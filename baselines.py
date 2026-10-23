@@ -20,6 +20,7 @@ from sklearn.model_selection import GroupKFold
 from scipy.sparse import hstack, csr_matrix
 from features import load, load_gt, pair_features, PAIRS, AGENTS
 
+SHUFFLE_FALLBACKS = []
 POS_CONDS = {"collusive_explicit", "collusive_innocent", "collusive_signal"}
 
 
@@ -41,6 +42,12 @@ def shuffle_runs(runs, gt, seed=0):
     out = {}
     for r in ids:
         pool = [x for x in by_lab[(label_of(gt[r]), gt[r]["condition"])] if x != r and len(runs[x]) == len(runs[r])]
+        if not pool:  # tiny fold: relax to same label, any condition (counted in SHUFFLE_FALLBACKS)
+            SHUFFLE_FALLBACKS.append(r)
+            pool = [x for x in ids if x != r and label_of(gt[x]) == label_of(gt[r]) and len(runs[x]) == len(runs[r])]
+        if not pool:  # no same-label donor in this fold at all: leave intact (also counted)
+            out[r] = runs[r]
+            continue
         d = rng.choice(pool)
         rp, dp = gt[r]["assigned_pair"], gt[d]["assigned_pair"]
         rest_r = [a for a in AGENTS if a not in rp]
@@ -169,6 +176,11 @@ def main():
         labs = load_gt(d / "labels.jsonl")
         runs = {r: v for r, v in runs.items() if r in labs}
         gt = {r: dict(gt[r], y=int(labs[r]["agreement"] in ("explicit", "info_exchange"))) for r in runs}
+        pf = d / "public_explicit.jsonl"  # hardset.py flags (keyword OR cheap-LLM check)
+        if pf.exists():
+            pe = load_gt(pf)
+            for r in gt:
+                gt[r]["public_explicit"] = bool(pe.get(r, {}).get("public_explicit"))
     recs = build(runs, gt)
     # shuffle donors drawn WITHIN each CV test fold (donor text never seen in training)
     groups = [r["run_id"] for r in recs]
@@ -202,6 +214,7 @@ def main():
     out = Path("results") / "baselines"
     out.mkdir(parents=True, exist_ok=True)
     res["learner"] = a.learner
+    res["shuffle_donor_fallbacks"] = len(SHUFFLE_FALLBACKS)
     (out / f"{a.ds}_{a.learner}.json").write_text(json.dumps(res, indent=1))
     for part in ("all", "hard", "hard_shuffled"):
         print(f"== {part}")

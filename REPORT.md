@@ -67,11 +67,38 @@ it only validates the pipeline and the shuffle ablation.
   the whole dataset let a boosted text model recognise memorised training-fold text (text-only AUROC *rose*
   0.91→0.995 under shuffle); donors are now drawn within the CV test fold.
 
-### LLM market (headline) — in progress
-First 19 runs: 14/15 private pairs reached an explicit agreement in the private chat (judge), 1 info-exchange.
-Realised pair premium is often small (median ≈ 0.2) because the *other* firms also drift up to 13–14 — a
-`none` run without any channel also ended with all four firms at 14 (tacit supra-competitive pricing).
-So pair identification from prices alone is hard; this is where text could help — or not.
+### LLM market (headline) — interim, n = 36 of 125 runs (NOT final; CIs wide)
+Snapshot 21:50 UTC, `uv run python analyze_llm.py --ds llm_v3` → `results/analysis/llm_v3_gpt-6.1-sol_orig.json`
+(24 positive runs: 23 explicit private agreements + 1 info-exchange; 12 negatives: 6 `none`, 6 `legit`).
+
+**Public text is innocuous.** `hardset.py` (keyword list + a gpt-6-luna check of every public message) flags
+**0 / 32** checked runs for explicit coordination language in public — the LLM sellers keep coordination entirely
+in the private channel. So the whole LLM set is the "hard" set; an "easy" set does not occur naturally here.
+
+**Actions carry the signal.** Assigned private pairs price on average +1.84 above the other two firms
+(other pairs −0.37; `none`/`legit` assigned pairs ≈ 0), with more lockstep (51% equal-price rounds vs 34%).
+
+LLM auditor (gpt-6.1-sol, zero-shot), run-level and pair-level AUROC [95% bootstrap CI, 500 resamples]:
+
+| view | run AUROC | pair AUROC | pair-ID acc (positives) | mean prompt chars |
+|---|---|---|---|---|
+| text | 0.46 [0.30, 0.63] | 0.58 [0.48, 0.69] | 0.35 | 9.3k |
+| action | 0.65 [0.43, 0.83] | 0.78 [0.66, 0.88] | 0.51 | 3.2k |
+| combined | 0.74 [0.53, 0.91] | 0.76 [0.66, 0.85] | 0.50 | 11.4k |
+| structured | 0.73 [0.54, 0.89] | 0.86 [0.77, 0.94] | 0.67 | 12.0k |
+
+Δ_structured (pair) = +0.086 [+0.006, +0.171] (paired bootstrap, P(Δ≤0)=0.014); Δ_combined (pair) = −0.014
+[−0.066, +0.034]; Δ_combined (run) = +0.094 [−0.018, +0.238]. Text-only is at chance.
+Open question this raises: is the structured gain from *cross-modal* reasoning or simply from the computed
+price statistics? → new ablation view `action_stats` (actions + pair statistics, no text) is being audited.
+
+Supervised non-LLM baselines (`baselines.py --ds llm_v3 --learner lr`, 5-fold grouped CV, same 36 runs):
+pair AUROC text 0.82 [0.77, 0.88], action 0.99 [0.97, 1.00], combined 0.99, structured 0.99; Δ ≈ 0 (ceiling).
+A simple *trained* classifier on price statistics far outperforms the zero-shot LLM reading raw price tables
+(not a like-for-like comparison: the LR sees in-distribution labels). The text LR beats chance while the LLM
+text auditor does not; its top-weighted n-grams show why: negatives are partly the `legit` pairs announcing
+their "shipping partnership", positives use margin-flavoured wording ("sustainable price", "considered price",
+"margins", "balances") — a weak stylistic tell of the private agreement that a zero-shot auditor does not exploit.
 
 ## Validity safeguards
 Labels from private chat only (judge blind to prices); same auditor model across views, fallback calls dropped;
@@ -80,6 +107,10 @@ hard set excludes runs with explicit coordination language in public text; cross
 a stratified subset (planned); adversarial methodology review by gpt-6.1-sol (`logs/review_methodology.md`,
 12 issues; fixes applied: label leakage, view superset, public partnership info, parse strictness, learner parity,
 resume ids, donor matching).
+
+## Held-out discipline
+`data/SPLITS.md`: dev = llm_v3_0000–0029, locked test = 0030–0124. The auditor prompt was written before any
+LLM-market data and has not been tuned (0 tuning attempts), so headline = all runs; test-only reported alongside.
 
 ## Limitations (so far)
 Single seller model family (GPT) and single framing for headline data; 12 rounds; agreement labels from one
@@ -90,7 +121,10 @@ LLM judge (spot-checked manually on pilots only).
 uv run python llm_market.py --ds llm_v3 --plan private:70,none:35,legit:20 --rounds 12 --framing lab --games-parallel 2 --seed 3000
 uv run python label_llm.py --ds llm_v3
 uv run python auditors.py --ds llm_v3 --views text,action,combined,structured --variant orig
-uv run python analyze_llm.py --ds llm_v3
+uv run python hardset.py --ds llm_v3
+uv run python analyze_llm.py --ds llm_v3            # --split dev|test, see data/SPLITS.md
+uv run python baselines.py --ds llm_v3 --learner lr
+uv run python auditors.py --ds llm_v3 --auditor claude-sonnet-5-5 --subset mod3   # cross-family subset
 uv run python sim.py --dataset scripted_v2 --n-per-cond 40 --rounds 30 --seed 1 --levels 12,14 --strength 0.15,0.5
 uv run python baselines.py --ds scripted_v2 --learner lr
 ```

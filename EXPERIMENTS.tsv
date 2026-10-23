@@ -1,0 +1,11 @@
+time_utc	id	hypothesis	change	dataset/split	metric (with 95% CI)	decision(keep/discard/inconclusive)	commit
+2026-10-23T20:30	E01-pilot-firm	luna sellers coordinate under firm+regulator framing	firm framing pilot	data/llm_v2 (3 runs)	0/3 runs with any private coordination	discard (framing)	dfcc714
+2026-10-23T20:38	E02-pilot-lab	lab (economics experiment) framing elicits coordination	lab framing pilot	data/pilot_lab_luna	private pairs exchange intended prices immediately	keep → llm_v3	dfcc714
+2026-10-23T20:51	E03-scripted-v1	non-LLM baselines pass gate	LR text/action/combined/structured	scripted_v1 5-fold CV	action run-AUROC 1.0 (ceiling) → Δ uninformative	keep (gate passed), discard as Δ evidence	95779a0
+2026-10-23T21:00	E04-mixed-learner	shuffle collapses hybrid	GBM numeric + LR text	scripted_v1	apparent shuffle collapse vanished with identical learners	discard (artefact)	95779a0
+2026-10-23T21:10	E05-global-donor	shuffle ablation with global donors	donors from whole dataset	scripted_v2 GBM	text AUROC rose .91→.995 under shuffle (memorised donor text leak)	discard → fold-local donors	5f2d8a0
+2026-10-23T21:23	E06-scripted-v2-lr	structured beats best single modality via say-vs-do features	LR nested feature sets, fold-local shuffle	scripted_v2 hard (280 runs) CV	Δ_structured +.049 [.027,.079]; structured 1.00→.748 shuffled; Δ_combined +.010 [.004,.019]	keep (mechanism demo only)	5f2d8a0
+2026-10-23T21:30	E07-llm-prelim	LLM auditor views differ	gpt-6.1-sol 4 views	llm_v3 dev (n=14, 3 neg)	pair-AUROC text .58 action .72 comb .74 struct .83 (no CI, n too small)	inconclusive	d47ddad
+2026-10-23T21:40	E08-hardset	LLM sellers avoid explicit public coordination	hardset.py keyword + luna check	llm_v3 (32 runs)	0/32 flagged	keep (all LLM runs = hard set)	(this iter)
+2026-10-23T21:42	E09-llm-baselines	non-LLM features detect pair on LLM data	LR 5-fold grouped CV	llm_v3 (36 runs, all)	pair AUROC text .82 [.77,.88] action .99 [.97,1.0] combined .99; Δ≈0	inconclusive (ceiling; n small)	(this iter)
+2026-10-23T21:48	E10-llm-auditor-interim	hybrid LLM auditor beats single modality	gpt-6.1-sol 4 views orig	llm_v3 all (36, 24 pos)	pair AUROC text .58 action .78 comb .76 struct .86; Δ_struct pair +.086 [.006,.171]	inconclusive (interim; needs action_stats ablation + n=125)	(this iter)

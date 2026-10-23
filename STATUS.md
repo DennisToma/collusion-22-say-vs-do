@@ -1,33 +1,29 @@
 # STATUS
 
-## Current state (2026-10-23 21:15 UTC, end of iteration 2)
-- **Headline data generating in background:** `llm_market.py --ds llm_v3` (125 runs: 70 private / 35 none /
-  20 legit, lab framing, gpt-6-luna sellers, 12 rounds), ~1.5 runs/min → ETA ~23:45 UTC. Log: `logs/llm_v3.log`.
-- **Background loop `pipeline.sh llm_v3`** labels finished runs (judge = gpt-6.1-sol, private chat ONLY) and audits
-  them (4 views, orig variant). Log: `logs/pipeline.log`. If it died: `nohup ./pipeline.sh llm_v3 > logs/pipeline.log 2>&1 &`
-  (generation resumes exact ids: rerun the same llm_market command).
-- Labels so far (19 runs): 14/15 private pairs → explicit agreement, 1 info_exchange. Pair price premium often ~0
-  (rivals drift up too; a `none` run also ended all-at-14 = tacit supra-competitive pricing).
-- Preliminary LLM-auditor numbers (n=14, 3 negatives — NOT reportable yet): pair-AUROC text .58, action .72,
-  combined .74, structured .83.
-- Scripted: scripted_v1 saturated (action AUROC 1.0). scripted_v2 (weak collusion) = mechanism demo:
-  LR, fold-local same-condition shuffle: text .839/.837, action .951/.951, combined .961/.961, structured 1.00/.748
-  (intact/shuffled run-AUROC); Δ_structured +.049 [.027,.079]. GBM version was still running at 21:35
-  (`logs/baselines_scripted_v2_gbm.log` → results/baselines/scripted_v2_gbm.json) — check it.
-- Methodology review done (`logs/review_methodology.md`); fixes 1-5,8(partly),10,11,12 applied.
+## Current state (2026-10-23 21:55 UTC, end of iteration 3)
+- **Generation** `llm_market.py --ds llm_v3` (125 runs) still running: ~0.65 runs/min → ETA ~00:15 UTC. Log `logs/llm_v3.log`.
+- **pipeline.sh llm_v3** (bg) labels + audits new runs; auditors.py default views now include `action_stats`
+  (actions + pair stats, no text = ablation of structured) → the loop backfills it for all runs automatically.
+- **Claude cross-family** (bg): `auditors.py --auditor claude-sonnet-5-5 --subset mod3` (runs with index%3==0, ~42),
+  log `logs/claude_audit.log`. Re-run same command after generation ends (+ `--views action_stats,structured` check).
+- Locked split frozen: `data/SPLITS.md` (dev 0000–0029, test 0030–0124; 0 tuning attempts). EXPERIMENTS.tsv started.
+- Interim (n=36, 24 pos), GPT auditor pair-AUROC: text .58, action .78, combined .76, structured .86;
+  Δ_struct(pair) +.086 [.006,.171]. Non-LLM LR: action .99, text .82 → ceiling. Public text 0/32 explicit (hardset.py).
+- Key open question: structured gain = stats table or cross-modal? → compare `action_stats` vs `structured`.
 
 ## Next steps (priority)
-1. When ≥60 runs labelled: `analyze_llm.py`; run shuffle variant (`auditors.py --variant shuffle --views text,combined,structured`).
-2. Length control: run `auditors.py --variant pad --views text,action` (implemented, not yet run).
-3. Cross-family: Claude auditor (`--auditor claude-sonnet-5-5`, use `--disallowedTools`/run in /var/tmp; isolate tools)
-   on stratified ~40 runs × 4 views.
-4. Non-LLM baselines on llm_v3 (`baselines.py --ds llm_v3`; features.py claim parser is template-specific → only
-   TF-IDF + action features meaningful).
-5. Figures + REPORT; codex review of final claims.
-- Risks: label is ≈ condition (almost every private pair agrees) → task is effectively "private vs none/legit";
-  few info_exchange/none-agreement private runs. Same-family (GPT) sellers/auditor.
+1. When ≥90 runs: `hardset.py`, `analyze_llm.py` (all + `--split test`), baselines LR; shuffle variant
+   (`auditors.py --variant shuffle --views text,combined,structured`) and pad (`--variant pad --views text,action`).
+2. Claude subset analysis: `analyze_llm.py --auditor claude-sonnet-5-5` + agreement with GPT on same runs (write small script).
+3. Figures (AUROC bars w/ CIs, Δ forest plot, action_stats vs structured) → REPORT; codex adversarial review of claims.
+4. Exploration: tacit `none` runs with supra-competitive prices (label = tacit) — how auditors score them.
+- Sibling `collusion-14-infotheory/data/llm_v1`: T=20, empty public messages in cond A → not poolable for text auditing.
+- Risks: action ceiling for trained baselines; label ≈ condition; same-family sellers/auditor; generation slow.
 
 ## Log
+- 21:55 iter 3: SPLITS.md + EXPERIMENTS.tsv; hardset.py (0/32 flagged); baselines on llm_v3 (donor fallback for tiny
+  folds, counted); analyze_llm --split + hardset flags; action_stats ablation view; Claude Sonnet subset launched;
+  REPORT interim LLM section.
 - 21:35 fold-local shuffle donors in baselines.py (fixes donor-memorisation leak); `--variant pad` length control
   added to auditors.py; Claude auditor call isolated (no tools, /var/tmp cwd) and tested OK on 1 run.
 - 20:28 iter 2 start. Built llm_market.py, baselines.py, show_run.py, label_llm.py, auditors.py, analyze_llm.py, pipeline.sh.
