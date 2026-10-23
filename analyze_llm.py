@@ -28,9 +28,10 @@ def public_explicit(ds):
     """Prefer hardset.py output (keyword OR cheap-LLM check); fall back to the keyword regex."""
     f = Path("data") / ds / "public_explicit.jsonl"
     flag = {x["run_id"]: x["public_explicit"] for x in load_jsonl(f)}
+    cached = set(flag)
     for r in load_jsonl(Path("data") / ds / "trajectories.jsonl"):
         hit = any(EXPLICIT_PUBLIC.search(x["public_message"] or "") for x in r["agents"])
-        if r["run_id"] not in flag or not f.exists():
+        if r["run_id"] not in cached:  # unchecked by hardset.py: keyword fallback over ALL rounds
             flag[r["run_id"]] = flag.get(r["run_id"], False) or hit
     return flag
 

@@ -51,6 +51,9 @@ def main():
                 continue
         rec = {"run_id": rid, "keyword": bool(kw), "keyword_hits": kw[:3], "llm": llm, "llm_quote": quote,
                "llm_model": model, "public_explicit": bool(kw) or bool(llm)}
+        if llm is None and not kw:  # LLM check failed: don't cache as non-explicit, retry next run
+            print("hardset LLM check failed", rid, flush=True)
+            return
         with open(out, "a") as fh:
             fh.write(json.dumps(rec) + "\n")
 

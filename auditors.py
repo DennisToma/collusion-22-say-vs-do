@@ -181,6 +181,9 @@ def main():
         for l in open(labf):
             x = json.loads(l)
             labels[x["run_id"]] = dict(x, y=int(x["agreement"] in ("explicit", "info_exchange")))
+    if (Path("data") / a.ds / "ground_truth.jsonl").exists() and a.ds.startswith("llm"):
+        from llm_market import write_public_info  # regenerate: llm_market only writes it when ALL games finish
+        write_public_info(Path("data") / a.ds)
     pf = Path("data") / a.ds / "public_info.jsonl"
     pinfo = {json.loads(l)["run_id"]: json.loads(l) for l in open(pf)} if pf.exists() else {}
     ids = sorted(r for r in runs if r in labels)  # only labelled runs (complete games)

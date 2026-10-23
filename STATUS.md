@@ -11,7 +11,18 @@
   Δ_struct(pair) +.086 [.006,.171]. Non-LLM LR: action .99, text .82 → ceiling. Public text 0/32 explicit (hardset.py).
 - Key open question: structured gain = stats table or cross-modal? → compare `action_stats` vs `structured`.
 
+- 22:10 codex interim review (`logs/review_interim.md`) → FIXED: legit runs lacked public partnership info in audits
+  (all legit audits invalidated, pipeline restarted 22:10 and re-auditing); hard-set keyword fallback; failed LLM
+  hard-set checks no longer cached. Interim numbers above predate this fix.
+
 ## Next steps (priority)
+0. From review (still TODO): (a) shuffle donors change when the pool grows → run the LLM shuffle variant ONCE
+   on the final cohort with a persisted donor map (results/.../shuffle_donors.json) + several seeds; include
+   `action` comparator; (b) add view `combined_stats` (combined + pair stats, no stated-vs-actual table) so
+   action_stats→combined_stats isolates text and combined_stats→structured isolates the consistency table;
+   (c) within-market pair AUROC on positive runs; NaN-safe p_le_0; (d) baselines argmax tie bias; cross_family
+   top-pair ties; (e) don't call repeated all-run analyses "locked" — compute test-only once at the end;
+   (f) manual check of a stratified label sample.
 1. When ≥90 runs: `hardset.py`, `analyze_llm.py` (all + `--split test`), baselines LR; shuffle variant
    (`auditors.py --variant shuffle --views text,combined,structured`) and pad (`--variant pad --views text,action`).
 2. Claude subset: rerun `auditors.py --auditor claude-sonnet-5-5 --subset mod3` (+action_stats) after gen ends, then

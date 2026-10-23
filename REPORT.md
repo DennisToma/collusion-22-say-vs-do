@@ -78,6 +78,10 @@ in the private channel. So the whole LLM set is the "hard" set; an "easy" set do
 **Actions carry the signal.** Assigned private pairs price on average +1.84 above the other two firms
 (other pairs −0.37; `none`/`legit` assigned pairs ≈ 0), with more lockstep (51% equal-price rounds vs 34%).
 
+*Caveat (found by the 22:00 codex review, `logs/review_interim.md`): in this snapshot, most of the 6 `legit` negatives were
+audited WITHOUT their public partnership notice (`public_info.jsonl` was only written at the end of generation).
+Fixed at 22:10 (auditors.py regenerates it; legit audits invalidated and re-run); the table below will be replaced.*
+
 LLM auditor (gpt-6.1-sol, zero-shot), run-level and pair-level AUROC [95% bootstrap CI, 500 resamples]:
 
 | view | run AUROC | pair AUROC | pair-ID acc (positives) | mean prompt chars |
