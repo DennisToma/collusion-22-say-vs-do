@@ -15,11 +15,13 @@
    rewrite abstract around: premium ≫ zero-shot LLM; text adds nothing to LLM; stats table helps; LLM = explanation.
 3. After inputs: shuffle_analysis.py --views combined,structured; cross_family.py; fp_stratum.py --ds llm_v3fp;
    rerun report_tables --split test; figures. 4. codex + Opus review of final REPORT claims.
-- Risks: codex review_iter7 pending (logs/review_iter7.md) — apply before finalize; LLM concurrency ~7 after 00:00.
+- codex review_iter7 APPLIED (pipefail retries; stamp STARTED vs HEADLINE_DONE; atomic json; exact ranks).
+- hardset.py on all runs: 74 checked, 0 flagged (still running). Risks: LLM concurrency ~7 after 00:00; finalize
+  needs hardset to have covered every run (preflight reruns it; a failed LLM check aborts BEFORE the lock — just rerun).
 
 ## Log
 - 23:25 iter 7: incremental.py (pre-registered); Opus pre-test review applied (logs in EXPERIMENTS E28); hardset.py
-  on all runs started; codex review of iter-7 diff running → logs/review_iter7.md.
+  on all runs started; codex review of iter-7 diff applied (E29).
 - 23:00 iter 6: applied codex review_iter6 (P1: textsim dev-only fit, figure CI crash, finalize preflight/lock;
   P2: report_tables labels, FP rendering, None CIs); cascade metrics in final_analysis triage (dev).
 - 22:40 iter 6: baselines.py --split (dev run), textsim.py (new untrained scorer, dev), report_tables.py,
