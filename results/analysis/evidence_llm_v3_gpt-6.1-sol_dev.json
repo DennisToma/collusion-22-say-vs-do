@@ -1,0 +1,151 @@
+{
+ "split": "dev",
+ "auditor": "gpt-6.1-sol",
+ "views": {
+  "text": {
+   "n_audits": 30,
+   "n_items": 108,
+   "valid": {
+    "rate": 1.0,
+    "n": 108
+   },
+   "on_pair": {
+    "rate": 0.471,
+    "n": 70
+   },
+   "price_ok": {
+    "rate": 0.667,
+    "n": 3
+   },
+   "price_any_ok": {
+    "rate": 0.667,
+    "n": 3
+   },
+   "quote_ok": {
+    "rate": null,
+    "n": 0
+   },
+   "cost": {
+    "calls": 30,
+    "mean_prompt_chars": 9276,
+    "est_prompt_tokens": 2319
+   }
+  },
+  "action": {
+   "n_audits": 30,
+   "n_items": 120,
+   "valid": {
+    "rate": 1.0,
+    "n": 120
+   },
+   "on_pair": {
+    "rate": 0.525,
+    "n": 80
+   },
+   "price_ok": {
+    "rate": 0.953,
+    "n": 64
+   },
+   "price_any_ok": {
+    "rate": 1.0,
+    "n": 64
+   },
+   "quote_ok": {
+    "rate": null,
+    "n": 0
+   },
+   "cost": {
+    "calls": 30,
+    "mean_prompt_chars": 3282,
+    "est_prompt_tokens": 820
+   }
+  },
+  "combined": {
+   "n_audits": 30,
+   "n_items": 120,
+   "valid": {
+    "rate": 1.0,
+    "n": 120
+   },
+   "on_pair": {
+    "rate": 0.525,
+    "n": 80
+   },
+   "price_ok": {
+    "rate": 0.887,
+    "n": 53
+   },
+   "price_any_ok": {
+    "rate": 0.981,
+    "n": 53
+   },
+   "quote_ok": {
+    "rate": null,
+    "n": 0
+   },
+   "cost": {
+    "calls": 30,
+    "mean_prompt_chars": 11444,
+    "est_prompt_tokens": 2861
+   }
+  },
+  "action_stats": {
+   "n_audits": 25,
+   "n_items": 100,
+   "valid": {
+    "rate": 1.0,
+    "n": 100
+   },
+   "on_pair": {
+    "rate": 0.575,
+    "n": 80
+   },
+   "price_ok": {
+    "rate": 0.837,
+    "n": 43
+   },
+   "price_any_ok": {
+    "rate": 0.977,
+    "n": 43
+   },
+   "quote_ok": {
+    "rate": null,
+    "n": 0
+   },
+   "cost": {
+    "calls": 25,
+    "mean_prompt_chars": 3637,
+    "est_prompt_tokens": 909
+   }
+  },
+  "structured": {
+   "n_audits": 28,
+   "n_items": 112,
+   "valid": {
+    "rate": 1.0,
+    "n": 112
+   },
+   "on_pair": {
+    "rate": 0.588,
+    "n": 80
+   },
+   "price_ok": {
+    "rate": 0.925,
+    "n": 53
+   },
+   "price_any_ok": {
+    "rate": 1.0,
+    "n": 53
+   },
+   "quote_ok": {
+    "rate": null,
+    "n": 0
+   },
+   "cost": {
+    "calls": 28,
+    "mean_prompt_chars": 12044,
+    "est_prompt_tokens": 3011
+   }
+  }
+ }
+}

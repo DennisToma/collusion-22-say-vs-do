@@ -67,43 +67,63 @@ it only validates the pipeline and the shuffle ablation.
   the whole dataset let a boosted text model recognise memorised training-fold text (text-only AUROC *rose*
   0.91→0.995 under shuffle); donors are now drawn within the CV test fold.
 
-### LLM market (headline) — interim, n = 36 of 125 runs (NOT final; CIs wide)
-Snapshot 21:50 UTC, `uv run python analyze_llm.py --ds llm_v3` → `results/analysis/llm_v3_gpt-6.1-sol_orig.json`
-(24 positive runs: 23 explicit private agreements + 1 info-exchange; 12 negatives: 6 `none`, 6 `legit`).
+### LLM market (headline data) — DEV split only; locked test analysis pending
+Generation still running (≈60/125 runs at 22:15 UTC). Per `data/SPLITS.md`, headline numbers will come from ONE
+run of the frozen `final_analysis.py --split test` (runs 0030–0124). The numbers below are **dev** (runs
+0000–0029; n = 25 with all views, 20 positive, 5 negative — the dev `legit` runs are still being re-audited, see
+caveat), so they are indicative only. `uv run python final_analysis.py --split dev` →
+`results/analysis/final_llm_v3_gpt-6.1-sol_dev.json`.
 
-**Public text is innocuous.** `hardset.py` (keyword list + a gpt-6-luna check of every public message) flags
-**0 / 32** checked runs for explicit coordination language in public — the LLM sellers keep coordination entirely
+**Public text is innocuous.** `hardset.py` (keyword list + a gpt-6-luna check of every public message) flagged
+**0 / 32** checked runs for explicit coordination language in public: the LLM sellers keep coordination entirely
 in the private channel. So the whole LLM set is the "hard" set; an "easy" set does not occur naturally here.
 
-**Actions carry the signal.** Assigned private pairs price on average +1.84 above the other two firms
-(other pairs −0.37; `none`/`legit` assigned pairs ≈ 0), with more lockstep (51% equal-price rounds vs 34%).
+**Actions carry the signal.** Assigned private pairs price above the other two firms; `none`/`legit` assigned
+pairs sit at ≈ 0 (labels.jsonl `pair_premium`).
 
-*Caveat (found by the 22:00 codex review, `logs/review_interim.md`): in this snapshot, most of the 6 `legit` negatives were
-audited WITHOUT their public partnership notice (`public_info.jsonl` was only written at the end of generation).
-Fixed at 22:10 (auditors.py regenerates it; legit audits invalidated and re-run); the table below will be replaced.*
+Scorers (all zero-shot / untrained except the fusion weight): six gpt-6.1-sol auditor views, the **untrained
+pair premium** (pair mean price − mean of the other two firms, every pair, all rounds; run score = max pair), and a
+**late fusion** w·text + (1−w)·action of the unimodal auditor scores (w picked on dev; it picked w = 0, i.e. text
+adds nothing). Dev, 1000 run-level bootstrap resamples:
 
-LLM auditor (gpt-6.1-sol, zero-shot), run-level and pair-level AUROC [95% bootstrap CI, 500 resamples]:
+| scorer | pooled pair AUROC | within-market AUROC (pos. runs) | run AUROC |
+|---|---|---|---|
+| text | 0.55 [0.43, 0.65] | 0.62 [0.49, 0.73] | 0.57 [0.35, 0.76] |
+| action | 0.82 [0.69, 0.92] | 0.85 [0.72, 0.92] | 0.86 [0.66, 0.98] |
+| combined | 0.80 [0.67, 0.89] | 0.85 [0.72, 0.93] | 0.86 [0.63, 1.00] |
+| action_stats (actions + pair stats, no text) | 0.91 [0.79, 0.98] | 0.91 [0.78, 0.98] | 0.92 [0.77, 1.00] |
+| structured (combined + stats + stated-vs-actual) | 0.88 [0.76, 0.95] | 0.91 [0.79, 0.97] | 0.79 [0.51, 0.97] |
+| **pair premium (untrained one-liner)** | **0.99 [0.97, 1.00]** | **0.98 [0.94, 1.00]** | **1.00** |
 
-| view | run AUROC | pair AUROC | pair-ID acc (positives) | mean prompt chars |
-|---|---|---|---|---|
-| text | 0.46 [0.30, 0.63] | 0.58 [0.48, 0.69] | 0.35 | 9.3k |
-| action | 0.65 [0.43, 0.83] | 0.78 [0.66, 0.88] | 0.51 | 3.2k |
-| combined | 0.74 [0.53, 0.91] | 0.76 [0.66, 0.85] | 0.50 | 11.4k |
-| structured | 0.73 [0.54, 0.89] | 0.86 [0.77, 0.94] | 0.67 | 12.0k |
+Paired contrasts (dev, pair AUROC): Δ_hybrid[combined] = −0.03 [−0.06, +0.02]; Δ_hybrid[structured] = +0.06
+[−0.01, +0.14]; action_stats − action = +0.09 [+0.02, +0.16]; premium − structured = +0.10 [+0.04, +0.20];
+premium − action_stats = +0.08 [+0.01, +0.17]. (`combined_stats` audits are still being backfilled.)
 
-Δ_structured (pair) = +0.086 [+0.006, +0.171] (paired bootstrap, P(Δ≤0)=0.014); Δ_combined (pair) = −0.014
-[−0.066, +0.034]; Δ_combined (run) = +0.094 [−0.018, +0.238]. Text-only is at chance.
-Open question this raises: is the structured gain from *cross-modal* reasoning or simply from the computed
-price statistics? → ablation views `action_stats` (actions + pair stats, no text) and `combined_stats` (combined +
-pair stats, no stated-vs-actual table). **First look (22:10, n=40 runs, legit re-audits still pending, 200 boots):**
-pair AUROC action_stats 0.90 vs structured 0.91; structured − action_stats = −0.024 [−0.060, +0.005];
-action_stats − action = +0.105 [+0.043, +0.168]. I.e. so far the "hybrid" gain is explained by the computed price
-statistics, not by adding text. To be confirmed on the full cohort.
+**Emerging answer (dev, to be confirmed on test):** adding public text to an LLM auditor does not help on LLM
+sellers (combined ≈ action; fusion puts zero weight on text), because the sellers keep coordination private and
+their public messages are bland. What helps the LLM auditor is a *computed price-statistics table* — and the
+statistic alone, untrained, beats every LLM view. Consistent with the sibling project's finding that
+dependence statistics detect coordinated *variation* rather than *level*: these colluders coordinate on level,
+which the premium captures directly.
+
+**Evidence accuracy (dev, `evidence.py`).** All cited rounds/firms are valid. Price numbers quoted in evidence
+match the cited firm's actual price (±1 round) in 84–95% of claims for views with actions (any firm: 98–100%).
+But on positive runs only 47–59% of cited firms belong to the colluding pair (chance = 50%): auditors cite
+market-wide observations, so evidence rarely singles out the colluders. No verbatim quotes are cited (text-view
+evidence paraphrases messages).
+
+**Audit cost (prompt size per call).** text 9.3k chars, action 3.3k, action_stats 3.6k, combined 11.4k,
+structured 12.0k (≈ chars/4 tokens); one call per run per view. The premium statistic costs nothing.
+
+*Caveat (22:00 codex review, `logs/review_interim.md`): `legit` runs were initially audited WITHOUT their public
+partnership notice. Fixed 22:10 (auditors.py regenerates `public_info`; legit audits invalidated and re-run;
+cached audits are now checked against the current prompt hash/length and re-run if stale).*
 
 Supervised non-LLM baselines (`baselines.py --ds llm_v3 --learner lr`, 5-fold grouped CV, same 36 runs):
 pair AUROC text 0.82 [0.77, 0.88], action 0.99 [0.97, 1.00], combined 0.99, structured 0.99; Δ ≈ 0 (ceiling).
 A simple *trained* classifier on price statistics far outperforms the zero-shot LLM reading raw price tables
-(not a like-for-like comparison: the LR sees in-distribution labels). The text LR beats chance while the LLM
+(not a like-for-like comparison: the LR sees in-distribution labels; these all-run interim numbers predate the
+dev/test rule and will be recomputed on test). The text LR beats chance while the LLM
 text auditor does not; its top-weighted n-grams show why: negatives are partly the `legit` pairs announcing
 their "shipping partnership", positives use margin-flavoured wording ("sustainable price", "considered price",
 "margins", "balances") — a weak stylistic tell of the private agreement that a zero-shot auditor does not exploit.
@@ -118,7 +138,9 @@ resume ids, donor matching).
 
 ## Held-out discipline
 `data/SPLITS.md`: dev = llm_v3_0000–0029, locked test = 0030–0124. The auditor prompt was written before any
-LLM-market data and has not been tuned (0 tuning attempts), so headline = all runs; test-only reported alongside.
+LLM-market data and has not been tuned (0 tuning attempts). `final_analysis.py` (frozen 22:15 UTC) calibrates the
+fusion weight and the FPR thresholds on dev, so the headline is test-only, computed once. Disclosure: interim
+iteration-3 analyses (n = 36–40) included test runs 0030–0039; nothing was tuned on them.
 
 ## Limitations (so far)
 Single seller model family (GPT) and single framing for headline data; 12 rounds; agreement labels from one
@@ -130,7 +152,9 @@ uv run python llm_market.py --ds llm_v3 --plan private:70,none:35,legit:20 --rou
 uv run python label_llm.py --ds llm_v3
 uv run python auditors.py --ds llm_v3 --views text,action,combined,structured --variant orig
 uv run python hardset.py --ds llm_v3
-uv run python analyze_llm.py --ds llm_v3            # --split dev|test, see data/SPLITS.md
+uv run python final_analysis.py --split test   # headline (frozen; dev for development)
+uv run python evidence.py --split test         # evidence accuracy + prompt cost
+uv run python auditors.py --ds llm_v3 --variant shuffle --shuffle-seed 0 --views text,combined,structured   # seeds 0,1,2
 uv run python baselines.py --ds llm_v3 --learner lr
 uv run python auditors.py --ds llm_v3 --auditor claude-sonnet-5-5 --subset mod3   # cross-family subset
 uv run python sim.py --dataset scripted_v2 --n-per-cond 40 --rounds 30 --seed 1 --levels 12,14 --strength 0.15,0.5
