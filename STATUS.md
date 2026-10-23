@@ -1,25 +1,24 @@
 # STATUS
 
-## Current state (2026-10-23 23:10 UTC, iteration 7)
-- **Generation** llm_v3 ~95/125 (ETA ~23:35); `pipeline.sh` audits in step; `after_gen.sh` then launches llm_v3fp,
-  Claude mod3 subset, shuffle seeds 0–2 on TEST (combined,structured; ETA ~02:00). `hardset.py` on all runs running.
+## Current state (2026-10-23 23:35 UTC, iteration 8)
+- **Generation** llm_v3 ~100/125 (ETA ~23:55); `pipeline.sh` audits in step; `after_gen.sh` then launches llm_v3fp,
+  Claude mod3 subset, shuffle seeds 0–2 on TEST (combined,structured). NEW `mon_chain.sh`: after v3fp gen, generates
+  llm_v3mon (monitored-price exploration stratum, private:14 none:6; cutoff 03:30) → pipeline → `monitor_stratum.py`.
 - Dev (n=30): premium run 1.00 / within .98 > action_stats .89/.91 > structured .83/.91 ≈ combined ≈ fusion > action
-  .78 > text .58. textsim (public-text convergence) within .81 vs LLM text .61. Cascade: LLM = explanation not detection.
-- NEW iter 7: `incremental.py` (untrained rank-average premium+view): no view adds over premium on dev (Δ ≤ 0; dev at
-  ceiling) — pre-registered for test. Opus pre-test review: no headline-distorting bug; fixes applied
-  (finalize: only headline step run-once, others retryable; label validity + full hard-set asserts; ext guard).
+  .78 > text .58. textsim within .81 vs LLM text .61. Cascade: LLM = explanation, premium = detection.
+- iter 8: DISCLOSURE 3 — premium chosen after director saw partial data incl. ~30 test runs (SPLITS, REPORT).
 ## Next steps
 1. When 125×6 audits done (`wc -l results/llm_auditor/llm_v3/gpt-6.1-sol/*_orig.jsonl` all 125): `./finalize_test.sh`
-   ONCE (if a later step fails: fix, rerun the script — it skips the headline step). Check logs/final/FAILED_STEPS.txt.
+   ONCE (if a later step fails: fix, rerun — it skips the headline step). Check logs/final/FAILED_STEPS.txt.
 2. Replace REPORT dev tables with `results/analysis/report_tables_test.md` (test = headline; dev → appendix);
-   rewrite abstract around: premium ≫ zero-shot LLM; text adds nothing to LLM; stats table helps; LLM = explanation.
+   abstract: premium ≫ zero-shot LLM (premium not discovered blind — disclosure 3); text adds nothing; stats help.
 3. After inputs: shuffle_analysis.py --views combined,structured; cross_family.py; fp_stratum.py --ds llm_v3fp;
-   rerun report_tables --split test; figures. 4. codex + Opus review of final REPORT claims.
-- codex review_iter7 APPLIED (pipefail retries; stamp STARTED vs HEADLINE_DONE; atomic json; exact ranks).
-- hardset.py on all runs: 74 checked, 0 flagged (still running). Risks: LLM concurrency ~7 after 00:00; finalize
-  needs hardset to have covered every run (preflight reruns it; a failed LLM check aborts BEFORE the lock — just rerun).
+   monitor_stratum.py --ds llm_v3mon (logs/monitor_stratum.txt); report_tables --split test; figures.
+4. codex + Opus review of final REPORT claims. codex review_iter8 (monitor stratum) running → logs/review_iter8.md.
+- Risks: LLM concurrency ~7 after 00:00; finalize needs hardset to cover every run (preflight reruns it).
 
 ## Log
+- 23:35 iter 8: premium-selection disclosure (E30); llm_v3mon monitored stratum code + chain launched (E31).
 - 23:25 iter 7: incremental.py (pre-registered); Opus pre-test review applied (logs in EXPERIMENTS E28); hardset.py
   on all runs started; codex review of iter-7 diff applied (E29).
 - 23:00 iter 6: applied codex review_iter6 (P1: textsim dev-only fit, figure CI crash, finalize preflight/lock;
