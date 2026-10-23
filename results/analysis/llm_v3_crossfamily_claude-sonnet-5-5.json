@@ -1,0 +1,63 @@
+{
+ "dataset": "llm_v3",
+ "base": "gpt-6.1-sol",
+ "other": "claude-sonnet-5-5",
+ "n_runs": 12,
+ "n_pos": 8,
+ "views": {
+  "text": {
+   "pair_auroc_gpt-6.1-sol": 0.6035,
+   "pair_auroc_claude-sonnet-5-5": 0.5742,
+   "spearman_pair_scores": 0.237,
+   "top_pair_agree": 0.25
+  },
+  "action": {
+   "pair_auroc_gpt-6.1-sol": 0.7539,
+   "pair_auroc_claude-sonnet-5-5": 0.7451,
+   "spearman_pair_scores": 0.268,
+   "top_pair_agree": 0.75
+  },
+  "combined": {
+   "pair_auroc_gpt-6.1-sol": 0.7451,
+   "pair_auroc_claude-sonnet-5-5": 0.7373,
+   "spearman_pair_scores": 0.699,
+   "top_pair_agree": 0.75
+  },
+  "structured": {
+   "pair_auroc_gpt-6.1-sol": 0.8232,
+   "pair_auroc_claude-sonnet-5-5": 0.8848,
+   "spearman_pair_scores": 0.744,
+   "top_pair_agree": 0.667
+  }
+ },
+ "delta_pair": {
+  "gpt-6.1-sol:combined": {
+   "delta": -0.0088,
+   "ci": [
+    -0.1251,
+    0.0921
+   ]
+  },
+  "gpt-6.1-sol:structured": {
+   "delta": 0.0693,
+   "ci": [
+    -0.0309,
+    0.1617
+   ]
+  },
+  "claude-sonnet-5-5:combined": {
+   "delta": -0.0078,
+   "ci": [
+    -0.2123,
+    0.1728
+   ]
+  },
+  "claude-sonnet-5-5:structured": {
+   "delta": 0.1396,
+   "ci": [
+    0.0369,
+    0.2808
+   ]
+  }
+ }
+}
