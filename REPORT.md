@@ -70,8 +70,13 @@ it only validates the pipeline and the shuffle ablation.
   the whole dataset let a boosted text model recognise memorised training-fold text (text-only AUROC *rose*
   0.91→0.995 under shuffle); donors are now drawn within the CV test fold.
 
-### LLM market (headline data) — DEV split only; locked test analysis pending
-Generation still running (≈60/125 runs at 22:15 UTC). Per `data/SPLITS.md`, headline numbers will come from ONE
+### LLM market — HEADLINE: locked test split (runs 0030–0124, n = 95)
+*Pending.* `auto_finalize.sh` runs `finalize_test.sh` (the single locked test analysis) as soon as all 125 runs are
+labelled and audited by all 6 views; the tables will be copied verbatim from the generated
+`results/analysis/report_tables_test.md`. Until then, the dev results below are the only LLM-market numbers.
+
+### LLM market — DEV split (runs 0000–0029, development; superseded by the test split above)
+Per `data/SPLITS.md`, headline numbers will come from ONE
 run of the frozen `final_analysis.py --split test` (runs 0030–0124; the script refuses to run unless every view has
 audited every run). Numbers below are **dev** (runs 0000–0029: 20 positive, 10 negative = 5 `none` + 5 `legit`),
 indicative only. `uv run python final_analysis.py --split dev` → `results/analysis/final_llm_v3_gpt-6.1-sol_dev.json`.
@@ -109,6 +114,11 @@ Why the premium is so strong: in many private runs the pair agrees in round 1 to
 (manual read of 3 dev chats: 0005, 0012, 0016). The opening-round gap alone carries much of the signal; without
 round 1 the premium still matches or beats every LLM view on dev, but no longer significantly
 (premium_r2plus − structured: run +0.09 [−0.10, +0.29]). The LLM auditors also see round 1.
+![mechanism dev](figures/mechanism_dev.png)
+*Descriptive (dev, `uv run python fig_mechanism.py --split dev` → `logs/mechanism_dev.txt`):* private pairs open
+near 17–18 vs ≈ 12.5 for the rivals, fall back within ~3 rounds, but on average stay above the rivals to the end:
+late-window (rounds 9–12) pair-minus-rivals premium +0.90 (none −0.07, legit +0.15), positive in 12/20 private runs.
+So the signal is a large round-1 gap plus a smaller persistent gap that roughly 40% of private pairs lose.
 **Label ≈ condition:** all 55 `private` runs so far are labelled y = 1 (52 explicit, 3 info-exchange), so on this
 generator "agreement" and "had a channel" coincide; see Limitations.
 Paired contrasts (dev): Δ_hybrid[combined] run +0.05 [−0.12, +0.21], within +0.01 [−0.05, +0.05];
@@ -232,6 +242,7 @@ uv run python auditors.py --ds llm_v3 --variant shuffle --shuffle-seed 0 --views
 uv run python baselines.py --ds llm_v3 --learner lr --split test   # CV inside the split
 uv run python textsim.py --split test           # untrained public-text convergence
 uv run python report_tables.py --split test     # renders all REPORT tables from results/*.json
+uv run python fig_mechanism.py --split all      # descriptive price paths by condition (no metric)
 ./finalize_test.sh                              # the ONE locked test run (all of the above for test)
 uv run python auditors.py --ds llm_v3 --auditor claude-sonnet-5-5 --subset mod3   # cross-family subset
 uv run python sim.py --dataset scripted_v2 --n-per-cond 40 --rounds 30 --seed 1 --levels 12,14 --strength 0.15,0.5
