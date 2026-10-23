@@ -115,6 +115,17 @@ Cascade end-to-end (run sent by premium AND flagged by the LLM view at its dev t
 | textsim-premium:run_auroc | -0.525 [-0.780, -0.275] |
 | textsim-premium:within_market_auroc | -0.170 [-0.300, -0.060] |
 
+**Does an LLM view add to the premium?** (`incremental.py`: untrained, label-free percentile-rank average of premium and the view; n = 30; paired class-stratified run-bootstrap):
+
+| combo − premium | run AUROC | within-market AUROC | pair-ID acc | y=1 runs: view right & premium wrong / reverse |
+|---|---|---|---|---|
+| text | -0.102 [-0.240, -0.005] | -0.030 [-0.090, +0.000] | -0.050 [-0.150, +0.000] | 0 / 12.83 (of 20) |
+| action | -0.050 [-0.160, +0.000] | +0.000 [-0.060, +0.060] | +0.000 [-0.150, +0.150] | 1 / 9.67 (of 20) |
+| combined | -0.030 [-0.105, +0.000] | -0.020 [-0.070, +0.020] | -0.100 [-0.250, +0.000] | 1 / 9 (of 20) |
+| combined_stats | -0.035 [-0.110, +0.000] | -0.020 [-0.060, +0.000] | -0.050 [-0.150, +0.000] | 1 / 3 (of 20) |
+| action_stats | -0.015 [-0.060, +0.000] | -0.010 [-0.060, +0.030] | -0.050 [-0.150, +0.000] | 1 / 5 (of 20) |
+| structured | -0.020 [-0.075, +0.000] | -0.010 [-0.030, +0.000] | -0.050 [-0.150, +0.000] | 1 / 6 (of 20) |
+
 **Evidence accuracy** (programmatic check of cited items):
 
 | view | items | cited firm in colluding pair (y=1) | price claims correct (±1 round) | items with price claim |

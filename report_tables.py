@@ -129,6 +129,18 @@ def main():
         L += ["", "| contrast | Δ [95% CI] |", "|---|---|"] + [f"| {k} | {dci(d)} |" for k, d in ts["contrasts"].items()]
     else:
         pending.append("textsim")
+    inc = load(A / f"incremental_llm_v3_{a.auditor}_{a.split}.json")
+    if inc:
+        L += ["", f"**Does an LLM view add to the premium?** (`incremental.py`: untrained, label-free percentile-rank average "
+              f"of premium and the view; n = {inc['n_runs']}; paired class-stratified run-bootstrap):", "",
+              "| combo − premium | run AUROC | within-market AUROC | pair-ID acc | y=1 runs: view right & premium wrong / reverse |",
+              "|---|---|---|---|---|"]
+        for v, d in inc["combo_minus_premium"].items():
+            c = inc["pair_id_complementarity_y1"][v]
+            L.append(f"| {v} | {dci(d['run_auroc'])} | {dci(d['within_market_auroc'])} | {dci(d['pair_id_acc'])} | "
+                     f"{c['view_right_premium_wrong']:g} / {c['premium_right_view_wrong']:g} (of {c['n_y1']}) |")
+    else:
+        pending.append("incremental")
     ev = load(A / f"evidence_llm_v3_{a.auditor}_{a.split}.json")
     if ev:
         L += ["", "**Evidence accuracy** (programmatic check of cited items):", "",

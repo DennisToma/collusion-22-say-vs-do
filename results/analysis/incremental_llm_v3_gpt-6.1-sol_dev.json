@@ -1,0 +1,307 @@
+{
+ "dataset": "llm_v3",
+ "auditor": "gpt-6.1-sol",
+ "split": "dev",
+ "n_runs": 30,
+ "n_pos": 20,
+ "method": "untrained label-free percentile-rank average of premium and each LLM view; paired class-stratified run bootstrap vs premium alone",
+ "point_ci": {
+  "premium": {
+   "run_auroc": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "within_market_auroc": [
+    0.98,
+    0.94,
+    1.0
+   ],
+   "pair_id_acc": [
+    0.95,
+    0.85,
+    1.0
+   ]
+  },
+  "combo[text]": {
+   "run_auroc": [
+    0.8975,
+    0.76,
+    0.995
+   ],
+   "within_market_auroc": [
+    0.95,
+    0.87,
+    1.0
+   ],
+   "pair_id_acc": [
+    0.9,
+    0.75,
+    1.0
+   ]
+  },
+  "combo[action]": {
+   "run_auroc": [
+    0.95,
+    0.84,
+    1.0
+   ],
+   "within_market_auroc": [
+    0.98,
+    0.94,
+    1.0
+   ],
+   "pair_id_acc": [
+    0.95,
+    0.85,
+    1.0
+   ]
+  },
+  "combo[combined]": {
+   "run_auroc": [
+    0.97,
+    0.895,
+    1.0
+   ],
+   "within_market_auroc": [
+    0.96,
+    0.91,
+    1.0
+   ],
+   "pair_id_acc": [
+    0.85,
+    0.7,
+    1.0
+   ]
+  },
+  "combo[combined_stats]": {
+   "run_auroc": [
+    0.965,
+    0.89,
+    1.0
+   ],
+   "within_market_auroc": [
+    0.96,
+    0.9,
+    1.0
+   ],
+   "pair_id_acc": [
+    0.9,
+    0.75,
+    1.0
+   ]
+  },
+  "combo[action_stats]": {
+   "run_auroc": [
+    0.985,
+    0.94,
+    1.0
+   ],
+   "within_market_auroc": [
+    0.97,
+    0.92,
+    1.0
+   ],
+   "pair_id_acc": [
+    0.9,
+    0.75,
+    1.0
+   ]
+  },
+  "combo[structured]": {
+   "run_auroc": [
+    0.98,
+    0.925,
+    1.0
+   ],
+   "within_market_auroc": [
+    0.97,
+    0.92,
+    1.0
+   ],
+   "pair_id_acc": [
+    0.9,
+    0.75,
+    1.0
+   ]
+  }
+ },
+ "combo_minus_premium": {
+  "text": {
+   "run_auroc": {
+    "delta": -0.1025,
+    "ci": [
+     -0.24,
+     -0.005
+    ]
+   },
+   "within_market_auroc": {
+    "delta": -0.03,
+    "ci": [
+     -0.09,
+     0.0
+    ]
+   },
+   "pair_id_acc": {
+    "delta": -0.05,
+    "ci": [
+     -0.15,
+     0.0
+    ]
+   }
+  },
+  "action": {
+   "run_auroc": {
+    "delta": -0.05,
+    "ci": [
+     -0.16,
+     0.0
+    ]
+   },
+   "within_market_auroc": {
+    "delta": 0.0,
+    "ci": [
+     -0.06,
+     0.06
+    ]
+   },
+   "pair_id_acc": {
+    "delta": 0.0,
+    "ci": [
+     -0.15,
+     0.15
+    ]
+   }
+  },
+  "combined": {
+   "run_auroc": {
+    "delta": -0.03,
+    "ci": [
+     -0.105,
+     0.0
+    ]
+   },
+   "within_market_auroc": {
+    "delta": -0.02,
+    "ci": [
+     -0.07,
+     0.02
+    ]
+   },
+   "pair_id_acc": {
+    "delta": -0.1,
+    "ci": [
+     -0.25,
+     0.0
+    ]
+   }
+  },
+  "combined_stats": {
+   "run_auroc": {
+    "delta": -0.035,
+    "ci": [
+     -0.11,
+     0.0
+    ]
+   },
+   "within_market_auroc": {
+    "delta": -0.02,
+    "ci": [
+     -0.06,
+     0.0
+    ]
+   },
+   "pair_id_acc": {
+    "delta": -0.05,
+    "ci": [
+     -0.15,
+     0.0
+    ]
+   }
+  },
+  "action_stats": {
+   "run_auroc": {
+    "delta": -0.015,
+    "ci": [
+     -0.06,
+     0.0
+    ]
+   },
+   "within_market_auroc": {
+    "delta": -0.01,
+    "ci": [
+     -0.06,
+     0.03
+    ]
+   },
+   "pair_id_acc": {
+    "delta": -0.05,
+    "ci": [
+     -0.15,
+     0.0
+    ]
+   }
+  },
+  "structured": {
+   "run_auroc": {
+    "delta": -0.02,
+    "ci": [
+     -0.075,
+     0.0
+    ]
+   },
+   "within_market_auroc": {
+    "delta": -0.01,
+    "ci": [
+     -0.03,
+     0.0
+    ]
+   },
+   "pair_id_acc": {
+    "delta": -0.05,
+    "ci": [
+     -0.15,
+     0.0
+    ]
+   }
+  }
+ },
+ "pair_id_complementarity_y1": {
+  "text": {
+   "premium_right_view_wrong": 12.83,
+   "view_right_premium_wrong": 0.0,
+   "both_wrong": 1.0,
+   "n_y1": 20
+  },
+  "action": {
+   "premium_right_view_wrong": 9.67,
+   "view_right_premium_wrong": 1.0,
+   "both_wrong": 0.0,
+   "n_y1": 20
+  },
+  "combined": {
+   "premium_right_view_wrong": 9.0,
+   "view_right_premium_wrong": 1.0,
+   "both_wrong": 0.0,
+   "n_y1": 20
+  },
+  "combined_stats": {
+   "premium_right_view_wrong": 3.0,
+   "view_right_premium_wrong": 1.0,
+   "both_wrong": 0.0,
+   "n_y1": 20
+  },
+  "action_stats": {
+   "premium_right_view_wrong": 5.0,
+   "view_right_premium_wrong": 1.0,
+   "both_wrong": 0.0,
+   "n_y1": 20
+  },
+  "structured": {
+   "premium_right_view_wrong": 6.0,
+   "view_right_premium_wrong": 1.0,
+   "both_wrong": 0.0,
+   "n_y1": 20
+  }
+ }
+}

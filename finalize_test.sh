@@ -11,6 +11,7 @@ uv run python final_analysis.py --split test --check-only | tee logs/final/prefl
 uv run python final_analysis.py --split dev  | tee logs/final/final_dev.txt
 uv run python baselines.py --ds llm_v3 --split dev  | tee logs/final/baselines_dev.txt
 uv run python textsim.py --split dev         | tee logs/final/textsim_dev.txt
+uv run python incremental.py --split dev     | tee logs/final/incremental_dev.txt
 uv run python report_tables.py --split dev   > /dev/null
 uv run python make_figures.py --split dev    | tee logs/final/figures_dev.txt
 # --- run-once guard (mkdir is atomic) ---
@@ -22,6 +23,7 @@ uv run python evidence.py --split test       | tee logs/final/evidence_test.txt
 uv run python gallery.py --split test        | tee logs/final/gallery_test.txt
 uv run python baselines.py --ds llm_v3 --split test | tee logs/final/baselines_test.txt
 uv run python textsim.py --split test        | tee logs/final/textsim_test.txt
+uv run python incremental.py --split test    | tee logs/final/incremental_test.txt
 uv run python cost.py --ds llm_v3            | tee logs/final/cost.txt
 uv run python report_tables.py --split test | tee logs/final/report_tables_test.txt
 uv run python make_figures.py --split test   | tee logs/final/figures_test.txt

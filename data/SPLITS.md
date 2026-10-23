@@ -36,3 +36,7 @@
   runs a metrics-free preflight (`final_analysis.py --check-only`) and all dev steps first, then takes an atomic mkdir lock + STARTED stamp before the test step (a failed-and-rerun test analysis must be disclosed here).
 - Iter 6 (23:00): additive output `triage.*.cascade_*` in final_analysis (end-to-end recall/FPR of premium screen →
   LLM flag at dev threshold), checked on dev only; no existing scorer/threshold/metric changed.
+- Iter 7 (23:15): pre-registered before any test look — `incremental.py` (untrained, label-free percentile-rank
+  average of premium and each LLM view vs premium alone; paired run bootstrap; pair-ID complementarity counts).
+  Added to `finalize_test.sh` (dev in preflight, test after lock) and `report_tables.py`. Checked on dev only.
+  No existing scorer/threshold/metric changed.
