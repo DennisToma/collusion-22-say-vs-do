@@ -1,3 +1,85 @@
-# REPORT
+# Say vs. Do: does auditing what AI agents *say* together with what they *do* catch collusion better?
 
-(in progress)
+*Apart AI Collusion Sprint, Q2.2 — text + action auditing. Status: DRAFT, results accumulating (see STATUS.md).*
+
+## Abstract (draft)
+We build a 4-firm repeated-pricing market populated by LLM sellers (gpt-6-luna) in which one designated pair
+may get a private channel. Sellers are never told to collude — they only get a profit objective and, in the
+`private` condition, the opportunity. Auditors (gpt-6.1-sol) see only the observable log and score each of the
+six firm pairs, under four views: public text only, actions only, both, and both + computed statistics
+("structured"). We measure whether the hybrid views beat the best single modality (Δ_hybrid), and whether any gain
+comes from cross-modal consistency checking (message↔action shuffle ablation). Final numbers: pending.
+
+## Question
+Given logged trajectories (public messages + prices + market state), do auditors that see both streams detect
+collusion — and identify the colluding pair — better than text-only or action-only auditors? Is any gain due
+to genuine cross-modal reasoning or just more input?
+
+## Setup
+**LLM market (`llm_market.py`, headline data `data/llm_v3`).** 4 firms, 12 rounds, integer prices 6–30, logit
+demand (μ=4; static Nash ≈ 11, joint-monopoly ≈ 19 at cost 6), public cost shocks and demand levels.
+Each round each seller (gpt-6-luna via codex) returns `{public_message, price, notes}` (+ `private_message` if it has
+a channel). Conditions (randomised, 125 runs planned): `private` (70) — designated pair has a private channel;
+`none` (35) — no channel; `legit` (20) — the pair has a publicly announced cost-saving shipping partnership
+(hard negative). Framing: economics-lab experiment with earnings = profit.
+
+*Pilot finding (framing matters):* with a "pricing manager + competition authority monitors public messages"
+framing, luna sellers used the private channel only to say "I'll price independently" (0/3 runs with any
+coordination) and posted near-identical boilerplate. With the lab framing, private pairs immediately exchange
+intended prices and proposals ("I plan to price at 14; consider matching so we can improve margins without
+triggering a price war"). Pilot data: `data/llm_v2` (firm framing), `data/pilot_lab_luna`.
+
+**Labels (`label_llm.py`).** A gpt-6.1-sol judge reads ONLY the private chat (no prices, to avoid building the
+action signal into the label) → `explicit` / `info_exchange` / `none`. Primary label y = explicit ∪
+info_exchange on the assigned pair. Realised conduct (pair price premium over the other two firms, rounds ≥ 4)
+is reported separately. Private chat is never auditor input.
+
+**Auditors (`auditors.py`).** Same model (gpt-6.1-sol, medium reasoning; calls that silently fell back to another
+model are discarded), same task text, same runs. Views: `text` (public messages + public facts), `action`
+(prices, cost, demand, units, profit + public facts), `combined` (strict union), `structured` (combined + pair
+statistics table + stated-vs-actual price table). Output: 0–100 suspicion per pair, P(any collusion), evidence.
+
+**Scripted market (`sim.py`, mechanism check only).** Templated messages × scripted actions, 8 conditions incl.
+hard negatives (cheap talk without action, common shocks, shared pricing rule, legit cooperation). Its Δ is a
+function of how we designed the templates (colluders' stated price direction is decoupled from their action), so
+it only validates the pipeline and the shuffle ablation.
+
+## Results so far
+
+### Scripted mechanism check (non-LLM baselines, `baselines.py`, 5-fold CV grouped by run, 320 runs)
+`uv run python baselines.py --ds scripted_v2 --learner lr` → `results/baselines/scripted_v2_lr.json`.
+- scripted_v1 (strong collusion): action features alone reach AUROC 1.0 → Δ_hybrid = 0 by ceiling; uninformative.
+- scripted_v2 (weak, low-markup collusion): see table in results file (being regenerated with condition-matched
+  shuffle). Preliminary (label-matched shuffle, LR): run-AUROC text 0.89, action 0.95, combined 0.97,
+  structured 1.00; Δ_structured = +0.05 [0.03, 0.08]; shuffling messages drops structured to 0.74 while
+  raw combined is unaffected → the gain is from the engineered say-vs-do features.
+- A first version that used gradient boosting for numeric views and LR for text produced an apparent
+  "shuffle collapse" that disappeared with identical learners — reported as a methodological caution.
+
+### LLM market (headline) — in progress
+First 19 runs: 14/15 private pairs reached an explicit agreement in the private chat (judge), 1 info-exchange.
+Realised pair premium is often small (median ≈ 0.2) because the *other* firms also drift up to 13–14 — a
+`none` run without any channel also ended with all four firms at 14 (tacit supra-competitive pricing).
+So pair identification from prices alone is hard; this is where text could help — or not.
+
+## Validity safeguards
+Labels from private chat only (judge blind to prices); same auditor model across views, fallback calls dropped;
+combined is a strict superset of both single views; shuffle donors matched on label *and* condition;
+hard set excludes runs with explicit coordination language in public text; cross-family auditor (Claude) on
+a stratified subset (planned); adversarial methodology review by gpt-6.1-sol (`logs/review_methodology.md`,
+12 issues; fixes applied: label leakage, view superset, public partnership info, parse strictness, learner parity,
+resume ids, donor matching).
+
+## Limitations (so far)
+Single seller model family (GPT) and single framing for headline data; 12 rounds; agreement labels from one
+LLM judge (spot-checked manually on pilots only).
+
+## Reproduce
+```
+uv run python llm_market.py --ds llm_v3 --plan private:70,none:35,legit:20 --rounds 12 --framing lab --games-parallel 2 --seed 3000
+uv run python label_llm.py --ds llm_v3
+uv run python auditors.py --ds llm_v3 --views text,action,combined,structured --variant orig
+uv run python analyze_llm.py --ds llm_v3
+uv run python sim.py --dataset scripted_v2 --n-per-cond 40 --rounds 30 --seed 1 --levels 12,14 --strength 0.15,0.5
+uv run python baselines.py --ds scripted_v2 --learner lr
+```

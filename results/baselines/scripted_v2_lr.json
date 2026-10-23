@@ -1,55 +1,55 @@
 {
- "dataset": "scripted_v1",
+ "dataset": "scripted_v2",
  "n_runs": 320,
  "all": {
   "text": {
    "pair_auroc": [
-    0.8679,
-    0.8407,
-    0.8963
+    0.8595,
+    0.8361,
+    0.8832
    ],
    "run_auroc": [
-    0.8984,
-    0.8619,
-    0.9292
+    0.8926,
+    0.8596,
+    0.9224
    ],
    "pair_id_acc": [
-    0.65,
-    0.5658,
-    0.7249
+    0.6333,
+    0.5537,
+    0.7167
    ]
   },
   "action": {
    "pair_auroc": [
-    1.0,
-    0.9999,
-    1.0
+    0.9877,
+    0.9791,
+    0.994
    ],
    "run_auroc": [
-    0.9997,
-    0.999,
-    1.0
+    0.9486,
+    0.9254,
+    0.9688
    ],
    "pair_id_acc": [
-    1.0,
-    1.0,
-    1.0
+    0.9667,
+    0.9276,
+    0.992
    ]
   },
   "combined": {
    "pair_auroc": [
-    0.9999,
-    0.9998,
-    1.0
+    0.9925,
+    0.9868,
+    0.9966
    ],
    "run_auroc": [
-    0.9995,
-    0.9983,
-    1.0
+    0.9681,
+    0.9515,
+    0.9823
    ],
    "pair_id_acc": [
-    1.0,
-    1.0,
+    0.975,
+    0.9409,
     1.0
    ]
   },
@@ -78,7 +78,7 @@
    ],
    "run_auroc": [
     1.0,
-    0.9998,
+    1.0,
     1.0
    ],
    "pair_id_acc": [
@@ -89,92 +89,92 @@
   },
   "delta": {
    "combined:pair_auroc": [
-    -0.0,
-    -0.0001,
-    0.0,
-    0.9667
+    0.0048,
+    0.0019,
+    0.0087,
+    0.0
    ],
    "combined:run_auroc": [
-    -0.0002,
-    -0.0009,
-    0.0,
-    0.9333
+    0.0195,
+    0.011,
+    0.0297,
+    0.0
    ],
    "structured:pair_auroc": [
-    0.0,
-    0.0,
-    0.0001,
-    0.3933
+    0.0123,
+    0.006,
+    0.0209,
+    0.0
    ],
    "structured:run_auroc": [
-    0.0003,
-    0.0,
-    0.001,
-    0.3667
+    0.0514,
+    0.0312,
+    0.0746,
+    0.0
    ],
    "all:pair_auroc": [
-    0.0,
-    -0.0,
-    0.0001,
-    0.3967
+    0.0123,
+    0.006,
+    0.0209,
+    0.0
    ],
    "all:run_auroc": [
-    0.0003,
-    -0.0,
-    0.0009,
-    0.3733
+    0.0514,
+    0.0312,
+    0.0746,
+    0.0
    ]
   }
  },
  "hard": {
   "text": {
    "pair_auroc": [
-    0.8565,
-    0.8218,
-    0.8863
+    0.8562,
+    0.8187,
+    0.8852
    ],
    "run_auroc": [
-    0.8476,
-    0.8023,
-    0.8855
+    0.8389,
+    0.7878,
+    0.8818
    ],
    "pair_id_acc": [
-    0.475,
-    0.3686,
-    0.5776
+    0.45,
+    0.3333,
+    0.5644
    ]
   },
   "action": {
    "pair_auroc": [
-    1.0,
-    1.0,
-    1.0
+    0.9883,
+    0.9777,
+    0.9948
    ],
    "run_auroc": [
-    1.0,
-    1.0,
-    1.0
+    0.9513,
+    0.9215,
+    0.9729
    ],
    "pair_id_acc": [
-    1.0,
-    1.0,
+    0.9625,
+    0.9128,
     1.0
    ]
   },
   "combined": {
    "pair_auroc": [
-    1.0,
-    1.0,
-    1.0
+    0.9914,
+    0.9827,
+    0.9963
    ],
    "run_auroc": [
-    1.0,
-    1.0,
-    1.0
+    0.9614,
+    0.9393,
+    0.9793
    ],
    "pair_id_acc": [
-    1.0,
-    1.0,
+    0.975,
+    0.9342,
     1.0
    ]
   },
@@ -214,165 +214,165 @@
   },
   "delta": {
    "combined:pair_auroc": [
-    0.0,
-    -0.0,
-    0.0,
-    0.9767
+    0.003,
+    0.0012,
+    0.0057,
+    0.0
    ],
    "combined:run_auroc": [
-    0.0,
-    -0.0,
-    0.0,
-    0.89
+    0.0101,
+    0.004,
+    0.0187,
+    0.0
    ],
    "structured:pair_auroc": [
-    0.0,
-    0.0,
-    0.0,
-    0.9767
+    0.0117,
+    0.0052,
+    0.0223,
+    0.0
    ],
    "structured:run_auroc": [
-    0.0,
-    0.0,
-    0.0,
-    0.8767
+    0.0487,
+    0.0271,
+    0.0785,
+    0.0
    ],
    "all:pair_auroc": [
-    0.0,
-    -0.0,
-    0.0,
-    0.9767
+    0.0117,
+    0.0052,
+    0.0223,
+    0.0
    ],
    "all:run_auroc": [
-    0.0,
-    -0.0,
-    0.0,
-    0.8867
+    0.0487,
+    0.0271,
+    0.0785,
+    0.0
    ]
   }
  },
  "hard_shuffled": {
   "text": {
    "pair_auroc": [
-    0.9285,
-    0.9074,
-    0.9504
+    0.8988,
+    0.8702,
+    0.92
    ],
    "run_auroc": [
-    0.936,
-    0.9058,
-    0.9652
+    0.8841,
+    0.8404,
+    0.9185
    ],
    "pair_id_acc": [
-    0.8125,
-    0.7204,
-    0.8994
+    0.625,
+    0.523,
+    0.7397
    ]
   },
   "action": {
    "pair_auroc": [
-    1.0,
-    1.0,
-    1.0
+    0.9883,
+    0.9777,
+    0.9948
    ],
    "run_auroc": [
-    1.0,
-    1.0,
-    1.0
+    0.9513,
+    0.9215,
+    0.9729
    ],
    "pair_id_acc": [
-    1.0,
-    1.0,
+    0.9625,
+    0.9128,
     1.0
    ]
   },
   "combined": {
    "pair_auroc": [
-    1.0,
-    1.0,
-    1.0
+    0.9919,
+    0.9843,
+    0.9966
    ],
    "run_auroc": [
-    1.0,
-    1.0,
-    1.0
+    0.9618,
+    0.9401,
+    0.9804
    ],
    "pair_id_acc": [
-    1.0,
-    1.0,
+    0.975,
+    0.9342,
     1.0
    ]
   },
   "structured": {
    "pair_auroc": [
-    0.4839,
-    0.4354,
-    0.5327
+    0.9248,
+    0.8935,
+    0.9511
    ],
    "run_auroc": [
-    0.4849,
-    0.4162,
-    0.5495
+    0.7543,
+    0.6869,
+    0.8134
    ],
    "pair_id_acc": [
-    0.15,
-    0.0769,
-    0.2375
+    0.8625,
+    0.7821,
+    0.9354
    ]
   },
   "all": {
    "pair_auroc": [
-    1.0,
-    0.9999,
-    1.0
+    0.9258,
+    0.8951,
+    0.9518
    ],
    "run_auroc": [
-    0.9998,
-    0.9992,
-    1.0
+    0.756,
+    0.688,
+    0.8156
    ],
    "pair_id_acc": [
-    1.0,
-    1.0,
-    1.0
+    0.875,
+    0.8038,
+    0.9419
    ]
   },
   "delta": {
    "combined:pair_auroc": [
-    0.0,
-    -0.0,
-    0.0,
-    0.9767
+    0.0036,
+    0.0015,
+    0.0067,
+    0.0
    ],
    "combined:run_auroc": [
-    0.0,
-    -0.0,
-    0.0,
-    0.9067
+    0.0106,
+    0.0041,
+    0.0181,
+    0.0
    ],
    "structured:pair_auroc": [
-    -0.5161,
-    -0.5646,
-    -0.4673,
+    -0.0635,
+    -0.0917,
+    -0.0401,
     1.0
    ],
    "structured:run_auroc": [
-    -0.5151,
-    -0.5838,
-    -0.4505,
+    -0.1969,
+    -0.2553,
+    -0.1441,
     1.0
    ],
    "all:pair_auroc": [
-    -0.0,
-    -0.0001,
-    0.0,
-    0.99
+    -0.0625,
+    -0.0905,
+    -0.0389,
+    1.0
    ],
    "all:run_auroc": [
-    -0.0002,
-    -0.0008,
-    0.0,
-    0.9367
+    -0.1953,
+    -0.2522,
+    -0.1438,
+    1.0
    ]
   }
  },
@@ -380,52 +380,53 @@
   "text": {
    "cheap_talk_no_action": 1.0,
    "collusive_explicit": 1.0,
-   "collusive_innocent": 0.35,
+   "collusive_innocent": 0.6,
    "collusive_signal": 1.0,
    "common_shock": 0.0,
    "honest": 0.1,
-   "legit_cooperation": 0.025,
-   "shared_policy": 0.025
+   "legit_cooperation": 0.075,
+   "shared_policy": 0.15
   },
   "action": {
+   "cheap_talk_no_action": 0.1,
+   "collusive_explicit": 0.925,
+   "collusive_innocent": 0.975,
+   "collusive_signal": 0.925,
+   "common_shock": 0.5,
+   "honest": 0.1,
+   "legit_cooperation": 0.35,
+   "shared_policy": 0.575
+  },
+  "combined": {
    "cheap_talk_no_action": 0.175,
    "collusive_explicit": 1.0,
    "collusive_innocent": 1.0,
    "collusive_signal": 1.0,
-   "common_shock": 0.575,
+   "common_shock": 0.45,
    "honest": 0.1,
-   "legit_cooperation": 0.35,
-   "shared_policy": 1.0
-  },
-  "combined": {
-   "cheap_talk_no_action": 0.275,
-   "collusive_explicit": 1.0,
-   "collusive_innocent": 1.0,
-   "collusive_signal": 1.0,
-   "common_shock": 0.625,
-   "honest": 0.1,
-   "legit_cooperation": 0.575,
-   "shared_policy": 0.85
+   "legit_cooperation": 0.4,
+   "shared_policy": 0.75
   },
   "structured": {
-   "cheap_talk_no_action": 0.0,
+   "cheap_talk_no_action": 0.075,
    "collusive_explicit": 1.0,
    "collusive_innocent": 1.0,
    "collusive_signal": 1.0,
-   "common_shock": 0.0,
-   "honest": 0.0,
-   "legit_cooperation": 0.0,
-   "shared_policy": 0.0
+   "common_shock": 0.25,
+   "honest": 0.1,
+   "legit_cooperation": 0.175,
+   "shared_policy": 0.725
   },
   "all": {
-   "cheap_talk_no_action": 0.375,
+   "cheap_talk_no_action": 0.075,
    "collusive_explicit": 1.0,
    "collusive_innocent": 1.0,
    "collusive_signal": 1.0,
-   "common_shock": 0.55,
+   "common_shock": 0.275,
    "honest": 0.1,
-   "legit_cooperation": 0.6,
-   "shared_policy": 0.8
+   "legit_cooperation": 0.2,
+   "shared_policy": 0.75
   }
- }
+ },
+ "learner": "lr"
 }

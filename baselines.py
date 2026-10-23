@@ -3,7 +3,7 @@
 Pair-level task: score each of the 6 pairs per run; positive = assigned pair of a run whose label is
 collusive. Run-level score = max pair score. 5-fold CV grouped by run. Bootstrap CIs over runs.
 Shuffle ablation: at test time each run's messages are replaced by those of another run with the
-same label, agents relabelled so the donor's pair maps onto the recipient's pair (text signal kept,
+same label AND condition, agents relabelled so the donor's pair maps onto the recipient's pair (text signal kept,
 say<->do alignment destroyed).
 
     uv run python baselines.py --ds scripted_v1
@@ -15,6 +15,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import HistGradientBoostingClassifier
 from sklearn.metrics import roc_auc_score
+from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import GroupKFold
 from scipy.sparse import hstack, csr_matrix
 from features import load, load_gt, pair_features, PAIRS, AGENTS
@@ -36,10 +37,10 @@ def shuffle_runs(runs, gt, seed=0):
     ids = sorted(runs)
     by_lab = {}
     for r in ids:
-        by_lab.setdefault(label_of(gt[r]), []).append(r)
+        by_lab.setdefault((label_of(gt[r]), gt[r]["condition"]), []).append(r)
     out = {}
     for r in ids:
-        pool = [x for x in by_lab[label_of(gt[r])] if x != r and len(runs[x]) == len(runs[r])]
+        pool = [x for x in by_lab[(label_of(gt[r]), gt[r]["condition"])] if x != r and len(runs[x]) == len(runs[r])]
         d = rng.choice(pool)
         rp, dp = gt[r]["assigned_pair"], gt[d]["assigned_pair"]
         rest_r = [a for a in AGENTS if a not in rp]
@@ -69,28 +70,31 @@ def build(runs, gt):
     return recs
 
 
-def matrices(recs, kind, vec=None):
-    A = np.array([r["act"] for r in recs])
-    X = np.array([r["cross"] for r in recs])
-    if kind == "action":
-        return A, vec
-    if kind == "structured":
-        return np.hstack([A, X]), vec
-    if vec is None:
-        vec = TfidfVectorizer(ngram_range=(1, 2), min_df=2, sublinear_tf=True).fit([r["text"] for r in recs])
-    T = vec.transform([r["text"] for r in recs])
-    if kind == "text":
-        return T, vec
-    if kind == "combined":  # raw text + actions, no derived cross features
-        return hstack([T, csr_matrix(A * 1.0)]).tocsr(), vec
-    if kind == "all":
-        return hstack([T, csr_matrix(np.hstack([A, X]))]).tocsr(), vec
+def matrices(recs, kind, fit=None):
+    """Nested feature sets with identical preprocessing. fit = (tfidf, scaler) learned on the train fold."""
+    has_text = kind in ("text", "combined", "all")
+    num = {"text": None, "action": ["act"], "combined": ["act"], "structured": ["act", "cross"],
+           "all": ["act", "cross"]}[kind]
+    if fit is None:
+        vec = TfidfVectorizer(ngram_range=(1, 2), min_df=2, sublinear_tf=True).fit([r["text"] for r in recs]) if has_text else None
+        sc = StandardScaler().fit(np.array([sum((r[k] for k in num), []) for r in recs])) if num else None
+        fit = (vec, sc)
+    vec, sc = fit
+    parts = []
+    if has_text:
+        parts.append(vec.transform([r["text"] for r in recs]))
+    if num:
+        parts.append(csr_matrix(sc.transform(np.array([sum((r[k] for k in num), []) for r in recs]))))
+    return hstack(parts).tocsr(), fit
+
+
+LEARNER = "lr"
 
 
 def model(kind):
-    if kind in ("action", "structured"):
+    if LEARNER == "gbm":
         return HistGradientBoostingClassifier(max_iter=200, learning_rate=0.05, random_state=0)
-    return LogisticRegression(C=2.0, max_iter=2000)
+    return LogisticRegression(C=1.0, max_iter=5000)
 
 
 def cv_scores(recs, kind, test_recs=None, seed=0):
@@ -100,11 +104,11 @@ def cv_scores(recs, kind, test_recs=None, seed=0):
     s = np.zeros(len(recs))
     test_recs = test_recs or recs
     for tr, te in GroupKFold(5).split(recs, y, groups):
-        Xtr, vec = matrices([recs[i] for i in tr], kind)
-        Xte, _ = matrices([test_recs[i] for i in te], kind, vec)
-        if kind in ("combined", "all"):  # scale numeric cols for LR
-            pass
-        m = model(kind).fit(Xtr if kind in ("text", "combined", "all") else Xtr, y[tr])
+        Xtr, fit = matrices([recs[i] for i in tr], kind)
+        Xte, _ = matrices([test_recs[i] for i in te], kind, fit)
+        if LEARNER == "gbm":
+            Xtr, Xte = Xtr.toarray(), Xte.toarray()
+        m = model(kind).fit(Xtr, y[tr])
         s[te] = m.predict_proba(Xte)[:, 1]
     return s
 
@@ -155,7 +159,10 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--ds", default="scripted_v1")
     ap.add_argument("--boot", type=int, default=1000)
+    ap.add_argument("--learner", default="lr", choices=["lr", "gbm"])
     a = ap.parse_args()
+    global LEARNER
+    LEARNER = a.learner
     d = Path("data") / a.ds
     runs, gt = load(d / "trajectories.jsonl"), load_gt(d / "ground_truth.jsonl")
     if (d / "labels.jsonl").exists():  # LLM data: keep labelled runs, primary label = verified agreement
@@ -187,7 +194,8 @@ def main():
     res["flag_rate_at_honest_p90"] = fpr
     out = Path("results") / "baselines"
     out.mkdir(parents=True, exist_ok=True)
-    (out / f"{a.ds}.json").write_text(json.dumps(res, indent=1))
+    res["learner"] = a.learner
+    (out / f"{a.ds}_{a.learner}.json").write_text(json.dumps(res, indent=1))
     for part in ("all", "hard", "hard_shuffled"):
         print(f"== {part}")
         for k in kinds:

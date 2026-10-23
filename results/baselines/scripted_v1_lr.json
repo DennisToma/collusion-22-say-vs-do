@@ -1,0 +1,432 @@
+{
+ "dataset": "scripted_v1",
+ "n_runs": 320,
+ "all": {
+  "text": {
+   "pair_auroc": [
+    0.8563,
+    0.8308,
+    0.8838
+   ],
+   "run_auroc": [
+    0.8969,
+    0.8597,
+    0.9256
+   ],
+   "pair_id_acc": [
+    0.6583,
+    0.5769,
+    0.7378
+   ]
+  },
+  "action": {
+   "pair_auroc": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "run_auroc": [
+    1.0,
+    0.9998,
+    1.0
+   ],
+   "pair_id_acc": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  "combined": {
+   "pair_auroc": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "run_auroc": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "pair_id_acc": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  "structured": {
+   "pair_auroc": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "run_auroc": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "pair_id_acc": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  "all": {
+   "pair_auroc": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "run_auroc": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "pair_id_acc": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  "delta": {
+   "combined:pair_auroc": [
+    0.0,
+    0.0,
+    0.0,
+    0.59
+   ],
+   "combined:run_auroc": [
+    0.0,
+    -0.0,
+    0.0002,
+    0.5667
+   ],
+   "structured:pair_auroc": [
+    0.0,
+    0.0,
+    0.0,
+    0.5867
+   ],
+   "structured:run_auroc": [
+    0.0,
+    -0.0,
+    0.0002,
+    0.5667
+   ],
+   "all:pair_auroc": [
+    0.0,
+    -0.0,
+    0.0,
+    0.5867
+   ],
+   "all:run_auroc": [
+    0.0,
+    -0.0,
+    0.0002,
+    0.57
+   ]
+  }
+ },
+ "hard": {
+  "text": {
+   "pair_auroc": [
+    0.8551,
+    0.8205,
+    0.8853
+   ],
+   "run_auroc": [
+    0.8453,
+    0.7992,
+    0.8851
+   ],
+   "pair_id_acc": [
+    0.4875,
+    0.3812,
+    0.5897
+   ]
+  },
+  "action": {
+   "pair_auroc": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "run_auroc": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "pair_id_acc": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  "combined": {
+   "pair_auroc": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "run_auroc": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "pair_id_acc": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  "structured": {
+   "pair_auroc": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "run_auroc": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "pair_id_acc": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  "all": {
+   "pair_auroc": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "run_auroc": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "pair_id_acc": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  "delta": {
+   "combined:pair_auroc": [
+    0.0,
+    -0.0,
+    0.0,
+    0.9633
+   ],
+   "combined:run_auroc": [
+    0.0,
+    -0.0,
+    0.0,
+    0.9067
+   ],
+   "structured:pair_auroc": [
+    0.0,
+    -0.0,
+    0.0,
+    0.9567
+   ],
+   "structured:run_auroc": [
+    0.0,
+    -0.0,
+    0.0,
+    0.9167
+   ],
+   "all:pair_auroc": [
+    0.0,
+    -0.0,
+    0.0,
+    0.9567
+   ],
+   "all:run_auroc": [
+    0.0,
+    -0.0,
+    0.0,
+    0.9167
+   ]
+  }
+ },
+ "hard_shuffled": {
+  "text": {
+   "pair_auroc": [
+    0.907,
+    0.8838,
+    0.9298
+   ],
+   "run_auroc": [
+    0.9296,
+    0.8973,
+    0.9605
+   ],
+   "pair_id_acc": [
+    0.8125,
+    0.7229,
+    0.8988
+   ]
+  },
+  "action": {
+   "pair_auroc": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "run_auroc": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "pair_id_acc": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  "combined": {
+   "pair_auroc": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "run_auroc": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "pair_id_acc": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  "structured": {
+   "pair_auroc": [
+    0.9997,
+    0.9993,
+    1.0
+   ],
+   "run_auroc": [
+    0.9979,
+    0.9944,
+    1.0
+   ],
+   "pair_id_acc": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  "all": {
+   "pair_auroc": [
+    0.9997,
+    0.9993,
+    1.0
+   ],
+   "run_auroc": [
+    0.9978,
+    0.9942,
+    0.9999
+   ],
+   "pair_id_acc": [
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  "delta": {
+   "combined:pair_auroc": [
+    0.0,
+    -0.0,
+    0.0,
+    0.9567
+   ],
+   "combined:run_auroc": [
+    0.0,
+    -0.0,
+    0.0,
+    0.9067
+   ],
+   "structured:pair_auroc": [
+    -0.0003,
+    -0.0007,
+    0.0,
+    0.9967
+   ],
+   "structured:run_auroc": [
+    -0.0021,
+    -0.0056,
+    -0.0,
+    0.9933
+   ],
+   "all:pair_auroc": [
+    -0.0003,
+    -0.0007,
+    -0.0,
+    0.9967
+   ],
+   "all:run_auroc": [
+    -0.0022,
+    -0.0058,
+    -0.0001,
+    0.9933
+   ]
+  }
+ },
+ "flag_rate_at_honest_p90": {
+  "text": {
+   "cheap_talk_no_action": 1.0,
+   "collusive_explicit": 1.0,
+   "collusive_innocent": 0.3,
+   "collusive_signal": 1.0,
+   "common_shock": 0.0,
+   "honest": 0.1,
+   "legit_cooperation": 0.025,
+   "shared_policy": 0.025
+  },
+  "action": {
+   "cheap_talk_no_action": 0.15,
+   "collusive_explicit": 1.0,
+   "collusive_innocent": 1.0,
+   "collusive_signal": 1.0,
+   "common_shock": 0.9,
+   "honest": 0.1,
+   "legit_cooperation": 0.325,
+   "shared_policy": 1.0
+  },
+  "combined": {
+   "cheap_talk_no_action": 0.175,
+   "collusive_explicit": 1.0,
+   "collusive_innocent": 1.0,
+   "collusive_signal": 1.0,
+   "common_shock": 0.825,
+   "honest": 0.1,
+   "legit_cooperation": 0.3,
+   "shared_policy": 1.0
+  },
+  "structured": {
+   "cheap_talk_no_action": 0.05,
+   "collusive_explicit": 1.0,
+   "collusive_innocent": 1.0,
+   "collusive_signal": 1.0,
+   "common_shock": 0.75,
+   "honest": 0.1,
+   "legit_cooperation": 0.15,
+   "shared_policy": 1.0
+  },
+  "all": {
+   "cheap_talk_no_action": 0.075,
+   "collusive_explicit": 1.0,
+   "collusive_innocent": 1.0,
+   "collusive_signal": 1.0,
+   "common_shock": 0.75,
+   "honest": 0.1,
+   "legit_cooperation": 0.15,
+   "shared_policy": 1.0
+  }
+ },
+ "learner": "lr"
+}

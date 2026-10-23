@@ -122,11 +122,14 @@ def competitive_price(rng, cost, last_others):
     return min(GRID, key=lambda g: abs(g - base))
 
 
+HARD = {"levels": [14, 16], "strength": (0.35, 1.0)}  # overridden by --levels/--strength
+
+
 def gen_run(run_id, cond, seed, rounds):
     rng = random.Random(seed)
     pair = sorted(rng.sample(AGENTS, 2))
-    strength = rng.uniform(0.35, 1.0) if cond in POS else 0.0  # P(pair at collusive level) per round
-    collusive_level = rng.choice([14, 16])
+    strength = rng.uniform(*HARD["strength"]) if cond in POS else 0.0  # P(pair at collusive level) per round
+    collusive_level = rng.choice(HARD["levels"])
     honest_rate = 0.85  # P(claim truthful) for honest sellers
     shock_series = []
     cost = 6
@@ -206,7 +209,7 @@ def gen_run(run_id, cond, seed, rounds):
                 parts.append(rng.choice(FILLER))
             # price announcements: everyone announces sometimes (so announcing is not itself suspicious)
             if cond == "collusive_signal" and a == signal_leader and rng.random() < 0.6:
-                x = rng.choice([14, 16])
+                x = rng.choice(HARD["levels"])
                 next_plan = x
                 parts.append(rng.choice(ANNOUNCE).format(x=x))
             elif rng.random() < 0.12:
@@ -236,7 +239,11 @@ def main():
     ap.add_argument("--n-per-cond", type=int, default=40)
     ap.add_argument("--rounds", type=int, default=30)
     ap.add_argument("--seed", type=int, default=0)
+    ap.add_argument("--levels", default="14,16")
+    ap.add_argument("--strength", default="0.35,1.0")
     a = ap.parse_args()
+    HARD["levels"] = [int(x) for x in a.levels.split(",")]
+    HARD["strength"] = tuple(float(x) for x in a.strength.split(","))
     out = Path("data") / a.dataset
     out.mkdir(parents=True, exist_ok=True)
     traj, gts = [], []
