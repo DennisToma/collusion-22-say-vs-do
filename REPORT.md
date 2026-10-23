@@ -94,7 +94,11 @@ LLM auditor (gpt-6.1-sol, zero-shot), run-level and pair-level AUROC [95% bootst
 Δ_structured (pair) = +0.086 [+0.006, +0.171] (paired bootstrap, P(Δ≤0)=0.014); Δ_combined (pair) = −0.014
 [−0.066, +0.034]; Δ_combined (run) = +0.094 [−0.018, +0.238]. Text-only is at chance.
 Open question this raises: is the structured gain from *cross-modal* reasoning or simply from the computed
-price statistics? → new ablation view `action_stats` (actions + pair statistics, no text) is being audited.
+price statistics? → ablation views `action_stats` (actions + pair stats, no text) and `combined_stats` (combined +
+pair stats, no stated-vs-actual table). **First look (22:10, n=40 runs, legit re-audits still pending, 200 boots):**
+pair AUROC action_stats 0.90 vs structured 0.91; structured − action_stats = −0.024 [−0.060, +0.005];
+action_stats − action = +0.105 [+0.043, +0.168]. I.e. so far the "hybrid" gain is explained by the computed price
+statistics, not by adding text. To be confirmed on the full cohort.
 
 Supervised non-LLM baselines (`baselines.py --ds llm_v3 --learner lr`, 5-fold grouped CV, same 36 runs):
 pair AUROC text 0.82 [0.77, 0.88], action 0.99 [0.97, 1.00], combined 0.99, structured 0.99; Δ ≈ 0 (ceiling).

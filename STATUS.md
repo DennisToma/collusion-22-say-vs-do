@@ -9,7 +9,10 @@
 - Locked split frozen: `data/SPLITS.md` (dev 0000–0029, test 0030–0124; 0 tuning attempts). EXPERIMENTS.tsv started.
 - Interim (n=36, 24 pos), GPT auditor pair-AUROC: text .58, action .78, combined .76, structured .86;
   Δ_struct(pair) +.086 [.006,.171]. Non-LLM LR: action .99, text .82 → ceiling. Public text 0/32 explicit (hardset.py).
-- Key open question: structured gain = stats table or cross-modal? → compare `action_stats` vs `structured`.
+- Key open question: structured gain = stats table or cross-modal? First look (n=40): action_stats ≈ structured
+  (Δ −.024 [−.06,.005]); action_stats − action +.105 [.04,.17] → gain is from computed stats, not text. Views
+  `action_stats` + `combined_stats` now in default auditor views (pipeline backfills). analyze_llm adds
+  within-market AUROC, paired view contrasts, NaN-safe p_le_0.
 
 - 22:10 codex interim review (`logs/review_interim.md`) → FIXED: legit runs lacked public partnership info in audits
   (all legit audits invalidated, pipeline restarted 22:10 and re-auditing); hard-set keyword fallback; failed LLM
