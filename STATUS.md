@@ -17,7 +17,7 @@
 - Risks: LLM concurrency ~7; finalize preflight needs hardset coverage of every run (it reruns hardset).
 
 ## Log
-- 23:46 iter 9: codex review_iter9 applied (E35): auditors.py --verify gate in auto_finalize + finalize preflight;
+- 23:40 iter 9: codex review_iter9 applied (E35): auditors.py --verify gate in auto_finalize + finalize preflight;
   REPORT dev table now generated values, softened claims, full disclosure. Open P2s in logs/review_iter9.md (evidence
   scope, n-gram coefficient artifact, cascade 'explanation role' wording).
 - 23:30 iter 9: auto_finalize.sh chain (E34); fig_mechanism.py dev figure (E33); REPORT test slot; codex review_iter9 started.

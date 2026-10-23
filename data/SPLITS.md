@@ -59,7 +59,7 @@
 - Iter 8 (23:11): exploration stratum `data/llm_v3mon` (lab framing + publicly known price monitor that halves flagged
   pairs' earnings; private:14, none:6, seed 7000), analysed by `monitor_stratum.py` (written before any llm_v3mon data
   existed; frozen llm_v3 dev thresholds; comparator = llm_v3 dev only). Never pooled into the headline.
-- Iter 9 (23:45): `auto_finalize.sh` runs `finalize_test.sh` automatically once llm_v3 generation is done, 125 runs are
+- Iter 9 (23:40): `auto_finalize.sh` runs `finalize_test.sh` automatically once llm_v3 generation is done, 125 runs are
   labelled and `auditors.py --verify` (read-only: one current-prompt-hash audit per labelled run per view, no
   duplicates) passes twice with no llm_v3 labeller/auditor running; `finalize_test.sh` preflight also runs `--verify`.
   `fig_mechanism.py` (descriptive price paths) refuses `--split test/all` before HEADLINE_DONE. No scorer changed.
