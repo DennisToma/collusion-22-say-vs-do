@@ -171,6 +171,12 @@ def main():
         if a.ds == "llm_v3":  # exact frozen id set (data/SPLITS.md): 0000-0124 all labelled, not just "available labels"
             exp = {f"llm_v3_{i:04d}" for i in range(N_FROZEN)}
             assert exp <= set(labs), f"missing labels: {sorted(exp - set(labs))[:5]}"
+    if a.ds == "llm_v3" and not a.allow_partial:  # hard-set filter must be the LLM+keyword check on every run
+        hs = {x["run_id"] for x in load_jsonl(Path("data") / a.ds / "public_explicit.jsonl")}
+        assert set(labs) <= hs, f"hardset.py has not checked {len(set(labs) - hs)} runs; run `uv run python hardset.py`"
+    bad = [r for r, L in labs.items() if L.get("agreement") not in ("explicit", "info_exchange", "none", "no_channel")
+           or (L.get("agreement") == "no_channel") != (L.get("condition") != "private")]
+    assert a.allow_partial or not bad, f"invalid/unparsed labels (would silently become y=0): {bad[:5]}"
     if a.check_only:
         print(f"preflight OK: split={a.split}, all views complete for {len(want)} runs (+{len(want_dev)} dev)"); return
     dev = [r for r in common if idx(r) < DEV_MAX]
@@ -269,6 +275,9 @@ def main():
             X = json.loads(ext_fn.read_text())  # sibling may rewrite it concurrently
         except json.JSONDecodeError:
             X = {"per_pair_scores": [], "n_runs": "unreadable"}
+        if not isinstance(X.get("per_pair_scores"), list) or not all(
+                isinstance(x, dict) and {"detector", "run_id", "pair", "score"} <= set(x) for x in X["per_pair_scores"]):
+            X = {"per_pair_scores": [], "n_runs": "unexpected schema"}  # never crash the frozen analysis on sibling data
         out["external_infotheory"] = {"source": str(ext_fn), "n_runs_in_file": X.get("n_runs")}
         for det in EXT_DETECTORS:
             E = {}
@@ -277,6 +286,8 @@ def main():
                     E.setdefault(x["run_id"], {})[x["pair"]] = float(x["score"])
             E = {r: {"scores": sc, "run": max(sc.values())} for r, sc in E.items() if set(sc) == set(PAIRS)}
             ix = [r for r in ids if r in E]
+            out["external_infotheory"].setdefault("coverage", {})[det] = f"{len(ix)}/{len(ids)} runs of the split" + (
+                "" if len(ix) == len(ids) else " (PARTIAL: sibling file lags our cohort)")
             if len(ix) < 4 or not (0 < sum(labs[r]["y"] for r in ix) < len(ix)):
                 out["external_infotheory"][det] = {"n": len(ix), "note": "too few runs"}
                 continue

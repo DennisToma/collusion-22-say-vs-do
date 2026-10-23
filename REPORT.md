@@ -74,8 +74,7 @@ it only validates the pipeline and the shuffle ablation.
 Generation still running (≈60/125 runs at 22:15 UTC). Per `data/SPLITS.md`, headline numbers will come from ONE
 run of the frozen `final_analysis.py --split test` (runs 0030–0124; the script refuses to run unless every view has
 audited every run). Numbers below are **dev** (runs 0000–0029: 20 positive, 10 negative = 5 `none` + 5 `legit`),
-indicative only. `uv run python final_analysis.py --split dev --allow-partial` (the `combined_stats` view is still
-being backfilled) → `results/analysis/final_llm_v3_gpt-6.1-sol_dev.json`.
+indicative only. `uv run python final_analysis.py --split dev` → `results/analysis/final_llm_v3_gpt-6.1-sol_dev.json`.
 
 **Endpoint.** y = 1 iff a judge reading the private chat finds an explicit price agreement or a pricing-intention
 exchange on the assigned pair. This is *private coordination communication*, not realised supra-competitive
@@ -90,8 +89,8 @@ in the private channel. So the whole LLM set is the "hard" set; an "easy" set do
 
 Scorers: six gpt-6.1-sol zero-shot auditor views; the **untrained pair premium** (pair mean price − mean of the
 other two firms, every pair, all rounds; run score = max over pairs; nothing fitted); a **late fusion**
-w·text + (1−w)·action of the unimodal auditor scores (w fitted on dev: 0.6). Dev, 1000 class-stratified run
-bootstraps:
+w·text + (1−w)·action of the unimodal auditor scores (w fitted on dev: 0.6). Dev, 2000 class-stratified run
+bootstraps (hand-copied; the generated `results/analysis/report_tables_dev.md` is authoritative and rounds e.g. text run 0.575 → 0.57):
 
 | scorer | run AUROC | within-market AUROC | pooled pair AUROC | flagged @dev thr.: y=1 / neg. (legit) |
 |---|---|---|---|---|
@@ -110,9 +109,9 @@ Why the premium is so strong: in many private runs the pair agrees in round 1 to
 (manual read of 3 dev chats: 0005, 0012, 0016). The opening-round gap alone carries much of the signal; without
 round 1 the premium still matches or beats every LLM view on dev, but no longer significantly
 (premium_r2plus − structured: run +0.09 [−0.10, +0.29]). The LLM auditors also see round 1.
-**Label ≈ condition:** all 37 `private` runs so far are labelled y = 1 (35 explicit, 2 info-exchange), so on this
+**Label ≈ condition:** all 55 `private` runs so far are labelled y = 1 (52 explicit, 3 info-exchange), so on this
 generator "agreement" and "had a channel" coincide; see Limitations.
-Paired contrasts (dev): Δ_hybrid[combined] run +0.05 [−0.12, +0.19], within +0.01 [−0.05, +0.05];
+Paired contrasts (dev): Δ_hybrid[combined] run +0.05 [−0.12, +0.21], within +0.01 [−0.05, +0.05];
 combined − fusion ≈ 0 (run +0.00 [−0.12, +0.12]); action_stats − action: within +0.07 [+0.02, +0.11];
 premium − structured: run +0.17 [+0.05, +0.34], within +0.08 [−0.01, +0.19]; premium − action_stats: run +0.11
 [+0.01, +0.25].
@@ -207,7 +206,11 @@ iteration-3 analyses (n = 36–40) included test runs 0030–0039; nothing was t
 - Agreement labels from one LLM judge (gpt-6.1-sol, same family as the auditor; blind to prices); manually
   spot-checked on 3 dev chats + pilots.
 - Zero-shot auditors with one prompt (0 tuning attempts); a tuned or few-shot auditor might use the stats table better.
-- Small dev split (30 runs, base rate 2/3) → dev-fitted thresholds and fusion weight are noisy.
+- Small dev split (30 runs, base rate 2/3) → dev-fitted thresholds and fusion weight are noisy. The Youden rule breaks
+  ties toward the higher threshold: conservative on FPR only — with perfect dev separation (premium) the cut sits at
+  the lowest dev-positive score, which can cost test TPR.
+- The sibling's information-theoretic detectors may have been developed while looking at llm_v3 runs that include our
+  test runs; their test numbers are a comparator, not a locked held-out result.
 
 ## Reproduce
 ```

@@ -48,9 +48,9 @@ def main():
     for v in ("text", "structured"):
         S[v] = {x["run_id"]: {"scores": x["scores"], "run": x["collusion_present"]} for x in load_jsonl(d / f"{v}_orig.jsonl")}
     ids = sorted(r for r in labs if all(r in R for R in S.values()) and (idx(r) < DEV_MAX) == (a.split == "dev"))
-    b = boot(ids, S, labs, a.boot)
     if a.split == "test" and a.ds == "llm_v3":  # exact frozen test cohort (data/SPLITS.md)
         assert ids == [f"llm_v3_{i:04d}" for i in range(DEV_MAX, 125)], f"incomplete test cohort: {len(ids)}"
+    b = boot(ids, S, labs, a.boot)
     out = {"dataset": a.ds, "split": a.split, "auditor": a.auditor, "run_ids": ids, "vectorizer_fit": "dev runs only", "n_runs": len(ids), "n_pos": int(sum(labs[r]["y"] for r in ids)),
            "point_ci": b["point_ci"],
            "contrasts": {f"textsim-{k}:{m}": _pd(ids, S, labs, "textsim", k, m, a.boot)

@@ -87,7 +87,7 @@ def shuffle(sh, split):
     for n, v in ims.items():
         if isinstance(v, dict) and "delta" in v and "ci" in v: items.append((n, {"x": v}))
     if not items: print("shuffle: no intact_minus_shuffled entries found"); return
-    forest(items, [("x", "intact minus shuffled")], f"Shuffle control (n={sh.get('n_runs', '?')})", "shuffle", None, "intact - shuffled (95% CI)")
+    forest(items, [("x", "intact minus shuffled")], f"Shuffle control (n={sh.get('n_common', sh.get('n_runs', '?'))})", "shuffle", None, "intact - shuffled (95% CI)")
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser(); ap.add_argument("--split", default="dev"); sp = ap.parse_args().split

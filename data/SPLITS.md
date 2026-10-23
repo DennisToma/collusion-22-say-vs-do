@@ -40,3 +40,10 @@
   average of premium and each LLM view vs premium alone; paired run bootstrap; pair-ID complementarity counts).
   Added to `finalize_test.sh` (dev in preflight, test after lock) and `report_tables.py`. Checked on dev only.
   No existing scorer/threshold/metric changed.
+- Iter 7 (23:25, after Opus review): safeguards only — finalize_test.sh: only `final_analysis --split test` is
+  run-once; later test steps are deterministic re-renderings and retryable (failures logged to
+  logs/final/FAILED_STEPS.txt); preflight runs `hardset.py` on all runs and final_analysis asserts full hard-set
+  coverage + valid labels (unparsed judge output would have become y=0); external block reports coverage and
+  tolerates sibling schema changes; textsim cohort assert moved before metrics. No scorer/threshold/metric changed.
+- Disclosure: `cross_family.py` (mod-3 subset, dev + test runs pooled, used for auditor agreement only) has been run
+  on partial data during development (iters 4–7); it is not a held-out metric and no scorer was tuned on it.

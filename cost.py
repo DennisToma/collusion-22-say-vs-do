@@ -14,6 +14,17 @@ from pathlib import Path
 import numpy as np
 
 
+def _rows(f):
+    """jsonl reader that skips half-written lines (files may be appended to concurrently)"""
+    out = []
+    for l in open(f):
+        try:
+            out.append(json.loads(l))
+        except json.JSONDecodeError:
+            pass
+    return out
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--ds", default="llm_v3")
@@ -22,7 +33,7 @@ def main():
     out = {"dataset": a.ds, "token_estimate": "chars/4", "audits": {}}
     for d in sorted(p for p in base.iterdir() if p.is_dir()):
         for f in sorted(d.glob("*_orig.jsonl")):
-            rows = [json.loads(l) for l in open(f)]
+            rows = _rows(f)
             if not rows:
                 continue
             ch = np.array([x["chars"] for x in rows], float)
@@ -36,8 +47,7 @@ def main():
     g = Path.home() / "collusion" / "llm_calls.jsonl"
     if g.exists():
         c = collections.Counter()
-        for l in open(g):
-            x = json.loads(l)
+        for x in _rows(g):
             c[f"{x.get('backend')}/{x.get('model')}"] += 1
         out["global_call_log_shared"] = dict(c)
     Path("results/analysis").mkdir(parents=True, exist_ok=True)
