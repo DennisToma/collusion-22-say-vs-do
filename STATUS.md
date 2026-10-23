@@ -1,32 +1,27 @@
 # STATUS
 
-## Current state (2026-10-23 22:30 UTC, end of iteration 4)
-- **Generation** llm_v3 running (~60/125, ETA ~00:00 UTC); `pipeline.sh llm_v3` labels + audits (6 views) in bg.
-- **Frozen analysis** `final_analysis.py` (+ `evidence.py`, `gallery.py`), codex-reviewed (`logs/review_final_analysis.md`,
-  9 fixes applied). Headline = `final_analysis.py --split test` run ONCE; it asserts every view audited every run.
-  Primary endpoints: run AUROC + within-market AUROC; comparators: untrained pair premium, dev-fitted late fusion.
-- **Dev (n=30, 20 pos)**: run AUROC premium 1.00 · action_stats .89 · structured .83 · combined .83 · fusion .83 ·
-  action .78 · text .58. Within-market: premium .98, structured/action_stats .91, action/combined .85, text .62.
-  → text adds nothing; stats table helps; untrained premium beats all LLM views. Evidence: cited firm in colluding
-  pair ≈ chance (47–59%). Gallery: legit pair has +premium, LLM discounts it via public partnership notice.
-- Input repairs done: prompt-hash/len cache check (0 stale), frozen context-matched shuffle donors, tie-aware argmax/top-pair.
+## Current state (2026-10-23 22:30 UTC, end of iteration 5)
+- **Generation** llm_v3 at 70/125 (ETA ~00:00); `pipeline.sh llm_v3` keeps audits in step (63 runs × 5 views; combined_stats backfilling).
+- **`after_gen.sh` running (logs/after_gen.log)**: when llm_v3 generation ends it auto-starts (a) llm_v3fp firm-framing
+  private:16 generation → `pipeline.sh llm_v3fp`; (b) Claude Sonnet mod3 subset (all 6 views); (c) after orig audits
+  finish: shuffle seeds 0,1,2 on TEST runs, views combined,structured (logs/shuffle.log). No manual launch needed.
+- Frozen `final_analysis.py` + new external block: sibling's info-theory per-pair scores. Dev: run AUROC pCMI .47,
+  MI .60, TE .59, Pearson .21 (colluders hold prices flat); premium−pCMI +.53 [+.28,+.78]; 14's pair_level == our premium.
+- Dev (n=30): premium run 1.00 / within .98 > action_stats .89/.91 > structured .83/.91 ≈ combined ≈ fusion > action .78 > text .58.
+- New: `cost.py` (cost table), `fp_stratum.py` (frozen dev thresholds applied to llm_v3fp; smoke-tested on dev),
+  `finalize_test.sh` (THE one test run: dev → test final_analysis, evidence, gallery, figures, cost).
 ## Next steps
-1. When generation ends (~00:00): launch shuffle ablation on TEST runs, 3 seeds, in parallel with pipeline:
-   `for s in 0 1 2; do uv run python auditors.py --ds llm_v3 --variant shuffle --shuffle-seed $s --only-test --views combined,structured,text --workers 2; done`
-   (text only needed for seed 0 — use `--views combined,structured` for seeds 1,2). Then add intact−shuffled paired
-   contrast script (reuse orig action scores). Claude subset re-run: `auditors.py --auditor claude-sonnet-5-5 --subset mod3`
-   (all 6 views), then `cross_family.py`.
-2. After all orig audits complete: `final_analysis.py --split test` ONCE, `evidence.py --split test`, `gallery.py --split test`, `make_figures.py --split test`,
-   baselines LR on test; figures; REPORT headline; codex review of REPORT claims.
-3. **Label≈condition is total (37/37 private runs y=1)** → the "channel, no agreement" stratum is now the most valuable
-   exploration. Right after llm_v3 generation ends, launch (separate ds, never pooled into headline):
-   `uv run python llm_market.py --ds llm_v3fp --plan private:16 --rounds 12 --framing firm --games-parallel 2 --seed 5000`
-   then `label_llm.py --ds llm_v3fp`, `auditors.py --ds llm_v3fp` (6 views) and score premium; report flag rates at
-   the dev thresholds (final_analysis thresholds) as a separate stratum.
-4. premium_r2plus (drop round 1) added to final_analysis as pre-registered robustness (dev: run .92, within .96).
-- Risks: audit throughput (~5 sol calls/min shared); dev base rate 2/3 → dev thresholds weak; label = communication.
+1. When all 125 runs × 6 views are audited (check `wc -l results/llm_auditor/llm_v3/gpt-6.1-sol/*_orig.jsonl` = 125):
+   `./finalize_test.sh` ONCE. Then write test headline into REPORT (replace dev table; keep dev as appendix), codex REPORT review.
+2. After shuffle seeds: `uv run python shuffle_analysis.py --views combined,structured`. After Claude: `cross_family.py`.
+   After llm_v3fp: `fp_stratum.py --ds llm_v3fp` (needs final dev json from step 1 for combined_stats threshold).
+3. Read `logs/review_fp.md` (codex critique of fp stratum/new code, launched 22:28) and apply fixes before running fp_stratum.
+4. Optional: baselines LR on llm_v3 test (recompute; the interim all-run numbers predate the split rule).
+- Risks: ~7 concurrent LLM calls after 00:00 (slightly over the ≤6 guide); sol throughput ~5/min → shuffle done ~02:00.
 
 ## Log
+- 22:30 iter 5: external info-theory comparator block (dev), cost.py, fp_stratum.py, finalize_test.sh, after_gen.sh
+  chain launched; codex review of fp stratum in background.
 - 22:30 iter 4: input repairs (prompt hash check, frozen donor maps, ties); final_analysis.py frozen after codex
   review; evidence.py, gallery.py; dev results in REPORT (premium dominates; text adds nothing); SPLITS: headline=test once.
 - 21:55 iter 3: SPLITS.md + EXPERIMENTS.tsv; hardset.py (0/32 flagged); baselines on llm_v3 (donor fallback for tiny

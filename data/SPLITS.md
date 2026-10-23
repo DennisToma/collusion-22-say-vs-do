@@ -20,5 +20,9 @@
   bootstrap, endpoint naming, high-markup proxy, stricter evidence checks, triage). Fusion weight objective = mean
   of dev run AUROC and within-market AUROC.
 
+- Iter 5 (22:23): added an EXTERNAL comparator block to `final_analysis.py` (sibling's per-pair pcmi/mi/te/pearson
+  and pair_level scores), checked on dev only. No existing scorer, threshold or metric changed. Separate block, so
+  partial coverage of the sibling's file never affects the frozen cohort.
+
 ## scripted_v1 / scripted_v2 (mechanism demo only)
 5-fold CV grouped by run_id (GroupKFold); no tuning beyond the learner choice (LR primary, GBM secondary).

@@ -9,6 +9,9 @@ Scorers (each gives 6 pair scores + 1 run score per run):
   fusion    late fusion of the unimodal LLM auditors: w*text + (1-w)*action (pair scores and run scores),
             w chosen on DEV (grid 0..1 step .1, max dev pair AUROC). Tests "complementary cues without relational
             reasoning".
+  ext_*     EXTERNAL (added 22:23 iter 5, before any test look): sibling Q1.4 per-pair information-theoretic scores
+            (pcmi, mi, te, pearson; + pair_level = their reimplementation of premium) from ../collusion-14-infotheory/results/eval/<ds>_ext.json, used as-is (higher =
+            more dependence). Separate block on the runs the file covers; paired premium-minus-ext contrast.
 Metrics (bootstrap over runs, n = runs): pooled pair AUROC, within-market localisation AUROC (positive runs only),
 run AUROC, pair-ID accuracy (tie-aware). Paired contrasts on identical runs.
 FPR at a fixed DEV-chosen threshold (Youden J on dev run scores), reported per stratum on the eval split:
@@ -107,6 +110,19 @@ def boot(ids, S, labs, n, seed=0):
         contrast(f"premium_r2plus-{h}", lambda x, m, h=h: x["premium_r2plus"][m] - x[h][m])
     out["contrasts"] = con
     return out
+
+
+EXT_DETECTORS = ["pcmi", "mi", "te", "pearson", "pair_level"]  # info-theoretic (higher = more dependence);
+# pair_level = sibling's INDEPENDENT reimplementation of our premium statistic (replication check, not a new comparator)
+
+
+def _pd(ids, S, labs, k1, k2, m, n, seed=1):
+    """paired (same resampled runs) difference k1 - k2 in metric m, class-stratified bootstrap."""
+    rng = np.random.default_rng(seed)
+    P, N = [r for r in ids if labs[r]["y"]], [r for r in ids if not labs[r]["y"]]
+    f = lambda rs: (lambda M: M[k1][m] - M[k2][m])(metrics(rs, {k1: S[k1], k2: S[k2]}, labs))
+    return {"delta": round(f(ids), 4), "ci": ci([f(list(rng.choice(P, len(P))) + (list(rng.choice(N, len(N))) if N else []))
+                                                  for _ in range(n)])}
 
 
 def youden(y, s):
@@ -221,6 +237,29 @@ def main():
             "neg_audited": int(sum(1 - labs[r]["y"] for r in top_k)),
             "audited_negatives_flagged_by_structured": int(sum((not labs[r]["y"]) and th.get("structured") is not None
                                                              and "structured" in S and S["structured"][r]["run"] >= th["structured"] for r in top_k))}
+    # external comparator (DIRECTION directive 2b): sibling Q1.4 per-pair information-theoretic scores, read-only
+    # (../collusion-14-infotheory/results/eval/<ds>_ext.json). Coverage may lag our cohort -> own block on the
+    # intersection, paired against premium/structured on the same runs; never part of the frozen-cohort assert.
+    ext_fn = Path("..") / "collusion-14-infotheory" / "results" / "eval" / f"{a.ds}_ext.json"
+    if ext_fn.exists():
+        X = json.loads(ext_fn.read_text())
+        out["external_infotheory"] = {"source": str(ext_fn), "n_runs_in_file": X.get("n_runs")}
+        for det in EXT_DETECTORS:
+            E = {}
+            for x in X["per_pair_scores"]:
+                if x["detector"] == det and np.isfinite(x["score"]):
+                    E.setdefault(x["run_id"], {})[x["pair"]] = float(x["score"])
+            E = {r: {"scores": sc, "run": max(sc.values())} for r, sc in E.items() if len(sc) == len(PAIRS)}
+            ix = [r for r in ids if r in E]
+            if len(ix) < 4 or not (0 < sum(labs[r]["y"] for r in ix) < len(ix)):
+                out["external_infotheory"][det] = {"n": len(ix), "note": "too few runs"}
+                continue
+            sub = {f"ext_{det}": E, "premium": S["premium"], **({"structured": S["structured"]} if "structured" in S else {})}
+            b = boot(ix, sub, labs, a.boot)
+            out["external_infotheory"][det] = {"n": len(ix), "n_pos": int(sum(labs[r]["y"] for r in ix)),
+                                                "point_ci": b["point_ci"],
+                                                "premium_minus_ext": {m: _pd(ix, sub, labs, "premium", f"ext_{det}", m, a.boot)
+                                                                      for m in ("run_auroc", "within_market_auroc")}}
     out["markup_by_run"] = {r: round(markup[r], 3) for r in ids}
     Path("results/analysis").mkdir(parents=True, exist_ok=True)
     fn = Path("results/analysis") / f"final_{a.ds}_{a.auditor}_{a.split}.json"
@@ -233,6 +272,11 @@ def main():
         if "run_auroc" in c or "within" in c:
             print(f"  {c:45s} {v['delta']:+.3f} {v['ci']}")
     print(json.dumps(out["flag_rate_by_stratum"], indent=0))
+    for det, v in out.get("external_infotheory", {}).items():
+        if isinstance(v, dict) and "point_ci" in v:
+            e = v["point_ci"][f"ext_{det}"]
+            print(f"ext {det:10s} n={v['n']} run={e['run_auroc'][0]:.3f}{e['run_auroc'][1:]} within={e['within_market_auroc'][0]:.3f}"
+                  f"  premium-ext run {v['premium_minus_ext']['run_auroc']}")
 
 
 if __name__ == "__main__":

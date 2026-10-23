@@ -126,6 +126,14 @@ price-statistics table*, and that statistic alone, untrained, beats every LLM vi
 finding that dependence statistics detect coordinated *variation*, not *level*: these colluders coordinate on
 level, and the premium measures level directly.
 
+**Information-theoretic dependence detectors (sibling Q1.4, dev).** Using the sibling project's per-pair scores on
+the same runs (`../collusion-14-infotheory/results/eval/llm_v3_ext.json`, read-only; block `external_infotheory`
+in the final_analysis output): run AUROC pCMI 0.47 [0.22, 0.73], MI 0.60 [0.40, 0.80], TE 0.59 [0.32, 0.83],
+Pearson 0.21 [0.06, 0.41] (below chance: colluding pairs hold prices *flat*, so they co-vary less); within-market
+MI 0.85, Pearson 0.76, TE 0.67, pCMI 0.55. Premium − pCMI run AUROC +0.53 [+0.28, +0.78]. Their independently
+coded `pair_level` statistic reproduces our premium exactly (run 1.00, within 0.98) — a code-level replication.
+So on this generator, dependence-in-variation statistics are weak, level statistics are strong.
+
 **Where the LLM does add something (gallery, `results/analysis/gallery_dev.md`):** in `legit` run 0001 the
 partnership pair has a positive premium (+0.62 all-round) and is the premium's top pair, while the text/structured
 auditors read the public partnership notice and give that pair 4–7/100. On dev the premium's run-level threshold
@@ -136,7 +144,7 @@ price claim; of these, 51–65% match the cited firm's price in the exact cited 
 match some firm's price nearby. On positive runs only 47–59% of cited firms belong to the colluding pair (chance
 50%): auditors cite market-wide observations, so their evidence rarely singles out the colluders. No verbatim quotes.
 
-**Audit cost (prompt size per call).** text 9.3k chars, action 3.3k, action_stats 3.7k, combined 11.4k,
+**Audit cost (prompt size per call; `uv run python cost.py` → `results/analysis/cost_llm_v3.json`).** text 9.3k chars, action 3.3k, action_stats 3.7k, combined 11.4k,
 structured 12.1k (≈ chars/4 tokens); one gpt-6.1-sol call per run per view. The premium costs nothing; a
 premium-first triage that sends only the top 75% of dev runs to the LLM audit keeps all positives (dev base
 rate is 2/3, so this saving will look larger on test).
