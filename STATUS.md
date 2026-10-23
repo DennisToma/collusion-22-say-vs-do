@@ -1,6 +1,6 @@
 # STATUS
 
-## Current state (2026-10-23 21:55 UTC, end of iteration 3)
+## Current state (2026-10-23 21:50 UTC, end of iteration 3)
 - **Generation** `llm_market.py --ds llm_v3` (125 runs) still running: ~0.65 runs/min → ETA ~00:15 UTC. Log `logs/llm_v3.log`.
 - **pipeline.sh llm_v3** (bg) labels + audits new runs; auditors.py default views now include `action_stats`
   (actions + pair stats, no text = ablation of structured) → the loop backfills it for all runs automatically.
@@ -14,7 +14,9 @@
 ## Next steps (priority)
 1. When ≥90 runs: `hardset.py`, `analyze_llm.py` (all + `--split test`), baselines LR; shuffle variant
    (`auditors.py --variant shuffle --views text,combined,structured`) and pad (`--variant pad --views text,action`).
-2. Claude subset analysis: `analyze_llm.py --auditor claude-sonnet-5-5` + agreement with GPT on same runs (write small script).
+2. Claude subset: rerun `auditors.py --auditor claude-sonnet-5-5 --subset mod3` (+action_stats) after gen ends, then
+   `cross_family.py` (written; n=12 so far: both auditors rank structured top, Spearman .74 on structured).
+   Read `logs/review_interim.md` (codex critique of interim design, launched 21:50) and act on it.
 3. Figures (AUROC bars w/ CIs, Δ forest plot, action_stats vs structured) → REPORT; codex adversarial review of claims.
 4. Exploration: tacit `none` runs with supra-competitive prices (label = tacit) — how auditors score them.
 - Sibling `collusion-14-infotheory/data/llm_v1`: T=20, empty public messages in cond A → not poolable for text auditing.
