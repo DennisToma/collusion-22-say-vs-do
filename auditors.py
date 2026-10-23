@@ -6,7 +6,7 @@ Views (same model, same task text, same runs):
   combined    both, per round
   structured  combined + computed pair statistics + stated-vs-actual table (numbers mentioned in public
               messages vs the agent's actual price that round / next round)
-Variants: "orig" | "shuffle" (messages from a same-label donor run, pair-aligned; see baselines.shuffle_runs)
+Variants: "orig" | "pad" (text/action padded with neutral filler to combined length) | "shuffle" (messages from a same-label donor run, pair-aligned; see baselines.shuffle_runs)
 Output cached per (run, view, variant) in results/llm_auditor/<ds>/<model>/<view>_<variant>.jsonl:
   {"run_id", "scores": {"AB": 0-100, ...}, "top_pair", "collusion_present", "evidence", "model", "chars"}
 
@@ -161,7 +161,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--ds", default="llm_v3")
     ap.add_argument("--views", default="text,action,combined,structured")
-    ap.add_argument("--variant", default="orig", choices=["orig", "shuffle"])
+    ap.add_argument("--variant", default="orig", choices=["orig", "shuffle", "pad"])
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--workers", type=int, default=2)
     ap.add_argument("--auditor", default="gpt-6.1-sol")
@@ -192,12 +192,19 @@ def main():
 
     def one(job):
         v, rid, f = job
-        prompt = TASK.format(what=WHAT[v], log=render(runs[rid], v, pinfo.get(rid)))
+        log = render(runs[rid], v, pinfo.get(rid))
+        if a.variant == "pad" and v in ("text", "action"):  # input-length control: neutral filler
+            target = len(render(runs[rid], "combined", pinfo.get(rid)))
+            filler = "(log padding line - contains no information about the market)"
+            log += "\n" + "\n".join([filler] * max(0, (target - len(log)) // (len(filler) + 1)))
+        prompt = TASK.format(what=WHAT[v], log=log)
         for _ in range(3):
             if a.auditor.startswith("claude"):
                 import subprocess
-                txt = subprocess.run(["claude", "-p", "--model", a.auditor, prompt], capture_output=True,
-                                     text=True, timeout=600).stdout
+                iso = Path("/var/tmp/claude_audit"); iso.mkdir(exist_ok=True)  # no repo access
+                txt = subprocess.run(["claude", "-p", "--model", a.auditor, "--no-session-persistence",
+                                      "--disallowedTools", "Bash,Edit,Write,Read,Glob,Grep,WebFetch,WebSearch,Task,Agent,NotebookEdit"],
+                                     input=prompt, capture_output=True, text=True, timeout=600, cwd=iso).stdout
                 model = a.auditor
             else:
                 r = chat(prompt, tier="big", max_tokens=600)

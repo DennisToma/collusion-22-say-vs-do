@@ -170,7 +170,14 @@ def main():
         runs = {r: v for r, v in runs.items() if r in labs}
         gt = {r: dict(gt[r], y=int(labs[r]["agreement"] in ("explicit", "info_exchange"))) for r in runs}
     recs = build(runs, gt)
-    srecs = build(shuffle_runs(runs, gt), gt)
+    # shuffle donors drawn WITHIN each CV test fold (donor text never seen in training)
+    groups = [r["run_id"] for r in recs]
+    srecs = list(recs)
+    pos = {(r["run_id"], r["pair"]): i for i, r in enumerate(recs)}
+    for _, te in GroupKFold(5).split(recs, [r["y"] for r in recs], groups):
+        fold_runs = sorted({recs[i]["run_id"] for i in te})
+        for r in build(shuffle_runs({x: runs[x] for x in fold_runs}, gt), gt):
+            srecs[pos[(r["run_id"], r["pair"])]] = r
     kinds = ["text", "action", "combined", "structured", "all"]
     scores = {k: cv_scores(recs, k) for k in kinds}
     shuf = {k: cv_scores(recs, k, test_recs=srecs) for k in kinds}

@@ -49,12 +49,23 @@ it only validates the pipeline and the shuffle ablation.
 ### Scripted mechanism check (non-LLM baselines, `baselines.py`, 5-fold CV grouped by run, 320 runs)
 `uv run python baselines.py --ds scripted_v2 --learner lr` → `results/baselines/scripted_v2_lr.json`.
 - scripted_v1 (strong collusion): action features alone reach AUROC 1.0 → Δ_hybrid = 0 by ceiling; uninformative.
-- scripted_v2 (weak, low-markup collusion): see table in results file (being regenerated with condition-matched
-  shuffle). Preliminary (label-matched shuffle, LR): run-AUROC text 0.89, action 0.95, combined 0.97,
-  structured 1.00; Δ_structured = +0.05 [0.03, 0.08]; shuffling messages drops structured to 0.74 while
-  raw combined is unaffected → the gain is from the engineered say-vs-do features.
-- A first version that used gradient boosting for numeric views and LR for text produced an apparent
-  "shuffle collapse" that disappeared with identical learners — reported as a methodological caution.
+- scripted_v2 (weak, low-markup collusion; hard set = 280 runs excl. explicit public talk), logistic regression on
+  nested feature sets, run-level AUROC [95% bootstrap CI]:
+
+  | view | intact | messages shuffled (same label+condition donor, same CV test fold) |
+  |---|---|---|
+  | text (TF-IDF) | 0.839 [0.788, 0.882] | 0.837 [0.787, 0.882] |
+  | action stats | 0.951 [0.922, 0.973] | 0.951 (unchanged by construction) |
+  | combined raw (text + action) | 0.961 [0.939, 0.979] | 0.961 [0.940, 0.979] |
+  | structured (action + say-vs-do consistency) | 1.000 [1.000, 1.000] | 0.748 [0.680, 0.811] |
+
+  Δ_structured = +0.049 [0.027, 0.079]; Δ_combined = +0.010 [0.004, 0.019]. Shuffling leaves both single
+  modalities and the raw union untouched but collapses the structured model → its gain comes from the
+  say-vs-do alignment features, i.e. the mechanism the templates were built to contain.
+- Methodological cautions found on the way: (i) mixing learners (boosting for numeric, LR for text) produced an
+  apparent shuffle collapse on scripted_v1 that vanished with identical learners; (ii) drawing shuffle donors from
+  the whole dataset let a boosted text model recognise memorised training-fold text (text-only AUROC *rose*
+  0.91→0.995 under shuffle); donors are now drawn within the CV test fold.
 
 ### LLM market (headline) — in progress
 First 19 runs: 14/15 private pairs reached an explicit agreement in the private chat (judge), 1 info-exchange.
