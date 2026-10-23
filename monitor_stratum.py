@@ -3,7 +3,9 @@ automated price monitor that halves the earnings of flagged pairs (llm_market.py
 private + none. Question: when colluders know that prices are watched, does the price premium (and the LLM views)
 still detect / localise them, and does public text become more (or less) useful?
 Nothing is fitted here: run-level flag rates use the FROZEN dev Youden thresholds of llm_v3; AUROCs are threshold-free.
-Comparator = llm_v3 DEV only (runs 0000-0029; the test split is not touched by this script).
+Comparator = llm_v3 DEV only (runs 0000-0029): labels, audits and trajectories of llm_v3 are filtered to dev ids
+BEFORE anything is parsed or scored, so test runs are never read into memory as scores (codex review_iter8 P1).
+The monitor is an ANNOUNCED threat only (prompt treatment): no monitor is run and payouts are not changed.
 
     uv run python monitor_stratum.py --ds llm_v3mon
 """
@@ -11,26 +13,57 @@ import argparse, json
 from pathlib import Path
 import numpy as np
 from analyze_llm import load_jsonl
-from final_analysis import LLM_VIEWS, premium_scores, boot
+from final_analysis import LLM_VIEWS, AG, PAIRS, boot
 from fp_stratum import wilson
+
+
+def keep(rid, max_idx):
+    return max_idx is None or int(rid.rsplit("_", 1)[1]) < max_idx
+
+
+def premium_scores(ds, max_idx=None, start=0):
+    """same definition as final_analysis.premium_scores (frozen), but only parses runs with keep(run_id)."""
+    P, C = {}, {}
+    for l in open(Path("data") / ds / "trajectories.jsonl"):
+        rid = l.split('"run_id": "', 1)[1].split('"', 1)[0]
+        if not keep(rid, max_idx):
+            continue
+        r = json.loads(l)
+        P.setdefault(rid, []).append((r["round"], {x["id"]: x["price"] for x in r["agents"]}))
+        C.setdefault(rid, []).append(r["market"]["cost"])
+    out, markup = {}, {}
+    for rid, rows in P.items():
+        rows.sort(key=lambda t: t[0])
+        pr = {a: np.array([d[a] for _, d in rows[start:]], float) for a in AG}
+        sc = {}
+        for p in PAIRS:
+            o = [a for a in AG if a not in p]
+            sc[p] = float(((pr[p[0]] + pr[p[1]]) / 2).mean() - np.mean([pr[a] for a in o], axis=0).mean())
+        out[rid] = {"scores": sc, "run": max(sc.values())}
+        markup[rid] = float(np.mean([pr[a].mean() for a in AG]) - np.mean(C[rid][start:]))
+    return out, markup
+
+
+VALID = {"private": {"explicit", "info_exchange", "none"}, "none": {"no_channel"}, "legit": {"no_channel"}}
 
 
 def load(ds, auditor, max_idx=None):
     labs = {}
     for x in load_jsonl(Path("data") / ds / "labels.jsonl"):
+        if not keep(x["run_id"], max_idx):
+            continue
         assert x["run_id"] not in labs, "duplicate labels"
+        assert x.get("agreement") in VALID.get(x.get("condition"), ()), f"invalid label {x['run_id']}: {x.get('condition')}/{x.get('agreement')}"
         labs[x["run_id"]] = dict(x, y=int(x["agreement"] in ("explicit", "info_exchange")))
-    if max_idx is not None:
-        labs = {r: x for r, x in labs.items() if int(r.rsplit("_", 1)[1]) < max_idx}
     d = Path("results") / "llm_auditor" / ds / auditor
     S = {}
     for v in LLM_VIEWS:
         f = d / f"{v}_orig.jsonl"
-        R = load_jsonl(f) if f.exists() else []
+        R = [x for x in (load_jsonl(f) if f.exists() else []) if keep(x["run_id"], max_idx)]
         assert len({x["run_id"] for x in R}) == len(R), f"duplicate audits in {v}"
         S[v] = {x["run_id"]: {"scores": x["scores"], "run": x["collusion_present"]} for x in R}
-    S["premium"], markup = premium_scores(ds)
-    S["premium_r2plus"], _ = premium_scores(ds, start=1)
+    S["premium"], markup = premium_scores(ds, max_idx)
+    S["premium_r2plus"], _ = premium_scores(ds, max_idx, start=1)
     ids = sorted(r for r in labs if all(r in R for R in S.values()))
     return labs, S, markup, ids
 
@@ -62,6 +95,11 @@ def main():
     if groups["private_y1"] and len(ids) > len(groups["private_y1"]):
         b = boot(ids, S, labs, a.n_boot)
         out["metrics"] = {k: {m: b["point_ci"][k][m] for m in ("run_auroc", "within_market_auroc", "pair_id_acc")} for k in S}
+    # channel-matched contrast (codex review_iter8 P2): private y=1 vs private y=0 only
+    pr = groups["private_y1"] + groups["private_y0"]
+    if groups["private_y1"] and groups["private_y0"]:
+        b = boot(pr, S, labs, a.n_boot)
+        out["run_auroc_private_y1_vs_y0"] = {k: b["point_ci"][k]["run_auroc"] for k in S}
     # how much did monitoring shrink the colluders' premium? assigned-pair premium (all rounds), vs llm_v3 DEV
     labs0, S0, markup0, ids0 = load("llm_v3", a.auditor, max_idx=30)
     def ap_prem(L, SS, rs):

@@ -204,6 +204,10 @@ as a robustness check for that reason.
   firm-framing stratum (`llm_v3fp`, `fp_stratum.py`, frozen dev thresholds) is an exploratory transfer check of
   "channel used vs. unused" — it changes framing, wording, refusals and price levels at the same time, so it cannot
   resolve the confound within llm_v3.
+- **Evasion not yet tested in the headline data.** Sellers were never told prices are watched. An exploration
+  stratum `llm_v3mon` (pre-registered, `monitor_stratum.py`, results pending) adds an *announced* price monitor
+  (no monitor is actually run and payouts are unchanged) to test whether the premium survives colluders who know
+  about it.
 - **Generator-specific premium.** Much of the premium's strength comes from round-1 joint high openings that are
   quickly undercut; a colluder that opens at the market price would weaken it (rounds 2–12 robustness: 0.92 on dev).
 - Single seller model family (GPT, gpt-6-luna), single framing for the headline data, 12 rounds, 4 firms.

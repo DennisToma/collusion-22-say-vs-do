@@ -97,3 +97,8 @@
 {"run_id": "llm_v3_0096", "public_info": "Public information: firms B and C operate a publicly announced joint shipping partnership that lowers both of their unit costs by 1.", "cost_offset": {"A": 0, "B": -1, "C": -1, "D": 0}}
 {"run_id": "llm_v3_0097", "public_info": "", "cost_offset": {"A": 0, "B": 0, "C": 0, "D": 0}}
 {"run_id": "llm_v3_0098", "public_info": "Public information: firms B and C operate a publicly announced joint shipping partnership that lowers both of their unit costs by 1.", "cost_offset": {"A": 0, "B": -1, "C": -1, "D": 0}}
+{"run_id": "llm_v3_0099", "public_info": "", "cost_offset": {"A": 0, "B": 0, "C": 0, "D": 0}}
+{"run_id": "llm_v3_0100", "public_info": "", "cost_offset": {"A": 0, "B": 0, "C": 0, "D": 0}}
+{"run_id": "llm_v3_0101", "public_info": "", "cost_offset": {"A": 0, "B": 0, "C": 0, "D": 0}}
+{"run_id": "llm_v3_0102", "public_info": "", "cost_offset": {"A": 0, "B": 0, "C": 0, "D": 0}}
+{"run_id": "llm_v3_0103", "public_info": "", "cost_offset": {"A": 0, "B": 0, "C": 0, "D": 0}}

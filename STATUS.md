@@ -6,6 +6,7 @@
   llm_v3mon (monitored-price exploration stratum, private:14 none:6; cutoff 03:30) → pipeline → `monitor_stratum.py`.
 - Dev (n=30): premium run 1.00 / within .98 > action_stats .89/.91 > structured .83/.91 ≈ combined ≈ fusion > action
   .78 > text .58. textsim within .81 vs LLM text .61. Cascade: LLM = explanation, premium = detection.
+- hardset all 94 checked runs: 0 flagged. codex review_iter8 applied (dev-only filtering before scoring, strict labels).
 - iter 8: DISCLOSURE 3 — premium chosen after director saw partial data incl. ~30 test runs (SPLITS, REPORT).
 ## Next steps
 1. When 125×6 audits done (`wc -l results/llm_auditor/llm_v3/gpt-6.1-sol/*_orig.jsonl` all 125): `./finalize_test.sh`
@@ -14,10 +15,11 @@
    abstract: premium ≫ zero-shot LLM (premium not discovered blind — disclosure 3); text adds nothing; stats help.
 3. After inputs: shuffle_analysis.py --views combined,structured; cross_family.py; fp_stratum.py --ds llm_v3fp;
    monitor_stratum.py --ds llm_v3mon (logs/monitor_stratum.txt); report_tables --split test; figures.
-4. codex + Opus review of final REPORT claims. codex review_iter8 (monitor stratum) running → logs/review_iter8.md.
+4. codex + Opus review of final REPORT claims. Check logs/mon_chain.log (v3mon gen ~01:00–02:30).
 - Risks: LLM concurrency ~7 after 00:00; finalize needs hardset to cover every run (preflight reruns it).
 
 ## Log
+- 23:26 iter 8: codex review_iter8 applied (E32); mon_chain restarted with explicit sequencing.
 - 23:13 iter 8: premium-selection disclosure (E30); llm_v3mon monitored stratum code + chain launched (E31).
 - 23:25 iter 7: incremental.py (pre-registered); Opus pre-test review applied (logs in EXPERIMENTS E28); hardset.py
   on all runs started; codex review of iter-7 diff applied (E29).
