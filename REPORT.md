@@ -157,10 +157,13 @@ partnership pair has a positive premium (+0.62 all-round) and is the premium's t
 auditors read the public partnership notice and give that pair 4–7/100. On dev the premium's run-level threshold
 happens to sit above it, but this is the failure mode a price-only screen has with legitimate cooperation.
 
-**Evidence accuracy (dev, `evidence.py`).** All cited rounds/firms are valid. About half of evidence items contain a
-price claim; of these, 51–65% match the cited firm's price in the exact cited round, 81–92% within ±1 round, 95–100%
-match some firm's price nearby. On positive runs only 47–59% of cited firms belong to the colluding pair (chance
-50%): auditors cite market-wide observations, so their evidence rarely singles out the colluders. No verbatim quotes.
+**Evidence accuracy (dev, `evidence.py` → `results/analysis/evidence_llm_v3_gpt-6.1-sol_dev.json`; 5 views, combined_stats
+not checked).** Syntactic checks only (cited round/firm exist; extracted price numbers vs the log), not whether the
+evidence supports the claim. All cited rounds/firms are valid. In the four action-bearing views 45–55% of items
+contain a price claim; of these, 51–65% match the cited firm's price in the exact cited round, 81–92% within ±1 round,
+95–100% match some firm's price nearby (text view: only 3 price claims). On positive runs 47–59% of cited firms
+belong to the colluding pair (chance 50%): auditors cite market-wide observations, so their evidence rarely singles
+out the colluders. No verbatim quotes were cited.
 
 **Audit cost (prompt size per call; `uv run python cost.py` → `results/analysis/cost_llm_v3.json`).** text 9.3k chars, action 3.3k, action_stats 3.7k, combined 11.4k,
 structured 12.1k (≈ chars/4 tokens); one gpt-6.1-sol call per run per view. The premium costs nothing; a
@@ -168,8 +171,8 @@ premium-first triage that sends only the top 75% of dev runs to the LLM audit ke
 rate is 2/3; test recall at each audit budget is reported from the locked run). End to end (run sent by the premium screen AND flagged by
 the LLM view at its dev threshold), the cascade can only lose recall relative to the premium alone: dev, auditing all
 runs, action_stats catches 0.85 of y=1 runs at FPR 0.10 and names the correct pair in 0.65; structured 0.65 / 0.10 /
-0.55 (`triage.*.cascade_*` in the final json). So the LLM's role in such a system is explanation and evidence for
-flagged pairs, not detection.
+0.55 (`triage.*.cascade_*` in the final json). So in such a system the LLM would at most supply explanation/evidence for flagged pairs (a proposed
+architecture; explanation usefulness itself is not measured here), not detection.
 **Does any LLM view add to the premium? (`incremental.py`, iter 7, dev.)** An untrained, label-free combination
 (average percentile rank of premium and the view) never beats the premium alone on dev: combo − premium run AUROC
 from −0.10 [−0.24, −0.005] (text) to −0.015 [−0.065, 0.00] (action_stats); within-market ≤ 0. On y=1 runs, every
@@ -185,9 +188,9 @@ dev, n = 30).** Run AUROC text 0.79 [0.60, 0.92], action 0.96 [0.85, 1.00], comb
 pair-ID accuracy text 0.90, action 0.95 (action = computed price/outcome features; supervised CV inside dev, labels of
 other dev runs). Hybrid Δ ≈ 0 (ceiling). A *trained* classifier on price features far
 outperforms the zero-shot LLM reading the same prices (not like-for-like: the LR sees in-distribution labels). The
-text LR beats the LLM text auditor by a wide margin (pair-ID 0.90 vs 0.31). Its top-weighted n-grams show why:
-positives share margin-flavoured phrasing ("considered price", "balances customer value", "sustainable"); negatives
-include the `legit` pairs' "shipping partnership" notices.
+text LR beats the LLM text auditor by a wide margin (pair-ID 0.90 vs 0.31). An informal look at its top-weighted
+n-grams during development (no saved artifact) suggested margin-flavoured phrasing for positives ("considered price",
+"sustainable") and the `legit` pairs' "shipping partnership" notices for negatives.
 
 **Untrained public-text convergence (new, iter 6, dev; `textsim.py`).** Hypothesis: if partners' private
 coordination shapes their public wording, the two colluders' public messages should resemble each other more than
