@@ -13,7 +13,10 @@
   audits finish. Dev results are labelled dev.
 - Disclosure: iteration-3 interim analyses (n = 36–40, all runs) included test runs 0030–0039 before this rule;
   nothing was tuned on them (auditor prompt unchanged; analysis code frozen before the full test set exists).
-- Analysis config frozen: `final_analysis.py` + `evidence.py` as of the iteration-4 commit (22:15 UTC).
+- Analysis config frozen: `final_analysis.py` + `evidence.py` as of the iteration-4 commit after the codex review
+  `logs/review_final_analysis.md` (fixes: cohort assertion, conservative Youden incl. +inf, class-stratified
+  bootstrap, endpoint naming, high-markup proxy, stricter evidence checks, triage). Fusion weight objective = mean
+  of dev run AUROC and within-market AUROC.
 
 ## scripted_v1 / scripted_v2 (mechanism demo only)
 5-fold CV grouped by run_id (GroupKFold); no tuning beyond the learner choice (LR primary, GBM secondary).

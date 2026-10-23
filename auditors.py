@@ -208,6 +208,7 @@ def main():
     ap.add_argument("--views", default="text,action,combined,structured,action_stats,combined_stats")
     ap.add_argument("--variant", default="orig", choices=["orig", "shuffle", "pad"])
     ap.add_argument("--shuffle-seed", type=int, default=0)
+    ap.add_argument("--only-test", action="store_true", help="audit only locked-test runs (index >= 30); donors still from all runs")
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--workers", type=int, default=2)
     ap.add_argument("--auditor", default="gpt-6.1-sol")
@@ -236,6 +237,8 @@ def main():
         dpath = Path("results") / "llm_auditor" / a.ds / f"shuffle_donors_s{a.shuffle_seed}.json"
         runs = shuffled({r: runs[r] for r in ids}, donor_map({r: runs[r] for r in ids}, labels, a.shuffle_seed, dpath))
         ids = [r for r in ids if r in runs]
+    if a.only_test:
+        ids = [r for r in ids if int(r.rsplit("_", 1)[1]) >= 30]
     outdir = Path("results") / "llm_auditor" / a.ds / a.auditor
     outdir.mkdir(parents=True, exist_ok=True)
     lock = threading.Lock()

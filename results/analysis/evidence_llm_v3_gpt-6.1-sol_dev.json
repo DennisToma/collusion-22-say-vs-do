@@ -13,6 +13,10 @@
     "rate": 0.471,
     "n": 70
    },
+   "price_exact": {
+    "rate": 0.667,
+    "n": 3
+   },
    "price_ok": {
     "rate": 0.667,
     "n": 3
@@ -24,6 +28,10 @@
    "quote_ok": {
     "rate": null,
     "n": 0
+   },
+   "has_price_claim": {
+    "rate": 0.028,
+    "n": 108
    },
    "cost": {
     "calls": 30,
@@ -42,17 +50,25 @@
     "rate": 0.525,
     "n": 80
    },
+   "price_exact": {
+    "rate": 0.652,
+    "n": 66
+   },
    "price_ok": {
-    "rate": 0.953,
-    "n": 64
+    "rate": 0.924,
+    "n": 66
    },
    "price_any_ok": {
-    "rate": 1.0,
-    "n": 64
+    "rate": 0.97,
+    "n": 66
    },
    "quote_ok": {
     "rate": null,
     "n": 0
+   },
+   "has_price_claim": {
+    "rate": 0.55,
+    "n": 120
    },
    "cost": {
     "calls": 30,
@@ -71,17 +87,25 @@
     "rate": 0.525,
     "n": 80
    },
+   "price_exact": {
+    "rate": 0.574,
+    "n": 54
+   },
    "price_ok": {
-    "rate": 0.887,
-    "n": 53
+    "rate": 0.87,
+    "n": 54
    },
    "price_any_ok": {
-    "rate": 0.981,
-    "n": 53
+    "rate": 0.963,
+    "n": 54
    },
    "quote_ok": {
     "rate": null,
     "n": 0
+   },
+   "has_price_claim": {
+    "rate": 0.45,
+    "n": 120
    },
    "cost": {
     "calls": 30,
@@ -90,62 +114,79 @@
    }
   },
   "action_stats": {
-   "n_audits": 25,
-   "n_items": 100,
+   "n_audits": 30,
+   "n_items": 120,
    "valid": {
     "rate": 1.0,
-    "n": 100
+    "n": 120
    },
    "on_pair": {
     "rate": 0.575,
     "n": 80
    },
+   "price_exact": {
+    "rate": 0.509,
+    "n": 57
+   },
    "price_ok": {
-    "rate": 0.837,
-    "n": 43
+    "rate": 0.807,
+    "n": 57
    },
    "price_any_ok": {
-    "rate": 0.977,
-    "n": 43
+    "rate": 0.947,
+    "n": 57
    },
    "quote_ok": {
     "rate": null,
     "n": 0
    },
+   "has_price_claim": {
+    "rate": 0.475,
+    "n": 120
+   },
    "cost": {
-    "calls": 25,
-    "mean_prompt_chars": 3637,
-    "est_prompt_tokens": 909
+    "calls": 30,
+    "mean_prompt_chars": 3677,
+    "est_prompt_tokens": 919
    }
   },
   "structured": {
-   "n_audits": 28,
-   "n_items": 112,
+   "n_audits": 30,
+   "n_items": 120,
    "valid": {
     "rate": 1.0,
-    "n": 112
+    "n": 120
    },
    "on_pair": {
     "rate": 0.588,
     "n": 80
    },
+   "price_exact": {
+    "rate": 0.643,
+    "n": 56
+   },
    "price_ok": {
-    "rate": 0.925,
-    "n": 53
+    "rate": 0.911,
+    "n": 56
    },
    "price_any_ok": {
     "rate": 1.0,
-    "n": 53
+    "n": 56
    },
    "quote_ok": {
     "rate": null,
     "n": 0
    },
+   "has_price_claim": {
+    "rate": 0.467,
+    "n": 120
+   },
    "cost": {
-    "calls": 28,
-    "mean_prompt_chars": 12044,
-    "est_prompt_tokens": 3011
+    "calls": 30,
+    "mean_prompt_chars": 12071,
+    "est_prompt_tokens": 3018
    }
   }
- }
+ },
+ "note": "price checks are over items with >=1 extracted price claim (coverage = has_price_claim); an item citing a price that matches a firm other than the cited one fails price_exact/price_ok; invalid round/firm items count as failures only in `valid`"
 }
