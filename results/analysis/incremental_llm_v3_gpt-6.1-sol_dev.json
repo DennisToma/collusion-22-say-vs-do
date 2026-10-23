@@ -4,7 +4,8 @@
  "split": "dev",
  "n_runs": 30,
  "n_pos": 20,
- "method": "untrained label-free percentile-rank average of premium and each LLM view; paired class-stratified run bootstrap vs premium alone",
+ "method": "untrained label-free rank sum (midranks, pooled over the split) of premium and each LLM view; paired class-stratified run bootstrap vs premium alone, ranks recomputed per resample",
+ "complementarity_note": "tie-aware: a k-way tie at the top counts 1/k (expected value under random tie-breaking)",
  "point_ci": {
   "premium": {
    "run_auroc": [
@@ -26,7 +27,7 @@
   "combo[text]": {
    "run_auroc": [
     0.8975,
-    0.76,
+    0.7649,
     0.995
    ],
    "within_market_auroc": [
@@ -43,7 +44,7 @@
   "combo[action]": {
    "run_auroc": [
     0.95,
-    0.84,
+    0.86,
     1.0
    ],
    "within_market_auroc": [
@@ -60,7 +61,7 @@
   "combo[combined]": {
    "run_auroc": [
     0.97,
-    0.895,
+    0.89,
     1.0
    ],
    "within_market_auroc": [
@@ -77,7 +78,7 @@
   "combo[combined_stats]": {
    "run_auroc": [
     0.965,
-    0.89,
+    0.88,
     1.0
    ],
    "within_market_auroc": [
@@ -94,7 +95,7 @@
   "combo[action_stats]": {
    "run_auroc": [
     0.985,
-    0.94,
+    0.935,
     1.0
    ],
    "within_market_auroc": [
@@ -111,7 +112,7 @@
   "combo[structured]": {
    "run_auroc": [
     0.98,
-    0.925,
+    0.91,
     1.0
    ],
    "within_market_auroc": [
@@ -131,7 +132,7 @@
    "run_auroc": {
     "delta": -0.1025,
     "ci": [
-     -0.24,
+     -0.2351,
      -0.005
     ]
    },
@@ -145,7 +146,7 @@
    "pair_id_acc": {
     "delta": -0.05,
     "ci": [
-     -0.15,
+     -0.2,
      0.0
     ]
    }
@@ -154,7 +155,7 @@
    "run_auroc": {
     "delta": -0.05,
     "ci": [
-     -0.16,
+     -0.14,
      0.0
     ]
    },
@@ -177,29 +178,6 @@
    "run_auroc": {
     "delta": -0.03,
     "ci": [
-     -0.105,
-     0.0
-    ]
-   },
-   "within_market_auroc": {
-    "delta": -0.02,
-    "ci": [
-     -0.07,
-     0.02
-    ]
-   },
-   "pair_id_acc": {
-    "delta": -0.1,
-    "ci": [
-     -0.25,
-     0.0
-    ]
-   }
-  },
-  "combined_stats": {
-   "run_auroc": {
-    "delta": -0.035,
-    "ci": [
      -0.11,
      0.0
     ]
@@ -207,14 +185,37 @@
    "within_market_auroc": {
     "delta": -0.02,
     "ci": [
-     -0.06,
+     -0.07,
+     0.04
+    ]
+   },
+   "pair_id_acc": {
+    "delta": -0.1,
+    "ci": [
+     -0.25,
+     0.1
+    ]
+   }
+  },
+  "combined_stats": {
+   "run_auroc": {
+    "delta": -0.035,
+    "ci": [
+     -0.12,
      0.0
+    ]
+   },
+   "within_market_auroc": {
+    "delta": -0.02,
+    "ci": [
+     -0.06,
+     0.02
     ]
    },
    "pair_id_acc": {
     "delta": -0.05,
     "ci": [
-     -0.15,
+     -0.2,
      0.0
     ]
    }
@@ -223,7 +224,7 @@
    "run_auroc": {
     "delta": -0.015,
     "ci": [
-     -0.06,
+     -0.065,
      0.0
     ]
    },
@@ -238,7 +239,7 @@
     "delta": -0.05,
     "ci": [
      -0.15,
-     0.0
+     0.05
     ]
    }
   },
@@ -246,21 +247,21 @@
    "run_auroc": {
     "delta": -0.02,
     "ci": [
-     -0.075,
+     -0.09,
      0.0
     ]
    },
    "within_market_auroc": {
     "delta": -0.01,
     "ci": [
-     -0.03,
-     0.0
+     -0.04,
+     0.01
     ]
    },
    "pair_id_acc": {
     "delta": -0.05,
     "ci": [
-     -0.15,
+     -0.2,
      0.0
     ]
    }

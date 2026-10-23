@@ -25,20 +25,21 @@ if [ ! -e logs/final/RUN_ONCE.stamp ]; then
   date -u +"%Y-%m-%dT%H:%M test analysis STARTED (any rerun of final_analysis --split test must be disclosed in data/SPLITS.md)" >> logs/final/RUN_ONCE.stamp
   # --- the single headline look ---
   uv run python final_analysis.py --split test | tee logs/final/final_test.txt
-  date -u +"%Y-%m-%dT%H:%M headline step done" >> logs/final/RUN_ONCE.stamp
+  date -u +"%Y-%m-%dT%H:%M HEADLINE_DONE" >> logs/final/RUN_ONCE.stamp
   set +e
 else
   echo "headline step already run ($(head -1 logs/final/RUN_ONCE.stamp)); re-running only the retryable test steps"
-  [ -e results/analysis/final_llm_v3_gpt-6.1-sol_test.json ] || { echo "stamp exists but no headline json: investigate + disclose"; exit 1; }
+  grep -q HEADLINE_DONE logs/final/RUN_ONCE.stamp && uv run python -c "import json; d=json.load(open('results/analysis/final_llm_v3_gpt-6.1-sol_test.json')); assert d['split']=='test' and d['n_runs']==95" \
+    || { echo "headline step STARTED but not completed/valid: investigate + disclose in data/SPLITS.md before any rerun"; exit 1; }
 fi
-step bash -c "uv run python evidence.py --split test       | tee logs/final/evidence_test.txt"
-step bash -c "uv run python gallery.py --split test        | tee logs/final/gallery_test.txt"
-step bash -c "uv run python baselines.py --ds llm_v3 --split test | tee logs/final/baselines_test.txt"
-step bash -c "uv run python textsim.py --split test        | tee logs/final/textsim_test.txt"
-step bash -c "uv run python incremental.py --split test    | tee logs/final/incremental_test.txt"
-step bash -c "uv run python cost.py --ds llm_v3            | tee logs/final/cost.txt"
-step bash -c "uv run python report_tables.py --split test  | tee logs/final/report_tables_test.txt"
-step bash -c "uv run python make_figures.py --split test   | tee logs/final/figures_test.txt"
+step bash -o pipefail -c "uv run python evidence.py --split test       | tee logs/final/evidence_test.txt"
+step bash -o pipefail -c "uv run python gallery.py --split test        | tee logs/final/gallery_test.txt"
+step bash -o pipefail -c "uv run python baselines.py --ds llm_v3 --split test | tee logs/final/baselines_test.txt"
+step bash -o pipefail -c "uv run python textsim.py --split test        | tee logs/final/textsim_test.txt"
+step bash -o pipefail -c "uv run python incremental.py --split test    | tee logs/final/incremental_test.txt"
+step bash -o pipefail -c "uv run python cost.py --ds llm_v3            | tee logs/final/cost.txt"
+step bash -o pipefail -c "uv run python report_tables.py --split test  | tee logs/final/report_tables_test.txt"
+step bash -o pipefail -c "uv run python make_figures.py --split test   | tee logs/final/figures_test.txt"
 date -u +"%Y-%m-%dT%H:%M retryable test steps finished (failures: logs/final/FAILED_STEPS.txt)" >> logs/final/RUN_ONCE.stamp
 # these depend on jobs that may finish later; run them separately when their inputs are complete:
 #   uv run python shuffle_analysis.py --views combined,structured     (after 3 shuffle seeds)

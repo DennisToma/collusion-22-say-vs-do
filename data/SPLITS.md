@@ -47,3 +47,7 @@
   tolerates sibling schema changes; textsim cohort assert moved before metrics. No scorer/threshold/metric changed.
 - Disclosure: `cross_family.py` (mod-3 subset, dev + test runs pooled, used for auditor agreement only) has been run
   on partial data during development (iters 4–7); it is not a held-out metric and no scorer was tuned on it.
+- Iter 7 (23:40, after codex review `logs/review_iter7.md`): retry steps use pipefail; RUN_ONCE.stamp distinguishes
+  STARTED from HEADLINE_DONE (a resumed finalize requires HEADLINE_DONE + a valid 95-run test json, else stop and
+  disclose); headline json written atomically; stricter sibling schema check; incremental.py uses exact midrank sums
+  recomputed inside every bootstrap resample (dev point estimates unchanged). Dev only.

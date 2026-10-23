@@ -153,7 +153,7 @@ runs, action_stats catches 0.85 of y=1 runs at FPR 0.10 and names the correct pa
 flagged pairs, not detection.
 **Does any LLM view add to the premium? (`incremental.py`, iter 7, dev.)** An untrained, label-free combination
 (average percentile rank of premium and the view) never beats the premium alone on dev: combo − premium run AUROC
-from −0.10 [−0.24, −0.005] (text) to −0.015 [−0.06, 0.00] (action_stats); within-market ≤ 0. On y=1 runs, every
+from −0.10 [−0.24, −0.005] (text) to −0.015 [−0.065, 0.00] (action_stats); within-market ≤ 0. On y=1 runs, every
 view gets the colluding pair right while the premium gets it wrong in at most 1 of 20 runs. Dev is at the premium's
 ceiling, so this can only show harm there; the pre-registered test run (larger, more varied) is the real check.
 

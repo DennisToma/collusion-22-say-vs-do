@@ -2,10 +2,11 @@
 test look; DIRECTION directive 4 'architecture takeaway'.)
 
 Combination is UNTRAINED and label-free: within the evaluated split, each scorer's pair scores and run scores are
-turned into percentile ranks (pooled over the split's runs, no labels); combo[v] = (rank(premium) + rank(v)) / 2.
+turned into midranks (pooled over the split's runs, no labels); combo[v] = rank(premium) + rank(v) (ranks are
+recomputed inside every bootstrap resample).
 Compared with premium alone on identical runs: run AUROC, within-market AUROC, pair-ID; paired class-stratified
 bootstrap over runs (n = runs). Plus complementarity counts on y=1 runs: premium's top pair wrong but view's right,
-and vice versa (tie-aware).
+and vice versa (tie-aware: a k-way top tie counts 1/k = expected value under random tie-breaking).
 
     uv run python incremental.py --split dev
     uv run python incremental.py --split test     # once, in finalize_test.sh
@@ -18,12 +19,24 @@ from analyze_llm import PAIRS, load_jsonl
 from final_analysis import LLM_VIEWS, DEV_MAX, idx, premium_scores, metrics, ci
 
 
-def pct_rank(R, ids):
-    """label-free percentile ranks of pair scores (pooled over ids x pairs) and of run scores (over ids)"""
-    ps = rankdata([R[r]["scores"][p] for r in ids for p in PAIRS]) / (6 * len(ids))
-    rs = rankdata([R[r]["run"] for r in ids]) / len(ids)
+def ranks(R, ids):
+    """label-free midranks of pair scores (pooled over ids x pairs) and of run scores (over ids); ids may contain
+    duplicates (bootstrap multiset): duplicates get identical ranks, so the dict view is consistent. Midranks are
+    multiples of 0.5 -> sums are exact (no float tie-breaking artefacts)."""
+    ps = rankdata([R[r]["scores"][p] for r in ids for p in PAIRS])
+    rs = rankdata([R[r]["run"] for r in ids])
     return {r: {"scores": {p: float(ps[6 * i + j]) for j, p in enumerate(PAIRS)}, "run": float(rs[i])}
             for i, r in enumerate(ids)}
+
+
+def combos(S, ids):
+    """premium ranks + for every view the (unnormalised) rank sum premium + view; recomputed per (re)sample"""
+    rk = {k: ranks(R, ids) for k, R in S.items()}
+    C = {"premium": rk["premium"]}
+    for v in LLM_VIEWS:
+        C[f"combo[{v}]"] = {r: {"scores": {p: rk["premium"][r]["scores"][p] + rk[v][r]["scores"][p] for p in PAIRS},
+                                "run": rk["premium"][r]["run"] + rk[v][r]["run"]} for r in rk["premium"]}
+    return C
 
 
 def top_ok(sc, ap):
@@ -49,19 +62,19 @@ def main():
     ids = [r for r in want if all(r in R for R in S.values())]
     if not a.allow_partial:
         assert len(ids) == len(want), f"incomplete: {len(ids)}/{len(want)} runs have all views"
-    rk = {k: pct_rank(R, ids) for k, R in S.items()}
-    C = {"premium": rk["premium"]}
-    for v in LLM_VIEWS:
-        C[f"combo[{v}]"] = {r: {"scores": {p: (rk["premium"][r]["scores"][p] + rk[v][r]["scores"][p]) / 2 for p in PAIRS},
-                                "run": (rk["premium"][r]["run"] + rk[v][r]["run"]) / 2} for r in ids}
+    C = combos(S, ids)
     pt = metrics(ids, C, labs)
     rng = np.random.default_rng(0)
     P, N = [r for r in ids if labs[r]["y"]], [r for r in ids if not labs[r]["y"]]
-    bs = [metrics(list(rng.choice(P, len(P))) + list(rng.choice(N, len(N))), C, labs) for _ in range(a.boot)]
+    bs = []
+    for _ in range(a.boot):  # ranks recomputed inside each resample (the transformation is sample-dependent)
+        rs = list(rng.choice(P, len(P))) + list(rng.choice(N, len(N)))
+        bs.append(metrics(rs, combos(S, rs), labs))
     M = ("run_auroc", "within_market_auroc", "pair_id_acc")
     out = {"dataset": a.ds, "auditor": a.auditor, "split": a.split, "n_runs": len(ids), "n_pos": len(P),
-           "method": "untrained label-free percentile-rank average of premium and each LLM view; paired class-stratified "
-                     "run bootstrap vs premium alone",
+           "method": "untrained label-free rank sum (midranks, pooled over the split) of premium and each LLM view; paired "
+                     "class-stratified run bootstrap vs premium alone, ranks recomputed per resample",
+           "complementarity_note": "tie-aware: a k-way tie at the top counts 1/k (expected value under random tie-breaking)",
            "point_ci": {k: {m: [round(pt[k][m], 4)] + ci([b[k][m] for b in bs]) for m in M} for k in C},
            "combo_minus_premium": {v: {m: {"delta": round(pt[f"combo[{v}]"][m] - pt["premium"][m], 4),
                                            "ci": ci([b[f"combo[{v}]"][m] - b["premium"][m] for b in bs])} for m in M}

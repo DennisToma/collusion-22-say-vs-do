@@ -275,8 +275,9 @@ def main():
             X = json.loads(ext_fn.read_text())  # sibling may rewrite it concurrently
         except json.JSONDecodeError:
             X = {"per_pair_scores": [], "n_runs": "unreadable"}
-        if not isinstance(X.get("per_pair_scores"), list) or not all(
-                isinstance(x, dict) and {"detector", "run_id", "pair", "score"} <= set(x) for x in X["per_pair_scores"]):
+        if not isinstance(X, dict) or not isinstance(X.get("per_pair_scores"), list) or not all(
+                isinstance(x, dict) and {"detector", "run_id", "pair", "score"} <= set(x)
+                and isinstance(x["score"], (int, float)) and not isinstance(x["score"], bool) for x in X["per_pair_scores"]):
             X = {"per_pair_scores": [], "n_runs": "unexpected schema"}  # never crash the frozen analysis on sibling data
         out["external_infotheory"] = {"source": str(ext_fn), "n_runs_in_file": X.get("n_runs")}
         for det in EXT_DETECTORS:
@@ -300,7 +301,7 @@ def main():
     out["markup_by_run"] = {r: round(markup[r], 3) for r in ids}
     Path("results/analysis").mkdir(parents=True, exist_ok=True)
     fn = Path("results/analysis") / f"final_{a.ds}_{a.auditor}_{a.split}.json"
-    fn.write_text(json.dumps(out, indent=1))
+    tmp = fn.with_suffix(".json.tmp"); tmp.write_text(json.dumps(out, indent=1)); tmp.replace(fn)  # atomic
     pc = out["point_ci"]
     print(f"split={a.split} n={out['n_runs']} pos={out['n_pos']} fusion w_text={w}")
     for k in pc:
