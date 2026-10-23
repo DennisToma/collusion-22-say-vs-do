@@ -192,7 +192,11 @@ resume ids, donor matching).
 `data/SPLITS.md`: dev = llm_v3_0000–0029, locked test = 0030–0124. The auditor prompt was written before any
 LLM-market data and has not been tuned (0 tuning attempts). `final_analysis.py` (frozen 22:15 UTC) calibrates the
 fusion weight and the FPR thresholds on dev, so the headline is test-only, computed once. Disclosure: interim
-iteration-3 analyses (n = 36–40) included test runs 0030–0039; nothing was tuned on them.
+iteration-3 analyses (n = 36–40) included test runs 0030–0039; nothing was tuned on them. Second disclosure: the pair-premium
+comparator is untrained and its one-line definition was fixed before the locked test run, but it was *chosen* after
+the research director looked at premium summaries on partial data that included ~30 test runs (data/SPLITS.md,
+disclosure 3); its test number is therefore not a blind out-of-sample discovery. The rounds-2–12 variant is reported
+as a robustness check for that reason.
 
 ## Limitations (so far)
 - **Label ≈ condition.** On llm_v3 every `private` run so far is judged y = 1, so detecting "agreement" and detecting
