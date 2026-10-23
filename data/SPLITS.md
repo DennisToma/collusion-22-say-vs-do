@@ -23,6 +23,9 @@
 - Iter 5 (22:23): added an EXTERNAL comparator block to `final_analysis.py` (sibling's per-pair pcmi/mi/te/pearson
   and pair_level scores), checked on dev only. No existing scorer, threshold or metric changed. Separate block, so
   partial coverage of the sibling's file never affects the frozen cohort.
+- Iter 5 (22:31, after codex review `logs/review_fp.md`): safeguards only — final_analysis now also requires the
+  exact frozen id set llm_v3_0000–0124 to be labelled; `finalize_test.sh` (pipefail) refuses to run twice
+  (`logs/final/RUN_ONCE.stamp`). No scorer, threshold rule or metric changed.
 
 ## scripted_v1 / scripted_v2 (mechanism demo only)
 5-fold CV grouped by run_id (GroupKFold); no tuning beyond the learner choice (LR primary, GBM secondary).

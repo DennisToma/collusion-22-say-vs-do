@@ -1,8 +1,9 @@
 """Exploration stratum (never pooled into the headline): firm-framing `private` runs (data/llm_v3fp), where sellers
 get a private channel but often refuse to coordinate (llm_v2 pilot). Judge label splits them into
   y=1  explicit agreement / info exchange       y=0  channel present, no agreement (natural hard negatives)
-This is the cheap answer to "label = condition" on llm_v3: does each scorer flag *agreement*, or just *the
-condition that a channel existed*? Uses the FROZEN dev thresholds from final_analysis (Youden on llm_v3 dev) —
+EXPLORATORY transfer check related to "label = condition" on llm_v3 (it does NOT resolve that confound within
+llm_v3: the firm framing also changes wording, refusals, opening prices and premiums): within one framing, does each
+scorer separate *agreement* from *a channel that went unused*? Uses the FROZEN dev thresholds from final_analysis (Youden on llm_v3 dev) —
 nothing is fitted on this stratum.
 
     uv run python fp_stratum.py --ds llm_v3fp
@@ -30,14 +31,21 @@ def main():
     ap.add_argument("--max-idx", type=int, default=0, help="smoke test only: restrict to run index < N (e.g. llm_v3 dev)")
     a = ap.parse_args()
     th = json.loads(Path(a.thresholds).read_text())["thresholds_dev_youden"]
-    labs = {x["run_id"]: dict(x, y=int(x["agreement"] in ("explicit", "info_exchange")))
-            for x in load_jsonl(Path("data") / a.ds / "labels.jsonl")}
+    rows = load_jsonl(Path("data") / a.ds / "labels.jsonl")
+    labs = {x["run_id"]: dict(x, y=int(x["agreement"] in ("explicit", "info_exchange"))) for x in rows}
+    assert len(labs) == len(rows), "duplicate labels"
+    bad = [r for r, x in labs.items() if not a.max_idx and (x["condition"] != "private" or x["agreement"] not in ("explicit", "info_exchange", "none"))]
+    assert not bad, f"unexpected condition/agreement label: {bad[:5]}"
     d = Path("results") / "llm_auditor" / a.ds / a.auditor
     S = {}
     for v in LLM_VIEWS:
         f = d / f"{v}_orig.jsonl"
         if f.exists():
-            S[v] = {x["run_id"]: {"scores": x["scores"], "run": x["collusion_present"]} for x in load_jsonl(f)}
+            R = load_jsonl(f)
+            assert len({x["run_id"] for x in R}) == len(R), f"duplicate audits in {v}"
+            S[v] = {x["run_id"]: {"scores": x["scores"], "run": x["collusion_present"]} for x in R}
+    missing = {v: len([r for r in labs if r not in S.get(v, {})]) for v in LLM_VIEWS}
+    assert a.max_idx or not any(missing.values()), f"incomplete audits: {missing}"
     S["premium"], markup = premium_scores(a.ds)
     S["premium_r2plus"], _ = premium_scores(a.ds, start=1)
     ids = sorted(r for r in labs if all(r in R for R in S.values()) and (not a.max_idx or int(r.rsplit("_", 1)[1]) < a.max_idx))

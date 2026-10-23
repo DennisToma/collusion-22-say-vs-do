@@ -2,8 +2,9 @@
 # The ONE locked-test analysis (data/SPLITS.md). Run once, after every llm_v3 run is labelled and audited by all
 # 6 views (final_analysis.py asserts this and exits non-zero otherwise -> nothing else runs).
 # Dev outputs are regenerated first (complete dev cohort -> final dev thresholds used by fp_stratum.py).
-set -e
+set -eo pipefail
 cd "$(dirname "$0")"
+[ -e logs/final/RUN_ONCE.stamp ] && { echo "test analysis already run (logs/final/RUN_ONCE.stamp); refusing"; exit 1; }
 mkdir -p logs/final
 uv run python final_analysis.py --split dev  | tee logs/final/final_dev.txt
 uv run python final_analysis.py --split test | tee logs/final/final_test.txt

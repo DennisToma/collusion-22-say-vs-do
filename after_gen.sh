@@ -13,8 +13,16 @@ echo "$(date -u +%H:%M) llm_v3 generation done"
   echo "$(date -u +%H:%M) claude subset done" ) &
 # shuffle ablation on TEST runs after the orig audits finish (text view skipped: donors share label+condition, and
 # the text-only view sees messages only, so text-shuffle is uninformative about cross-modal use)
-while pgrep -f "pipeline.sh llm_v3$" >/dev/null || pgrep -f "auditors.py --ds llm_v3 --workers" >/dev/null; do sleep 60; done
+# (pipeline.sh llm_v3 keeps looping while llm_v3fp generates -- its pgrep pattern also matches llm_v3fp -- so wait
+#  on completeness of the orig audits instead: 125 rows in each of the 6 view files)
+done6() { for v in text action combined combined_stats action_stats structured; do
+            [ "$(wc -l < results/llm_auditor/llm_v3/gpt-6.1-sol/${v}_orig.jsonl 2>/dev/null || echo 0)" -ge 125 ] || return 1; done; }
+until done6; do sleep 60; done
 echo "$(date -u +%H:%M) llm_v3 orig audits done"
+# second (cached) Claude pass: the first one started before the last runs were labelled
+( while pgrep -f "auditor claude-sonnet-5-5 --subset mod3" >/dev/null; do sleep 60; done
+  uv run python auditors.py --ds llm_v3 --auditor claude-sonnet-5-5 --subset mod3 --workers 1 >> logs/claude_mod3.log 2>&1
+  echo "$(date -u +%H:%M) claude subset pass 2 done" ) &
 for s in 0 1 2; do
   uv run python auditors.py --ds llm_v3 --variant shuffle --shuffle-seed $s --only-test --views combined,structured --workers 2 \
     >> logs/shuffle.log 2>&1

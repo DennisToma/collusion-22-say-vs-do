@@ -31,6 +31,7 @@ from analyze_llm import PAIRS, load_jsonl, auc, public_explicit
 LLM_VIEWS = ["text", "action", "combined", "combined_stats", "action_stats", "structured"]
 AG = ["A", "B", "C", "D"]
 DEV_MAX = 30  # data/SPLITS.md: dev = llm_v3_0000..0029
+N_FROZEN = 125  # llm_v3 plan private:70,none:35,legit:20
 
 
 def idx(r):
@@ -166,6 +167,9 @@ def main():
     incomplete = {v: len([r for r in set(want) | set(want_dev) if r not in R]) for v, R in S.items()}
     if not a.allow_partial:  # frozen cohort: every labelled run of the split (and all 30 dev runs) audited by every view
         assert len(want_dev) == DEV_MAX and not any(incomplete.values()), f"incomplete cohort: {incomplete}"
+        if a.ds == "llm_v3":  # exact frozen id set (data/SPLITS.md): 0000-0124 all labelled, not just "available labels"
+            exp = {f"llm_v3_{i:04d}" for i in range(N_FROZEN)}
+            assert exp <= set(labs), f"missing labels: {sorted(exp - set(labs))[:5]}"
     dev = [r for r in common if idx(r) < DEV_MAX]
     # late fusion weight from dev only
     def fuse(w):
@@ -242,14 +246,17 @@ def main():
     # intersection, paired against premium/structured on the same runs; never part of the frozen-cohort assert.
     ext_fn = Path("..") / "collusion-14-infotheory" / "results" / "eval" / f"{a.ds}_ext.json"
     if ext_fn.exists():
-        X = json.loads(ext_fn.read_text())
+        try:
+            X = json.loads(ext_fn.read_text())  # sibling may rewrite it concurrently
+        except json.JSONDecodeError:
+            X = {"per_pair_scores": [], "n_runs": "unreadable"}
         out["external_infotheory"] = {"source": str(ext_fn), "n_runs_in_file": X.get("n_runs")}
         for det in EXT_DETECTORS:
             E = {}
             for x in X["per_pair_scores"]:
                 if x["detector"] == det and np.isfinite(x["score"]):
                     E.setdefault(x["run_id"], {})[x["pair"]] = float(x["score"])
-            E = {r: {"scores": sc, "run": max(sc.values())} for r, sc in E.items() if len(sc) == len(PAIRS)}
+            E = {r: {"scores": sc, "run": max(sc.values())} for r, sc in E.items() if set(sc) == set(PAIRS)}
             ix = [r for r in ids if r in E]
             if len(ix) < 4 or not (0 < sum(labs[r]["y"] for r in ix) < len(ix)):
                 out["external_infotheory"][det] = {"n": len(ix), "note": "too few runs"}

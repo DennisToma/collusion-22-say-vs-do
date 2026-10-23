@@ -15,11 +15,15 @@
    `./finalize_test.sh` ONCE. Then write test headline into REPORT (replace dev table; keep dev as appendix), codex REPORT review.
 2. After shuffle seeds: `uv run python shuffle_analysis.py --views combined,structured`. After Claude: `cross_family.py`.
    After llm_v3fp: `fp_stratum.py --ds llm_v3fp` (needs final dev json from step 1 for combined_stats threshold).
-3. Read `logs/review_fp.md` (codex critique of fp stratum/new code, launched 22:28) and apply fixes before running fp_stratum.
+3. codex critique `logs/review_fp.md` applied (22:31). REPORT must frame llm_v3fp as an EXPLORATORY transfer check
+   (framing shift changes wording/refusals/premiums; does not resolve label=condition within llm_v3); disclose class
+   counts, premiums, thresholds. If all 16 fp runs come out y=0 or all y=1, agreement discrimination is untested — say so.
 4. Optional: baselines LR on llm_v3 test (recompute; the interim all-run numbers predate the split rule).
 - Risks: ~7 concurrent LLM calls after 00:00 (slightly over the ≤6 guide); sol throughput ~5/min → shuffle done ~02:00.
 
 ## Log
+- 22:31 iter 5: codex review of new code → safeguard fixes (exact id set, run-once stamp, pipefail, fp asserts);
+  after_gen.sh restarted (waits on 125×6 audit completeness, not pipeline.sh, whose pgrep also matches llm_v3fp).
 - 22:30 iter 5: external info-theory comparator block (dev), cost.py, fp_stratum.py, finalize_test.sh, after_gen.sh
   chain launched; codex review of fp stratum in background.
 - 22:30 iter 4: input repairs (prompt hash check, frozen donor maps, ties); final_analysis.py frozen after codex
