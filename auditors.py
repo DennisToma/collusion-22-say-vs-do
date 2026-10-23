@@ -14,7 +14,7 @@ Output cached per (run, view, variant) in results/llm_auditor/<ds>/<model>/<view
 
     uv run python auditors.py --ds llm_v3 --views text,action,combined,structured --variant orig --limit 40
 """
-import argparse, json, random, re, threading
+import argparse, hashlib, json, random, re, threading
 from concurrent.futures import ThreadPoolExecutor
 from itertools import combinations
 from pathlib import Path
@@ -141,29 +141,65 @@ def parse(text):
             "evidence": d.get("evidence", [])}
 
 
-def shuffled(runs, labels, seed=0):
-    """Messages from a same-label, same-condition donor run, agents relabelled so donor pair -> recipient pair."""
+def context(rows):
+    lvl = {"low": -1, "normal": 0, "high": 1}
+    return np.array([[r["market"]["cost"], lvl.get(r["market"]["demand_shock"], 0)] for r in rows], float)
+
+
+def donor_map(runs, labels, seed, path):
+    """Frozen donor assignment (persisted to `path`; reused verbatim if it exists, so a growing pool never
+    changes inputs behind cached outputs). Donor = same label & condition & length, chosen at random among the
+    3 nearest runs in cost/demand path (L1); falls back to same label only if the stratum is a singleton."""
+    if Path(path).exists():
+        return json.loads(Path(path).read_text())
     rng = random.Random(seed)
     ids = sorted(runs)
-    by = {}
+    mp = {}
     for r in ids:
-        by.setdefault((labels[r]["y"], labels[r]["condition"]), []).append(r)
-    out = {}
-    for r in ids:
-        d = rng.choice([x for x in by[(labels[r]["y"], labels[r]["condition"])] if x != r and len(runs[x]) == len(runs[r])])
+        cand = [x for x in ids if x != r and len(runs[x]) == len(runs[r]) and labels[x]["y"] == labels[r]["y"]]
+        same = [x for x in cand if labels[x]["condition"] == labels[r]["condition"]]
+        cand = same or cand
+        cand.sort(key=lambda x: (float(np.abs(context(runs[x]) - context(runs[r])).sum()), x))
+        d = rng.choice(cand[:3])
         rp, dp = labels[r]["assigned_pair"], labels[d]["assigned_pair"]
         rest_d = [a for a in AGENTS if a not in dp]
         rng.shuffle(rest_d)
-        amap = dict(zip(rp + [a for a in AGENTS if a not in rp], dp + rest_d))
+        amap = dict(zip(rp + [a for a in AGENTS if a not in rp], dp + rest_d))  # recipient firm -> donor firm
+        mp[r] = {"donor": d, "amap": amap, "same_condition": bool(same),
+                 "ctx_l1": float(np.abs(context(runs[d]) - context(runs[r])).sum())}
+    Path(path).write_text(json.dumps({"seed": seed, "map": mp}, indent=1))
+    return {"seed": seed, "map": mp}
+
+
+def shuffled(runs, dm):
+    """Public messages from the frozen donor run, firms relabelled so donor pair -> recipient pair
+    (letters inside messages remapped too); actions/market data stay the recipient's own."""
+    out = {}
+    for r, m in dm["map"].items():
+        if r not in runs:
+            continue
+        amap, d = m["amap"], m["donor"]
+        inv = {v: k for k, v in amap.items()}
+        fix = lambda s: re.sub(r"\b([ABCD])\b", lambda mm: inv[mm.group(1)], s)
         new = []
         for row, drow in zip(runs[r], runs[d]):
-            dm = {x["id"]: x["public_message"] for x in drow["agents"]}
-            # donor's text mentions donor letters; remap letters inside messages too
-            inv = {v: k for k, v in amap.items()}
-            fix = lambda s: re.sub(r"\b([ABCD])\b", lambda m: inv[m.group(1)], s)
-            new.append(dict(row, agents=[dict(x, public_message=fix(dm[amap[x["id"]]])) for x in row["agents"]]))
+            msg = {x["id"]: x["public_message"] for x in drow["agents"]}
+            new.append(dict(row, agents=[dict(x, public_message=fix(msg[amap[x["id"]]])) for x in row["agents"]]))
         out[r] = new
     return out
+
+
+def prompt_for(rows, v, info, variant):
+    log = render(rows, v, info)
+    if variant == "pad" and v in ("text", "action"):  # input-length control: neutral filler
+        target = len(render(rows, "combined", info))
+        filler = "(log padding line - contains no information about the market)"
+        log += "\n" + "\n".join([filler] * max(0, (target - len(log)) // (len(filler) + 1)))
+    return TASK.format(what=WHAT[v], log=log)
+
+
+def sha(s):
+    return hashlib.sha256(s.encode()).hexdigest()[:16]
 
 
 def main():
@@ -171,6 +207,7 @@ def main():
     ap.add_argument("--ds", default="llm_v3")
     ap.add_argument("--views", default="text,action,combined,structured,action_stats,combined_stats")
     ap.add_argument("--variant", default="orig", choices=["orig", "shuffle", "pad"])
+    ap.add_argument("--shuffle-seed", type=int, default=0)
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--workers", type=int, default=2)
     ap.add_argument("--auditor", default="gpt-6.1-sol")
@@ -193,26 +230,38 @@ def main():
         ids = [r for r in ids if int(r.rsplit("_", 1)[1]) % 3 == 0]
     if a.limit:
         ids = ids[: a.limit]
+    variant = a.variant
     if a.variant == "shuffle":
-        runs = shuffled({r: runs[r] for r in ids}, labels)
+        variant = f"shuffle_s{a.shuffle_seed}"
+        dpath = Path("results") / "llm_auditor" / a.ds / f"shuffle_donors_s{a.shuffle_seed}.json"
+        runs = shuffled({r: runs[r] for r in ids}, donor_map({r: runs[r] for r in ids}, labels, a.shuffle_seed, dpath))
+        ids = [r for r in ids if r in runs]
     outdir = Path("results") / "llm_auditor" / a.ds / a.auditor
     outdir.mkdir(parents=True, exist_ok=True)
     lock = threading.Lock()
     jobs = []
     for v in a.views.split(","):
-        f = outdir / f"{v}_{a.variant}.jsonl"
-        done = {json.loads(l)["run_id"] for l in open(f)} if f.exists() else set()
+        f = outdir / f"{v}_{variant}.jsonl"
+        rows = [json.loads(l) for l in open(f)] if f.exists() else []
+        # provenance check: a cached audit is valid only if its prompt matches the current prompt
+        # (prompt_sha if recorded, else prompt length); stale rows are dropped and re-audited
+        cur = {r: prompt_for(runs[r], v, pinfo.get(r), a.variant) for r in {x["run_id"] for x in rows} if r in runs}
+        ok = [x for x in rows if x["run_id"] in cur and (x.get("prompt_sha") == sha(cur[x["run_id"]]) if "prompt_sha" in x
+                                                        else x.get("chars") == len(cur[x["run_id"]]))]
+        if len(ok) < len(rows):
+            print(f"{v}_{variant}: dropping {len(rows) - len(ok)} stale cached audits", flush=True)
+            with open(outdir / "stale.jsonl", "a") as fh:
+                for x in rows:
+                    if x not in ok:
+                        fh.write(json.dumps(x) + "\n")
+            f.write_text("".join(json.dumps(x) + "\n" for x in ok))
+        done = {x["run_id"] for x in ok}
         jobs += [(v, r, f) for r in ids if r not in done]
     print(len(jobs), "audit calls", flush=True)
 
     def one(job):
         v, rid, f = job
-        log = render(runs[rid], v, pinfo.get(rid))
-        if a.variant == "pad" and v in ("text", "action"):  # input-length control: neutral filler
-            target = len(render(runs[rid], "combined", pinfo.get(rid)))
-            filler = "(log padding line - contains no information about the market)"
-            log += "\n" + "\n".join([filler] * max(0, (target - len(log)) // (len(filler) + 1)))
-        prompt = TASK.format(what=WHAT[v], log=log)
+        prompt = prompt_for(runs[rid], v, pinfo.get(rid), a.variant)
         for _ in range(3):
             if a.auditor.startswith("claude"):
                 import subprocess
@@ -235,9 +284,9 @@ def main():
         if res is None:
             with lock:
                 with open(outdir / "failures.jsonl", "a") as fh:
-                    fh.write(json.dumps({"run_id": rid, "view": v, "variant": a.variant}) + "\n")
+                    fh.write(json.dumps({"run_id": rid, "view": v, "variant": variant}) + "\n")
             return
-        res.update(run_id=rid, view=v, variant=a.variant, model=model, chars=len(prompt))
+        res.update(run_id=rid, view=v, variant=variant, model=model, chars=len(prompt), prompt_sha=sha(prompt))
         with lock:
             with open(f, "a") as fh:
                 fh.write(json.dumps(res) + "\n")

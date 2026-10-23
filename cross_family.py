@@ -41,7 +41,10 @@ def main():
     for v in views:
         sb = [R[(a.base, v)][r]["scores"][p] for r in common for p in PAIRS]
         so = [R[(a.other, v)][r]["scores"][p] for r in common for p in PAIRS]
-        top = np.mean([R[(a.base, v)][r]["top_pair"] == R[(a.other, v)][r]["top_pair"] for r in common])
+        def tops(m, r):  # tie-aware top set
+            sc = R[(m, v)][r]["scores"]; return {p for p in PAIRS if sc[p] == max(sc.values())}
+        # expected agreement when each auditor breaks its own ties uniformly at random
+        top = np.mean([len(tops(a.base, r) & tops(a.other, r)) / (len(tops(a.base, r)) * len(tops(a.other, r))) for r in common])
         out["views"][v] = {"pair_auroc_" + m: round(pair_auc(m, v, common), 4) for m in (a.base, a.other)}
         out["views"][v].update(spearman_pair_scores=round(float(spearmanr(sb, so)[0]), 3), top_pair_agree=round(float(top), 3))
     for m in (a.base, a.other):

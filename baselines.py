@@ -135,7 +135,9 @@ def evaluate(recs, gt, scores, run_ids, n_boot=1000, seed=0):
         res = {}
         for k, v in scores.items():
             run_s = np.array([v[idx[rid]].max() for rid in rids])
-            top_ok = [recs[idx[rid][int(np.argmax(v[idx[rid]]))]]["y"] for rid in rids if label_of(gt[rid])]
+            # tie-aware: credit 1/k if the true pair is among k tied top-scoring pairs (no index-order bias)
+            top_ok = [np.mean([recs[idx[rid][j]]["y"] for j in np.flatnonzero(v[idx[rid]] == v[idx[rid]].max())])
+                      for rid in rids if label_of(gt[rid])]
             res[k] = {"pair_auroc": roc_auc_score(y, sc[k]) if 0 < y.sum() < len(y) else np.nan,
                       "run_auroc": roc_auc_score(yr, run_s) if 0 < yr.sum() < len(yr) else np.nan,
                       "pair_id_acc": float(np.mean(top_ok)) if top_ok else np.nan}
