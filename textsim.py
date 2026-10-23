@@ -1,8 +1,8 @@
 """Untrained 'say-say' text statistic: lexical convergence of a pair's PUBLIC messages.
 
 Pair score = TF-IDF cosine between the two firms' concatenated public messages minus the mean cosine of the
-other pairs in the run (relative, like the price premium). The vectorizer is fit on all public messages of the
-dataset without labels (unsupervised). No tuning. Exploration added iter 6 after a dev-only look at trained
+other pairs in the run (relative, like the price premium). The vectorizer (vocabulary + IDF) is fit on the public
+messages of DEV runs only (no labels) and frozen; test runs are only transformed. No tuning. Exploration added iter 6 after a dev-only look at trained
 TF-IDF LR coefficients (colluding pairs share phrasing such as 'considered price', 'balances customer value').
 
     uv run python textsim.py --split dev
@@ -23,7 +23,7 @@ def textsim_scores(ds):
             M.setdefault(r["run_id"], {}).setdefault(x["id"], []).append(x.get("public_message") or "")
     docs = {(rid, a): " ".join(m[a]) for rid, m in M.items() for a in AG}
     keys = list(docs)
-    vec = TfidfVectorizer(ngram_range=(1, 2), min_df=2, sublinear_tf=True).fit([docs[k] for k in keys])
+    vec = TfidfVectorizer(ngram_range=(1, 2), min_df=2, sublinear_tf=True).fit([docs[k] for k in keys if idx(k[0]) < DEV_MAX])
     X = vec.transform([docs[k] for k in keys])
     row = {k: i for i, k in enumerate(keys)}
     out = {}
@@ -49,7 +49,9 @@ def main():
         S[v] = {x["run_id"]: {"scores": x["scores"], "run": x["collusion_present"]} for x in load_jsonl(d / f"{v}_orig.jsonl")}
     ids = sorted(r for r in labs if all(r in R for R in S.values()) and (idx(r) < DEV_MAX) == (a.split == "dev"))
     b = boot(ids, S, labs, a.boot)
-    out = {"dataset": a.ds, "split": a.split, "n_runs": len(ids), "n_pos": int(sum(labs[r]["y"] for r in ids)),
+    if a.split == "test" and a.ds == "llm_v3":  # exact frozen test cohort (data/SPLITS.md)
+        assert ids == [f"llm_v3_{i:04d}" for i in range(DEV_MAX, 125)], f"incomplete test cohort: {len(ids)}"
+    out = {"dataset": a.ds, "split": a.split, "auditor": a.auditor, "run_ids": ids, "vectorizer_fit": "dev runs only", "n_runs": len(ids), "n_pos": int(sum(labs[r]["y"] for r in ids)),
            "point_ci": b["point_ci"],
            "contrasts": {f"textsim-{k}:{m}": _pd(ids, S, labs, "textsim", k, m, a.boot)
                          for k in ("text", "premium") for m in ("run_auroc", "within_market_auroc")}}

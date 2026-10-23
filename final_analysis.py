@@ -147,6 +147,7 @@ def main():
     ap.add_argument("--split", required=True, choices=["dev", "test", "all"])
     ap.add_argument("--boot", type=int, default=2000)
     ap.add_argument("--allow-partial", action="store_true", help="development only: analyse runs that have all views so far")
+    ap.add_argument("--check-only", action="store_true", help="preflight: assert the frozen cohort is complete, compute nothing")
     a = ap.parse_args()
     labs = {x["run_id"]: dict(x, y=int(x["agreement"] in ("explicit", "info_exchange")))
             for x in load_jsonl(Path("data") / a.ds / "labels.jsonl")}
@@ -170,6 +171,8 @@ def main():
         if a.ds == "llm_v3":  # exact frozen id set (data/SPLITS.md): 0000-0124 all labelled, not just "available labels"
             exp = {f"llm_v3_{i:04d}" for i in range(N_FROZEN)}
             assert exp <= set(labs), f"missing labels: {sorted(exp - set(labs))[:5]}"
+    if a.check_only:
+        print(f"preflight OK: split={a.split}, all views complete for {len(want)} runs (+{len(want_dev)} dev)"); return
     dev = [r for r in common if idx(r) < DEV_MAX]
     # late fusion weight from dev only
     def fuse(w):

@@ -1,29 +1,63 @@
 {
  "dataset": "llm_v3",
  "split": "dev",
+ "auditor": "gpt-6.1-sol",
+ "run_ids": [
+  "llm_v3_0000",
+  "llm_v3_0001",
+  "llm_v3_0002",
+  "llm_v3_0003",
+  "llm_v3_0004",
+  "llm_v3_0005",
+  "llm_v3_0006",
+  "llm_v3_0007",
+  "llm_v3_0008",
+  "llm_v3_0009",
+  "llm_v3_0010",
+  "llm_v3_0011",
+  "llm_v3_0012",
+  "llm_v3_0013",
+  "llm_v3_0014",
+  "llm_v3_0015",
+  "llm_v3_0016",
+  "llm_v3_0017",
+  "llm_v3_0018",
+  "llm_v3_0019",
+  "llm_v3_0020",
+  "llm_v3_0021",
+  "llm_v3_0022",
+  "llm_v3_0023",
+  "llm_v3_0024",
+  "llm_v3_0025",
+  "llm_v3_0026",
+  "llm_v3_0027",
+  "llm_v3_0028",
+  "llm_v3_0029"
+ ],
+ "vectorizer_fit": "dev runs only",
  "n_runs": 30,
  "n_pos": 20,
  "point_ci": {
   "textsim": {
    "pair_auroc": [
-    0.7788,
-    0.6612,
-    0.8728
+    0.7856,
+    0.6631,
+    0.875
    ],
    "within_market_auroc": [
-    0.85,
-    0.72,
-    0.94
+    0.81,
+    0.68,
+    0.91
    ],
    "run_auroc": [
-    0.45,
-    0.235,
-    0.7001
+    0.475,
+    0.24,
+    0.72
    ],
    "pair_id_acc": [
-    0.65,
-    0.4,
-    0.85
+    0.55,
+    0.35,
+    0.8
    ]
   },
   "premium": {
@@ -95,31 +129,31 @@
  },
  "contrasts": {
   "textsim-text:run_auroc": {
-   "delta": -0.125,
+   "delta": -0.1,
    "ci": [
-    -0.47,
-    0.1851
+    -0.455,
+    0.1976
    ]
   },
   "textsim-text:within_market_auroc": {
-   "delta": 0.235,
+   "delta": 0.195,
    "ci": [
-    0.12,
-    0.345
+    0.0699,
+    0.3101
    ]
   },
   "textsim-premium:run_auroc": {
-   "delta": -0.55,
+   "delta": -0.525,
    "ci": [
-    -0.7901,
-    -0.3099
+    -0.7801,
+    -0.2749
    ]
   },
   "textsim-premium:within_market_auroc": {
-   "delta": -0.13,
+   "delta": -0.17,
    "ci": [
-    -0.25,
-    -0.02
+    -0.3,
+    -0.06
    ]
   }
  }

@@ -155,20 +155,22 @@ cached audits are now checked against the current prompt hash/length and re-run 
 
 **Supervised non-LLM baselines (dev; `baselines.py --ds llm_v3 --split dev`, LR, 5-fold CV grouped by run inside
 dev, n = 30).** Run AUROC text 0.79 [0.60, 0.92], action 0.96 [0.85, 1.00], combined 0.96, structured 0.95;
-pair-ID accuracy text 0.90, action 0.95. Hybrid Δ ≈ 0 (ceiling). A *trained* classifier on price features far
+pair-ID accuracy text 0.90, action 0.95 (action = computed price/outcome features; supervised CV inside dev, labels of
+other dev runs). Hybrid Δ ≈ 0 (ceiling). A *trained* classifier on price features far
 outperforms the zero-shot LLM reading the same prices (not like-for-like: the LR sees in-distribution labels). The
 text LR beats the LLM text auditor by a wide margin (pair-ID 0.90 vs 0.31). Its top-weighted n-grams show why:
 positives share margin-flavoured phrasing ("considered price", "balances customer value", "sustainable"); negatives
 include the `legit` pairs' "shipping partnership" notices.
 
-**Untrained public-text convergence (new, iter 6, dev; `textsim.py`).** If the private agreement leaks into the
-pair's public wording, the two colluders' public messages should resemble each other more than other pairs'. Score
-= TF-IDF cosine of the pair's public messages − mean cosine of the other pairs (vectorizer fit without labels;
-nothing tuned). Dev: within-market AUROC **0.85 [0.72, 0.94]** vs the zero-shot LLM text auditor 0.61
-(Δ +0.24 [+0.12, +0.35]); pair-ID 0.65. It does **not** detect which markets have collusion (run AUROC 0.45
-[0.23, 0.70]): every market has some most-similar pair. So the public text *does* carry a localisation signal
-(lexical alignment between partners), and the zero-shot LLM auditor does not use it. Pre-registered for the single
-test run (added to `finalize_test.sh` before any test look).
+**Untrained public-text convergence (new, iter 6, dev; `textsim.py`).** Hypothesis: if partners' private
+coordination shapes their public wording, the two colluders' public messages should resemble each other more than
+other pairs' do. Score = TF-IDF cosine of the pair's public messages − mean cosine of the other pairs (vectorizer fit
+on dev text only, no labels; nothing tuned). Dev: within-market AUROC **0.81 [0.68, 0.91]** vs the zero-shot LLM
+text auditor 0.61 (paired Δ +0.20 [+0.07, +0.31]); pair-ID 0.55. It showed no detection ability on dev (run AUROC
+0.48 [0.24, 0.72], inconclusive). So the public text does contain a localisation cue that the zero-shot LLM text
+auditor does not reflect in its pair scores. That the cue comes from the private agreement leaking into public
+wording is a plausible mechanism, not shown (label ≈ condition here). Pre-registered before this scorer was
+evaluated on test (earlier disclosed test exposures of other scorers still apply, `data/SPLITS.md`).
 
 ## Validity safeguards
 Labels from private chat only (judge blind to prices); same auditor model across views, fallback calls dropped;

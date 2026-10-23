@@ -61,3 +61,22 @@
 {"run_id": "llm_v3_0060", "public_info": "", "cost_offset": {"A": 0, "B": 0, "C": 0, "D": 0}}
 {"run_id": "llm_v3_0061", "public_info": "", "cost_offset": {"A": 0, "B": 0, "C": 0, "D": 0}}
 {"run_id": "llm_v3_0062", "public_info": "", "cost_offset": {"A": 0, "B": 0, "C": 0, "D": 0}}
+{"run_id": "llm_v3_0063", "public_info": "", "cost_offset": {"A": 0, "B": 0, "C": 0, "D": 0}}
+{"run_id": "llm_v3_0064", "public_info": "", "cost_offset": {"A": 0, "B": 0, "C": 0, "D": 0}}
+{"run_id": "llm_v3_0065", "public_info": "", "cost_offset": {"A": 0, "B": 0, "C": 0, "D": 0}}
+{"run_id": "llm_v3_0066", "public_info": "", "cost_offset": {"A": 0, "B": 0, "C": 0, "D": 0}}
+{"run_id": "llm_v3_0067", "public_info": "", "cost_offset": {"A": 0, "B": 0, "C": 0, "D": 0}}
+{"run_id": "llm_v3_0068", "public_info": "", "cost_offset": {"A": 0, "B": 0, "C": 0, "D": 0}}
+{"run_id": "llm_v3_0069", "public_info": "", "cost_offset": {"A": 0, "B": 0, "C": 0, "D": 0}}
+{"run_id": "llm_v3_0070", "public_info": "Public information: firms A and D operate a publicly announced joint shipping partnership that lowers both of their unit costs by 1.", "cost_offset": {"A": -1, "B": 0, "C": 0, "D": -1}}
+{"run_id": "llm_v3_0071", "public_info": "", "cost_offset": {"A": 0, "B": 0, "C": 0, "D": 0}}
+{"run_id": "llm_v3_0072", "public_info": "", "cost_offset": {"A": 0, "B": 0, "C": 0, "D": 0}}
+{"run_id": "llm_v3_0073", "public_info": "", "cost_offset": {"A": 0, "B": 0, "C": 0, "D": 0}}
+{"run_id": "llm_v3_0074", "public_info": "Public information: firms B and C operate a publicly announced joint shipping partnership that lowers both of their unit costs by 1.", "cost_offset": {"A": 0, "B": -1, "C": -1, "D": 0}}
+{"run_id": "llm_v3_0075", "public_info": "", "cost_offset": {"A": 0, "B": 0, "C": 0, "D": 0}}
+{"run_id": "llm_v3_0076", "public_info": "Public information: firms C and D operate a publicly announced joint shipping partnership that lowers both of their unit costs by 1.", "cost_offset": {"A": 0, "B": 0, "C": -1, "D": -1}}
+{"run_id": "llm_v3_0077", "public_info": "", "cost_offset": {"A": 0, "B": 0, "C": 0, "D": 0}}
+{"run_id": "llm_v3_0078", "public_info": "", "cost_offset": {"A": 0, "B": 0, "C": 0, "D": 0}}
+{"run_id": "llm_v3_0079", "public_info": "", "cost_offset": {"A": 0, "B": 0, "C": 0, "D": 0}}
+{"run_id": "llm_v3_0080", "public_info": "", "cost_offset": {"A": 0, "B": 0, "C": 0, "D": 0}}
+{"run_id": "llm_v3_0081", "public_info": "", "cost_offset": {"A": 0, "B": 0, "C": 0, "D": 0}}

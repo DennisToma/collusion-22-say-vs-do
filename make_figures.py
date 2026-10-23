@@ -27,8 +27,10 @@ def auroc(d, title, split):
                                               ("within_market_auroc", C2, "s", 0.15, "within-market AUROC")]):
         ys = [i + off for i in range(len(sc))]
         pt = [pc[s][m][0] for s in sc]
-        err = [[pc[s][m][0] - pc[s][m][1] for s in sc], [pc[s][m][2] - pc[s][m][0] for s in sc]]
-        ax.errorbar(pt, ys, xerr=err, fmt=mk, color=c, ms=6, lw=1.5, capsize=0, mec="white", label=nm)
+        for y, s in zip(ys, sc):  # CI drawn independently of the point (percentile CIs need not contain it)
+            if pc[s][m][1] is not None and pc[s][m][2] is not None:
+                ax.plot([pc[s][m][1], pc[s][m][2]], [y, y], color=c, lw=1.5)
+        ax.plot(pt, ys, mk, color=c, ms=6, mec="white", label=nm, ls="none")
     ax.axvline(0.5, ls="--", color=MUTED, lw=1); ax.text(0.505, -0.55, "chance", color=MUTED, ha="left", fontsize=8)
     ax.set_yticks(range(len(sc))); ax.set_yticklabels([lab(s) for s in sc]); ax.invert_yaxis()
     ax.set_xlim(0.35, 1.02); ax.set_xlabel("AUROC (95% CI)"); ax.grid(axis="x", color="#e6e6e6", lw=0.6); ax.set_axisbelow(True)
@@ -45,8 +47,10 @@ def forest(items, metrics, title, fname, split, xlabel="delta (95% CI)"):
         for i, (n, c) in enumerate(items):
             e = c.get(m)
             if not e: continue
-            lo, hi = e["ci"]; col = C1 if (lo > 0 or hi < 0) else MUTED
-            ax.errorbar([e["delta"]], [i], xerr=[[e["delta"] - lo], [hi - e["delta"]]], fmt="o", color=col, ms=6, lw=1.5, mec="white")
+            lo, hi = e["ci"]
+            if lo is None or hi is None: continue
+            col = C1 if (lo > 0 or hi < 0) else MUTED
+            ax.plot([lo, hi], [i, i], color=col, lw=1.5); ax.plot([e["delta"]], [i], "o", color=col, ms=6, mec="white")
         ax.axvline(0, color=INK, lw=1); ax.set_title(mt, fontsize=10, loc="left"); ax.set_xlabel(xlabel)
         ax.grid(axis="x", color="#e6e6e6", lw=0.6); ax.set_axisbelow(True)
     axs[0][0].set_yticks(range(len(items))); axs[0][0].set_yticklabels([n for n, _ in items]); axs[0][0].invert_yaxis()
