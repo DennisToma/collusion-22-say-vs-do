@@ -1,7 +1,7 @@
 # STATUS
 
-## Current state (2026-10-23 22:40 UTC, iteration 6)
-- **Generation** llm_v3 at 72/125 (ETA ~00:00); `pipeline.sh llm_v3` keeps audits in step (63 runs × 6 views).
+## Current state (2026-10-23 23:00 UTC, end of iteration 6)
+- **Generation** llm_v3 at 82/125 (ETA ~23:30); `pipeline.sh llm_v3` keeps audits in step (63 runs × 6 views).
 - **`after_gen.sh` running**: when generation ends → llm_v3fp (private:16 firm framing) + Claude Sonnet mod3 subset +
   shuffle seeds 0,1,2 on TEST (combined,structured). No manual launch needed.
 - Dev (n=30): premium run 1.00 / within .98 > action_stats .89/.91 > structured .83/.91 ≈ combined ≈ fusion > action
@@ -10,9 +10,11 @@
   but run AUROC .45 → public text carries a LOCALISATION signal the zero-shot LLM misses. Trained LR (dev split):
   text pair-ID .90, action run .96. Both pre-registered in `finalize_test.sh`; `report_tables.py` renders all REPORT
   tables from json (`results/analysis/report_tables_{dev,test}.md`).
-- codex review of iter-6 code running → `logs/review_iter6.md` (apply fixes BEFORE finalize_test.sh).
+- codex review `logs/review_iter6.md` APPLIED (textsim vectorizer now dev-only: within .81, Δ vs LLM text +.20
+  [+.07,+.31]; finalize = preflight `--check-only` + dev steps → atomic lock → test). Cascade (premium→LLM) added:
+  dev best action_stats .85 recall / .10 FPR — LLM adds explanation, not detection.
 ## Next steps
-1. Apply `logs/review_iter6.md` fixes (dev-only checks).
+1. (done) review fixes. Generation 82/125 at 22:47 → ETA ~23:30; audits ~00:00.
 2. When 125×6 audits done (`wc -l results/llm_auditor/llm_v3/gpt-6.1-sol/*_orig.jsonl`): `./finalize_test.sh` ONCE;
    paste `results/analysis/report_tables_test.md` into REPORT (test = headline; dev → appendix); rewrite abstract.
 3. Then shuffle_analysis / cross_family / fp_stratum as inputs complete; rerun `report_tables.py --split test`.
@@ -20,6 +22,8 @@
 - Risks: ~7 concurrent LLM calls after 00:00; sol ~5/min → shuffle done ~02:00.
 
 ## Log
+- 23:00 iter 6: applied codex review_iter6 (P1: textsim dev-only fit, figure CI crash, finalize preflight/lock;
+  P2: report_tables labels, FP rendering, None CIs); cascade metrics in final_analysis triage (dev).
 - 22:40 iter 6: baselines.py --split (dev run), textsim.py (new untrained scorer, dev), report_tables.py,
   finalize_test.sh extended + STARTED stamp; SPLITS pre-registration; REPORT dev baseline/textsim paragraphs.
 - 22:31 iter 5: codex review of new code → safeguard fixes (exact id set, run-once stamp, pipefail, fp asserts);

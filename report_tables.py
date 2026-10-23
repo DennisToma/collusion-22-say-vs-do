@@ -86,6 +86,15 @@ def main():
         for k, d in tr.items():
             L.append(f"| {k.replace('top_', '').replace('pct', '%')} | {d['llm_calls']} | {f(d['recall_of_positives'])} | "
                      f"{d['neg_audited']} | {d['audited_negatives_flagged_by_structured']} |")
+        cv = [v for v in ("structured", "action_stats", "combined") if f"cascade_{v}" in next(iter(tr.values()))]
+        if cv:
+            L += ["", "Cascade end-to-end (run sent by premium AND flagged by the LLM view at its dev threshold): "
+                  "recall / FPR / recall with the correct pair named:", "",
+                  "| audit top | " + " | ".join(cv) + " |", "|---|" + "---|" * len(cv)]
+            for k, d in tr.items():
+                L.append(f"| {k.replace('top_', '').replace('pct', '%')} | " + " | ".join(
+                    f"{f(d['cascade_' + v]['recall'])} / {f(d['cascade_' + v]['fpr'])} / {f(d['cascade_' + v]['recall_with_correct_pair'])}"
+                    for v in cv) + " |")
     ext = fa.get("external_infotheory", {})
     if ext and any(isinstance(v, dict) and "point_ci" in v for v in ext.values()):
         L += ["", f"**External comparator** (sibling Q1.4 per-pair scores, `{ext.get('source')}`):", "",

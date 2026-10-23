@@ -47,84 +47,84 @@
   "text": {
    "pair_auroc": [
     0.5642,
-    0.4465,
-    0.6729
+    0.4453,
+    0.6808
    ],
    "within_market_auroc": [
     0.615,
-    0.4948,
-    0.715
+    0.5,
+    0.725
    ],
    "run_auroc": [
     0.575,
-    0.3909,
-    0.7626
+    0.3675,
+    0.775
    ],
    "pair_id_acc": [
     0.3083,
-    0.1873,
-    0.45
+    0.175,
+    0.4502
    ]
   },
   "action": {
    "pair_auroc": [
     0.8216,
-    0.7039,
-    0.9265
+    0.6998,
+    0.9217
    ],
    "within_market_auroc": [
     0.845,
-    0.7224,
+    0.73,
     0.93
    ],
    "run_auroc": [
     0.775,
-    0.5887,
-    0.9388
+    0.575,
+    0.93
    ],
    "pair_id_acc": [
     0.5167,
     0.3,
-    0.75
+    0.7167
    ]
   },
   "combined": {
    "pair_auroc": [
     0.8031,
-    0.6909,
-    0.8975
+    0.6838,
+    0.9019
    ],
    "within_market_auroc": [
     0.85,
-    0.7295,
+    0.73,
     0.94
    ],
    "run_auroc": [
     0.8275,
-    0.64,
-    0.9738
+    0.6449,
+    0.9725
    ],
    "pair_id_acc": [
     0.55,
     0.35,
-    0.7762
+    0.75
    ]
   },
   "combined_stats": {
    "pair_auroc": [
     0.8936,
-    0.7781,
-    0.9701
+    0.7827,
+    0.972
    ],
    "within_market_auroc": [
     0.93,
-    0.8147,
+    0.82,
     1.0
    ],
    "run_auroc": [
     0.815,
-    0.6461,
-    0.9588
+    0.64,
+    0.9526
    ],
    "pair_id_acc": [
     0.85,
@@ -135,40 +135,40 @@
   "action_stats": {
    "pair_auroc": [
     0.9084,
-    0.7908,
-    0.9791
+    0.7989,
+    0.9814
    ],
    "within_market_auroc": [
     0.91,
-    0.8,
+    0.7998,
     0.98
    ],
    "run_auroc": [
     0.8875,
-    0.755,
-    0.9876
+    0.75,
+    0.99
    ],
    "pair_id_acc": [
     0.75,
     0.55,
-    0.95
+    0.9
    ]
   },
   "structured": {
    "pair_auroc": [
     0.8894,
-    0.7746,
-    0.9602
+    0.7842,
+    0.9611
    ],
    "within_market_auroc": [
     0.905,
-    0.7998,
+    0.795,
     0.97
    ],
    "run_auroc": [
     0.8325,
-    0.6762,
-    0.955
+    0.6675,
+    0.9575
    ],
    "pair_id_acc": [
     0.7,
@@ -179,7 +179,7 @@
   "premium": {
    "pair_auroc": [
     0.9869,
-    0.9628,
+    0.9634,
     1.0
    ],
    "within_market_auroc": [
@@ -201,12 +201,12 @@
   "premium_r2plus": {
    "pair_auroc": [
     0.9587,
-    0.9091,
-    0.9915
+    0.9096,
+    0.9916
    ],
    "within_market_auroc": [
     0.955,
-    0.88,
+    0.885,
     1.0
    ],
    "run_auroc": [
@@ -223,80 +223,80 @@
   "fusion": {
    "pair_auroc": [
     0.8189,
-    0.7005,
-    0.9218
+    0.698,
+    0.9178
    ],
    "within_market_auroc": [
     0.85,
     0.73,
-    0.9352
+    0.93
    ],
    "run_auroc": [
     0.825,
     0.66,
-    0.9576
+    0.95
    ],
    "pair_id_acc": [
     0.5167,
     0.3,
-    0.75
+    0.7167
    ]
   }
  },
  "n_boot_finite": {
   "text": {
-   "pair_auroc": 300,
-   "within_market_auroc": 300,
-   "run_auroc": 300,
-   "pair_id_acc": 300
+   "pair_auroc": 2000,
+   "within_market_auroc": 2000,
+   "run_auroc": 2000,
+   "pair_id_acc": 2000
   },
   "action": {
-   "pair_auroc": 300,
-   "within_market_auroc": 300,
-   "run_auroc": 300,
-   "pair_id_acc": 300
+   "pair_auroc": 2000,
+   "within_market_auroc": 2000,
+   "run_auroc": 2000,
+   "pair_id_acc": 2000
   },
   "combined": {
-   "pair_auroc": 300,
-   "within_market_auroc": 300,
-   "run_auroc": 300,
-   "pair_id_acc": 300
+   "pair_auroc": 2000,
+   "within_market_auroc": 2000,
+   "run_auroc": 2000,
+   "pair_id_acc": 2000
   },
   "combined_stats": {
-   "pair_auroc": 300,
-   "within_market_auroc": 300,
-   "run_auroc": 300,
-   "pair_id_acc": 300
+   "pair_auroc": 2000,
+   "within_market_auroc": 2000,
+   "run_auroc": 2000,
+   "pair_id_acc": 2000
   },
   "action_stats": {
-   "pair_auroc": 300,
-   "within_market_auroc": 300,
-   "run_auroc": 300,
-   "pair_id_acc": 300
+   "pair_auroc": 2000,
+   "within_market_auroc": 2000,
+   "run_auroc": 2000,
+   "pair_id_acc": 2000
   },
   "structured": {
-   "pair_auroc": 300,
-   "within_market_auroc": 300,
-   "run_auroc": 300,
-   "pair_id_acc": 300
+   "pair_auroc": 2000,
+   "within_market_auroc": 2000,
+   "run_auroc": 2000,
+   "pair_id_acc": 2000
   },
   "premium": {
-   "pair_auroc": 300,
-   "within_market_auroc": 300,
-   "run_auroc": 300,
-   "pair_id_acc": 300
+   "pair_auroc": 2000,
+   "within_market_auroc": 2000,
+   "run_auroc": 2000,
+   "pair_id_acc": 2000
   },
   "premium_r2plus": {
-   "pair_auroc": 300,
-   "within_market_auroc": 300,
-   "run_auroc": 300,
-   "pair_id_acc": 300
+   "pair_auroc": 2000,
+   "within_market_auroc": 2000,
+   "run_auroc": 2000,
+   "pair_id_acc": 2000
   },
   "fusion": {
-   "pair_auroc": 300,
-   "within_market_auroc": 300,
-   "run_auroc": 300,
-   "pair_id_acc": 300
+   "pair_auroc": 2000,
+   "within_market_auroc": 2000,
+   "run_auroc": 2000,
+   "pair_id_acc": 2000
   }
  },
  "note": "CIs condition on the dev-fitted fusion weight/thresholds; [1,1]-type intervals = boundary (perfect separation)",
@@ -304,92 +304,92 @@
   "delta_hybrid[combined]:pair_auroc": {
    "delta": -0.0184,
    "ci": [
-    -0.0574,
-    0.0357
+    -0.0603,
+    0.0316
    ]
   },
   "delta_hybrid[combined]:within_market_auroc": {
    "delta": 0.005,
    "ci": [
-    -0.0376,
-    0.0476
+    -0.05,
+    0.045
    ]
   },
   "delta_hybrid[combined]:run_auroc": {
    "delta": 0.0525,
    "ci": [
-    -0.1153,
-    0.1889
+    -0.1226,
+    0.21
    ]
   },
   "delta_hybrid[combined_stats]:pair_auroc": {
    "delta": 0.072,
    "ci": [
-    0.0072,
-    0.1481
+    0.0094,
+    0.155
    ]
   },
   "delta_hybrid[combined_stats]:within_market_auroc": {
    "delta": 0.085,
    "ci": [
     0.04,
-    0.125
+    0.135
    ]
   },
   "delta_hybrid[combined_stats]:run_auroc": {
    "delta": 0.04,
    "ci": [
-    -0.1139,
-    0.1563
+    -0.1101,
+    0.17
    ]
   },
   "delta_hybrid[action_stats]:pair_auroc": {
    "delta": 0.0869,
    "ci": [
-    0.0212,
-    0.1598
+    0.0247,
+    0.1625
    ]
   },
   "delta_hybrid[action_stats]:within_market_auroc": {
    "delta": 0.065,
    "ci": [
     0.02,
-    0.105
+    0.11
    ]
   },
   "delta_hybrid[action_stats]:run_auroc": {
    "delta": 0.1125,
    "ci": [
-    -0.01,
-    0.2275
+    -0.02,
+    0.245
    ]
   },
   "delta_hybrid[structured]:pair_auroc": {
    "delta": 0.0678,
    "ci": [
-    -0.0093,
-    0.1455
+    -0.0047,
+    0.1527
    ]
   },
   "delta_hybrid[structured]:within_market_auroc": {
    "delta": 0.06,
    "ci": [
     0.02,
-    0.1
+    0.105
    ]
   },
   "delta_hybrid[structured]:run_auroc": {
    "delta": 0.0575,
    "ci": [
-    -0.115,
-    0.1964
+    -0.1025,
+    0.2175
    ]
   },
   "delta_hybrid[fusion]:pair_auroc": {
    "delta": -0.0027,
    "ci": [
-    -0.0218,
-    0.0199
+    -0.0236,
+    0.0234
    ]
   },
   "delta_hybrid[fusion]:within_market_auroc": {
@@ -402,36 +402,36 @@
   "delta_hybrid[fusion]:run_auroc": {
    "delta": 0.05,
    "ci": [
-    -0.0376,
-    0.1363
+    -0.045,
+    0.15
    ]
   },
   "action_stats-action:pair_auroc": {
    "delta": 0.0869,
    "ci": [
-    0.0212,
-    0.1598
+    0.0247,
+    0.1625
    ]
   },
   "action_stats-action:within_market_auroc": {
    "delta": 0.065,
    "ci": [
     0.02,
-    0.105
+    0.11
    ]
   },
   "action_stats-action:run_auroc": {
    "delta": 0.1125,
    "ci": [
-    -0.01,
-    0.2679
+    -0.015,
+    0.2775
    ]
   },
   "combined_stats-action_stats:pair_auroc": {
    "delta": -0.0148,
    "ci": [
-    -0.0406,
-    0.0162
+    -0.0403,
+    0.0144
    ]
   },
   "combined_stats-action_stats:within_market_auroc": {
@@ -445,14 +445,14 @@
    "delta": -0.0725,
    "ci": [
     -0.2051,
-    0.02
+    0.015
    ]
   },
   "structured-combined_stats:pair_auroc": {
    "delta": -0.0042,
    "ci": [
-    -0.0441,
-    0.0343
+    -0.0422,
+    0.0338
    ]
   },
   "structured-combined_stats:within_market_auroc": {
@@ -465,42 +465,42 @@
   "structured-combined_stats:run_auroc": {
    "delta": 0.0175,
    "ci": [
-    -0.0725,
-    0.1076
+    -0.08,
+    0.1225
    ]
   },
   "combined_stats-combined:pair_auroc": {
    "delta": 0.0905,
    "ci": [
-    0.0113,
-    0.1639
+    0.0177,
+    0.1706
    ]
   },
   "combined_stats-combined:within_market_auroc": {
    "delta": 0.08,
    "ci": [
     0.03,
-    0.1352
+    0.14
    ]
   },
   "combined_stats-combined:run_auroc": {
    "delta": -0.0125,
    "ci": [
     -0.16,
-    0.1366
+    0.1375
    ]
   },
   "combined-fusion:pair_auroc": {
    "delta": -0.0158,
    "ci": [
-    -0.0539,
+    -0.0541,
     0.035
    ]
   },
   "combined-fusion:within_market_auroc": {
    "delta": 0.0,
    "ci": [
-    -0.04,
+    -0.05,
     0.04
    ]
   },
@@ -508,322 +508,322 @@
    "delta": 0.0025,
    "ci": [
     -0.12,
-    0.1014
+    0.12
    ]
   },
   "structured-fusion:pair_auroc": {
    "delta": 0.0705,
    "ci": [
-    -0.0002,
-    0.1389
+    0.0047,
+    0.1452
    ]
   },
   "structured-fusion:within_market_auroc": {
    "delta": 0.055,
    "ci": [
     0.02,
-    0.09
+    0.095
    ]
   },
   "structured-fusion:run_auroc": {
    "delta": 0.0075,
    "ci": [
-    -0.1338,
-    0.125
+    -0.1325,
+    0.145
    ]
   },
   "premium-text:pair_auroc": {
    "delta": 0.4227,
    "ci": [
-    0.3201,
-    0.5346
+    0.312,
+    0.535
    ]
   },
   "premium-text:within_market_auroc": {
    "delta": 0.365,
    "ci": [
-    0.2624,
-    0.48
+    0.26,
+    0.475
    ]
   },
   "premium-text:run_auroc": {
    "delta": 0.425,
    "ci": [
-    0.2374,
-    0.6091
+    0.225,
+    0.6325
    ]
   },
   "premium_r2plus-text:pair_auroc": {
    "delta": 0.3945,
    "ci": [
-    0.2956,
-    0.5031
+    0.2868,
+    0.5081
    ]
   },
   "premium_r2plus-text:within_market_auroc": {
    "delta": 0.34,
    "ci": [
-    0.2524,
+    0.245,
     0.43
    ]
   },
   "premium_r2plus-text:run_auroc": {
    "delta": 0.345,
    "ci": [
-    0.1156,
-    0.5826
+    0.0774,
+    0.5875
    ]
   },
   "premium-action:pair_auroc": {
    "delta": 0.1653,
    "ci": [
-    0.0599,
-    0.2743
+    0.0661,
+    0.2831
    ]
   },
   "premium-action:within_market_auroc": {
    "delta": 0.135,
    "ci": [
-    0.03,
-    0.2652
+    0.035,
+    0.26
    ]
   },
   "premium-action:run_auroc": {
    "delta": 0.225,
    "ci": [
-    0.0612,
-    0.4113
+    0.07,
+    0.425
    ]
   },
   "premium_r2plus-action:pair_auroc": {
    "delta": 0.1372,
    "ci": [
-    0.0295,
-    0.2529
+    0.0265,
+    0.26
    ]
   },
   "premium_r2plus-action:within_market_auroc": {
    "delta": 0.11,
    "ci": [
-    0.0174,
-    0.1976
+    0.02,
+    0.2
    ]
   },
   "premium_r2plus-action:run_auroc": {
    "delta": 0.145,
    "ci": [
-    -0.0013,
-    0.3175
+    -0.015,
+    0.325
    ]
   },
   "premium-combined:pair_auroc": {
    "delta": 0.1838,
    "ci": [
-    0.0873,
-    0.2885
+    0.0897,
+    0.2938
    ]
   },
   "premium-combined:within_market_auroc": {
    "delta": 0.13,
    "ci": [
-    0.0248,
-    0.2552
+    0.02,
+    0.26
    ]
   },
   "premium-combined:run_auroc": {
    "delta": 0.1725,
    "ci": [
-    0.0262,
-    0.36
+    0.0275,
+    0.3551
    ]
   },
   "premium_r2plus-combined:pair_auroc": {
    "delta": 0.1556,
    "ci": [
-    0.0554,
-    0.262
+    0.0534,
+    0.2706
    ]
   },
   "premium_r2plus-combined:within_market_auroc": {
    "delta": 0.105,
    "ci": [
     0.005,
-    0.195
+    0.2051
    ]
   },
   "premium_r2plus-combined:run_auroc": {
    "delta": 0.0925,
    "ci": [
-    -0.0813,
-    0.2813
+    -0.11,
+    0.295
    ]
   },
   "premium-combined_stats:pair_auroc": {
    "delta": 0.0933,
    "ci": [
-    0.0142,
-    0.1988
+    0.0153,
+    0.1961
    ]
   },
   "premium-combined_stats:within_market_auroc": {
    "delta": 0.05,
    "ci": [
     -0.04,
-    0.18
+    0.17
    ]
   },
   "premium-combined_stats:run_auroc": {
    "delta": 0.185,
    "ci": [
-    0.0412,
-    0.3539
+    0.0474,
+    0.36
    ]
   },
   "premium_r2plus-combined_stats:pair_auroc": {
    "delta": 0.0652,
    "ci": [
-    -0.0308,
-    0.1788
+    -0.0252,
+    0.1664
    ]
   },
   "premium_r2plus-combined_stats:within_market_auroc": {
    "delta": 0.025,
    "ci": [
-    -0.0626,
-    0.1176
+    -0.05,
+    0.11
    ]
   },
   "premium_r2plus-combined_stats:run_auroc": {
    "delta": 0.105,
    "ci": [
-    -0.045,
-    0.2963
+    -0.0625,
+    0.2926
    ]
   },
   "premium-action_stats:pair_auroc": {
    "delta": 0.0784,
    "ci": [
-    0.0065,
-    0.1927
+    0.0069,
+    0.1791
    ]
   },
   "premium-action_stats:within_market_auroc": {
    "delta": 0.07,
    "ci": [
     -0.02,
-    0.1952
+    0.19
    ]
   },
   "premium-action_stats:run_auroc": {
    "delta": 0.1125,
    "ci": [
-    0.0124,
-    0.245
+    0.01,
+    0.25
    ]
   },
   "premium_r2plus-action_stats:pair_auroc": {
    "delta": 0.0503,
    "ci": [
-    -0.037,
-    0.1607
+    -0.0325,
+    0.1541
    ]
   },
   "premium_r2plus-action_stats:within_market_auroc": {
    "delta": 0.045,
    "ci": [
-    -0.0376,
+    -0.035,
     0.13
    ]
   },
   "premium_r2plus-action_stats:run_auroc": {
    "delta": 0.0325,
    "ci": [
-    -0.0988,
-    0.1713
+    -0.105,
+    0.17
    ]
   },
   "premium-structured:pair_auroc": {
    "delta": 0.0975,
    "ci": [
-    0.0211,
-    0.2022
+    0.0256,
+    0.1955
    ]
   },
   "premium-structured:within_market_auroc": {
    "delta": 0.075,
    "ci": [
-    -0.0126,
+    -0.01,
     0.185
    ]
   },
   "premium-structured:run_auroc": {
    "delta": 0.1675,
    "ci": [
-    0.045,
-    0.3238
+    0.0425,
+    0.3325
    ]
   },
   "premium_r2plus-structured:pair_auroc": {
    "delta": 0.0694,
    "ci": [
-    -0.0241,
-    0.1756
+    -0.0164,
+    0.1684
    ]
   },
   "premium_r2plus-structured:within_market_auroc": {
    "delta": 0.05,
    "ci": [
-    -0.0326,
+    -0.0251,
     0.125
    ]
   },
   "premium_r2plus-structured:run_auroc": {
    "delta": 0.0875,
    "ci": [
-    -0.0664,
-    0.2925
+    -0.1025,
+    0.285
    ]
   },
   "premium-fusion:pair_auroc": {
    "delta": 0.168,
    "ci": [
-    0.0643,
-    0.2792
+    0.0689,
+    0.2822
    ]
   },
   "premium-fusion:within_market_auroc": {
    "delta": 0.13,
    "ci": [
     0.03,
-    0.2552
+    0.25
    ]
   },
   "premium-fusion:run_auroc": {
    "delta": 0.175,
    "ci": [
-    0.0424,
+    0.05,
     0.34
    ]
   },
   "premium_r2plus-fusion:pair_auroc": {
    "delta": 0.1398,
    "ci": [
-    0.0266,
-    0.2563
+    0.0292,
+    0.2606
    ]
   },
   "premium_r2plus-fusion:within_market_auroc": {
    "delta": 0.105,
    "ci": [
-    0.0124,
-    0.1926
+    0.015,
+    0.1901
    ]
   },
   "premium_r2plus-fusion:run_auroc": {
    "delta": 0.095,
    "ci": [
-    -0.0576,
-    0.255
+    -0.0701,
+    0.265
    ]
   }
  },
@@ -1293,30 +1293,90 @@
    "llm_calls": 8,
    "recall_of_positives": 0.4,
    "neg_audited": 0,
-   "audited_negatives_flagged_by_structured": 0
+   "audited_negatives_flagged_by_structured": 0,
+   "cascade_structured": {
+    "recall": 0.35,
+    "fpr": 0.0,
+    "recall_with_correct_pair": 0.35
+   },
+   "cascade_action_stats": {
+    "recall": 0.4,
+    "fpr": 0.0,
+    "recall_with_correct_pair": 0.4
+   },
+   "cascade_combined": {
+    "recall": 0.3,
+    "fpr": 0.0,
+    "recall_with_correct_pair": 0.25
+   }
   },
   "top_50pct": {
    "llm_calls": 15,
    "recall_of_positives": 0.75,
    "neg_audited": 0,
-   "audited_negatives_flagged_by_structured": 0
+   "audited_negatives_flagged_by_structured": 0,
+   "cascade_structured": {
+    "recall": 0.55,
+    "fpr": 0.0,
+    "recall_with_correct_pair": 0.5
+   },
+   "cascade_action_stats": {
+    "recall": 0.65,
+    "fpr": 0.0,
+    "recall_with_correct_pair": 0.55
+   },
+   "cascade_combined": {
+    "recall": 0.6,
+    "fpr": 0.0,
+    "recall_with_correct_pair": 0.35
+   }
   },
   "top_75pct": {
    "llm_calls": 23,
    "recall_of_positives": 1.0,
    "neg_audited": 3,
-   "audited_negatives_flagged_by_structured": 0
+   "audited_negatives_flagged_by_structured": 0,
+   "cascade_structured": {
+    "recall": 0.65,
+    "fpr": 0.0,
+    "recall_with_correct_pair": 0.55
+   },
+   "cascade_action_stats": {
+    "recall": 0.85,
+    "fpr": 0.1,
+    "recall_with_correct_pair": 0.65
+   },
+   "cascade_combined": {
+    "recall": 0.8,
+    "fpr": 0.1,
+    "recall_with_correct_pair": 0.45
+   }
   },
   "top_100pct": {
    "llm_calls": 30,
    "recall_of_positives": 1.0,
    "neg_audited": 10,
-   "audited_negatives_flagged_by_structured": 1
+   "audited_negatives_flagged_by_structured": 1,
+   "cascade_structured": {
+    "recall": 0.65,
+    "fpr": 0.1,
+    "recall_with_correct_pair": 0.55
+   },
+   "cascade_action_stats": {
+    "recall": 0.85,
+    "fpr": 0.1,
+    "recall_with_correct_pair": 0.65
+   },
+   "cascade_combined": {
+    "recall": 0.8,
+    "fpr": 0.2,
+    "recall_with_correct_pair": 0.45
+   }
   }
  },
  "external_infotheory": {
   "source": "../collusion-14-infotheory/results/eval/llm_v3_ext.json",
-  "n_runs_in_file": 52,
+  "n_runs_in_file": 74,
   "pcmi": {
    "n": 30,
    "n_pos": 20,
@@ -1324,29 +1384,29 @@
     "ext_pcmi": {
      "pair_auroc": [
       0.577,
-      0.4564,
-      0.6831
+      0.4537,
+      0.6901
      ],
      "within_market_auroc": [
       0.545,
-      0.3974,
-      0.68
+      0.4,
+      0.69
      ],
      "run_auroc": [
       0.47,
-      0.2336,
-      0.7289
+      0.2249,
+      0.715
      ],
      "pair_id_acc": [
       0.2583,
-      0.0833,
-      0.4167
+      0.1,
+      0.45
      ]
     },
     "premium": {
      "pair_auroc": [
       0.9869,
-      0.9628,
+      0.9634,
       1.0
      ],
      "within_market_auroc": [
@@ -1368,18 +1428,18 @@
     "structured": {
      "pair_auroc": [
       0.8894,
-      0.7746,
-      0.9602
+      0.7842,
+      0.9611
      ],
      "within_market_auroc": [
       0.905,
-      0.7998,
+      0.795,
       0.97
      ],
      "run_auroc": [
       0.8325,
-      0.6762,
-      0.955
+      0.6675,
+      0.9575
      ],
      "pair_id_acc": [
       0.7,
@@ -1392,15 +1452,15 @@
     "run_auroc": {
      "delta": 0.53,
      "ci": [
-      0.2862,
-      0.7538
+      0.265,
+      0.775
      ]
     },
     "within_market_auroc": {
      "delta": 0.435,
      "ci": [
-      0.2624,
-      0.5902
+      0.27,
+      0.59
      ]
     }
    }
@@ -1412,29 +1472,29 @@
     "ext_mi": {
      "pair_auroc": [
       0.7323,
-      0.6593,
-      0.8246
+      0.6531,
+      0.8223
      ],
      "within_market_auroc": [
       0.845,
-      0.73,
-      0.9426
+      0.725,
+      0.94
      ],
      "run_auroc": [
       0.6,
-      0.4074,
-      0.7876
+      0.395,
+      0.8
      ],
      "pair_id_acc": [
       0.625,
-      0.45,
-      0.8131
+      0.425,
+      0.825
      ]
     },
     "premium": {
      "pair_auroc": [
       0.9869,
-      0.9628,
+      0.9634,
       1.0
      ],
      "within_market_auroc": [
@@ -1456,18 +1516,18 @@
     "structured": {
      "pair_auroc": [
       0.8894,
-      0.7746,
-      0.9602
+      0.7842,
+      0.9611
      ],
      "within_market_auroc": [
       0.905,
-      0.7998,
+      0.795,
       0.97
      ],
      "run_auroc": [
       0.8325,
-      0.6762,
-      0.955
+      0.6675,
+      0.9575
      ],
      "pair_id_acc": [
       0.7,
@@ -1481,14 +1541,14 @@
      "delta": 0.4,
      "ci": [
       0.195,
-      0.575
+      0.5951
      ]
     },
     "within_market_auroc": {
      "delta": 0.135,
      "ci": [
-      0.03,
-      0.2526
+      0.02,
+      0.265
      ]
     }
    }
@@ -1500,29 +1560,29 @@
     "ext_te": {
      "pair_auroc": [
       0.6078,
-      0.4801,
-      0.7191
+      0.485,
+      0.7244
      ],
      "within_market_auroc": [
       0.67,
-      0.47,
-      0.8252
+      0.49,
+      0.82
      ],
      "run_auroc": [
       0.59,
-      0.3098,
+      0.3249,
       0.825
      ],
      "pair_id_acc": [
       0.35,
-      0.1238,
-      0.55
+      0.15,
+      0.6
      ]
     },
     "premium": {
      "pair_auroc": [
       0.9869,
-      0.9628,
+      0.9634,
       1.0
      ],
      "within_market_auroc": [
@@ -1544,18 +1604,18 @@
     "structured": {
      "pair_auroc": [
       0.8894,
-      0.7746,
-      0.9602
+      0.7842,
+      0.9611
      ],
      "within_market_auroc": [
       0.905,
-      0.7998,
+      0.795,
       0.97
      ],
      "run_auroc": [
       0.8325,
-      0.6762,
-      0.955
+      0.6675,
+      0.9575
      ],
      "pair_id_acc": [
       0.7,
@@ -1568,15 +1628,15 @@
     "run_auroc": {
      "delta": 0.41,
      "ci": [
-      0.1574,
-      0.6626
+      0.1699,
+      0.675
      ]
     },
     "within_market_auroc": {
      "delta": 0.31,
      "ci": [
-      0.17,
-      0.5
+      0.16,
+      0.48
      ]
     }
    }
@@ -1588,29 +1648,29 @@
     "ext_pearson": {
      "pair_auroc": [
       0.6878,
-      0.5824,
-      0.7922
+      0.5666,
+      0.796
      ],
      "within_market_auroc": [
       0.755,
-      0.6174,
-      0.8676
+      0.615,
+      0.875
      ],
      "run_auroc": [
       0.205,
-      0.075,
-      0.405
+      0.06,
+      0.3851
      ],
      "pair_id_acc": [
       0.4583,
-      0.2583,
-      0.6544
+      0.25,
+      0.6583
      ]
     },
     "premium": {
      "pair_auroc": [
       0.9869,
-      0.9628,
+      0.9634,
       1.0
      ],
      "within_market_auroc": [
@@ -1632,18 +1692,18 @@
     "structured": {
      "pair_auroc": [
       0.8894,
-      0.7746,
-      0.9602
+      0.7842,
+      0.9611
      ],
      "within_market_auroc": [
       0.905,
-      0.7998,
+      0.795,
       0.97
      ],
      "run_auroc": [
       0.8325,
-      0.6762,
-      0.955
+      0.6675,
+      0.9575
      ],
      "pair_id_acc": [
       0.7,
@@ -1656,15 +1716,15 @@
     "run_auroc": {
      "delta": 0.795,
      "ci": [
-      0.6147,
-      0.9452
+      0.6049,
+      0.94
      ]
     },
     "within_market_auroc": {
      "delta": 0.225,
      "ci": [
-      0.105,
-      0.3702
+      0.1,
+      0.37
      ]
     }
    }
@@ -1676,7 +1736,7 @@
     "ext_pair_level": {
      "pair_auroc": [
       0.9869,
-      0.9628,
+      0.9634,
       1.0
      ],
      "within_market_auroc": [
@@ -1698,7 +1758,7 @@
     "premium": {
      "pair_auroc": [
       0.9869,
-      0.9628,
+      0.9634,
       1.0
      ],
      "within_market_auroc": [
@@ -1720,18 +1780,18 @@
     "structured": {
      "pair_auroc": [
       0.8894,
-      0.7746,
-      0.9602
+      0.7842,
+      0.9611
      ],
      "within_market_auroc": [
       0.905,
-      0.7998,
+      0.795,
       0.97
      ],
      "run_auroc": [
       0.8325,
-      0.6762,
-      0.955
+      0.6675,
+      0.9575
      ],
      "pair_id_acc": [
       0.7,

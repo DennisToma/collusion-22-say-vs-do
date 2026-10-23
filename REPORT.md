@@ -147,7 +147,11 @@ match some firm's price nearby. On positive runs only 47–59% of cited firms be
 **Audit cost (prompt size per call; `uv run python cost.py` → `results/analysis/cost_llm_v3.json`).** text 9.3k chars, action 3.3k, action_stats 3.7k, combined 11.4k,
 structured 12.1k (≈ chars/4 tokens); one gpt-6.1-sol call per run per view. The premium costs nothing; a
 premium-first triage that sends only the top 75% of dev runs to the LLM audit keeps all positives (dev base
-rate is 2/3, so this saving will look larger on test).
+rate is 2/3, so this saving will look larger on test). End to end (run sent by the premium screen AND flagged by
+the LLM view at its dev threshold), the cascade can only lose recall relative to the premium alone: dev, auditing all
+runs, action_stats catches 0.85 of y=1 runs at FPR 0.10 and names the correct pair in 0.65; structured 0.65 / 0.10 /
+0.55 (`triage.*.cascade_*` in the final json). So the LLM's role in such a system is explanation and evidence for
+flagged pairs, not detection.
 
 *Caveat (22:00 codex review, `logs/review_interim.md`): `legit` runs were initially audited WITHOUT their public
 partnership notice. Fixed 22:10 (auditors.py regenerates `public_info`; legit audits invalidated and re-run;

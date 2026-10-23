@@ -34,3 +34,5 @@
   of each pair; TF-IDF fit on DEV public messages only, no labels (the earlier all-run fit was replaced after the iter-6 codex review); nothing tuned; motivated by dev-only LR n-gram
   inspection); (c) `report_tables.py` renders REPORT tables from the json. All added to `finalize_test.sh`, which now
   runs a metrics-free preflight (`final_analysis.py --check-only`) and all dev steps first, then takes an atomic mkdir lock + STARTED stamp before the test step (a failed-and-rerun test analysis must be disclosed here).
+- Iter 6 (23:00): additive output `triage.*.cascade_*` in final_analysis (end-to-end recall/FPR of premium screen →
+  LLM flag at dev threshold), checked on dev only; no existing scorer/threshold/metric changed.
