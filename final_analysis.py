@@ -34,7 +34,9 @@ def idx(r):
     return int(r.rsplit("_", 1)[1])
 
 
-def premium_scores(ds):
+def premium_scores(ds, start=0):
+    """start = first round (0-based) included; start=1 drops the opening round (robustness: many private pairs
+    open jointly high in round 1 and abandon the agreement after being undercut)."""
     P, C = {}, {}
     for l in open(Path("data") / ds / "trajectories.jsonl"):
         r = json.loads(l)
@@ -43,13 +45,13 @@ def premium_scores(ds):
     out, markup = {}, {}
     for rid, rows in P.items():
         rows.sort(key=lambda t: t[0])
-        pr = {a: np.array([d[a] for _, d in rows], float) for a in AG}
+        pr = {a: np.array([d[a] for _, d in rows[start:]], float) for a in AG}
         sc = {}
         for p in PAIRS:
             o = [a for a in AG if a not in p]
             sc[p] = float(((pr[p[0]] + pr[p[1]]) / 2).mean() - np.mean([pr[a] for a in o], axis=0).mean())
         out[rid] = {"scores": sc, "run": max(sc.values())}
-        markup[rid] = float(np.mean([pr[a].mean() for a in AG]) - np.mean(C[rid]))
+        markup[rid] = float(np.mean([pr[a].mean() for a in AG]) - np.mean(C[rid][start:]))
     return out, markup
 
 
@@ -102,6 +104,7 @@ def boot(ids, S, labs, n, seed=0):
         contrast(f"{h2}-{h1}", lambda x, m, h1=h1, h2=h2: x[h2][m] - x[h1][m])
     for h in [v for v in LLM_VIEWS + ["fusion"] if v in S]:
         contrast(f"premium-{h}", lambda x, m, h=h: x["premium"][m] - x[h][m])
+        contrast(f"premium_r2plus-{h}", lambda x, m, h=h: x["premium_r2plus"][m] - x[h][m])
     out["contrasts"] = con
     return out
 
@@ -140,6 +143,7 @@ def main():
         if rows or not a.allow_partial:
             S[v] = {x["run_id"]: {"scores": x["scores"], "run": x["collusion_present"]} for x in rows}
     S["premium"], markup = premium_scores(a.ds)
+    S["premium_r2plus"], _ = premium_scores(a.ds, start=1)
     common = sorted(set(labs).intersection(*[set(R) for R in S.values()]))
     want_dev = sorted(r for r in labs if idx(r) < DEV_MAX)
     want = sorted(labs) if a.split == "all" else [r for r in sorted(labs) if (idx(r) < DEV_MAX) == (a.split == "dev")]

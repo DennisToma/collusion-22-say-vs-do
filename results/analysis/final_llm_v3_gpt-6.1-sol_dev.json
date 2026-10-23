@@ -25,7 +25,8 @@
   "combined": 0,
   "action_stats": 0,
   "structured": 0,
-  "premium": 0
+  "premium": 0,
+  "premium_r2plus": 0
  },
  "endpoint": "y = verified private coordination COMMUNICATION on the assigned pair (judge on private chat: explicit agreement or pricing-intention exchange); not realised supra-competitive conduct",
  "primary_metrics": [
@@ -176,6 +177,28 @@
     1.0
    ]
   },
+  "premium_r2plus": {
+   "pair_auroc": [
+    0.9587,
+    0.9096,
+    0.9916
+   ],
+   "within_market_auroc": [
+    0.955,
+    0.885,
+    1.0
+   ],
+   "run_auroc": [
+    0.92,
+    0.8,
+    1.0
+   ],
+   "pair_id_acc": [
+    0.9,
+    0.75,
+    1.0
+   ]
+  },
   "fusion": {
    "pair_auroc": [
     0.8189,
@@ -231,6 +254,12 @@
    "pair_id_acc": 1000
   },
   "premium": {
+   "pair_auroc": 1000,
+   "within_market_auroc": 1000,
+   "run_auroc": 1000,
+   "pair_id_acc": 1000
+  },
+  "premium_r2plus": {
    "pair_auroc": 1000,
    "within_market_auroc": 1000,
    "run_auroc": 1000,
@@ -413,6 +442,27 @@
     0.6325
    ]
   },
+  "premium_r2plus-text:pair_auroc": {
+   "delta": 0.3945,
+   "ci": [
+    0.2884,
+    0.5058
+   ]
+  },
+  "premium_r2plus-text:within_market_auroc": {
+   "delta": 0.34,
+   "ci": [
+    0.25,
+    0.43
+   ]
+  },
+  "premium_r2plus-text:run_auroc": {
+   "delta": 0.345,
+   "ci": [
+    0.0449,
+    0.585
+   ]
+  },
   "premium-action:pair_auroc": {
    "delta": 0.1653,
    "ci": [
@@ -432,6 +482,27 @@
    "ci": [
     0.065,
     0.4276
+   ]
+  },
+  "premium_r2plus-action:pair_auroc": {
+   "delta": 0.1372,
+   "ci": [
+    0.0289,
+    0.2614
+   ]
+  },
+  "premium_r2plus-action:within_market_auroc": {
+   "delta": 0.11,
+   "ci": [
+    0.0149,
+    0.2001
+   ]
+  },
+  "premium_r2plus-action:run_auroc": {
+   "delta": 0.145,
+   "ci": [
+    -0.0151,
+    0.3326
    ]
   },
   "premium-combined:pair_auroc": {
@@ -455,6 +526,27 @@
     0.3526
    ]
   },
+  "premium_r2plus-combined:pair_auroc": {
+   "delta": 0.1556,
+   "ci": [
+    0.0526,
+    0.2722
+   ]
+  },
+  "premium_r2plus-combined:within_market_auroc": {
+   "delta": 0.105,
+   "ci": [
+    0.005,
+    0.21
+   ]
+  },
+  "premium_r2plus-combined:run_auroc": {
+   "delta": 0.0925,
+   "ci": [
+    -0.125,
+    0.2876
+   ]
+  },
   "premium-action_stats:pair_auroc": {
    "delta": 0.0784,
    "ci": [
@@ -474,6 +566,27 @@
    "ci": [
     0.01,
     0.25
+   ]
+  },
+  "premium_r2plus-action_stats:pair_auroc": {
+   "delta": 0.0503,
+   "ci": [
+    -0.0297,
+    0.1574
+   ]
+  },
+  "premium_r2plus-action_stats:within_market_auroc": {
+   "delta": 0.045,
+   "ci": [
+    -0.0301,
+    0.13
+   ]
+  },
+  "premium_r2plus-action_stats:run_auroc": {
+   "delta": 0.0325,
+   "ci": [
+    -0.1,
+    0.1626
    ]
   },
   "premium-structured:pair_auroc": {
@@ -497,6 +610,27 @@
     0.335
    ]
   },
+  "premium_r2plus-structured:pair_auroc": {
+   "delta": 0.0694,
+   "ci": [
+    -0.0139,
+    0.1694
+   ]
+  },
+  "premium_r2plus-structured:within_market_auroc": {
+   "delta": 0.05,
+   "ci": [
+    -0.025,
+    0.1251
+   ]
+  },
+  "premium_r2plus-structured:run_auroc": {
+   "delta": 0.0875,
+   "ci": [
+    -0.1001,
+    0.2851
+   ]
+  },
   "premium-fusion:pair_auroc": {
    "delta": 0.168,
    "ci": [
@@ -517,6 +651,27 @@
     0.05,
     0.345
    ]
+  },
+  "premium_r2plus-fusion:pair_auroc": {
+   "delta": 0.1398,
+   "ci": [
+    0.0323,
+    0.2568
+   ]
+  },
+  "premium_r2plus-fusion:within_market_auroc": {
+   "delta": 0.105,
+   "ci": [
+    0.01,
+    0.195
+   ]
+  },
+  "premium_r2plus-fusion:run_auroc": {
+   "delta": 0.095,
+   "ci": [
+    -0.07,
+    0.265
+   ]
   }
  },
  "hard_set": {
@@ -534,6 +689,7 @@
   "action_stats": 48.0,
   "structured": 27.0,
   "premium": 0.6666666666666661,
+  "premium_r2plus": 0.45454545454545325,
   "fusion": 35.8
  },
  "flag_rate_by_stratum": {
@@ -568,6 +724,11 @@
     0.0,
     0,
     0.278
+   ],
+   "premium_r2plus": [
+    0.2,
+    0.057,
+    0.51
    ],
    "fusion": [
     0.1,
@@ -607,6 +768,11 @@
     0,
     0.434
    ],
+   "premium_r2plus": [
+    0.4,
+    0.118,
+    0.769
+   ],
    "fusion": [
     0.2,
     0.036,
@@ -641,6 +807,11 @@
     0.624
    ],
    "premium": [
+    0.0,
+    0,
+    0.434
+   ],
+   "premium_r2plus": [
     0.0,
     0,
     0.434
@@ -683,6 +854,11 @@
     0,
     0.793
    ],
+   "premium_r2plus": [
+    0.0,
+    0,
+    0.793
+   ],
    "fusion": [
     0.0,
     0,
@@ -717,6 +893,11 @@
     0.699
    ],
    "premium": [
+    0.0,
+    0,
+    0.49
+   ],
+   "premium_r2plus": [
     0.0,
     0,
     0.49
@@ -758,6 +939,11 @@
     1.0,
     0.839,
     1
+   ],
+   "premium_r2plus": [
+    0.9,
+    0.699,
+    0.972
    ],
    "fusion": [
     0.7,
@@ -817,6 +1003,14 @@
     ],
     "pair_id_acc": 0.875
    },
+   "premium_r2plus": {
+    "flag_rate": [
+     0.75,
+     0.409,
+     0.929
+    ],
+    "pair_id_acc": 0.75
+   },
    "fusion": {
     "flag_rate": [
      0.625,
@@ -869,6 +1063,14 @@
     "pair_id_acc": 0.833
    },
    "premium": {
+    "flag_rate": [
+     1.0,
+     0.757,
+     1
+    ],
+    "pair_id_acc": 1.0
+   },
+   "premium_r2plus": {
     "flag_rate": [
      1.0,
      0.757,

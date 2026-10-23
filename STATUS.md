@@ -18,7 +18,12 @@
    (all 6 views), then `cross_family.py`.
 2. After all orig audits complete: `final_analysis.py --split test` ONCE, `evidence.py --split test`, `gallery.py --split test`, `make_figures.py --split test`,
    baselines LR on test; figures; REPORT headline; codex review of REPORT claims.
-3. Optional (if codex idle by 01:00): 15–20 firm-framing private runs as "channel, no agreement" stratum (separate).
+3. **Label≈condition is total (37/37 private runs y=1)** → the "channel, no agreement" stratum is now the most valuable
+   exploration. Right after llm_v3 generation ends, launch (separate ds, never pooled into headline):
+   `uv run python llm_market.py --ds llm_v3fp --plan private:16 --rounds 12 --framing firm --games-parallel 2 --seed 5000`
+   then `label_llm.py --ds llm_v3fp`, `auditors.py --ds llm_v3fp` (6 views) and score premium; report flag rates at
+   the dev thresholds (final_analysis thresholds) as a separate stratum.
+4. premium_r2plus (drop round 1) added to final_analysis as pre-registered robustness (dev: run .92, within .96).
 - Risks: audit throughput (~5 sol calls/min shared); dev base rate 2/3 → dev thresholds weak; label = communication.
 
 ## Log

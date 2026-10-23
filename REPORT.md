@@ -102,8 +102,16 @@ bootstraps:
 | action_stats (actions + pair stats, no text) | 0.89 [0.75, 0.99] | 0.91 [0.80, 0.98] | 0.91 [0.80, 0.98] | 0.85 / 0.10 (0.2) |
 | structured (combined + stats + stated-vs-actual) | 0.83 [0.67, 0.96] | 0.91 [0.80, 0.97] | 0.89 [0.78, 0.96] | 0.65 / 0.10 (0.0) |
 | **pair premium (untrained)** | **1.00 [1.00, 1.00]** | **0.98 [0.94, 1.00]** | **0.99 [0.96, 1.00]** | **1.00 / 0.00 (0.0)** |
+| pair premium, rounds 2–12 only (robustness) | 0.92 [0.80, 1.00] | 0.96 [0.89, 1.00] | 0.96 [0.91, 0.99] | – |
 
 (Thresholds are dev-fitted, so the flag rates on dev are optimistic; test will show honest FPR.)
+Why the premium is so strong: in many private runs the pair agrees in round 1 to open high ("let's both start at
+18") while the rivals open at ≈ 12; the pair is undercut and often abandons the agreement within 1–3 rounds
+(manual read of 3 dev chats: 0005, 0012, 0016). The opening-round gap alone carries much of the signal; without
+round 1 the premium still matches or beats every LLM view on dev, but no longer significantly
+(premium_r2plus − structured: run +0.09 [−0.10, +0.29]). The LLM auditors also see round 1.
+**Label ≈ condition:** all 37 `private` runs so far are labelled y = 1 (35 explicit, 2 info-exchange), so on this
+generator "agreement" and "had a channel" coincide; see Limitations.
 Paired contrasts (dev): Δ_hybrid[combined] run +0.05 [−0.12, +0.19], within +0.01 [−0.05, +0.05];
 combined − fusion ≈ 0 (run +0.00 [−0.12, +0.12]); action_stats − action: within +0.07 [+0.02, +0.11];
 premium − structured: run +0.17 [+0.05, +0.34], within +0.08 [−0.01, +0.19]; premium − action_stats: run +0.11
