@@ -1,0 +1,126 @@
+{
+ "dataset": "llm_v3",
+ "split": "dev",
+ "n_runs": 30,
+ "n_pos": 20,
+ "point_ci": {
+  "textsim": {
+   "pair_auroc": [
+    0.7788,
+    0.6612,
+    0.8728
+   ],
+   "within_market_auroc": [
+    0.85,
+    0.72,
+    0.94
+   ],
+   "run_auroc": [
+    0.45,
+    0.235,
+    0.7001
+   ],
+   "pair_id_acc": [
+    0.65,
+    0.4,
+    0.85
+   ]
+  },
+  "premium": {
+   "pair_auroc": [
+    0.9869,
+    0.9634,
+    1.0
+   ],
+   "within_market_auroc": [
+    0.98,
+    0.94,
+    1.0
+   ],
+   "run_auroc": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "pair_id_acc": [
+    0.95,
+    0.85,
+    1.0
+   ]
+  },
+  "text": {
+   "pair_auroc": [
+    0.5642,
+    0.4464,
+    0.6797
+   ],
+   "within_market_auroc": [
+    0.615,
+    0.505,
+    0.72
+   ],
+   "run_auroc": [
+    0.575,
+    0.3675,
+    0.7801
+   ],
+   "pair_id_acc": [
+    0.3083,
+    0.175,
+    0.45
+   ]
+  },
+  "structured": {
+   "pair_auroc": [
+    0.8894,
+    0.7815,
+    0.9602
+   ],
+   "within_market_auroc": [
+    0.905,
+    0.795,
+    0.97
+   ],
+   "run_auroc": [
+    0.8325,
+    0.665,
+    0.955
+   ],
+   "pair_id_acc": [
+    0.7,
+    0.5,
+    0.85
+   ]
+  }
+ },
+ "contrasts": {
+  "textsim-text:run_auroc": {
+   "delta": -0.125,
+   "ci": [
+    -0.47,
+    0.1851
+   ]
+  },
+  "textsim-text:within_market_auroc": {
+   "delta": 0.235,
+   "ci": [
+    0.12,
+    0.345
+   ]
+  },
+  "textsim-premium:run_auroc": {
+   "delta": -0.55,
+   "ci": [
+    -0.7901,
+    -0.3099
+   ]
+  },
+  "textsim-premium:within_market_auroc": {
+   "delta": -0.13,
+   "ci": [
+    -0.25,
+    -0.02
+   ]
+  }
+ }
+}

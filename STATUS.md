@@ -1,27 +1,27 @@
 # STATUS
 
-## Current state (2026-10-23 22:30 UTC, end of iteration 5)
-- **Generation** llm_v3 at 70/125 (ETA ~00:00); `pipeline.sh llm_v3` keeps audits in step (63 runs × 5 views; combined_stats backfilling).
-- **`after_gen.sh` running (logs/after_gen.log)**: when llm_v3 generation ends it auto-starts (a) llm_v3fp firm-framing
-  private:16 generation → `pipeline.sh llm_v3fp`; (b) Claude Sonnet mod3 subset (all 6 views); (c) after orig audits
-  finish: shuffle seeds 0,1,2 on TEST runs, views combined,structured (logs/shuffle.log). No manual launch needed.
-- Frozen `final_analysis.py` + new external block: sibling's info-theory per-pair scores. Dev: run AUROC pCMI .47,
-  MI .60, TE .59, Pearson .21 (colluders hold prices flat); premium−pCMI +.53 [+.28,+.78]; 14's pair_level == our premium.
-- Dev (n=30): premium run 1.00 / within .98 > action_stats .89/.91 > structured .83/.91 ≈ combined ≈ fusion > action .78 > text .58.
-- New: `cost.py` (cost table), `fp_stratum.py` (frozen dev thresholds applied to llm_v3fp; smoke-tested on dev),
-  `finalize_test.sh` (THE one test run: dev → test final_analysis, evidence, gallery, figures, cost).
+## Current state (2026-10-23 22:40 UTC, iteration 6)
+- **Generation** llm_v3 at 72/125 (ETA ~00:00); `pipeline.sh llm_v3` keeps audits in step (63 runs × 6 views).
+- **`after_gen.sh` running**: when generation ends → llm_v3fp (private:16 firm framing) + Claude Sonnet mod3 subset +
+  shuffle seeds 0,1,2 on TEST (combined,structured). No manual launch needed.
+- Dev (n=30): premium run 1.00 / within .98 > action_stats .89/.91 > structured .83/.91 ≈ combined ≈ fusion > action
+  .78 > text .58. External info-theory (pCMI .47, MI .60) weak: colluders coordinate on level.
+- NEW iter 6: `textsim.py` untrained public-text convergence: dev within-market .85 vs LLM text .61 (Δ +.24 [+.12,+.35])
+  but run AUROC .45 → public text carries a LOCALISATION signal the zero-shot LLM misses. Trained LR (dev split):
+  text pair-ID .90, action run .96. Both pre-registered in `finalize_test.sh`; `report_tables.py` renders all REPORT
+  tables from json (`results/analysis/report_tables_{dev,test}.md`).
+- codex review of iter-6 code running → `logs/review_iter6.md` (apply fixes BEFORE finalize_test.sh).
 ## Next steps
-1. When all 125 runs × 6 views are audited (check `wc -l results/llm_auditor/llm_v3/gpt-6.1-sol/*_orig.jsonl` = 125):
-   `./finalize_test.sh` ONCE. Then write test headline into REPORT (replace dev table; keep dev as appendix), codex REPORT review.
-2. After shuffle seeds: `uv run python shuffle_analysis.py --views combined,structured`. After Claude: `cross_family.py`.
-   After llm_v3fp: `fp_stratum.py --ds llm_v3fp` (needs final dev json from step 1 for combined_stats threshold).
-3. codex critique `logs/review_fp.md` applied (22:31). REPORT must frame llm_v3fp as an EXPLORATORY transfer check
-   (framing shift changes wording/refusals/premiums; does not resolve label=condition within llm_v3); disclose class
-   counts, premiums, thresholds. If all 16 fp runs come out y=0 or all y=1, agreement discrimination is untested — say so.
-4. Optional: baselines LR on llm_v3 test (recompute; the interim all-run numbers predate the split rule).
-- Risks: ~7 concurrent LLM calls after 00:00 (slightly over the ≤6 guide); sol throughput ~5/min → shuffle done ~02:00.
+1. Apply `logs/review_iter6.md` fixes (dev-only checks).
+2. When 125×6 audits done (`wc -l results/llm_auditor/llm_v3/gpt-6.1-sol/*_orig.jsonl`): `./finalize_test.sh` ONCE;
+   paste `results/analysis/report_tables_test.md` into REPORT (test = headline; dev → appendix); rewrite abstract.
+3. Then shuffle_analysis / cross_family / fp_stratum as inputs complete; rerun `report_tables.py --split test`.
+4. codex + Opus review of final REPORT claims.
+- Risks: ~7 concurrent LLM calls after 00:00; sol ~5/min → shuffle done ~02:00.
 
 ## Log
+- 22:40 iter 6: baselines.py --split (dev run), textsim.py (new untrained scorer, dev), report_tables.py,
+  finalize_test.sh extended + STARTED stamp; SPLITS pre-registration; REPORT dev baseline/textsim paragraphs.
 - 22:31 iter 5: codex review of new code → safeguard fixes (exact id set, run-once stamp, pipefail, fp asserts);
   after_gen.sh restarted (waits on 125×6 audit completeness, not pipeline.sh, whose pgrep also matches llm_v3fp).
 - 22:30 iter 5: external info-theory comparator block (dev), cost.py, fp_stratum.py, finalize_test.sh, after_gen.sh

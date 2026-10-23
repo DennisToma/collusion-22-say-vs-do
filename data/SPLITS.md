@@ -29,3 +29,8 @@
 
 ## scripted_v1 / scripted_v2 (mechanism demo only)
 5-fold CV grouped by run_id (GroupKFold); no tuning beyond the learner choice (LR primary, GBM secondary).
+- Iter 6 (22:35): pre-registered before any test look — (a) `baselines.py --split test` (LR, 5-fold grouped CV inside
+  test only; dev version run for development); (b) NEW untrained scorer `textsim.py` (public-text lexical convergence
+  of each pair; TF-IDF fit on all public messages WITHOUT labels; nothing tuned; motivated by dev-only LR n-gram
+  inspection); (c) `report_tables.py` renders REPORT tables from the json. All added to `finalize_test.sh`, which now
+  writes a STARTED stamp before the test step (a failed-and-rerun test analysis must be disclosed here).

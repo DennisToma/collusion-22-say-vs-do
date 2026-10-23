@@ -153,14 +153,22 @@ rate is 2/3, so this saving will look larger on test).
 partnership notice. Fixed 22:10 (auditors.py regenerates `public_info`; legit audits invalidated and re-run;
 cached audits are now checked against the current prompt hash/length and re-run if stale).*
 
-Supervised non-LLM baselines (`baselines.py --ds llm_v3 --learner lr`, 5-fold grouped CV, same 36 runs):
-pair AUROC text 0.82 [0.77, 0.88], action 0.99 [0.97, 1.00], combined 0.99, structured 0.99; Δ ≈ 0 (ceiling).
-A simple *trained* classifier on price statistics far outperforms the zero-shot LLM reading raw price tables
-(not a like-for-like comparison: the LR sees in-distribution labels; these all-run interim numbers predate the
-dev/test rule and will be recomputed on test). The text LR beats chance while the LLM
-text auditor does not; its top-weighted n-grams show why: negatives are partly the `legit` pairs announcing
-their "shipping partnership", positives use margin-flavoured wording ("sustainable price", "considered price",
-"margins", "balances") — a weak stylistic tell of the private agreement that a zero-shot auditor does not exploit.
+**Supervised non-LLM baselines (dev; `baselines.py --ds llm_v3 --split dev`, LR, 5-fold CV grouped by run inside
+dev, n = 30).** Run AUROC text 0.79 [0.60, 0.92], action 0.96 [0.85, 1.00], combined 0.96, structured 0.95;
+pair-ID accuracy text 0.90, action 0.95. Hybrid Δ ≈ 0 (ceiling). A *trained* classifier on price features far
+outperforms the zero-shot LLM reading the same prices (not like-for-like: the LR sees in-distribution labels). The
+text LR beats the LLM text auditor by a wide margin (pair-ID 0.90 vs 0.31). Its top-weighted n-grams show why:
+positives share margin-flavoured phrasing ("considered price", "balances customer value", "sustainable"); negatives
+include the `legit` pairs' "shipping partnership" notices.
+
+**Untrained public-text convergence (new, iter 6, dev; `textsim.py`).** If the private agreement leaks into the
+pair's public wording, the two colluders' public messages should resemble each other more than other pairs'. Score
+= TF-IDF cosine of the pair's public messages − mean cosine of the other pairs (vectorizer fit without labels;
+nothing tuned). Dev: within-market AUROC **0.85 [0.72, 0.94]** vs the zero-shot LLM text auditor 0.61
+(Δ +0.24 [+0.12, +0.35]); pair-ID 0.65. It does **not** detect which markets have collusion (run AUROC 0.45
+[0.23, 0.70]): every market has some most-similar pair. So the public text *does* carry a localisation signal
+(lexical alignment between partners), and the zero-shot LLM auditor does not use it. Pre-registered for the single
+test run (added to `finalize_test.sh` before any test look).
 
 ## Validity safeguards
 Labels from private chat only (judge blind to prices); same auditor model across views, fallback calls dropped;
@@ -199,7 +207,10 @@ uv run python hardset.py --ds llm_v3
 uv run python final_analysis.py --split test   # headline (frozen; dev for development)
 uv run python evidence.py --split test         # evidence accuracy + prompt cost
 uv run python auditors.py --ds llm_v3 --variant shuffle --shuffle-seed 0 --views text,combined,structured   # seeds 0,1,2
-uv run python baselines.py --ds llm_v3 --learner lr
+uv run python baselines.py --ds llm_v3 --learner lr --split test   # CV inside the split
+uv run python textsim.py --split test           # untrained public-text convergence
+uv run python report_tables.py --split test     # renders all REPORT tables from results/*.json
+./finalize_test.sh                              # the ONE locked test run (all of the above for test)
 uv run python auditors.py --ds llm_v3 --auditor claude-sonnet-5-5 --subset mod3   # cross-family subset
 uv run python sim.py --dataset scripted_v2 --n-per-cond 40 --rounds 30 --seed 1 --levels 12,14 --strength 0.15,0.5
 uv run python baselines.py --ds scripted_v2 --learner lr

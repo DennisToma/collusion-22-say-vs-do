@@ -169,6 +169,8 @@ def main():
     ap.add_argument("--ds", default="scripted_v1")
     ap.add_argument("--boot", type=int, default=1000)
     ap.add_argument("--learner", default="lr", choices=["lr", "gbm"])
+    ap.add_argument("--split", default="all", choices=["all", "dev", "test"],
+                    help="LLM data (data/SPLITS.md): restrict to dev (run index < 30) or test runs; CV runs inside the split")
     a = ap.parse_args()
     global LEARNER
     LEARNER = a.learner
@@ -177,6 +179,8 @@ def main():
     if (d / "labels.jsonl").exists():  # LLM data: keep labelled runs, primary label = verified agreement
         labs = load_gt(d / "labels.jsonl")
         runs = {r: v for r, v in runs.items() if r in labs}
+        if a.split != "all":
+            runs = {r: v for r, v in runs.items() if (int(r.rsplit("_", 1)[1]) < 30) == (a.split == "dev")}
         gt = {r: dict(gt[r], y=int(labs[r]["agreement"] in ("explicit", "info_exchange"))) for r in runs}
         pf = d / "public_explicit.jsonl"  # hardset.py flags (keyword OR cheap-LLM check)
         if pf.exists():
@@ -195,7 +199,7 @@ def main():
     kinds = ["text", "action", "combined", "structured", "all"]
     scores = {k: cv_scores(recs, k) for k in kinds}
     shuf = {k: cv_scores(recs, k, test_recs=srecs) for k in kinds}
-    res = {"dataset": a.ds, "n_runs": len(runs)}
+    res = {"dataset": a.ds, "split": a.split, "n_runs": len(runs)}
     all_ids = sorted(runs)
     hard_ids = [r for r in all_ids if gt[r]["condition"] != "collusive_explicit" and not gt[r].get("public_explicit")]
     res["all"] = evaluate(recs, gt, scores, all_ids, a.boot)
@@ -217,7 +221,7 @@ def main():
     out.mkdir(parents=True, exist_ok=True)
     res["learner"] = a.learner
     res["shuffle_donor_fallbacks"] = len(SHUFFLE_FALLBACKS)
-    (out / f"{a.ds}_{a.learner}.json").write_text(json.dumps(res, indent=1))
+    (out / (f"{a.ds}_{a.learner}" + ("" if a.split == "all" else f"_{a.split}") + ".json")).write_text(json.dumps(res, indent=1))
     for part in ("all", "hard", "hard_shuffled"):
         print(f"== {part}")
         for k in kinds:
