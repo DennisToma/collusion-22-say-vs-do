@@ -18,7 +18,7 @@
 
 ## Next steps (priority)
 1. When ≥60 runs labelled: `analyze_llm.py`; run shuffle variant (`auditors.py --variant shuffle --views text,combined,structured`).
-2. Length control: pad text/action views to combined length (neutral filler) — add `--pad` variant.
+2. Length control: run `auditors.py --variant pad --views text,action` (implemented, not yet run).
 3. Cross-family: Claude auditor (`--auditor claude-sonnet-5-5`, use `--disallowedTools`/run in /var/tmp; isolate tools)
    on stratified ~40 runs × 4 views.
 4. Non-LLM baselines on llm_v3 (`baselines.py --ds llm_v3`; features.py claim parser is template-specific → only
