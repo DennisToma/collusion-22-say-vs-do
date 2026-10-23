@@ -177,8 +177,18 @@ fusion weight and the FPR thresholds on dev, so the headline is test-only, compu
 iteration-3 analyses (n = 36–40) included test runs 0030–0039; nothing was tuned on them.
 
 ## Limitations (so far)
-Single seller model family (GPT) and single framing for headline data; 12 rounds; agreement labels from one
-LLM judge (spot-checked manually on pilots only).
+- **Label ≈ condition.** On llm_v3 every `private` run so far is judged y = 1, so detecting "agreement" and detecting
+  "a channel was granted" coincide; the endpoint is coordination *communication*, not realised overcharge. A separate
+  firm-framing stratum (`llm_v3fp`, `fp_stratum.py`, frozen dev thresholds) is an exploratory transfer check of
+  "channel used vs. unused" — it changes framing, wording, refusals and price levels at the same time, so it cannot
+  resolve the confound within llm_v3.
+- **Generator-specific premium.** Much of the premium's strength comes from round-1 joint high openings that are
+  quickly undercut; a colluder that opens at the market price would weaken it (rounds 2–12 robustness: 0.92 on dev).
+- Single seller model family (GPT, gpt-6-luna), single framing for the headline data, 12 rounds, 4 firms.
+- Agreement labels from one LLM judge (gpt-6.1-sol, same family as the auditor; blind to prices); manually
+  spot-checked on 3 dev chats + pilots.
+- Zero-shot auditors with one prompt (0 tuning attempts); a tuned or few-shot auditor might use the stats table better.
+- Small dev split (30 runs, base rate 2/3) → dev-fitted thresholds and fusion weight are noisy.
 
 ## Reproduce
 ```
