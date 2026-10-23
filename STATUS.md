@@ -1,27 +1,25 @@
 # STATUS
 
-## Current state (2026-10-23 23:00 UTC, end of iteration 6)
-- **Generation** llm_v3 at 82/125 (ETA ~23:30); `pipeline.sh llm_v3` keeps audits in step (63 runs × 6 views).
-- **`after_gen.sh` running**: when generation ends → llm_v3fp (private:16 firm framing) + Claude Sonnet mod3 subset +
-  shuffle seeds 0,1,2 on TEST (combined,structured). No manual launch needed.
+## Current state (2026-10-23 23:10 UTC, iteration 7)
+- **Generation** llm_v3 ~95/125 (ETA ~23:35); `pipeline.sh` audits in step; `after_gen.sh` then launches llm_v3fp,
+  Claude mod3 subset, shuffle seeds 0–2 on TEST (combined,structured; ETA ~02:00). `hardset.py` on all runs running.
 - Dev (n=30): premium run 1.00 / within .98 > action_stats .89/.91 > structured .83/.91 ≈ combined ≈ fusion > action
-  .78 > text .58. External info-theory (pCMI .47, MI .60) weak: colluders coordinate on level.
-- NEW iter 6: `textsim.py` untrained public-text convergence: dev within-market .85 vs LLM text .61 (Δ +.24 [+.12,+.35])
-  but run AUROC .45 → public text carries a LOCALISATION signal the zero-shot LLM misses. Trained LR (dev split):
-  text pair-ID .90, action run .96. Both pre-registered in `finalize_test.sh`; `report_tables.py` renders all REPORT
-  tables from json (`results/analysis/report_tables_{dev,test}.md`).
-- codex review `logs/review_iter6.md` APPLIED (textsim vectorizer now dev-only: within .81, Δ vs LLM text +.20
-  [+.07,+.31]; finalize = preflight `--check-only` + dev steps → atomic lock → test). Cascade (premium→LLM) added:
-  dev best action_stats .85 recall / .10 FPR — LLM adds explanation, not detection.
+  .78 > text .58. textsim (public-text convergence) within .81 vs LLM text .61. Cascade: LLM = explanation not detection.
+- NEW iter 7: `incremental.py` (untrained rank-average premium+view): no view adds over premium on dev (Δ ≤ 0; dev at
+  ceiling) — pre-registered for test. Opus pre-test review: no headline-distorting bug; fixes applied
+  (finalize: only headline step run-once, others retryable; label validity + full hard-set asserts; ext guard).
 ## Next steps
-1. (done) review fixes. Generation 82/125 at 22:47 → ETA ~23:30; audits ~00:00.
-2. When 125×6 audits done (`wc -l results/llm_auditor/llm_v3/gpt-6.1-sol/*_orig.jsonl`): `./finalize_test.sh` ONCE;
-   paste `results/analysis/report_tables_test.md` into REPORT (test = headline; dev → appendix); rewrite abstract.
-3. Then shuffle_analysis / cross_family / fp_stratum as inputs complete; rerun `report_tables.py --split test`.
-4. codex + Opus review of final REPORT claims.
-- Risks: ~7 concurrent LLM calls after 00:00; sol ~5/min → shuffle done ~02:00.
+1. When 125×6 audits done (`wc -l results/llm_auditor/llm_v3/gpt-6.1-sol/*_orig.jsonl` all 125): `./finalize_test.sh`
+   ONCE (if a later step fails: fix, rerun the script — it skips the headline step). Check logs/final/FAILED_STEPS.txt.
+2. Replace REPORT dev tables with `results/analysis/report_tables_test.md` (test = headline; dev → appendix);
+   rewrite abstract around: premium ≫ zero-shot LLM; text adds nothing to LLM; stats table helps; LLM = explanation.
+3. After inputs: shuffle_analysis.py --views combined,structured; cross_family.py; fp_stratum.py --ds llm_v3fp;
+   rerun report_tables --split test; figures. 4. codex + Opus review of final REPORT claims.
+- Risks: codex review_iter7 pending (logs/review_iter7.md) — apply before finalize; LLM concurrency ~7 after 00:00.
 
 ## Log
+- 23:25 iter 7: incremental.py (pre-registered); Opus pre-test review applied (logs in EXPERIMENTS E28); hardset.py
+  on all runs started; codex review of iter-7 diff running → logs/review_iter7.md.
 - 23:00 iter 6: applied codex review_iter6 (P1: textsim dev-only fit, figure CI crash, finalize preflight/lock;
   P2: report_tables labels, FP rendering, None CIs); cascade metrics in final_analysis triage (dev).
 - 22:40 iter 6: baselines.py --split (dev run), textsim.py (new untrained scorer, dev), report_tables.py,
