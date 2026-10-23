@@ -74,7 +74,7 @@ architecture takeaway (cheap stats always-on → trigger LLM audit).
    Report bootstrap CIs and a paired test for Δ_hybrid (same runs, all auditors).
 4. **Cross-family auditor check.** Sellers are GPT-family, the main auditor is gpt-6.1-sol → same-family
    bias risk. Re-run all 4 auditor configs on a stratified subset (~40 runs) with a Claude auditor
-   (`claude -p --model claude-sonnet-5-5`, cached; keep this the only claude -p use) and report agreement.
+   (`llm.chat(..., backend="claude", model="claude-opus-5-5")`, cached; Sonnet if Claude quota is tight) and report agreement.
 5. **Operational definition.** Explicit collusion = coordinated supra-competitive behaviour enabled by
    a verified private agreement. Tacit coordination and cheap talk are separate labels; report
    auditor behaviour on each instead of forcing binary labels.
