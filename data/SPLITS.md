@@ -11,6 +11,8 @@
   things on dev (late-fusion weight; Youden run-score thresholds for FPR), so **headline = test split only**
   (llm_v3_0030 … 0124), computed ONCE with `uv run python final_analysis.py --split test` after generation and
   audits finish. Dev results are labelled dev.
+- Disclosure 2: at 22:20 a smoke test of `shuffle_analysis.py` (fake shuffle = copy of intact audits) printed intact
+  Δ_hybrid on 24 test runs (0030–0057). Analysis code was already frozen; nothing was changed in response.
 - Disclosure: iteration-3 interim analyses (n = 36–40, all runs) included test runs 0030–0039 before this rule;
   nothing was tuned on them (auditor prompt unchanged; analysis code frozen before the full test set exists).
 - Analysis config frozen: `final_analysis.py` + `evidence.py` as of the iteration-4 commit after the codex review
