@@ -51,11 +51,11 @@
   STARTED from HEADLINE_DONE (a resumed finalize requires HEADLINE_DONE + a valid 95-run test json, else stop and
   disclose); headline json written atomically; stricter sibling schema check; incremental.py uses exact midrank sums
   recomputed inside every bootstrap resample (dev point estimates unchanged). Dev only.
-- Disclosure 3 (iter 8, 23:20): the **pair-premium scorer** was not designed blind. The research director proposed it
+- Disclosure 3 (iter 8, 23:11): the **pair-premium scorer** was not designed blind. The research director proposed it
   (DIRECTION.md, 22:00) after looking at per-condition pair-premium summaries on the partial data at that time (≈ runs
   0000–0060, i.e. including ~30 test runs). Its definition was fixed before the locked test analysis and is untrained
   (one line, no parameters), but its *selection* as the headline comparator used test-split exposure. REPORT says so.
   Robustness variant `premium_r2plus` was added for the same reason.
-- Iter 8 (23:25): exploration stratum `data/llm_v3mon` (lab framing + publicly known price monitor that halves flagged
+- Iter 8 (23:11): exploration stratum `data/llm_v3mon` (lab framing + publicly known price monitor that halves flagged
   pairs' earnings; private:14, none:6, seed 7000), analysed by `monitor_stratum.py` (written before any llm_v3mon data
   existed; frozen llm_v3 dev thresholds; comparator = llm_v3 dev only). Never pooled into the headline.

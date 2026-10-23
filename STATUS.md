@@ -1,6 +1,6 @@
 # STATUS
 
-## Current state (2026-10-23 23:35 UTC, iteration 8)
+## Current state (2026-10-23 23:13 UTC, iteration 8)
 - **Generation** llm_v3 ~100/125 (ETA ~23:55); `pipeline.sh` audits in step; `after_gen.sh` then launches llm_v3fp,
   Claude mod3 subset, shuffle seeds 0–2 on TEST (combined,structured). NEW `mon_chain.sh`: after v3fp gen, generates
   llm_v3mon (monitored-price exploration stratum, private:14 none:6; cutoff 03:30) → pipeline → `monitor_stratum.py`.
@@ -18,7 +18,7 @@
 - Risks: LLM concurrency ~7 after 00:00; finalize needs hardset to cover every run (preflight reruns it).
 
 ## Log
-- 23:35 iter 8: premium-selection disclosure (E30); llm_v3mon monitored stratum code + chain launched (E31).
+- 23:13 iter 8: premium-selection disclosure (E30); llm_v3mon monitored stratum code + chain launched (E31).
 - 23:25 iter 7: incremental.py (pre-registered); Opus pre-test review applied (logs in EXPERIMENTS E28); hardset.py
   on all runs started; codex review of iter-7 diff applied (E29).
 - 23:00 iter 6: applied codex review_iter6 (P1: textsim dev-only fit, figure CI crash, finalize preflight/lock;
