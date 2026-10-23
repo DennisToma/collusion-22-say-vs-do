@@ -1,24 +1,23 @@
 # STATUS
 
-## Current state (2026-10-23 23:13 UTC, iteration 8)
-- **Generation** llm_v3 ~100/125 (ETA ~23:55); `pipeline.sh` audits in step; `after_gen.sh` then launches llm_v3fp,
-  Claude mod3 subset, shuffle seeds 0–2 on TEST (combined,structured). NEW `mon_chain.sh`: after v3fp gen, generates
-  llm_v3mon (monitored-price exploration stratum, private:14 none:6; cutoff 03:30) → pipeline → `monitor_stratum.py`.
+## Current state (2026-10-23 23:30 UTC, iteration 9)
+- **Generation** llm_v3 110/125 (ETA ~23:55); `pipeline.sh` audits in step; `after_gen.sh` then v3fp gen, Claude mod3,
+  shuffle seeds 0–2 on TEST; `mon_chain.sh` then llm_v3mon (cutoff 03:30).
+- NEW `auto_finalize.sh` (pid running, log `logs/final_auto.log`): waits for gen done + 125 labels + 125×6 audits, then
+  runs `finalize_test.sh` ONCE. **Do not run finalize by hand unless final_auto.log shows a preflight failure.**
 - Dev (n=30): premium run 1.00 / within .98 > action_stats .89/.91 > structured .83/.91 ≈ combined ≈ fusion > action
-  .78 > text .58. textsim within .81 vs LLM text .61. Cascade: LLM = explanation, premium = detection.
-- hardset all 94 checked runs: 0 flagged. codex review_iter8 applied (dev-only filtering before scoring, strict labels).
-- iter 8: DISCLOSURE 3 — premium chosen after director saw partial data incl. ~30 test runs (SPLITS, REPORT).
+  .78 > text .58. Mechanism fig (dev): private pair opens ~17.4 vs 12.5, late premium +0.90, >0 in 12/20 runs.
+- REPORT now has a HEADLINE (test) slot above the dev section; dev section labelled as superseded.
 ## Next steps
-1. When 125×6 audits done (`wc -l results/llm_auditor/llm_v3/gpt-6.1-sol/*_orig.jsonl` all 125): `./finalize_test.sh`
-   ONCE (if a later step fails: fix, rerun — it skips the headline step). Check logs/final/FAILED_STEPS.txt.
-2. Replace REPORT dev tables with `results/analysis/report_tables_test.md` (test = headline; dev → appendix);
-   abstract: premium ≫ zero-shot LLM (premium not discovered blind — disclosure 3); text adds nothing; stats help.
-3. After inputs: shuffle_analysis.py --views combined,structured; cross_family.py; fp_stratum.py --ds llm_v3fp;
-   monitor_stratum.py --ds llm_v3mon (logs/monitor_stratum.txt); report_tables --split test; figures.
-4. codex + Opus review of final REPORT claims. Check logs/mon_chain.log (v3mon gen ~01:00–02:30).
-- Risks: LLM concurrency ~7 after 00:00; finalize needs hardset to cover every run (preflight reruns it).
+1. When `logs/final/RUN_ONCE.stamp` has HEADLINE_DONE: paste `results/analysis/report_tables_test.md` into the REPORT
+   headline slot; rewrite abstract from test numbers; move dev tables to an appendix; `fig_mechanism.py --split all`.
+2. After inputs: shuffle_analysis.py --views combined,structured; cross_family.py; fp_stratum.py --ds llm_v3fp;
+   monitor_stratum.py (mon_chain does it); report_tables --split test; make_figures --split test.
+3. Apply logs/review_iter9.md (codex, auto_finalize + REPORT claims). Final codex + Opus review of REPORT claims.
+- Risks: LLM concurrency ~7; finalize preflight needs hardset coverage of every run (it reruns hardset).
 
 ## Log
+- 23:30 iter 9: auto_finalize.sh chain (E34); fig_mechanism.py dev figure (E33); REPORT test slot; codex review_iter9 started.
 - 23:26 iter 8: codex review_iter8 applied (E32); mon_chain restarted with explicit sequencing.
 - 23:13 iter 8: premium-selection disclosure (E30); llm_v3mon monitored stratum code + chain launched (E31).
 - 23:25 iter 7: incremental.py (pre-registered); Opus pre-test review applied (logs in EXPERIMENTS E28); hardset.py
