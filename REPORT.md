@@ -109,6 +109,8 @@ combined − fusion ≈ 0 (run +0.00 [−0.12, +0.12]); action_stats − action:
 premium − structured: run +0.17 [+0.05, +0.34], within +0.08 [−0.01, +0.19]; premium − action_stats: run +0.11
 [+0.01, +0.25].
 
+![dev AUROC](figures/auroc_dev.png)
+
 **Emerging answer (dev, to be confirmed on test):** giving an LLM auditor the public text on top of actions does
 not help localise colluders (combined ≈ action; joint reading ≈ simple late fusion of the two unimodal auditors),
 because the sellers keep coordination private and their public messages are bland. What helps is a *computed

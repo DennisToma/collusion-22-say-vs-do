@@ -16,7 +16,7 @@
    (text only needed for seed 0 — use `--views combined,structured` for seeds 1,2). Then add intact−shuffled paired
    contrast script (reuse orig action scores). Claude subset re-run: `auditors.py --auditor claude-sonnet-5-5 --subset mod3`
    (all 6 views), then `cross_family.py`.
-2. After all orig audits complete: `final_analysis.py --split test` ONCE, `evidence.py --split test`, `gallery.py --split test`,
+2. After all orig audits complete: `final_analysis.py --split test` ONCE, `evidence.py --split test`, `gallery.py --split test`, `make_figures.py --split test`,
    baselines LR on test; figures; REPORT headline; codex review of REPORT claims.
 3. Optional (if codex idle by 01:00): 15–20 firm-framing private runs as "channel, no agreement" stratum (separate).
 - Risks: audit throughput (~5 sol calls/min shared); dev base rate 2/3 → dev thresholds weak; label = communication.
