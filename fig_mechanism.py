@@ -8,15 +8,22 @@ import numpy as np, matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot 
 ap = argparse.ArgumentParser(); ap.add_argument("--ds", default="llm_v3"); ap.add_argument("--split", default="dev",
                                                                                          choices=["dev", "test", "all"])
 a = ap.parse_args()
+if a.split != "dev":  # condition-linked price summaries of test runs = a test look: only after the locked headline
+    import pathlib; st = pathlib.Path("logs/final/RUN_ONCE.stamp")
+    assert st.exists() and "HEADLINE_DONE" in st.read_text(), "--split test/all only after finalize_test.sh HEADLINE_DONE"
 def in_split(rid):
     i = int(rid.rsplit("_", 1)[1]); return a.split == "all" or (a.split == "dev") == (i < 30)
 gt = {r["run_id"]: r for r in map(json.loads, open(f"data/{a.ds}/ground_truth.jsonl")) if in_split(r["run_id"])}
 series = collections.defaultdict(list)   # cond -> list of (pair[T], others[T])
 by_run = collections.defaultdict(dict)
 for r in map(json.loads, open(f"data/{a.ds}/trajectories.jsonl")):
-    if r["run_id"] in gt: by_run[r["run_id"]][r["round"]] = {x["id"]: x["price"] for x in r["agents"]}
+    if r["run_id"] in gt:
+        assert r["round"] not in by_run[r["run_id"]], f"duplicate round {r['run_id']} {r['round']}"
+        by_run[r["run_id"]][r["round"]] = {x["id"]: x["price"] for x in r["agents"]}
+assert set(by_run) == set(gt), "trajectories missing for some runs"
 for rid, rounds in by_run.items():
     g = gt[rid]; pair = set(g["assigned_pair"]); T = sorted(rounds)
+    assert T == list(range(g["rounds"])), f"{rid}: rounds {T}"
     p = [np.mean([rounds[t][f] for f in pair]) for t in T]; o = [np.mean([v for f, v in rounds[t].items() if f not in pair]) for t in T]
     series[g["condition"]].append((p, o))
 conds = [c for c in ["private", "none", "legit"] if c in series]
@@ -32,7 +39,7 @@ np.atleast_1d(axs)[0].set_ylabel("mean price (±95% CI)"); np.atleast_1d(axs)[0]
 fig.text(.01, -.06, "dotted: static Nash ≈ 11; dashed: joint monopoly ≈ 19 (cost 6, normal demand)", fontsize=8)
 fig.suptitle(f"{a.ds} {a.split.upper()} split: assigned pair vs rivals", fontsize=10, y=1.03)
 out = f"figures/mechanism_{a.split}.png"; fig.savefig(out, dpi=160, bbox_inches="tight"); print("wrote", out)
-# descriptive numbers quoted in REPORT: late-window (rounds 9-12, round index >= 8) pair-minus-rivals premium per run
+# descriptive numbers quoted in REPORT: late-window (rounds 9-12 = round ids 8..11; every run has ids 0..11, asserted)
 for c in conds:
-    v = np.array([np.mean(np.array(p[8:]) - np.array(o[8:])) for p, o in series[c]])
+    v = np.array([np.mean(np.array(p[8:12]) - np.array(o[8:12])) for p, o in series[c]])
     print(f"{c}: n={len(v)} late(r9-12) premium mean {v.mean():+.2f}, fraction of runs > 0: {(v > 0).mean():.2f}")

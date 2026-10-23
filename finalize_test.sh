@@ -13,6 +13,7 @@ if [ ! -e logs/final/RUN_ONCE.stamp ]; then
   set -e
   # --- preflight (no test metrics) ---
   uv run python hardset.py --ds llm_v3 | tail -3
+  uv run python auditors.py --ds llm_v3 --verify | tee logs/final/verify_preflight.txt   # current-hash, 1 audit/run/view
   uv run python final_analysis.py --split test --check-only | tee logs/final/preflight.txt
   uv run python final_analysis.py --split dev  | tee logs/final/final_dev.txt
   uv run python baselines.py --ds llm_v3 --split dev  | tee logs/final/baselines_dev.txt

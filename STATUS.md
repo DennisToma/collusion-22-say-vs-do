@@ -3,7 +3,7 @@
 ## Current state (2026-10-23 23:30 UTC, iteration 9)
 - **Generation** llm_v3 110/125 (ETA ~23:55); `pipeline.sh` audits in step; `after_gen.sh` then v3fp gen, Claude mod3,
   shuffle seeds 0–2 on TEST; `mon_chain.sh` then llm_v3mon (cutoff 03:30).
-- NEW `auto_finalize.sh` (pid running, log `logs/final_auto.log`): waits for gen done + 125 labels + 125×6 audits, then
+- NEW `auto_finalize.sh` (log `logs/final_auto.log`): waits for gen done + 125 labels + `auditors.py --verify` OK, then
   runs `finalize_test.sh` ONCE. **Do not run finalize by hand unless final_auto.log shows a preflight failure.**
 - Dev (n=30): premium run 1.00 / within .98 > action_stats .89/.91 > structured .83/.91 ≈ combined ≈ fusion > action
   .78 > text .58. Mechanism fig (dev): private pair opens ~17.4 vs 12.5, late premium +0.90, >0 in 12/20 runs.
@@ -13,10 +13,13 @@
    headline slot; rewrite abstract from test numbers; move dev tables to an appendix; `fig_mechanism.py --split all`.
 2. After inputs: shuffle_analysis.py --views combined,structured; cross_family.py; fp_stratum.py --ds llm_v3fp;
    monitor_stratum.py (mon_chain does it); report_tables --split test; make_figures --split test.
-3. Apply logs/review_iter9.md (codex, auto_finalize + REPORT claims). Final codex + Opus review of REPORT claims.
+3. Remaining P2s of logs/review_iter9.md. Final codex + Opus review of REPORT claims.
 - Risks: LLM concurrency ~7; finalize preflight needs hardset coverage of every run (it reruns hardset).
 
 ## Log
+- 23:46 iter 9: codex review_iter9 applied (E35): auditors.py --verify gate in auto_finalize + finalize preflight;
+  REPORT dev table now generated values, softened claims, full disclosure. Open P2s in logs/review_iter9.md (evidence
+  scope, n-gram coefficient artifact, cascade 'explanation role' wording).
 - 23:30 iter 9: auto_finalize.sh chain (E34); fig_mechanism.py dev figure (E33); REPORT test slot; codex review_iter9 started.
 - 23:26 iter 8: codex review_iter8 applied (E32); mon_chain restarted with explicit sequencing.
 - 23:13 iter 8: premium-selection disclosure (E30); llm_v3mon monitored stratum code + chain launched (E31).

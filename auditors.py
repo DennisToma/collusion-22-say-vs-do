@@ -213,6 +213,8 @@ def main():
     ap.add_argument("--workers", type=int, default=2)
     ap.add_argument("--auditor", default="gpt-6.1-sol")
     ap.add_argument("--subset", default="", help="'mod3': only runs with index %% 3 == 0 (cross-family subset, ~42/125)")
+    ap.add_argument("--verify", action="store_true", help="read-only: exit 1 unless every labelled run has exactly one "
+                    "audit per view whose prompt matches the current prompt (no calls, no writes)")
     a = ap.parse_args()
     runs = load_runs(a.ds)
     labf = Path("data") / a.ds / "labels.jsonl"
@@ -242,7 +244,7 @@ def main():
     outdir = Path("results") / "llm_auditor" / a.ds / a.auditor
     outdir.mkdir(parents=True, exist_ok=True)
     lock = threading.Lock()
-    jobs = []
+    jobs, verify_bad = [], False
     for v in a.views.split(","):
         f = outdir / f"{v}_{variant}.jsonl"
         rows = [json.loads(l) for l in open(f)] if f.exists() else []
@@ -251,6 +253,13 @@ def main():
         cur = {r: prompt_for(runs[r], v, pinfo.get(r), a.variant) for r in {x["run_id"] for x in rows} if r in runs}
         ok = [x for x in rows if x["run_id"] in cur and (x.get("prompt_sha") == sha(cur[x["run_id"]]) if "prompt_sha" in x
                                                         else x.get("chars") == len(cur[x["run_id"]]))]
+        if a.verify:
+            okids = [x["run_id"] for x in ok]
+            miss, dup = set(ids) - set(okids), len(okids) - len(set(okids))
+            print(f"verify {v}_{variant}: {len(set(okids) & set(ids))}/{len(ids)} current, stale {len(rows) - len(ok)}, "
+                  f"missing {len(miss)}, duplicate {dup}", flush=True)
+            verify_bad = verify_bad or bool(miss or dup or len(ok) < len(rows))
+            continue
         if len(ok) < len(rows):
             print(f"{v}_{variant}: dropping {len(rows) - len(ok)} stale cached audits", flush=True)
             with open(outdir / "stale.jsonl", "a") as fh:
@@ -260,6 +269,8 @@ def main():
             f.write_text("".join(json.dumps(x) + "\n" for x in ok))
         done = {x["run_id"] for x in ok}
         jobs += [(v, r, f) for r in ids if r not in done]
+    if a.verify:
+        print("VERIFY", "FAIL" if verify_bad else "OK", f"({len(ids)} labelled runs)"); raise SystemExit(int(verify_bad))
     print(len(jobs), "audit calls", flush=True)
 
     def one(job):

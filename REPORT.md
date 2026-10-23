@@ -9,9 +9,10 @@ may get a private channel. Sellers are never told to collude — they only get a
 six firm pairs, under four views: public text only, actions only, both, and both + computed statistics
 ("structured"). We measure whether the hybrid views beat the best single modality (Δ_hybrid), and whether any gain
 comes from cross-modal consistency checking (message↔action shuffle ablation), and compare all LLM views with an
-untrained one-line statistic (pair price premium). Dev split so far (n = 30): LLM sellers never coordinate in public,
-adding text does not help the auditor, a computed price-statistics table does — and the untrained premium alone
-beats every LLM view (run AUROC 1.00 vs ≤ 0.89). Locked-test numbers pending.
+untrained one-line statistic (pair price premium). Dev split so far (n = 30): no LLM seller coordinated in public
+(0/94 runs flagged), adding text gave no resolved gain to the auditor, views with a computed pair-statistics table
+localised better — and the untrained premium alone beat every LLM view (run AUROC 1.00 vs ≤ 0.89). Locked-test
+numbers pending.
 
 ## Question
 Given logged trajectories (public messages + prices + market state), do auditors that see both streams detect
@@ -89,58 +90,66 @@ pair of the same market), positive runs). Pooled pair AUROC is secondary (a scor
 market can still reach ≈ 0.77 pooled, per the codex review).
 
 **Public text is innocuous.** `hardset.py` (keyword list + a gpt-6-luna check of every public message) flagged
-**0 / 32** checked runs for explicit coordination language in public: the LLM sellers keep coordination entirely
-in the private channel. So the whole LLM set is the "hard" set; an "easy" set does not occur naturally here.
+**0 / 94** runs checked so far (`logs/hardset_all.log`; the locked run re-checks all 125) for explicit coordination
+language in public. Within the limits of a keyword list + one LLM check, the sellers keep coordination in the private
+channel, so the LLM set is effectively all "hard" set; an "easy" set does not occur naturally here.
 
 Scorers: six gpt-6.1-sol zero-shot auditor views; the **untrained pair premium** (pair mean price − mean of the
 other two firms, every pair, all rounds; run score = max over pairs; nothing fitted); a **late fusion**
 w·text + (1−w)·action of the unimodal auditor scores (w fitted on dev: 0.6). Dev, 2000 class-stratified run
-bootstraps (hand-copied; the generated `results/analysis/report_tables_dev.md` is authoritative and rounds e.g. text run 0.575 → 0.57):
+bootstraps; table copied verbatim from the generated `results/analysis/report_tables_dev.md`
+(flag rates at dev thresholds: see the flag-rate table there; y=1 / all negatives: text .25/.10, action .65/.10,
+action_stats .85/.10, combined .80/.20, combined_stats .90/.30, structured .65/.10, fusion .70/.10, premium 1.00/.00):
 
-| scorer | run AUROC | within-market AUROC | pooled pair AUROC | flagged @dev thr.: y=1 / neg. (legit) |
+| scorer | run AUROC (detection) | within-market AUROC (localisation) | pooled pair AUROC | pair-ID acc |
 |---|---|---|---|---|
-| text | 0.58 [0.37, 0.78] | 0.62 [0.51, 0.72] | 0.56 [0.45, 0.68] | 0.25 / 0.10 (0.2) |
-| action | 0.78 [0.57, 0.94] | 0.85 [0.73, 0.93] | 0.82 [0.70, 0.92] | 0.65 / 0.10 (0.2) |
-| combined | 0.83 [0.65, 0.97] | 0.85 [0.73, 0.94] | 0.80 [0.69, 0.90] | 0.80 / 0.20 (0.2) |
-| fusion (text+action scores) | 0.83 [0.66, 0.95] | 0.85 [0.73, 0.93] | 0.82 [0.70, 0.92] | 0.70 / 0.10 (0.2) |
-| action_stats (actions + pair stats, no text) | 0.89 [0.75, 0.99] | 0.91 [0.80, 0.98] | 0.91 [0.80, 0.98] | 0.85 / 0.10 (0.2) |
-| structured (combined + stats + stated-vs-actual) | 0.83 [0.67, 0.96] | 0.91 [0.80, 0.97] | 0.89 [0.78, 0.96] | 0.65 / 0.10 (0.0) |
-| **pair premium (untrained)** | **1.00 [1.00, 1.00]** | **0.98 [0.94, 1.00]** | **0.99 [0.96, 1.00]** | **1.00 / 0.00 (0.0)** |
-| pair premium, rounds 2–12 only (robustness) | 0.92 [0.80, 1.00] | 0.96 [0.89, 1.00] | 0.96 [0.91, 0.99] | – |
+| text | 0.57 [0.37, 0.78] | 0.61 [0.50, 0.72] | 0.56 [0.45, 0.68] | 0.31 [0.17, 0.45] |
+| action | 0.78 [0.57, 0.93] | 0.84 [0.73, 0.93] | 0.82 [0.70, 0.92] | 0.52 [0.30, 0.72] |
+| action_stats | 0.89 [0.75, 0.99] | 0.91 [0.80, 0.98] | 0.91 [0.80, 0.98] | 0.75 [0.55, 0.90] |
+| combined | 0.83 [0.64, 0.97] | 0.85 [0.73, 0.94] | 0.80 [0.68, 0.90] | 0.55 [0.35, 0.75] |
+| combined_stats | 0.81 [0.64, 0.95] | 0.93 [0.82, 1.00] | 0.89 [0.78, 0.97] | 0.85 [0.70, 1.00] |
+| structured | 0.83 [0.67, 0.96] | 0.91 [0.80, 0.97] | 0.89 [0.78, 0.96] | 0.70 [0.50, 0.90] |
+| fusion | 0.82 [0.66, 0.95] | 0.85 [0.73, 0.93] | 0.82 [0.70, 0.92] | 0.52 [0.30, 0.72] |
+| premium | 1.00 [1.00, 1.00] | 0.98 [0.94, 1.00] | 0.99 [0.96, 1.00] | 0.95 [0.85, 1.00] |
+| premium_r2plus | 0.92 [0.80, 1.00] | 0.95 [0.89, 1.00] | 0.96 [0.91, 0.99] | 0.90 [0.75, 1.00] |
 
 (Thresholds are dev-fitted, so the flag rates on dev are optimistic; test will show honest FPR.)
 Why the premium is so strong: in many private runs the pair agrees in round 1 to open high ("let's both start at
 18") while the rivals open at ≈ 12; the pair is undercut and often abandons the agreement within 1–3 rounds
 (manual read of 3 dev chats: 0005, 0012, 0016). The opening-round gap alone carries much of the signal; without
-round 1 the premium still matches or beats every LLM view on dev, but no longer significantly
-(premium_r2plus − structured: run +0.09 [−0.10, +0.29]). The LLM auditors also see round 1.
+round 1 the premium still matches or beats every LLM view on dev, but no longer significantly vs structured/action_stats
+(premium_r2plus − structured: run +0.09 [−0.10, +0.29]; it still beats text, and action/combined on
+localisation). The LLM auditors also see round 1.
 ![mechanism dev](figures/mechanism_dev.png)
 *Descriptive (dev, `uv run python fig_mechanism.py --split dev` → `logs/mechanism_dev.txt`):* private pairs open
 near 17–18 vs ≈ 12.5 for the rivals, fall back within ~3 rounds, but on average stay above the rivals to the end:
 late-window (rounds 9–12) pair-minus-rivals premium +0.90 (none −0.07, legit +0.15), positive in 12/20 private runs.
 So the signal is a large round-1 gap plus a smaller persistent gap that roughly 40% of private pairs lose.
-**Label ≈ condition:** all 55 `private` runs so far are labelled y = 1 (52 explicit, 3 info-exchange), so on this
+**Label ≈ condition:** all 20 dev `private` runs are labelled y = 1 (19 explicit, 1 info-exchange), so on this
 generator "agreement" and "had a channel" coincide; see Limitations.
-Paired contrasts (dev): Δ_hybrid[combined] run +0.05 [−0.12, +0.21], within +0.01 [−0.05, +0.05];
-combined − fusion ≈ 0 (run +0.00 [−0.12, +0.12]); action_stats − action: within +0.07 [+0.02, +0.11];
-premium − structured: run +0.17 [+0.05, +0.34], within +0.08 [−0.01, +0.19]; premium − action_stats: run +0.11
-[+0.01, +0.25].
+Paired contrasts (dev, from the generated file): Δ_hybrid[combined] run +0.052 [−0.123, +0.210], within +0.005
+[−0.050, +0.045]; Δ_hybrid[combined_stats] within +0.085 [+0.040, +0.135]; combined − fusion run +0.003
+[−0.120, +0.120]; action_stats − action within +0.065 [+0.020, +0.110]; combined_stats − action_stats within +0.020
+[+0.000, +0.050]; premium − structured run +0.168 [+0.043, +0.333], within +0.075 [−0.010, +0.185]; premium −
+action_stats run +0.113 [+0.010, +0.250].
 
 ![dev AUROC](figures/auroc_dev.png)
 
-**Emerging answer (dev, to be confirmed on test):** giving an LLM auditor the public text on top of actions does
-not help localise colluders (combined ≈ action; joint reading ≈ simple late fusion of the two unimodal auditors),
-because the sellers keep coordination private and their public messages are bland. What helps is a *computed
-price-statistics table*, and that statistic alone, untrained, beats every LLM view. This fits the sibling project's
+**Emerging answer (dev, to be confirmed on test):** on dev, adding the public text to the actions shows no resolved
+gain for the LLM auditor (combined − action within +0.005 [−0.05, +0.045]; joint reading ≈ late fusion of the two
+unimodal auditors). A plausible reason, not tested causally, is that the sellers keep coordination private and their
+public messages are bland. The views that include a *computed pair-statistics table* (action_stats, combined_stats,
+structured) localise better than those without; separately, a single untrained statistic (the pair premium) beats
+every LLM view. (Whether the table's benefit is the premium row specifically is not ablated.) This fits the sibling project's
 finding that dependence statistics detect coordinated *variation*, not *level*: these colluders coordinate on
 level, and the premium measures level directly.
 
 **Information-theoretic dependence detectors (sibling Q1.4, dev).** Using the sibling project's per-pair scores on
 the same runs (`../collusion-14-infotheory/results/eval/llm_v3_ext.json`, read-only; block `external_infotheory`
 in the final_analysis output): run AUROC pCMI 0.47 [0.22, 0.73], MI 0.60 [0.40, 0.80], TE 0.59 [0.32, 0.83],
-Pearson 0.21 [0.06, 0.41] (below chance: colluding pairs hold prices *flat*, so they co-vary less); within-market
+Pearson 0.21 [0.06, 0.41] (below chance; hypothesis, not tested: colluding pairs hold prices flat, so co-vary less); within-market
 MI 0.85, Pearson 0.76, TE 0.67, pCMI 0.55. Premium − pCMI run AUROC +0.53 [+0.28, +0.78]. Their independently
-coded `pair_level` statistic reproduces our premium exactly (run 1.00, within 0.98) — a code-level replication.
+coded `pair_level` statistic matches our premium's aggregate metrics (run 1.00, within 0.98); per-pair equality not checked.
 So on this generator, dependence-in-variation statistics are weak, level statistics are strong.
 
 **Where the LLM does add something (gallery, `results/analysis/gallery_dev.md`):** in `legit` run 0001 the
@@ -156,7 +165,7 @@ match some firm's price nearby. On positive runs only 47–59% of cited firms be
 **Audit cost (prompt size per call; `uv run python cost.py` → `results/analysis/cost_llm_v3.json`).** text 9.3k chars, action 3.3k, action_stats 3.7k, combined 11.4k,
 structured 12.1k (≈ chars/4 tokens); one gpt-6.1-sol call per run per view. The premium costs nothing; a
 premium-first triage that sends only the top 75% of dev runs to the LLM audit keeps all positives (dev base
-rate is 2/3, so this saving will look larger on test). End to end (run sent by the premium screen AND flagged by
+rate is 2/3; test recall at each audit budget is reported from the locked run). End to end (run sent by the premium screen AND flagged by
 the LLM view at its dev threshold), the cascade can only lose recall relative to the premium alone: dev, auditing all
 runs, action_stats catches 0.85 of y=1 runs at FPR 0.10 and names the correct pair in 0.65; structured 0.65 / 0.10 /
 0.55 (`triage.*.cascade_*` in the final json). So the LLM's role in such a system is explanation and evidence for
@@ -199,14 +208,18 @@ a stratified subset (planned); adversarial methodology review by gpt-6.1-sol (`l
 resume ids, donor matching).
 
 ## Held-out discipline
-`data/SPLITS.md`: dev = llm_v3_0000–0029, locked test = 0030–0124. The auditor prompt was written before any
-LLM-market data and has not been tuned (0 tuning attempts). `final_analysis.py` (frozen 22:15 UTC) calibrates the
+`data/SPLITS.md`: dev = llm_v3_0000–0029, locked test = 0030–0124. The core auditor prompt was written before any
+LLM-market data; there were 0 performance-tuning attempts, but the configuration changed afterwards (views
+`action_stats`/`combined_stats` added, public-partnership info rendering fixed; all before the locked test run,
+logged in EXPERIMENTS.tsv). `final_analysis.py` (frozen 22:15 UTC) calibrates the
 fusion weight and the FPR thresholds on dev, so the headline is test-only, computed once. Disclosure: interim
 iteration-3 analyses (n = 36–40) included test runs 0030–0039; nothing was tuned on them. Second disclosure: the pair-premium
 comparator is untrained and its one-line definition was fixed before the locked test run, but it was *chosen* after
 the research director looked at premium summaries on partial data that included ~30 test runs (data/SPLITS.md,
 disclosure 3); its test number is therefore not a blind out-of-sample discovery. The rounds-2–12 variant is reported
-as a robustness check for that reason.
+as a robustness check for that reason. Further disclosed exposures (data/SPLITS.md): a 24-test-run shuffle smoke
+test, an early all-run TF-IDF fit for textsim (since replaced by a dev-only fit), and cross-family agreement numbers
+computed on the mod-3 subset incl. test runs. The test evaluation is locked and run once, but not fully blind.
 
 ## Limitations (so far)
 - **Label ≈ condition.** On llm_v3 every `private` run so far is judged y = 1, so detecting "agreement" and detecting
@@ -236,14 +249,14 @@ uv run python llm_market.py --ds llm_v3 --plan private:70,none:35,legit:20 --rou
 uv run python label_llm.py --ds llm_v3
 uv run python auditors.py --ds llm_v3 --views text,action,combined,structured --variant orig
 uv run python hardset.py --ds llm_v3
-uv run python final_analysis.py --split test   # headline (frozen; dev for development)
+uv run python final_analysis.py --split dev    # development only; the test headline runs ONLY via finalize_test.sh
 uv run python evidence.py --split test         # evidence accuracy + prompt cost
 uv run python auditors.py --ds llm_v3 --variant shuffle --shuffle-seed 0 --views text,combined,structured   # seeds 0,1,2
 uv run python baselines.py --ds llm_v3 --learner lr --split test   # CV inside the split
 uv run python textsim.py --split test           # untrained public-text convergence
 uv run python report_tables.py --split test     # renders all REPORT tables from results/*.json
 uv run python fig_mechanism.py --split all      # descriptive price paths by condition (no metric)
-./finalize_test.sh                              # the ONE locked test run (all of the above for test)
+./finalize_test.sh                              # the ONE locked test run (sole entry point for --split test headline)
 uv run python auditors.py --ds llm_v3 --auditor claude-sonnet-5-5 --subset mod3   # cross-family subset
 uv run python sim.py --dataset scripted_v2 --n-per-cond 40 --rounds 30 --seed 1 --levels 12,14 --strength 0.15,0.5
 uv run python baselines.py --ds scripted_v2 --learner lr
