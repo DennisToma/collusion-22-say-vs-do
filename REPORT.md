@@ -177,6 +177,10 @@ coordination language (e.g. llm_p2cue_0002: "Test a high-margin price while leav
 neutral 1.00, random partner 1.00, placebo 0.96 [0.87, 1.00], **notes 0.86 [0.70, 0.98]**, and this dataset's own `none` arm 0.40. It puts the
 notepad pair on top in 14/15 runs. The public-text trace therefore also appears when the firms have no one to talk to.
 
+**Wording band (E78, registered; `uv run python p2_cue.py --ds llm_p2para1` → `results/analysis/p2_cue_llm_p2para1.json`).** Paraphrase 1 of the base
+seller prompt (same facts, 10 matched seeds): private − none premium r2–12 +1.79 [+1.20, +2.43], flags 9/10 vs 0/10, run AUROC 1.00.
+The original wording on the same 10 seeds gives +1.75 [+0.91, +2.65]. Paraphrase 2 is running.
+
 ![Figure P2.5](figures/p2_cue_rounds.png)
 
 **P2.6 Other seller families (E79 + amendments, registered before generation; E90 descriptive; `uv run python p2_cue.py

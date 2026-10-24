@@ -14,12 +14,13 @@
 ## Next steps
 1. When sol / ds finish: `uv run python p2_family.py --ds llm_p2sol llm_p2ds`; auditors.py + p2_family_views.py on them
    (register as E91 extension) -> extend P2.6 table; then trim P2.6 to ≤ 20 lines.
-2. para1/para2 -> E78 band (≤5 lines in P2.5). p2rep -> `replication.py --ds llm_p2rep` ONCE after chain3 views; p2_behaviour on p2rep.
+2. para2 -> complete E78 band line in P2.5 (para1 written: +1.79 [1.20,2.43]). p2rep -> `replication.py --ds llm_p2rep` ONCE after chain3 views; p2_behaviour on p2rep.
 3. Gap 1 follow-up: same-length irrelevant-sentence control arm (register first).
 4. Possible: 5 more Claude seeds incl. placebo (quota permitting) — the "public invitation" label question is a headline candidate.
 5. codex adversarial review of P2 claims when codex slots free; checkpoint block (5-line Phase 2 takeaways) by 19:30.
 
 ## Log
+- 09:15 P2 iter3: E78 paraphrase 1 interim (+1.79 vs +1.75 orig, same seeds) in P2.5.
 - 09:11 P2 iter3: Opus review of P2.6 applied; E91 frozen auditor views on Claude markets (text views flag 10/10 incl. none: public invitations).
 - 08:58 P2 iter3: P2.6 Claude family result (E79-p2claude, E90 p2_family.py), REPORT P2.6 + TL;DR 8.
 - 08:44 P2 iter2: P2.5 cue result (E77, H3 failed: notepad gives ~65% of premium), text LR on cue arms (E82b), Opus reviews E84e + P2.5 applied; chain4 for families.
