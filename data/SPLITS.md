@@ -138,3 +138,8 @@ scorers, thresholds, metric definitions and published numerical estimates are un
   runs). Premium run AUROC is computed ONCE after all 60 runs are labelled.
 - `llm_p2aware` (aware/aware_all), `llm_p2asym` (highcost/quality), `llm_p2coded` (coded): seed 8100, k = 0..9,
   matched to llm_p2cue seeds (E86–E88); no tuning; whole set analysed once.
+- `llm_p2sol` (gpt-6.1-sol sellers via codex, seed 8100, k = 0..6, private/none/placebo; registered E79-p2sol-reg 07:45). Same vendor as luna.
+- `llm_p2claude` (claude-sonnet-5-5 sellers, seed 8100, k = 0..4, private/none; E79-p2claude-reg). Cross-family.
+- `llm_p2ds` (deepseek-v4.1-flash, thinking disabled, Go; seed 8100 k = 0..14, private/none; E79-p2ds2-reg). Cross-family; best-effort.
+- E89 (07:50, before llm_p2rep exists): frozen 6 auditor views on `llm_p2rep` (all 60, held-out; `replication.py --ds llm_p2rep`
+  computed ONCE, lock `logs/final/P2REP_ONCE.lock`) and on `llm_p2cue` private/placebo/notes/none (descriptive).

@@ -111,6 +111,12 @@ where a private agreement was *attempted*, mostly from the opening-round burst. 
 were *sustained*. No zero-shot LLM view separates followed from abandoned agreements on test. Caveats: 14 and 5
 positives give wide CIs. "Start at 18" terms may be meant for the opening round only, so "not followed" partly
 depends on how the judge reads the terms. No `none` run reached the tacit-high threshold (pair premium ≥ 1 in rounds 5–12).
+**The Q2.2 contrast on the behaviour label** (json key `delta_hybrid_followed`; Δ_hybrid[v] = AUROC(v) − max(AUROC(text),
+AUROC(action)), paired bootstrap over the same runs). Test: combined −0.03 [−0.14, +0.06], action_stats +0.07
+[−0.07, +0.19], structured +0.03 [−0.11, +0.14]. Replication: combined −0.08 [−0.32, +0.16], action_stats −0.02
+[−0.15, +0.09]. Against the followed label, reading messages *and* prices again shows no resolved gain over the
+better single modality. The statistics-table gain seen with condition labels (+0.11 on test) is not resolved here.
+Only the untrained premium exceeds the LLM modalities on test (+0.22 [+0.08, +0.33]); it does not on replication (−0.10 [−0.34, +0.12]).
 
 **P2.5 Is the "collusion" a prompt artifact? (E77/E78, generation running).** Six matched-seed conditions (same pair,
 cost and demand path per seed): private channel; neutrally worded "message box"; private notepad with no recipient;

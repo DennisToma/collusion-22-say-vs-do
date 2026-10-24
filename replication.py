@@ -25,7 +25,9 @@ def main():
     ap.add_argument("--allow-partial", action="store_true", help="smoke test only")
     ap.add_argument("--max-idx", type=int, default=None, help="smoke test only (e.g. --ds llm_v3 --max-idx 30 = dev)")
     a = ap.parse_args()
-    smoke = a.allow_partial or a.max_idx is not None or a.ds != "llm_v3rep"
+    COHORT = {"llm_v3rep": (30, {"private": 15, "none": 10, "legit": 5}, "REPLICATION_ONCE"),
+              "llm_p2rep": (60, {"private": 30, "none": 20, "legit": 10}, "P2REP_ONCE")}  # E80 + E89 (Phase 2)
+    smoke = a.allow_partial or a.max_idx is not None or a.ds not in COHORT
     if a.ds == "llm_v3rep":
         from evaluation_guard import refuse_completed
         refuse_completed("replication")
@@ -36,17 +38,17 @@ def main():
               ("results/analysis/final_llm_v3_gpt-6.1-sol_dev.json", "results/analysis/final_llm_v3_gpt-6.1-sol_test.json")}
     if not smoke:  # run-once lock (codex review_iter12 P2)
         os.makedirs("logs/final", exist_ok=True)
-        os.mkdir("logs/final/REPLICATION_ONCE.lock")  # raises if it already ran; a rerun must be disclosed in SPLITS.md
+        os.mkdir(f"logs/final/{COHORT[a.ds][2]}.lock")  # raises if it already ran; a rerun must be disclosed in SPLITS.md
     dev = json.loads(Path("results/analysis/final_llm_v3_gpt-6.1-sol_dev.json").read_text())
     test = json.loads(Path("results/analysis/final_llm_v3_gpt-6.1-sol_test.json").read_text())
     th, w = dev["thresholds_dev_youden"], dev["fusion_w_text"]
     best = max(LLM_VIEWS, key=lambda v: test["point_ci"][v]["run_auroc"][0])
     labs, S, markup, ids = load(a.ds, a.auditor, a.max_idx)
     if not smoke:  # exact registered cohort (codex review_iter12 P3)
-        want = {f"llm_v3rep_{i:04d}" for i in range(30)}
+        want = {f"{a.ds}_{i:04d}" for i in range(COHORT[a.ds][0])}
         assert set(ids) == set(labs) == want, f"cohort mismatch: {len(ids)} audited / {len(labs)} labelled"
         cnt = {c: sum(labs[r]["condition"] == c for r in ids) for c in ("private", "none", "legit")}
-        assert cnt == {"private": 15, "none": 10, "legit": 5}, cnt
+        assert cnt == COHORT[a.ds][1], cnt
         for k in S:
             assert all(np.isfinite(S[k][r]["run"]) and all(np.isfinite(v) for v in S[k][r]["scores"].values()) for r in ids), k
     S["fusion"] = {r: {"scores": {p: w * S["text"][r]["scores"][p] + (1 - w) * S["action"][r]["scores"][p] for p in PAIRS},

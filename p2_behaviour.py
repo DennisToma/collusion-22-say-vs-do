@@ -121,6 +121,18 @@ def main():
                 rng = np.random.default_rng(0)
                 B = [au(rng.choice(pos, len(pos)), rng.choice(neg, len(neg))) for _ in range(1000)]
                 res["run_auroc_followed"][k] = [round(au(pos, neg), 3), round(float(np.percentile(B, 2.5)), 3), round(float(np.percentile(B, 97.5)), 3)]
+        # Directive 3a: Δ_hybrid[v] = AUROC(v) − max(AUROC(text), AUROC(action)) on the followed label, paired bootstrap
+        # (same resampled runs for every view; max taken inside each resample, as in final_analysis)
+        NEG = ("none", "legit", "no_agreement", "not_followed", "trivial_floor")
+        P = [r for r in ids if C[r]["cls"] == "followed"]; N = [r for r in ids if C[r]["cls"] in NEG]
+        if P and N and all(k in S for k in ("text", "action")):
+            au = lambda k, P_, N_: float(np.mean([(S[k][p] > S[k][q]) + .5 * (S[k][p] == S[k][q]) for p in P_ for q in N_]))
+            rng = np.random.default_rng(1); res["delta_hybrid_followed"] = {}
+            boots = [(list(rng.choice(P, len(P))), list(rng.choice(N, len(N)))) for _ in range(1000)]
+            for v in [k for k in S if k not in ("text", "action")]:
+                d = lambda P_, N_: au(v, P_, N_) - max(au("text", P_, N_), au("action", P_, N_))
+                B = [d(p_, n_) for p_, n_ in boots]
+                res["delta_hybrid_followed"][v] = [round(d(P, N), 3), round(float(np.percentile(B, 2.5)), 3), round(float(np.percentile(B, 97.5)), 3)]
         res["per_run"] = C
         out["datasets"][ds] = res
         print(ds, json.dumps({k: v for k, v in res.items() if k != "per_run"}, indent=1))

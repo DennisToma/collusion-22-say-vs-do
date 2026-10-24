@@ -227,6 +227,7 @@ def main():
     ap.add_argument("--workers", type=int, default=2)
     ap.add_argument("--auditor", default="gpt-6.1-sol")
     ap.add_argument("--subset", default="", help="'mod3': only runs with index %% 3 == 0 (cross-family subset, ~42/125)")
+    ap.add_argument("--conds", default="", help="Phase 2: comma list; audit only runs whose label condition is listed")
     ap.add_argument("--verify", action="store_true", help="read-only: exit 1 unless every labelled run has exactly one "
                     "audit per view whose prompt matches the current prompt (no calls, no writes)")
     a = ap.parse_args()
@@ -243,6 +244,8 @@ def main():
     pf = Path("data") / a.ds / "public_info.jsonl"
     pinfo = {json.loads(l)["run_id"]: json.loads(l) for l in open(pf)} if pf.exists() else {}
     ids = sorted(r for r in runs if r in labels)  # only labelled runs (complete games)
+    if a.conds:
+        ids = [r for r in ids if labels[r]["condition"] in a.conds.split(",")]
     if a.subset == "mod3":
         ids = [r for r in ids if int(r.rsplit("_", 1)[1]) % 3 == 0]
     if a.limit:
