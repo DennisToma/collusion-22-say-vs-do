@@ -2,24 +2,25 @@
 
 # STATUS
 
-## Current state (2026-10-24 09:11 UTC, Phase 2 iteration 3 end)
-- RUNNING (bg): p2_chain.sh para1 -> para2 -> p2rep (ETA ~11:00+); llm_p2sol (~11/21); llm_p2ds (~10/30);
-  p2_chain4.sh labels + p2_cue.py each family when done; p2_chain3.sh (E89) auditor views after sol / after p2rep.
-- DONE P2.6 Claude pilot (E79-p2claude, E90, E91; Opus review applied): Claude sellers price 20.2 with NO channel (above
-  joint-profit max 19 from round 1 -> read as high-price disposition) AND publicly urge "avoid undercutting"; chat pairs
-  state 20-24 and stay there (twins don't, 4/5). Premium +0.58, flags 2/5; text LR .64; frozen LLM views that read text
-  flag 10/10 (incl. none), action_stats 3/5 vs 3/5. => no detector transfers; text verdict depends on label definition.
-- DONE P2.1-P2.5 (see REPORT). P2.6 section ~30 lines: trim when sol/ds rows land.
+## Current state (2026-10-24 09:45 UTC, Phase 2 iteration 4)
+- RUNNING (bg): p2_chain.sh para2 (15/20) -> p2rep (60, ETA ~13:00); llm_p2sol (~14/21); llm_p2ds (~15/30);
+  NEW llm_p2logbook (E92, 15 runs, games-parallel 1, ~9 min/run, ETA ~11:45); chain3 (E89 views after sol / p2rep); chain4.
+- NEW E92 (registered 09:25, before data): logbook arm = notes structure with invented-weather content (price-irrelevant),
+  matched seeds to llm_p2cue. Decision rule in EXPERIMENTS.tsv; analysis `uv run python p2_logbook.py` written before data.
+  Separates "extra private writing field for the pair" (structural artifact) from "private space to think about pricing".
+- REPORT: interim 5-line "Phase 2 takeaways" block added at top of Phase 2 section (update at 19:30 checkpoint).
+- DONE P2.1-P2.6 (see REPORT). P2.6 ~30 lines: trim when sol/ds rows land.
 
 ## Next steps
-1. When sol / ds finish: `uv run python p2_family.py --ds llm_p2sol llm_p2ds`; auditors.py + p2_family_views.py on them
-   (register as E91 extension) -> extend P2.6 table; then trim P2.6 to ≤ 20 lines.
-2. para2 -> complete E78 band line in P2.5 (para1 written: +1.79 [1.20,2.43]). p2rep -> `replication.py --ds llm_p2rep` ONCE after chain3 views; p2_behaviour on p2rep.
-3. Gap 1 follow-up: same-length irrelevant-sentence control arm (register first).
-4. Possible: 5 more Claude seeds incl. placebo (quota permitting) — the "public invitation" label question is a headline candidate.
-5. codex adversarial review of P2 claims when codex slots free; checkpoint block (5-line Phase 2 takeaways) by 19:30.
+1. When logbook has 15 runs: `uv run python p2_logbook.py` ONCE -> E92 result row, P2.5 paragraph (replace "missing control" sentence), TL;DR 7.
+2. When sol / ds finish: p2_family.py --ds llm_p2sol llm_p2ds; auditors + p2_family_views (E91 ext.) -> P2.6 table; trim to <= 20 lines.
+3. para2 -> E78 band line in P2.5. p2rep -> replication.py --ds llm_p2rep ONCE after chain3 views; p2_behaviour on p2rep.
+4. codex adversarial review of P2 claims when codex load drops; checkpoint takeaways refresh by 19:30.
+- Risk: codex oversubscribed (para2 + sol + logbook + sibling's 5 workers); p2rep may slip past 14:00.
 
 ## Log
+- 09:58 P2 iter4: codex pre-outcome review of E92 applied as amendment (direction-aware/strict verdicts, completeness asserts).
+- 09:40 P2 iter4: E92 logbook control registered + launched; p2_logbook.py; Phase 2 takeaways block in REPORT.
 - 09:15 P2 iter3: E78 paraphrase 1 interim (+1.79 vs +1.75 orig, same seeds) in P2.5.
 - 09:11 P2 iter3: Opus review of P2.6 applied; E91 frozen auditor views on Claude markets (text views flag 10/10 incl. none: public invitations).
 - 08:58 P2 iter3: P2.6 Claude family result (E79-p2claude, E90 p2_family.py), REPORT P2.6 + TL;DR 8.

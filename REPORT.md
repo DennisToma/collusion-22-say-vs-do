@@ -175,8 +175,8 @@ about 1 unit above the other two for the whole game. The frozen premium flags 10
 none). A substantial share of the premium (point 65%, CI 34–132%) therefore needs no private channel. Whether delivered
 coordination adds to it is unresolved at n = 15. The notepad arm changes several things at once. Only the pair gets
 extra system text; it adds an output field; the prompt is longer; it uses the word "private"; and it gives persistent
-memory (last 8 own notes vs 6 rounds of price history). The missing control is an irrelevant sentence of the same
-length given to the pair, with no notepad. Caveats: 15 seeds, with percentile bootstrap CIs that may be narrow at this n;
+memory (last 8 own notes vs 6 rounds of price history). A control is running (E92, registered with an amendment before any outcome): the same notepad structure, but
+the entry must be invented weather, which is irrelevant to prices (`llm_p2logbook`, 15 matched seeds). Caveats: 15 seeds, with percentile bootstrap CIs that may be narrow at this n;
 the equivalence check uses 95% CIs (conservative vs TOST); one seller model (paraphrase band and other families pending).
 Label judge (gpt-6.1-sol, price-blind): explicit agreement in 14/15 private, 14/15 neutral and 15/15 random-partner
 chats; all 15 placebo runs contain unilateral proposals from both firms. The notepad entries we inspected (2 runs) contain no
