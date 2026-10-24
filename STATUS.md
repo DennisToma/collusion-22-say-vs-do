@@ -2,7 +2,7 @@
 
 # STATUS
 
-## Current state (2026-10-24 09:45 UTC, Phase 2 iteration 5)
+## Current state (2026-10-24 09:25 UTC, Phase 2 iteration 5)
 - RUNNING (bg): p2_chain.sh para2 (18/20) -> p2rep (60); llm_p2sol (14/21); llm_p2ds (16/30); llm_p2logbook (E92, 2/15);
   chain3 (E89 views), chain4 (family label+analysis on generator exit), chain5 (E92 analysis once).
 - NEW E93 interim families (p2_interim.py -> results/analysis/interim/, complete matched seeds only; descriptive):
@@ -21,7 +21,8 @@
 - Risk: codex oversubscribed; p2rep may slip past 14:00. deepseek none arm is not a clean negative (label issue, like Claude).
 
 ## Log
-- 09:45 P2 iter5: E93 interim family snapshot (p2_interim.py); REPORT P2.6/TL;DR 8/takeaways; Opus review launched.
+- 09:25 NOTE: earlier iterations stamped STATUS/EXPERIMENTS times ahead of the VM clock (e.g. E92 amend "09:58" was committed 09:20). Always use `date -u`.
+- 09:22 P2 iter5: E93 interim family snapshot (p2_interim.py); REPORT P2.6/TL;DR 8/takeaways; Opus review launched.
 - 09:58 P2 iter4: codex pre-outcome review of E92 applied as amendment (direction-aware/strict verdicts, completeness asserts).
 - 09:40 P2 iter4: E92 logbook control registered + launched; p2_logbook.py; Phase 2 takeaways block in REPORT.
 - 09:15 P2 iter3: E78 paraphrase 1 interim (+1.79 vs +1.75 orig, same seeds) in P2.5.
