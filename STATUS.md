@@ -1,26 +1,25 @@
 # STATUS
 
-## Current state (2026-10-24 01:10 UTC, iteration 12)  [note: iter-11 log times were ~25 min ahead of the real clock]
-- LOCKED TEST DONE (00:03; do NOT rerun final_analysis --split test). REPORT presentable; all reviews applied thru E46.
-- NEW (E47): fresh REPLICATION split `llm_v3rep` (seed 9000, private:15 none:10 legit:5, same lab generator)
-  PRE-REGISTERED in data/SPLITS.md + `replication.py` (P1-P4) committed BEFORE generation (commit 71eae06).
-  Running in background: generation (2 games parallel, ~70 min) → pipeline.sh label+audit; `logs/gen_v3rep.log`
-  ends with REP_DONE when finished (~02:45-03:15). Then run ONCE: `uv run python replication.py` and add a
-  REPORT section "Replication on a fresh split" (+abstract line). Not pooled with llm_v3.
-- NEW (E48): matched-recall legit check → LLM views have NO advantage over premium on legit at equal recall
-  (REPORT finding 4 rewritten).
-- codex review_iter12 APPLIED (E49): prereg chronology disclosed, finding 4 = mixed at moderate recall / premium better at high recall,
-  replication.py hardened (exact cohort, run-once lock logs/final/REPLICATION_ONCE.lock, hashes).
-- 01:30: 20/30 rep games generated; ETA generation ~01:45, label+audit (pipeline.sh) ~02:20.
+## Current state (2026-10-24 01:50 UTC, iteration 13)
+- LOCKED TEST DONE (00:03; do NOT rerun final_analysis --split test). REPORT presentable; reviews applied thru E49.
+- NEW (E50): round-1 prices are chosen BEFORE any private message is read, yet channel holders open at 17.5 vs 12.9
+  (premium +4.56 [+4.19,+4.90], 69/70) -> round-1-only premium test run AUROC .90 (full .95, r2..12 .90).
+  => premium is largely a treatment-response detector (reacts to channel *offer*). REPORT §Exploration "When does
+  the premium appear?" + fig early_detection_llm_v3.png + abstract caveat + limitation; Appendix A "agrees in round 1" corrected.
+  codex review_iter13 APPLIED (E51).
+- E47 replication llm_v3rep: generation DONE (30/30; labels 15/15 private y=1), audits running (pipeline.sh,
+  logs/pipeline_v3rep.log), ETA ~02:45. gen_v3rep.log gets REP_DONE when finished.
 ## Next steps
-1. When logs/gen_v3rep.log ends with REP_DONE: `uv run python auditors.py --ds llm_v3rep --verify`, then
-   `uv run python replication.py` ONCE; fill REPORT §Replication (replace PENDING) + abstract bullet; EXPERIMENTS E47 row result; commit.
-   If an audit view is missing, rerun `./pipeline.sh llm_v3rep` first (lock only taken by a full run).
-2. No new generation after 03:30, no new experiments after 06:30; FINALIZE from 08:15 (final REPORT review by codex).
-- Risks: codex usage limits shared with sibling (it runs 4 workers) → generation could slow; if not done by ~05:30,
-  run with --allow-partial NOT allowed for headline; report as incomplete instead.
+1. (done) review_iter13 applied.
+2. When logs/gen_v3rep.log ends with REP_DONE: `uv run python auditors.py --ds llm_v3rep --verify`, then
+   `uv run python replication.py` ONCE; fill REPORT §Replication (replace PENDING) + abstract bullet; E47 row; commit.
+   Only AFTER that (exploratory): `uv run python round1_effect.py --ds llm_v3rep` and early_detection --ds llm_v3rep.
+3. No new generation after 03:30, no new experiments after 06:30; FINALIZE from 08:15 (final REPORT review by codex).
+- Risks: codex limits shared with sibling (it runs 4 workers).
 
 ## Log
+- 02:05 iter 13: codex review_iter13 applied (E51).
+- 01:50 iter 13: round-1 treatment-response finding (E50), early_detection.py, round1_effect.py, fig_early.py.
 - 01:35 iter 12: codex review_iter12 applied (E49).
 - 01:10 iter 12: llm_v3rep replication pre-registered + launched (E47); matched-recall legit (E48); codex review started.
 - 01:25 iter 11: monitor_stratum FP (E46) + codex review fixes in REPORT.
