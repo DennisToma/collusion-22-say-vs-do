@@ -9,7 +9,7 @@
 - Tests: test_audit_inputs (5), test_handoff (5) and test_mechanism_sources (1) FAIL on inventory/manifest staleness, as before this edit
   (checked against the pre-edit REPORT). Expected until the Sun 16:30 manifest rebuild; the other 3 test files pass.
 - **E115** (sol newcomer) 9/30 complete at 18:12, generator alive; ETA ~20:00–21:00.
-- **E113:** snapshot 48 games / 16 cells (sibling 438fa0973f). Cached audit of the new games running (log /var/tmp/e113_audit.log); no scores read.
+- **E113:** snapshot 48 games / 16 cells (sibling 438fa0973f). Cached audit done (28 new calls); coverage 16/16 cells complete, 0 unparsed; no scores read.
   Q1.4 E70 = 6 sweeps (ETA ~21:30–22:00); final `eval` ONCE when their STATUS says "6 sweeps complete" (or Sun 08:00).
 
 ## Next steps
