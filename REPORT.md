@@ -43,6 +43,10 @@ test and replication evidence item beside the public log (offline, searchable; n
    private channel raises it by +1.61 [+0.92, +2.35]; the difference is not resolved (+0.56 [−0.29, +1.48]), and so is the effect of delivery
    (private − placebo +0.38 [−0.41, +1.18]). The frozen premium flags 10/15 notepad runs (AUROC 0.89). The registered
    "offer alone is not the driver" prediction failed. The notepad arm has confounds (pair-only extra text, memory).
+8. *The detectors depend on the seller model (P2.6, preliminary, 5 matched seeds):* Claude Sonnet 5.5 sellers with **no
+   channel** already price at or above the joint-monopoly level (market 20.2 vs monopoly ≈ 19, Nash ≈ 11; 5/5 markets). Given the channel,
+   all 5 pairs agree on 20–24 and keep it. Because the background is already high, the pair premium is small (+0.58
+   [+0.23, +1.03]) and the frozen premium flags 2/5. The luna-trained text classifier scores 0.64. gpt-6.1-sol and deepseek runs are pending.
 
 ## Phase 2 results (in progress, from 2026-10-24 06:30 UTC; v1 above frozen as git tag `v1-overnight`)
 
@@ -174,6 +178,27 @@ neutral 1.00, random partner 1.00, placebo 0.96 [0.87, 1.00], **notes 0.86 [0.70
 notepad pair on top in 14/15 runs. The public-text trace therefore also appears when the firms have no one to talk to.
 
 ![Figure P2.5](figures/p2_cue_rounds.png)
+
+**P2.6 Other seller families (E79 + amendments, registered before generation; E90 descriptive; `uv run python p2_cue.py
+--ds llm_p2claude && uv run python p2_family.py` → `results/analysis/p2_cue_llm_p2claude.json`, `p2_family.json`).
+Preliminary: Claude Sonnet 5.5 is done (5 matched seeds × private/none). gpt-6.1-sol (same vendor as luna, so not
+cross-family) and deepseek-v4.1-flash (Go) are still running.** Static Nash ≈ 11, joint monopoly ≈ 19.
+
+| sellers | market price r2–12, `none` | market price r2–12, private | pair premium private − none (r2–12) | frozen premium flags private / none | premium run AUROC | private chats: agreed / kept (E84 rule) |
+|---|---|---|---|---|---|---|
+| gpt-6-luna (llm_p2cue, 15 seeds) | 11.94 [11.56, 12.31] | 13.96 [13.39, 14.54] | +1.61 [+0.92, +2.35] | 14/15 / 2/15 | 0.91 [0.79, 1.00] | 14/15 explicit (terms not extracted) |
+| Claude Sonnet 5.5 (llm_p2claude, 5 seeds) | **20.19 [19.66, 20.63]** | 21.64 [20.72, 22.57] | +0.58 [+0.23, +1.03] | 2/5 / 0/5 | 0.70 [0.32, 1.00] | 5/5 / **5/5** (floors 20–24) |
+
+**Reading (n = 5 pairs, descriptive).** Without any channel, all 5 Claude markets price at or above the joint-monopoly
+level for the whole game: this is tacit collusion by the whole market, which the luna `none` markets never reach (0/15 ≥ 19). With the channel, all
+5 Claude pairs agree on a floor of 20–24 in round 1–2 and keep it in ≥ 90% of later rounds. These are the
+*kept* agreements that P2.4 found rare for luna. Yet the pair-relative premium is small (+0.58; markup private − none +1.46
+[+0.49, +2.42]), because the two other firms already price almost as high. The frozen premium flags only 2/5. The luna-trained
+public-text classifier scores the Claude private runs at 0.64 [0.24, 1.00] vs Claude `none` (it gives 1.00 on luna's own arms).
+**Both of our best detectors depend on the seller family: they find agreements that stand out from a competitive
+background, and Claude sellers provide no such background.** Absolute price levels would flag every Claude market, but
+then all 5 no-channel markets are flagged too (cf. Q1.4 P2.3: absolute statistics need model-matched references). One glm-5.3-flash run
+per arm (llm_p2glm, stopped early, E79-p2glm-stop): `none` 15.8, private 19.3 (2 runs), descriptive only.
 
 ## Abstract
 Does an auditor catch LLM collusion better if it reads what sellers *say* in public as well as what they *do*?
