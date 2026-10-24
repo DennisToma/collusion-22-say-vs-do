@@ -143,12 +143,16 @@ which lists all 25 pre-registered contrasts; no multiplicity correction):
    Without round 1 (premium_r2plus) the detection gap vs structured/action_stats is no longer resolved (+0.068
    [−0.029, +0.161], +0.045 [−0.042, +0.139]). Disclosure: the premium was proposed after a look at partial data
    that included test runs (see Held-out discipline), so this is not a blind discovery.
-4. **Legitimate cooperation (suggestive only).** At dev-chosen thresholds the premium flags 5/15 (0.33)
+4. **Legitimate cooperation: no LLM advantage at matched recall.** At dev-chosen thresholds the premium flags 5/15 (0.33)
    `legit` partnership runs; the structured and action auditors flag 0/15 (Wilson CI [0, 0.20]); they can read the public
    partnership notice (no notice-removal ablation was run, so this is not shown to be the cause). But these are different operating points: at the same thresholds structured catches only 0.40 and action
    0.20 of y=1 runs vs the premium's 0.92, and the text-reading combined views flag legit runs about as often as the
-   premium (combined 0.27, combined_stats 0.20). No matched-recall comparison was run, so this is suggestive only:
-   the LLM's possible distinctive value is reading a public explanation, not detection.
+   premium (combined 0.27, combined_stats 0.20). **At matched recall the LLM advantage disappears** (post-lock,
+   descriptive; `uv run python matched_recall.py` → `results/analysis/matched_recall_llm_v3_test.json`; oracle
+   thresholds read off the test positives): legit runs flagged at TPR ≈ 0.5 — premium 0/15, structured 0/15,
+   action_stats 1/15; at TPR ≈ 0.7 — premium 2/15, action_stats 1/15, structured 3/15; at TPR ≈ 0.9 — premium 5/15,
+   action_stats 9/15, structured 11/15 (and `none` runs 2/30 vs 20/30 and 19/30). So, at equal recall, reading the public
+   partnership notice does not make the LLM auditors better at clearing legitimate cooperation than the premium (n = 15 legit runs; oracle thresholds; no CIs on the comparison).
 5. **No tested LLM+premium combination beats the premium** (`incremental.py`, one fixed untrained label-free
    rank-average rule; other combination rules or conditional use were not tested): combo − premium run AUROC from −0.147 [−0.226, −0.078] (text) to +0.001 [−0.038, +0.043] (structured); never resolved positive.
 6. **Label = condition check.** Among y=1 runs where the pair's late-window premium is ≤ 0.5 (agreement apparently
