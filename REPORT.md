@@ -53,6 +53,13 @@ test and replication evidence item beside the public log (offline, searchable; n
 Phase 2 closes known validity gaps. Every experiment is registered in `EXPERIMENTS.tsv` before its data exist
 (E77–E80). New datasets are named `llm_p2*`. v1 numbers above are unchanged.
 
+**Phase 2 takeaways (interim, 09:40 UTC; one line per gap, details in P2.1–P2.6).**
+- *Prevalence (P2.1):* at 5% collusion prevalence the frozen premium's precision is 0.24 [0.15, 0.43] on test, 0.16 on replication (`p2_prevalence.json`).
+- *Reimplementation (P2.2):* an independent codex reimplementation from the method text matches 31/32 headline numbers (`results/reimpl/`).
+- *Behaviour labels (P2.4):* only 14/50 test "colluders" keep the agreed price; premium AUROC on that label 0.80 [0.67, 0.90]; text + actions vs best single modality −0.03 [−0.14, +0.06] (`p2_behaviour.json`).
+- *Prompt artifact (P2.5):* a private notepad with no recipient raises the pair premium by +1.04 [+0.65, +1.42] (private channel +1.61 [+0.92, +2.35]); the supervised text classifier scores notepad runs 0.86 (`p2_cue_verdict_llm_p2cue.json`, `p2_textlr.json`). Paraphrase 1 of the prompt: +1.79 [+1.20, +2.43].
+- *Other sellers (P2.6):* Claude Sonnet sellers price ≥ monopoly with no channel; premium flags 2/5, text views flag 10/10 incl. no-channel markets (`p2_family*.json`). sol / deepseek pending.
+
 **P2.1 Precision at realistic prevalence (E81; post-hoc re-expression of saved scores, nothing refit).** The test split
 has 53% positives, which flatters precision. At the frozen dev thresholds, precision(π) = TPR·π / (TPR·π + FPR·(1−π)),
 with class-stratified bootstrap CIs (`uv run python p2_prevalence.py` → `results/analysis/p2_prevalence.json`):
