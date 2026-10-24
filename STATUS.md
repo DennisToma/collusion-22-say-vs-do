@@ -1,23 +1,26 @@
 # STATUS
 
-## Current state (2026-10-24 00:09 UTC, iteration 9)
-- **LOCKED TEST DONE** (finalize_test.sh once: STARTED 23:59, HEADLINE_DONE 00:03; no failed steps). REPORT headline +
-  abstract written from `results/analysis/report_tables_test.md`. DO NOT rerun final_analysis --split test.
-- Test (n=95, 50 y=1): text LLM run .47 / within .65; Δ_hybrid[combined] −.013 [−.09,+.06]; action_stats−action +.106
-  run; combined_stats−action_stats within +.036 [+.008,+.072]; premium run .95 vs structured .84 (+.112 [+.026,+.197]);
-  localisation premium ≈ stats views; legit flagged: premium 5/15, structured/action 0/15; text LR (CV in test) .98 —
-  inspection (text_lr_inspect.py): market-wide wording shift in private runs + pair-specific shift.
-- Running: after_gen (v3fp gen → pipeline; Claude mod3 pass; shuffle seeds 0–2 on TEST for combined,structured),
-  mon_chain (llm_v3mon after v3fp; cutoff 03:30).
+## Current state (2026-10-24 00:30 UTC, iteration 10)
+- LOCKED TEST DONE (00:03; do NOT rerun final_analysis --split test). REPORT restructured for judges: abstract rewritten,
+  headline test → Exploration strata → Validity/Held-out/Limitations/Next steps/Reproduce → App. A dev, App. B scripted.
+- Final REPORT reviews DONE (codex logs/review_report_codex.md + Opus subagent): all tables match sources; overclaims
+  fixed (null≠equivalence, 'tied'→unresolved, legit = operating-point effect, label = condition, multiplicity 25×3).
+- Cross-family full (42 runs): text null + no text gain replicate for Claude; stats views best for Claude.
+- Firm-level text cue: colluders DROP competitive wording ("keeping" 67/140 vs rivals 133/140) → text LR pair-ID 1.00.
+- llm_v3fp (firm framing): 16/16 channel-unused; frozen thresholds FP: premium .44, action_stats .50, structured .25,
+  text/action .06 → stats scorers don't transfer across framing (in REPORT Exploration).
+- New fig: figures/roc_test.png (fig_roc.py).
+- Running: shuffle seed 2 (after_gen), llm_v3mon generation (mon_chain → pipeline → monitor_stratum).
 ## Next steps
-1. When shuffle done (`logs/after_gen.log` "shuffle done"): `shuffle_analysis.py --views combined,structured`;
-   re-run `report_tables.py --split test` + copy new sections (shuffle) into REPORT.
-2. cross_family.py after Claude pass 2; fp_stratum.py --ds llm_v3fp; monitor_stratum (mon_chain) → REPORT strata.
-3. Move dev section to an appendix; tidy REPORT; final codex + Opus review of REPORT claims (REQUIRED).
-4. Limitations: add text-LR finding (in-split supervised, transfer untested), hardset model mix.
-- Risks: LLM concurrency; v3mon may not finish before 06:30 (no new experiments after).
+1. Shuffle done (`logs/after_gen.log` "shuffle done") → `uv run python shuffle_analysis.py --seeds 0,1,2` → REPORT
+   Exploration paragraph (replace "Running") + report_tables --split test.
+2. mon_chain done → monitor_stratum result into REPORT Exploration (cutoff: no new experiments after 06:30).
+3. Final pass: codex quick re-check of new Exploration paragraphs; keep abstract in sync; FINALIZE from 08:15.
+- Risks: v3mon may not finish (20 runs × 12 rounds serial); then report as not completed.
 
 ## Log
+- 00:30 iter 10: cross-family full (E39), firm-level text cue (E40), fp stratum (E41), final REPORT reviews applied
+  (E42), REPORT restructure + abstract + next steps, fig_roc.
 - 00:09 iter 9: LOCKED TEST RUN (E36) after preflight caught 1 hardset failure (E37 fix); REPORT headline/abstract;
   text_lr_inspect (E38); mechanism figs dev/test/all.
 - 23:40 iter 9: codex review_iter9 applied (E35): auditors.py --verify gate in auto_finalize + finalize preflight;

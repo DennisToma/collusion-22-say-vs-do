@@ -90,6 +90,12 @@ siblings). Hard set: 0/125 runs have explicit coordination language in public (`
 
 ![test AUROC](figures/auroc_test.png)
 
+![test ROC](figures/roc_test.png)
+*Test ROC curves (`uv run python fig_roc.py`; descriptive, thresholds read from the locked json). Dots = dev-chosen
+operating points with the number of `legit` runs flagged. The legit advantage of structured/action_stats is largely an
+operating-point effect; at very low FPR (≈ 0.04) action_stats' curve sits above the premium's (TPR ≈ 0.82 vs ≈ 0.66),
+so the premium's AUROC lead comes from the moderate-FPR region. Read off the curve, no CI.*
+
 **Key paired contrasts** (same runs; Δ_hybrid[v] = v − max(text, action); rows selected from the generated file,
 which lists all 25 pre-registered contrasts; no multiplicity correction):
 
@@ -296,6 +302,10 @@ uv run python baselines.py --ds llm_v3 --learner lr --split test   # CV inside t
 uv run python textsim.py --split test           # untrained public-text convergence
 uv run python report_tables.py --split test     # renders all REPORT tables from results/*.json
 uv run python fig_mechanism.py --split all      # descriptive price paths by condition (no metric)
+uv run python fig_roc.py                        # test ROC + dev operating points (descriptive)
+uv run python text_lr_inspect.py                # n-gram / firm-level text cue inspection (descriptive)
+uv run python incremental.py --split test       # premium + LLM view rank-average (run by finalize_test.sh)
+uv run python fp_stratum.py --ds llm_v3fp       # firm-framing exploration stratum
 ./finalize_test.sh                              # the ONE locked test run (sole entry point for --split test headline)
 uv run python auditors.py --ds llm_v3 --auditor claude-sonnet-5-5 --subset mod3   # cross-family subset
 uv run python cross_family.py --ds llm_v3 --other claude-sonnet-5-5               # cross-family comparison
