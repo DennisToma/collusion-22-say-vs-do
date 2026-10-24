@@ -16,7 +16,7 @@
 2. Finalize: figures check, reproduce block (add evidence_rounds.py), final codex review of REPORT claims.
 
 ## Log
-- 02:25 iter 14: REPORT restructure (flag-rate tables, other test results -> Appendix C; numbers unchanged).
+- 02:21 iter 14: REPORT restructure (flag-rate tables, other test results -> Appendix C; numbers unchanged).
 - 02:20 iter 14: applied e2e reviews (E55).
 - 02:16 iter 14: evidence_rounds.py (E54) -> REPORT exploration; e2e reviews launched.
 - 02:15 iter 13: replication run once (E47 result: 4/4 held), round-1 replicates (E52), codex review_iter13_rep applied (E53).
