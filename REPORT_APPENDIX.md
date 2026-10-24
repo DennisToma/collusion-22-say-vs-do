@@ -536,3 +536,52 @@ avoid undercutting count as collusion, the text auditor is right on all 10 marke
 separates the arms. Registered prediction (action views flag the kept 20–24 agreements more often than the premium, 2/5): **held weakly**, action_stats 3/5, but it flags 3/5 no-channel markets too.
 Prediction "text view near chance" **failed**: it flags everything.
 
+
+
+## P2.1–P2.3 detail (moved from REPORT.md 2026-10-24 14:20 UTC for length; text unchanged)
+
+**P2.1 Precision at realistic prevalence (E81; post-hoc re-expression of saved scores, nothing refit).** The test split
+has 53% positives, which flatters precision. At the frozen dev thresholds, precision(π) = TPR·π / (TPR·π + FPR·(1−π)),
+with class-stratified bootstrap CIs (`uv run python p2_prevalence.py` → `results/analysis/p2_prevalence.json`):
+
+| detector (frozen dev threshold) | split | TP/pos, FP/neg | precision @ 1% | @ 5% | @ 20% |
+|---|---|---|---|---|---|
+| premium | test (n=95) | 46/50, 7/45 | 0.06 [0.03, 0.13] | 0.24 [0.15, 0.43] | 0.60 [0.46, 0.78] |
+| premium | replication (n=30) | 14/15, 4/15 | 0.03 [0.02, 0.13] | 0.16 [0.09, 0.44] | 0.47 [0.31, 0.79] |
+| action_stats (LLM) | test | 36/50, 2/45 | 0.14 [0.06, 1.0] | 0.46 [0.24, 1.0] | 0.80 [0.60, 1.0] |
+| action_stats (LLM) | replication | 8/15, 5/15 | 0.02 [0.01, 0.05] | 0.08 [0.04, 0.21] | 0.29 [0.15, 0.56] |
+| combined (LLM) | test | 26/50, 9/45 | 0.03 [0.01, 0.06] | 0.12 [0.07, 0.24] | 0.39 [0.27, 0.60] |
+| text (LLM) | test | 5/50, 5/45 | 0.01 [0.00, 0.04] | 0.05 [0.01, 0.16] | 0.18 [0.05, 0.47] |
+
+When a resample has zero false positives the upper bound reaches 1.0. A conservative bound (Wilson lower TPR,
+Wilson upper FPR) gives premium 0.13 / action_stats 0.17 at 5% prevalence on test (json key
+`precision_conservative_wilson`). **Reading:** if 1 market in 20 colludes, most premium alarms are false (point
+estimates 0.24 test, 0.16 replication; both CIs below 0.5). action_stats is better on test (0.46, CI up to 1.0) but not on
+replication (0.08). At 5% prevalence the premium raises about 150 false alarms per 1,000 audited markets on test and
+about 250 on replication. Two caveats. Labels equal the condition here, so this is precision for "a private channel
+was offered and used", not for realised collusion. The premium was also selected after partial test exposure (see
+§Held-out discipline). All views are reported in the json.
+
+**P2.2 Independent reimplementation (E83).** codex gpt-6.1-sol worked in an empty scratch directory with only the
+method excerpts of this REPORT ([results/reimpl/METHOD.md](results/reimpl/METHOD.md)) and the raw data files, not our code.
+It reimplemented the premium scorer, the four metrics, bootstrap CIs, the dev Youden threshold and the
+combined − best-unimodal contrast. On the locked test and the replication split, 30 of 32 point estimates agree with ours to 3 decimals
+(corrected 10:08 UTC from 31/32 after a codex review). The exceptions are the replication premium pooled-pair AUROC, 0.9832 vs our 0.9836 (a single tied pair comparison
+out of 2,475, because its exact integer ties differ from our float means), and the test premium run AUROC, 0.9467 vs our 0.9476 (≈ 2 of 2,250 comparisons; we presume the same tie handling, not verified). The threshold (0.667), test flags (46/50
+positives, 7/45 negatives) and the contrast (−0.0127 [−0.090, +0.065] vs our −0.013 [−0.091, +0.064]) also match. No bug was found
+(`results/reimpl/NOTES.md`, `reimpl.py`, `reimpl_results.json`).
+
+**P2.3 What does the 0.98 supervised text classifier detect? (E82, registered; `uv run python p2_textlr.py` →
+`results/analysis/p2_textlr.json`; no LLM calls).** Its signal does not need any delivered private message.
+(a) The signal is diffuse. On test (grouped CV, as published), removing each training fold's top 20 / 100 / 500
+n-grams leaves run AUROC 0.98 / 0.96 / 0.92 [0.86, 0.97]. (b) We fit the same classifier on all llm_v3 runs and scored
+fresh runs against fresh no-channel runs (llm_v3rep `none`, n = 10). Delivered private runs score 0.97 [0.89, 1.00].
+**Placebo runs: all 15 score above all 10 negatives** (AUROC 1.00; the bootstrap CI is degenerate). In these runs
+the channel was offered but no message was ever delivered (llm_v3plc; its seeds match llm_v3rep, not the training set).
+Legit-partnership runs vs the same negatives: AUROC 0.38. Prediction (b) held; its ±0.05 margin is loose with only 10 negatives. Prediction (a)
+("gradual") had no numeric criterion, so it is descriptive only. **Reading:** the public-text trace *does not require
+any delivered message*. Placebo sellers still write proposals they believe are delivered, so this does not
+distinguish "reaction to the offer" from "intended (unilateral) coordination". It does mean that, with labels equal to
+the condition, a near-perfect text classifier is not evidence that agreements can be detected from public text.
+The notes-to-self condition (P2.5) separates the two explanations.
+
