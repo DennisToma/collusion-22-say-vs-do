@@ -112,6 +112,8 @@
 {"run_id": "llm_grid_p2_c09_D_002", "cell": "c09", "channel": 1, "condition": "qwen_ch", "agreement": "channel_arm", "sweep": 2}
 {"run_id": "llm_grid_p2_c09_D_003", "cell": "c09", "channel": 1, "condition": "qwen_ch", "agreement": "channel_arm", "sweep": 3}
 {"run_id": "llm_grid_p2_c09_B_003", "cell": "c09", "channel": 0, "condition": "qwen_noch", "agreement": "none", "sweep": 3}
+{"run_id": "llm_grid_p2_c09_B_004", "cell": "c09", "channel": 0, "condition": "qwen_noch", "agreement": "none", "sweep": 4}
+{"run_id": "llm_grid_p2_c09_D_004", "cell": "c09", "channel": 1, "condition": "qwen_ch", "agreement": "channel_arm", "sweep": 4}
 {"run_id": "llm_grid_p2_c10_B_000", "cell": "c10", "channel": 0, "condition": "qwen_noch", "agreement": "none", "sweep": 0}
 {"run_id": "llm_grid_p2_c10_D_000", "cell": "c10", "channel": 1, "condition": "qwen_ch", "agreement": "channel_arm", "sweep": 0}
 {"run_id": "llm_grid_p2_c10_B_001", "cell": "c10", "channel": 0, "condition": "qwen_noch", "agreement": "none", "sweep": 1}

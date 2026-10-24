@@ -1,15 +1,18 @@
 # STATUS
 
-## Current state (2026-10-24 21:20 UTC by `date -u`, Phase 2 iteration 45) — following DIRECTION 20:00
+## Current state (2026-10-24 21:10 UTC by `date -u`, Phase 2 iteration 46) — following DIRECTION 20:00
 - Headline unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc).
 - DIRECTION 20:00 directives 1–3, 5 done; 4 pre-staged (merge block, E113 line PENDING).
-- E113 still blocked on Q1.4 qwen lane: luna 6/6 sweeps (20:54); qwen sweep idx 3 done 20:36, idx 4 running (~50 min/sweep) → 6 sweeps ≈ 22:15–22:40. Snapshot 160 games + cached audit, coverage complete, 0 unparsed (no scores read). Board posts now: c07 no-channel 152/480, c04 none 3/480; channel arms c02–c05/c07 73–78/480 → refresh the P2.7 luna board-use line ("7/82 games, 4/8 cells, at 4 sweeps") at landing from `p2_e1_coverage.json`.
-- Room made for the landing: REPORT 711 → 698 lines (C2 older-seller + C3c detail and P2.8 behaviour paragraph → REPORT_APPENDIX verbatim with 2-line summaries; P2.9/P2.13 reflowed, words unchanged). Budget: P2.16 ≤ 10 lines + glance row + blank = 12 → ≤ 710.
-- Checks: claims 31/31; verify_phase2 receipt current 26/26, 33/33; tests.test_e1_completion 13/13.
-- **E113 next:** when Q1.4 STATUS / `/var/tmp/c14/e1_grid.log` shows "lane qwen-3.6-35b … sweep 5 complete": `snapshot` → `audit` → `coverage` → `preflight` → `eval` ONCE → `uv run python p2_e1_report.py` → insert P2.16 after P2.15, glance row, abstract clause, replace PENDING merge line + header. One ledger row. If Q1.4 says qwen pCMI replicated → joint sentence.
+- E113 still blocked on the Q1.4 qwen lane. luna lane finished all 6 sweeps (20:54); all luna cells have 12/12 games. qwen: sweep idx 3 done 20:36; idx 4 is at c10 (c08 20:41, c09 21:04 — the c09 cell took 22 min vs ~5 min/cell in sweep 3, so the lane may be slowing). 14 qwen cell-runs left → ETA ≈ 22:20 at 5 min/cell, ≈ 02:15 at 22 min/cell; both before the registered Sun 08:00 fallback.
+- Snapshot 164 games + cached audit (+6 sol calls), coverage complete, 0 unparsed; preflight refuses (4/6 complete sweeps); `results/analysis/p2_e1_audit.json` absent (no scores read).
+- Luna board posts at final luna count (for the P2.7 line refresh at landing): c07 no-channel 152/480, c04 none 3/480, c02–c05/c07 channel 73–78/480, c06 0/480 both arms.
+- REPORT 698 lines (budget for the landing ≤ 710). Checks from iter45 still valid (REPORT unchanged): claims 31/31; verify_phase2 26/26; tests 13/13.
+- **E113 next:** when `/var/tmp/c14/e1_grid.log` shows "lane qwen-3.6-35b … sweep 5 complete": `snapshot` → `audit` → `coverage` → `preflight` → `eval` ONCE → `uv run python p2_e1_report.py` → insert P2.16 after P2.15, glance row, abstract clause, replace PENDING merge line + header. One ledger row. If Q1.4 says qwen pCMI replicated → joint sentence.
 - Then the ONE abstract pass ≤ 260 words by Sun 07:30. Reviews Sun 12:30; freeze 14:00; exports from 16:30. Never stash/checkout while generators run.
+- Note: the iter45 stamp (21:20) was ahead of the real clock (iter46 started 21:07). Use `date -u` stamps only.
 
 ## Log
+- 21:10 P2 iter46: E113 snapshot 164 games + cached audit (+6 calls), coverage complete, preflight refuses 4/6 (no scores read); luna lane done 6/6, qwen idx 4 in progress and maybe slowing (c09 22 min). No ledger row, REPORT unchanged.
 - 21:20 P2 iter45: E113 snapshot 160 games + cached audit, coverage complete (no scores read); REPORT 711→698 lines to fit the E113 landing (verbatim moves to appendix + reflow); claims 31/31, verify 26/26. No ledger row.
 - 21:03 P2 iter44: E113 snapshot 154 games + cached audit, coverage complete (no scores read); qwen lane sweep 5/6 running. Note: a `until ! pgrep -f <pattern>` waiter self-matches its own command line (same bug as E100) — wait on PIDs, not patterns. No ledger row, REPORT unchanged.
 - 20:57 P2 iter43: E113 still waiting (4/6 sweeps, 148 games, cached audit, no scores read); stale luna board-use statement fixed in REPORT (7/82 games, 4/8 cells) + header snapshot count; claims 31/31, verify_phase2 26/26. No ledger row (per DIRECTION: one row at final snapshot).
