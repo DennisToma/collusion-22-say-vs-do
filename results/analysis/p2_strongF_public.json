@@ -1,0 +1,43 @@
+{
+ "rule": "\\b(hold|keep|maintain|stay|stable|match)\\w*\\b.*\\b1\\d\\b|\\b1\\d\\b.*\\b(hold|keep|maintain|stable)",
+ "by_condition": {
+  "none": {
+   "hold_msgs": 1362,
+   "msgs": 3200,
+   "share": 0.426,
+   "runs": 20
+  },
+  "private": {
+   "hold_msgs": 903,
+   "msgs": 3200,
+   "share": 0.282,
+   "runs": 20
+  }
+ },
+ "by_class": {
+  "tacit_high": {
+   "hold_msgs": 1229,
+   "msgs": 3040,
+   "share": 0.404,
+   "runs": 19
+  },
+  "executed": {
+   "hold_msgs": 668,
+   "msgs": 2080,
+   "share": 0.321,
+   "runs": 13
+  },
+  "nonexec_private": {
+   "hold_msgs": 235,
+   "msgs": 1120,
+   "share": 0.21,
+   "runs": 7
+  },
+  "competitive": {
+   "hold_msgs": 133,
+   "msgs": 160,
+   "share": 0.831,
+   "runs": 1
+  }
+ }
+}

@@ -33,7 +33,7 @@ for cls, (col, ls, lab) in STY.items():
     lo, hi = np.percentile(boot, [2.5, 97.5], axis=0)
     ax[1].fill_between(range(1, T + 1), lo, hi, color=col, alpha=0.15, lw=0)
     ax[1].plot(range(1, T + 1), mu, color=col, ls=ls, lw=2, label=f"{lab}, n = {len(rs)}")
-    ax[1].annotate(f"{cls.replace('_', ' ')} ({len(rs)})", (T, mu[-1]), xytext=(4, 0), textcoords="offset points",
+    ax[1].annotate(f"{cls.replace('_', ' ')} ({len(rs)})", (T, mu[-1]), xytext=(4, {"executed": -7, "tacit_high": 7}.get(cls, 0)), textcoords="offset points",
                    va="center", fontsize=8, color="#333333")
 for k, t in enumerate(["every run", "class mean, 95% bootstrap band over runs"]):
     ax[k].axhline(0, color="#888888", lw=0.8); ax[k].axhline(2, color="#888888", lw=0.8, ls="--")
