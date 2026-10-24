@@ -334,5 +334,17 @@
   "key_path": "arms.private.O1_market_repl_minus_orig; arms.private.O4_reagreement_floor_ge13.{repl,orig}",
   "status": "OK",
   "in_report_abstract": true
+ },
+ {
+  "id": "C28",
+  "claim": "E115 participant replacement (gpt-6.1-sol newcomer), private arm: re-agreement replaced; markets >= Nash + 2 replaced",
+  "expected": "0/20; 18/20",
+  "denominator": "same 20 paired private games as E112, sol newcomer from round 21; registered E115, S1 failed, S2-S4 held; none arm 9/10 in P2.15",
+  "note": "",
+  "value": "0/20; 18/20",
+  "source": "results/analysis/p2_replace_sol.json",
+  "key_path": "arms.private.O4_reagreement_floor_ge13.repl; arms.private.O6_market_excess_ge2.repl",
+  "status": "OK",
+  "in_report_abstract": true
  }
 ]

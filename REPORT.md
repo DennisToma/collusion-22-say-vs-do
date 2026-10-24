@@ -1,7 +1,7 @@
 # Say vs. Do: does auditing what AI agents *say* together with what they *do* catch collusion better?
 
 *Apart AI Collusion Sprint, Q2.2 — text + action auditing. v1 (overnight) results are frozen as git tag `v1-overnight`;
-Phase 2 (from 2026-10-24 06:30 UTC) re-tests them. Checkpoint text, 2026-10-24 19:07 UTC: P2.1–P2.15 final except the second P2.15 arm (E115, gpt-6.1-sol newcomer; generating) and the E1 grid audit (E113; 82 snapshot games, cached audits verified; final eval once Q1.4's 6 balanced sweeps are complete). E102 (strong-framing Qwen, 6 seeds) is descriptive. Exports: [README.md](README.md).*
+Phase 2 (from 2026-10-24 06:30 UTC) re-tests them. Checkpoint text, 2026-10-24 19:07 UTC: P2.1–P2.15 final (E115 evaluated 19:20) except the E1 grid audit (E113; 82 snapshot games, cached audits verified; final eval once Q1.4's 6 balanced sweeps are complete). E102 (strong-framing Qwen, 6 seeds) is descriptive. Exports: [README.md](README.md).*
 
 ## Abstract
 Adding LLM sellers' public messages to their prices gives **no resolved gain** for detecting collusion: combined minus the better
@@ -14,8 +14,9 @@ at base framing luna proposes it only in private; Claude, deepseek and Qwen also
 control market (50/50). When the deal is struck in chat (SALT-NLP), text predicts execution (AUROC 0.87 [0.83, 0.91]). (3) Talk and
 behaviour labels disagree: only 14/50 test "colluders" keep their agreement. With memory and profit framing (levers combined), 13/20
 channel pairs strictly execute, yet 19/20 no-channel markets also price ≥ Nash + 2. Exploratory: within channel pairs (13 executed vs
-7 not), no text or plan view resolves execution (private plans 0.69 [0.44, 0.91]; low power). Swapping one seller for a fresh luna at
-round 21 leaves the market level (+0.20 [−0.08, +0.62]) and re-agreement (16/20; originals 15/20) without resolved change.
+7 not), no text or plan view resolves execution (private plans 0.69 [0.44, 0.91]; low power). Swapping one seller at round 21
+for a fresh luna changes neither the market level (+0.20 [−0.08, +0.62]) nor re-agreement (16/20 vs 15/20); a gpt-6.1-sol newcomer
+never re-agrees (0/20), yet 18/20 markets stay ≥ Nash + 2.
 Abliterated Qwen3.8-27B executes no more than its base model (13/15 both; agreement at ceiling) with a smaller channel premium
 (−1.24 [−2.41, −0.03]; serving precision differs).
 Every abstract number with its denominator and source key: `results/analysis/claims_denominators.md` (`p2_claims.py`).
@@ -37,6 +38,8 @@ Every abstract number with its denominator and source key: `results/analysis/cla
    post hoc, not shown to be agreement) did not; a no-LLM partner-name count does comparably (0.82 [0.66, 0.96]) and no plan uses agreement words (a channel footprint). Within channel pairs
    (13 vs 7, E116, exploratory) no text or plan view resolves execution (plan 0.69 [0.44, 0.91], text 0.61 [0.37, 0.85]; low power); market excess separates partly by construction (0.78 [0.54, 0.96]) and action_stats inverts (0.18 [0.00, 0.42]); in two Qwen strata (5 vs 10 each, E116b) public text 0.73 [0.43, 0.99] / 0.51 [0.25, 0.70].
    A fresh luna replacing one seller at round 21 re-joins the level and a new agreement with its partner is judged (16/20; originals 15/20); CUSUM 0/30 alarms by round 25 with the threshold set at the originals' maximum (any-round 3/30), P2.15.
+   A gpt-6.1-sol newcomer (E115) instead re-agrees 0/20 and undercuts (own price −3.38 [−4.17, −2.54] vs the replaced firm); the market drops
+   −1.34 [−1.79, −0.91] (private) but stays ≥ Nash + 2 in 18/20 and 9/10: the agreement is a property of the pair, the high level largely of the prompt.
 6. *Practical:* premium precision 0.24 at 5% prevalence; legitimate cost/quality edges are flagged 7/10, 9/10 (controls 2/10). Screens
    need model- and prompt-matched references; our evidence does not support recommending any particular screening architecture.
 
@@ -69,7 +72,7 @@ Phase 2 experiments and checks are E77–E116 (exceptions to pre-registration ar
 | P2.12 | external data (SALT-NLP) | P(said \| executed) 0.385 [0.353, 0.416]; text auditor AUROC 0.87 [0.83, 0.91] (TF-IDF 0.91) | `salt_d1.json` |
 | P2.13 | transcript anomaly hunt (exploratory, 40 games) | ±1 opening-price band: 37/40 rounds but exactly target 1/40; 28-round asymmetric pair streak; same-response price declarations 0/143 contradictions | `p2_serendipity.json` |
 | P2.14 | German-language market (10 + 10, paired seeds) | agreement 3/10 vs 9/10 English; premium still +0.91 [+0.20, +1.58] (English +1.75; paired German − English −0.58 [−1.79, +0.51]) | `p2_de.json` |
-| P2.15 | participant replacement (30 paired games) | market Δ +0.20 [−0.08, +0.62] private, +0.16 [−0.27, +0.57] none; re-agreement 16/20 (originals 15/20); CUSUM 0/30 | `p2_replace.json` |
+| P2.15 | participant replacement (30 paired games) | market Δ +0.20 [−0.08, +0.62] private, +0.16 [−0.27, +0.57] none; re-agreement 16/20 (originals 15/20); CUSUM 0/30. sol newcomer (E115): re-agreement 0/20, market Δ −1.34 [−1.79, −0.91] private, −1.71 [−2.51, −0.92] none, ≥ Nash + 2 18/20 & 9/10 | `p2_replace.json`, `p2_replace_sol.json` |
 | – | coded public signals; trust-breaking (D3) | dropped (budget; D3 measures promise-breaking, not collusion) | – |
 
 **P2.1 Precision at realistic prevalence (E81).** At 5% prevalence the frozen premium's precision is 0.24 [0.15, 0.43] (test), 0.16 (replication);
@@ -354,7 +357,12 @@ Paired with the original rounds 21–40: market excess over Nash replaced − or
 markets ≥ Nash + 2 stay 19/20 and 9/10; a new agreement with its partner is judged (floor ≥ 13) in 16/20 (originals 15/20; it writes
 in all 20, first in 10/20) and executes in 15/20 (14/20); level CUSUM alarms by round 25 in 0/30 (threshold = maximum over the original continuations, so originals cannot alarm; any-round alarms 3/30). All four registered predictions held.
 **Reading:** in this luna arm (20 + 10 games), the level and agreement survive one firm's memory reset; its partner keeps its memory and often re-proposes.
-E115 (gpt-6.1-sol newcomer) is running; full-cohort provenance checks and a run-once lock precede its frozen S1–S4 evaluation.
+**E115 (gpt-6.1-sol newcomer, same 30 games/seeds/firm; evaluated once 19:20 UTC after the full-cohort gate; `P2REPL_ARM=sol uv run python p2_replace_eval.py` → `p2_replace_sol.json`).**
+Newcomer own excess − replaced firm −3.38 [−4.17, −2.54] (private), −4.33 [−5.75, −2.79] (none); market −1.34 [−1.79, −0.91] / −1.71 [−2.51, −0.92];
+markets ≥ Nash + 2 18/20 [0.72, 0.98] and 9/10; re-agreement (floor ≥ 13) 0/20 (one trivial floor-11 agreement), post-r21 executed 0/20 (originals 14/20); level CUSUM by r25 0/30.
+Registered predictions: S1 (own-excess CI includes 0) **failed**; S2 level survives, S3 re-agreement ≤ 9/20, S4 CUSUM ≤ 4/30 held.
+Not registered as a prediction: Q1.4's E50 pair-gap CUSUM alarms in 22/30 (originals 5/30), because one undercutting firm opens price gaps, not because of collusion.
+**Reading:** a newcomer that will not coordinate ends the agreement and lowers the market, but the three remaining luna firms keep it above Nash + 2.
 E115 caveat: four run-0014 round-40 raw decisions were reconstructed from saved trajectories/chat; their model and parse status are inferred (`p2_replace_integrity.json`).
 
 ## v1 overnight summary (frozen 2026-10-24 06:30 UTC; superseded by the Abstract above)

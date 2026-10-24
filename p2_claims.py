@@ -324,7 +324,7 @@ def _():
 
 
 @claim("C25", "E112 participant replacement (luna newcomer), private arm: market excess replaced - original; re-agreement replaced; originals",
-       "+0.20 [-0.08, +0.62]; 16/20; 15/20", "market level (+0.20 [-0.08, +0.62]) and re-agreement (16/20; originals 15/20)",
+       "+0.20 [-0.08, +0.62]; 16/20; 15/20", "market level (+0.20 [-0.08, +0.62]) nor re-agreement (16/20 vs 15/20)",
        "20 paired private games replayed from llm_p2strongF, newcomer from round 21, rounds 21-40; registered E112, all 4 predictions held; none arm +0.16 [-0.27, +0.57] in P2.15")
 def _():
     src = "results/analysis/p2_replace.json"
@@ -332,6 +332,16 @@ def _():
     ra = a["O4_reagreement_floor_ge13"]
     v = f"{ci(a['O1_market_repl_minus_orig'])}; {ra['repl'][0]}/{ra['repl'][1]}; {ra['orig'][0]}/{ra['orig'][1]}"
     return v, src, "arms.private.O1_market_repl_minus_orig; arms.private.O4_reagreement_floor_ge13.{repl,orig}"
+
+
+@claim("C28", "E115 participant replacement (gpt-6.1-sol newcomer), private arm: re-agreement replaced; markets >= Nash + 2 replaced",
+       "0/20; 18/20", "never re-agrees (0/20), yet 18/20 markets stay",
+       "same 20 paired private games as E112, sol newcomer from round 21; registered E115, S1 failed, S2-S4 held; none arm 9/10 in P2.15")
+def _():
+    src = "results/analysis/p2_replace_sol.json"
+    a = json.load(open(src))["arms"]["private"]
+    ra, l = a["O4_reagreement_floor_ge13"]["repl"], a["O6_market_excess_ge2"]["repl"]
+    return f"{ra[0]}/{ra[1]}; {l[0]}/{l[1]}", src, "arms.private.O4_reagreement_floor_ge13.repl; arms.private.O6_market_excess_ge2.repl"
 
 
 def run():
