@@ -4,7 +4,7 @@
 - Headline unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc).
 - All DIRECTION 17:56 directives 1, 2, 4, 5 done (within-agreement E116, E112/E115 in abstract, 19:30 review applied early, E3 dropped). Directive 3 (E113) in progress.
 - **E113:** snapshot7 = 100 games / 3 complete sweeps (Q1.4 E70 on sweep 4; ETA sweeps 3–5 ≈22:40 per Q1.4 STATUS). Coverage 100%, 0 unparsed. NO detector metrics read.
-- iter39: TL;DR item 5 split (replacement result now item 6, Practical 7); header → 20:00 checkpoint, E77–E120. claims 30/30, verify_phase2 26/26. REPORT 712 lines.
+- iter39: TL;DR item 5 split (replacement result now item 6, Practical 7); header → 20:00 checkpoint, E77–E120. claims 30/30, verify_phase2 26/26. REPORT 711 lines.
 - Checkpoint PDF export of 19:40 stands (next export Sun 16:30).
 - Next E113: keep `snapshot` + `audit` + `coverage` as sweeps land; when Q1.4 STATUS says "6 sweeps complete" (or Sun 08:00) → `preflight`, then `eval` ONCE → ≤10 lines + glance row by Sun 10:00.
 - Next review Sun 12:30 (Opus + codex on final claims), numbers freeze Sun 14:00, presentation/EVIDENCE/manifest rebuild Sun 16:30. Never stash/checkout while generators run.
