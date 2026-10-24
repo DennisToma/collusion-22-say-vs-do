@@ -324,7 +324,147 @@
        0.823
       ]
      }
+    },
+    "strict_floor_minus_tol_ge_12": {
+     "n_followed": 13,
+     "class_counts": {
+      "followed": 13,
+      "legit": 15,
+      "none": 30,
+      "not_followed": 36,
+      "trivial_floor": 1
+     },
+     "run_auroc_followed": {
+      "premium": [
+       0.826,
+       0.719,
+       0.918
+      ],
+      "text": [
+       0.496,
+       0.349,
+       0.658
+      ],
+      "action": [
+       0.622,
+       0.498,
+       0.735
+      ],
+      "combined": [
+       0.591,
+       0.464,
+       0.704
+      ],
+      "combined_stats": [
+       0.598,
+       0.453,
+       0.73
+      ],
+      "action_stats": [
+       0.699,
+       0.589,
+       0.811
+      ],
+      "structured": [
+       0.652,
+       0.516,
+       0.768
+      ]
+     }
     }
+   },
+   "floors_by_class": {
+    "followed": [
+     12,
+     13,
+     13,
+     14,
+     14,
+     14,
+     14,
+     15,
+     16,
+     16,
+     16,
+     18,
+     18,
+     18
+    ],
+    "not_followed": [
+     15,
+     17,
+     18,
+     18,
+     18,
+     18,
+     18,
+     18,
+     18,
+     18,
+     18,
+     18,
+     18,
+     18,
+     18,
+     18,
+     18,
+     18,
+     18,
+     18,
+     18,
+     18,
+     18,
+     18,
+     18,
+     18,
+     18,
+     18,
+     18,
+     18,
+     18,
+     18,
+     18,
+     18,
+     18,
+     18
+    ]
+   },
+   "auroc_followed_vs_not_followed": {
+    "premium": [
+     0.601,
+     0.401,
+     0.792
+    ],
+    "text": [
+     0.52,
+     0.359,
+     0.685
+    ],
+    "action": [
+     0.377,
+     0.23,
+     0.527
+    ],
+    "combined": [
+     0.359,
+     0.212,
+     0.52
+    ],
+    "combined_stats": [
+     0.342,
+     0.181,
+     0.521
+    ],
+    "action_stats": [
+     0.381,
+     0.22,
+     0.542
+    ],
+    "structured": [
+     0.374,
+     0.217,
+     0.551
+    ]
    },
    "per_run": {
     "llm_v3_0000": {
@@ -1260,7 +1400,112 @@
        0.83
       ]
      }
+    },
+    "strict_floor_minus_tol_ge_12": {
+     "n_followed": 4,
+     "class_counts": {
+      "followed": 4,
+      "legit": 5,
+      "no_agreement": 1,
+      "none": 10,
+      "not_followed": 9,
+      "trivial_floor": 1
+     },
+     "run_auroc_followed": {
+      "premium": [
+       0.774,
+       0.596,
+       0.923
+      ],
+      "text": [
+       0.601,
+       0.356,
+       0.837
+      ],
+      "action": [
+       0.832,
+       0.538,
+       1.0
+      ],
+      "combined": [
+       0.822,
+       0.654,
+       0.952
+      ],
+      "combined_stats": [
+       0.644,
+       0.279,
+       0.995
+      ],
+      "action_stats": [
+       0.808,
+       0.567,
+       0.981
+      ],
+      "structured": [
+       0.712,
+       0.447,
+       0.99
+      ]
+     }
     }
+   },
+   "floors_by_class": {
+    "followed": [
+     12,
+     13,
+     14,
+     14,
+     18
+    ],
+    "not_followed": [
+     14,
+     18,
+     18,
+     18,
+     18,
+     18,
+     18,
+     18,
+     18
+    ]
+   },
+   "auroc_followed_vs_not_followed": {
+    "premium": [
+     0.433,
+     0.156,
+     0.756
+    ],
+    "text": [
+     0.433,
+     0.133,
+     0.767
+    ],
+    "action": [
+     0.756,
+     0.444,
+     1.0
+    ],
+    "combined": [
+     0.756,
+     0.511,
+     0.956
+    ],
+    "combined_stats": [
+     0.511,
+     0.133,
+     0.867
+    ],
+    "action_stats": [
+     0.667,
+     0.356,
+     0.933
+    ],
+    "structured": [
+     0.511,
+     0.178,
+     0.844
+    ]
    },
    "per_run": {
     "llm_v3rep_0000": {
