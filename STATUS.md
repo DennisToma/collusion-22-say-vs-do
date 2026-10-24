@@ -9,10 +9,11 @@
 - iter40 (E122): E113 formatter `p2_e1_report.py` written + synthetic-tested BEFORE eval (12/12 unittests); wording fixed in advance (registered k/K headline first).
 - Next E113: keep `snapshot` + `audit` + `coverage` as sweeps land; when Q1.4 STATUS says "6 sweeps complete" (or Sun 08:00) → `preflight`, then `eval` ONCE → `uv run python p2_e1_report.py` → paste P2.16 lines + glance row (replace equal text elsewhere; REPORT ≤ 711) by Sun 10:00.
 - Next review Sun 12:30 (Opus + codex on final claims), numbers freeze Sun 14:00, presentation/EVIDENCE/manifest rebuild Sun 16:30. Never stash/checkout while generators run.
-- Optional Sun: abstract 275 → ~260 words.
+- Abstract 268 words (E123, iter40); claims 30/30. Further trim optional.
 
 ## Log
 - 20:10 P2 iter40: E122 E113 formatter p2_e1_report.py + synthetic test (tests.test_e1_completion 12/12); no metrics read, REPORT unchanged.
+- 20:20 P2 iter40: E123 abstract 275→268 words (claims 30/30, C25 snippet), verify_phase2 receipt refresh.
 - 20:00 P2 iter39: E113 snapshot7 (100 games, 3 sweeps, coverage OK, no scores read); TL;DR 5 split (E121), header → 20:00; claims 30/30, verify_phase2 26/26.
 - 19:48 P2 iter38: E120 executed-definition sensitivity (p2_strict_sensitivity.py, 0 calls): strict 10–16/20 one-at-a-time, 7–18/20 all 81; tacit-high 17–20/20 → P2.7/glance, C29 (30/30), verify_phase2 26/26.
 - 19:40 P2 iter37: abstract 298→275 words (claims 29/29, 3 snippet texts updated), E113 snapshot6 (90 games, 2 sweeps, coverage 100%, no scores read), checkpoint re-export PASS.

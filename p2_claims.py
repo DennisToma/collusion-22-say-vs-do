@@ -324,7 +324,7 @@ def _():
 
 
 @claim("C25", "E112 participant replacement (luna newcomer), private arm: market excess replaced - original; re-agreement replaced; originals",
-       "+0.20 [-0.08, +0.62]; 16/20; 15/20", "the level (+0.20 [-0.08, +0.62]) nor re-agreement (16/20 vs 15/20)",
+       "+0.20 [-0.08, +0.62]; 16/20; 15/20", "level (+0.20 [-0.08, +0.62]) nor re-agreement (16/20 vs 15/20)",
        "20 paired private games replayed from llm_p2strongF, newcomer from round 21, rounds 21-40; registered E112, all 4 predictions held; none arm +0.16 [-0.27, +0.57] in P2.15")
 def _():
     src = "results/analysis/p2_replace.json"

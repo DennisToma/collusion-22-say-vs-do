@@ -9,13 +9,13 @@ single view is −0.01 [−0.09, +0.06] run-AUROC on the locked test (n = 95) an
 post hoc (n = 90), excluding gains above +0.06 (test) and +0.02 (pooled). Setup: a 4-firm pricing market of gpt-6-luna sellers (one pair
 may chat privately); zero-shot gpt-6.1-sol auditors read public text, actions, or both. (1) The action signal is partly a prompt
 effect: the post-hoc-selected pair price premium (AUROC 0.94 [0.87, 0.99], n = 60 fresh) also responds to an unread pricing notepad
-(65% of the channel premium), to wording and to legitimate cost/quality edges. (2) Where coordination is voiced depends on the family:
-luna proposes it only in private; Claude, deepseek and Qwen also invite rivals publicly, so text auditors flag every
+(65% of the channel premium), wording and legitimate cost/quality edges. (2) The family decides where coordination is voiced:
+luna only in private; Claude, deepseek and Qwen also invite rivals publicly, so text auditors flag every
 control market (50/50). When the deal is struck in chat (SALT-NLP), text predicts execution (AUROC 0.87 [0.83, 0.91]). (3) Talk and
-behaviour labels disagree: only 14/50 test "colluders" keep their agreement. With memory and profit framing, 13/20
+behaviour labels disagree: 14/50 test "colluders" keep their agreement. With memory and profit framing, 13/20
 channel pairs strictly execute, yet 19/20 no-channel markets also price ≥ Nash + 2; among channel pairs (13 executed vs
 7 not, exploratory) no text or plan view resolves execution (plans 0.69 [0.44, 0.91]). A fresh luna swapped in at round 21
-changes neither the level (+0.20 [−0.08, +0.62]) nor re-agreement (16/20 vs 15/20); a gpt-6.1-sol newcomer
+changes neither level (+0.20 [−0.08, +0.62]) nor re-agreement (16/20 vs 15/20); a gpt-6.1-sol newcomer
 re-agrees 0/20, yet 18/20 markets stay ≥ Nash + 2. Abliterated Qwen3.8-27B executes no more than its base model (13/15 both; agreement at ceiling) with a
 smaller channel premium (−1.24 [−2.41, −0.03]; serving precision differs).
 Every abstract number with its denominator and source key: `results/analysis/claims_denominators.md` (`p2_claims.py`).
