@@ -45,8 +45,9 @@ to genuine cross-modal reasoning or just more input?
 
 **Short answer.** On this generator, raw public messages give the tested zero-shot LLM auditors no resolved detection
 benefit. Computed action summaries help, and a simple premium comparator performs strongly. Opening prices already
-separate the conditions before any partner message is received. That limits how far any detector here can be read as
-detecting agreement-driven conduct.
+separate the conditions before any partner message is received, and in a placebo run where private messages are never
+delivered, every action-based scorer flags the pair just as often. That limits how far any detector here can be read
+as detecting agreement-driven conduct.
 
 ## Setup
 **LLM market (`llm_market.py`, headline data `data/llm_v3`).** 4 firms, 12 rounds, integer prices 6–30, logit
