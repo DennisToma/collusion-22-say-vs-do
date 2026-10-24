@@ -52,7 +52,7 @@ def extract(priv):
 def terms(ds):
     D = Path("data") / ds; out = D / "terms.jsonl"
     gt = {g["run_id"]: g for g in map(json.loads, open(D / "ground_truth.jsonl"))}
-    priv = [p for p in map(json.loads, open(D / "private.jsonl")) if gt[p["run_id"]]["condition"] in ("private", "neutral")]
+    priv = [p for p in map(json.loads, open(D / "private.jsonl")) if gt[p["run_id"]]["condition"] in ("private", "neutral", "aware", "aware_all", "coded")]
     done = {l["run_id"] for l in map(json.loads, open(out))} if out.exists() else set()
     with ThreadPoolExecutor(int(os.environ.get("LABEL_PAR", "1"))) as ex:
         for d in ex.map(extract, [p for p in priv if p["run_id"] not in done]):
@@ -72,7 +72,7 @@ def classes(ds, T):
     C = {}
     for rid, g in gt.items():
         pair = g["assigned_pair"]; R = sorted(P[rid])
-        if g["condition"] in ("private", "neutral"):
+        if g["condition"] in ("private", "neutral", "aware", "aware_all", "coded"):
             t = T.get(rid, {})
             if not t.get("agreed") or t.get("price_floor") is None:
                 C[rid] = {"cls": "no_agreement"}; continue
@@ -116,7 +116,11 @@ def main():
             res["flag_rate"][k] = {c: [int(sum(s[r] >= TH[k] for r in ids if C[r]["cls"] == c)), sum(C[r]["cls"] == c for r in ids)] for c in cls}
             NEG = ("none", "legit", "no_agreement", "not_followed", "trivial_floor")  # registered negatives (E84)
             pos = [s[r] for r in ids if C[r]["cls"] == "followed"]; neg = [s[r] for r in ids if C[r]["cls"] in NEG]
-            res["run_auroc_followed"][k] = round(float(np.mean([(p > q) + .5 * (p == q) for p in pos for q in neg])), 3) if pos and neg else None
+            if pos and neg:
+                au = lambda P_, N_: float(np.mean([(p > q) + .5 * (p == q) for p in P_ for q in N_]))
+                rng = np.random.default_rng(0)
+                B = [au(rng.choice(pos, len(pos)), rng.choice(neg, len(neg))) for _ in range(1000)]
+                res["run_auroc_followed"][k] = [round(au(pos, neg), 3), round(float(np.percentile(B, 2.5)), 3), round(float(np.percentile(B, 97.5)), 3)]
         res["per_run"] = C
         out["datasets"][ds] = res
         print(ds, json.dumps({k: v for k, v in res.items() if k != "per_run"}, indent=1))

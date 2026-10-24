@@ -2,25 +2,27 @@
 
 # STATUS
 
-## Current state (2026-10-24 06:43 UTC, Phase 2 iteration 1)
-- Generator: new matched-seed conditions neutral / notes / randpartner (`--matched`); v1 prompts byte-identical (fake-chat diff).
-- RUNNING (bg): `p2_chain.sh` -> llm_p2cue (90 runs: 6 conds x 15 seeds; ~25 luna calls/min, ETA ~09:00) -> llm_p2para1/2
-  (40) -> llm_p2rep (60, gap 4). `p2_post.sh` labels (`p2_label.py`) + analyses (`p2_cue.py`) cue/para once each finishes.
-  Second family: llm_p2glm (glm-5.3-flash via Go, 30 runs; slow, shared lock). deepseek aborted (empty replies, E79 deviation).
-- DONE: E81 precision@5% prevalence: premium .24 test / .16 rep; action_stats .46 / .08 (most alarms false).
-- DONE: E83 independent codex reimplementation from REPORT text: 31/32 numbers match to 3 dp, no bug.
-- DONE: E82 text LR explained: placebo (no delivery) runs score AUROC 1.00 vs fresh none -> text detects channel OFFER.
-- REPORT: new "Phase 2 results" section above Abstract (P2.1–P2.4).
-- verify_artifacts.py now FAILS by design (v1 inventory manifest); verify v1 at tag v1-overnight; rebuild manifest at finalize.
+## Current state (2026-10-24 07:15 UTC, Phase 2 iteration 1)
+- RUNNING (bg): `p2_chain.sh` llm_p2cue (6 conds x 15 seeds; ~30/90 runs at 07:10, ETA ~08:30) -> llm_p2para1/2 (40)
+  -> llm_p2rep (60, gap 4); then `p2_chain2.sh` -> llm_p2aware (20), llm_p2asym (20), llm_p2coded (10).
+  `p2_post.sh` auto-labels (p2_label.py) + analyses (p2_cue.py) cue/para1/para2. llm_p2glm (glm-5.3-flash, Go, slow ~1 run/2h).
+- DONE E81 precision@5%: premium .24 test/.16 rep; action_stats .46/.08. E83 codex reimplementation: 31/32 match, no bug.
+- DONE E82: text LR flags placebo (no delivery) 15/15 above all none -> text signal needs no delivered message.
+- DONE E84 behaviour labels: test only 14/50 positives FOLLOW the agreement; premium flags 34/36 abandoned ones;
+  vs followed label premium .80 [.67,.90], LLM views .50-.65. P1/P3 failed, P2 held.
+- E85 Opus design review applied (prereg amendment E77-p2cue-amend BEFORE any cue outcome).
+- verify_artifacts.py FAILS by design (v1 manifest); verify v1 at tag v1-overnight; rebuild manifest at finalize.
 
 ## Next steps
-1. When llm_p2cue labelled: read results/analysis/p2_cue_llm_p2cue.json, write P2.4 (gap 1 headline), rerun p2_textlr.py (adds cue conds).
-2. Gap 2 (labels by behaviour): label "agreement followed?" from chat + prices; channel-but-no-agreement / tacit-high runs.
-3. After llm_p2rep: label_llm-equivalent labels + frozen premium (E80; computed once). Gap 3: glm analysis when done.
-4. Gaps 5, 7, 8 (monitor-aware, cost asymmetry, coded public text) need new generation -> queue after p2rep (by Sun 15:00).
-5. Adversarial codex + Opus review of Phase 2 section before Sat 20:00.
+1. Cue done -> check logs/p2/post.log; read results/analysis/p2_cue_llm_p2cue.json; write P2.5 against the
+   registered pattern (E77 + amendment); rerun p2_textlr.py (adds cue conds); run p2_behaviour on llm_p2cue.
+2. Para1/2 -> E78 band. p2rep -> `p2_label.py --ds llm_p2rep` then compute frozen premium AUROC ONCE (E80; write script first).
+3. Gaps 5/7/8 analyses when chain2 data lands (E86-E88): need small analysis scripts (premium, own-cost premium, judge).
+4. codex adversarial review of Phase 2 REPORT claims before Sat 20:00; Figure for P2.5 (per-round premium by condition).
+5. Optional: LLM auditor views on p2cue placebo/notes/neutral (tests which detectors respond to the offer).
 
 ## Log
+- 07:15 P2 iter1: E84 behaviour labels (P2.4); gaps 5/7/8 generator + E86-E88 registered, chain2 queued; TL;DR item 6.
 - 06:53 P2 iter1: Opus design review (E85) applied: registration amendment, script fixes, REPORT wording.
 - 06:43 P2 iter1: generator conds + matched seeds; E77-E83 registered; E81/E82/E83 done; generation launched (codex + Go).
 - 06:20 iter 30: TL;DR block in REPORT (E75); handoff exports + manifest rebuilt; all verifiers/tests PASS. No new experiments from here.
