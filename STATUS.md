@@ -1,6 +1,6 @@
 # STATUS
 
-## Current state (2026-10-24 23:40 UTC, Phase 2 iteration 57) — following DIRECTION 22:05
+## Current state (2026-10-24 23:10 UTC, Phase 2 iteration 57) — following DIRECTION 22:05
 - Base headline unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc).
 - E113 landed + sealed (iter55): registered P1 weakly held 4/16; Qwen-3.6 stratified combined−action −0.24 [−0.37, −0.09], but prices alone at chance there (pooled 0.52) and text inverted (pooled 0.32); luna posting cells +0.11 [−0.02, +0.24].
 - **DIRECTION #3 adversarial review DONE (E131), pulled forward from Sun 02:00** because its stated condition ("after E113 lands") was met; earlier = more fix time before the 07:30 freeze, same quota. Codex gpt-6.1-sol + Opus subagent; 30 wording/traceability fixes applied (no number recomputed); untraceable deepseek 719/720 + sol "Nash + 4" removed; inversion scoped to point estimates; all executed/kept counts named by rule; amend3 timing disclosed.
@@ -11,7 +11,7 @@
 - Risks: six games/arm/cell in E113; channel labels ≠ executed collusion; Q1.4 may edit joint statement — re-diff before freeze.
 
 ## Log
-- 23:40 P2 iter57: E131 adversarial review (codex + Opus) of top/P2.0/glance/P2.16, pulled forward from Sun02:00 (E113 landed). Fixed all P1s and most P2s by wording only; claims35/35, verify26/26, joint verbatim True; REPORT707 lines, abstract247 words. One ledger row.
+- 23:10 P2 iter57: E131 adversarial review (codex + Opus) of top/P2.0/glance/P2.16, pulled forward from Sun02:00 (E113 landed). Fixed all P1s and most P2s by wording only; claims35/35, verify26/26, joint verbatim True; REPORT707 lines, abstract247 words. One ledger row.
 - 22:38 P2 iter56: read CLAUDE/PLAN/STATUS/DIRECTION and experiment ledger; E113 already landed and verified in iter55. Nothing due before Sun02:00–05:00 adversarial review; ended cheaply per DIRECTION22:05 directive5. REPORT remains current; no new experiment, metric, snapshot, calls, tooling, checks or export.
 - 22:37 P2 iter55 verification COMPLETE: offline reproduction26/26 commands,33/33 JSON outputs exact, originals unchanged. Claims35/35; E113 synthetic14/14; final result/snapshot/audit-cache hashes exact; REPORT707 lines/abstract211 words/P2.16 nine lines. One final E113 ledger row; no new generation, metric rerun, joint-statement change or PDF export. Next work is the scheduled Sun02:00–05:00 review.
 - 22:36 P2 iter55 E113 FINAL: 192 games/six balanced sweeps, +30 frozen audit calls, coverage/current-prompt preflight PASS, eval once. Qwen stratified combined−action−0.24 [−0.37,−0.09], combined−text−0.05 [−0.13,+0.03];0/8 positive/0 ties/8 negative; text0.32 [0.24,0.42],48/48 flags each arm. Registered P1 weakly held4/16 positive (1 tie,11 negative); secondary execution labels unavailable at cutoff. P2.16/abstract211 words/glance/merge/TL;DR landed, claims35/35; all saved-input/result hashes exact. Offline reproduction in progress; no joint-statement edit.
