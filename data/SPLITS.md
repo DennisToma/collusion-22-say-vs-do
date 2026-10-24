@@ -147,3 +147,5 @@ scorers, thresholds, metric definitions and published numerical estimates are un
   T=40, seed 9700, matched private/none k=0..2), `llm_p2strong_sol` (gpt-6.1-sol, same, k=0..1) = C1 pilot; the full C1 arm
   will be a NEW dataset with a new seed. `llm_p2g56sol` (gpt-5.6-sol), `llm_p2mimo` (mimo-v2.5, Go): lab, T=12, seed 8100,
   matched private/none k=0..6 (C2). No tuning; whole sets analysed once; fallback-model runs excluded.
+- `llm_p2strongF` (E99, registered before generation): C1 full arm, gpt-6-luna, --framing strong, T=40, seed 9800, matched
+  private/none k=0..19 (run index 2k + cond). Held out: no tuning; analysed once by p2_strong_eval.py.
