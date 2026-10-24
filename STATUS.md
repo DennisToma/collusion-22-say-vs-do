@@ -5,7 +5,7 @@
 - E99, E110, E102, E111, E112 final in REPORT. **Checkpoint Opus review done (iter26, early)**: 19/19 spot-checked numbers match;
   4 P1 + 8 P2 framing fixes applied (abstract now says action_stats test gain did NOT replicate, +0.00 pooled; SALT text auditor 0.87
   stated next to 62%; plan view "comparably, no paired test"; P2.15 reading limited to one firm's memory; joint-statement Qwen numbers
-  labelled as Q1.4 E65). p2_claims 25/25 OK (new C04c, C22, C23). REPORT 717 lines; abstract ~400 words (over the ~255 target: trim at final pass).
+  labelled as Q1.4 E65). p2_claims 25/25 OK (new C04c, C22, C23). REPORT 717 lines; abstract ~365 words after a tightening pass (over the ~255 target because of review-required qualifiers).
 - **E115** (sol-newcomer arm of E112) generating (`logs/p2replS_gen.log`, 7/30 raw at 17:55); ETA ~20:00–21:00.
 - **E113 E1 audit**: snapshot refreshed 36 games / 16 cells (first sweep complete); audit cached; coverage 100%, 0 unparsed; no scores read.
 - verify_artifacts manifest FAIL still expected (rebuild deferred to Sun 16:30).
@@ -14,7 +14,7 @@
 1. E115: when "p2replS gen done": `P2REPL_ARM=sol uv run python p2_replace_eval.py` ONCE → S1–S4 into P2.15 (2–3 lines) + glance.
 2. Checkpoint review is DONE (do not run another before Sun 12:30 per DIRECTION). Remaining P3-3 (registration exceptions) partly applied.
 3. E1: re-run `snapshot` + `audit` (+ `coverage`) as Q1.4 sweeps 2–3 land; FINAL `eval` once when all 3 sweeps exist (or Sun 12:00).
-4. Optional low-cost: trim abstract toward ~300 words without dropping the review's qualifiers.
+4. Abstract tightened once (iter26); further cuts only by moving the Qwen/plan sentences to TL;DR at the final pass.
 
 ## Log
 - 17:58 P2 iter26: Opus checkpoint review (reviews/p2_iter26_checkpoint_opus.md) applied to abstract/TL;DR/glance/P2.15/header; p2_claims +C04c/C22/C23 → 25/25 OK; E1 snapshot 36 games/16 cells, coverage OK.

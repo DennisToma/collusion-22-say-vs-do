@@ -6,22 +6,21 @@ Phase 2 (from 2026-10-24 06:30 UTC) re-tests them. Checkpoint text, 2026-10-24 1
 ## Abstract
 Reading LLM sellers' public messages in addition to their prices gives **no resolved gain** in detecting collusion: combined minus the better
 single view is −0.01 [−0.09, +0.06] run-AUROC on the locked test (n = 95) and −0.07 [−0.17, +0.02] on two fresh replications pooled post hoc
-(n = 90). Gains above +0.06 (test) and +0.02 (pooled) are excluded at 95%. Setup: a
-4-firm pricing market of gpt-6-luna sellers (one pair may chat privately), audited zero-shot by gpt-6.1-sol on public text, actions, or both.
-(A computed pair-statistics table added to the action view gains on test, +0.11 [+0.04, +0.18], but not on fresh data, +0.00 [−0.06, +0.07]
-pooled n = 90; adding text to it does not gain, −0.06 [−0.14, +0.01] test.)
-Three reasons. (1) The action signal is partly a prompt effect: the post-hoc-selected pair price premium (AUROC 0.94 [0.87, 0.99], n = 60 fresh)
-responds to private pricing deliberation (a private pricing notepad no other firm reads gives 65% of the channel premium, ratio CI [0.34, 1.32]), to wording,
-and flags legitimate cost/quality edges (7/10, 9/10 vs 2/10). (2) Where coordination is said depends on the family: luna talks only in
-private; Claude, deepseek and Qwen also invite rivals publicly, so text auditors flag every control market (50/50). On external SALT-NLP data
-(8000 episodes, 10 models) 62% of executed episodes show no explicit agreement in their chat, yet a
-text auditor still predicts execution there (AUROC 0.87 [0.83, 0.91]): the act is negotiated in the chat itself. (3) Talk and behaviour labels disagree: only 14/50 test "colluders" keep their agreement.
-With memory, a profit objective and other strong-framing levers (combined, not ablated), 13/20 channel pairs strictly execute agreements, yet 19/20 no-channel markets also price ≥ Nash + 2
-(paired difference unresolved). Exploratory (13 vs 19 markets): an LLM monitor reading firms' private plans ranks executed above tacit
-(AUROC 0.76 [0.55, 0.93]), but a no-LLM count of plans naming the chat partner does comparably (0.82 [0.66, 0.96]; no paired test), and
-no plan uses agreement words: consistent with plans carrying a channel footprint rather than stated collusion. Public text ranks the classes in reverse (0.25 [0.08, 0.46]).
-Abliterated vs base Qwen3.8-27B (15 + 15 markets; bf16 vs FP8 serving; agreement at ceiling, 15/15 both): no detectable increase in agreement or execution,
-and a smaller channel premium (−1.24 [−2.41, −0.03]).
+(n = 90). Gains above +0.06 (test) and +0.02 (pooled) are excluded at 95%. Setup: a 4-firm pricing market of gpt-6-luna sellers (one pair may
+chat privately), audited zero-shot by gpt-6.1-sol on public text, actions, or both. (A computed pair-statistics table gains on test,
++0.11 [+0.04, +0.18], but not on fresh data, +0.00 [−0.06, +0.07] pooled n = 90; adding text to it does not, −0.06 [−0.14, +0.01] test.)
+Three reasons. (1) The action signal is partly a prompt effect: the post-hoc-selected pair price premium (AUROC 0.94 [0.87, 0.99], n = 60
+fresh) responds to private deliberation (a pricing notepad nobody else reads gives 65% of the channel premium, ratio CI [0.34, 1.32]), to
+wording, and flags legitimate cost/quality edges (7/10, 9/10 vs 2/10). (2) Where coordination is said depends on the family: luna talks only
+in private; Claude, deepseek and Qwen also invite rivals publicly, so text auditors flag every control market (50/50). On external SALT-NLP
+data (8000 episodes, 10 models) 62% of executed episodes show no explicit agreement in their chat, yet a text auditor still predicts execution
+(AUROC 0.87 [0.83, 0.91]) because the act is negotiated in the chat. (3) Talk and behaviour labels disagree: only 14/50 test "colluders" keep
+their agreement. With memory, profit framing and other levers (combined, not ablated), 13/20 channel pairs strictly execute, yet 19/20
+no-channel markets also price ≥ Nash + 2. Exploratory (13 vs 19 markets): a monitor reading private plans ranks executed above tacit
+(AUROC 0.76 [0.55, 0.93]), but a no-LLM count of plans naming the chat partner does comparably (0.82 [0.66, 0.96]; no paired test) and
+no plan uses agreement words, consistent with a channel footprint rather than stated collusion. Public text ranks the classes in reverse (0.25 [0.08, 0.46]).
+Abliterated vs base Qwen3.8-27B (15 + 15 markets; bf16 vs FP8; agreement at ceiling): no detectable increase in agreement or execution, and a
+smaller channel premium (−1.24 [−2.41, −0.03]).
 Every abstract number with its denominator and source key: `results/analysis/claims_denominators.md` (`p2_claims.py`, 25/25 match).
 
 **TL;DR (sources: Phase 2 at a glance, below).**
