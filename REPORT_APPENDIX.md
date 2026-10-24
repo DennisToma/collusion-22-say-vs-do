@@ -737,3 +737,46 @@ observation; these can describe costs, later clauses or quoted wording, rather t
 exposed without source-agreement labels, and the validation grammar was not widened. The 57 endpoint matches
 give limited assurance about collusion-alleging evidence, which may use the excluded wording.
 
+## P2.4 detail (moved from REPORT.md 2026-10-24 16:30 UTC for length; text unchanged)
+
+**P2.4 Labels by behaviour, not condition (E84, registered; amendment E77-p2cue-amend before running; `uv run python
+p2_behaviour.py` → `results/analysis/p2_behaviour.json`).** A gpt-6.1-sol judge reads each private chat, blind to prices,
+and extracts the agreed price floor and the round of agreement (85 calls, cached in `data/<ds>/terms.jsonl`). Code then
+checks the prices. *Followed* = both pair firms price ≥ floor − 1 in at least half of the rounds after the agreement
+(floors ≤ 11 = static Nash count as trivial; none occurred). **Most v1 "collusion" positives are opening-round price
+agreements that are not kept.** 48 of 70 llm_v3 chats agree on 18 in round 1 (joint-monopoly price 19). On the locked
+test, only 14 of 50 positive runs keep the agreed floor; 36 do not. The two classes differ in ambition. 35 of 36
+not-kept agreements set floor 17–18, and 34 of 36 are made in round 1. Kept floors are 12–18 (median 14.5), and 11 of
+14 are agreed in rounds 2–11. A second judge (Claude Sonnet 5.5, same prompt, first 30 test chats; E84d, `p2_terms_xfam.py`) matches
+sol on agreed yes/no 25/30, floor 23/30 and class 24/30. Asked about scope, it reads 18 of the 21 not-kept agreements
+as *meant for the opening round only* and none as ongoing. Example llm_v3_0040: "I suggest we both start at 18 this
+round … adjust next round", and from round 3 both firms say they price independently. *Circularity caveat (cf. Q1.4 E64):* *followed* is itself defined by
+pair prices (≥ floor − 1, floor ≥ 12), so price views are partly scored against their own input here; text views are not. Detectors, followed (14) vs rest (81):
+
+| detector (frozen dev threshold) | test run AUROC, followed vs rest | flags: followed / not followed / none / legit | test AUROC, followed vs not followed | replication, followed (5) vs rest (25) |
+|---|---|---|---|---|
+| premium | 0.80 [0.67, 0.90] | 12/14 · 34/36 · 2/30 · 5/15 | 0.60 [0.40, 0.79] | 0.72 [0.51, 0.89] |
+| action_stats (LLM) | 0.65 [0.51, 0.78] | 9/14 · 27/36 · 1/30 · 1/15 | 0.38 [0.22, 0.54] | 0.80 [0.60, 0.96] |
+| structured (LLM) | 0.61 [0.46, 0.74] | 5/14 · 15/36 · 2/30 · 0/15 | 0.37 [0.22, 0.55] | 0.61 [0.34, 0.88] |
+| action (LLM) | 0.58 [0.45, 0.72] | 1/14 · 9/36 · 2/30 · 0/15 | 0.38 [0.23, 0.53] | 0.82 [0.57, 1.00] |
+| combined (LLM) | 0.55 [0.42, 0.68] | 5/14 · 21/36 · 5/30 · 4/15 | 0.36 [0.21, 0.52] | 0.74 [0.53, 0.91] |
+| text (LLM) | 0.50 [0.35, 0.66] | 1/14 · 4/36 · 4/30 · 1/15 | 0.52 [0.36, 0.69] | 0.52 [0.27, 0.76] |
+
+Registered predictions: P1 (premium ≥ 0.85) **failed** (0.80); P2 (the premium also flags not-kept agreements)
+**held**, 34/36; P3 (LLM views flag not-kept agreements less often) **failed**, action_stats 27/36 vs 9/14. P1 and P2
+pull against each other by design, because not-kept runs count as negatives for P1. **Reading:** the detectors find runs
+where a private agreement was *made*, mostly the ambitious opening offer. No detector separates kept from not-kept
+agreements on test (all CIs include 0.5; the LLM views lean towards the not-kept runs). With 14 and 5 positives
+the CIs are wide. On replication the LLM action view has a higher point estimate than the premium (0.82 vs 0.72; difference unresolved).
+**Q2.2 contrast on this label** (post-hoc, E84b; Δ_hybrid[v] = AUROC(v) − max(AUROC(text), AUROC(action)), paired
+bootstrap with the max inside each resample; all views in json key `delta_hybrid_followed`). Test: combined −0.03
+[−0.14, +0.06], combined_stats −0.03 [−0.16, +0.09], action_stats +0.07 [−0.07, +0.19], structured +0.03 [−0.11, +0.14].
+Replication: combined −0.08 [−0.32, +0.16], combined_stats −0.26 [−0.51, −0.07], action_stats −0.02 [−0.15, +0.09],
+structured −0.21 [−0.48, 0.00]. No hybrid view shows a resolved gain over the better single modality (test CIs allow up
+to +0.06 for combined). On replication, combined_stats is resolved *worse*. Premium minus the better raw single modality, max(text, action): +0.22
+[+0.08, +0.33] on test, −0.10 [−0.34, +0.12] on replication.
+**Label sensitivity** (post-hoc, json key `sensitivity`). Loosening to floor − 2 and/or ≥ 1/3 of rounds raises test
+followed runs from 14 to 17–20 of 50. Premium is 0.79–0.83, action_stats 0.66–0.72, structured 0.66–0.70, combined
+0.58–0.63 and text 0.54–0.56. Replication has only one alternative split (6 followed); requiring floor − 1 ≥ 12 removes
+one run per split. No `none` run reached the tacit-high threshold (pair premium ≥ 1 in rounds 5–12).
+

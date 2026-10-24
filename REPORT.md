@@ -1,7 +1,7 @@
 # Say vs. Do: does auditing what AI agents *say* together with what they *do* catch collusion better?
 
 *Apart AI Collusion Sprint, Q2.2 — text + action auditing. v1 (overnight) results are frozen as git tag `v1-overnight`;
-Phase 2 (from 2026-10-24 06:30 UTC) re-tests them. Checkpoint text, 2026-10-24 16:45 UTC: all original gaps, P2.7 (E99) and P2.14 (E110) are final; running: participant replacement (E112, Part E2), strong-Qwen pilot (E102, descriptive). Exports: [README.md](README.md).*
+Phase 2 (from 2026-10-24 06:30 UTC) re-tests them. Checkpoint text, 2026-10-24 16:30 UTC: all original gaps, P2.7 (E99) and P2.14 (E110) are final; running: participant replacement (E112, Part E2); E102 strong-Qwen pilot final (P2.11, descriptive). Exports: [README.md](README.md).*
 
 ## Abstract
 Reading LLM sellers' public messages in addition to their prices gives **no resolved gain** in detecting collusion: combined minus the better
@@ -61,7 +61,7 @@ Phase 2 experiments and checks are E77–E108; descriptive post-hoc analyses are
 | P2.8 | second fresh replication (n = 60, registered) | premium 0.94 [0.87, 0.99] (confounded, P2.5/P2.10); hybrid −0.04 [−0.16, +0.08]; pooled n = 90 −0.07 [−0.17, +0.02] | `replication_llm_p2rep.json`, `p2_pool_rep.json` |
 | P2.9 | monitor-aware sellers | 0/10 + 0/10 agreements vs 10/10 matched: compliance, not evasion | `p2_aware.json` |
 | P2.10 | legitimate asymmetry hard negative | flagged 7/10 (cost), 9/10 (quality) vs 2/10; competition predicts the cost flag | `p2_asym.json`, `p2_asym_nash.json` |
-| P2.11 | abliterated vs base Qwen (C3) | agreement 15/15 both (ceiling); executed 13/15 both, strict 5/15 both (diff 0 [−0.26, +0.26]); premium diff −1.24 [−2.41, −0.03] (bf16 vs FP8 serving); Qwen3.5-9B pair dropped at its registered pilot (base prices below Nash) | `p2_qwen_cmp.json`, `p2_qwen9_pilot.json` |
+| P2.11 | abliterated vs base Qwen (C3) | agreement 15/15 both (ceiling); executed 13/15 both, strict 5/15 both (diff 0 [−0.26, +0.26]); premium diff −1.24 [−2.41, −0.03] (bf16 vs FP8 serving); Qwen3.5-9B pair dropped at its registered pilot (base prices below Nash); strong framing (E102, 6 seeds, descriptive): strict 4/6 base vs 3/6 abliterated | `p2_qwen_cmp.json`, `p2_qwen9_pilot.json`, `p2_qwen_strong.json` |
 | P2.12 | external data (SALT-NLP) | P(said \| executed) 0.385 [0.353, 0.416]; text auditor AUROC 0.87 [0.83, 0.91] (TF-IDF 0.91) | `salt_d1.json` |
 | P2.13 | transcript anomaly hunt (exploratory, 40 games) | ±1 opening-price band: 37/40 rounds but exactly target 1/40; 28-round asymmetric pair streak; same-response price declarations 0/143 contradictions | `p2_serendipity.json` |
 | P2.14 | German-language market (10 + 10, paired seeds) | agreement 3/10 vs 9/10 English; premium still +0.91 [+0.20, +1.58] (English +1.75) | `p2_de.json` |
@@ -77,45 +77,17 @@ other two differ by ≤ 0.001 (tie handling); no bug. Detail in the appendix and
 detects condition traces, not agreements. Detail in the appendix (`p2_textlr.json`).
 
 **P2.4 Labels by behaviour, not condition (E84, registered; amendment E77-p2cue-amend before running; `uv run python
-p2_behaviour.py` → `results/analysis/p2_behaviour.json`).** A gpt-6.1-sol judge reads each private chat, blind to prices,
-and extracts the agreed price floor and the round of agreement (85 calls, cached in `data/<ds>/terms.jsonl`). Code then
-checks the prices. *Followed* = both pair firms price ≥ floor − 1 in at least half of the rounds after the agreement
-(floors ≤ 11 = static Nash count as trivial; none occurred). **Most v1 "collusion" positives are opening-round price
-agreements that are not kept.** 48 of 70 llm_v3 chats agree on 18 in round 1 (joint-monopoly price 19). On the locked
-test, only 14 of 50 positive runs keep the agreed floor; 36 do not. The two classes differ in ambition. 35 of 36
-not-kept agreements set floor 17–18, and 34 of 36 are made in round 1. Kept floors are 12–18 (median 14.5), and 11 of
-14 are agreed in rounds 2–11. A second judge (Claude Sonnet 5.5, same prompt, first 30 test chats; E84d, `p2_terms_xfam.py`) matches
-sol on agreed yes/no 25/30, floor 23/30 and class 24/30. Asked about scope, it reads 18 of the 21 not-kept agreements
-as *meant for the opening round only* and none as ongoing. Example llm_v3_0040: "I suggest we both start at 18 this
-round … adjust next round", and from round 3 both firms say they price independently. *Circularity caveat (cf. Q1.4 E64):* *followed* is itself defined by
-pair prices (≥ floor − 1, floor ≥ 12), so price views are partly scored against their own input here; text views are not. Detectors, followed (14) vs rest (81):
-
-| detector (frozen dev threshold) | test run AUROC, followed vs rest | flags: followed / not followed / none / legit | test AUROC, followed vs not followed | replication, followed (5) vs rest (25) |
-|---|---|---|---|---|
-| premium | 0.80 [0.67, 0.90] | 12/14 · 34/36 · 2/30 · 5/15 | 0.60 [0.40, 0.79] | 0.72 [0.51, 0.89] |
-| action_stats (LLM) | 0.65 [0.51, 0.78] | 9/14 · 27/36 · 1/30 · 1/15 | 0.38 [0.22, 0.54] | 0.80 [0.60, 0.96] |
-| structured (LLM) | 0.61 [0.46, 0.74] | 5/14 · 15/36 · 2/30 · 0/15 | 0.37 [0.22, 0.55] | 0.61 [0.34, 0.88] |
-| action (LLM) | 0.58 [0.45, 0.72] | 1/14 · 9/36 · 2/30 · 0/15 | 0.38 [0.23, 0.53] | 0.82 [0.57, 1.00] |
-| combined (LLM) | 0.55 [0.42, 0.68] | 5/14 · 21/36 · 5/30 · 4/15 | 0.36 [0.21, 0.52] | 0.74 [0.53, 0.91] |
-| text (LLM) | 0.50 [0.35, 0.66] | 1/14 · 4/36 · 4/30 · 1/15 | 0.52 [0.36, 0.69] | 0.52 [0.27, 0.76] |
-
-Registered predictions: P1 (premium ≥ 0.85) **failed** (0.80); P2 (the premium also flags not-kept agreements)
-**held**, 34/36; P3 (LLM views flag not-kept agreements less often) **failed**, action_stats 27/36 vs 9/14. P1 and P2
-pull against each other by design, because not-kept runs count as negatives for P1. **Reading:** the detectors find runs
-where a private agreement was *made*, mostly the ambitious opening offer. No detector separates kept from not-kept
-agreements on test (all CIs include 0.5; the LLM views lean towards the not-kept runs). With 14 and 5 positives
-the CIs are wide. On replication the LLM action view has a higher point estimate than the premium (0.82 vs 0.72; difference unresolved).
-**Q2.2 contrast on this label** (post-hoc, E84b; Δ_hybrid[v] = AUROC(v) − max(AUROC(text), AUROC(action)), paired
-bootstrap with the max inside each resample; all views in json key `delta_hybrid_followed`). Test: combined −0.03
-[−0.14, +0.06], combined_stats −0.03 [−0.16, +0.09], action_stats +0.07 [−0.07, +0.19], structured +0.03 [−0.11, +0.14].
-Replication: combined −0.08 [−0.32, +0.16], combined_stats −0.26 [−0.51, −0.07], action_stats −0.02 [−0.15, +0.09],
-structured −0.21 [−0.48, 0.00]. No hybrid view shows a resolved gain over the better single modality (test CIs allow up
-to +0.06 for combined). On replication, combined_stats is resolved *worse*. Premium minus the better raw single modality, max(text, action): +0.22
-[+0.08, +0.33] on test, −0.10 [−0.34, +0.12] on replication.
-**Label sensitivity** (post-hoc, json key `sensitivity`). Loosening to floor − 2 and/or ≥ 1/3 of rounds raises test
-followed runs from 14 to 17–20 of 50. Premium is 0.79–0.83, action_stats 0.66–0.72, structured 0.66–0.70, combined
-0.58–0.63 and text 0.54–0.56. Replication has only one alternative split (6 followed); requiring floor − 1 ≥ 12 removes
-one run per split. No `none` run reached the tacit-high threshold (pair premium ≥ 1 in rounds 5–12).
+p2_behaviour.py` → `results/analysis/p2_behaviour.json`; full text, detector table, contrasts and label sensitivity in
+[REPORT_APPENDIX.md § P2.4 detail](REPORT_APPENDIX.md)).** A gpt-6.1-sol judge reads each private chat blind to prices and extracts the
+agreed floor and round; code checks *followed* = both pair firms ≥ floor − 1 in ≥ half the later rounds. **Most v1 "collusion" positives
+are opening-round agreements that are not kept:** on the locked test only 14/50 positive runs keep the floor (35/36 not-kept floors are
+17–18, 34/36 made in round 1; kept floors 12–18, mostly agreed in rounds 2–11). A second judge (Claude Sonnet 5.5, 30 chats) agrees on
+class 24/30 and reads 18/21 not-kept agreements as meant for the opening round only. Followed (14) vs rest (81), test run AUROC: premium
+0.80 [0.67, 0.90], action_stats 0.65, structured 0.61, action 0.58, combined 0.55, text 0.50; no detector separates kept from not-kept
+agreements on test (all CIs include 0.5). Registered P1 (premium ≥ 0.85) **failed**, P2 (premium flags not-kept agreements, 34/36) held, P3 **failed**.
+Q2.2 contrast on this label (post hoc): combined − max(text, action) −0.03 [−0.14, +0.06] test, −0.08 [−0.32, +0.16] replication; no
+hybrid view shows a resolved gain. Label sensitivity (floor − 2, ≥ 1/3 of rounds): premium 0.79–0.83, text 0.54–0.56. *Circularity caveat
+(cf. Q1.4 E64):* *followed* is defined by pair prices, so price views are partly scored against their own input; text views are not.
 
 **P2.5 Is the "collusion" a prompt artifact? (E77 + amendment, E78, E92; registered before generation; `uv run python p2_cue.py
 --ds llm_p2cue && uv run python p2_cue_verdict.py && uv run python p2_band.py`; full text in
@@ -301,7 +273,7 @@ seller has the *smaller* channel premium and the lower price level. Both models 
 markets are tacit-high, i.e. market excess over Nash ≥ +2 over rounds 2–12), and they invite rivals publicly: 636/720 (base) and 617/720 (abliterated) no-channel public messages match the
 frozen invitation regex, vs 290 and 354 with a private channel. Text views flag 15/15 markets in both arms and score *below* chance, consistent with these public invitations (post-hoc regex) (as for Claude/deepseek, P2.6).
 Q1.4 E61 (their market, T = 20): abliterated − base −0.37 [−2.09, +1.36]. In neither market did removing refusal training detectably increase channel
-collusion. "No detectable" is not "no effect": n = 15 pairs excludes only large differences. E102 (strong framing, 6 + 6 seeds per model) is still generating and will be reported descriptively.
+collusion. "No detectable" is not "no effect": n = 15 pairs excludes only large differences. *E102 (strong framing, T = 40, 6 matched seeds per model × private/none, registered descriptive; `uv run python p2_label.py --ds llm_p2qwen{b,a}S && uv run python p2_strong.py --ds llm_p2qwenbS llm_p2qwenaS --min-floor 13 --late 11 --out results/analysis/p2_qwen_strong.json`):* agreement 6/6 both; strict-executed base 4/6 [0.29, 0.92] vs abliterated 3/6 [0.17, 0.83]; mean pair premium private − none +3.42 (base) / +2.97 (abliterated); market excess over Nash private / none +5.6 / +6.3 (base), +3.8 / +2.9 (abliterated). Under strong framing, too, abliteration shows no increase (n = 6, no test).
 *C3c (Qwen3.5-9B, base vs abliterated on identical Modal FP8 serving; E109):* dropped by its registered protocol pilot (4 games per model): 0/192 unparsable decisions in each model, but the base model's median market price, 9.0, is below static Nash (11) (abliterated: 11.5), which fails the registered price-sanity rule; stage 2 was not run (`uv run python p2_qwen9_pilot.py` → `p2_qwen9_pilot.json`).
 
 **P2.12 External validity: SALT-NLP agent-collusion (Part D1; E105 registered before any call; E104 P1/P2 registered after the pooled

@@ -1,6 +1,6 @@
 # STATUS
 
-## Current state (2026-10-24 16:45 UTC VM clock, Phase 2 iteration 22)
+## Current state (2026-10-24 16:35 UTC from date -u, Phase 2 iteration 23)
 - Main claim unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc).
 - E99 strongF final: strict-executed 13/20, tacit-high none 19/20; paired private−none −0.44 [−1.84, +1.00].
 - **E111 (new, no LLM, exploratory):** private plans contain NO agreement words (0/39 private-arm runs); a partner-name count separates
@@ -16,7 +16,10 @@
 - **E114 (iter22, no LLM):** `p2_claims.py` → `results/analysis/claims_denominators.md`: 22/22 abstract claims regenerate from json keys
   with denominators. Found + fixed one abstract error: "+0.08 pair-statistics gain" was the `structured` view; correct is action_stats−action
   +0.11 [+0.04, +0.18], text on top −0.06 [−0.14, +0.01]. Hooked into verify_artifacts.py, which currently FAILS at the manifest check
-  (inventory changed; manifest rebuild deferred to Sun 16:30 per DIRECTION). E112: 3/30 games done by 16:35 → ETA ~19:45.
+  (inventory changed; manifest rebuild deferred to Sun 16:30 per DIRECTION). E112: 6/30 games done at 16:23 → ETA ~19:45.
+
+- **Iter23:** E102 strong-Qwen final (descriptive, P2.11 + glance): strict base 4/6 vs abliterated 3/6, agreement 6/6 both → no increase,
+  as E100. REPORT 738→710 lines (P2.4 detail moved verbatim to appendix; claims 22/22). verify_artifacts manifest FAIL still expected.
 
 ## Next steps
 1. When `logs/p2repl.log` shows "p2repl gen done": run `uv run python p2_replace_eval.py` ONCE (~40 judge calls), write ≤ 8 lines
@@ -24,10 +27,11 @@
 2. E113 E1 audit plan REGISTERED (16:18, before Q1.4 registered/generated the grid). Shakedown on Q1.4's first complete sweep
    (snapshot into data/ext_llm_grid_p2, pipeline check only); final once by Sun 12:00. If no sweep by Sun 06:00 → limitation line.
 3. Checkpoint 19:30: one Opus review of abstract + TL;DR + glance + P2.7 + P2.14.
-4. E102 stop/report Sun 10:00; denominators table (dir 5a); P2.11 three-pair table when Q1.4 E69 lands.
+4. P2.11 three-pair table when Q1.4 E69 lands (qb36 19/30 at 15:52). E102 DONE.
 
 ## Log
-- 16:45 P2 iter22: E114 claims×denominators (p2_claims.py), abstract C04 error fixed, denominators added (n = 60, 50/50, 15 + 15), header refreshed.
+- 16:35 P2 iter23: E102 result (p2_qwen_strong.json) into P2.11/glance; P2.4 detail → appendix (REPORT 710 lines); fixed iter22 timestamps.
+- 16:22 P2 iter22 (was mis-stamped 16:45): E114 claims×denominators (p2_claims.py), abstract C04 error fixed, denominators added (n = 60, 50/50, 15 + 15), header refreshed.
 - 16:18 P2 iter21: E113 E1-audit plan registered (no grid data exist yet).
 - 16:16 P2 iter21: E112 replacement registered, smoke-tested (0 calls for replayed prefix), launched; p2_replace_eval.py committed pre-outcome.
 - 16:12 P2 iter21: E111 plan-view keyword baseline (p2_plan_keyword.py); abstract/TL;DR/P2.7 plan claim rescoped; E66 line; joint sentence 2 rescoped.
