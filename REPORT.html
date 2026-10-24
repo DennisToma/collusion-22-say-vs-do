@@ -33,7 +33,7 @@ nav p { margin:0 } nav ul { columns:2; padding-left:22px } nav li { font-size:14
  .wide th:first-child,.wide td:first-child { width:17% }
  pre { font-size:8pt; padding:8pt } a { color:inherit; text-decoration:none }
 }
-</style></head><body><main><p class="export-note">Offline rendering of REPORT.md. Figures are embedded; source links are local in HTML and point to GitHub in PDF. No results recomputed.<br>Source SHA-256: 645b09435da7e07e432e5058c6d8230dc9dcb8db2925e8d78aabe9771a17abc9</p><nav aria-label="Contents"><p><strong>Contents</strong></p><ul><li><a href="#section-2">Abstract</a></li><li><a href="#section-4">Question</a></li><li><a href="#section-5">Setup</a></li><li><a href="#section-6">Results</a></li><li><a href="#section-10">Validity safeguards</a></li><li><a href="#section-11">Held-out discipline</a></li><li><a href="#section-12">Limitations</a></li><li><a href="#section-13">What to do next</a></li><li><a href="#section-14">Appendix A — LLM market, DEV split (runs 0000–0029; development only, superseded by the locked test above)</a></li><li><a href="#section-15">Appendix B — Scripted mechanism check (non-LLM baselines, baselines.py, 5-fold CV grouped by run, 320 runs)</a></li><li><a href="#section-16">Appendix C — Additional test-split detail (locked test split, n = 95; moved from §Results for length)</a></li><li><a href="#section-17">Appendix D — Exploration strata detail (moved from §Results for length; text unchanged)</a></li><li><a href="#section-18">Appendix E — Reproduce</a></li></ul></nav><h1 id="section-1">Say vs. Do: does auditing what AI agents <em>say</em> together with what they <em>do</em> catch collusion better?</h1>
+</style></head><body><main><p class="export-note">Offline rendering of REPORT.md. Figures are embedded; source links are local in HTML and point to GitHub in PDF. No results recomputed.<br>Source SHA-256: 0f3b91cffa8f8c4fb1f7a33f7331dd120da771a82286bddaefc8dff1bb7c3b5b</p><nav aria-label="Contents"><p><strong>Contents</strong></p><ul><li><a href="#section-2">Abstract</a></li><li><a href="#section-4">Question</a></li><li><a href="#section-5">Setup</a></li><li><a href="#section-6">Results</a></li><li><a href="#section-10">Validity safeguards</a></li><li><a href="#section-11">Held-out discipline</a></li><li><a href="#section-12">Limitations</a></li><li><a href="#section-13">What to do next</a></li><li><a href="#section-14">Appendix A — LLM market, DEV split (runs 0000–0029; development only, superseded by the locked test above)</a></li><li><a href="#section-15">Appendix B — Scripted mechanism check (non-LLM baselines, baselines.py, 5-fold CV grouped by run, 320 runs)</a></li><li><a href="#section-16">Appendix C — Additional test-split detail (locked test split, n = 95; moved from §Results for length)</a></li><li><a href="#section-17">Appendix D — Exploration strata detail (moved from §Results for length; text unchanged)</a></li><li><a href="#section-18">Appendix E — Reproduce</a></li></ul></nav><h1 id="section-1">Say vs. Do: does auditing what AI agents <em>say</em> together with what they <em>do</em> catch collusion better?</h1>
 <p><em>Apart AI Collusion Sprint, Q2.2 — text + action auditing. Status: locked test results in (2026-10-24 00:03 UTC); registered replication run 02:07 UTC (chronology disclosed below); placebo-channel exploration 03:33 UTC. Offline verification: <code>python3 verify_artifacts.py</code>; handoff instructions in <a href="README.md">README.md</a>.</em></p>
 <p>For the five-minute presentation, open <a href="PRESENTATION.html">PRESENTATION.html</a> locally in a browser;
 <a href="PRESENTATION.md">speaker notes and saved-input hashes</a> accompany it. Render with
@@ -86,8 +86,8 @@ effect. Claude Sonnet 5.5 shows the same pattern on 42 runs. Supervised baseline
 actions alone 0.96 (text alone 0.98, see below).</li>
 <li><strong>A computed statistics table helps</strong> (action_stats − action, run AUROC +0.11 [+0.04, +0.18]). On fresh data the
 run-level gain is not resolved (+0.04 [−0.10, +0.19]), but the localisation gain is. A post-hoc column ablation (E71)
-shows that the run-level gain comes from the price-level columns. With only the co-movement columns, run AUROC is
-0.77 on test vs 0.86 for the full table (Δ +0.09 [+0.02, +0.17]), close to actions alone at 0.75.</li>
+removes the table's three price-level columns. This lowers test run AUROC from 0.86 to 0.77 (Δ +0.09 [+0.02,
++0.17]; actions alone 0.75). The corresponding dev and replication differences are unresolved.</li>
 <li><strong>A one-line untrained statistic ranks highest among untrained scorers.</strong> The pair's price premium over its rivals
 reaches 0.95, against ≤ 0.86 for the six original LLM views (+0.09 [+0.01, +0.18]). A post-hoc one-sentence hint
 pointing the auditor at the premium gives action_stats 0.93 vs 0.86 on test (Δ +0.07 [−0.00, +0.15]) but 0.796 vs
@@ -573,9 +573,10 @@ uniform rate (4.5–6.8% of evidence items vs 8.3% uniform), although round 1 is
 the auditor at pair premiums and round-1 prices lifts action_stats on test (run AUROC 0.86 → 0.93, Δ +0.07
 [−0.00, +0.15]) but not on the replication (0.798 → 0.796); neither split is held out for this hint.</p>
 <p><strong>Which table columns help? (<code>action_stats_nolevel</code>, post-hoc E71; <code>uv run python auditors.py --ds llm_v3 --views action_stats_nolevel</code> (+ <code>--ds llm_v3rep</code>), then <code>uv run python nolevel_view.py</code> → <code>results/analysis/nolevel_view.json</code>).</strong>
-Same prompt as action_stats, but the pair table keeps only its co-movement columns (rounds within 1, correlation of price
-changes); pair mean, rivals' mean and premium are removed (155 gpt-6.1-sol calls, one prompt, no tuning; hypothesis
-logged in EXPERIMENTS.tsv before any audit ran). Paired, class-stratified bootstrap over runs:</p>
+Same prompt as action_stats, but the pair table keeps only its price-proximity column (rounds within 1) and its
+price-change correlation; the three level columns (pair mean, rivals' mean, premium) are removed. The raw action log is
+unchanged (155 completed gpt-6.1-sol audits, one prompt, no tuning; hypothesis logged in EXPERIMENTS.tsv before any E71
+audit ran). Paired, class-stratified bootstrap over runs (95% intervals, 2,000 resamples):</p>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -615,14 +616,14 @@ logged in EXPERIMENTS.tsv before any audit ran). Paired, class-stratified bootst
 </tbody>
 </table></div>
 <p>Pair-ID accuracy (action / no-level / action_stats): test 0.42 / 0.55 / 0.66, replication 0.47 / 0.53 / 0.93.
-Reading: without the level columns, the run-level score falls back to the action-only level on all three splits
-(no-level − action run Δ: test +0.01 [−0.06, +0.09], replication −0.04 [−0.20, +0.11]). The run-level table gain is
-therefore carried by the level columns (pair mean, rivals' mean, premium), and the full-minus-no-level difference is
-resolved on test. The co-movement columns alone improve localisation on test (+0.07 [+0.02, +0.13]), but the larger
-replication localisation gain needs the level columns. This fits the level-vs-variation reading above (and the sibling
-project's finding). It does not separate the premium column from the two mean columns, because the premium is their
-difference. Post hoc, on splits whose results were already known; the registered hypothesis (no-level ≈ action) holds
-at run level and only partly for localisation.</p>
+Reading: removing the three level columns reduces test run AUROC by 0.09 [0.02, 0.17]; the corresponding run-level
+differences on dev and replication are unresolved. No run-AUROC difference between the reduced table and actions
+alone is resolved (test +0.01 [−0.06, +0.09], replication −0.04 [−0.20, +0.11]), which is not evidence of equivalence.
+Adding the price-proximity and price-change-correlation columns to the action log improves test localisation (+0.07
+[+0.02, +0.13]); on the replication, the within-market gap between the full and reduced tables is +0.12 [+0.04, +0.25].
+This is consistent with the level-vs-variation reading above and with the sibling project's finding. The test covers the three
+level columns jointly and does not single out the premium, which is the difference of the two means. Post hoc, on splits whose results were
+already known.</p>
 <p><strong>Dropping the rival comparison: absolute markup over cost (post-hoc E70, <code>markup_baseline.py</code>).</strong> The premium compares a
 pair with its rivals, so it is undefined with two firms. Three untrained, comparison-free scores: <code>markup_pair</code> (max over
 pairs of pair mean price minus mean common base cost; usable with two firms), <code>markup_pair_own</code> (same, with each firm's own
@@ -871,7 +872,7 @@ gain for the LLM auditor (combined − action within +0.005 [−0.05, +0.045]; j
 unimodal auditors). A plausible reason, not tested causally, is that the sellers keep coordination private and their
 public messages are bland. The views that include a <em>computed pair-statistics table</em> (action_stats, combined_stats,
 structured) localise better than those without; separately, a single untrained statistic (the pair premium) beats
-every original LLM view on dev. (A later post-hoc column ablation, E71 in §Exploration, attributes the run-level benefit to the table's level columns.) This fits the sibling project's
+every original LLM view on dev. (A later post-hoc column ablation, E71 in §Exploration, finds that removing the table's three level columns lowers test run AUROC; dev and replication differences are unresolved.) This fits the sibling project's
 finding that dependence statistics detect coordinated <em>variation</em>, not <em>level</em>: these colluders coordinate on
 level, and the premium measures level directly.</p>
 <p><strong>Information-theoretic dependence detectors (sibling Q1.4, dev).</strong> Using the sibling project's per-pair scores on

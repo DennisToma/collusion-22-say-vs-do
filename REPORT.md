@@ -56,8 +56,8 @@ public log under six views (defined in §Setup). Locked test split (n = 95, run 
   actions alone 0.96 (text alone 0.98, see below).
 - **A computed statistics table helps** (action_stats − action, run AUROC +0.11 [+0.04, +0.18]). On fresh data the
   run-level gain is not resolved (+0.04 [−0.10, +0.19]), but the localisation gain is. A post-hoc column ablation (E71)
-  shows that the run-level gain comes from the price-level columns. With only the co-movement columns, run AUROC is
-  0.77 on test vs 0.86 for the full table (Δ +0.09 [+0.02, +0.17]), close to actions alone at 0.75.
+  removes the table's three price-level columns. This lowers test run AUROC from 0.86 to 0.77 (Δ +0.09 [+0.02,
+  +0.17]; actions alone 0.75). The corresponding dev and replication differences are unresolved.
 - **A one-line untrained statistic ranks highest among untrained scorers.** The pair's price premium over its rivals
   reaches 0.95, against ≤ 0.86 for the six original LLM views (+0.09 [+0.01, +0.18]). A post-hoc one-sentence hint
   pointing the auditor at the premium gives action_stats 0.93 vs 0.86 on test (Δ +0.07 [−0.00, +0.15]) but 0.796 vs
@@ -385,9 +385,10 @@ the auditor at pair premiums and round-1 prices lifts action_stats on test (run 
 
 **Which table columns help? (`action_stats_nolevel`, post-hoc E71; `uv run python auditors.py --ds llm_v3 --views
 action_stats_nolevel` (+ `--ds llm_v3rep`), then `uv run python nolevel_view.py` → `results/analysis/nolevel_view.json`).**
-Same prompt as action_stats, but the pair table keeps only its co-movement columns (rounds within 1, correlation of price
-changes); pair mean, rivals' mean and premium are removed (155 gpt-6.1-sol calls, one prompt, no tuning; hypothesis
-logged in EXPERIMENTS.tsv before any audit ran). Paired, class-stratified bootstrap over runs:
+Same prompt as action_stats, but the pair table keeps only its price-proximity column (rounds within 1) and its
+price-change correlation; the three level columns (pair mean, rivals' mean, premium) are removed. The raw action log is
+unchanged (155 completed gpt-6.1-sol audits, one prompt, no tuning; hypothesis logged in EXPERIMENTS.tsv before any E71
+audit ran). Paired, class-stratified bootstrap over runs (95% intervals, 2,000 resamples):
 
 | split | run AUROC action / no-level / action_stats | full − no-level (run) | within-market action / no-level / action_stats | full − no-level (within) | no-level − action (within) |
 |---|---|---|---|---|---|
@@ -396,14 +397,14 @@ logged in EXPERIMENTS.tsv before any audit ran). Paired, class-stratified bootst
 | dev (n = 30) | 0.78 / 0.78 / 0.89 | +0.11 [−0.04, +0.28] | 0.85 / 0.86 / 0.91 | +0.05 [+0.01, +0.09] | +0.02 [+0.00, +0.04] |
 
 Pair-ID accuracy (action / no-level / action_stats): test 0.42 / 0.55 / 0.66, replication 0.47 / 0.53 / 0.93.
-Reading: without the level columns, the run-level score falls back to the action-only level on all three splits
-(no-level − action run Δ: test +0.01 [−0.06, +0.09], replication −0.04 [−0.20, +0.11]). The run-level table gain is
-therefore carried by the level columns (pair mean, rivals' mean, premium), and the full-minus-no-level difference is
-resolved on test. The co-movement columns alone improve localisation on test (+0.07 [+0.02, +0.13]), but the larger
-replication localisation gain needs the level columns. This fits the level-vs-variation reading above (and the sibling
-project's finding). It does not separate the premium column from the two mean columns, because the premium is their
-difference. Post hoc, on splits whose results were already known; the registered hypothesis (no-level ≈ action) holds
-at run level and only partly for localisation.
+Reading: removing the three level columns reduces test run AUROC by 0.09 [0.02, 0.17]; the corresponding run-level
+differences on dev and replication are unresolved. No run-AUROC difference between the reduced table and actions
+alone is resolved (test +0.01 [−0.06, +0.09], replication −0.04 [−0.20, +0.11]), which is not evidence of equivalence.
+Adding the price-proximity and price-change-correlation columns to the action log improves test localisation (+0.07
+[+0.02, +0.13]); on the replication, the within-market gap between the full and reduced tables is +0.12 [+0.04, +0.25].
+This is consistent with the level-vs-variation reading above and with the sibling project's finding. The test covers the three
+level columns jointly and does not single out the premium, which is the difference of the two means. Post hoc, on splits whose results were
+already known.
 
 **Dropping the rival comparison: absolute markup over cost (post-hoc E70, `markup_baseline.py`).** The premium compares a
 pair with its rivals, so it is undefined with two firms. Three untrained, comparison-free scores: `markup_pair` (max over
@@ -598,7 +599,7 @@ gain for the LLM auditor (combined − action within +0.005 [−0.05, +0.045]; j
 unimodal auditors). A plausible reason, not tested causally, is that the sellers keep coordination private and their
 public messages are bland. The views that include a *computed pair-statistics table* (action_stats, combined_stats,
 structured) localise better than those without; separately, a single untrained statistic (the pair premium) beats
-every original LLM view on dev. (A later post-hoc column ablation, E71 in §Exploration, attributes the run-level benefit to the table's level columns.) This fits the sibling project's
+every original LLM view on dev. (A later post-hoc column ablation, E71 in §Exploration, finds that removing the table's three level columns lowers test run AUROC; dev and replication differences are unresolved.) This fits the sibling project's
 finding that dependence statistics detect coordinated *variation*, not *level*: these colluders coordinate on
 level, and the premium measures level directly.
 

@@ -1,20 +1,23 @@
 # STATUS
 
-## Current state (2026-10-24 05:40 UTC, iteration 26)
+## Current state (2026-10-24 05:35 UTC, iteration 27)
 - LOCKED TEST DONE (00:03), REPLICATION DONE (02:07); never rerun; detection estimates unchanged.
 - Test: premium run AUROC .95; action_stats .86; combined-minus-best-unimodal -.013 [-.091,+.064].
 - Replication (n=30): premium .92 vs action_stats .80; 4/4 registered rules held (not equivalence).
 - Placebo premium flags 14/15 with/without delivery; channel/condition confound remains.
-- NEW E70 (post-hoc): comparison-free markup over cost (two-firm usable) test .92-.95, rep .80-.84; premium gaps
-  unresolved (rep +.08..+.16). REPORT §Exploration + Key results + Limitations updated; Codex review applied.
-- Evidence checks (E68/E69) are literal/endpoint only; explanation role remains unvalidated.
-- 47 tests / 414 hashes pass; exports rebuilt (26 pages); talk unchanged at 7 slides.
-## Next steps (no new generation after 03:30; no new experiments after 06:30; FINALIZE 08:15)
+- E70 (post-hoc): comparison-free markup over cost test .92-.95, rep .80-.84.
+- NEW E71 (post-hoc, hypothesis registered first): stats table without its 3 level columns -> test run AUROC .77 vs
+  full .86 (d +.09 [+.02,+.17]; action .75); dev/rep differences unresolved; proximity/corr columns add test
+  localisation +.07 [+.02,+.13]. Codex review applied (logs/review_iter27_nolevel.md).
+- 47 tests / 418 hashes / 2,368 audit inputs pass; exports rebuilt (27 pages); talk unchanged at 7 slides.
+## Next steps (no new experiments after 06:30; FINALIZE 08:15)
 1. Keep detection results frozen; present PRESENTATION.pdf or PRESENTATION.html. Send REPORT.pdf for detail.
 2. Read-only: python3 -S verify_artifacts.py; uv run python check_audit_inputs.py; python3 -S check_price_transitions.py --check.
-3. If REPORT.md changes, regenerate handoff exports and update the post-hoc manifest (README instructions).
+3. If REPORT.md changes, rerun build_handoff.py, then re-record the manifest (rm data/artifact_manifest.json; verify_artifacts.py --write-manifest).
+4. Optional remaining (before 06:30): nothing essential; prefer polish/review over new audits.
 
 ## Log
+- 05:35 iter 27: E71 level-column ablation (action_stats_nolevel, 155 audits, nolevel_view.py); checker/verifier counts 44->46 caches, 2,213->2,368 audits; codex review applied; REPORT/exports/manifest refreshed.
 - 05:40 iter 26: E70 markup_baseline.py (comparison-free markup vs premium; own-cost variant after Codex review logs/review_iter26_markup.md); REPORT, exports, manifest updated.
 - 04:40 iter 23: read-only integrity re-check (E67): verifier, handoff/presentation checks, audit-input check, 27 unittests all PASS. No changes to results; remaining open items (evasion, second seller model) need new generation, barred after 03:30.
 - 04:05 iter 18: Figure 1 summary figure (E62) inserted after abstract; reproduce line added.
