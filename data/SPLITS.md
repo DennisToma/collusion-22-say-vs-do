@@ -83,3 +83,11 @@
   Pre-registered predictions: P1 premium run AUROC ≥ 0.85; P2 text run AUROC CI includes 0.5; P3 premium − best
   view ≥ 0 (point estimate); P4 combined − action CI includes 0. n = 30 → wide CIs; this is a replication check,
   not a new headline. Reported as its own section; never pooled with llm_v3.
+- Disclosure (codex review_iter12 P1): generation was launched ~01:00 in the same shell step that appended this
+  section; the freeze commit 71eae06 (01:0x) therefore already contains partial raw seller output of runs 0000–0001.
+  The manager looked only at the first two raw lines of run 0000 (a round-1 public and private message, to check
+  progress); no label, audit, premium or metric of llm_v3rep was computed or viewed before the freeze. Seed not changed.
+- Hardening after review (before any llm_v3rep metric): combined−action now also on within-market AUROC; exact id set
+  llm_v3rep_0000–0029 and counts 15/10/5 asserted; finite scores asserted; sha256 of the frozen dev/test jsons recorded;
+  run-once lock `logs/final/REPLICATION_ONCE.lock`; smoke runs write *_SMOKE.json. Only the three contrasts named above
+  are registered; every other contrast in the output is exploratory.

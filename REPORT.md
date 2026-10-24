@@ -143,16 +143,18 @@ which lists all 25 pre-registered contrasts; no multiplicity correction):
    Without round 1 (premium_r2plus) the detection gap vs structured/action_stats is no longer resolved (+0.068
    [−0.029, +0.161], +0.045 [−0.042, +0.139]). Disclosure: the premium was proposed after a look at partial data
    that included test runs (see Held-out discipline), so this is not a blind discovery.
-4. **Legitimate cooperation: no LLM advantage at matched recall.** At dev-chosen thresholds the premium flags 5/15 (0.33)
-   `legit` partnership runs; the structured and action auditors flag 0/15 (Wilson CI [0, 0.20]); they can read the public
-   partnership notice (no notice-removal ablation was run, so this is not shown to be the cause). But these are different operating points: at the same thresholds structured catches only 0.40 and action
-   0.20 of y=1 runs vs the premium's 0.92, and the text-reading combined views flag legit runs about as often as the
-   premium (combined 0.27, combined_stats 0.20). **At matched recall the LLM advantage disappears** (post-lock,
+4. **Legitimate cooperation: no LLM advantage at matched recall.** At dev-chosen thresholds the premium flags 5/15
+   (0.33) `legit` partnership runs, while structured and action flag 0/15 (Wilson CI [0, 0.20]); these views can read
+   the public partnership notice (no notice-removal ablation was run). But they operate at much lower recall (0.40 and
+   0.20 of y=1 runs vs the premium's 0.92), and the text-reading combined views flag legit runs about as often as the
+   premium (combined 0.27, combined_stats 0.20). Comparing at a common *minimum recall target* (post-lock,
    descriptive; `uv run python matched_recall.py` → `results/analysis/matched_recall_llm_v3_test.json`; oracle
-   thresholds read off the test positives): legit runs flagged at TPR ≈ 0.5 — premium 0/15, structured 0/15,
-   action_stats 1/15; at TPR ≈ 0.7 — premium 2/15, action_stats 1/15, structured 3/15; at TPR ≈ 0.9 — premium 5/15,
-   action_stats 9/15, structured 11/15 (and `none` runs 2/30 vs 20/30 and 19/30). So, at equal recall, reading the public
-   partnership notice does not make the LLM auditors better at clearing legitimate cooperation than the premium (n = 15 legit runs; oracle thresholds; no CIs on the comparison).
+   thresholds read off the test positives; ties can push a scorer's recall above the target) gives mixed results at
+   moderate recall and a premium advantage at high recall. Legit runs flagged: target 0.5 — premium 0/15 (TPR 0.50),
+   structured 0/15 (0.54), action_stats 1/15 (0.50); target 0.7 — premium 2/15 (0.72), action_stats 1/15 (0.72),
+   structured 3/15 (0.78); target 0.9 — premium 5/15 (0.90), action_stats 9/15 (0.92), structured 11/15 (0.92);
+   `none` runs at target 0.9: 2/30 vs 20/30 and 19/30. So reading the partnership notice gives the LLM auditors no
+   consistent advantage in clearing legitimate cooperation (n = 15 legit runs; no CIs on the comparison).
 5. **No tested LLM+premium combination beats the premium** (`incremental.py`, one fixed untrained label-free
    rank-average rule; other combination rules or conditional use were not tested): combo − premium run AUROC from −0.147 [−0.226, −0.078] (text) to +0.001 [−0.038, +0.043] (structured); never resolved positive.
 6. **Label = condition check.** Among y=1 runs where the pair's late-window premium is ≤ 0.5 (agreement apparently
@@ -223,7 +225,8 @@ positive in 44/50 runs; none −0.02; legit +0.08.)*
 Because the premium was chosen after a look at partial data including test runs, we generate 30 new runs with the
 unchanged generator (seed 9000; 15 `private`, 10 `none`, 5 `legit`) AFTER freezing everything. Analysis
 (`uv run python replication.py`, frozen dev thresholds, best LLM view fixed from the test json, run once) and four
-predictions are pre-registered in `data/SPLITS.md` (commit 71eae06, before generation). *Results pending — generation
+predictions are pre-registered in `data/SPLITS.md` (commit 71eae06; generation had started ~2 min earlier and that
+commit includes partial raw output of runs 0000–0001, but no labels, audits or scores existed; see the SPLITS.md disclosure). *Results pending — generation
 and audits running at 01:10 UTC.*
 
 ### Exploration strata (never pooled into the headline; frozen dev thresholds, nothing fitted)

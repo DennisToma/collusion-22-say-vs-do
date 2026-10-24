@@ -1,6 +1,6 @@
 """Post-lock DESCRIPTIVE check (iter 12; REPORT finding 4 said "no matched-recall comparison was run"): at matched
 recall on the llm_v3 test y=1 runs, how many `legit` and `none` runs does each scorer flag? Thresholds are read off
-the TEST positives (smallest threshold reaching TPR >= r), so this is an oracle operating point, not a deployable
+the TEST positives (highest threshold reaching TPR >= r, a minimum-recall target; ties can push TPR above r), so this is an oracle operating point, not a deployable
 rule; it only removes the operating-point confound when comparing scorers on legit partnerships. No CIs on the
 threshold choice; Wilson intervals on the flag counts.
 

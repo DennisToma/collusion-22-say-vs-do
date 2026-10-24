@@ -5,7 +5,7 @@ the llm_v3 TEST json (highest test run AUROC). Run ONCE on the complete set.
 
     uv run python replication.py            # -> results/analysis/replication_llm_v3rep.json
 """
-import argparse, json
+import argparse, hashlib, json, os
 from pathlib import Path
 import numpy as np
 from final_analysis import LLM_VIEWS, PAIRS, boot, _pd
@@ -24,12 +24,24 @@ def main():
     ap.add_argument("--allow-partial", action="store_true", help="smoke test only")
     ap.add_argument("--max-idx", type=int, default=None, help="smoke test only (e.g. --ds llm_v3 --max-idx 30 = dev)")
     a = ap.parse_args()
+    smoke = a.allow_partial or a.max_idx is not None or a.ds != "llm_v3rep"
+    frozen = {f: hashlib.sha256(Path(f).read_bytes()).hexdigest()[:16] for f in
+              ("results/analysis/final_llm_v3_gpt-6.1-sol_dev.json", "results/analysis/final_llm_v3_gpt-6.1-sol_test.json")}
+    if not smoke:  # run-once lock (codex review_iter12 P2)
+        os.makedirs("logs/final", exist_ok=True)
+        os.mkdir("logs/final/REPLICATION_ONCE.lock")  # raises if it already ran; a rerun must be disclosed in SPLITS.md
     dev = json.loads(Path("results/analysis/final_llm_v3_gpt-6.1-sol_dev.json").read_text())
     test = json.loads(Path("results/analysis/final_llm_v3_gpt-6.1-sol_test.json").read_text())
     th, w = dev["thresholds_dev_youden"], dev["fusion_w_text"]
     best = max(LLM_VIEWS, key=lambda v: test["point_ci"][v]["run_auroc"][0])
     labs, S, markup, ids = load(a.ds, a.auditor, a.max_idx)
-    assert a.allow_partial or (len(ids) == len(labs) == 30), f"incomplete: {len(ids)} audited / {len(labs)} labelled"
+    if not smoke:  # exact registered cohort (codex review_iter12 P3)
+        want = {f"llm_v3rep_{i:04d}" for i in range(30)}
+        assert set(ids) == set(labs) == want, f"cohort mismatch: {len(ids)} audited / {len(labs)} labelled"
+        cnt = {c: sum(labs[r]["condition"] == c for r in ids) for c in ("private", "none", "legit")}
+        assert cnt == {"private": 15, "none": 10, "legit": 5}, cnt
+        for k in S:
+            assert all(np.isfinite(S[k][r]["run"]) and all(np.isfinite(v) for v in S[k][r]["scores"].values()) for r in ids), k
     S["fusion"] = {r: {"scores": {p: w * S["text"][r]["scores"][p] + (1 - w) * S["action"][r]["scores"][p] for p in PAIRS},
                        "run": w * S["text"][r]["run"] + (1 - w) * S["action"][r]["run"]} for r in ids}
     b = boot(ids, S, labs, a.n_boot)
@@ -43,6 +55,7 @@ def main():
     flag = {k: {g: wilson(sum(S[k][r]["run"] >= th[k] for r in rs), len(rs)) if rs and th.get(k) is not None else None
                 for g, rs in groups.items()} for k in S}
     con["combined-action:run_auroc"] = _pd(ids, S, labs, "combined", "action", "run_auroc", a.n_boot)
+    con["combined-action:within_market_auroc"] = _pd(ids, S, labs, "combined", "action", "within_market_auroc", a.n_boot)
     pc = b["point_ci"]
     pv = {"P1": pc["premium"]["run_auroc"][0] >= 0.85,
           "P2": pc["text"]["run_auroc"][1] is not None and pc["text"]["run_auroc"][1] <= 0.5 <= pc["text"]["run_auroc"][2],
@@ -50,12 +63,15 @@ def main():
           "P4": (lambda c: c[0] is not None and c[0] <= 0 <= c[1])(con["combined-action:run_auroc"]["ci"])}
     out = {"dataset": a.ds, "auditor": a.auditor, "n_runs": len(ids), "group_n": {g: len(v) for g, v in groups.items()},
            "agreement_counts": {k: sum(labs[r]["agreement"] == k for r in labs) for k in sorted({labs[r]["agreement"] for r in labs})},
+           "smoke": smoke, "frozen_input_sha256_16": frozen,
+           "registered_contrasts": [f"premium-best[{best}]", "action_stats-action", "combined-action"],
+           "note": "all other contrasts are exploratory (not pre-registered); P2/P4 = CI inclusion, not equivalence",
            "best_view_fixed_from_llm_v3_test": best, "fusion_w_text_dev": w,
            "point_ci": pc, "contrasts": con, "flag_rate_frozen_dev_thresholds": flag,
            "predictions": PREDICTIONS, "prediction_held": pv,
            "mean_markup": {g: round(float(np.mean([markup[r] for r in rs])), 2) if rs else None for g, rs in groups.items()}}
     Path("results/analysis").mkdir(parents=True, exist_ok=True)
-    (Path("results/analysis") / f"replication_{a.ds}.json").write_text(json.dumps(out, indent=1))
+    (Path("results/analysis") / (f"replication_{a.ds}" + ("_SMOKE" if smoke else "") + ".json")).write_text(json.dumps(out, indent=1))
     print(f"{a.ds}: n={len(ids)} groups {out['group_n']} agreement {out['agreement_counts']} best={best}")
     for k in S:
         print(f"{k:15s} run {pc[k]['run_auroc']} within {pc[k]['within_market_auroc']}  flag {flag[k]}")
