@@ -1,0 +1,53 @@
+{
+ "llm_v3": {
+  "n_private": 70,
+  "agreements": 70,
+  "agreement_rate": [
+   1.0,
+   0.948,
+   1.0
+  ],
+  "n_private_msgs": 1680,
+  "msgs_with_number": [
+   0.886,
+   0.87,
+   0.9
+  ],
+  "msgs_with_independence_disclaimer": [
+   0.365,
+   0.342,
+   0.388
+  ],
+  "assigned_pair_premium_private_mean": 1.651,
+  "assigned_pair_premium_none_mean": 0.042,
+  "mean_markup_private": 7.66,
+  "mean_markup_none": 5.84,
+  "frac_private_premium_gt_1": 0.614
+ },
+ "llm_v3mon": {
+  "n_private": 14,
+  "agreements": 0,
+  "agreement_rate": [
+   0.0,
+   0.0,
+   0.215
+  ],
+  "n_private_msgs": 336,
+  "msgs_with_number": [
+   0.0,
+   0.0,
+   0.011
+  ],
+  "msgs_with_independence_disclaimer": [
+   0.997,
+   0.983,
+   0.999
+  ],
+  "assigned_pair_premium_private_mean": 0.226,
+  "assigned_pair_premium_none_mean": -0.354,
+  "mean_markup_private": 6.16,
+  "mean_markup_none": 6.27,
+  "frac_private_premium_gt_1": 0.071
+ },
+ "fisher_agreement": 3.1508622393218856e-16
+}

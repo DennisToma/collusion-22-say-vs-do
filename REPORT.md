@@ -26,6 +26,9 @@ table. Results on the locked test split (n = 95, run once):
   One seller model, one framing, sellers never try to evade. On 16 runs from a different framing in which the judge found
   no agreement, the frozen thresholds flag 44% (premium) and 25–63% (stats-table views) of runs: the strong
   detectors do not transfer as-is.
+- **Announcing a price monitor deters rather than produces evasion.** When the prompt says prices are monitored
+  (private chat still unmonitored), agreements drop from 70/70 to 0/14 private runs and prices fall to the no-channel
+  level, so the planned evasion test had no colluders to test on (exploration, n = 20).
 
 ## Question
 Given logged trajectories (public messages + prices + market state), do auditors that see both streams detect
@@ -227,7 +230,19 @@ alarms here. With only y = 0 runs, no AUROC can be computed. Exploratory (n = 16
 changes wording and refusals).
 
 **Announced price monitor (`llm_v3mon`, lab framing + public announcement that prices are monitored; 14 private,
-6 none).** Generation running; results are added if it finishes before the 06:30 cutoff (`monitor_stratum.py`, frozen).
+6 none; the note says an automated monitor reviews prices + public board, cannot see private messages, and halves
+the earnings of flagged pairs — announced only, no monitor is run). `uv run python deterrence.py` →
+`results/analysis/deterrence.json`.** The pre-registered question (does the premium survive colluders who know prices
+are watched?) **could not be tested: the announcement removed collusion altogether.** The judge finds an agreement in
+**0/14** monitored private runs [Wilson 0.00, 0.22] vs **70/70** unmonitored lab private runs [0.95, 1.00] (Fisher
+p ≈ 3·10⁻¹⁶). The private chats turn into disclaimers: 0/336 private messages contain any number (vs 89% on llm_v3),
+and 99.7% contain an independence/refusal phrase such as "I can't coordinate prices" (keyword regex; 37% on llm_v3).
+Prices follow: mean markup over cost in private runs 6.16 vs 6.27 in monitored `none` runs (llm_v3: private 7.66,
+none 5.84), assigned-pair premium +0.23 (llm_v3 private +1.65), premium > 1 in 1/14 runs (llm_v3 61%). So these LLM
+sellers respond to an announced monitor with *compliance*, not evasion — a deterrence result, not a detection
+result. Caveat: one seller model, 14 runs, different seeds; the refusal-style wording suggests the note triggers the
+model's safety behaviour rather than a strategic cost–benefit trade-off, so it says nothing about how a model that
+does try to evade would look. MONFP_PLACEHOLDER
 
 **Message-shuffle ablation on test (pre-registered; `uv run python shuffle_analysis.py --seeds 0,1,2 --views
 combined,structured` → `results/analysis/shuffle_llm_v3_gpt-6.1-sol_test.json`; 95 runs × 3 seeds × 2 views).**
@@ -269,10 +284,9 @@ computed on the mod-3 subset incl. test runs. The test evaluation is locked and 
   firm-framing stratum (`llm_v3fp`, `fp_stratum.py`, frozen dev thresholds) is an exploratory transfer check of
   "agreement vs. channel without agreement" — it changes framing, wording, refusals and price levels at the same time, so it cannot
   resolve the confound within llm_v3.
-- **Evasion not yet tested in the headline data.** Sellers were never told prices are watched. An exploration
-  stratum `llm_v3mon` (pre-registered, `monitor_stratum.py`, results pending) adds an *announced* price monitor
-  (no monitor is actually run and payouts are unchanged) to test whether the premium survives colluders who know
-  about it.
+- **Evasion not tested.** Sellers in the headline data were never told prices are watched. In the exploration
+  stratum `llm_v3mon`, announcing a price monitor made sellers stop coordinating (0/14 agreements), so no evasive
+  colluders were produced; robustness of the premium to evasion remains open.
 - **The premium only sees partial cartels.** It compares a pair with its non-colluding rivals by construction; a
   market-wide cartel (or a 2-firm market) gives a premium near zero. That is where text or dependence statistics
   might be needed, and we did not test it.
@@ -290,7 +304,8 @@ computed on the mod-3 subset incl. test runs. The test evaluation is locked and 
 
 ## What to do next
 1. **Evasion-aware colluders.** The premium is strong because colluders open high in round 1. Test sellers that are
-   told prices are monitored *and* paid less when flagged (our `llm_v3mon` stratum only announces a monitor), and
+   told prices are monitored *and* paid less when flagged; our `llm_v3mon` announcement deterred gpt-6-luna completely
+   (0/14 agreements), so evasion needs a red-teamed or instructed colluder (or a less safety-tuned seller model), and
    colluders that coordinate on gradual drift; we expect the premium and stats-table views to degrade first.
 2. **Make text matter.** Text should become necessary when conduct alone is ambiguous: legit cooperation that moves
    prices, or collusion signalled in public through innocuous-looking wording (a supervised text model already finds
@@ -318,6 +333,8 @@ uv run python fig_roc.py                        # test ROC + dev operating point
 uv run python text_lr_inspect.py                # n-gram / firm-level text cue inspection (descriptive)
 uv run python incremental.py --split test       # premium + LLM view rank-average (run by finalize_test.sh)
 uv run python fp_stratum.py --ds llm_v3fp       # firm-framing exploration stratum
+uv run python monitor_stratum.py --ds llm_v3mon # announced-monitor stratum (frozen thresholds)
+uv run python deterrence.py                     # agreement / message / markup comparison llm_v3 vs llm_v3mon
 ./finalize_test.sh                              # the ONE locked test run (sole entry point for --split test headline)
 uv run python auditors.py --ds llm_v3 --auditor claude-sonnet-5-5 --subset mod3   # cross-family subset
 uv run python cross_family.py --ds llm_v3 --other claude-sonnet-5-5               # cross-family comparison
