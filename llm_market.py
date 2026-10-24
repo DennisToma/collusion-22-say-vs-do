@@ -213,7 +213,9 @@ def decide(cache, key, system, prompt, fallback_price):
         with SEM:
             # Go models (deepseek etc.) are reasoning models: 300 tokens are spent on hidden reasoning -> empty reply
             r = chat(prompt, system=system, backend=CFG["backend"], model=CFG["model"],
-                     max_tokens=(600 if CFG["framing"] == "strong" else 300) if CFG["backend"] == "codex" else 6000)
+                     max_tokens=(600 if CFG["framing"] == "strong" else 300) if CFG["backend"] == "codex"
+                     # qwen9 (C3c) endpoints have max_model_len 8192: 6000 leaves too little room for late-round prompts
+                     else 2500 if str(CFG["model"]).startswith("qwen9") else 6000)
         d = parse(r["text"])
         if d:
             d.update(model=r["model"], backend=r["backend"], parse_ok=True)

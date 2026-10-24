@@ -54,7 +54,7 @@ Phase 2 experiments and checks are E77–E108; descriptive post-hoc analyses are
 | P2.8 | second fresh replication (n = 60, registered) | premium 0.94 [0.87, 0.99] (confounded, P2.5/P2.10); hybrid −0.04 [−0.16, +0.08]; pooled n = 90 −0.07 [−0.17, +0.02] | `replication_llm_p2rep.json`, `p2_pool_rep.json` |
 | P2.9 | monitor-aware sellers | 0/10 + 0/10 agreements vs 10/10 matched: compliance, not evasion | `p2_aware.json` |
 | P2.10 | legitimate asymmetry hard negative | flagged 7/10 (cost), 9/10 (quality) vs 2/10; competition predicts the cost flag | `p2_asym.json`, `p2_asym_nash.json` |
-| P2.11 | abliterated vs base Qwen (C3) | agreement 15/15 both (ceiling); executed 13/15 both, strict 5/15 both (diff 0 [−0.26, +0.26]); premium diff −1.24 [−2.41, −0.03] (bf16 vs FP8 serving) | `p2_qwen_cmp.json` |
+| P2.11 | abliterated vs base Qwen (C3) | agreement 15/15 both (ceiling); executed 13/15 both, strict 5/15 both (diff 0 [−0.26, +0.26]); premium diff −1.24 [−2.41, −0.03] (bf16 vs FP8 serving); Qwen3.5-9B pair dropped at its registered pilot (base prices below Nash) | `p2_qwen_cmp.json`, `p2_qwen9_pilot.json` |
 | P2.12 | external data (SALT-NLP) | P(said \| executed) 0.385 [0.353, 0.416]; text auditor AUROC 0.87 [0.83, 0.91] (TF-IDF 0.91) | `salt_d1.json` |
 | P2.13 | transcript anomaly hunt (exploratory, 40 games) | ±1 opening-price band: 37/40 rounds but exactly target 1/40; 28-round asymmetric pair streak; same-response price declarations 0/143 contradictions | `p2_serendipity.json` |
 | – | coded public signals; trust-breaking (D3) | dropped (budget; D3 measures promise-breaking, not collusion) | – |
@@ -267,6 +267,7 @@ markets are tacit-high, i.e. market excess over Nash ≥ +2 over rounds 2–12),
 frozen invitation regex, vs 290 and 354 with a private channel. Text views flag 15/15 markets in both arms and score *below* chance, consistent with these public invitations (post-hoc regex) (as for Claude/deepseek, P2.6).
 Q1.4 E61 (their market, T = 20): abliterated − base −0.37 [−2.09, +1.36]. In neither market did removing refusal training detectably increase channel
 collusion. "No detectable" is not "no effect": n = 15 pairs excludes only large differences. E102 (strong framing, 6 + 6 seeds per model) is still generating and will be reported descriptively.
+*C3c (Qwen3.5-9B, base vs abliterated on identical Modal FP8 serving; E109):* dropped by its registered protocol pilot (4 games per model): 0/192 unparsable decisions in each model, but the base model's median market price, 9.0, is below static Nash (11) (abliterated: 11.5), which fails the registered price-sanity rule; stage 2 was not run (`uv run python p2_qwen9_pilot.py` → `p2_qwen9_pilot.json`).
 
 **P2.12 External validity: SALT-NLP agent-collusion (Part D1; E105 registered before any call; E104 P1/P2 registered after the pooled
 crosstab was seen, so mostly descriptive; `uv run python salt_d1.py sayvsdo|sample|audit|tfidf|report` → `results/analysis/salt_d1.json`;

@@ -1,15 +1,13 @@
 # STATUS
 
-## Current state (2026-10-24 14:52 UTC VM clock, Phase 2 iteration 18)
+## Current state (2026-10-24 15:14 UTC VM clock, Phase 2 iteration 19)
 - Main claim unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc).
-- iter18: Part E4 DONE, E108a–e. Frozen 40-game / 841-round sample (20 per repo); five post-hoc descriptive checks, no new games or seller/auditor calls.
-- Label nuance: q14 pair within ±1 opening target 37/40 rounds but exactly target 1/40; openly unequal 12/13 for 28 rounds. REPORT no longer equates Q1.4 band and Q2.2 lower-bound rules.
-- Other cases: independence disclaimers with price talk; unilateral rigid18 with lowest relative profit; Claude endgame withdrawal vs GLM precommitment. No intent/causal/profit-counterfactual inference.
-- Dud: 0/143 narrow price-declaration mismatches across10 runs checks SAME-RESPONSE fields, not temporal honesty. Full cases + provenance: data/serendipity_e108/README.md; results/analysis/p2_serendipity.json.
-- Verified: independent Codex review; all40 transcripts equal source git objects; deterministic regeneration, resampling refusal; 17 strongF tests + transition checker PASS; figure visually checked.
-- E99 strongF 32/40; generator 3302642 and post wrapper 3033342 alive. No full-arm class/detector outcome inspected; publish complete classes first, evaluate once.
-- E100/E105 final; E102 remains descriptive until Sun10:00 cutoff. REPORT now689 lines + new case figure; static exports/manifest still deferred to Sun16:30.
-- New director serendipity-explorer instruction read; ../collusion-serendipity/HITS.md has no hits, so no confirmation experiment warranted.
+- iter19: C3c (E109, Qwen3.5-9B base vs abliterated, identical Modal L4 FP8) registered + piloted: 0/192 parse failures each, but base median price 9.0 < Nash 11 → registered pilot rule FAILS → stage 2 dropped (Modal ~$1.5). REPORT P2.11 + glance row note it.
+- Fix: llm_market.py caps max_tokens 2500 for qwen9 models (endpoint max_model_len 8192 → HTTP 400 at 6000); only qwen9 affected.
+- E99 strongF 36/40 at 15:12; generator + p2_strongF_post.sh (pid 3033342) alive. No full-arm class/detector outcome inspected yet.
+- E100/E105 final; E102 qwen strong (aS 6/12, bS 11/12) descriptive until Sun 10:00 cutoff. E108 serendipity final (iter18).
+- Abstract 242 words; REPORT ~690 lines. Exports/manifest deferred to Sun 16:30.
+- Sibling Q1.4 has not started the E1 grid (nothing for us to audit yet).
 
 ## Next steps
 1. E99 remains priority: watch logs/partc_chain.log for "strongF classes ready" (releases Q1.4 E66) and "strongF post done". No new waiter scripts.
@@ -19,6 +17,7 @@
 5. Checkpoint Sat19:30; E102 stop/report at Sun10:00; finalize-only Sun16:30. Read ../collusion-serendipity/HITS.md every iteration; decide explicitly whether any relevant hit warrants registered confirmation.
 
 ## Log
+- 15:14 P2 iter19: C3c E109 registered, pilot run, dropped by registered price rule (base 9B prices below Nash); qwen9 max_tokens fix; REPORT P2.11 line.
 - 14:16 P2 iter16: p2_strongF_fig.py (Part C class-path figure, pilot smoke test); no new experiments, waiting on E99 gen 24/40.
 - 14:35 P2 iter15: REPORT consolidation (v1 summary + v1 limitations -> appendix; Phase-2 Limitations/What-next), 770 -> 692 lines.
 - 14:12 P2 iter14: p2_strongF_report.py formatter (pilot smoke test); P2.4 circularity caveat, E44 cite in P2.7, merger sentence 1.
