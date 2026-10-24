@@ -167,6 +167,7 @@ class E1CompletionTests(unittest.TestCase):
         cid = 'c02'; d = source / f'llm_grid_p2_{cid}'
         ids = [r for r, l in self.labs.items() if l['cell'] == cid]
         gs = [dict(self.gt[r], private_chat='SECRET', reasoning_notes='SECRET',
+                   agreement_verified=None, coordinated_actions_verified=None, realized_collusion=None,
                    private_costs=[dict.fromkeys('ABCD', 6)] * 2) for r in ids]
         rs = [dict(x, agents=[dict(a, private_message='SECRET') for a in x['agents']])
               for r in ids for x in self.runs[r]]
@@ -178,6 +179,18 @@ class E1CompletionTests(unittest.TestCase):
         self.assertNotIn('SECRET', (e.OUT / 'ground_truth.jsonl').read_text())
         receipt = json.loads((e.OUT / 'snapshot_receipt.json').read_text())
         self.assertIn(e.digest(d / 'trajectories.jsonl'), '\n'.join(receipt['source_files_sha256']))
+        original = (e.OUT / 'ground_truth.jsonl').read_bytes()
+        for g in gs:
+            g.update(agreement_verified=True, coordinated_actions_verified=True, realized_collusion=True,
+                     mean_price=17, mean_markup_over_nash=6, agreement_hit_rate=1,
+                     pair_mean_price=17, others_mean_price=17, tacit_supracompetitive=True)
+        dump(d / 'ground_truth.jsonl', gs)
+        with patch.object(e.subprocess, 'run') as git, redirect_stdout(io.StringIO()):
+            git.return_value.stdout = 'fixture-head\n'
+            e.snapshot()
+        self.assertEqual((e.OUT / 'ground_truth.jsonl').read_bytes(), original)
+        receipt = json.loads((e.OUT / 'snapshot_receipt.json').read_text())
+        self.assertIn(e.digest(d / 'ground_truth.jsonl'), '\n'.join(receipt['source_files_sha256']))
         gs[0]['private_channel_enabled'] = not gs[0]['private_channel_enabled']
         dump(d / 'ground_truth.jsonl', gs)
         with self.assertRaisesRegex(AssertionError, 'ground_truth.jsonl changed/disappeared'):
