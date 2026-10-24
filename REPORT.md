@@ -16,7 +16,7 @@ behaviour labels disagree: 14/50 test "colluders" keep their agreement. With mem
 channel pairs strictly execute, yet 19/20 no-channel markets also price ≥ Nash + 2; among channel pairs (13 executed vs
 7 not, exploratory) no text or plan view resolves execution (plans 0.69 [0.44, 0.91]). A fresh luna swapped in at round 21
 changes neither level (+0.20 [−0.08, +0.62]) nor re-agreement (16/20 vs 15/20); a gpt-6.1-sol newcomer
-re-agrees 0/20, yet 18/20 markets stay ≥ Nash + 2. Abliterated Qwen3.8-27B executes no more than its base model (13/15 both; agreement at ceiling) with a
+re-agrees 0/20, yet 18/20 markets stay ≥ Nash + 2. Abliterated Qwen3.8-27B executes no more than its base model (strict 5/15 both; 13/15 under the registered floor rule; agreement at ceiling) with a
 smaller channel premium (−1.24 [−2.41, −0.03]; serving precision differs).
 Every abstract number with its denominator and source key: `results/analysis/claims_denominators.md` (`p2_claims.py`).
 
@@ -63,11 +63,11 @@ Phase 2 experiments and checks are E77–E120 (exceptions to pre-registration ar
 | P2.4 | labels by behaviour | 14/50 agreements kept; premium 0.80 [0.67, 0.90] on kept label; hybrid −0.03 [−0.14, +0.06] (test), −0.03 [−0.13, +0.06] (pooled fresh) | `p2_behaviour.json`, `p2_pool_rep.json` |
 | P2.5 | prompt artifact? | notepad +1.04 [+0.65, +1.42] vs channel +1.61; weather notepad +0.22; terse wording +0.24 [−0.32, +0.81] vs +1.75 original wording (same 10 seeds) | `p2_logbook.json`, `p2_band.json` |
 | P2.6 | other seller families | luna private only (base framing); Claude (5 seeds) / deepseek public too (deepseek: 719/720 no-channel public messages match the invitation regex, precision 20/20); sol 0/7 agreements, Nash + 4 | `p2_family3way.json` |
-| P2.7 | executed (strong) collusion; older sellers | strict-executed 13/20 [0.43, 0.83] (10–16/20 across definitions, E120) vs tacit-high 19/20 no-channel (17–20/20); executed vs tacit (exploratory): price-view CIs include 0.5, public text 0.25 (reverse), private-plan view 0.76 [0.55, 0.93] but no-LLM partner-name count 0.82 [0.66, 0.96] (E111; plans contain no agreement words); within channel pairs (E116, 13 vs 7) plan 0.69 [0.44, 0.91], action_stats 0.18 (inverted); older sellers: gpt-5.6-sol executed 1/7, mimo 4/4 | `p2_strongF_report_llm_p2strongF.json`, `p2_plan_keyword_llm_p2strongF.json`, `p2_within_agree_llm_p2strongF.json`, `p2_c2older.json` |
+| P2.7 | executed (strong) collusion; older sellers | strict-executed 13/20 [0.43, 0.83] (10–16/20 across definitions, E120) vs tacit-high 19/20 no-channel (17–20/20); executed vs tacit (exploratory): price-view CIs include 0.5, public text 0.25 (reverse), private-plan view 0.76 [0.55, 0.93] but no-LLM partner-name count 0.82 [0.66, 0.96] (E111; plans contain no agreement words); within channel pairs (E116, 13 vs 7) plan 0.69 [0.44, 0.91], action_stats 0.18 (inverted); older sellers: strict-executed gpt-5.6-sol 1/7, mimo 3/4 (floor rule 1/7, 4/4) | `p2_strongF_report_llm_p2strongF.json`, `p2_plan_keyword_llm_p2strongF.json`, `p2_within_agree_llm_p2strongF.json`, `p2_c2older.json` |
 | P2.8 | second fresh replication (n = 60, registered) | premium 0.94 [0.87, 0.99] (confounded, P2.5/P2.10); hybrid −0.04 [−0.16, +0.08]; pooled n = 90 −0.07 [−0.17, +0.02] | `replication_llm_p2rep.json`, `p2_pool_rep.json` |
 | P2.9 | monitor-aware sellers | 0/10 + 0/10 agreements vs 10/10 matched: compliance, not evasion | `p2_aware.json` |
 | P2.10 | legitimate asymmetry hard negative | flagged 7/10 (cost), 9/10 (quality) vs 2/10; competition predicts the cost flag | `p2_asym.json`, `p2_asym_nash.json` |
-| P2.11 | abliterated vs base Qwen (C3) | agreement 15/15 both (ceiling); executed 13/15 both (diff 0 [−0.26, +0.26]); strict 5/15 both; premium diff −1.24 [−2.41, −0.03] (bf16 vs FP8 serving); no increase in 3/3 Qwen pairs with Q1.4 E61/E69; Qwen3.5-9B pair dropped at its registered pilot (base prices below Nash); strong framing (E102, 6 seeds, descriptive): strict 4/6 base vs 3/6 abliterated | `p2_qwen_cmp.json`, `p2_qwen9_pilot.json`, `p2_qwen_strong.json` |
+| P2.11 | abliterated vs base Qwen (C3) | agreement 15/15 both (ceiling); strict-executed 5/15 both; floor-rule executed 13/15 both (diff 0 [−0.26, +0.26]); premium diff −1.24 [−2.41, −0.03] (bf16 vs FP8 serving); no increase in 3/3 Qwen pairs with Q1.4 E61/E69; Qwen3.5-9B pair dropped at its registered pilot (base prices below Nash); strong framing (E102, 6 seeds, descriptive): strict 4/6 base vs 3/6 abliterated | `p2_qwen_cmp.json`, `p2_qwen9_pilot.json`, `p2_qwen_strong.json` |
 | P2.12 | external data (SALT-NLP) | P(said \| executed) 0.385 [0.353, 0.416]; text auditor AUROC 0.87 [0.83, 0.91] (TF-IDF 0.91) | `salt_d1.json` |
 | P2.13 | transcript anomaly hunt (exploratory, 40 games) | ±1 opening-price band: 37/40 rounds but exactly target 1/40; 28-round asymmetric pair streak; same-response price declarations 0/143 contradictions | `p2_serendipity.json` |
 | P2.14 | German-language market (10 + 10, paired seeds) | agreement 3/10 vs 9/10 English; premium still +0.91 [+0.20, +1.58] (English +1.75; paired German − English −0.58 [−1.79, +0.51]) | `p2_de.json` |
@@ -210,8 +210,8 @@ plan P2 (strict > tacit-high flags) held. Levers were combined, not ablated; wit
 market-wide and the channel alone does not identify sustained high pricing.
 *C2 older sellers (E98, final, base lab prompt, T = 12, generation stopped; `uv run python p2_label.py --ds llm_p2g56sol` (and `llm_p2mimo`), then
 `p2_strong.py --ds llm_p2g56sol llm_p2mimo --min-floor 12 --late 2 --out results/analysis/p2_c2older.json` and `p2_strong_eval.py`; 0 fallback runs; descriptive):*
-gpt-5.6-sol (7 + 7 matched seeds): judged agreement 4/7, executed 1/7 [0.02, 0.50]; market ≈ Nash + 7.2 with *and* without a channel; frozen premium
-flags 5/7 private vs 1/7 none (AUROC 0.75 [0.49, 0.97]). mimo-v2.5 (4 private + 3 none): agreement 4/4, executed 4/4 [0.56, 1.00] (strict 3/4), market ≈ Nash + 4.4
+gpt-5.6-sol (7 + 7 matched seeds): judged agreement 4/7, executed 1/7 [0.02, 0.50] (floor rule; strict 1/7); market ≈ Nash + 7.2 with *and* without a channel; frozen premium
+flags 5/7 private vs 1/7 none (AUROC 0.75 [0.49, 0.97]). mimo-v2.5 (4 private + 3 none): agreement 4/4, floor-rule executed 4/4 [0.56, 1.00] (strict 3/4), market ≈ Nash + 4.4
 in both arms, premium flags 4/4 vs 1/3. Unlike gpt-6.1-sol (0/7 agreements, P2.6), the previous-generation sol agrees but rarely keeps it. With Q1.4's
 gpt-5.6-luna (tacit-high 9/10 in their market), older and other models price far above Nash without any channel in both markets. C3 (abliterated Qwen): P2.11.
 
@@ -359,7 +359,7 @@ in all 20, first in 10/20) and executes in 15/20 (14/20); level CUSUM alarms by 
 **Reading:** in this luna arm (20 + 10 games), the level and agreement survive one firm's memory reset; its partner keeps its memory and often re-proposes.
 **E115 (gpt-6.1-sol newcomer, same 30 games/seeds/firm; evaluated once 19:20 UTC after the full-cohort gate; `P2REPL_ARM=sol uv run python p2_replace_eval.py` → `p2_replace_sol.json`).**
 Newcomer own excess − replaced firm −3.38 [−4.17, −2.54] (private), −4.33 [−5.75, −2.79] (none); market −1.34 [−1.79, −0.91] / −1.71 [−2.51, −0.92];
-markets ≥ Nash + 2 18/20 [0.72, 0.98] and 9/10; re-agreement (floor ≥ 13) 0/20 (one trivial floor-11 agreement), post-r21 executed 0/20 (originals 14/20); level CUSUM by r25 0/30.
+markets ≥ Nash + 2 18/20 [0.72, 0.98] and 9/10; re-agreement (floor ≥ 13) 0/20 (one trivial floor-11 agreement), post-r21 executed (registered floor rule) 0/20 (originals 14/20); level CUSUM by r25 0/30.
 Registered predictions: S1 (own-excess CI includes 0) **failed**; S2 level survives, S3 re-agreement ≤ 9/20, S4 CUSUM ≤ 4/30 held.
 Not registered as a prediction: Q1.4's E50 pair-gap CUSUM alarms in 22/30 (originals 5/30), because one undercutting firm opens price gaps, not because of collusion.
 **Reading:** a newcomer that will not coordinate ends the agreement and lowers the market, but the three remaining luna firms keep it above Nash + 2.

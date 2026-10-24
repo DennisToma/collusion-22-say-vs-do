@@ -277,7 +277,7 @@ def _():
 
 
 @claim("C21", "abliterated vs base Qwen: executed markets each arm; agreement at ceiling", "13/15; 13/15",
-       "executes no more than its base model (13/15 both; agreement at ceiling)",
+       "13/15 under the registered floor rule; agreement at ceiling)",
        "15 vs 15 private markets (llm_p2qwena vs llm_p2qwenb); execution diff 0.00 [-0.26, +0.26] Newcombe; agreement 15/15 both; registered (C3), predictions not supported")
 def _():
     assert pick(QWEN, ("P1_agreement_rate", "base")) == [15, 15] == pick(QWEN, ("P1_agreement_rate", "abliterated"))
@@ -291,6 +291,15 @@ def _():
     d = pick(SALT, ("E105_audit",))
     assert d["n"] == 240 and d["n_exec"] == 120
     return ci([d["auroc"]["est"], *d["auroc"]["ci"]], False), SALT, "E105_audit.auroc{est,ci}; n; n_exec"
+
+
+@claim("C21b", "abliterated vs base Qwen: strict-executed (shared definition) each arm", "5/15; 5/15",
+       "executes no more than its base model (strict 5/15 both",
+       "15 private markets per model; shared strict executed rule (p2_strong_classes on llm_p2qwena / llm_p2qwenb)")
+def _():
+    a = json.loads((ROOT / A / "p2_strong_classes_llm_p2qwena.json").read_text())["n_strict_executed"]
+    b = json.loads((ROOT / A / "p2_strong_classes_llm_p2qwenb.json").read_text())["n_strict_executed"]
+    return f"{a[0]}/{a[1]}; {b[0]}/{b[1]}", A + "p2_strong_classes_llm_p2qwena.json", "n_strict_executed (qwena; qwenb)"
 
 
 @claim("C23", "abliterated minus base Qwen: paired channel premium difference", "-1.24 [-2.41, -0.03]",

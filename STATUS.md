@@ -1,17 +1,15 @@
 # STATUS
 
-## Current state (2026-10-24 ~20:10 UTC, Phase 2 iteration 40) — Sat 20:00 checkpoint reached
+## Current state (2026-10-24 ~20:50 UTC, Phase 2 iteration 40) — following DIRECTION 20:00
 - Headline unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc).
-- All DIRECTION 17:56 directives 1, 2, 4, 5 done (within-agreement E116, E112/E115 in abstract, 19:30 review applied early, E3 dropped). Directive 3 (E113) in progress.
-- **E113:** snapshot7 = 100 games / 3 complete sweeps (Q1.4 E70 on sweep 4; ETA sweeps 3–5 ≈22:40 per Q1.4 STATUS). Coverage 100%, 0 unparsed. NO detector metrics read.
-- iter39: TL;DR item 5 split (replacement result now item 6, Practical 7); header → 20:00 checkpoint, E77–E120. claims 30/30, verify_phase2 26/26. REPORT 711 lines.
-- Checkpoint PDF export of 19:40 stands (next export Sun 16:30).
-- iter40 (E122): E113 formatter `p2_e1_report.py` written + synthetic-tested BEFORE eval (12/12 unittests); wording fixed in advance (registered k/K headline first).
-- Next E113: keep `snapshot` + `audit` + `coverage` as sweeps land; when Q1.4 STATUS says "6 sweeps complete" (or Sun 08:00) → `preflight`, then `eval` ONCE → `uv run python p2_e1_report.py` → paste P2.16 lines + glance row (replace equal text elsewhere; REPORT ≤ 711) by Sun 10:00.
-- Next review Sun 12:30 (Opus + codex on final claims), numbers freeze Sun 14:00, presentation/EVIDENCE/manifest rebuild Sun 16:30. Never stash/checkout while generators run.
-- Abstract 268 words (E123, iter40); claims 30/30. Further trim optional.
+- DIRECTION 20:00: directive 1 E113-amend3 registered pre-eval (SPLITS.md, ledger): qwen-cell headline pos/tie/neg + cell-stratified pooled Δ (game-cluster bootstrap), luna combined−action = re-prompt noise, posting cells separate; `p2_e1_report.py` formats eval → P2.16 lines + glance + abstract clause; tests 13/13 synthetic. Directive 2 done (E124: strict 5/15 first everywhere, C21b, claims 31/31). Directive 3 done (stale E100 waiter killed, json unchanged).
+- Deviation note: E123 abstract trim 275→268 landed at 20:20, just before I read the 20:00 DIRECTION (no wording loops). No further wording until E113 lands; abstract now ~274 words after the definition fix.
+- **E113 next:** when Q1.4 STATUS says "6 sweeps complete" (ETA ≈22:40): `snapshot` → `audit` → `coverage` → `preflight` → `eval` ONCE → `uv run python p2_e1_report.py` → replace P2.13-adjacent stub text with P2.16 lines + glance row + abstract clause (REPORT ≤ 711), target Sun 00:30. One ledger row at final snapshot only. If Q1.4 says qwen pCMI replicated → joint sentence.
+- Then directive 4 (one abstract pass ≤ 260, 8-line "For the merged report" block) by Sun 07:30; directive 5 optional say-vs-do table in report_tables.py.
+- Reviews: Sun 12:30 only. Freeze 14:00. Exports/presentation from 16:30. Never stash/checkout while generators run.
 
 ## Log
+- 20:50 P2 iter40: DIRECTION 20:00 directives 1–3: E113-amend3 + formatter/tests 13/13 (no scores read), E124 executed-definition labels (C21b, claims 31/31), stale E100 waiter killed.
 - 20:10 P2 iter40: E122 E113 formatter p2_e1_report.py + synthetic test (tests.test_e1_completion 12/12); no metrics read, REPORT unchanged.
 - 20:20 P2 iter40: E123 abstract 275→268 words (claims 30/30, C25 snippet), verify_phase2 receipt refresh.
 - 20:00 P2 iter39: E113 snapshot7 (100 games, 3 sweeps, coverage OK, no scores read); TL;DR 5 split (E121), header → 20:00; claims 30/30, verify_phase2 26/26.

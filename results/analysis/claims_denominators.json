@@ -288,6 +288,18 @@
   "in_report_abstract": true
  },
  {
+  "id": "C21b",
+  "claim": "abliterated vs base Qwen: strict-executed (shared definition) each arm",
+  "expected": "5/15; 5/15",
+  "denominator": "15 private markets per model; shared strict executed rule (p2_strong_classes on llm_p2qwena / llm_p2qwenb)",
+  "note": "",
+  "value": "5/15; 5/15",
+  "source": "results/analysis/p2_strong_classes_llm_p2qwena.json",
+  "key_path": "n_strict_executed (qwena; qwenb)",
+  "status": "OK",
+  "in_report_abstract": true
+ },
+ {
   "id": "C23",
   "claim": "abliterated minus base Qwen: paired channel premium difference",
   "expected": "-1.24 [-2.41, -0.03]",
