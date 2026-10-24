@@ -1,6 +1,6 @@
 # Say vs. Do: does auditing what AI agents *say* together with what they *do* catch collusion better?
 
-*Apart AI Collusion Sprint, Q2.2 — text + action auditing. Status: locked test results in (2026-10-24 00:03 UTC); registered replication run 02:07 UTC (chronology disclosed below); placebo-channel exploration 03:33 UTC. Offline verification: `python3 verify_artifacts.py`; handoff instructions in [README.md](README.md).*
+*Apart AI Collusion Sprint, Q2.2 — text + action auditing. Status: locked test results in (2026-10-24 00:03 UTC); registered replication run 02:07 UTC (chronology disclosed below); placebo-channel exploration 03:33 UTC; post-hoc markup baseline (E70) and stats-table column ablation (E71) 05:20–05:35 UTC (exploratory, headline unchanged). Offline verification: `python3 verify_artifacts.py`; handoff instructions in [README.md](README.md).*
 
 For the five-minute presentation, open [PRESENTATION.html](PRESENTATION.html) locally in a browser;
 [speaker notes and saved-input hashes](PRESENTATION.md) accompany it. Render with
@@ -16,21 +16,22 @@ test and replication evidence item beside the public log (offline, searchable; n
 
 ## Abstract
 Does an auditor catch LLM collusion better if it reads what sellers *say* in public as well as what they *do*?
-**On our generator: no resolved gain.** We simulate a 4-firm repeated-pricing market with gpt-6-luna sellers; in the
+**On our generator: no resolved run-level detection gain** (a small nominal localisation gain with statistics did not repeat on fresh data). We simulate a 4-firm repeated-pricing market with gpt-6-luna sellers; in the
 `private` condition one pair gets a private chat. Sellers are never told to collude, yet all 70 private pairs use it to
 exchange prices or propose agreements, while a screen for explicit public coordination flags 0/125 runs. Zero-shot
-gpt-6.1-sol auditors score each firm pair from the public log, seeing text only, actions only, or both, with or
-without a computed statistics table. On the locked test split (n = 95, run once), text alone is at chance (run AUROC
-0.47) and combined minus the best single modality is −0.01 [−0.09, +0.06]. A statistics table helps (+0.11
-[+0.04, +0.18]). An untrained one-line statistic, the pair's price premium over its rivals, reaches 0.95 against ≤ 0.86
+gpt-6.1-sol auditors score each firm pair from the public log, seeing text only, actions only, or both; the action-bearing views also come with a computed statistics table
+(there is no text + statistics view). On the locked test split (n = 95, run once), text alone is at chance (run AUROC
+0.47), combined text + actions gives 0.74 vs actions alone 0.75, and combined minus the best single modality is −0.01 [−0.09, +0.06] ("resolved" throughout = 95% run-bootstrap CI excludes 0; no multiplicity correction). A statistics table helps (+0.11
+[+0.04, +0.18]). An untrained one-line statistic selected after partial test exposure, the pair's price premium over its rivals, reaches 0.95 against ≤ 0.86
 for the six original LLM views. But round-1 prices alone give 0.90, and they are set before any partner message is read; and when
-private messages are offered but never delivered (placebo, 15 matched seeds), the premium flags 14/15 runs, as with
-delivery. Our detectors therefore pick up a strong channel-offer cue, not only agreement-driven conduct. A replication
-on 30 fresh runs keeps the premium on top (0.92) and shows no text gain (−0.14 [−0.30, +0.02]). Public text still
-carries a learnable trace: supervised TF-IDF reaches 0.98. Caveats: the label coincides with the condition, one seller
+private messages are offered but never delivered (placebo, 15 matched seeds), the premium flags 14/15 placebo vs 14/15 matched
+delivered runs (no difference resolved; equivalence not tested). So high premiums and detector flags occur without delivered private
+messages; the round-1 gap shows a channel-offer response, which the placebo cannot separate from tacit coordination on public prices. A replication
+on 30 fresh runs keeps the premium on top (0.92) and does not resolve a gain from adding text; if anything text hurt (combined − action −0.14 [−0.30, +0.02]). Public text still
+carries a learnable trace: supervised TF-IDF reaches 0.98 (five-fold CV grouped by run within the test split, a different regime from the zero-shot auditors). Caveats: the label coincides with the condition, one seller
 model, and evasion is untested (under an announced monitor the judge finds coordination talk in 0/14 runs).
-Suggested architecture (not evaluated end to end): always-on action statistics as the screen, LLM audit reserved for
-explaining flagged runs.
+Suggested architecture: always-on action statistics as the screen, LLM audit reserved for explaining flagged runs;
+neither explanation usefulness nor end-to-end performance was evaluated.
 
 ![summary](figures/summary.png)
 *Figure 1 (`uv run python fig_summary.py`, read from existing results JSON). (a) Run AUROC with 95% run-bootstrap CIs;
@@ -52,12 +53,15 @@ the explicit-public-coordination screen flags 0/125 runs. Zero-shot gpt-6.1-sol 
 public log under six views (defined in §Setup). Locked test split (n = 95, run once):
 - **Text adds nothing resolved.** Text-only run AUROC is 0.47 (chance). Combined minus the best single modality is
   −0.01 [−0.09, +0.06] (gains up to ~0.06 not excluded). Replacing messages with a matched donor run's has no resolved
-  effect. Claude Sonnet 5.5 shows the same pattern on 42 runs. Supervised baselines agree: text + actions 0.96 vs
-  actions alone 0.96 (text alone 0.98, see below).
+  effect. Claude Sonnet 5.5 shows the same pattern on 42 runs (dev + test pooled; pair-AUROC contrasts, run AUROCs without CIs). Supervised baselines agree: text + actions 0.96 vs
+  actions alone 0.96 (text alone 0.98, see below; trained within the test split on labels that equal the condition).
 - **A computed statistics table helps** (action_stats − action, run AUROC +0.11 [+0.04, +0.18]). On fresh data the
   run-level gain is not resolved (+0.04 [−0.10, +0.19]), but the localisation gain is. A post-hoc column ablation (E71)
   removes the table's three price-level columns. This lowers test run AUROC from 0.86 to 0.77 (Δ +0.09 [+0.02,
-  +0.17]; actions alone 0.75). The corresponding dev and replication differences are unresolved.
+  +0.17]; actions alone 0.75); run-level differences on dev and replication are unresolved. For localisation the
+  picture is mixed: the level columns' gain is resolved on dev (+0.05) and replication (+0.12) but not test (+0.03),
+  and on test the remaining proximity/correlation columns beat actions alone (+0.07 [+0.02, +0.13]). The hypothesis
+  registered before the E71 audits (no-level ≈ action) held only for test run AUROC. Post hoc.
 - **A one-line untrained statistic ranks highest among untrained scorers.** The pair's price premium over its rivals
   reaches 0.95, against ≤ 0.86 for the six original LLM views (+0.09 [+0.01, +0.18]). A post-hoc one-sentence hint
   pointing the auditor at the premium gives action_stats 0.93 vs 0.86 on test (Δ +0.07 [−0.00, +0.15]) but 0.796 vs
@@ -65,12 +69,14 @@ public log under six views (defined in §Setup). Locked test split (n = 95, run 
   **round-1 prices alone give 0.90**. Those prices are set before any partner message is read. So the premium picks up a
   substantial pre-message cue tied to the channel *offer*; its contribution to full-period discrimination is not
   quantified. A post-hoc comparison-free markup over cost (usable with two firms) gives 0.92–0.95 on
-  test but 0.80–0.84 on the replication.
+  test but 0.80–0.84 on the replication; it needs known costs and also flags 11/15 and 9/15 placebo runs.
 - **The public text carries a learnable trace.** A supervised TF-IDF classifier reaches 0.98 (grouped CV within the
-  test split). Zero-shot text auditing does not use this trace.
+  test split). The tested zero-shot text auditor does not reach comparable detection performance.
 - **Replication on 30 fresh runs** (analysis registered after generation began, before any metrics; 4/4 decision rules
   satisfied): premium 0.92 [0.79, 1.00] vs action_stats 0.80, a gap that is not resolved. Text scores 0.67;
-  combined − action is −0.14 [−0.30, +0.02].
+  combined − action is −0.14 [−0.30, +0.02] (registered). Exploratory contrasts point the same way and
+  two exclude zero (combined − fusion −0.17 [−0.32, −0.04]; Δ_hybrid[combined] −0.14 [−0.33, −0.02]): on fresh data,
+  adding text, if anything, hurt.
 - **Placebo channel (exploration, 15 matched seeds).** With private messages offered but never delivered, the pair
   premium in rounds 2–12 was +1.09 vs +1.06 with delivery (Δ +0.03 [−0.54, +0.49]). The premium flags 14/15 placebo
   vs 14/15 private runs, and the action-based LLM views flag placebo runs at least as often; no scorer resolves a
@@ -138,9 +144,9 @@ development results are in Appendix A.
 
 ### LLM market — HEADLINE: locked test split (runs 0030–0124, n = 95; 50 y=1, 30 `none`, 15 `legit`)
 Computed ONCE by `./finalize_test.sh` (stamp `logs/final/RUN_ONCE.stamp`: started 23:59, HEADLINE_DONE 00:03 UTC) with
-the configuration frozen on dev; all tables below (and in Appendix C) are copied verbatim from the generated
+the configuration frozen on dev; the headline scorer table, paired-contrast rows and Appendix C flag-rate tables are copied from the generated
 `results/analysis/report_tables_test.md` (source: `results/analysis/final_llm_v3_gpt-6.1-sol_test.json` and
-siblings). Hard set: 0/125 runs have explicit coordination language in public (`hardset.py`), so every run is "hard".
+siblings); replication and exploratory results cite their own JSON sources. Hard set: the keyword/LLM screen flags 0/125 runs for explicit public coordination (`hardset.py`), so every run meets the operational "hard" criterion.
 95% class-stratified run-bootstrap CIs; fusion weight w_text = 0.6 fitted on dev.
 
 | scorer | run AUROC (detection) | within-market AUROC (localisation) | pooled pair AUROC | pair-ID acc |
@@ -193,7 +199,7 @@ which lists all 25 contrast families specified before the locked analysis (after
 2. **A computed statistics table helps a lot.** action_stats − action: run +0.106 [+0.038, +0.180], within +0.100
    [+0.036, +0.164]. With the table present, adding text gives a small localisation gain (combined_stats −
    action_stats within +0.036 [+0.008, +0.072]; dev +0.020 [0.000, +0.050]) and no detection gain (run −0.061
-   [−0.138, +0.014]). This is the only positive say+do signal on LLM data: nominal, unadjusted (25 contrast families × 3 metrics are reported, no multiplicity correction), and small; dev's lower bound is 0.000. It **did not repeat on the fresh replication split**: combined_stats − action_stats within −0.007 [−0.040, +0.020] (`replication_llm_v3rep.json`; not a registered contrast).
+   [−0.138, +0.014]). This is the only positive say+do signal for the zero-shot LLM auditors (the supervised baseline shows a negligible +0.003 pooled-pair gain): nominal, unadjusted (25 contrast families × 3 metrics are reported, no multiplicity correction), and small; dev's lower bound is 0.000. It **did not repeat on the fresh replication split**: combined_stats − action_stats within −0.007 [−0.040, +0.020] (`replication_llm_v3rep.json`; not a registered contrast).
 3. **The untrained premium has the highest run AUROC among the zero-shot LLM views and untrained comparators.** (The supervised text baseline scores higher, 0.98, under within-split CV, a different regime.) Pair premium run AUROC 0.95
    [0.90, 0.98] vs best original LLM view 0.86 (action_stats; premium − action_stats +0.089 [+0.010, +0.182], premium −
    structured +0.112 [+0.026, +0.197]). For localisation the premium also has the highest point
@@ -279,7 +285,8 @@ labeller log lines with per-run pair premiums (runs 0027–0029); no metric was 
 
 **Reading.** The fresh sample preserves the premium's highest run-AUROC point estimate, but its advantage over the
 fixed best LLM view is unresolved. No run-AUROC gain from adding text is resolved; P2 and P4 establish CI inclusion,
-not equivalence. action_stats and combined_stats reach within-market AUROCs of 0.99 and 0.98 on the 15 positive runs;
+not equivalence. Exploratory: combined − fusion run −0.17 [−0.32, −0.04] and Δ_hybrid[combined] −0.14 [−0.33, −0.02]
+exclude zero, so on fresh data text nominally hurt. action_stats and combined_stats reach within-market AUROCs of 0.99 and 0.98 on the 15 positive runs;
 their run-AUROC point estimates are lower than on test. At the frozen dev thresholds several scorers flag 40–60% of
 the 10 fresh `none` runs (test `none`: 3–17%; premium 0.40 vs 0.07), suggesting that the frozen operating points may
 be unstable even under the same generator. With only 10 fresh `none` runs, uncertainty is substantial: Wilson 95% CIs
@@ -353,7 +360,7 @@ paired bootstrap over the 15 seeds; `none` = the 10 `llm_v3rep` no-channel runs,
   (rounds 2–12). Pair markup over cost 7.91 vs 7.88 (Δ +0.03 [−0.66, +0.71]); rivals 6.46 vs 6.49 (`none` 6.26–6.28).
   The estimates are consistent with the offer-response prediction (b) written in `SPLITS.md`. They do not establish equivalence:
   delivery effects of up to about half a price unit either way are compatible with these intervals.
-- **Placebo runs look as collusive as real ones to every action-based detector.** At the frozen dev thresholds the
+- **At frozen thresholds, every action-bearing scorer flags placebo runs at least as often as delivered runs (equivalence not established).** At the frozen dev thresholds the
   premium flags 14/15 placebo and 14/15 matched private runs (`none` 4/10) and ranks the designated pair first in
   13.5/15 (tie-aware) vs 14/15. The action-bearing LLM views flag placebo runs at least as often as private runs
   (action 7 vs 5, action_stats 12 vs 8, combined 11 vs 8, combined_stats 12 vs 11, structured 8 vs 6 of 15); text
@@ -394,7 +401,7 @@ audit ran). Paired, class-stratified bootstrap over runs (95% intervals, 2,000 r
 |---|---|---|---|---|---|
 | test (n = 95) | 0.75 / 0.77 / 0.86 | +0.09 [+0.02, +0.17] | 0.79 / 0.86 / 0.89 | +0.03 [−0.01, +0.08] | +0.07 [+0.02, +0.13] |
 | replication (n = 30) | 0.76 / 0.71 / 0.80 | +0.09 [−0.04, +0.21] | 0.81 / 0.87 / 0.99 | +0.12 [+0.04, +0.25] | +0.05 [−0.11, +0.23] |
-| dev (n = 30) | 0.78 / 0.78 / 0.89 | +0.11 [−0.04, +0.28] | 0.85 / 0.86 / 0.91 | +0.05 [+0.01, +0.09] | +0.02 [+0.00, +0.04] |
+| dev (n = 30) | 0.78 / 0.78 / 0.89 | +0.11 [−0.04, +0.28] | 0.85 / 0.86 / 0.91 | +0.05 [+0.01, +0.09] | +0.015 [0.000, +0.040] |
 
 Pair-ID accuracy (action / no-level / action_stats): test 0.42 / 0.55 / 0.66, replication 0.47 / 0.53 / 0.93.
 Reading: removing the three level columns reduces test run AUROC by 0.09 [0.02, 0.17]; the corresponding run-level
@@ -402,7 +409,7 @@ differences on dev and replication are unresolved. No run-AUROC difference betwe
 alone is resolved (test +0.01 [−0.06, +0.09], replication −0.04 [−0.20, +0.11]), which is not evidence of equivalence.
 Adding the price-proximity and price-change-correlation columns to the action log improves test localisation (+0.07
 [+0.02, +0.13]); on the replication, the within-market gap between the full and reduced tables is +0.12 [+0.04, +0.25].
-This is consistent with the level-vs-variation reading above and with the sibling project's finding. The test covers the three
+Run-level results partly fit the level-vs-variation reading in Appendix A; the localisation results do not cleanly separate level from proximity columns. The test covers the three
 level columns jointly and does not single out the premium, which is the difference of the two means. Post hoc, on splits whose results were
 already known.
 
@@ -425,7 +432,7 @@ costs and a competitive benchmark; a uniform four-firm price rise remains untest
 ## Validity safeguards
 Labels from private chat only (judge blind to prices); same auditor model across views, fallback calls dropped;
 combined is a strict superset of both single views; shuffle donors matched on label *and* condition;
-hard set excludes runs with explicit coordination language in public text; cross-family auditor (Claude Sonnet 5.5) on
+the hard-set rule excludes runs flagged by the explicit-public-coordination screen; cross-family auditor (Claude Sonnet 5.5) on
 the 42-run mod-3 subset, all six views (done; text ≈ chance and no text gain for both auditors); adversarial methodology review by gpt-6.1-sol (`logs/review_methodology.md`,
 12 issues; fixes applied: label leakage, view superset, public partnership info, parse strictness, learner parity,
 resume ids, donor matching).
@@ -499,7 +506,7 @@ computed on the mod-3 subset incl. test runs. The test evaluation is locked and 
   "agreement vs. channel without agreement" — it changes framing, wording, refusals and price levels at the same time, so it cannot
   resolve the confound within llm_v3. The placebo stratum (`llm_v3plc`, same seeds and prompt, messages never
   delivered) addresses part of it within one generator: premium and auditor flags are no lower without message delivery, so
-  delivered private coordination is not needed for what our conduct-based detectors pick up (n = 15, exploratory;
+  in this sample, delivered private coordination was not required to produce the flags our conduct-based detectors raise (n = 15, exploratory;
   equivalence not shown; focal opening prices and tacit public-price coordination are not separated).
 - **Evasion not tested.** Sellers in the headline data were never told prices are watched. In the exploration
   stratum `llm_v3mon`, with an announced price monitor the judge found no agreements (0/14), so no evasive
@@ -515,7 +522,8 @@ computed on the mod-3 subset incl. test runs. The test evaluation is locked and 
 - Agreement labels from one LLM judge (gpt-6.1-sol, same family as the auditor; blind to prices); manually
   spot-checked on 3 dev chats + pilots.
 - Zero-shot auditors with one prompt per view (0 tuning attempts on the six original views; the post-hoc hint view E56 is one data-informed revision); a tuned or few-shot auditor might use the stats table better.
-- Small dev split (30 runs, base rate 2/3) → dev-fitted thresholds and fusion weight are noisy. The Youden rule breaks
+- Small dev split (30 runs, base rate 2/3) → dev-fitted thresholds and fusion weight are noisy. Reported intervals resample saved runs and
+  scores; they do not repeat model calls, refit supervised models, or account for adaptive analysis selection. The Youden rule breaks
   ties toward the higher threshold: conservative on FPR only — with perfect dev separation (premium) the cut sits at
   the lowest dev-positive score, which can cost test TPR.
 - The sibling's information-theoretic detectors may have been developed while looking at llm_v3 runs that include our
@@ -599,9 +607,9 @@ gain for the LLM auditor (combined − action within +0.005 [−0.05, +0.045]; j
 unimodal auditors). A plausible reason, not tested causally, is that the sellers keep coordination private and their
 public messages are bland. The views that include a *computed pair-statistics table* (action_stats, combined_stats,
 structured) localise better than those without; separately, a single untrained statistic (the pair premium) beats
-every original LLM view on dev. (A later post-hoc column ablation, E71 in §Exploration, finds that removing the table's three level columns lowers test run AUROC; dev and replication differences are unresolved.) This fits the sibling project's
-finding that dependence statistics detect coordinated *variation*, not *level*: these colluders coordinate on
-level, and the premium measures level directly.
+every original LLM view on dev. (A later post-hoc column ablation, E71 in §Exploration, finds that removing the table's three level columns lowers test run AUROC; dev and replication run-level differences are unresolved and within-market results are mixed.) This fits the sibling project's
+finding that dependence statistics detect coordinated *variation*, not *level*: price levels discriminate strongly here and the premium
+measures level directly (this does not establish agreement-driven pricing).
 
 **Information-theoretic dependence detectors (sibling Q1.4, dev).** Using the sibling project's per-pair scores on
 the same runs (`../collusion-14-infotheory/results/eval/llm_v3_ext.json`, read-only; block `external_infotheory`

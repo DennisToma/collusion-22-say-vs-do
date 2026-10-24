@@ -80,7 +80,7 @@ class HandoffTests(unittest.TestCase):
 
     def test_report_prose_edit_invalidates_export(self):
         path = self.root / "REPORT.md"
-        path.write_text(path.read_text().replace("no resolved gain", "proven equivalence"))
+        path.write_text(path.read_text().replace("no resolved run-level detection gain", "proven equivalence"))
         before = self.state()
         result = self.run_copy(sys.executable, "-S", "build_handoff.py", "--check")
         self.assertNotEqual(result.returncode, 0)
