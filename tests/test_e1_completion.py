@@ -189,6 +189,17 @@ class E1CompletionTests(unittest.TestCase):
         with self.assertRaisesRegex(AssertionError, 'changed/disappeared'):
             e.snapshot()
 
+    def test_amend3_stratified_delta_known_values_and_level_shift_immunity(self):
+        rows = []
+        for cid, shift, comb, act in (('c08', 0, (10, 90), (90, 10)), ('c09', 500, (10, 90), (10, 90))):
+            for y in (0, 1):
+                for i in range(3):
+                    rows.append(dict(cell=cid, y=y, combined=comb[y] + shift + i, action=act[y] + i))
+        r = e.stratified_delta(rows, ['c08', 'c09'], 'combined', 'action', B=200)
+        self.assertEqual((r['delta'], r['n_cells']), (0.5, 2))  # c08: 1 - 0, c09: 1 - 1
+        self.assertLessEqual(r['ci'][0], 0.5); self.assertGreaterEqual(r['ci'][1], 0.5)
+        self.assertIsNone(e.stratified_delta([x for x in rows if x['y'] == 1], ['c08'], 'combined', 'action'))
+
     def test_live_jsonl_ignores_only_incomplete_last_line(self):
         f = Path(self.tmp.name) / 'live.jsonl'
         f.write_bytes(b'{"run_id":"done"}\n{"run_id":')
@@ -214,11 +225,11 @@ class E1CompletionTests(unittest.TestCase):
         self.assertEqual(d['c_per_cell_appendix']['c08']['auroc_text'], 1)
         self.assertIsNone(d['c_per_cell_appendix']['c02']['auroc_text'])
         import p2_e1_report
-        body, glance = p2_e1_report.render(d)
+        body, glance, clause = p2_e1_report.render(d)
         self.assertLessEqual(len(body.splitlines()), 10)
-        self.assertIn('**0/16 cells**', body); self.assertIn('0/8 Qwen cells', body)
+        self.assertIn('**0/8 cells** (8 ties, 0 worse)', body); self.assertIn('0/16 positive (16 ties', body); self.assertIn('+0.00 [+0.00, +0.00] (8 cells)', body)
         self.assertIn('8/8 channel vs 0/8 no-channel', body)  # synthetic qwen text flags
-        self.assertIn('exceptions c02 8/8', body)  # synthetic luna board exception (4 firms x 2 rounds)
+        self.assertIn('posting cells c02 8/8', body)  # synthetic luna board exception (4 firms x 2 rounds)
         self.assertIn('not run', body); self.assertTrue(glance.startswith('| P2.16 |'))
         e.LOCK.unlink()  # a fresh clone has no ignored local lock
         with self.assertRaisesRegex(ValueError, 'already exists'):

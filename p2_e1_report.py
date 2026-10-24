@@ -50,35 +50,42 @@ def render(d):
         sec_line = f"Secondary (Q1.4 E70 executed labels): {pos} executed channel games vs all matched no-channel games; per-cell AUROCs in the json."
     else:
         sec_line = "Secondary executed-vs-no-channel contrast: not run (Q1.4 E70 labels not published at eval time)."
+    m = d["amend3"]
+    sd = lambda x: f"{x['delta']:+.2f} [{x['ci'][0]:+.2f}, {x['ci'][1]:+.2f}] ({x['n_cells']} cells)" if x else "n/a"
+    qs, al = m["qwen_sign_counts"], m["all_sign_counts"]
+    qca, qct = m["qwen_stratified_combined_minus_action"], m["qwen_stratified_combined_minus_text"]
     lines = [
-        f"**P2.16 E1 factorial grid audit (E113, registered before the grid existed; amendments E113-amend/-amend2 before any score was read).** "
+        f"**P2.16 E1 factorial grid audit (E113, registered before the grid existed; amendments E113-amend/-amend2/-amend3 before any score was read).** "
         f"Frozen gpt-6.1-sol auditors (dev thresholds) on Q1.4's E70 grid: {d['n_games']} games, {d['complete_sweeps']} balanced sweep(s), "
         f"{d['n_cells']} cells (channel vs no channel per cell, n per arm {', '.join(f'{a}/{b}' for a, b in n_per_arm)}).",
-        f"Registered headline: combined view beats the best single view in **{k}/{K} cells** (one-sided sign test p = {d['b_sign_test_one_sided_p']}; "
-        f"P1 'no systematic gain' {'held' if d['b_P1_held'] else 'failed'}); {qk}/{qK} Qwen cells, where public text is audited.",
-        f"Pooled channel-vs-none AUROC (descriptive): action {pv('action_all')}, combined {pv('combined_all')}; "
-        f"Qwen text {pv('text_qwen')}, Qwen combined {pv('combined_qwen')}; luna combined {pv('combined_luna')}.",
-        f"Qwen text flags: {tx1[0]}/{tx1[1]} channel vs {tx0[0]}/{tx0[1]} no-channel games "
-        f"(TL;DR 3 predicts control flags: Qwen invites rivals publicly).",
+        f"Headline (8 Qwen cells, where public text exists; amend3): combined beats the best single view in **{qs['pos']}/{qK} cells** "
+        f"({qs['tie']} ties, {qs['neg']} worse); cell-stratified pooled Δ combined − action {sd(qca)}, combined − text {sd(qct)}.",
+        f"Registered P1 over 16 cells: {k}/{K} positive ({al['tie']} ties, {al['neg']} negative; one-sided sign test p = {d['b_sign_test_one_sided_p']}), "
+        f"P1 'no systematic gain' {'held' if d['b_P1_held'] else 'failed'}: a weak confirmation, because per-cell max(text, action) selection biases Δ downward and ties count toward P1; the stratified Δ is the informative number.",
+        f"Luna cells have no text input: combined − action {sd(m['luna_stratified_combined_minus_action_noise'])} estimates auditor re-prompt noise, not a text gain"
+        + (f"; posting cells {', '.join(used)} posts/agent-rounds (channel arm; any-arm posting cells {', '.join(m['luna_posting_cells'])}) "
+           f"{sd(m['luna_posting_stratified_combined_minus_action'])} vs silent {sd(m['luna_silent_stratified_combined_minus_action'])}." if m["luna_posting_cells"] else "."),
+        f"Unstratified pooled channel-vs-none AUROC (raw scores pooled across cells; descriptive): action {pv('action_all')}, combined {pv('combined_all')}; "
+        f"Qwen text {pv('text_qwen')}. Qwen text flags: {tx1[0]}/{tx1[1]} channel vs {tx0[0]}/{tx0[1]} no-channel games (TL;DR 3 predicts control flags: Qwen invites rivals publicly).",
         f"Combined-flag factor main effects with CI excluding 0: {'; '.join(ce) if ce else 'none'}; "
-        f"text-flag (Qwen cells): {'; '.join(te) if te else 'none'} (7 factors each, uncorrected, descriptive).",
-        f"Board use is a finding, not an auditor effect: {silent}/{len(luna)} luna cells never post publicly"
-        + (f"; exceptions {', '.join(used)} posts/agent-rounds (channel arm)." if used else "."),
+        f"text-flag (Qwen cells): {'; '.join(te) if te else 'none'} (7 factors each, uncorrected, descriptive). "
+        f"{silent}/{len(luna)} luna cells never post publicly (a finding about the sellers, not the auditor).",
         sec_line,
         f"Source: `results/analysis/p2_e1_audit.json` (`uv run python p2_e1_audit.py eval`, run once; lines by `p2_e1_report.py`).",
     ]
-    glance = (f"| P2.16 | E1 factorial grid audit (Q1.4 E70, {d['n_games']} games) | combined > best single view in {k}/{K} cells "
-              f"({qk}/{qK} Qwen); pooled combined {pv('combined_all')}, action {pv('action_all')} | `p2_e1_audit.json` |")
+    glance = (f"| P2.16 | E1 factorial grid audit (Q1.4 E70, {d['n_games']} games) | Qwen cells: combined > best single in {qs['pos']}/{qK} "
+              f"({qs['tie']} ties); stratified Δ combined − action {sd(qca)}; luna re-prompt noise {sd(m['luna_stratified_combined_minus_action_noise'])} | `p2_e1_audit.json` |")
+    clause = f"no text gain in {qK - qs['pos']}/{qK} Qwen cells of an external 16-cell grid; pooled Δ {sd(qca)}"
     assert len(lines) <= 10
-    return "\n".join(lines), glance
+    return "\n".join(lines), glance, clause
 
 
 def main():
     src = Path(sys.argv[1]) if len(sys.argv) > 1 else SRC
     out = Path(sys.argv[2]) if len(sys.argv) > 2 else OUT
-    body, glance = render(json.loads(src.read_text()))
-    out.write_text(body + "\n\nGLANCE:\n" + glance + "\n")
-    print(body + "\n\n" + glance)
+    body, glance, clause = render(json.loads(src.read_text()))
+    out.write_text(body + "\n\nGLANCE:\n" + glance + "\n\nABSTRACT CLAUSE:\n" + clause + "\n")
+    print(body + "\n\n" + glance + "\n\n" + clause)
 
 
 if __name__ == "__main__":
