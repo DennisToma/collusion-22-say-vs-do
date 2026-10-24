@@ -585,3 +585,129 @@ distinguish "reaction to the offer" from "intended (unilateral) coordination". I
 the condition, a near-perfect text classifier is not evidence that agreements can be detected from public text.
 The notes-to-self condition (P2.5) separates the two explanations.
 
+## v1 overnight summary and key results (moved from REPORT.md 2026-10-24 14:30 UTC for length; text unchanged)
+Does an auditor catch LLM collusion better if it reads what sellers *say* in public as well as what they *do*?
+**On our generator: no resolved run-level detection gain** (a small unadjusted within-market localisation gain with statistics did not repeat on fresh data). We simulate a 4-firm repeated-pricing market with gpt-6-luna sellers; in the
+`private` condition one pair gets a private chat. Sellers are never told to collude, yet all 70 private pairs use it to
+exchange prices or propose agreements, while a screen for explicit public coordination flags 0/125 runs. Zero-shot
+gpt-6.1-sol auditors score each firm pair from the public log, seeing text only, actions only, or both. Further views
+add a computed statistics table to the action log, with or without text; a structured view also adds a stated-vs-actual
+price table. No view gives statistics without the raw action log. On the locked test split (n = 95, run once), text
+alone is consistent with chance (run AUROC 0.47), combined text + actions gives 0.74 vs actions alone 0.75, and combined minus the best single modality is −0.01 [−0.09, +0.06] ("resolved" throughout = 95% run-bootstrap CI excludes 0; no multiplicity correction). A statistics table helps test detection (+0.11
+[+0.04, +0.18]; unresolved on replication) and improves localisation in both samples. An untrained one-line statistic selected after partial test exposure, the pair's price premium over its rivals, reaches 0.95 against ≤ 0.86
+for the six original LLM views. But round-1 prices alone give 0.90, and they are set before any partner message is read; and when
+private messages are offered but never delivered (placebo, 15 matched seeds), the premium flags 14/15 placebo vs 14/15 matched
+delivered runs (no difference resolved; equivalence not tested). So high premiums and detector flags occur without delivered private
+messages; the round-1 gap indicates a response to the channel offer or its prompt framing, which the placebo cannot separate from tacit coordination on public prices. A replication
+on 30 fresh runs keeps the premium's run-AUROC point estimate highest (0.92, lead unresolved) and does not resolve a gain from adding text; if anything text hurt (combined − action −0.14 [−0.30, +0.02]). Public text still
+carries a learnable trace: supervised TF-IDF reaches 0.98 (five-fold CV grouped by run within the test split, a different regime from the zero-shot auditors). Caveats: the label coincides with the condition, one seller
+model, and evasion is untested (under an announced monitor the judge finds coordination talk in 0/14 runs).
+(v1 suggested action statistics as the screen with LLM audit to explain flags; Phase 2 P2.5 undermines this and it was never evaluated end to end.)
+
+![summary](figures/summary.png)
+*Figure 1 (`uv run python fig_summary.py`, read from existing results JSON). (a) Run AUROC with 95% run-bootstrap CIs;
+filled = locked test split (n = 95), hollow = fresh replication (n = 30). The premium comparator was chosen after
+seeing partial data including test runs; the round-1 replication point is exploratory (computed after `replication.py`). (b) Flag
+rates at frozen dev thresholds in the placebo exploration stratum (15 placebo, 15 matched private, 10 `none`); n is
+small and no scorer resolves placebo from private.*
+
+#### Key results (detail)
+**Answer (on this generator): no resolved detection gain.** Adding what LLM sellers *say* in public to what they *do*
+gives no resolved run-level detection gain, for zero-shot LLM auditors or for supervised baselines (with a statistics
+table present, text gives a small nominal localisation gain that did not repeat on fresh data). What helps is a better
+summary of the actions, and opening prices already discriminate strongly, before any partner message has been read.
+
+We build a 4-firm repeated-pricing market with LLM sellers (gpt-6-luna). In the `private` condition one pair gets a
+private chat channel. Sellers are never told to collude, yet all 70 private pairs (dev + test) exchange prices or propose agreements there (judge-labelled from the
+private chat), and
+the explicit-public-coordination screen flags 0/125 runs. Zero-shot gpt-6.1-sol auditors score every firm pair from the
+public log under six views (defined in §Setup). Locked test split (n = 95, run once):
+- **Text adds nothing resolved.** Text-only run AUROC is 0.47 (consistent with chance). Combined minus the best single modality is
+  −0.01 [−0.09, +0.06] (gains up to ~0.06 not excluded). Replacing messages with a matched donor run's has no resolved
+  effect. Claude Sonnet 5.5 shows the same pattern on 42 runs (dev + test pooled; pair-AUROC contrasts, run AUROCs without CIs). Supervised baselines agree: text + actions 0.96 vs
+  actions alone 0.96 (text alone 0.98, see below; trained within the test split on labels that equal the condition).
+- **A computed statistics table helps** (action_stats − action, run AUROC +0.11 [+0.04, +0.18]). On fresh data the
+  run-level gain is not resolved (+0.04 [−0.10, +0.19]), but the localisation gain is. A post-hoc column ablation (E71)
+  removes the table's three price-level columns. This lowers test run AUROC from 0.86 to 0.77 (Δ +0.09 [+0.02,
+  +0.17]; actions alone 0.75); run-level differences on dev and replication are unresolved. For localisation the
+  picture is mixed: the level columns' gain is resolved on dev (+0.05) and replication (+0.12) but not test (+0.03),
+  and on test the remaining proximity/correlation columns beat actions alone (+0.07 [+0.02, +0.13]). The hypothesis
+  registered before the E71 audits (no-level ≈ action) held only for test run AUROC. Post hoc.
+- **A one-line untrained statistic ranks highest among untrained scorers.** The pair's price premium over its rivals
+  reaches 0.95, against ≤ 0.86 for the six original LLM views (+0.09 [+0.01, +0.18]). A post-hoc one-sentence hint
+  pointing the auditor at the premium gives action_stats 0.93 vs 0.86 on test (Δ +0.07 [−0.00, +0.15]) but 0.796 vs
+  0.798 on the replication; neither dataset was held out for the hint. The premium comparator was chosen after seeing partial data, and
+  **round-1 prices alone give 0.90**. Those prices are set before any partner message is read. So the premium picks up a
+  substantial pre-message cue tied to the channel *offer*; its contribution to full-period discrimination is not
+  quantified. A post-hoc comparison-free markup over cost (usable with two firms) gives 0.92–0.95 on
+  test but 0.80–0.84 on the replication; it needs known costs and also flags 11/15 and 9/15 placebo runs.
+- **The public text carries a learnable trace.** A supervised TF-IDF classifier reaches 0.98 (grouped CV within the
+  test split). The tested zero-shot text auditor does not reach comparable detection performance.
+- **Replication on 30 fresh runs** (analysis registered after generation began, before any metrics; 4/4 decision rules
+  satisfied): premium 0.92 [0.79, 1.00] vs action_stats 0.80, a gap that is not resolved. Text scores 0.67;
+  combined − action is −0.14 [−0.30, +0.02] (registered). Exploratory contrasts point the same way and
+  two exclude zero (combined − fusion −0.17 [−0.32, −0.04]; Δ_hybrid[combined] −0.14 [−0.33, −0.02]): on fresh data,
+  adding text, if anything, hurt.
+- **Placebo channel (exploration, 15 matched seeds).** With private messages offered but never delivered, the pair
+  premium in rounds 2–12 was +1.09 vs +1.06 with delivery (Δ +0.03 [−0.54, +0.49]). The premium flags 14/15 placebo
+  vs 14/15 private runs, and the action-based LLM views flag placebo runs at least as often; no scorer resolves a
+  separation of the two arms (n = 15). Elevated premiums and frequent flags occur without private-message delivery. This does not
+  establish equivalence, nor exclude a smaller delivery effect.
+- **Caveats.** The label coincides with the condition: we detect *channel granted and used*, and the placebo shows
+  the conduct signal does not need the private messages to be delivered. We used one seller model,
+  and sellers were never instructed or warned to evade (headline data). Frozen premium thresholds flag 4/10 fresh `none` runs; under a shifted framing the premium and
+  stats/combined views flag 25–63% of runs (text and action 6%). With an announced price monitor, the judge finds no coordination communication (0/14), so evasion is untested.
+
+## v1 limitations and next steps (moved from REPORT.md 2026-10-24 14:30 UTC; text unchanged)
+### v1 Limitations
+- **Label = condition.** On llm_v3 all 70 `private` runs are judged y = 1 and `none`/`legit` runs are y = 0 by
+  construction (no channel to judge), so y equals the condition in all 125 runs: the endpoint is effectively "channel
+  granted and used", and detecting "agreement" and detecting "a channel was granted" coincide; the endpoint is coordination *communication*, not realised overcharge. A separate
+  firm-framing stratum (`llm_v3fp`, `fp_stratum.py`, frozen dev thresholds) is an exploratory transfer check of
+  "agreement vs. channel without agreement" — it changes framing, wording, refusals and price levels at the same time, so it cannot
+  resolve the confound within llm_v3. The placebo stratum (`llm_v3plc`, same seeds and prompt, messages never
+  delivered) addresses part of it within one generator: premium and auditor flags are no lower without message delivery, so
+  in this sample, delivered private coordination was not required to produce the flags our conduct-based detectors raise (n = 15, exploratory;
+  equivalence not shown; focal opening prices and tacit public-price coordination are not separated).
+- **Evasion not tested.** Sellers in the headline data were never told prices are watched. In the exploration
+  stratum `llm_v3mon`, with an announced price monitor the judge found no agreements (0/14), so no evasive
+  colluders were produced; robustness of the premium to evasion remains open.
+- **The premium requires comparison firms.** As specified it is undefined in a two-firm market and cannot detect a
+  uniform price increase shared by all four firms. A comparison-free markup over cost keeps much of the signal here
+  (post-hoc E70), but it needs known costs and a competitive benchmark, and it can flag high pricing without delivered private messages; a
+  uniform all-firm cartel was not generated, so this case is untested.
+- **Generator-specific premium.** Channel holders open higher before receiving any private message. Round 1 alone
+  gives test run AUROC 0.90; rounds 2–12 give test 0.90 and dev 0.92. Removing observed round 1 does not estimate what
+  would happen if sellers changed their opening strategy.
+- Single seller model family (GPT, gpt-6-luna), single framing for the headline data, 12 rounds, 4 firms.
+- Agreement labels from one LLM judge (gpt-6.1-sol, same family as the auditor; blind to prices); manually
+  spot-checked on 3 dev chats + pilots. A Claude Sonnet 5.5 re-judge (E74) reproduces the binary label on all 115
+  private chats, but the explicit vs info_exchange sub-label differs between these two judges.
+- Zero-shot auditors with one prompt per view (0 tuning attempts on the six original views; the post-hoc hint view E56 is one data-informed revision); a tuned or few-shot auditor might use the stats table better.
+- Small dev split (30 runs, base rate 2/3) → dev-fitted thresholds and fusion weight are noisy. Reported intervals resample saved runs and
+  scores; they do not repeat model calls, refit supervised models, or account for adaptive analysis selection. The Youden rule breaks
+  ties toward the higher threshold: conservative on FPR only — with perfect dev separation (premium) the cut sits at
+  the lowest dev-positive score, which can cost test TPR.
+- The sibling's information-theoretic detectors may have been developed while looking at llm_v3 runs that include our
+  test runs; their test numbers are a comparator, not a locked held-out result.
+
+### v1 What to do next
+1. **Evasion-aware colluders.** The premium already discriminates strongly before any partner message is read;
+   robustness to sellers that conceal this opening-price cue remains untested. Under our `llm_v3mon`
+   announcement (prices monitored, flagged pairs lose half their earnings) gpt-6-luna produced no judge-labelled
+   agreements (0/14), so testing evasion needs a red-teamed or instructed colluder (or a less safety-tuned seller
+   model), including colluders that coordinate on gradual drift; we expect the premium and stats-table views to
+   degrade first.
+2. **Make text matter.** Text should become necessary when conduct alone is ambiguous: legit cooperation that moves
+   prices, or collusion signalled in public through innocuous-looking wording (a supervised text model already finds
+   such a trace here). Train/transfer that text model across seller models and framings before trusting it.
+3. **Label ≠ condition.** Include placebo-matched negatives and test whether public text or conduct distinguishes
+   delivered private coordination from an offered but undelivered channel, across seller models and games where a
+   delivered agreement actually changes prices. Add a one-sided placebo (offer to one seller only) to separate
+   offer-induced focal pricing from tacit coordination on public prices.
+4. **Auditor design.** The stats-table views already include the premium. A one-sentence premium hint was tested
+   post hoc (§Exploration, E56: mixed). Test it prospectively on a fresh split, repeat the post-hoc level-column ablation (E71) prospectively, evaluate any
+   stats-first → LLM cascade on fresh data, and test tuned/few-shot auditors on a fresh split.
+5. **Breadth.** Other seller model families, more firms/rounds, and a second market type.
+
+
