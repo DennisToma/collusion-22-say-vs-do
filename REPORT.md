@@ -1,6 +1,6 @@
 # Say vs. Do: does auditing what AI agents *say* together with what they *do* catch collusion better?
 
-*Apart AI Collusion Sprint, Q2.2 — text + action auditing. Status: locked test results in (2026-10-24 00:03 UTC); all exploration strata (§Exploration) complete (01:25 UTC).*
+*Apart AI Collusion Sprint, Q2.2 — text + action auditing. Status: locked test results in (2026-10-24 00:03 UTC); all exploration strata (§Exploration) complete (01:25 UTC); pre-registered replication run 02:07 UTC.*
 
 ## Abstract
 We build a 4-firm repeated-pricing market with LLM sellers (gpt-6-luna). In the `private` condition, one pair of firms
@@ -28,6 +28,9 @@ table. Results on the locked test split (n = 95, run once):
   One seller model, one framing, sellers never try to evade. On 16 runs from a different framing in which the judge found
   no agreement, the frozen thresholds flag 44% (premium) and 25–63% (stats-table views) of runs: the strong
   detectors do not transfer as-is.
+- **Pre-registered replication on 30 fresh runs (4/4 predictions held, two narrowly):** premium run AUROC 0.92
+  [0.79, 1.00] vs best LLM view 0.80 (Δ +0.12 [−0.004, +0.29]); text 0.67 [0.47, 0.86]; combined − action −0.14
+  [−0.30, +0.02] (no text gain). The frozen dev thresholds over-flag fresh `none` runs (premium 4/10).
 - **No coordination under an announced price monitor.** When the prompt also says prices are monitored (private chat
   still unmonitored), the judge finds agreements in 0/14 private runs (vs 70/70 without the note) and mean markup is
   close to the no-channel runs, so the planned evasion test had no colluders to test on (unpaired exploration, n = 20).
@@ -223,13 +226,47 @@ Message-shuffle ablation and exploration strata: see Exploration below.
 *(Descriptive, `fig_mechanism.py --split test` → `logs/mechanism_test.txt`: private pairs' late-window premium +1.02,
 positive in 44/50 runs; none −0.02; legit +0.08.)*
 
-### Replication on a fresh split (`llm_v3rep`, pre-registered; PENDING)
-Because the premium was chosen after a look at partial data including test runs, we generate 30 new runs with the
+### Replication on a fresh split (`llm_v3rep`, pre-registered, run once 02:07 UTC)
+Because the premium was chosen after a look at partial data including test runs, we generated 30 new runs with the
 unchanged generator (seed 9000; 15 `private`, 10 `none`, 5 `legit`) AFTER freezing everything. Analysis
-(`uv run python replication.py`, frozen dev thresholds, best LLM view fixed from the test json, run once) and four
-predictions are pre-registered in `data/SPLITS.md` (commit 71eae06; generation had started ~2 min earlier and that
-commit includes partial raw output of runs 0000–0001, but no labels, audits or scores existed; see the SPLITS.md disclosure). *Results pending — generation
-and audits running at 01:10 UTC.*
+(`uv run python replication.py` → `results/analysis/replication_llm_v3rep.json`; frozen llm_v3 dev thresholds and
+fusion weight; best LLM view = action_stats, fixed from the llm_v3 test json; run-once lock
+`logs/final/REPLICATION_ONCE.lock`) and four predictions were pre-registered in `data/SPLITS.md` (commit 71eae06;
+generation had started ~2 min earlier and that commit includes partial raw output of runs 0000–0001, but no labels,
+audits or scores existed; see the SPLITS.md disclosure). Before the run the manager saw the label counts and three
+labeller log lines with per-run pair premiums (runs 0027–0029); no metric was computed. All 15 private runs are judged y = 1
+(13 explicit, 2 info_exchange), so label = condition again. Run-bootstrap 95% CIs (2000 class-stratified); n = 30.
+
+| scorer | run AUROC | within-market AUROC | flag rate at frozen dev threshold: private y=1 / none / legit |
+|---|---|---|---|
+| text | 0.67 [0.47, 0.86] | 0.69 [0.55, 0.82] | 0.07 / 0.20 / 0.00 |
+| action | 0.76 [0.57, 0.91] | 0.81 [0.67, 0.93] | 0.33 / 0.10 / 0.00 |
+| combined | 0.62 [0.40, 0.80] | 0.80 [0.66, 0.91] | 0.53 / 0.50 / 0.20 |
+| action_stats | 0.80 [0.61, 0.94] | 0.99 [0.96, 1.00] | 0.53 / 0.50 / 0.00 |
+| combined_stats | 0.66 [0.47, 0.85] | 0.98 [0.95, 1.00] | 0.73 / 0.60 / 0.20 |
+| structured | 0.66 [0.45, 0.84] | 0.91 [0.82, 0.98] | 0.40 / 0.40 / 0.00 |
+| fusion | 0.78 [0.60, 0.93] | 0.84 [0.71, 0.93] | 0.47 / 0.10 / 0.00 |
+| premium | 0.92 [0.79, 1.00] | 0.99 [0.96, 1.00] | 0.93 / 0.40 / 0.00 |
+| premium_r2plus | 0.90 [0.75, 1.00] | 0.95 [0.89, 1.00] | 1.00 / 0.20 / 0.20 |
+
+**Pre-registered predictions: 4/4 held**, but two only narrowly, and n = 30 gives wide CIs.
+- P1 premium run AUROC ≥ 0.85: **0.92** [0.79, 1.00] — held (point estimate; the CI dips below 0.85).
+- P2 text run AUROC CI includes 0.5: 0.67 [0.47, 0.86] — held, but the point estimate is higher than on test (0.47).
+- P3 premium − best view (action_stats) ≥ 0, point: **+0.12** [−0.004, +0.29] — held; CI just includes 0
+  (within-market: +0.00 [−0.04, +0.04]).
+- P4 combined − action run AUROC CI includes 0: **−0.14** [−0.30, +0.02] — held narrowly. Adding the public text to
+  the action view nominally *lowered* detection; an exploratory second bootstrap of the same contrast
+  (Δ_hybrid[combined], different resampling stream) gives [−0.33, −0.02], so the "includes 0" call is
+  resampling-sensitive. Either way there is no sign of a text gain.
+- Registered action_stats − action: run +0.04 [−0.10, +0.19] (not resolved, vs +0.11 on test), within-market +0.17
+  [+0.05, +0.32] (resolved, as on test).
+
+**Reading.** The qualitative headline replicates on fresh data: the untrained premium has the best detection point
+estimate, and text adds nothing to the LLM auditor. The stats-table views localise almost perfectly within markets
+(0.98–0.99), but their *run-level* detection is weaker than on test. At the frozen dev thresholds several scorers
+flag 40–60% of the 10 fresh `none` runs (test `none`: 3–17%; premium 0.40 vs 0.07), so the dev operating points do
+not carry over even within the same generator (n = 10, Wilson CIs ~[0.17, 0.69]). Exploratory contrasts (not
+pre-registered) are all in the json.
 
 ### Exploration strata (never pooled into the headline; frozen dev thresholds, nothing fitted)
 **Firm framing, channel offered, no agreement found (`llm_v3fp`, 16 `private` runs, `uv run python fp_stratum.py --ds
@@ -295,7 +332,9 @@ with anticipation of coordination. As a result the premium from **round 1 alone*
 12-round premium (0.95 / 0.96) and above every LLM view's run-AUROC point estimate, though below combined_stats on
 localisation (0.926 vs 0.930; no paired CIs for these comparisons). Dropping round 1, the premium over rounds 2..k has
 test run AUROC 0.877 at k = 2, falls to 0.855 at k = 4, and reaches 0.904 at k = 12, so later prices also distinguish
-the conditions. Strong discrimination is thus already present before sellers receive any partner message: the
+the conditions. On the fresh replication split (run after `replication.py`; `--ds llm_v3rep`), the round-1 private
+pair premium is +5.03 [+4.30, +5.80] (> 0 in 15/15; `none` −0.40, `legit` −1.40) and round 1 alone gives run AUROC
+0.84 [0.69, 0.96], within-market 0.95 [0.91, 0.99] (n = 30). Strong discrimination is thus already present before sellers receive any partner message: the
 round-1 score is a **treatment-response detector** (it reacts to the channel *offer*). These analyses do not quantify
 how much of the full-period AUROC comes from that response, nor performance when no agreement develops. This tightens
 the label = condition caveat. Round-1 prices support early ranking here; first-round alarm rates at a calibrated
@@ -390,6 +429,7 @@ uv run python deterrence.py                     # agreement / message / markup c
 uv run python matched_recall.py                 # legit/none flags at matched recall (post-lock, descriptive)
 uv run python round1_effect.py --ds llm_v3      # round-1 (pre-message) prices by role (descriptive)
 uv run python early_detection.py --ds llm_v3 && uv run python fig_early.py   # premium AUROC vs rounds observed
+uv run python replication.py                    # pre-registered fresh-split replication (run ONCE; lock in logs/final)
 ./finalize_test.sh                              # the ONE locked test run (sole entry point for --split test headline)
 uv run python auditors.py --ds llm_v3 --auditor claude-sonnet-5-5 --subset mod3   # cross-family subset
 uv run python cross_family.py --ds llm_v3 --other claude-sonnet-5-5               # cross-family comparison

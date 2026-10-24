@@ -91,3 +91,7 @@
   llm_v3rep_0000–0029 and counts 15/10/5 asserted; finite scores asserted; sha256 of the frozen dev/test jsons recorded;
   run-once lock `logs/final/REPLICATION_ONCE.lock`; smoke runs write *_SMOKE.json. Only the three contrasts named above
   are registered; every other contrast in the output is exploratory.
+- Run record (iter 13, 02:07 UTC): `replication.py` run ONCE (lock created), after `auditors.py --ds llm_v3rep --verify`
+  OK (30/30 × 6 views current). Exposure before the run: label counts (15/15 private y=1) and three label_llm log lines
+  showing per-run pair premiums of runs 0027–0029 (seen in a progress `tail`); no metric computed. pipeline.sh had
+  to be killed after all audits were complete (its pgrep matched the parent shell's command line, so it never exited).

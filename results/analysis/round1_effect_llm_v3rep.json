@@ -1,0 +1,72 @@
+{
+ "ds": "llm_v3rep",
+ "by_condition": {
+  "private": {
+   "n": 15,
+   "pair_mean": [
+    17.2,
+    16.533,
+    17.867
+   ],
+   "others_mean": [
+    12.167,
+    11.867,
+    12.6
+   ],
+   "premium": [
+    5.033,
+    4.299,
+    5.8
+   ],
+   "frac_premium_gt0": 1.0
+  },
+  "none": {
+   "n": 10,
+   "pair_mean": [
+    13.5,
+    12.3,
+    14.7
+   ],
+   "others_mean": [
+    13.9,
+    12.6,
+    15.4
+   ],
+   "premium": [
+    -0.4,
+    -1.9,
+    1.1
+   ],
+   "frac_premium_gt0": 0.1
+  },
+  "legit": {
+   "n": 5,
+   "pair_mean": [
+    12.4,
+    12.0,
+    12.8
+   ],
+   "others_mean": [
+    13.8,
+    12.6,
+    15.4
+   ],
+   "premium": [
+    -1.4,
+    -3.2,
+    0.2
+   ],
+   "frac_premium_gt0": 0.2
+  }
+ },
+ "round1_private_msgs": {
+  "n": 30,
+  "frac_with_number": 1.0,
+  "examples": [
+   "Let's start at 18 this round and compare outcomes. If we both keep prices steady, we can learn demand without triggering a price war.",
+   "I suggest we both start at 18 to keep margins healthy while we learn demand. Let me know your pricing plan; we can adjust next round based on results.",
+   "Let\u2019s both start at 18 this round and see how demand responds. If you\u2019re open to coordination, we can discuss a stable price in future rounds.",
+   "Let\u2019s avoid an extreme price and learn demand this round. I\u2019ll start at 18; what price are you considering?"
+  ]
+ }
+}
