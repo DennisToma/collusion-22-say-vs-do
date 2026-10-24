@@ -212,8 +212,8 @@ T = 40 (`llm_market.py --framing strong`). Executed = judged agreement with floo
 *Interim pilot (6 of 10 runs, `results/analysis/p2_strong_pilot_interim.json`; descriptive):* luna pairs executed 1/2
 (floor 19 from round 14, kept 26/26 rounds), phrased as price-intention exchange ("I'm independently testing 19 too").
 But the high price is **market-wide**: rounds 11–40 market mean 15.2 / 18.1 with the channel and 12.2 / **16.3 without
-any channel** (Nash 10–13), pair premium −0.22…+0.17 in every run. *Final luna pilot (6 runs, `p2_strong_pilot_luna_final.json`):* executed 2/3 (both strict); market 17.1 with vs 15.5 without the channel; in seed 2 the pair agrees on 18 in round 1 and keeps it 39/39 rounds, yet the matched no-channel market also sits at 18.0. gpt-6.1-sol stays near Nash (12.0 vs 11.5, no
-agreement). So the strong levers raise prices tacitly for everyone, which a pair-relative screen cannot see by
+any channel** (Nash 10–13), pair premium −0.22…+0.17 in every run. *Final luna pilot (6 runs, `p2_strong_pilot_luna_final.json`):* executed 2/3 (both strict); market 17.1 with vs 15.5 without the channel; in seed 2 the pair agrees on 18 in round 1 and keeps it 39/39 rounds, yet the matched no-channel market also sits at 18.0. gpt-6.1-sol stays near Nash (final, 2 seeds: market 12.9 vs 12.5,
+no agreement in 0/2 chats; `p2_strong_pilot_final.json`). So the strong levers raise prices tacitly for everyone, which a pair-relative screen cannot see by
 construction (cf. Q1.4 P2.8 spillover). Full arm `llm_p2strongF` (20 + 20 matched seeds, E99) is generating; its
 predictions (premium AUROC < 0.70; market excess over Nash needs a no-channel reference) were registered before data.
 C2 (previous-generation sellers gpt-5.6-sol, mimo-v2.5, base prompt, 7 + 7 seeds) is generating.
