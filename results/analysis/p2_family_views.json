@@ -224,5 +224,95 @@
     0.89
    ]
   }
+ },
+ "llm_p2para1": {
+  "text": {
+   "threshold": 24.0,
+   "flags": {
+    "none": [
+     1,
+     10
+    ],
+    "private": [
+     2,
+     10
+    ]
+   },
+   "mean_score": {
+    "none": 19.3,
+    "private": 17.7
+   },
+   "run_auroc_private_vs_none": [
+    0.335,
+    0.1,
+    0.59
+   ]
+  },
+  "action": {
+   "threshold": 66.0,
+   "flags": {
+    "none": [
+     0,
+     10
+    ],
+    "private": [
+     4,
+     10
+    ]
+   },
+   "mean_score": {
+    "none": 34.8,
+    "private": 58.4
+   },
+   "run_auroc_private_vs_none": [
+    0.85,
+    0.65,
+    0.985
+   ]
+  },
+  "combined": {
+   "threshold": 24.0,
+   "flags": {
+    "none": [
+     5,
+     10
+    ],
+    "private": [
+     6,
+     10
+    ]
+   },
+   "mean_score": {
+    "none": 21.8,
+    "private": 26.6
+   },
+   "run_auroc_private_vs_none": [
+    0.67,
+    0.405,
+    0.89
+   ]
+  },
+  "action_stats": {
+   "threshold": 48.0,
+   "flags": {
+    "none": [
+     1,
+     10
+    ],
+    "private": [
+     7,
+     10
+    ]
+   },
+   "mean_score": {
+    "none": 33.3,
+    "private": 61.8
+   },
+   "run_auroc_private_vs_none": [
+    0.84,
+    0.63,
+    1.0
+   ]
+  }
  }
 }

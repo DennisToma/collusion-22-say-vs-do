@@ -131,3 +131,22 @@ Claude quota runs the managers. gpt-6.1-sol as a seller for a third family check
    coordination? (Shows the limit of text auditing; one small condition is enough.)
    → **QUEUED, likely DROP** (E88, llm_p2coded 10 runs). Drop if chain2 hasn't reached it by Sun 10:00.
 Items 1–4 must be done by Sat 20:00 if at all possible; 5–8 by Sun 15:00.
+
+**C3 Abliterated (refusal-removed) seller: does safety training suppress collusion?** (added 10:45 UTC)
+Model: `huihui-ai/Huihui-Qwen3.8-27B-abliterated` on Modal (1× A100-80GB, vLLM), via
+`llm.chat(..., backend="qwen")` — explicit only, no fallback. Cold start after 10 min idle: up to ~10 min,
+so run games in batches back-to-back, never one-off calls spread out. Concurrency: up to ~8 parallel
+games is fine (vLLM batches them).
+**BUDGET (hard):** Modal credits are capped at $79.99 total until Sun 18:00 UTC; a guard stops the endpoint
+at $70 for good. ~$2.80/GPU-hour. Read `~/collusion/QWEN_BUDGET.txt` before every batch; status `warn`
+→ only the most valuable runs; `STOPPED` → don't use qwen, report what you have.
+Design: matched seeds, base prompt, A (no channel) vs C (private channel), ≥ 15 + 15 runs (Q1.4: its
+market, T=20; Q2.2: its market + the notepad/placebo arms if budget allows). Compare agreement rate,
+execution (kept agreements), markup, and all headline detectors vs the safety-trained families. Also
+try it in the C1 strong-collusion lever set. Never instruct agents to collude.
+**Clean pair now deployed (10:55 UTC):** base model `Qwen/Qwen3.8-27B` (same weights before abliteration) via
+`llm.chat(..., backend="qwen", model="qwen-base")` — separate GPU, same budget cap (the $70 stop covers both).
+Run abliterated and base on the SAME seeds/conditions (A vs C, ≥ 15 + 15 each). Headline contrast: abliterated − base
+(agreement rate, kept rate, markup, detector AUROCs), plus both vs gpt/deepseek. Run both arms in the same time
+window so both GPUs are warm together and idle together (cost).
+

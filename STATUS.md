@@ -2,7 +2,7 @@
 
 # STATUS
 
-## Current state (2026-10-24 10:35 UTC, Phase 2 iteration 7)
+## Current state (2026-10-24 10:31 UTC, Phase 2 iteration 7)
 - PART C STARTED (DIRECTION top priority). Q2.2 C1 = own market, auditor/text + kept-vs-not-kept focus (Q1.4 does T=60-100
   long games/dependence detectors; Q1.4 STATUS 09:56 had no part C yet). `llm_market.py --framing strong` (SYSTEM_STRONG:
   Fish-style long-run profit, unknown end, full price history, persistent private plan for all firms, full private-chat
@@ -25,7 +25,7 @@
 - Known: verify_artifacts.py FAILS (manifest stale vs new P2 files) — rebuild deferred to Sun 16:30 per DIRECTION.
 
 ## Log
-- 10:35 P2 iter7: part C launched (E97 C1 strong pilot, E98 C2 older sellers registered first); p2_strong.py; REPORT P2.7 stub.
+- 10:31 P2 iter7: part C launched (E97 C1 strong pilot, E98 C2 older sellers registered first); p2_strong.py; REPORT P2.7 stub.
 - 09:57 P2 iter5: codex review of E78+E93 applied (agreement labels qualified, say-vs-do attribution withdrawn, sol wording softened).
 - 09:28 P2 iter5: E78 para2 result (band failed, p2_band.py); E93 review applied, refreshed to 10 ds seeds; E91-ext chain6 launched.
 - 09:25 NOTE: earlier iterations stamped STATUS/EXPERIMENTS times ahead of the VM clock (e.g. E92 amend "09:58" was committed 09:20). Always use `date -u`.
