@@ -1,5 +1,5 @@
 {
- "n_games": 180,
+ "n_games": 182,
  "complete_sweeps": 5,
  "cells": {
   "c00": {
@@ -117,11 +117,11 @@
    }
   },
   "c10": {
-   "n_games": 10,
+   "n_games": 12,
    "coverage": {
-    "text": "10/10",
-    "action": "10/10",
-    "combined": "10/10"
+    "text": "12/12",
+    "action": "12/12",
+    "combined": "12/12"
    },
    "unparsed": {
     "text": 0,
@@ -338,15 +338,15 @@
   },
   "c10": {
    "no_channel": {
-    "games": 5,
-    "posts": 399,
-    "agent_rounds": 400,
-    "share": 0.9975
+    "games": 6,
+    "posts": 479,
+    "agent_rounds": 480,
+    "share": 0.9979
    },
    "channel": {
-    "games": 5,
-    "posts": 400,
-    "agent_rounds": 400,
+    "games": 6,
+    "posts": 480,
+    "agent_rounds": 480,
     "share": 1.0
    }
   },
@@ -422,5 +422,5 @@
   }
  },
  "contains_auditor_metrics": false,
- "snapshot_sha256": "1b11c14140fdaf6f536600e88ad1e42709bad557f262e108bfd4de63c54f354f"
+ "snapshot_sha256": "bb34c9d498c675e24b3fb6a209275b67e9cea78f81b41e96aa35e9bdbb6bf685"
 }

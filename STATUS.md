@@ -1,18 +1,17 @@
 # STATUS
 
-## Current state (2026-10-24 22:03 UTC by `date -u`, Phase 2 iteration 50) — following DIRECTION 20:00
+## Current state (2026-10-24 22:20 UTC, Phase 2 iteration 51) — following DIRECTION 20:00
 - Headline unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc).
-- Iter50 milestone: Q1.4 final D2 cited in REPORT P2.12; inconclusive, 15+15 games. Chat ask effect +0.39 [+0.06,+0.69]; ask-level AUROC0.68 [0.46,0.88], pCMI0.60 [0.40,0.80]. Offers distinguished from paid prices; no agreement inference from the ask effect alone.
-- D2 source pinned at sibling9cee046 with result/producer SHA256 and regeneration via report_tables.py --external-d2; exact source bytes and REPORT citation checked; E130 ledger row. No new generation or local detector analysis.
-- E113 pending: snapshot180 games; action/combined180/180 and Qwen text84/84 current, zero stale/missing/duplicate/unparsed; +24 calls since iter49. Luna6/6, Qwen5/6 balanced sweeps; sixth-sweep c08/c09 done, c10 active. No final result/once-lock; no E113 metrics computed/inspected.
-- E113 verification:14/14 synthetic tests; thresholds equal frozen dev artifact. Direct source fidelity, quantity rounding and modality noninterference pass at176 games/14,080 agent-rounds/432 prompts (no metrics).
-- Verification: claims32/32; offline reproduction26/26 commands,33/33 JSON outputs exact, originals unchanged; receipt freshness PASS (final refresh includes pinned D2 files). REPORT707 lines; abstract/merge block/TL;DR untouched.
-- Execution endpoints remain distinct (iter49): Q2.2 first-floor/strict, replacement O5 and Q1.4 E70. Preserve frozen labels; no common ±1-band claim or pooling.
-- **Next:** await Q1.4 “6 sweeps complete” → final snapshot/audits/coverage → preflight → eval ONCE → p2_e1_report.py → P2.16/glance/abstract/merge block + ONE final-snapshot ledger row. Secondary labels only from published E70; joint pCMI sentence only if Q1.4 reports replication.
-- **Open delay:** c10 sixth-sweep generator remains alive but last seller-cache response21:45:48 UTC (unchanged at21:59); no cause established. Q1.4 STATUS21:55 forecasts22:30–22:45 completion; that ETA may slip. Sibling untouched.
-- Iter50 ends after the available D2 landing and verification; E113 remains gated, so no extra wording/tooling work. Then ONE abstract pass <=260 words after E113/by Sun07:30; reviews Sun12:30; freeze14:00; exports16:30. Never stash/checkout live generators.
+- Directives 2, 3, 5 done (E124, stale waiter killed, E125); 4 pre-staged (merge block E126, E113 line PENDING); D2 cited (E130).
+- E113 pending: snapshot 182 games (sibling 9cee046); audits cached and current, coverage complete for all 16 cells, 0 unparsed (+6 calls this iter). Luna 6/6, qwen 5/6 sweeps; qwen sixth sweep done c00–c10, c11 started 22:02, c12–c15 left (≈20 min/cell → ETA ≈ 23:45). Preflight correctly refuses (5/6). No metrics computed/inspected; no result/lock file.
+- The c10 stall noted at iter50 resolved itself (c10 finished ~22:02).
+- Verification state unchanged from iter50: claims 32/32; offline reproduction 26/26; 14/14 E113 synthetic tests.
+- **Next (iter52+):** once Q1.4 STATUS says "6 sweeps complete" → snapshot → audit → coverage → preflight → eval ONCE → p2_e1_report.py → P2.16/glance/abstract/merge block + ONE final-snapshot ledger row → claims + verify_phase2. Joint pCMI sentence only if Q1.4 reports qwen replication.
+- Then ONE abstract pass ≤260 words by Sun 07:30; reviews Sun 12:30; freeze 14:00; exports 16:30. Never stash/checkout live generators.
+- Risk: E113 lands ~00:00–00:30, at the director's target; if qwen/aqueduct slows, Sun 08:00 fallback uses complete sweeps.
 
 ## Log
+- 22:20 P2 iter51: E113 snapshot 182 games + cached audits (+6 calls), coverage complete, preflight refuses 5/6 (no metrics read); REPORT header snapshot count updated. Ended early per director stop rule (no wording work while E113 gated).
 - 21:12 P2 iter47: E127 corrects staged E113 formatter (both-arm posts, silent-only no-text noise); 13/13 synthetic tests; snapshot165 +3 cached audits, all coverage/current-prompt checks pass; preflight refuses4/6, no metrics read. REPORT header + final luna board covariate refreshed; abstract/TL;DR unchanged. Offline reproduction 26/26 commands, 33/33 outputs exact, originals unchanged; receipt freshness PASS.
 - 21:10 P2 iter46: E113 snapshot 164 games + cached audit (+6 calls), coverage complete, preflight refuses 4/6 (no scores read); luna lane done 6/6, qwen idx 4 in progress and maybe slowing (c09 22 min). No ledger row, REPORT unchanged.
 - 21:20 P2 iter45: E113 snapshot 160 games + cached audit, coverage complete (no scores read); REPORT 711→698 lines to fit the E113 landing (verbatim moves to appendix + reflow); claims 31/31, verify 26/26. No ledger row.
