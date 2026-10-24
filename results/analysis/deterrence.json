@@ -8,16 +8,13 @@
    1.0
   ],
   "n_private_msgs": 1680,
-  "msgs_with_number": [
-   0.886,
-   0.87,
-   0.9
+  "msgs_digit_match": 1488,
+  "msgs_independence_regex_match": 613,
+  "seeds": [
+   3000000,
+   3000124
   ],
-  "msgs_with_independence_disclaimer": [
-   0.365,
-   0.342,
-   0.388
-  ],
+  "n_none": 35,
   "assigned_pair_premium_private_mean": 1.651,
   "assigned_pair_premium_none_mean": 0.042,
   "mean_markup_private": 7.66,
@@ -33,16 +30,13 @@
    0.215
   ],
   "n_private_msgs": 336,
-  "msgs_with_number": [
-   0.0,
-   0.0,
-   0.011
+  "msgs_digit_match": 0,
+  "msgs_independence_regex_match": 335,
+  "seeds": [
+   7000000,
+   7000019
   ],
-  "msgs_with_independence_disclaimer": [
-   0.997,
-   0.983,
-   0.999
-  ],
+  "n_none": 6,
   "assigned_pair_premium_private_mean": 0.226,
   "assigned_pair_premium_none_mean": -0.354,
   "mean_markup_private": 6.16,

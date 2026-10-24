@@ -1,21 +1,22 @@
 # STATUS
 
-## Current state (2026-10-24 01:05 UTC, iteration 11)
+## Current state (2026-10-24 01:25 UTC, iteration 11)
 - LOCKED TEST DONE (00:03; do NOT rerun final_analysis --split test). REPORT is presentable (abstract, headline test,
   Exploration strata, limitations, reproduce, appendices). All reviews applied through E44.
 - NEW (E45): llm_v3mon announced price monitor → DETERRENCE: agreements 0/14 vs 70/70 lab (Fisher p=3e-16), 0/336
   private msgs with numbers, markup back to none level. Evasion test impossible (no positives). In REPORT
   Exploration + abstract bullet + Limitations/Next steps; deterrence.py → results/analysis/deterrence.json.
-- Running: v3mon combined_stats audits → monitor_stratum.py (FP flag rates on 14 private-no-agreement + 6 none runs);
-  codex review of the deterrence paragraph (logs/review_iter11_deterrence.md).
+- DONE: monitor_stratum FP (E46): premium .36/.50, stats views .33-.43, text 0 on monitored y=0 runs → in REPORT.
+  codex review of deterrence text applied (narrowed: "no judge-labelled agreements", unpaired cohorts, regex counts).
 ## Next steps
-1. When mon_chain prints MON_CHAIN_DONE: replace "MONFP: ... pending." sentence in REPORT with monitor_stratum flag rates
-   (results/analysis/monitor_stratum_llm_v3mon.json). Apply codex review fixes.
+1. (done) v3mon in REPORT. All generation finished; nothing running.
+
 2. Optional (descriptive): matched-recall legit FPR comparison; figure polish. No new generation after 03:30,
    no new experiments after 06:30; FINALIZE from 08:15.
-- Risks: none major; REPORT must not ship with MONFP_PLACEHOLDER (grep before commit).
+- Risks: none major. Consider a final REPORT read-through for length/clarity before 08:15.
 
 ## Log
+- 01:25 iter 11: monitor_stratum FP (E46) + codex review fixes in REPORT.
 - 01:00 iter 11: v3mon deterrence result (E45) → REPORT; codex review started.
 - 00:50 iter 10: codex re-check (E44) applied.
 - 00:40 iter 10: shuffle ablation on test (E43, null). cross-family full (E39), firm-level text cue (E40), fp stratum (E41), final REPORT reviews applied
