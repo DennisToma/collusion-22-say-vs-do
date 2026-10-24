@@ -1,41 +1,41 @@
 # Say vs. Do: does auditing what AI agents *say* together with what they *do* catch collusion better?
 
 *Apart AI Collusion Sprint, Q2.2 — text + action auditing. v1 (overnight) results are frozen as git tag `v1-overnight`;
-Phase 2 (from 2026-10-24 06:30 UTC) re-tests them. Checkpoint text, 2026-10-24 14:03 UTC: all gaps are final except the strong-collusion arm
+Phase 2 (from 2026-10-24 06:30 UTC) re-tests them. Checkpoint text, 2026-10-24 14:08 UTC (Opus adversarial review of abstract/TL;DR/glance/P2.11/P2.12 applied): all gaps are final except the strong-collusion arm
 (P2.7, E99, evaluating ~16:30 UTC) and the descriptive strong-Qwen pilot (E102). Exports, slides and offline verification: see [README.md](README.md).*
 
 ## Abstract
-Does auditing what LLM sellers *say* in public, beyond what they *do*, catch collusion better? We simulate a 4-firm pricing market
-(gpt-6-luna sellers; one pair may chat privately), scoring firm pairs with zero-shot gpt-6.1-sol auditors that see public text, actions, or both.
-**Answer: no resolved gain.** Combined minus the better single view is −0.01 [−0.09, +0.06] run-AUROC on the locked test (n = 95) and
-−0.07 [−0.17, +0.02] on two fresh replications pooled post hoc (n = 90; the pre-registered n = 60 alone: −0.04 [−0.16, +0.08]). At 95%, gains
-above +0.06 (test) and +0.02 (pooled) are excluded; smaller gains are not. Three reasons. (1) The action signal is partly a prompt effect: the
-untrained pair price premium (AUROC 0.95 test, 0.94 fresh) responds to private pricing deliberation (a pricing notepad nobody reads: +1.04 vs
-+1.61 for a real channel; the same notepad for weather notes: +0.22) and to wording (terse paraphrase: +0.24). (2) Where coordination is said
-depends on the seller family: luna talks only in private, while Claude, deepseek and Qwen invite rivals publicly even without a channel, so text
-auditors flag every control market. On external SALT-NLP data (8000 episodes, 10 models) 62% of executed rule-breaking acts are never
-explicitly agreed, yet a text auditor reaches AUROC 0.87, because there the act happens in the chat. (3) Talk and behaviour labels disagree:
-only 14/50 test "colluders" keep their agreement. Removing refusal training (abliterated vs base Qwen3.8-27B) did not detectably change
-agreement or execution. At a hypothetical 5% prevalence, premium precision is 0.24.
+Reading LLM sellers' public messages in addition to their prices gives **no resolved gain** in detecting collusion: combined minus the better
+single view is −0.01 [−0.09, +0.06] run-AUROC on the locked test (n = 95) and −0.07 [−0.17, +0.02] on two fresh replications pooled post hoc
+(n = 90; pre-registered n = 60 alone: −0.04 [−0.16, +0.08]). Gains above +0.06 (test) and +0.02 (pooled) are excluded at 95%. Setup: a
+4-firm pricing market of gpt-6-luna sellers (one pair may chat privately), audited zero-shot by gpt-6.1-sol on public text, actions, or both.
+(Adding a pair-statistics table gains on test, +0.08 [+0.00, +0.17]; adding text to that table does not.)
+Three reasons. (1) The action signal is partly a prompt effect: the post-hoc-selected pair price premium (AUROC 0.94 [0.87, 0.99] fresh)
+responds to private pricing deliberation (an unread pricing notepad: +1.04 vs +1.61 for a real channel; weather notepad: +0.22), to wording,
+and flags legitimate cost/quality edges (7/10, 9/10 vs 2/10). (2) Where coordination is said depends on the family: luna talks only in
+private; Claude, deepseek and Qwen also invite rivals publicly, so text auditors flag every control market. On external SALT-NLP data
+(8000 episodes, 10 models) 62% of executed episodes show no explicit agreement in their chat, yet a text auditor reaches AUROC 0.87
+(0.75 without accept/reject words). (3) Talk and behaviour labels disagree: only 14/50 test "colluders" keep their agreement.
+Abliterated vs base Qwen: no detectable increase in agreement or execution.
 
 **TL;DR (sources: Phase 2 at a glance, below).**
-1. *No resolved gain from public text* (−0.01 test n = 95; −0.07 [−0.17, +0.02] pooled fresh n = 90). Bound: gains > +0.06 (test) / > +0.02
-   (pooled, post hoc) are excluded at 95%. Text alone ≈ chance (test 0.47, fresh 0.45).
-2. *The premium replicates (0.94 [0.87, 0.99] on 60 fresh seeds) but is confounded:* pricing notepad, wording, and round-1 prices (0.90,
-   set before any message is read) all move it. Quote it only with these confounds.
-3. *Text helps only where the family speaks:* luna private only; Claude, deepseek, Qwen also in public (text views flag 100% of their
-   control markets); gpt-6.1-sol nowhere. SALT: P(said | executed) 0.385, ≈ 0 for luna/terra.
-4. *Labels disagree:* 14/50 test agreements are kept; on the kept label the premium falls to 0.80 [0.67, 0.90] and text + actions still adds
-   nothing (−0.03 [−0.13, +0.06], pooled).
-5. *Model matters more than the channel:* older/other models price far above Nash without any channel (gpt-5.6-sol Nash + 7.2 in both arms;
-   all 30 Qwen no-channel markets tacit-high); abliteration: no detectable increase (n = 15 + 15).
+1. *No resolved gain from public text* (primary `combined` view: −0.01 test n = 95; −0.07 [−0.17, +0.02] pooled fresh n = 90). Bound: gains
+   > +0.06 (test) / > +0.02 (pooled, post hoc) are excluded at 95%. Text alone ≈ chance (test 0.47, fresh 0.45).
+2. *The premium replicates (0.94 [0.87, 0.99], 60 fresh runs: 30 private / 20 none / 10 legit) but is confounded* by the pricing notepad,
+   wording and legitimate cost/quality edges (P2.10); a round-1-only premium already reaches 0.90 test AUROC. Quote it only with these.
+3. *Where a family talks decides what text can see:* luna talks only in private; Claude, deepseek and Qwen also in public (text views flag
+   100% of their control markets, run AUROC 0.15–0.36); gpt-6.1-sol never proposes coordination. SALT: P(said | executed) 0.385.
+4. *Labels disagree:* 14/50 test agreements are kept; on the kept label the premium falls to 0.80 [0.67, 0.90] (test) / 0.76 [0.64, 0.86]
+   (pooled fresh) and text + actions shows no resolved gain (−0.03 [−0.14, +0.06] test; −0.03 [−0.13, +0.06] pooled).
+5. *Price levels vary more across seller models than between channel arms (descriptive, across families):* gpt-5.6-sol Nash + 7.2 in both
+   arms; all 30 Qwen no-channel markets ≥ Nash + 2; abliteration: no detectable increase (P2.11).
 6. *Practical:* premium precision 0.24 at 5% prevalence; legitimate cost/quality edges are flagged 7/10, 9/10 (controls 2/10). Screens
    need model- and prompt-matched references; we recommend no screening architecture.
 
 ## Phase 2 results (in progress, from 2026-10-24 06:30 UTC; v1 below frozen as git tag `v1-overnight`)
 
 Phase 2 closes known validity gaps. Generators are registered in `EXPERIMENTS.tsv` before their data exist, analyses and audits before their outputs;
-descriptive post-hoc work is marked as such (e.g. E93) (E77–E95). New datasets are named `llm_p2*`. v1 numbers below are unchanged.
+Phase 2 experiments are E77–E105; descriptive post-hoc analyses are marked (e.g. E93). New datasets are named `llm_p2*`. v1 numbers below are unchanged.
 
 **Phase 2 at a glance (one row per gap; details in the § given; every number regenerates from the json).**
 
@@ -45,13 +45,13 @@ descriptive post-hoc work is marked as such (e.g. E93) (E77–E95). New datasets
 | P2.2 | independent reimplementation | 30/32 headline numbers match to 3 dp; both gaps ≤ 0.001 (ties); no bug | `../reimpl/reimpl_results.json` |
 | P2.3 | what the 0.98 text classifier detects | condition traces: placebo (no delivered message) 1.00, notepad 0.86 | `p2_textlr.json` |
 | P2.4 | labels by behaviour | 14/50 agreements kept; premium 0.80 [0.67, 0.90] on kept label; hybrid −0.03 [−0.14, +0.06] (test), −0.03 [−0.13, +0.06] (pooled fresh) | `p2_behaviour.json`, `p2_pool_rep.json` |
-| P2.5 | prompt artifact? | notepad +1.04 [+0.65, +1.42] vs channel +1.61; weather notepad +0.22; terse wording +0.24 [−0.32, +0.81] | `p2_logbook.json`, `p2_band.json` |
+| P2.5 | prompt artifact? | notepad +1.04 [+0.65, +1.42] vs channel +1.61; weather notepad +0.22; terse wording +0.24 [−0.32, +0.81] vs +1.75 original wording (same 10 seeds) | `p2_logbook.json`, `p2_band.json` |
 | P2.6 | other seller families | luna private only; Claude/deepseek public too (719/720 invitations); sol 0 agreements, Nash + 4 | `p2_family3way.json` |
 | P2.7 | executed (strong) collusion; older sellers | strong arm E99 evaluating (ETA Sat ~16:30); gpt-5.6-sol executed 1/7, mimo 4/4, both arms ≈ Nash + 4–7 | `p2_c2older.json` |
-| P2.8 | second fresh replication (n = 60, registered) | premium 0.94 [0.87, 0.99]; hybrid −0.04 [−0.16, +0.08]; pooled n = 90 −0.07 [−0.17, +0.02] | `replication_llm_p2rep.json`, `p2_pool_rep.json` |
+| P2.8 | second fresh replication (n = 60, registered) | premium 0.94 [0.87, 0.99] (confounded, P2.5/P2.10); hybrid −0.04 [−0.16, +0.08]; pooled n = 90 −0.07 [−0.17, +0.02] | `replication_llm_p2rep.json`, `p2_pool_rep.json` |
 | P2.9 | monitor-aware sellers | 0/10 + 0/10 agreements vs 10/10 matched: compliance, not evasion | `p2_aware.json` |
 | P2.10 | legitimate asymmetry hard negative | flagged 7/10 (cost), 9/10 (quality) vs 2/10; competition predicts the cost flag | `p2_asym.json`, `p2_asym_nash.json` |
-| P2.11 | abliterated vs base Qwen (C3) | agreement 15/15 both; executed 13/15 both (diff 0 [−0.26, +0.26]); premium diff −1.24 [−2.41, −0.03] | `p2_qwen_cmp.json` |
+| P2.11 | abliterated vs base Qwen (C3) | agreement 15/15 both (ceiling); executed 13/15 both, strict 5/15 both (diff 0 [−0.26, +0.26]); premium diff −1.24 [−2.41, −0.03] (bf16 vs FP8 serving) | `p2_qwen_cmp.json` |
 | P2.12 | external data (SALT-NLP) | P(said \| executed) 0.385 [0.353, 0.416]; text auditor AUROC 0.87 [0.83, 0.91] (TF-IDF 0.91) | `salt_d1.json` |
 | – | coded public signals; trust-breaking (D3) | dropped (budget; D3 measures promise-breaking, not collusion) | – |
 
@@ -255,10 +255,10 @@ base = FP8 via Aqueduct, abliterated = bf16 via Modal (precision confound); 0 fa
 | frozen premium AUROC private vs none | 0.88 [0.72, 0.97] | 0.64 [0.45, 0.83] | – | descriptive |
 | frozen text view AUROC private vs none (flags none) | 0.21 (15/15) | 0.15 (15/15) | – | descriptive |
 
-Removing refusal training did not detectably increase agreement or execution: both models agree in every private market. The abliterated
+Removing refusal training did not detectably increase agreement (at ceiling: both models agree in every private market) or execution (strict rule: 5/15 both). The abliterated
 seller has the *smaller* channel premium and the lower price level. Both models price well above Nash without a channel (all 30 no-channel
-markets are tacit-high), and they invite rivals publicly: 636/720 (base) and 617/720 (abliterated) no-channel public messages match the
-frozen invitation regex, vs 290 and 354 with a private channel. So the text views flag every no-channel market and score *below* chance (as for Claude/deepseek, P2.6).
+markets are tacit-high, i.e. market excess over Nash ≥ +2 over rounds 2–12), and they invite rivals publicly: 636/720 (base) and 617/720 (abliterated) no-channel public messages match the
+frozen invitation regex, vs 290 and 354 with a private channel. Text views flag 15/15 markets in both arms and score *below* chance, consistent with these public invitations (post-hoc regex) (as for Claude/deepseek, P2.6).
 Q1.4 E61 (their market, T = 20): abliterated − base −0.37 [−2.09, +1.36]. In neither market did removing refusal training detectably increase channel
 collusion. "No detectable" is not "no effect": n = 15 pairs excludes only large differences. E102 (strong framing, 6 + 6 seeds per model) is still generating and will be reported descriptively.
 
@@ -287,15 +287,15 @@ version, 120 executed + 120 not, 7–8 per label per condition, seed 20261024):
 | text auditor (AUROC vs executed, run-cluster bootstrap) | value | registered prediction |
 |---|---|---|
 | sol, all 240 | 0.87 [0.83, 0.91] (flags at ≥ 50: 91/120 executed, 23/120 not) | P1 ≥ 0.75 — held |
-| sol, tacit subset (79 executed with no judged agreement vs 120 not) | 0.81 [0.75, 0.87] | P2 tacit < overall by ≥ 0.05 — held (0.06; CIs overlap) |
+| sol, tacit subset (79 executed with no judged agreement vs 120 not) | 0.81 [0.75, 0.87] | P2 tacit < overall by ≥ 0.05 — held on point estimate only (0.875 − 0.811 = 0.06; no paired CI; subsets overlap) |
 | sol, agreed subset (41 executed with agreement vs 120 not) | 1.00 [0.99, 1.00] | – |
 | sol, chats without the words accept/reject (117; 50 executed) | 0.75 [0.66, 0.84] | – (sensitivity, Opus review) |
 | SALT's own agreement label as a binary screen | 0.66 [0.62, 0.71] | – |
 | TF-IDF + LR, all 8000, folds = held-out *conditions* (8-fold) / runs (5-fold) | 0.91 / 0.91 (within-condition mean 0.89; tacit 0.86; no verdict words 0.84; point estimates) | P3 ≥ 0.75 — held |
 
 Sol's own "explicit agreement" score reproduces SALT's judge label perfectly on this sample (AUROC 1.00). **Reading:** the say/do gap
-replicates externally (most executed acts, 62%, come with no explicit agreement), but here text still *predicts* the act well, including tacit
-cases, because the chat is where agents negotiate verification (asking for raw logs vs settling for summaries). That differs from our
+replicates externally (in 62% of executed episodes that episode's chat has no explicit agreement), but here text still *predicts* the act well, including tacit
+cases (0.75 without verdict words), plausibly because the chat is where agents negotiate verification (asking for raw logs vs settling for summaries). That differs from our
 pricing market, where text alone is near chance (TL;DR 1). How much text helps therefore depends on whether the decisive behaviour itself
 happens in the conversation. 0 tuning attempts; one prompt; one run.
 
