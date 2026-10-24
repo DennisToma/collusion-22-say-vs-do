@@ -1,0 +1,110 @@
+[
+ {
+  "setting": "luna, base framing (locked test)",
+  "contrast": "judge-labelled pair y=1 vs y=0",
+  "n": "95 runs",
+  "text": [
+   0.472,
+   0.3647,
+   0.5807
+  ],
+  "action": [
+   0.7533,
+   0.6529,
+   0.8498
+  ],
+  "source": "final_llm_v3_gpt-6.1-sol_test.json : point_ci.{text,action}.run_auroc"
+ },
+ {
+  "setting": "Claude Sonnet, public-inviting family",
+  "contrast": "private vs none",
+  "n": "10 runs",
+  "text": [
+   0.22,
+   0.0,
+   0.52
+  ],
+  "action": [
+   0.52,
+   0.2,
+   0.88
+  ],
+  "source": "p2_family3way.json : llm_p2claude.views.{text,action}.auroc_private_vs_none"
+ },
+ {
+  "setting": "deepseek, public-inviting family",
+  "contrast": "private vs none",
+  "n": "30 runs",
+  "text": [
+   0.358,
+   0.2,
+   0.516
+  ],
+  "action": [
+   0.531,
+   0.304,
+   0.738
+  ],
+  "source": "p2_family3way.json : llm_p2ds.views.{text,action}.auroc_private_vs_none"
+ },
+ {
+  "setting": "Qwen3.8 base, public-inviting family",
+  "contrast": "private vs none",
+  "n": "15 + 15 runs",
+  "text": [
+   0.213,
+   0.116,
+   0.334
+  ],
+  "action": [
+   0.858,
+   0.693,
+   0.978
+  ],
+  "source": "p2_strong_eval_llm_p2qwenb.json : detectors.{text,action}.auroc_private_vs_none"
+ },
+ {
+  "setting": "Qwen3.8 abliterated, public-inviting family",
+  "contrast": "private vs none",
+  "n": "15 + 15 runs",
+  "text": [
+   0.147,
+   0.051,
+   0.253
+  ],
+  "action": [
+   0.571,
+   0.364,
+   0.782
+  ],
+  "source": "p2_strong_eval_llm_p2qwena.json : detectors.{text,action}.auroc_private_vs_none"
+ },
+ {
+  "setting": "luna, memory + profit framing, within channel pairs (E116, exploratory)",
+  "contrast": "strict-executed vs not",
+  "n": "13 vs 7 markets",
+  "text": [
+   0.615,
+   0.369,
+   0.854
+  ],
+  "action": [
+   0.33,
+   0.101,
+   0.59
+  ],
+  "source": "p2_within_agree_llm_p2strongF.json : views.{text,action}.auroc_strict_vs_nonexec"
+ },
+ {
+  "setting": "SALT-NLP negotiation, deal struck in chat (E105, external)",
+  "contrast": "executed vs not",
+  "n": "240 episodes (120 executed)",
+  "text": [
+   0.8749305555555555,
+   0.8305071201787338,
+   0.9145740052961312
+  ],
+  "action": null,
+  "source": "salt_d1.json : E105_audit.auroc (no separate action view: execution is the label)"
+ }
+]
