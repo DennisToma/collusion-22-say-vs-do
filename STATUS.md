@@ -28,6 +28,7 @@
 - Known: verify_artifacts.py FAILS (manifest stale vs new P2 files) — rebuild deferred to Sun 16:30 per DIRECTION.
 
 ## Log
+- 11:39 P2 iter7: luna pilot final 2/3 executed (strict 2/3); seed 2 executed floor 18 but matched no-channel market also 18.0 -> executed adds ~0 over tacit. g56sol started.
 - 11:17 P2 iter7: E97 interim pilot (luna 1/2 executed, market-wide high prices, sol 0/1); E99 full arm registered+launched; REPORT P2.7.
 - 10:31 P2 iter7: part C launched (E97 C1 strong pilot, E98 C2 older sellers registered first); p2_strong.py; REPORT P2.7 stub.
 - 09:57 P2 iter5: codex review of E78+E93 applied (agreement labels qualified, say-vs-do attribution withdrawn, sol wording softened).
