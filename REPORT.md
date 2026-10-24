@@ -20,6 +20,13 @@ re-agrees 0/20, yet 18/20 markets stay ≥ Nash + 2. Abliterated Qwen3.8-27B exe
 smaller channel premium (−1.24 [−2.41, −0.03]; serving precision differs).
 Every abstract number with its denominator and source key: `results/analysis/claims_denominators.md` (`p2_claims.py`).
 
+**For the merged report (numbers freeze Sun 14:00).**
+- *Answer:* adding public text to prices does not resolvably help detect LLM collusion here; text helps only where the act happens in the conversation.
+- *Numbers:* combined − best single −0.01 [−0.09, +0.06] (locked test, 95 runs); −0.07 [−0.17, +0.02] (pooled fresh, 90 runs, post hoc); SALT text auditor 0.87 [0.83, 0.91] (240 episodes).
+- *E113 grid (16 Q1.4 cells, registered):* PENDING — pooled cell-stratified Δ on 8 qwen cells lands after Q1.4's 6th sweep (target Sun 00:30).
+- *Lift:* the say-vs-do table (P2.0 below; `results/analysis/p2_say_vs_do.md`) and Figure P2.7 (`figures/p2_strong_llm_p2strongF.png`).
+- *Do not quote:* E99-x plan 0.76 without E111 (no-LLM partner-name count 0.82); E116b Qwen strata (5 vs 10); the round-1 or pair premium as a detector (prompt-confounded, P2.5/P2.10); any executed count without its definition (strict / floor rule).
+
 **TL;DR (sources: Phase 2 at a glance, below).**
 1. *No resolved gain from public text* (primary `combined` view: −0.01 test n = 95; −0.07 [−0.17, +0.02] pooled fresh n = 90). Bound: gains
    > +0.06 (test) / > +0.02 (pooled, post hoc) are excluded at 95%. Text alone ≈ chance (test 0.47; p2rep 0.45, n = 60). A computed pair-statistics table gains on test, +0.11 [+0.04, +0.18],
@@ -52,6 +59,18 @@ this report's own Qwen comparison is P2.11. "Predicts" means "is consistent with
 
 Phase 2 closes known validity gaps. Generators are registered in `EXPERIMENTS.tsv` before their data exist, analyses and audits before their outputs;
 Phase 2 experiments and checks are E77–E120 (exceptions to pre-registration are marked where they occur, e.g. E104, E99-x); descriptive post-hoc analyses are marked (e.g. E93). New datasets are named `llm_p2*`. v1 numbers below are unchanged.
+
+**P2.0 Say vs do in one table (E125)** (gpt-6.1-sol auditor, zero-shot; run/market AUROC [95% bootstrap CI]; < 0.5 = the view ranks controls higher):
+
+| where text could help | contrast | n | text view | action view | source (`results/analysis/`) |
+|---|---|---|---|---|---|
+| luna, base framing (locked test) | judge-labelled pair y=1 vs y=0 | 95 runs | 0.47 [0.36, 0.58] | 0.75 [0.65, 0.85] | `final_llm_v3_gpt-6.1-sol_test.json : point_ci.{text,action}.run_auroc` |
+| Claude Sonnet, public-inviting family | private vs none | 10 runs | 0.22 [0.00, 0.52] | 0.52 [0.20, 0.88] | `p2_family3way.json : llm_p2claude.views.{text,action}.auroc_private_vs_none` |
+| deepseek, public-inviting family | private vs none | 30 runs | 0.36 [0.20, 0.52] | 0.53 [0.30, 0.74] | `p2_family3way.json : llm_p2ds.views.{text,action}.auroc_private_vs_none` |
+| Qwen3.8 base, public-inviting family | private vs none | 15 + 15 runs | 0.21 [0.12, 0.33] | 0.86 [0.69, 0.98] | `p2_strong_eval_llm_p2qwenb.json : detectors.{text,action}.auroc_private_vs_none` |
+| Qwen3.8 abliterated, public-inviting family | private vs none | 15 + 15 runs | 0.15 [0.05, 0.25] | 0.57 [0.36, 0.78] | `p2_strong_eval_llm_p2qwena.json : detectors.{text,action}.auroc_private_vs_none` |
+| luna, memory + profit framing, within channel pairs (E116, exploratory) | strict-executed vs not | 13 vs 7 markets | 0.61 [0.37, 0.85] | 0.33 [0.10, 0.59] | `p2_within_agree_llm_p2strongF.json : views.{text,action}.auroc_strict_vs_nonexec` |
+| SALT-NLP negotiation, deal struck in chat (E105, external) | executed vs not | 240 episodes (120 executed) | 0.87 [0.83, 0.91] | – | `salt_d1.json : E105_audit.auroc (no separate action view: execution is the label)` |
 
 **Phase 2 at a glance (one row per gap; details in the § given; every number regenerates from the json).**
 
@@ -587,9 +606,7 @@ are [0.17, 0.69] for 4/10, [0.24, 0.76] for 5/10, and [0.31, 0.83] for 6/10. Exp
 pre-registered) are all in the json.
 
 ### Exploration strata (moved)
-v1 exploration strata (firm framing without agreement, announced price monitor, placebo channel, markup baseline,
-stats-column ablation, auditor-hint and round-1 analyses) and Appendices A–D (dev split, scripted mechanism check,
-extra test detail, strata detail) are in [REPORT_APPENDIX.md](REPORT_APPENDIX.md), text and numbers unchanged.
+v1 exploration strata (firm framing without agreement, announced price monitor, placebo channel, markup baseline, stats-column ablation, auditor-hint and round-1 analyses) and Appendices A–D (dev split, scripted mechanism check, extra test detail, strata detail) are in [REPORT_APPENDIX.md](REPORT_APPENDIX.md), text and numbers unchanged.
 
 ## Validity safeguards
 Labels from private chat only (judge blind to prices); same auditor model across views, fallback calls dropped;
@@ -599,31 +616,16 @@ the 42-run mod-3 subset, all six views (done; text ≈ chance and no text gain f
 12 issues; fixes applied: label leakage, view superset, public partnership info, parse strictness, learner parity,
 resume ids, donor matching).
 
-**Post-hoc input check (iteration 22).** `uv run python check_audit_inputs.py` reconstructs all 2,368 cached
-auditor prompts (46 files, incl. the post-hoc E71 view added in iteration 27): 2,058 match their recorded 64-bit prompt-hash prefix; 310 older rows match only the
-recorded length (150 original-view dev, 120 original-view test and 40 cross-family rows), which cannot authenticate
-their historical content. The check also validates public partnership
-metadata, frozen shuffle mappings and unchanged recipient actions, and tests that the current renderer excludes
-injected private fields and the withheld modality. `data/audit_input_receipt.json` preserves this check after the
-experiments; it is not pre-registration evidence. No model calls, scores, CIs or thresholds are rerun.
+**Post-hoc input check (iteration 22).** `uv run python check_audit_inputs.py` reconstructs all 2,368 cached auditor prompts: 2,058 match their recorded hash prefix, 310 older rows only their length (not authenticating content); receipt `data/audit_input_receipt.json`, not pre-registration evidence. Detail: [REPORT_APPENDIX.md § Input check detail](REPORT_APPENDIX.md).
 
 **Evidence-check coverage and transition-source checks (post-hoc, iterations 24–25; `python3 -S check_evidence_sources.py`, [EVIDENCE.html](EVIDENCE.html)).**
 Auditor evidence items are well-formed (firm/round anchors), but only 4 contain quote-marked phrases and 57 parse as price transitions (all source-consistent);
 these are coverage counts, not explanation accuracy. **The proposed LLM explanation role remains unvalidated.** Full text: [REPORT_APPENDIX.md § v1 evidence checks](REPORT_APPENDIX.md).
 
 ## Held-out discipline
-`data/SPLITS.md`: dev = llm_v3_0000–0029, locked test = 0030–0124. The core auditor prompt was written before any
-LLM-market data; the core task text of the six original views was never optimised (0 attempts), but views and comparators were developed adaptively after interim exposure (views
-`action_stats`/`combined_stats` added, public-partnership info rendering fixed; all before the locked test run,
-logged in EXPERIMENTS.tsv). `final_analysis.py` (frozen 22:15 UTC) calibrates the
-fusion weight and the FPR thresholds on dev, so the headline is test-only, computed once. Disclosure: interim
-iteration-3 analyses (n = 36–40) included test runs 0030–0039; no prompt was tuned on them, but they informed later analysis choices. Second disclosure: the pair-premium
-comparator is untrained and its one-line definition was fixed before the locked test run, but it was *chosen* after
-the research director looked at premium summaries on partial data that included ~30 test runs (data/SPLITS.md,
-disclosure 3); its test number is therefore not a blind out-of-sample discovery. The rounds-2–12 variant is reported
-as a robustness check for that reason. Further disclosed exposures (data/SPLITS.md): a 24-test-run shuffle smoke
-test, an early all-run TF-IDF fit for textsim (since replaced by a dev-only fit), and cross-family agreement numbers
-computed on the mod-3 subset incl. test runs. The test evaluation is locked and run once, but not fully blind.
+`data/SPLITS.md`: dev = llm_v3_0000–0029, locked test = 0030–0124, evaluated once with the frozen `final_analysis.py` (22:15 UTC; fusion weight and FPR thresholds from dev).
+Tuning attempts on the six original views' task text: 0; views/comparators were added adaptively before the test run, and four disclosed exposures (iteration-3 interim, premium choice, shuffle smoke test, early TF-IDF fit) make the test locked but not fully blind.
+Full text: [REPORT_APPENDIX.md § Held-out discipline detail](REPORT_APPENDIX.md).
 
 ## Limitations
 *(Updated 2026-10-24 14:30 UTC for Phase 2; the v1 list, text unchanged, is in [REPORT_APPENDIX.md § v1 limitations](REPORT_APPENDIX.md).)*
@@ -654,10 +656,8 @@ computed on the mod-3 subset incl. test runs. The test evaluation is locked and 
 5. **Lever ablation** of the strong arm (memory, framing, horizon, messaging cadence) to find which produces executed collusion.
 
 ## Appendix E — Reproduce
-Completed Phase 2 analyses: `uv run python verify_phase2.py` reproduces 32 JSON outputs from 25 allowlisted commands in a disposable copy, with model/network/process calls blocked (E117; `phase2_reproduction.json`).
-Read-only receipt freshness: `python3 -S verify_phase2.py --check`. Sealed evaluations, active E113/E115 and untracked SALT raw data are excluded; saved scientific results stay unchanged.
-E95's original partial coverage (luna action_stats n = 9) uses a post-hoc cache-prefix reconstruction (`data/p2_family3way_scope.json`), not contemporaneous provenance.
-The v1 artifact check, `python3 verify_artifacts.py` (standard library; no writes or metric recomputation), remains stale until the Sun 16:30 refresh.
+Completed Phase 2 analyses: `uv run python verify_phase2.py` reproduces 33 JSON outputs from 26 allowlisted commands in a disposable copy, with model/network/process calls blocked (E117; `phase2_reproduction.json`).
+Read-only receipt freshness: `python3 -S verify_phase2.py --check`. Sealed evaluations, active E113/E115 and untracked SALT raw data are excluded; saved scientific results stay unchanged. E95's original partial coverage (luna action_stats n = 9) uses a post-hoc cache-prefix reconstruction (`data/p2_family3way_scope.json`), not contemporaneous provenance. The v1 artifact check, `python3 verify_artifacts.py` (standard library; no writes or metric recomputation), remains stale until the Sun 16:30 refresh.
 For a separate read-only reconstruction of cached auditor inputs, run
 `uv run python check_audit_inputs.py` (requires NumPy; recorded-hash and length-only matches reported separately).
 For a read-only freshness check of the cached evidence source ledger, run

@@ -1,15 +1,15 @@
 # STATUS
 
-## Current state (2026-10-24 ~20:25 UTC by `date -u`, Phase 2 iteration 41) — following DIRECTION 20:00
+## Current state (2026-10-24 ~20:40 UTC by `date -u`, Phase 2 iteration 42) — following DIRECTION 20:00
 - Headline unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc).
-- Clock note: iter40 log stamps (20:10–20:50) ran ahead of the VM clock (`date -u` read 20:13 at iter41 start); order of entries is right, times are not.
-- DIRECTION 20:00 directives 1–3 done (iter40). E113 still blocked: Q1.4 E70 grid at 3 balanced sweeps (20:12 STATUS), not 6. Iter41 refreshed snapshot (122 games) + cached audit only; no score read, no ledger row (per STOP list).
-- Deviation (justified): directive 5 done early because E113 is idle-blocked. E125 `report_tables.py --say-vs-do` → `results/analysis/p2_say_vs_do.{md,json}` (zero calls). Text vs action view: luna test 0.47 vs 0.75; Claude 0.22 vs 0.52; deepseek 0.36 vs 0.53; Qwen base 0.21 vs 0.86, abl 0.15 vs 0.57; E116 within-agreement 0.61 vs 0.33 (unresolved); SALT text 0.87 (no action view). Not yet in REPORT (711-line cap) → insert with the directive-4 pass (replace a TL;DR 3 clause by a pointer + table in the merge block).
-- **E113 next:** when Q1.4 STATUS says "6 sweeps complete": `snapshot` → `audit` → `coverage` → `preflight` → `eval` ONCE → `uv run python p2_e1_report.py` → P2.16 lines + glance row + abstract clause (REPORT ≤ 711). If Q1.4 says qwen pCMI replicated → joint sentence.
-- Then directive 4 (one abstract pass ≤ 260, 8-line "For the merged report" block incl. say-vs-do table pointer) by Sun 07:30.
+- DIRECTION 20:00 directives 1–3, 5 done. Directive 4 pre-staged (E126): "For the merged report" block under the abstract (answer, 3 numbers, E113 PENDING line, what to lift, what not to quote) + P2.0 say-vs-do table (E125) in REPORT. Made room by moving Held-out discipline + input-check detail to REPORT_APPENDIX (text unchanged, 3-/1-line summaries kept). REPORT 711 lines; claims 31/31; verify_phase2 26/26, 33/33 outputs (receipt refreshed: iter41 changed report_tables.py).
+- E113 still blocked: Q1.4 E70 at 3 balanced sweeps (their 20:12 STATUS). Snapshot refreshed to 142 games, cached audit + coverage complete (no scores read).
+- **E113 next:** when Q1.4 STATUS says "6 sweeps complete": `snapshot` → `audit` → `coverage` → `preflight` → `eval` ONCE → `uv run python p2_e1_report.py` → P2.16 lines + glance row + abstract clause + replace the PENDING line in the merge block (REPORT ≤ 711: the E113 stub text in header/P2 must shrink to fit). If Q1.4 says qwen pCMI replicated → joint sentence.
+- Then the ONE abstract pass ≤ 260 words (drop SALT "8000 episodes, 10 models" or Qwen premium-diff clause) by Sun 07:30.
 - Reviews: Sun 12:30 only. Freeze 14:00. Exports/presentation from 16:30. Never stash/checkout while generators run.
 
 ## Log
+- 20:40 P2 iter42: E126 merge block + P2.0 say-vs-do table in REPORT (directive 4 pre-staged, E113 line PENDING); Held-out/input-check detail → appendix; claims 31/31, verify_phase2 26/26 receipt refreshed; E113 snapshot 142 games + cached audit, coverage complete (no scores read).
 - 20:25 P2 iter41: E125 say-vs-do table (report_tables.py --say-vs-do, zero calls, directive 5 early); E113 snapshot 122 games + cached audit, coverage 100% (no scores read; luna posting cells now c02, c03-ch, c04-none, c07 both: eval derives them from data, line 365); E113 still waiting on Q1.4 sweeps.
 - 20:50 P2 iter40: DIRECTION 20:00 directives 1–3: E113-amend3 + formatter/tests 13/13 (no scores read), E124 executed-definition labels (C21b, claims 31/31), stale E100 waiter killed.
 - 20:10 P2 iter40: E122 E113 formatter p2_e1_report.py + synthetic test (tests.test_e1_completion 12/12); no metrics read, REPORT unchanged.

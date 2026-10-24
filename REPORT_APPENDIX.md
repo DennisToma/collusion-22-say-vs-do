@@ -811,3 +811,26 @@ Run `uv run python p2_e1_audit.py snapshot`, then `audit`, then `coverage` as Q1
 E113-amend2 corrects the early claim that luna never posts: c02/c07 contain public messages. The registered E113-amend restriction to qwen-only text audits is retained. Thus the 16-cell summary mixes combined-minus-action in luna cells with combined-minus-best(text, action) in qwen cells; a separate k/8 summary covers the full three-view qwen comparison. Per-cell/arm nonempty-post counts quantify board use; the model-factor text-auditor effect is not estimated. No prompts, thresholds or predictions change.
 
 Before final `eval`, run `uv run python p2_e1_audit.py preflight`: require all 16 cells × both arms for each included sweep, six complete sweeps (or the complete sweeps available at Sun 08:00 UTC), unique audit records, exact current prompt hashes, gpt-6.1-sol audits and finite scores on the same selected games. Partial later sweeps are excluded. `eval` has an exclusive ignored local lock and refuses to overwrite its committed result even in a fresh clone. Execution-label secondary results use a provenance-tagged local copy of Q1.4's final E70 labels when available; otherwise they are explicitly unavailable. Synthetic-fixture guard tests: `uv run python -m unittest discover -s tests -p test_e1_completion.py`.
+
+## Held-out discipline detail (moved from REPORT.md 2026-10-24 20:40 UTC for length; text unchanged)
+`data/SPLITS.md`: dev = llm_v3_0000–0029, locked test = 0030–0124. The core auditor prompt was written before any
+LLM-market data; the core task text of the six original views was never optimised (0 attempts), but views and comparators were developed adaptively after interim exposure (views
+`action_stats`/`combined_stats` added, public-partnership info rendering fixed; all before the locked test run,
+logged in EXPERIMENTS.tsv). `final_analysis.py` (frozen 22:15 UTC) calibrates the
+fusion weight and the FPR thresholds on dev, so the headline is test-only, computed once. Disclosure: interim
+iteration-3 analyses (n = 36–40) included test runs 0030–0039; no prompt was tuned on them, but they informed later analysis choices. Second disclosure: the pair-premium
+comparator is untrained and its one-line definition was fixed before the locked test run, but it was *chosen* after
+the research director looked at premium summaries on partial data that included ~30 test runs (data/SPLITS.md,
+disclosure 3); its test number is therefore not a blind out-of-sample discovery. The rounds-2–12 variant is reported
+as a robustness check for that reason. Further disclosed exposures (data/SPLITS.md): a 24-test-run shuffle smoke
+test, an early all-run TF-IDF fit for textsim (since replaced by a dev-only fit), and cross-family agreement numbers
+computed on the mod-3 subset incl. test runs. The test evaluation is locked and run once, but not fully blind.
+
+## Input check detail (moved from REPORT.md § Validity safeguards 2026-10-24 20:40 UTC for length; text unchanged)
+**Post-hoc input check (iteration 22).** `uv run python check_audit_inputs.py` reconstructs all 2,368 cached
+auditor prompts (46 files, incl. the post-hoc E71 view added in iteration 27): 2,058 match their recorded 64-bit prompt-hash prefix; 310 older rows match only the
+recorded length (150 original-view dev, 120 original-view test and 40 cross-family rows), which cannot authenticate
+their historical content. The check also validates public partnership
+metadata, frozen shuffle mappings and unchanged recipient actions, and tests that the current renderer excludes
+injected private fields and the withheld modality. `data/audit_input_receipt.json` preserves this check after the
+experiments; it is not pre-registration evidence. No model calls, scores, CIs or thresholds are rerun.
