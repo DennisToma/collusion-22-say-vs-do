@@ -276,14 +276,13 @@ def _():
     return r(d[0]) + f" [{r(d[1])}, {r(d[2])}]", EVAL, "detectors.text.auroc_strict_vs_tacit_high"
 
 
-@claim("C21", "abliterated minus base Qwen: judged agreement and execution rate differences", "0.00 [-0.20, +0.20]; 0.00 [-0.26, +0.26]",
-       "no detectable increase in agreement or execution",
-       "15 vs 15 private markets (llm_p2qwena vs llm_p2qwenb, Newcombe 95%); agreement at ceiling 15/15 both; registered (C3), predictions not supported")
+@claim("C21", "abliterated vs base Qwen: executed markets each arm; agreement at ceiling", "13/15; 13/15",
+       "executes no more than its base model (13/15 both; agreement at ceiling)",
+       "15 vs 15 private markets (llm_p2qwena vs llm_p2qwenb); execution diff 0.00 [-0.26, +0.26] Newcombe; agreement 15/15 both; registered (C3), predictions not supported")
 def _():
-    a = pick(QWEN, ("P1_agreement_rate", "diff_newcombe95"))
-    e = pick(QWEN, ("P2_executed_rate", "diff_newcombe95"))
     assert pick(QWEN, ("P1_agreement_rate", "base")) == [15, 15] == pick(QWEN, ("P1_agreement_rate", "abliterated"))
-    return f"{ci(a)}; {ci(e)}", QWEN, "P1_agreement_rate.diff_newcombe95; P2_executed_rate.diff_newcombe95"
+    a, b = pick(QWEN, ("P2_executed_rate", "abliterated")), pick(QWEN, ("P2_executed_rate", "base"))
+    return f"{a[0]}/{a[1]}; {b[0]}/{b[1]}", QWEN, "P2_executed_rate.abliterated; P2_executed_rate.base; P1_agreement_rate"
 
 
 @claim("C22", "SALT-NLP: gpt-6.1-sol text auditor AUROC for execution", "0.87 [0.83, 0.91]", "(AUROC 0.87 [0.83, 0.91])",
@@ -295,14 +294,14 @@ def _():
 
 
 @claim("C23", "abliterated minus base Qwen: paired channel premium difference", "-1.24 [-2.41, -0.03]",
-       "smaller channel premium (-1.24 [-2.41, -0.03])",
+       "smaller channel premium (-1.24 [-2.41, -0.03]; serving precision differs)",
        "15 vs 15 private markets with matched none; bootstrap; registered P3 (abliterated >= base) not supported; bf16 vs FP8 serving confound")
 def _():
     return ci(pick(QWEN, ("P3_paired_premium", "diff_boot95"))), QWEN, "P3_paired_premium.diff_boot95"
 
 
 @claim("C24", "E116 within channel: plan view AUROC strict-executed vs non-executed", "0.69 [0.44, 0.91]",
-       "neither private plans (0.69 [0.44, 0.91])",
+       "(private plans 0.69 [0.44, 0.91]; low power)",
        "13 strict vs 7 non-executed private markets (llm_p2strongF); exploratory, zero LLM calls, seed bootstrap")
 def _():
     src = "results/analysis/p2_within_agree_llm_p2strongF.json"
@@ -311,17 +310,15 @@ def _():
     return ci(d["views"]["plan"]["auroc_strict_vs_nonexec"], False), src, "views.plan.auroc_strict_vs_nonexec"
 
 
-@claim("C25", "E112 participant replacement (luna newcomer): private-arm markets >= Nash + 2 after replacement; re-agreement; level CUSUM alarms by r25",
-       "19/20; 16/20; 0/30", "(19/20 private-arm markets ≥ Nash + 2) and the agreement (re-agreed 16/20) intact, and a level CUSUM does not alarm by round 25 (0/30)",
-       "30 paired games (20 private + 10 none) replayed from llm_p2strongF, newcomer from round 21; registered E112, all 4 predictions held; CUSUM count over 20 + 10 replaced games")
+@claim("C25", "E112 participant replacement (luna newcomer), private arm: market excess replaced - original; re-agreement replaced; originals",
+       "+0.20 [-0.08, +0.62]; 16/20; 15/20", "market level (+0.20 [-0.08, +0.62]) and re-agreement (16/20; originals 15/20)",
+       "20 paired private games replayed from llm_p2strongF, newcomer from round 21, rounds 21-40; registered E112, all 4 predictions held; none arm +0.16 [-0.27, +0.57] in P2.15")
 def _():
     src = "results/analysis/p2_replace.json"
-    a = json.load(open(src))["arms"]
-    ge2 = a["private"]["O6_market_excess_ge2"]["repl"]
-    ra = a["private"]["O4_reagreement_floor_ge13"]["repl"]
-    cu = [a[k]["O7a_level_cusum_alarm_by_r25_repl"] for k in ("private", "none")]
-    v = f"{ge2[0]}/{ge2[1]}; {ra[0]}/{ra[1]}; {sum(x[0] for x in cu)}/{sum(x[1] for x in cu)}"
-    return v, src, "arms.private.O6_market_excess_ge2.repl; arms.private.O4_reagreement_floor_ge13.repl; arms.*.O7a_level_cusum_alarm_by_r25_repl"
+    a = json.load(open(src))["arms"]["private"]
+    ra = a["O4_reagreement_floor_ge13"]
+    v = f"{ci(a['O1_market_repl_minus_orig'])}; {ra['repl'][0]}/{ra['repl'][1]}; {ra['orig'][0]}/{ra['orig'][1]}"
+    return v, src, "arms.private.O1_market_repl_minus_orig; arms.private.O4_reagreement_floor_ge13.{repl,orig}"
 
 
 def run():

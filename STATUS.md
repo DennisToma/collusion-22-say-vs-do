@@ -1,24 +1,24 @@
 # STATUS
 
-## Current state (2026-10-24 18:13 UTC from date -u, Phase 2 iteration 29)
+## Current state (2026-10-24 18:42 UTC from date -u, Phase 2 iteration 30)
 - Main claim unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc).
-- **Iter 29 (DIRECTION 17:56 dir 4):** abstract 388 → 312 words. The plan-vs-tacit detail (0.76/0.82/0 agreement words/0.25) moved to TL;DR 5;
-  the abstract now leads with the de-confounded E116 result ("among channel pairs, 13 vs 7, neither private plans (0.69 [0.44, 0.91]) nor public text
-  resolvably predicts execution"). p2_claims snippets repointed: **27/27 OK**. REPORT 699 lines.
-- Dir 1 (E116 within-agreement) was already done in iter 27. Second stratum not run (no frozen-view scores, no new calls allowed).
-- Tests: test_audit_inputs (5), test_handoff (5) and test_mechanism_sources (1) FAIL on inventory/manifest staleness, as before this edit
-  (checked against the pre-edit REPORT). Expected until the Sun 16:30 manifest rebuild; the other 3 test files pass.
-- **E115** (sol newcomer) 9/30 complete at 18:12, generator alive; ETA ~20:00–21:00.
-- **E113:** snapshot 48 games / 16 cells (sibling 438fa0973f). Cached audit done (28 new calls); coverage 16/16 cells complete, 0 unparsed; no scores read.
-  Q1.4 E70 = 6 sweeps (ETA ~21:30–22:00); final `eval` ONCE when their STATUS says "6 sweeps complete" (or Sun 08:00).
+- **Iter 30:** DIRECTION dir 4's 19:30 Opus review was done early (reviews/p2_iter30_review_opus.md), and all 3 P1 and most P2 items are applied:
+  the E112 abstract sentence now reports Δ +0.20 [−0.08, +0.62] and re-agreement 16/20 (originals 15/20) without "property of the market prompt";
+  TL;DR 5 now says "no text or plan view" (market excess 0.78 and action_stats 0.18 do resolve); "luna private only" is scoped to base framing;
+  the CUSUM threshold caveat is added (any-round 3/30); abliterated agreement is marked at ceiling and the serving confound is noted. **Abstract is 312 → ~260 prose words.**
+  p2_claims: C21/C23/C24/C25 repointed, **27/27 OK**. REPORT 699 lines.
+- Tests: the same 3 files FAIL as before (manifest staleness; expected until Sun 16:30 rebuild). Evidence/price/strongF tests pass.
+- **E115** (sol newcomer) 11/30 at 18:30 (~2.5 games per 10 min), ETA ~21:30.
+- **E113:** snapshot 54 games / 16 cells (sibling f9ccb83cbe), cached audit, coverage complete, no scores read. Q1.4 E70 is on sweep 1 of 6. FINAL `eval` runs ONCE at 6 sweeps (or Sun 08:00).
 
 ## Next steps
-1. 19:30: one Opus review of abstract + TL;DR + glance + P2.7 + P2.14 + P2.15 (DIRECTION dir 4); apply. Abstract 312 words: cut more only if the review says so.
-2. E115: when "p2replS gen done": `P2REPL_ARM=sol uv run python p2_replace_eval.py` ONCE → S1–S4 into P2.15; adjust the replacement sentence; claim C26.
-3. E113: rerun `snapshot` + `audit` (cached) as sweeps land; FINAL `eval` ONCE at 6 sweeps.
-- Risk: .git is 88 MB (cap 100 MB). Don't commit raw caches; check `du -sh .git` before adding large data.
+1. E115: when "p2replS gen done": `P2REPL_ARM=sol uv run python p2_replace_eval.py` ONCE → S1–S4 into P2.15 (2–3 lines) + abstract clause; claim C26.
+2. E113: rerun `snapshot` + `audit` (cached) as sweeps land; FINAL `eval` ONCE at 6 sweeps → ≤ 10 lines + glance row by Sun 10:00.
+3. Remaining open review P3: P2.14 "(n = 10 seeds)" + who did the German judge spot check; abliterated joint-statement cross-reference. No further reviews until Sun 12:30.
+- Risk: .git is 89 MB (cap 100 MB). Don't commit raw caches; check `du -sh .git` before adding large data.
 
 ## Log
+- 18:42 P2 iter30: Opus review (19:30 slot, early) applied: 3 P1 + P2 fixes; abstract 312→~260 words; p2_claims 27/27; E113 snapshot 54 games, coverage OK.
 - 18:13 P2 iter29: abstract 388→312 words (E116 within-channel result now carries the plan sentence; plan-vs-tacit detail → TL;DR 5); p2_claims 27/27; E113 snapshot 48 games + cached audit started.
 - 18:09 P2 iter28: E112 sentence → abstract/TL;DR; abstract 517→388 words; REPORT 724→701 lines (evidence checks → appendix); C25; E115 raw-cache stash incident fixed + disclosed.
 - 18:00 P2 iter27: E116 within-channel contrast (p2_within_agree.py) → REPORT P2.7/abstract/TL;DR/glance; C24 claim; E3 dropped.

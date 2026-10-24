@@ -265,13 +265,13 @@
  },
  {
   "id": "C21",
-  "claim": "abliterated minus base Qwen: judged agreement and execution rate differences",
-  "expected": "0.00 [-0.20, +0.20]; 0.00 [-0.26, +0.26]",
-  "denominator": "15 vs 15 private markets (llm_p2qwena vs llm_p2qwenb, Newcombe 95%); agreement at ceiling 15/15 both; registered (C3), predictions not supported",
+  "claim": "abliterated vs base Qwen: executed markets each arm; agreement at ceiling",
+  "expected": "13/15; 13/15",
+  "denominator": "15 vs 15 private markets (llm_p2qwena vs llm_p2qwenb); execution diff 0.00 [-0.26, +0.26] Newcombe; agreement 15/15 both; registered (C3), predictions not supported",
   "note": "",
-  "value": "0.00 [-0.20, +0.20]; 0.00 [-0.26, +0.26]",
+  "value": "13/15; 13/15",
   "source": "results/analysis/p2_qwen_cmp.json",
-  "key_path": "P1_agreement_rate.diff_newcombe95; P2_executed_rate.diff_newcombe95",
+  "key_path": "P2_executed_rate.abliterated; P2_executed_rate.base; P1_agreement_rate",
   "status": "OK",
   "in_report_abstract": true
  },
@@ -313,13 +313,13 @@
  },
  {
   "id": "C25",
-  "claim": "E112 participant replacement (luna newcomer): private-arm markets >= Nash + 2 after replacement; re-agreement; level CUSUM alarms by r25",
-  "expected": "19/20; 16/20; 0/30",
-  "denominator": "30 paired games (20 private + 10 none) replayed from llm_p2strongF, newcomer from round 21; registered E112, all 4 predictions held; CUSUM count over 20 + 10 replaced games",
+  "claim": "E112 participant replacement (luna newcomer), private arm: market excess replaced - original; re-agreement replaced; originals",
+  "expected": "+0.20 [-0.08, +0.62]; 16/20; 15/20",
+  "denominator": "20 paired private games replayed from llm_p2strongF, newcomer from round 21, rounds 21-40; registered E112, all 4 predictions held; none arm +0.16 [-0.27, +0.57] in P2.15",
   "note": "",
-  "value": "19/20; 16/20; 0/30",
+  "value": "+0.20 [-0.08, +0.62]; 16/20; 15/20",
   "source": "results/analysis/p2_replace.json",
-  "key_path": "arms.private.O6_market_excess_ge2.repl; arms.private.O4_reagreement_floor_ge13.repl; arms.*.O7a_level_cusum_alarm_by_r25_repl",
+  "key_path": "arms.private.O1_market_repl_minus_orig; arms.private.O4_reagreement_floor_ge13.{repl,orig}",
   "status": "OK",
   "in_report_abstract": true
  }
