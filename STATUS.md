@@ -9,19 +9,21 @@
   (DIRECTION 5b; Q1.4 REPORT still carries the unscoped "LLM sellers" version → Q1.4 to align).
 - E110 German final (P2.14). REPORT 738 lines (was 734; P2.13 + P2.7 pilot compressed).
 
-- **E112 (Part E2 participant replacement) registered + LAUNCHED 16:20** (`p2_replace.sh`, setsid; 30 games = 20 private + 10 none,
-  rounds 1–20 replayed byte-identical from E99 cache, fresh luna takes one firm at r21; ETA ~17:45). Eval script
+- **E112 (Part E2 participant replacement) registered + LAUNCHED 16:15** (`p2_replace.sh`, setsid; 30 games = 20 private + 10 none,
+  rounds 1–20 replayed byte-identical from E99 cache, fresh luna takes one firm at r21; ETA ~18:00 at ~10 min per 3-game batch). Eval script
   `p2_replace_eval.py` committed before outcomes (selftest passes; predictions P1–P4 in EXPERIMENTS.tsv).
 
 ## Next steps
 1. When `logs/p2repl.log` shows "p2repl gen done": run `uv run python p2_replace_eval.py` ONCE (~40 judge calls), write ≤ 8 lines
    into REPORT (replace text, no net growth) + glance row + EXPERIMENTS row with verdicts verbatim. Sol-replacement arm only if done by Sun 05:00.
-2. E1 audit plan: register before Q1.4 grid data exist (dir 4).
+2. E113 E1 audit plan REGISTERED (16:18, before Q1.4 registered/generated the grid). Shakedown on Q1.4's first complete sweep
+   (snapshot into data/ext_llm_grid_p2, pipeline check only); final once by Sun 12:00. If no sweep by Sun 06:00 → limitation line.
 3. Checkpoint 19:30: one Opus review of abstract + TL;DR + glance + P2.7 + P2.14.
 4. E102 stop/report Sun 10:00; denominators table (dir 5a); P2.11 three-pair table when Q1.4 E69 lands.
 
 ## Log
-- 16:25 P2 iter21: E112 replacement registered, smoke-tested (0 calls for replayed prefix), launched; p2_replace_eval.py committed pre-outcome.
+- 16:18 P2 iter21: E113 E1-audit plan registered (no grid data exist yet).
+- 16:16 P2 iter21: E112 replacement registered, smoke-tested (0 calls for replayed prefix), launched; p2_replace_eval.py committed pre-outcome.
 - 16:12 P2 iter21: E111 plan-view keyword baseline (p2_plan_keyword.py); abstract/TL;DR/P2.7 plan claim rescoped; E66 line; joint sentence 2 rescoped.
 - 16:09 P2 iter20: E110 German result (P2.14 + glance); codex review of E99 write-up applied.
 - 15:40 P2 iter20: E99 strongF final → P2.7/abstract/TL;DR/glance; p2_strongF_public.py; E110 German market registered + launched (llm_market --lang de, p2_de.py).
