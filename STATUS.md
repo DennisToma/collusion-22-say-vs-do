@@ -1,6 +1,6 @@
 # STATUS
 
-## Current state (2026-10-24 18:55 UTC from date -u, Phase 2 iteration 31)
+## Current state (2026-10-24 18:28 UTC from date -u, Phase 2 iteration 32; iter31's 18:55 stamps were ahead of the clock, actual ≤ 18:25)
 - Main claim unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc).
 - **Iter 31: E116b** (dir 1 second stratum, registered 18:30, 0 LLM calls): within-agreement strict vs non-executed in the Qwen base-framing private arms
   (5 vs 10 per model, 15/15 agreed, not pooled): public text 0.73 [0.43, 0.99] abliterated / 0.51 [0.25, 0.70] base (text flags 30/30); action 0.80 [0.54, 1.00]
@@ -14,10 +14,11 @@
 ## Next steps
 1. E115: when "p2replS gen done": `P2REPL_ARM=sol uv run python p2_replace_eval.py` ONCE → S1–S4 into P2.15 (2–3 lines) + abstract clause; claim C26.
 2. E113: rerun `snapshot` + `audit` (cached) as sweeps land; FINAL `eval` ONCE at 6 sweeps → ≤ 10 lines + glance row by Sun 10:00.
-3. Remaining open review P3: who did the German judge spot check (provenance not recorded in ledger/STATUS: leave unattributed rather than guess); abliterated joint-statement cross-reference. No further reviews until Sun 12:30.
-- Risk: .git is 89 MB (cap 100 MB). Don't commit raw caches; check `du -sh .git` before adding large data.
+3. Review P3 done (iter32: P2.11 E65 cross-ref, TL;DR 'new agreement is judged', E116 column '5/7 non-executed agreed'); German spot-check provenance stays unattributed. No further reviews until Sun 12:30.
+- .git repacked iter32 (`git gc`): 90 MB loose → 20 MB packed; cap risk gone. Still don't commit raw caches.
 
 ## Log
+- 18:28 P2 iter32: git gc (.git 90→20 MB); last iter30-review P3 wording fixes (P2.11 E65 cross-ref, TL;DR P2.15 wording, E116 column header); claims 28/28; E115 still 15/30 raw, rescuer holding 0024/26/28.
 - 18:55 P2 iter31: E116b Qwen within-agreement strata (0 calls) → P2.7/TL;DR5/C27, claims 28/28; stash incident #2 on E115 raw 0024/26/28, rescuer running.
 - 18:42 P2 iter30: Opus review (19:30 slot, early) applied: 3 P1 + P2 fixes; abstract 312→~260 words; p2_claims 27/27; E113 snapshot 54 games, coverage OK.
 - 18:13 P2 iter29: abstract 388→312 words (E116 within-channel result now carries the plan sentence; plan-vs-tacit detail → TL;DR 5); p2_claims 27/27; E113 snapshot 48 games + cached audit started.
