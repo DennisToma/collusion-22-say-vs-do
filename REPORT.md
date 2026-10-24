@@ -386,6 +386,14 @@ the 42-run mod-3 subset, all six views (done; text ≈ chance and no text gain f
 12 issues; fixes applied: label leakage, view superset, public partnership info, parse strictness, learner parity,
 resume ids, donor matching).
 
+**Post-hoc input check (iteration 22).** `uv run python check_audit_inputs.py` reconstructs all 2,213 cached
+auditor prompts (44 files): 1,903 match their recorded 64-bit prompt-hash prefix; 310 older rows match only the
+recorded length (150 original-view dev, 120 original-view test and 40 cross-family rows), which cannot authenticate
+their historical content. The check also validates public partnership
+metadata, frozen shuffle mappings and unchanged recipient actions, and tests that the current renderer excludes
+injected private fields and the withheld modality. `data/audit_input_receipt.json` preserves this check after the
+experiments; it is not pre-registration evidence. No model calls, scores, CIs or thresholds are rerun.
+
 ## Held-out discipline
 `data/SPLITS.md`: dev = llm_v3_0000–0029, locked test = 0030–0124. The core auditor prompt was written before any
 LLM-market data; the core task text of the six original views was never optimised (0 attempts), but views and comparators were developed adaptively after interim exposure (views
@@ -732,6 +740,8 @@ compute the statistic and ask the LLM only for explanation.
 ## Appendix E — Reproduce
 The experiments are complete. For a read-only offline check of the shipped artifacts, run
 `python3 verify_artifacts.py` (standard library only; no LLM calls, metric recomputation, or writes).
+For a separate read-only reconstruction of cached auditor inputs, run
+`uv run python check_audit_inputs.py` (requires NumPy; recorded-hash and length-only matches reported separately).
 The post-hoc manifest and completion receipt were added in iteration 19 to preserve the handoff;
 they are not pre-registration evidence. See [README.md](README.md) for artifact locations and
 safe rendering commands. The generation/audit commands below document how the existing results

@@ -1,17 +1,19 @@
 # STATUS
 
-## Current state (2026-10-24 04:20 UTC, iteration 21)
+## Current state (2026-10-24 04:32 UTC, iteration 22)
 - LOCKED TEST DONE (00:03) and REPLICATION DONE (02:07); never rerun. Scientific estimates unchanged.
 - Test: premium run AUROC .95; action_stats .86; combined-minus-best-unimodal -.013 [-.091,+.064].
 - Fresh replication (n=30): premium .92 vs action_stats .80; 4/4 registered rules held (not equivalence).
 - Placebo: premium flags 14/15 with or without delivery; channel/condition confound remains.
-- E65: ready-to-share PRESENTATION.pdf (7 pages), REPORT.pdf (25), REPORT.html (8 embedded figures).
-- Export validates 441 report text fragments + 100 slide fragments; all scientific artifact hashes unchanged.
-- Independent Codex review caught machine-local PDF links; fixed to GitHub, verified all 35 links.
-- Offline verifier: 401 hashes; 206 runs/2472 rounds; 1236 audits; all 14 handoff tests pass.
+- E66: read-only check_audit_inputs.py reconstructs all 2,213 audits across 44 original/shuffle/hint/cross-family caches.
+- Recorded 64-bit prompt hashes match 1,903 rows; 310 length-only (150 dev / 120 test / 40 cross-family) cannot authenticate historical content.
+- Frozen donor mappings, recipient actions, public partnership metadata and current-renderer input boundaries pass.
+- REPORT/README disclose provenance limits; refreshed REPORT.pdf remains 25 pages, talk 7 slides; all 8 figures preserved.
+- Offline verifier: 404 hashes; all 27 tests pass; clean Git-index export is write-free without local evaluation locks.
+- Independent Codex + Opus review fixes applied; final Codex recheck has no consequential findings. No scientific artifact changed.
 ## Next steps (no new generation after 03:30; no new experiments after 06:30; FINALIZE 08:15)
 1. Keep results frozen; present PRESENTATION.pdf or PRESENTATION.html. Send REPORT.pdf for detail.
-2. Read-only: python3 -S verify_artifacts.py; python3 -S build_handoff.py --check.
+2. Read-only: python3 -S verify_artifacts.py; uv run python check_audit_inputs.py; python3 -S build_handoff.py --check.
 3. If REPORT.md changes, regenerate handoff exports and update the post-hoc manifest (README instructions).
 
 ## Log
@@ -74,3 +76,5 @@
 - 04:07 iter 20: E64 presentation-only handoff: build_presentation.py renders seven offline HTML slides plus speaker notes and SHA-256 source hashes from existing JSON; --check is write-free. REPORT/README link it; verifier and post-hoc manifest cover freshness (396 hashes). Independent Codex reviewer found no blocking issues; all 3 minor caveats applied. Chromium checked navigation, JavaScript-disabled reading, zero external requests, local links, desktop/mobile layout and 7-page print. All 11 tests pass via uv (initial system-Python invocation lacked sklearn, so evaluator-import assertions failed before any metrics). All pre-existing scientific data/results/figures/receipts/analysis hashes unchanged. No generation, LLM audit calls, metrics, bootstrap or threshold refitting. Review: reviews/iteration20_presentation.md.
 
 - 2026-10-24 04:20 UTC iter 21: E65 portable handoff: saved-result slides PDF, full report PDF and standalone HTML with embedded figures; build_handoff.py + optional locked renderer dependencies and post-hoc source/output receipt. Independent Codex review found absolute VM paths in PDF links; fixed to GitHub links before printing. Checks preserve all 18 headings, 317 cells, 441 report text fragments (including reproduction code), 100 visible slide fragments and 8 figures; 7 slide pages, 25 report pages (2 landscape appendix tables). PDFs have no machine paths or clipped text; relocated standalone HTML works offline without JavaScript at mobile/desktop widths. 401 hashes and 14 isolation tests pass; clean Git-index export verified without locks or writes. Every original scientific data/result/figure/receipt/analysis hash unchanged. No generation, audit calls, metrics, bootstrap or threshold refitting. Review: reviews/iteration21_portable_exports.md.
+
+- 2026-10-24 04:32 UTC iter 22: E66 cached-input provenance: new read-only checker imports the frozen renderer without entering the historical auditor CLI (whose --verify path regenerates metadata). All 44 caches / 2,213 audits reconstruct: 1,903 recorded 64-bit prompt-hash prefixes match; 310 legacy rows have only matching lengths (150 original dev, 120 original test, 40 cross-family). Added public-info/setup checks, frozen donor/context/pair checks, independently checked shuffled recipient actions, injected-private-field and withheld-modality controls, and positive controls for retained observables. Post-hoc receipt freezes individual hash eligibility and all 68 sources; stdlib verifier validates receipt freshness. Codex + Opus critiques applied (complete source/count coverage, hash-vs-length wording, alternate-root identity, missing/stale receipt refusal); final Codex recheck found no consequential issues. All 27 tests and 404 hashes pass; clean Git-index export preserves all file hashes/mtimes/inventory and refuses completed evaluation without local locks. REPORT/README updated; regenerated 25-page report/7-page talk exports preserve 442 report fragments, 317 cells and 8 figures. Every scientific input/cache/result/figure/analysis/evaluation-receipt hash unchanged. No generation, audit calls, AUROC/bootstrap or threshold refitting. Review: reviews/iteration22_audit_inputs.md.

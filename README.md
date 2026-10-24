@@ -32,6 +32,26 @@ AUROC, bootstrap intervals, or thresholds. The manifest and completion receipt w
 pre-registration. Some early audit rows have a recorded prompt length but no historical
 prompt hash; the manifest authenticates their current bytes, not their original prompts.
 
+To reconstruct every cached auditor prompt against the shipped public data, use
+the pinned environment (NumPy is required):
+
+```sh
+uv run python check_audit_inputs.py
+```
+
+This separate read-only check covers all 2,213 audits in 44 caches, including the
+cross-family, shuffled and post-hoc hint views. It checks 1,903 recorded 64-bit
+prompt-hash prefixes and 310 legacy prompt lengths (150 original-view dev, 120
+original-view test and 40 cross-family rows), public partnership metadata, frozen
+shuffle mappings and preservation of recipient actions. It also checks that the
+current renderer ignores injected private fields, excludes public messages from
+action-only views and numeric actions from text-only views, and retains each
+view's observable inputs. Length-only rows cannot establish historical prompt
+content. The post-hoc `data/audit_input_receipt.json` records this check and its
+source hashes; the standard-library verifier validates receipt freshness without
+reconstructing prompts. Use this checker for handoff inspection: the historical
+`auditors.py --verify` entry point regenerates public metadata before checking.
+
 For deterministic table/figure rendering, install the pinned environment with `uv sync --frozen`, then:
 
 ```sh

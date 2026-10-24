@@ -163,6 +163,39 @@ def check_saved_results(root):
         require((root / name).is_file(), f"missing REPORT figure: {name}")
 
 
+def check_audit_input_receipt(root):
+    # Validate preservation of the separate, NumPy-based prompt reconstruction
+    # without importing the auditor or running that reconstruction here.
+    receipt = read(root, "data/audit_input_receipt.json")
+    require(receipt["schema_version"] == 1 and receipt["post_hoc"] is True,
+            "invalid post-hoc audit input receipt")
+    from check_audit_inputs import source_inventory
+    require(receipt["totals"] == {"recorded_hash_match": 1903, "length_only_match": 310},
+            "audit input receipt totals")
+    require(receipt["legacy_length_only_by_cohort"] == {"headline_dev": 150, "headline_test": 120, "cross_family": 40},
+            "audit input receipt legacy cohorts")
+    actual = {p.relative_to(root).as_posix() for p in (root / "results/llm_auditor").glob("*/*/*.jsonl")}
+    require(set(receipt["files"]) == actual and len(actual) == 44, "audit input receipt cache coverage")
+    require(set(receipt["prompt_hash_coverage"]) == actual, "audit input receipt hash coverage inventory")
+    totals = Counter()
+    for name, counts in receipt["files"].items():
+        cached = rows(root, name)
+        actual_counts = Counter("recorded_hash_match" if "prompt_sha" in r else "length_only_match" for r in cached)
+        require(dict(actual_counts) == counts, f"audit input receipt per-file counts: {name}")
+        require(sorted(r["run_id"] for r in cached if "prompt_sha" in r) == receipt["prompt_hash_coverage"][name],
+                f"audit input receipt hash eligibility changed: {name}")
+        totals.update(counts)
+    require(dict(totals) == receipt["totals"], "audit input receipt file totals")
+    sources = receipt["sources_sha256"]
+    require(set(sources) == source_inventory(),
+            "audit input receipt source coverage")
+    for name, want in sources.items():
+        path = (root / name).resolve()
+        require(path.is_relative_to(root.resolve()), "audit input receipt path outside repository")
+        require(hashlib.sha256(path.read_bytes()).hexdigest() == want,
+                f"stale audit input receipt: {name}")
+
+
 def verify(root):
     n = check_manifest(root)
     datasets = {}
@@ -187,6 +220,7 @@ def verify(root):
     require(set(hard) == set(datasets["llm_v3"][0]) and
             all(r["public_explicit"] is False and isinstance(r["llm"], bool) for r in hard.values()), "hard-set coverage")
     check_saved_results(root)
+    check_audit_input_receipt(root)
     # The presentation renderer uses only saved values and standard-library code.
     # This checks freshness without writing HTML or importing an experiment module.
     from build_presentation import render
@@ -195,7 +229,7 @@ def verify(root):
     from build_handoff import check as check_handoff
     check_handoff(root)
     print(f"PASS: {n} artifact hashes; 206 runs / 2,472 rounds; 1,236 original-view audits; "
-          "15 matched placebo paths; frozen inputs/receipts; saved CI/contrast consistency; REPORT table/figures; presentation freshness; offline HTML/PDF provenance.")
+          "15 matched placebo paths; frozen inputs/receipts; saved CI/contrast consistency; REPORT table/figures; presentation freshness; offline HTML/PDF provenance; 2,213-audit input receipt.")
     print("No LLM calls, writes, refitting, or AUROC/bootstrap recomputation. Manifest is post-hoc, not a registration.")
 
 
