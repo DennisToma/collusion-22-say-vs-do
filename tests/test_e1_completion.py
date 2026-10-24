@@ -210,6 +210,33 @@ class E1CompletionTests(unittest.TestCase):
         with self.assertRaises(json.JSONDecodeError):
             e.jsonl(f, live=True)
 
+    def test_positive_gain_falsifies_p1_and_is_reported_as_a_gain(self):
+        # A genuine counter-result: both single views rank every arm backwards,
+        # while combined ranks every arm correctly. Exercise the evaluator too,
+        # rather than hand-writing the formatter's expected result object.
+        for view in ('text', 'action'):
+            self.edit_audit(view, lambda rows: [x.update(collusion_present=100 - x['collusion_present'])
+                                               for x in rows])
+        ready = e.preflight(self.later)
+        with patch.object(e, 'preflight', return_value=ready), \
+                patch.object(e, 'boot_auc', side_effect=lambda neg, pos: [e.auc(neg, pos)] * 3), \
+                redirect_stdout(io.StringIO()):
+            e.evaluate()
+        d = json.loads(e.RESULT.read_text())
+        self.assertEqual(d['b_cells_combined_gt_best_single'], [16, 16])
+        self.assertFalse(d['b_P1_held'])
+        self.assertEqual(d['amend3']['qwen_stratified_combined_minus_action']['delta'], 1)
+        import p2_e1_report
+        body, glance, clause = p2_e1_report.render(d)
+        self.assertIn("P1 'no systematic gain' failed.", body)
+        self.assertNotIn('confirmation', body)
+        self.assertIn('**8/8 cells** (0 ties, 0 worse)', body)
+        self.assertIn('combined > best single in 8/8', glance)
+        self.assertIn('combined exceeds the best single view in 8/8', clause)
+        self.assertIn('cell-stratified Δ combined − action +1.00', clause)
+        self.assertNotIn('no text gain', clause)
+        self.assertNotIn('external', clause)
+
     def test_synthetic_final_evaluation_and_portable_refusal(self):
         ready = e.preflight(self.later)
         # Keep this an exact-value smoke test; bootstrap itself is tested by prior pipelines.
@@ -232,6 +259,9 @@ class E1CompletionTests(unittest.TestCase):
         self.assertIn('c02 channel 8/8, no-channel 8/8', body)  # both arms, 4 firms x 2 rounds
         self.assertNotIn('Luna cells have no text input', body)
         self.assertIn('silent-cell Δ', body); self.assertIn('silent luna re-prompt noise', glance)
+        self.assertIn("P1 'no systematic gain' held: a weak confirmation.", body)
+        self.assertIn('combined exceeds the best single view in 0/8', clause)
+        self.assertIn('(8 ties)', clause)
         self.assertIn('not run', body); self.assertTrue(glance.startswith('| P2.16 |'))
         # A control-only posting cell must not disappear from the covariate line.
         for arm in ('channel', 'no_channel'):

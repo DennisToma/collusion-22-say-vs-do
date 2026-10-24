@@ -55,6 +55,7 @@ def render(d):
     sd = lambda x: f"{x['delta']:+.2f} [{x['ci'][0]:+.2f}, {x['ci'][1]:+.2f}] ({x['n_cells']} cells)" if x else "n/a"
     qs, al = m["qwen_sign_counts"], m["all_sign_counts"]
     qca, qct = m["qwen_stratified_combined_minus_action"], m["qwen_stratified_combined_minus_text"]
+    p1 = ("held: a weak confirmation" if d["b_P1_held"] else "failed")
     lines = [
         f"**P2.16 E1 factorial grid audit (E113, registered before the grid existed; amendments E113-amend/-amend2/-amend3 before any score was read).** "
         f"Frozen gpt-6.1-sol auditors (dev thresholds) on Q1.4's E70 grid: {d['n_games']} games, {d['complete_sweeps']} balanced sweep(s), "
@@ -62,7 +63,7 @@ def render(d):
         f"Headline (8 Qwen cells, where public text exists; amend3): combined beats the best single view in **{qs['pos']}/{qK} cells** "
         f"({qs['tie']} ties, {qs['neg']} worse); cell-stratified pooled Δ combined − action {sd(qca)}, combined − text {sd(qct)}.",
         f"Registered P1 over 16 cells: {k}/{K} positive ({al['tie']} ties, {al['neg']} negative; one-sided sign test p = {d['b_sign_test_one_sided_p']}), "
-        f"P1 'no systematic gain' {'held' if d['b_P1_held'] else 'failed'}: a weak confirmation, because per-cell max(text, action) selection biases Δ downward and ties count toward P1; the stratified Δ is the informative number.",
+        f"P1 'no systematic gain' {p1}. Per-cell max(text, action) selection biases Δ downward and ties count toward P1; the stratified Δ is the informative number.",
         f"Luna combined − action {sd(m['luna_stratified_combined_minus_action_noise'])}; no separate text audit was registered. "
         + (f"Posting cells (posts/agent-rounds): {'; '.join(used)}; posting-cell Δ "
            f"{sd(m['luna_posting_stratified_combined_minus_action'])}; " if m["luna_posting_cells"] else "")
@@ -77,7 +78,8 @@ def render(d):
     ]
     glance = (f"| P2.16 | E1 factorial grid audit (Q1.4 E70, {d['n_games']} games) | Qwen cells: combined > best single in {qs['pos']}/{qK} "
               f"({qs['tie']} ties); stratified Δ combined − action {sd(qca)}; silent luna re-prompt noise {sd(m['luna_silent_stratified_combined_minus_action'])} | `p2_e1_audit.json` |")
-    clause = f"no text gain in {qK - qs['pos']}/{qK} Qwen cells of an external 16-cell grid; pooled Δ {sd(qca)}"
+    clause = (f"combined exceeds the best single view in {qs['pos']}/{qK} Qwen cells of Q1.4's 16-cell grid "
+              f"({qs['tie']} ties); cell-stratified Δ combined − action {sd(qca)}")
     assert len(lines) <= 10
     return "\n".join(lines), glance, clause
 

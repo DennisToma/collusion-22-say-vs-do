@@ -1,7 +1,7 @@
 # Say vs. Do: does auditing what AI agents *say* together with what they *do* catch collusion better?
 
 *Apart AI Collusion Sprint, Q2.2 — text + action auditing. v1 (overnight) results are frozen as git tag `v1-overnight`;
-Phase 2 (from 2026-10-24 06:30 UTC) re-tests them. Checkpoint text, 2026-10-24 20:00 UTC: P2.1–P2.15 final (E115 evaluated 19:20) except the E1 grid audit (E113; 165 snapshot games (luna 6/6, qwen 4/6 sweeps), cached audits verified 21:11 UTC; final eval once Q1.4's 6 balanced sweeps are complete; formatter separates silent cells from both-arm public-board use). E102 (strong-framing Qwen, 6 seeds) is descriptive. Exports: [README.md](README.md).*
+Phase 2 (from 2026-10-24 06:30 UTC) re-tests them. Checkpoint text, 2026-10-24 20:00 UTC: P2.1–P2.15 final (E115 evaluated 19:20) except the E1 grid audit (E113; 168 snapshot games (luna 6/6, qwen 4/6 sweeps), cached audits verified 21:19 UTC; final eval once Q1.4's 6 balanced sweeps are complete; formatter separates silent cells from both-arm public-board use and preserves a failed P1 verdict (synthetic counter-result checked)). E102 (strong-framing Qwen, 6 seeds) is descriptive. Exports: [README.md](README.md).*
 
 ## Abstract
 Adding LLM sellers' public messages to their prices gives **no resolved gain** for detecting collusion: combined minus the better

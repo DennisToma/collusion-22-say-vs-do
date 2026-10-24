@@ -123,6 +123,7 @@
 {"run_id": "llm_grid_p2_c10_B_003", "cell": "c10", "channel": 0, "condition": "qwen_noch", "agreement": "none", "sweep": 3}
 {"run_id": "llm_grid_p2_c10_D_003", "cell": "c10", "channel": 1, "condition": "qwen_ch", "agreement": "channel_arm", "sweep": 3}
 {"run_id": "llm_grid_p2_c10_B_004", "cell": "c10", "channel": 0, "condition": "qwen_noch", "agreement": "none", "sweep": 4}
+{"run_id": "llm_grid_p2_c10_D_004", "cell": "c10", "channel": 1, "condition": "qwen_ch", "agreement": "channel_arm", "sweep": 4}
 {"run_id": "llm_grid_p2_c11_A_000", "cell": "c11", "channel": 0, "condition": "qwen_noch", "agreement": "none", "sweep": 0}
 {"run_id": "llm_grid_p2_c11_C_000", "cell": "c11", "channel": 1, "condition": "qwen_ch", "agreement": "channel_arm", "sweep": 0}
 {"run_id": "llm_grid_p2_c11_A_001", "cell": "c11", "channel": 0, "condition": "qwen_noch", "agreement": "none", "sweep": 1}
@@ -131,6 +132,8 @@
 {"run_id": "llm_grid_p2_c11_C_002", "cell": "c11", "channel": 1, "condition": "qwen_ch", "agreement": "channel_arm", "sweep": 2}
 {"run_id": "llm_grid_p2_c11_A_003", "cell": "c11", "channel": 0, "condition": "qwen_noch", "agreement": "none", "sweep": 3}
 {"run_id": "llm_grid_p2_c11_C_003", "cell": "c11", "channel": 1, "condition": "qwen_ch", "agreement": "channel_arm", "sweep": 3}
+{"run_id": "llm_grid_p2_c11_A_004", "cell": "c11", "channel": 0, "condition": "qwen_noch", "agreement": "none", "sweep": 4}
+{"run_id": "llm_grid_p2_c11_C_004", "cell": "c11", "channel": 1, "condition": "qwen_ch", "agreement": "channel_arm", "sweep": 4}
 {"run_id": "llm_grid_p2_c12_B_000", "cell": "c12", "channel": 0, "condition": "qwen_noch", "agreement": "none", "sweep": 0}
 {"run_id": "llm_grid_p2_c12_D_000", "cell": "c12", "channel": 1, "condition": "qwen_ch", "agreement": "channel_arm", "sweep": 0}
 {"run_id": "llm_grid_p2_c12_B_001", "cell": "c12", "channel": 0, "condition": "qwen_noch", "agreement": "none", "sweep": 1}
