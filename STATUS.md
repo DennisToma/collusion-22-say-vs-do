@@ -4,7 +4,7 @@
 
 ## Current state (2026-10-24 09:45 UTC, Phase 2 iteration 4)
 - RUNNING (bg): p2_chain.sh para2 (15/20) -> p2rep (60, ETA ~13:00); llm_p2sol (~14/21); llm_p2ds (~15/30);
-  NEW llm_p2logbook (E92, 15 runs, games-parallel 1, ~9 min/run, ETA ~11:45); chain3 (E89 views after sol / p2rep); chain4.
+  NEW llm_p2logbook (E92, 2/15 at 10:00, ETA ~13:00; p2_chain5.sh auto-runs p2_logbook.py once -> logs/p2/logbook_analysis.log); chain3 (E89 views after sol / p2rep); chain4.
 - NEW E92 (registered 09:25, before data): logbook arm = notes structure with invented-weather content (price-irrelevant),
   matched seeds to llm_p2cue. Decision rule in EXPERIMENTS.tsv; analysis `uv run python p2_logbook.py` written before data.
   Separates "extra private writing field for the pair" (structural artifact) from "private space to think about pricing".
