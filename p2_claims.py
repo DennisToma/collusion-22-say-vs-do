@@ -310,7 +310,7 @@ def _():
 
 
 @claim("C24", "E116 within channel: plan view AUROC strict-executed vs non-executed", "0.69 [0.44, 0.91]",
-       "(plans 0.69 [0.44, 0.91])",
+       "(plan 0.69 [0.44, 0.91], text",
        "13 strict vs 7 non-executed private markets (llm_p2strongF); exploratory, zero LLM calls, seed bootstrap")
 def _():
     src = "results/analysis/p2_within_agree_llm_p2strongF.json"
@@ -333,7 +333,7 @@ def _():
 
 
 @claim("C25", "E112 participant replacement (luna newcomer), private arm: market excess replaced - original; re-agreement replaced; originals",
-       "+0.20 [-0.08, +0.62]; 16/20; 15/20", "level (+0.20 [-0.08, +0.62]) nor re-agreement (16/20 vs 15/20)",
+       "+0.20 [-0.08, +0.62]; 16/20; 15/20", "market Δ +0.20 [-0.08, +0.62] (private) and re-agreement 16/20 vs 15/20 originals",
        "20 paired private games replayed from llm_p2strongF, newcomer from round 21, rounds 21-40; registered E112, all 4 predictions held; none arm +0.16 [-0.27, +0.57] in P2.15")
 def _():
     src = "results/analysis/p2_replace.json"
@@ -373,6 +373,45 @@ def _():
         v = pick(src, ("arms", "private", "O5_executed_after_r21"))
         vals.extend(f"{v[k][0]}/{v[k][1]}" for k in ("repl", "orig"))
     return "; ".join(vals), "; ".join(srcs), "arms.private.O5_executed_after_r21.{repl,orig}"
+
+
+@claim("C31", "E113 Qwen cell-stratified combined minus action / text AUROC",
+       "-0.24 [-0.37, -0.09]; -0.05 [-0.13, +0.03]",
+       "combined − action −0.24 [−0.37, −0.09], combined − text −0.05 [−0.13, +0.03]",
+       "8 Qwen cells x 6 matched seeds x 2 arms = 96 games of Q1.4 E70's 192; channel assignment label; equal-cell mean of within-cell AUROC differences; game bootstrap within cell x arm, B=2000 seed=0; E113-amend3 registered before scores; shared Q1.4 data, not independent joint replication")
+def _():
+    src = A + "p2_e1_audit.json"
+    d = pick(src, ())
+    assert (d["n_games"], d["n_cells"], d["complete_sweeps"]) == (192, 16, 6)
+    a = d["amend3"]
+    vals = [a["qwen_stratified_combined_minus_" + v] for v in ("action", "text")]
+    assert all(v["n_cells"] == 8 for v in vals)
+    return "; ".join(dci(v) for v in vals), src, "amend3.qwen_stratified_combined_minus_{action,text}.{delta,ci,n_cells}"
+
+
+@claim("C32", "E113 combined-minus-best-single cell signs: Qwen positive/tie/negative; all cells positive/tie/negative",
+       "0/8; 0; 8; 4/16; 1; 11", "0/8 Qwen cells (0 ties, 8 worse)",
+       "8 Qwen cells and all 16 Q1.4 E70 cells, 6 games per arm per cell; best-single max selection biases delta downward; ties count toward registered P1, so held P1 is weak confirmation")
+def _():
+    src = A + "p2_e1_audit.json"
+    d = pick(src, ())
+    q, a = (d["amend3"][k + "_sign_counts"] for k in ("qwen", "all"))
+    assert d["b_P1_held"] is True and sum(q.values()) == 8 and sum(a.values()) == 16
+    assert d["b_cells_combined_gt_best_single"] == [a["pos"], 16]
+    return f"{q['pos']}/8; {q['tie']}; {q['neg']}; {a['pos']}/16; {a['tie']}; {a['neg']}", src, "amend3.{qwen,all}_sign_counts; b_cells_combined_gt_best_single; b_P1_held"
+
+
+@claim("C33", "E113 Qwen text inversion and flags in channel / no-channel arms",
+       "0.32 [0.24, 0.42]; 48/48; 48/48", "Qwen grid text is inverted (0.32 [0.24, 0.42])",
+       "96 games in 8 Qwen E70 cells (48 channel, 48 no-channel); unstratified pooled text AUROC and frozen dev threshold flags; game-bootstrap CI, not an independent replication of Q1.4 data")
+def _():
+    src = A + "p2_e1_audit.json"
+    d = pick(src, ())
+    a = d["a_text_flag_rate_by_arm_qwen"]
+    vals = [a[k] for k in ("1", "0")]
+    assert all(v[1] == 48 for v in vals)
+    v = ci(d["pooled_auroc_channel_vs_none_descriptive"]["text_qwen"], False)
+    return "; ".join([v, *[f"{x[0]}/{x[1]}" for x in vals]]), src, "pooled_auroc_channel_vs_none_descriptive.text_qwen; a_text_flag_rate_by_arm_qwen.{1,0}"
 
 
 def run():

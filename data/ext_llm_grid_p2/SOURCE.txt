@@ -1,2 +1,3 @@
-Snapshot of /home/factory/collusion/collusion-14-infotheory/data/llm_grid_p2_* (complete games only), sibling HEAD 9cee04681b5fb9342d286563c1f1e439764188c7.
+Snapshot of /home/factory/collusion/collusion-14-infotheory/data/llm_grid_p2_* (complete games only), sibling HEAD e0f343a9d9b3d74810f54ff74e6db6dd60c43ae1.
 private_message, private_chat and reasoning_notes removed (auditors never see them).
+Post-generation outcome aggregates omitted; original outcome placeholders remain null.
