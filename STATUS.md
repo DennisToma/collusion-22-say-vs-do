@@ -2,23 +2,25 @@
 
 # STATUS
 
-## Current state (2026-10-24 09:10 UTC, Phase 2 iteration 3)
-- RUNNING (bg): p2_chain.sh para1 (16/20) -> para2 -> p2rep (ETA ~11:00); llm_p2sol (10/21, ETA ~11:00); llm_p2ds (10/30, ETA ~11:30);
+## Current state (2026-10-24 09:55 UTC, Phase 2 iteration 3 end)
+- RUNNING (bg): p2_chain.sh para1 -> para2 -> p2rep (ETA ~11:00+); llm_p2sol (~11/21); llm_p2ds (~10/30);
   p2_chain4.sh labels + p2_cue.py each family when done; p2_chain3.sh (E89) auditor views after sol / after p2rep.
-- DONE P2.6 prelim (E79-p2claude + E90, p2_family.py): Claude Sonnet sellers with NO channel price 20.2 (>= monopoly 19, 5/5)
-  vs luna none 11.9; private pairs agree 20-24 and keep it 5/5; pair premium only +0.58 [.23,1.03], frozen flags 2/5,
-  luna-trained text LR .64. => detectors are seller-family dependent. TL;DR item 8. Opus review of P2.6 launched 09:08.
-- DONE P2.5 (E77) notes-to-self result; P2.4 behaviour labels + Δ_hybrid; P2.1-P2.3.
+- DONE P2.6 Claude pilot (E79-p2claude, E90, E91; Opus review applied): Claude sellers price 20.2 with NO channel (above
+  joint-profit max 19 from round 1 -> read as high-price disposition) AND publicly urge "avoid undercutting"; chat pairs
+  state 20-24 and stay there (twins don't, 4/5). Premium +0.58, flags 2/5; text LR .64; frozen LLM views that read text
+  flag 10/10 (incl. none), action_stats 3/5 vs 3/5. => no detector transfers; text verdict depends on label definition.
+- DONE P2.1-P2.5 (see REPORT). P2.6 section ~30 lines: trim when sol/ds rows land.
 
 ## Next steps
-1. When sol / ds finish (chain4 labels them): `uv run python p2_family.py --ds llm_p2sol llm_p2ds` (+ p2_cue json) -> extend P2.6 table.
-2. Claude follow-up (exploration, register first): run frozen action_stats/text/combined auditor views on llm_p2claude (40 sol
-   calls) — does the LLM auditor flag kept 20-24 agreements when the whole market is high? Consider 5 more Claude seeds (quota).
-3. para1/para2 -> E78 band (≤5 lines in P2.5). p2rep -> `replication.py --ds llm_p2rep` ONCE after chain3 views; p2_behaviour on p2rep.
-4. Gap 1 follow-up: same-length irrelevant-sentence control arm (register first).
+1. When sol / ds finish: `uv run python p2_family.py --ds llm_p2sol llm_p2ds`; auditors.py + p2_family_views.py on them
+   (register as E91 extension) -> extend P2.6 table; then trim P2.6 to ≤ 20 lines.
+2. para1/para2 -> E78 band (≤5 lines in P2.5). p2rep -> `replication.py --ds llm_p2rep` ONCE after chain3 views; p2_behaviour on p2rep.
+3. Gap 1 follow-up: same-length irrelevant-sentence control arm (register first).
+4. Possible: 5 more Claude seeds incl. placebo (quota permitting) — the "public invitation" label question is a headline candidate.
 5. codex adversarial review of P2 claims when codex slots free; checkpoint block (5-line Phase 2 takeaways) by 19:30.
 
 ## Log
+- 09:55 P2 iter3: Opus review of P2.6 applied; E91 frozen auditor views on Claude markets (text views flag 10/10 incl. none: public invitations).
 - 09:10 P2 iter3: P2.6 Claude family result (E79-p2claude, E90 p2_family.py), REPORT P2.6 + TL;DR 8.
 - 08:44 P2 iter2: P2.5 cue result (E77, H3 failed: notepad gives ~65% of premium), text LR on cue arms (E82b), Opus reviews E84e + P2.5 applied; chain4 for families.
 - 07:58 P2 iter2: seller families sol/Claude/deepseek launched (E79 amendments); E84b/c/d; E89 registered + chain3; REPORT appendix split.

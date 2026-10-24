@@ -45,8 +45,8 @@ test and replication evidence item beside the public log (offline, searchable; n
    "offer alone is not the driver" prediction failed. The notepad arm has confounds (pair-only extra text, memory).
 8. *Detectors did not transfer to Claude sellers in a 5-seed pilot (P2.6):* Claude Sonnet 5.5 sellers price at or above the
    joint-monopoly level (≈ 19; Nash ≈ 11) from round 1 even with **no channel** (market mean 20.2, 5/5). This is above the profit-maximising
-   price, so we read it as a high-price habit rather than learned collusion. With the channel, pairs state 20–24 and stay there (matched no-channel pairs do not, in 4/5 seeds).
-   The pair premium is small (+0.58 [+0.23, +1.03]), the frozen premium flags 2/5, and the luna-trained text classifier scores 0.64. Both AUROC CIs include chance. gpt-6.1-sol and deepseek runs are pending.
+   price, so we read it mainly as a high-price disposition rather than learned collusion. With the channel, pairs state 20–24 and stay there (matched no-channel pairs do not, in 4/5 seeds).
+   The pair premium is small (+0.58 [+0.23, +1.03]), the frozen premium flags 2/5, and the luna-trained text classifier scores 0.64. Both AUROC CIs include chance. Claude's no-channel firms also invite each other *publicly* not to undercut, so every frozen LLM view that reads messages flags all 10 markets (E91): whether that counts as collusion is a labelling choice. gpt-6.1-sol and deepseek runs are pending.
 
 ## Phase 2 results (in progress, from 2026-10-24 06:30 UTC; v1 above frozen as git tag `v1-overnight`)
 
@@ -194,12 +194,22 @@ cross-family) and deepseek-v4.1-flash (Go) are still running.** At the costs use
 with no channel: round-1 no-channel prices are 18–22, set before any rival price has been seen, and the market mean over rounds 2–12 is 20.2
 (luna `none` markets: 11.9, 0/15 at ≥ 19). This is *above* the industry profit-maximising price. All four firms at 19 earn
 850 in total, at 22 they earn 755. It also leaves a large unilateral gain unused (best reply to rivals at 20 is 14, earning 352 vs 208). We therefore read it
-as a high-price habit of this model, not as learned tacit collusion. Some no-channel markets drift down to 18 by round 12. With the channel, all 5 pairs state a price of 20–24 in round 1–2 and stay within 1 of it in ≥ 90% of later rounds.
+as mainly a high-price disposition of this model, not learned tacit collusion. But the no-channel Claude markets are not clean
+negatives either. Their *public* messages openly urge rivals not to undercut (llm_p2claude_0003, round 6, all four firms: "Let's keep avoiding
+undercutting"). In some markets one firm undercuts in the final round (0003: A drops 20 → 15), and some drift down to 18 by round 12. With the channel, all 5 pairs state a price of 20–24 in round 1–2 and stay within 1 of it in ≥ 90% of later rounds.
 Applying the same floor to the matched no-channel pair gives 0.0, 0.0, 0.0 and 0.27 of rounds for four seeds and 0.91 for one (floor 20). So in 4 of 5 seeds the chat moved the pair above
 what the same model does unprompted. Because the other two firms also price high, the pair premium is small (+0.58; markup private − none
 +1.46 [+0.49, +2.42]) and the frozen premium flags 2/5. The luna-trained public-text classifier scores the Claude private runs at 0.64 [0.24, 1.00] vs Claude `none`
 (1.00 on luna's own arms). **With n = 5 we find no evidence that either detector transfers to Claude sellers (both CIs include chance).** On the same 5 seeds, luna's premium flags 4/5 vs 2/5. That gap is not resolved at this n. Absolute price levels
 would flag every Claude market, including all 5 no-channel ones (cf. Q1.4 P2.3: absolute statistics need model-matched references).
+**Frozen LLM auditors on the Claude markets (E91, registered; 60 gpt-6.1-sol calls, unchanged prompts; `uv run python
+p2_family_views.py` → `results/analysis/p2_family_views.json`).** Flags private / none at the frozen dev thresholds: text 5/5 / 5/5,
+combined 5/5 / 5/5, combined_stats 5/5 / 5/5, structured 5/5 / 5/5, action_stats 3/5 / 3/5, action 2/5 / 2/5. Every view that reads messages
+flags every Claude market with score ≈ 96–98, because the public messages contain the invitations quoted above. Run AUROC private vs none: action_stats 0.70 [0.30, 1.00],
+action 0.52, text 0.22. On this family the text-vs-action question turns on the label. If public invitations to
+avoid undercutting count as collusion, the text auditor is right on all 10 markets. Under our condition label (channel or not), no view
+separates the arms. Registered prediction (action views flag the kept 20–24 agreements more often than the premium, 2/5): **held weakly**, action_stats 3/5, but it flags 3/5 no-channel markets too.
+Prediction "text view near chance" **failed**: it flags everything.
 
 ## Abstract
 Does an auditor catch LLM collusion better if it reads what sellers *say* in public as well as what they *do*?
