@@ -1,0 +1,37 @@
+{
+ "n": 30,
+ "model": "claude-sonnet-5-5",
+ "reference": "gpt-6.1-sol terms.jsonl",
+ "same_agreed": 25,
+ "same_floor": 23,
+ "floor_within_1": 24,
+ "same_round": 23,
+ "same_class": 24,
+ "class_counts_sol": {
+  "followed": 9,
+  "not_followed": 21
+ },
+ "class_counts_claude": {
+  "followed": 7,
+  "no_agreement": 5,
+  "not_followed": 18
+ },
+ "scope_counts": {
+  "none": 11,
+  "opening_only": 19
+ },
+ "scope_by_sol_class": {
+  "followed": {
+   "opening_only": 1,
+   "ongoing": 0,
+   "unclear": 0,
+   "none": 8
+  },
+  "not_followed": {
+   "opening_only": 18,
+   "ongoing": 0,
+   "unclear": 0,
+   "none": 3
+  }
+ }
+}

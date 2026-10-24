@@ -201,6 +201,131 @@
      0.141
     ]
    },
+   "sensitivity": {
+    "tol2_frac0.50": {
+     "n_followed": 18,
+     "n_not_followed": 32,
+     "run_auroc_followed": {
+      "premium": [
+       0.808,
+       0.698,
+       0.901
+      ],
+      "text": [
+       0.541,
+       0.412,
+       0.682
+      ],
+      "action": [
+       0.615,
+       0.477,
+       0.741
+      ],
+      "combined": [
+       0.604,
+       0.471,
+       0.729
+      ],
+      "combined_stats": [
+       0.626,
+       0.496,
+       0.756
+      ],
+      "action_stats": [
+       0.672,
+       0.536,
+       0.789
+      ],
+      "structured": [
+       0.681,
+       0.547,
+       0.803
+      ]
+     }
+    },
+    "tol1_frac0.33": {
+     "n_followed": 17,
+     "n_not_followed": 33,
+     "run_auroc_followed": {
+      "premium": [
+       0.831,
+       0.729,
+       0.917
+      ],
+      "text": [
+       0.56,
+       0.423,
+       0.702
+      ],
+      "action": [
+       0.595,
+       0.451,
+       0.714
+      ],
+      "combined": [
+       0.577,
+       0.444,
+       0.703
+      ],
+      "combined_stats": [
+       0.605,
+       0.463,
+       0.747
+      ],
+      "action_stats": [
+       0.657,
+       0.519,
+       0.784
+      ],
+      "structured": [
+       0.663,
+       0.529,
+       0.785
+      ]
+     }
+    },
+    "tol2_frac0.33": {
+     "n_followed": 20,
+     "n_not_followed": 30,
+     "run_auroc_followed": {
+      "premium": [
+       0.794,
+       0.692,
+       0.884
+      ],
+      "text": [
+       0.549,
+       0.409,
+       0.68
+      ],
+      "action": [
+       0.667,
+       0.546,
+       0.785
+      ],
+      "combined": [
+       0.633,
+       0.511,
+       0.748
+      ],
+      "combined_stats": [
+       0.655,
+       0.525,
+       0.775
+      ],
+      "action_stats": [
+       0.718,
+       0.593,
+       0.829
+      ],
+      "structured": [
+       0.703,
+       0.582,
+       0.823
+      ]
+     }
+    }
+   },
    "per_run": {
     "llm_v3_0000": {
      "cls": "none"
@@ -1011,6 +1136,131 @@
      -0.48,
      0.0
     ]
+   },
+   "sensitivity": {
+    "tol2_frac0.50": {
+     "n_followed": 6,
+     "n_not_followed": 8,
+     "run_auroc_followed": {
+      "premium": [
+       0.729,
+       0.542,
+       0.889
+      ],
+      "text": [
+       0.455,
+       0.236,
+       0.688
+      ],
+      "action": [
+       0.712,
+       0.451,
+       0.965
+      ],
+      "combined": [
+       0.615,
+       0.351,
+       0.868
+      ],
+      "combined_stats": [
+       0.5,
+       0.201,
+       0.792
+      ],
+      "action_stats": [
+       0.76,
+       0.559,
+       0.924
+      ],
+      "structured": [
+       0.58,
+       0.337,
+       0.83
+      ]
+     }
+    },
+    "tol1_frac0.33": {
+     "n_followed": 6,
+     "n_not_followed": 8,
+     "run_auroc_followed": {
+      "premium": [
+       0.729,
+       0.542,
+       0.889
+      ],
+      "text": [
+       0.455,
+       0.236,
+       0.688
+      ],
+      "action": [
+       0.712,
+       0.451,
+       0.965
+      ],
+      "combined": [
+       0.615,
+       0.351,
+       0.868
+      ],
+      "combined_stats": [
+       0.5,
+       0.201,
+       0.792
+      ],
+      "action_stats": [
+       0.76,
+       0.559,
+       0.924
+      ],
+      "structured": [
+       0.58,
+       0.337,
+       0.83
+      ]
+     }
+    },
+    "tol2_frac0.33": {
+     "n_followed": 6,
+     "n_not_followed": 8,
+     "run_auroc_followed": {
+      "premium": [
+       0.729,
+       0.542,
+       0.889
+      ],
+      "text": [
+       0.455,
+       0.236,
+       0.688
+      ],
+      "action": [
+       0.712,
+       0.451,
+       0.965
+      ],
+      "combined": [
+       0.615,
+       0.351,
+       0.868
+      ],
+      "combined_stats": [
+       0.5,
+       0.201,
+       0.792
+      ],
+      "action_stats": [
+       0.76,
+       0.559,
+       0.924
+      ],
+      "structured": [
+       0.58,
+       0.337,
+       0.83
+      ]
+     }
+    }
    },
    "per_run": {
     "llm_v3rep_0000": {

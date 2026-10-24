@@ -62,7 +62,7 @@ def terms(ds):
     return {l["run_id"]: l for l in map(json.loads, open(out))} if out.exists() else {}
 
 
-def classes(ds, T):
+def classes(ds, T, tol=1, frac=0.5):
     D = Path("data") / ds
     gt = {g["run_id"]: g for g in map(json.loads, open(D / "ground_truth.jsonl"))}
     labs = {l["run_id"]: l for l in map(json.loads, open(D / "labels.jsonl"))}
@@ -83,9 +83,9 @@ def classes(ds, T):
                 C[rid] = {"cls": "undetermined", "floor": floor, "round": r0}; continue
             if floor < 12:  # floor at/below static Nash (11) is followed trivially: not a collusive agreement
                 C[rid] = {"cls": "trivial_floor", "floor": floor, "round": r0}; continue
-            ok = [all(P[rid][k][a] >= floor - 1 for a in pair) for k in after]
+            ok = [all(P[rid][k][a] >= floor - tol for a in pair) for k in after]
             fr = float(np.mean(ok))
-            C[rid] = {"cls": "followed" if fr >= 0.5 else "not_followed", "follow_frac": round(fr, 3),
+            C[rid] = {"cls": "followed" if fr >= frac - 1e-9 else "not_followed", "follow_frac": round(fr, 3),
                       "floor": floor, "round": r0}
         elif g["condition"] == "none":  # tacit_high is DEFINED by the premium (circular for the premium detector)
             C[rid] = {"cls": "tacit_high" if labs[rid]["pair_premium"] >= 1.0 else "none"}
@@ -133,6 +133,16 @@ def main():
                 d = lambda P_, N_: au(v, P_, N_) - max(au("text", P_, N_), au("action", P_, N_))
                 B = [d(p_, n_) for p_, n_ in boots]
                 res["delta_hybrid_followed"][v] = [round(d(P, N), 3), round(float(np.percentile(B, 2.5)), 3), round(float(np.percentile(B, 97.5)), 3)]
+        # Directive 4 label sensitivity (post-hoc, not registered): floor - 2 tolerance and/or followed in >= 1/3 of rounds
+        res["sensitivity"] = {}
+        for tol, frac in ((2, 0.5), (1, 1 / 3), (2, 1 / 3)):
+            C2 = classes(ds, T, tol, frac); P2 = [r for r in ids if C2[r]["cls"] == "followed"]; N2 = [r for r in ids if C2[r]["cls"] in NEG]
+            e = {"n_followed": len(P2), "n_not_followed": sum(C2[r]["cls"] == "not_followed" for r in ids), "run_auroc_followed": {}}
+            for k in S:
+                rng = np.random.default_rng(0); f = lambda P_, N_: float(np.mean([(S[k][p] > S[k][q]) + .5 * (S[k][p] == S[k][q]) for p in P_ for q in N_]))
+                B = [f(rng.choice(P2, len(P2)), rng.choice(N2, len(N2))) for _ in range(1000)]
+                e["run_auroc_followed"][k] = [round(f(P2, N2), 3), round(float(np.percentile(B, 2.5)), 3), round(float(np.percentile(B, 97.5)), 3)]
+            res["sensitivity"][f"tol{tol}_frac{frac:.2f}"] = e
         res["per_run"] = C
         out["datasets"][ds] = res
         print(ds, json.dumps({k: v for k, v in res.items() if k != "per_run"}, indent=1))

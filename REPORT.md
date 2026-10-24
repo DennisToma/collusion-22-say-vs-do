@@ -34,8 +34,9 @@ test and replication evidence item beside the public log (offline, searchable; n
    Neither explanation usefulness nor this workflow's end-to-end performance was evaluated.
 6. *Phase 2 (in progress, section below):* an independent reimplementation reproduces the headline numbers. At 5%
    prevalence most premium alarms are false (precision 0.24 test). The supervised text signal appears without any delivered
-   message (placebo AUROC 1.00). Judged by behaviour, 36 of 50 test "colluders" abandon their agreement within a few rounds;
-   the premium flags them anyway, and against the followed-agreement label it falls to 0.80.
+   message (placebo AUROC 1.00). Judged by behaviour, 36 of 50 test "colluders" only agree on an opening-round price and then compete
+   (a second judge, Claude, reads 18/21 checked cases as opening-only). The premium flags them anyway; against the
+   followed-agreement label it falls to 0.80, and text + actions still adds nothing over the best single modality.
 
 ## Phase 2 results (in progress, from 2026-10-24 06:30 UTC; v1 above frozen as git tag `v1-overnight`)
 
@@ -116,7 +117,17 @@ AUROC(action)), paired bootstrap over the same runs). Test: combined −0.03 [�
 [−0.07, +0.19], structured +0.03 [−0.11, +0.14]. Replication: combined −0.08 [−0.32, +0.16], action_stats −0.02
 [−0.15, +0.09]. Against the followed label, reading messages *and* prices again shows no resolved gain over the
 better single modality. The statistics-table gain seen with condition labels (+0.11 on test) is not resolved here.
-Only the untrained premium exceeds the LLM modalities on test (+0.22 [+0.08, +0.33]); it does not on replication (−0.10 [−0.34, +0.12]).
+Only the untrained premium exceeds the LLM modalities on test (+0.22 [+0.08, +0.33]); it does not on replication (−0.10 [−0.34, +0.12]). **Label sensitivity** (post-hoc, json key `sensitivity`):
+loosening "followed" to floor − 2 and/or ≥ 1/3 of rounds raises test followed runs from 14 to 17–20 of 50. The
+premium stays at 0.79–0.83, action_stats at 0.66–0.72 and text at 0.54–0.56, so the abandoned-majority finding does not hinge on the tolerance.
+**Cross-family term check** (E84d, `uv run python p2_terms_xfam.py` → `results/analysis/p2_terms_xfam.json`; Claude
+Sonnet 5.5, same prompt, first 30 test chats). Claude matches gpt-6.1-sol on agreed yes/no in 25/30, floor in 23/30 and
+class in 24/30 (followed 7 vs 9; Claude calls 5 chats no agreement). Asked whether the agreed price was meant for the
+opening round only or as an ongoing rule, Claude answers *opening only* for 18 of the 21 sol-"not followed" runs and
+*ongoing* for none. Example llm_v3_0040: "I suggest we both start at 18 this round … we can compare outcomes and adjust
+next round", and from round 3 both firms say they price independently. So most v1 positives are explicit one-round
+price agreements that the firms then explicitly drop. "Not followed" means "agreed for the opening round only", not
+a broken long-term cartel.
 
 **P2.5 Is the "collusion" a prompt artifact? (E77/E78, generation running).** Six matched-seed conditions (same pair,
 cost and demand path per seed): private channel; neutrally worded "message box"; private notepad with no recipient;
