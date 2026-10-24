@@ -1,0 +1,140 @@
+{
+ "ds": "llm_p2qwena",
+ "n_strict": 5,
+ "n_nonexec": 10,
+ "n_nonexec_agreed": 10,
+ "judged_agreement": {
+  "strict": 5.0,
+  "nonexec": 10
+ },
+ "views": {
+  "premium": {
+   "auroc_strict_vs_nonexec": [
+    0.44,
+    0.124,
+    0.77
+   ],
+   "auroc_strict_vs_nonexec_agreed": [
+    0.44,
+    0.124,
+    0.77
+   ],
+   "mean_strict": 1.15,
+   "mean_nonexec": 1.571,
+   "flags_strict_nonexec": [
+    3,
+    5,
+    6,
+    10
+   ]
+  },
+  "market_excess_nash": {
+   "auroc_strict_vs_nonexec": [
+    0.84,
+    0.593,
+    1.0
+   ],
+   "auroc_strict_vs_nonexec_agreed": [
+    0.84,
+    0.593,
+    1.0
+   ],
+   "mean_strict": 6.26,
+   "mean_nonexec": 3.7
+  },
+  "action": {
+   "auroc_strict_vs_nonexec": [
+    0.8,
+    0.535,
+    1.0
+   ],
+   "auroc_strict_vs_nonexec_agreed": [
+    0.8,
+    0.535,
+    1.0
+   ],
+   "mean_strict": 72.2,
+   "mean_nonexec": 52.1,
+   "flags_strict_nonexec": [
+    4,
+    5,
+    2,
+    10
+   ]
+  },
+  "action_stats": {
+   "auroc_strict_vs_nonexec": [
+    0.62,
+    0.308,
+    0.908
+   ],
+   "auroc_strict_vs_nonexec_agreed": [
+    0.62,
+    0.308,
+    0.908
+   ],
+   "mean_strict": 64.0,
+   "mean_nonexec": 49.4,
+   "flags_strict_nonexec": [
+    4,
+    5,
+    5,
+    10
+   ]
+  },
+  "text": {
+   "auroc_strict_vs_nonexec": [
+    0.73,
+    0.429,
+    0.989
+   ],
+   "auroc_strict_vs_nonexec_agreed": [
+    0.73,
+    0.429,
+    0.989
+   ],
+   "mean_strict": 94.4,
+   "mean_nonexec": 88.4,
+   "flags_strict_nonexec": [
+    5,
+    5,
+    10,
+    10
+   ]
+  },
+  "combined": {
+   "auroc_strict_vs_nonexec": [
+    0.6,
+    0.296,
+    0.902
+   ],
+   "auroc_strict_vs_nonexec_agreed": [
+    0.6,
+    0.296,
+    0.902
+   ],
+   "mean_strict": 95.6,
+   "mean_nonexec": 90.9,
+   "flags_strict_nonexec": [
+    5,
+    5,
+    10,
+    10
+   ]
+  },
+  "judged_agreement": {
+   "auroc_strict_vs_nonexec": [
+    0.5,
+    null,
+    null
+   ],
+   "auroc_strict_vs_nonexec_agreed": [
+    0.5,
+    null,
+    null
+   ],
+   "mean_strict": 1.0,
+   "mean_nonexec": 1.0
+  }
+ }
+}

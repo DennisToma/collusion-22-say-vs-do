@@ -312,6 +312,18 @@
   "in_report_abstract": true
  },
  {
+  "id": "C27",
+  "claim": "E116b within agreement, Qwen abliterated / base: public text AUROC strict vs non-executed",
+  "expected": "0.73 [0.43, 0.99]; 0.51 [0.25, 0.70]",
+  "denominator": "5 strict vs 10 non-executed private markets per model (llm_p2qwena, llm_p2qwenb; 15/15 judged agreement each); exploratory, not pooled",
+  "note": "",
+  "value": "0.73 [0.43, 0.99]; 0.51 [0.25, 0.70]",
+  "source": "results/analysis/p2_within_agree_llm_p2qwen{a,b}.json",
+  "key_path": "views.text.auroc_strict_vs_nonexec",
+  "status": "OK",
+  "in_report_abstract": true
+ },
+ {
   "id": "C25",
   "claim": "E112 participant replacement (luna newcomer), private arm: market excess replaced - original; re-agreement replaced; originals",
   "expected": "+0.20 [-0.08, +0.62]; 16/20; 15/20",

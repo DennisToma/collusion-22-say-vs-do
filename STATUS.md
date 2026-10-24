@@ -1,15 +1,15 @@
 # STATUS
 
-## Current state (2026-10-24 18:42 UTC from date -u, Phase 2 iteration 30)
+## Current state (2026-10-24 18:55 UTC from date -u, Phase 2 iteration 31)
 - Main claim unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc).
-- **Iter 30:** DIRECTION dir 4's 19:30 Opus review was done early (reviews/p2_iter30_review_opus.md), and all 3 P1 and most P2 items are applied:
-  the E112 abstract sentence now reports Δ +0.20 [−0.08, +0.62] and re-agreement 16/20 (originals 15/20) without "property of the market prompt";
-  TL;DR 5 now says "no text or plan view" (market excess 0.78 and action_stats 0.18 do resolve); "luna private only" is scoped to base framing;
-  the CUSUM threshold caveat is added (any-round 3/30); abliterated agreement is marked at ceiling and the serving confound is noted. **Abstract is 312 → ~260 prose words.**
-  p2_claims: C21/C23/C24/C25 repointed, **27/27 OK**. REPORT 699 lines.
-- Tests: the same 3 files FAIL as before (manifest staleness; expected until Sun 16:30 rebuild). Evidence/price/strongF tests pass.
-- **E115** (sol newcomer) 11/30 at 18:30 (~2.5 games per 10 min), ETA ~21:30.
-- **E113:** snapshot 54 games / 16 cells (sibling f9ccb83cbe), cached audit, coverage complete, no scores read. Q1.4 E70 is on sweep 1 of 6. FINAL `eval` runs ONCE at 6 sweeps (or Sun 08:00).
+- **Iter 31: E116b** (dir 1 second stratum, registered 18:30, 0 LLM calls): within-agreement strict vs non-executed in the Qwen base-framing private arms
+  (5 vs 10 per model, 15/15 agreed, not pooled): public text 0.73 [0.43, 0.99] abliterated / 0.51 [0.25, 0.70] base (text flags 30/30); action 0.80 [0.54, 1.00]
+  abliterated only (base 0.42, strongF 0.33). → P2.7 + TL;DR 5; claim C27; **p2_claims 28/28 OK**. REPORT 701 lines.
+- **INCIDENT #2 (18:50, my fault): `git stash` again orphaned E115 raw files 0024/0026/0028.** Rescuer `/var/tmp/rescue/rescue_fd.py` (setsid, log
+  /var/tmp/rescue/rescue.log) holds the inodes, copies them back every 3 s, and makes a final copy when the generator closes them. Before E115 eval, check the log says
+  "closed -> final copy" for all 3 and that `p2_replace.py` per-game asserts pass. **NEVER `git stash`/checkout while a generator runs.**
+- Tests: the same 3 files FAIL (audit_inputs, handoff, mechanism_sources: manifest staleness, expected until Sun 16:30). Run with `uv run python -m unittest discover -s tests`.
+- **E115** (sol newcomer) 15/30 raw at 18:50, ETA ~21:30. **E113:** snapshot 54 games; Q1.4 E70 on sweep 1 of 6; FINAL `eval` ONCE at 6 sweeps (or Sun 08:00).
 
 ## Next steps
 1. E115: when "p2replS gen done": `P2REPL_ARM=sol uv run python p2_replace_eval.py` ONCE → S1–S4 into P2.15 (2–3 lines) + abstract clause; claim C26.
@@ -18,6 +18,7 @@
 - Risk: .git is 89 MB (cap 100 MB). Don't commit raw caches; check `du -sh .git` before adding large data.
 
 ## Log
+- 18:55 P2 iter31: E116b Qwen within-agreement strata (0 calls) → P2.7/TL;DR5/C27, claims 28/28; stash incident #2 on E115 raw 0024/26/28, rescuer running.
 - 18:42 P2 iter30: Opus review (19:30 slot, early) applied: 3 P1 + P2 fixes; abstract 312→~260 words; p2_claims 27/27; E113 snapshot 54 games, coverage OK.
 - 18:13 P2 iter29: abstract 388→312 words (E116 within-channel result now carries the plan sentence; plan-vs-tacit detail → TL;DR 5); p2_claims 27/27; E113 snapshot 48 games + cached audit started.
 - 18:09 P2 iter28: E112 sentence → abstract/TL;DR; abstract 517→388 words; REPORT 724→701 lines (evidence checks → appendix); C25; E115 raw-cache stash incident fixed + disclosed.

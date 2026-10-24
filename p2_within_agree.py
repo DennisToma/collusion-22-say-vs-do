@@ -10,18 +10,18 @@ partly mechanically tied to the strict definition (strict requires pair mean >= 
 not say-vs-do evidence.
 
     uv run python p2_within_agree.py      # -> results/analysis/p2_within_agree_llm_p2strongF.json
+    uv run python p2_within_agree.py llm_p2qwena llm_p2qwenb   # E116b second stratum (Qwen, base framing, T=12;
+                                          # reported per model, not pooled; no plans in base framing -> no plan/E111 rows)
 """
 import json
+import sys
 from pathlib import Path
 from final_analysis import premium_scores
 from p2_plan_view import plans
 from p2_plan_keyword import TERMS, names
 from p2_strong_eval import auroc, boot
 
-DS = "llm_p2strongF"
-
-
-def main():
+def main(DS="llm_p2strongF"):
     cls = json.load(open(f"results/analysis/p2_strong_classes_{DS}.json"))["runs"]
     ev = json.load(open(f"results/analysis/p2_strong_eval_{DS}.json"))["detectors"]
     priv = {r: c for r, c in cls.items() if c["cond"] == "private"}
@@ -30,14 +30,17 @@ def main():
     S = {"premium": {r: d["run"] for r, d in premium_scores(DS)[0].items()},
          "market_excess_nash": {r: c["market_excess_nash"] for r, c in cls.items()}}
     base = Path("results/llm_auditor") / DS / "gpt-6.1-sol"
-    for v in ("action", "action_stats", "text", "combined", "plan"):  # last row per run wins (as in p2_strong_eval for plan)
+    for v in ("action", "action_stats", "text", "combined", "plan"):
+        if not (base / f"{v}_orig.jsonl").exists():
+            continue  # last row per run wins (as in p2_strong_eval for plan)
         S[v] = {x["run_id"]: x["collusion_present"] for x in map(json.loads, open(base / f"{v}_orig.jsonl"))}
     K = {}
-    for rid in priv:  # E111 K_dir: share of plan entries with agreement terms or naming the chat partner
+    for rid in (priv if any(plans(DS, r) for r in priv) else ()):  # E111 K_dir: share of plan entries with agreement terms or naming the chat partner
         P = plans(DS, rid); pair = gt[rid]["assigned_pair"]; partner = {pair[0]: pair[1], pair[1]: pair[0]}
         d = [bool(TERMS.search(p)) or (a in partner and names(p, partner[a])) for (_, a), p in P.items()]
         K[rid] = sum(d) / len(d)
-    S["partner_share_E111"] = K
+    if K:
+        S["partner_share_E111"] = K
     S["judged_agreement"] = {r: float(bool(terms.get(r, {}).get("agreed"))) for r in priv}
     pos = sorted(r for r, c in priv.items() if c["class"] == "executed")
     neg = sorted(r for r, c in priv.items() if c["class"] == "nonexec_private")
@@ -65,4 +68,5 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    for ds in sys.argv[1:] or ["llm_p2strongF"]:
+        main(ds)

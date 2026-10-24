@@ -310,6 +310,19 @@ def _():
     return ci(d["views"]["plan"]["auroc_strict_vs_nonexec"], False), src, "views.plan.auroc_strict_vs_nonexec"
 
 
+@claim("C27", "E116b within agreement, Qwen abliterated / base: public text AUROC strict vs non-executed", "0.73 [0.43, 0.99]; 0.51 [0.25, 0.70]",
+       "public text 0.73 [0.43, 0.99] / 0.51 [0.25, 0.70]",
+       "5 strict vs 10 non-executed private markets per model (llm_p2qwena, llm_p2qwenb; 15/15 judged agreement each); exploratory, not pooled")
+def _():
+    v = []
+    for ds in ("llm_p2qwena", "llm_p2qwenb"):
+        src = f"results/analysis/p2_within_agree_{ds}.json"
+        d = json.load(open(src))
+        assert (d["n_strict"], d["n_nonexec"], d["n_nonexec_agreed"]) == (5, 10, 10)
+        v.append(ci(d["views"]["text"]["auroc_strict_vs_nonexec"], False))
+    return "; ".join(v), "results/analysis/p2_within_agree_llm_p2qwen{a,b}.json", "views.text.auroc_strict_vs_nonexec"
+
+
 @claim("C25", "E112 participant replacement (luna newcomer), private arm: market excess replaced - original; re-agreement replaced; originals",
        "+0.20 [-0.08, +0.62]; 16/20; 15/20", "market level (+0.20 [-0.08, +0.62]) and re-agreement (16/20; originals 15/20)",
        "20 paired private games replayed from llm_p2strongF, newcomer from round 21, rounds 21-40; registered E112, all 4 predictions held; none arm +0.16 [-0.27, +0.57] in P2.15")

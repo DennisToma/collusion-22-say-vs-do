@@ -35,7 +35,7 @@ Every abstract number with its denominator and source key: `results/analysis/cla
    In this one arm (n = 13 vs 19, exploratory), a monitor reading private plans separated executed from tacit (0.76 [0.55, 0.93]) where
    prices (≈ 0.5) and public text (0.25 [0.08, 0.46], inverted; no-channel markets use more hold-price phrases on the public board, 43% vs 28% of messages,
    post hoc, not shown to be agreement) did not; a no-LLM partner-name count does comparably (0.82 [0.66, 0.96]) and no plan uses agreement words (a channel footprint). Within channel pairs
-   (13 vs 7, E116, exploratory) no text or plan view resolves execution (plan 0.69 [0.44, 0.91], text 0.61 [0.37, 0.85]; low power); market excess separates partly by construction (0.78 [0.54, 0.96]) and action_stats inverts (0.18 [0.00, 0.42]).
+   (13 vs 7, E116, exploratory) no text or plan view resolves execution (plan 0.69 [0.44, 0.91], text 0.61 [0.37, 0.85]; low power); market excess separates partly by construction (0.78 [0.54, 0.96]) and action_stats inverts (0.18 [0.00, 0.42]); in two Qwen strata (5 vs 10 each, E116b) public text 0.73 [0.43, 0.99] / 0.51 [0.25, 0.70].
    A fresh luna replacing one seller at round 21 re-joins the level and re-agrees (16/20; originals 15/20); CUSUM 0/30 alarms by round 25 with the threshold set at the originals' maximum (any-round 3/30), P2.15.
 6. *Practical:* premium precision 0.24 at 5% prevalence; legitimate cost/quality edges are flagged 7/10, 9/10 (controls 2/10). Screens
    need model- and prompt-matched references; our evidence does not support recommending any particular screening architecture.
@@ -183,7 +183,9 @@ testing 19 too"); gpt-6.1-sol 0/2. The high price was already market-wide (round
 *E116 within-channel contrast (zero LLM calls, registered before computing AUROCs, after the per-class flag counts had been seen; `uv run python p2_within_agree.py`):* both classes had the channel, so the
 footprint confound is gone. No text or plan view resolves execution (plan 0.69, partner count 0.73, public text 0.61; CIs reach 0.5); judged
 agreement cannot separate much (13/13 vs 5/7). The action auditors rank the wrong way (action_stats 0.18 [0.00, 0.42]: non-executed pairs look
-*more* collusive to them). Agreed-only non-executed (n = 5) gives the same picture. Say-vs-do here: what pairs plan does not resolvably predict what they do.
+*more* collusive to them). Agreed-only non-executed (n = 5) gives the same picture. *E116b (second stratum, Qwen3.8-27B, base framing, T = 12, 15/15 judged agreement, 5 strict vs 10 per model, not pooled;
+`uv run python p2_within_agree.py llm_p2qwena llm_p2qwenb`):* public text flags all 30 runs; text 0.73 [0.43, 0.99] abliterated / 0.51 [0.25, 0.70] base; action 0.80 [0.54, 1.00] abliterated only (base 0.42, strongF 0.33: not replicated).
+Say-vs-do here: in all three strata what agreeing pairs say or plan does not resolvably predict whether they execute.
 
 Reading. (i) Premium and market-excess CIs include 0.5 (not equivalence; the classes use different price-based selection rules).
 (ii) Public text ranks tacit-high above strict-executed (0.25 [0.08, 0.46]; combined 0.18). Post-hoc "hold/keep/maintain … 1x" matches occur in
