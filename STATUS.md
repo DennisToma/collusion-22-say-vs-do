@@ -1,15 +1,16 @@
 # STATUS
 
-## Current state (2026-10-24 ~20:57 UTC by `date -u`, Phase 2 iteration 43) — following DIRECTION 20:00
+## Current state (2026-10-24 21:03 UTC by `date -u`, Phase 2 iteration 44) — following DIRECTION 20:00
 - Headline unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc).
 - DIRECTION 20:00 directives 1–3, 5 done. Directive 4 pre-staged (E126): "For the merged report" block under the abstract (answer, 3 numbers, E113 PENDING line, what to lift, what not to quote) + P2.0 say-vs-do table (E125) in REPORT. Made room by moving Held-out discipline + input-check detail to REPORT_APPENDIX (text unchanged, 3-/1-line summaries kept). REPORT 711 lines; claims 31/31; verify_phase2 26/26, 33/33 outputs (receipt refreshed: iter41 changed report_tables.py).
-- E113 still blocked: snapshot 148/192 games = 4 balanced sweeps (20:55); cached audit + coverage complete (no scores read). ETA 6 sweeps ≈ 22:00–23:00.
+- E113 still blocked: snapshot 154/192 games (21:00); luna lane 6/6 sweeps done 20:54, qwen lane at sweep index 4 (sweep 3 done 20:36, ~40 min/sweep) → ETA ≈ 22:00–22:30. Cached audit + coverage complete, 0 unparsed (no scores read). Serendipity HITS: no promoted hits.
 - Luna board-use cross-check for Q1.4 (coverage only): posts in 7/82 luna games, 4/8 cells (c02 D_001; c03 C_003; c04 B_002, D_004; c07 B_001, B_004, D_003); posting is per-game, ~75–80 posts/400 agent-rounds per posting cell-arm. REPORT P2.7 line updated (was 'c02/c07').
 - **E113 next:** when Q1.4 STATUS says "6 sweeps complete": `snapshot` → `audit` → `coverage` → `preflight` → `eval` ONCE → `uv run python p2_e1_report.py` → P2.16 lines + glance row + abstract clause + replace the PENDING line in the merge block (REPORT ≤ 711: the E113 stub text in header/P2 must shrink to fit). If Q1.4 says qwen pCMI replicated → joint sentence.
 - Then the ONE abstract pass ≤ 260 words (drop SALT "8000 episodes, 10 models" or Qwen premium-diff clause) by Sun 07:30.
 - Reviews: Sun 12:30 only. Freeze 14:00. Exports/presentation from 16:30. Never stash/checkout while generators run.
 
 ## Log
+- 21:03 P2 iter44: E113 snapshot 154 games + cached audit, coverage complete (no scores read); qwen lane sweep 5/6 running. Note: a `until ! pgrep -f <pattern>` waiter self-matches its own command line (same bug as E100) — wait on PIDs, not patterns. No ledger row, REPORT unchanged.
 - 20:57 P2 iter43: E113 still waiting (4/6 sweeps, 148 games, cached audit, no scores read); stale luna board-use statement fixed in REPORT (7/82 games, 4/8 cells) + header snapshot count; claims 31/31, verify_phase2 26/26. No ledger row (per DIRECTION: one row at final snapshot).
 - 20:40 P2 iter42: E126 merge block + P2.0 say-vs-do table in REPORT (directive 4 pre-staged, E113 line PENDING); Held-out/input-check detail → appendix; claims 31/31, verify_phase2 26/26 receipt refreshed; E113 snapshot 142 games + cached audit, coverage complete (no scores read).
 - 20:25 P2 iter41: E125 say-vs-do table (report_tables.py --say-vs-do, zero calls, directive 5 early); E113 snapshot 122 games + cached audit, coverage 100% (no scores read; luna posting cells now c02, c03-ch, c04-none, c07 both: eval derives them from data, line 365); E113 still waiting on Q1.4 sweeps.

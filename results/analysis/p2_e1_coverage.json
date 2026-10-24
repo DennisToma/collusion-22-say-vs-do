@@ -1,5 +1,5 @@
 {
- "n_games": 148,
+ "n_games": 154,
  "complete_sweeps": 4,
  "cells": {
   "c00": {
@@ -25,10 +25,10 @@
    }
   },
   "c02": {
-   "n_games": 10,
+   "n_games": 12,
    "coverage": {
-    "action": "10/10",
-    "combined": "10/10"
+    "action": "12/12",
+    "combined": "12/12"
    },
    "unparsed": {
     "action": 0,
@@ -36,10 +36,10 @@
    }
   },
   "c03": {
-   "n_games": 10,
+   "n_games": 12,
    "coverage": {
-    "action": "10/10",
-    "combined": "10/10"
+    "action": "12/12",
+    "combined": "12/12"
    },
    "unparsed": {
     "action": 0,
@@ -91,11 +91,11 @@
    }
   },
   "c08": {
-   "n_games": 8,
+   "n_games": 10,
    "coverage": {
-    "text": "8/8",
-    "action": "8/8",
-    "combined": "8/8"
+    "text": "10/10",
+    "action": "10/10",
+    "combined": "10/10"
    },
    "unparsed": {
     "text": 0,
@@ -226,30 +226,30 @@
   },
   "c02": {
    "no_channel": {
-    "games": 5,
+    "games": 6,
     "posts": 0,
-    "agent_rounds": 400,
+    "agent_rounds": 480,
     "share": 0.0
    },
    "channel": {
-    "games": 5,
+    "games": 6,
     "posts": 78,
-    "agent_rounds": 400,
-    "share": 0.195
+    "agent_rounds": 480,
+    "share": 0.1625
    }
   },
   "c03": {
    "no_channel": {
-    "games": 5,
+    "games": 6,
     "posts": 0,
-    "agent_rounds": 400,
+    "agent_rounds": 480,
     "share": 0.0
    },
    "channel": {
-    "games": 5,
+    "games": 6,
     "posts": 75,
-    "agent_rounds": 400,
-    "share": 0.1875
+    "agent_rounds": 480,
+    "share": 0.1562
    }
   },
   "c04": {
@@ -310,15 +310,15 @@
   },
   "c08": {
    "no_channel": {
-    "games": 4,
-    "posts": 320,
-    "agent_rounds": 320,
+    "games": 5,
+    "posts": 400,
+    "agent_rounds": 400,
     "share": 1.0
    },
    "channel": {
-    "games": 4,
-    "posts": 320,
-    "agent_rounds": 320,
+    "games": 5,
+    "posts": 400,
+    "agent_rounds": 400,
     "share": 1.0
    }
   },
@@ -422,5 +422,5 @@
   }
  },
  "contains_auditor_metrics": false,
- "snapshot_sha256": "82bd266979b46e48db74ea3c2c8748f89c917f633b74271ae7cd7025230f89e4"
+ "snapshot_sha256": "3588a8b68dc46234b407361094dcd091a6788ac4f846efe6db017f10c96669ee"
 }
