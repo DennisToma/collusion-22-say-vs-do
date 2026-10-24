@@ -33,7 +33,7 @@ nav p { margin:0 } nav ul { columns:2; padding-left:22px } nav li { font-size:14
  .wide th:first-child,.wide td:first-child { width:17% }
  pre { font-size:8pt; padding:8pt } a { color:inherit; text-decoration:none }
 }
-</style></head><body><main><p class="export-note">Offline rendering of REPORT.md. Figures are embedded; source links are local in HTML and point to GitHub in PDF. No results recomputed.<br>Source SHA-256: 7d992e91063e70f5ddc5a718613124cf09d22f21cbe55b88206c6e0cb2c8e8d6</p><nav aria-label="Contents"><p><strong>Contents</strong></p><ul><li><a href="#section-2">Abstract</a></li><li><a href="#section-4">Question</a></li><li><a href="#section-5">Setup</a></li><li><a href="#section-6">Results</a></li><li><a href="#section-10">Validity safeguards</a></li><li><a href="#section-11">Held-out discipline</a></li><li><a href="#section-12">Limitations</a></li><li><a href="#section-13">What to do next</a></li><li><a href="#section-14">Appendix A — LLM market, DEV split (runs 0000–0029; development only, superseded by the locked test above)</a></li><li><a href="#section-15">Appendix B — Scripted mechanism check (non-LLM baselines, baselines.py, 5-fold CV grouped by run, 320 runs)</a></li><li><a href="#section-16">Appendix C — Additional test-split detail (locked test split, n = 95; moved from §Results for length)</a></li><li><a href="#section-17">Appendix D — Exploration strata detail (moved from §Results for length; text unchanged)</a></li><li><a href="#section-18">Appendix E — Reproduce</a></li></ul></nav><h1 id="section-1">Say vs. Do: does auditing what AI agents <em>say</em> together with what they <em>do</em> catch collusion better?</h1>
+</style></head><body><main><p class="export-note">Offline rendering of REPORT.md. Figures are embedded; source links are local in HTML and point to GitHub in PDF. No results recomputed.<br>Source SHA-256: 92be9af376d29b8b7e9c3b026b7d1a6f7499b6ead944cc3b6569259ddefc95f2</p><nav aria-label="Contents"><p><strong>Contents</strong></p><ul><li><a href="#section-2">Abstract</a></li><li><a href="#section-4">Question</a></li><li><a href="#section-5">Setup</a></li><li><a href="#section-6">Results</a></li><li><a href="#section-10">Validity safeguards</a></li><li><a href="#section-11">Held-out discipline</a></li><li><a href="#section-12">Limitations</a></li><li><a href="#section-13">What to do next</a></li><li><a href="#section-14">Appendix A — LLM market, DEV split (runs 0000–0029; development only, superseded by the locked test above)</a></li><li><a href="#section-15">Appendix B — Scripted mechanism check (non-LLM baselines, baselines.py, 5-fold CV grouped by run, 320 runs)</a></li><li><a href="#section-16">Appendix C — Additional test-split detail (locked test split, n = 95; moved from §Results for length)</a></li><li><a href="#section-17">Appendix D — Exploration strata detail (moved from §Results for length; text unchanged)</a></li><li><a href="#section-18">Appendix E — Reproduce</a></li></ul></nav><h1 id="section-1">Say vs. Do: does auditing what AI agents <em>say</em> together with what they <em>do</em> catch collusion better?</h1>
 <p><em>Apart AI Collusion Sprint, Q2.2 — text + action auditing. Status: locked test results in (2026-10-24 00:03 UTC); registered replication run 02:07 UTC (chronology disclosed below); placebo-channel exploration 03:33 UTC. Offline verification: <code>python3 verify_artifacts.py</code>; handoff instructions in <a href="README.md">README.md</a>.</em></p>
 <p>For the five-minute presentation, open <a href="PRESENTATION.html">PRESENTATION.html</a> locally in a browser;
 <a href="PRESENTATION.md">speaker notes and saved-input hashes</a> accompany it. Render with
@@ -92,7 +92,8 @@ pointing the auditor at the premium gives action_stats 0.93 vs 0.86 on test (Δ 
 0.798 on the replication; neither dataset was held out for the hint. The premium comparator was chosen after seeing partial data, and
 <strong>round-1 prices alone give 0.90</strong>. Those prices are set before any partner message is read. So the premium picks up a
 substantial pre-message cue tied to the channel <em>offer</em>; its contribution to full-period discrimination is not
-quantified.</li>
+quantified. A post-hoc comparison-free markup over cost (usable with two firms) gives 0.92–0.95 on
+test but 0.80–0.84 on the replication.</li>
 <li><strong>The public text carries a learnable trace.</strong> A supervised TF-IDF classifier reaches 0.98 (grouped CV within the
 test split). Zero-shot text auditing does not use this trace.</li>
 <li><strong>Replication on 30 fresh runs</strong> (analysis registered after generation began, before any metrics; 4/4 decision rules
@@ -569,6 +570,21 @@ uniform rate (4.5–6.8% of evidence items vs 8.3% uniform), although round 1 is
 <p><strong>Telling the auditor where to look (<code>action_stats_hint</code>, post-hoc E56; Appendix D).</strong> One fixed sentence pointing
 the auditor at pair premiums and round-1 prices lifts action_stats on test (run AUROC 0.86 → 0.93, Δ +0.07
 [−0.00, +0.15]) but not on the replication (0.798 → 0.796); neither split is held out for this hint.</p>
+<p><strong>Dropping the rival comparison: absolute markup over cost (post-hoc E70, <code>markup_baseline.py</code>).</strong> The premium compares a
+pair with its rivals, so it is undefined with two firms. Three untrained, comparison-free scores: <code>markup_pair</code> (max over
+pairs of pair mean price minus mean common base cost; usable with two firms), <code>markup_pair_own</code> (same, with each firm's own
+public unit cost, i.e. legit partners at cost − 1) and <code>markup_all</code> (all-firm mean price minus cost).
+Run AUROC on test: premium 0.95 [0.90, 0.98], markup_pair 0.95 [0.90, 0.98] (Δ +0.00 [−0.05, +0.05]), markup_pair_own
+0.92 [0.86, 0.97] (Δ +0.03 [−0.03, +0.08]), markup_all 0.91 [0.85, 0.96]. On the replication (n = 30): premium 0.92,
+markup_pair 0.84 [0.68, 0.96] (Δ +0.08 [−0.04, +0.22]), markup_pair_own 0.80 [0.62, 0.94] (Δ +0.12 [−0.02, +0.28]),
+markup_all 0.76 [0.57, 0.91]. At frozen dev Youden thresholds markup_pair / markup_pair_own flag 0.78 / 0.72 of test and
+0.67 / 0.60 of replication y = 1 runs (premium 0.92 / 0.93); <code>none</code> 0.07 / 0.00 (test) and 0.30 / 0.10 (replication);
+<code>legit</code> 0.07 / 0.20 and 0.20 / 0.20 (premium: <code>none</code> 0.07 / 0.40, <code>legit</code> 0.33 / 0.00). Placebo runs: 0.73 / 0.60
+(premium 0.93). Within a four-firm run markup_pair ranks pairs exactly like the premium (premium = 2 × (pair markup − all-firm markup)), so its localisation is identical.
+Reading: two-firm-compatible markup scores retain substantial discrimination here (at a lower flag rate on y = 1 runs);
+the premium's AUROC advantages are statistically unresolved, but the point gaps on the replication (0.08–0.16) are not
+small. Similar AUROCs do not show where the signal comes from, and real two-firm markets were not tested. Post hoc, on splits whose premium results were already known; it needs known
+costs and a competitive benchmark; a uniform four-firm price rise remains untested (no such data).</p>
 <h2 id="section-10">Validity safeguards</h2>
 <p>Labels from private chat only (judge blind to prices); same auditor model across views, fallback calls dropped;
 combined is a strict superset of both single views; shuffle donors matched on label <em>and</em> condition;
@@ -648,8 +664,9 @@ equivalence not shown; focal opening prices and tacit public-price coordination 
 stratum <code>llm_v3mon</code>, with an announced price monitor the judge found no agreements (0/14), so no evasive
 colluders were produced; robustness of the premium to evasion remains open.</li>
 <li><strong>The premium requires comparison firms.</strong> As specified it is undefined in a two-firm market and cannot detect a
-uniform price increase shared by all four firms. That is where text or dependence statistics
-might be needed, and we did not test it.</li>
+uniform price increase shared by all four firms. A comparison-free markup over cost keeps much of the signal here
+(post-hoc E70), but it needs known costs and a competitive benchmark, and it can flag high pricing without delivered private messages; a
+uniform all-firm cartel was not generated, so this case is untested.</li>
 <li><strong>Generator-specific premium.</strong> Channel holders open higher before receiving any private message. Round 1 alone
 gives test run AUROC 0.90; rounds 2–12 give test 0.90 and dev 0.92. Removing observed round 1 does not estimate what
 would happen if sellers changed their opening strategy.</li>
@@ -1192,6 +1209,7 @@ uv run python fp_stratum.py --ds llm_v3fp       # firm-framing exploration strat
 uv run python fp_prices.py                      # firm-framing vs lab none mean prices (descriptive)
 uv run python monitor_stratum.py --ds llm_v3mon # announced-monitor stratum (frozen thresholds)
 uv run python deterrence.py                     # agreement / message / markup comparison llm_v3 vs llm_v3mon
+uv run python markup_baseline.py                # E70 post-hoc: comparison-free markup vs premium (test, rep, placebo)
 uv run python matched_recall.py                 # legit/none flags at matched recall (post-lock, descriptive)
 uv run python round1_effect.py --ds llm_v3      # round-1 (pre-message) prices by role (descriptive)
 uv run python early_detection.py --ds llm_v3 &amp;&amp; uv run python fig_early.py   # premium AUROC vs rounds observed

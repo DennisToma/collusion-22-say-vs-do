@@ -62,7 +62,8 @@ public log under six views (defined in §Setup). Locked test split (n = 95, run 
   0.798 on the replication; neither dataset was held out for the hint. The premium comparator was chosen after seeing partial data, and
   **round-1 prices alone give 0.90**. Those prices are set before any partner message is read. So the premium picks up a
   substantial pre-message cue tied to the channel *offer*; its contribution to full-period discrimination is not
-  quantified.
+  quantified. A post-hoc comparison-free markup over cost (usable with two firms) gives 0.92–0.95 on
+  test but 0.80–0.84 on the replication.
 - **The public text carries a learnable trace.** A supervised TF-IDF classifier reaches 0.98 (grouped CV within the
   test split). Zero-shot text auditing does not use this trace.
 - **Replication on 30 fresh runs** (analysis registered after generation began, before any metrics; 4/4 decision rules
@@ -380,6 +381,22 @@ uniform rate (4.5–6.8% of evidence items vs 8.3% uniform), although round 1 is
 the auditor at pair premiums and round-1 prices lifts action_stats on test (run AUROC 0.86 → 0.93, Δ +0.07
 [−0.00, +0.15]) but not on the replication (0.798 → 0.796); neither split is held out for this hint.
 
+**Dropping the rival comparison: absolute markup over cost (post-hoc E70, `markup_baseline.py`).** The premium compares a
+pair with its rivals, so it is undefined with two firms. Three untrained, comparison-free scores: `markup_pair` (max over
+pairs of pair mean price minus mean common base cost; usable with two firms), `markup_pair_own` (same, with each firm's own
+public unit cost, i.e. legit partners at cost − 1) and `markup_all` (all-firm mean price minus cost).
+Run AUROC on test: premium 0.95 [0.90, 0.98], markup_pair 0.95 [0.90, 0.98] (Δ +0.00 [−0.05, +0.05]), markup_pair_own
+0.92 [0.86, 0.97] (Δ +0.03 [−0.03, +0.08]), markup_all 0.91 [0.85, 0.96]. On the replication (n = 30): premium 0.92,
+markup_pair 0.84 [0.68, 0.96] (Δ +0.08 [−0.04, +0.22]), markup_pair_own 0.80 [0.62, 0.94] (Δ +0.12 [−0.02, +0.28]),
+markup_all 0.76 [0.57, 0.91]. At frozen dev Youden thresholds markup_pair / markup_pair_own flag 0.78 / 0.72 of test and
+0.67 / 0.60 of replication y = 1 runs (premium 0.92 / 0.93); `none` 0.07 / 0.00 (test) and 0.30 / 0.10 (replication);
+`legit` 0.07 / 0.20 and 0.20 / 0.20 (premium: `none` 0.07 / 0.40, `legit` 0.33 / 0.00). Placebo runs: 0.73 / 0.60
+(premium 0.93). Within a four-firm run markup_pair ranks pairs exactly like the premium (premium = 2 × (pair markup − all-firm markup)), so its localisation is identical.
+Reading: two-firm-compatible markup scores retain substantial discrimination here (at a lower flag rate on y = 1 runs);
+the premium's AUROC advantages are statistically unresolved, but the point gaps on the replication (0.08–0.16) are not
+small. Similar AUROCs do not show where the signal comes from, and real two-firm markets were not tested. Post hoc, on splits whose premium results were already known; it needs known
+costs and a competitive benchmark; a uniform four-firm price rise remains untested (no such data).
+
 ## Validity safeguards
 Labels from private chat only (judge blind to prices); same auditor model across views, fallback calls dropped;
 combined is a strict superset of both single views; shuffle donors matched on label *and* condition;
@@ -463,8 +480,9 @@ computed on the mod-3 subset incl. test runs. The test evaluation is locked and 
   stratum `llm_v3mon`, with an announced price monitor the judge found no agreements (0/14), so no evasive
   colluders were produced; robustness of the premium to evasion remains open.
 - **The premium requires comparison firms.** As specified it is undefined in a two-firm market and cannot detect a
-  uniform price increase shared by all four firms. That is where text or dependence statistics
-  might be needed, and we did not test it.
+  uniform price increase shared by all four firms. A comparison-free markup over cost keeps much of the signal here
+  (post-hoc E70), but it needs known costs and a competitive benchmark, and it can flag high pricing without delivered private messages; a
+  uniform all-firm cartel was not generated, so this case is untested.
 - **Generator-specific premium.** Channel holders open higher before receiving any private message. Round 1 alone
   gives test run AUROC 0.90; rounds 2–12 give test 0.90 and dev 0.92. Removing observed round 1 does not estimate what
   would happen if sellers changed their opening strategy.
@@ -812,6 +830,7 @@ uv run python fp_stratum.py --ds llm_v3fp       # firm-framing exploration strat
 uv run python fp_prices.py                      # firm-framing vs lab none mean prices (descriptive)
 uv run python monitor_stratum.py --ds llm_v3mon # announced-monitor stratum (frozen thresholds)
 uv run python deterrence.py                     # agreement / message / markup comparison llm_v3 vs llm_v3mon
+uv run python markup_baseline.py                # E70 post-hoc: comparison-free markup vs premium (test, rep, placebo)
 uv run python matched_recall.py                 # legit/none flags at matched recall (post-lock, descriptive)
 uv run python round1_effect.py --ds llm_v3      # round-1 (pre-message) prices by role (descriptive)
 uv run python early_detection.py --ds llm_v3 && uv run python fig_early.py   # premium AUROC vs rounds observed

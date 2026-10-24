@@ -1,22 +1,21 @@
 # STATUS
 
-## Current state (2026-10-24 05:03 UTC, iteration 25)
+## Current state (2026-10-24 05:40 UTC, iteration 26)
 - LOCKED TEST DONE (00:03), REPLICATION DONE (02:07); never rerun; detection estimates unchanged.
 - Test: premium run AUROC .95; action_stats .86; combined-minus-best-unimodal -.013 [-.091,+.064].
 - Replication (n=30): premium .92 vs action_stats .80; 4/4 registered rules held (not equivalence).
 - Placebo premium flags 14/15 with/without delivery; channel/condition confound remains.
-- E69: 57/2,925 evidence items have parsed leading price transitions; 54 adjacent + 3 earlier endpoints match.
-- Grammar omits joint/simultaneous wording; 52+17 further numeric-span items exposed without validation labels.
-- Endpoint agreement is not explanation accuracy; the proposed explanation role remains unvalidated.
-- Codex + Opus critiques applied; final Codex diagnostic recheck has no consequential findings.
-- 47 tests / 412 hashes pass; clean export write-free; 2,213 prompts still 1,903 hashes + 310 length-only.
-- Refreshed report: 26 pages / 8 figures; talk unchanged at 7 slides; scientific artifact bytes unchanged.
+- NEW E70 (post-hoc): comparison-free markup over cost (two-firm usable) test .92-.95, rep .80-.84; premium gaps
+  unresolved (rep +.08..+.16). REPORT §Exploration + Key results + Limitations updated; Codex review applied.
+- Evidence checks (E68/E69) are literal/endpoint only; explanation role remains unvalidated.
+- 47 tests / 414 hashes pass; exports rebuilt (26 pages); talk unchanged at 7 slides.
 ## Next steps (no new generation after 03:30; no new experiments after 06:30; FINALIZE 08:15)
 1. Keep detection results frozen; present PRESENTATION.pdf or PRESENTATION.html. Send REPORT.pdf for detail.
 2. Read-only: python3 -S verify_artifacts.py; uv run python check_audit_inputs.py; python3 -S check_price_transitions.py --check.
 3. If REPORT.md changes, regenerate handoff exports and update the post-hoc manifest (README instructions).
 
 ## Log
+- 05:40 iter 26: E70 markup_baseline.py (comparison-free markup vs premium; own-cost variant after Codex review logs/review_iter26_markup.md); REPORT, exports, manifest updated.
 - 04:40 iter 23: read-only integrity re-check (E67): verifier, handoff/presentation checks, audit-input check, 27 unittests all PASS. No changes to results; remaining open items (evasion, second seller model) need new generation, barred after 03:30.
 - 04:05 iter 18: Figure 1 summary figure (E62) inserted after abstract; reproduce line added.
 - 03:56 iter 17: repro check (E60); final codex+Opus claims audit applied (E61); abstract shortened; appendix D/E.
