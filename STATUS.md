@@ -2,23 +2,24 @@
 
 # STATUS
 
-## Current state (2026-10-24 13:25 UTC, Phase 2 iteration 10)
-- DONE P2.6 final (E95 3-way + E91-ext sol + ds/sol market finals): location PRIV/PUB/NEITHER luna 14/0/16, Claude 5/5/0, ds 15/15/0,
-  sol 0/0/21; all 3 E95 predictions held; ds none 17.20 [16.54,17.81], sol none 15.27 (Nash+4, no agreements). One table in REPORT.
-- DONE P2.7 compressed to ~20 lines (pilot + registered predictions); final numbers replace it when E99 lands.
-- FIXED: stale wrapper shell (cmdline contained the c3post pgrep pattern) blocked p2_c3post.sh + E102 qwenaS; killed 13:05.
-  NOTE for future iterations: don't type the literal "--ds llm_p2qwen? " pattern in your own shell commands while pgrep loops wait on it.
-- E100 compare: p2_qwen_cmp.py (Newcombe / bootstrap, smoke-tested on pilots) + p2_qwen_cmp_wait.sh runs it once after c3post.
-- RUNNING: strongF 17/40 (ETA ~17:30) -> p2_strongF_post.sh; qwenb 23/30 (ETA ~13:45) -> c3post (qwena views running now) -> c3 cmp;
-  E102 qwenaS started 13:07; mimo 8/14, g56sol 8/14; chain3 p2cue views.
+## Current state (2026-10-24 13:30 UTC, Phase 2 iteration 11)
+- NEW Part D1 (SALT-NLP agent-collusion, external): E104 DONE (no calls): P(said|executed) 0.385 [0.353,0.416], P(executed|said)
+  0.985, tacit onset 76% of 761 colluding runs; strongly model-dependent (gemini-3.7 0.93 ... luna/terra/gemma ~0). REPORT P2.12.
+- RUNNING E105: sol text auditor on 240 SALT episodes (logs/salt_audit.log, cache results/salt/audit.jsonl) + TF-IDF baseline;
+  then `uv run python salt_d1.py report` -> fill SALT_E105_PENDING in REPORT P2.12, E105 result row. Opus review of D1 running.
+- From iter10: P2.6 final (E95), P2.7 compressed; C3 post chain unblocked.
+- RUNNING: strongF 40 runs gen (600 traj lines) -> p2_strongF_post.sh (views running); qwenb 28/30 -> c3post -> c3 cmp;
+  E102 qwenaS; mimo, g56sol; chain3 p2cue views. Qwen Modal budget $7.75 (ok).
 ## Next steps
-1. When logs/partc_qwen.log shows "c3 cmp done": write P2.11 (C3) from p2_qwen_cmp.json + p2_strong_eval_llm_p2qwen{a,b}.json; E100 result row; abstract sentence.
-2. E99: when "strongF post done" in logs/partc_chain.log: replace P2.7 interim with finals (by class + plan view, E103 P1-P4), E99/E103 rows,
-   abstract C sentence + merger sentence, takeaway line for part C. Checkpoint Sat 19:30 regardless (interim labelled).
-3. C2 (mimo/g56sol) by Sun 12:00 with p2_strong.py --min-floor 12 --late 2. Codex review of abstract/TL;DR/P2.6-P2.7 after E99.
-- Risk: codex overload. Known: verify_artifacts.py FAILS (manifest) — deferred to Sun 16:30.
+1. E105 report + P2.12 fill; abstract/TL;DR one line on external validity (D1). D3 (trust-breaking) lowest priority, maybe skip.
+2. When logs/partc_qwen.log shows "c3 cmp done": write P2.11 (C3) from p2_qwen_cmp.json; E100 row; abstract sentence.
+3. E99: when "strongF post done" in logs/partc_chain.log: replace P2.7 interim with finals (by class + plan view, E103), abstract C sentence.
+4. Checkpoint Sat 19:30: codex review of abstract/TL;DR/P2.6-P2.12. C2 (mimo/g56sol) by Sun 12:00.
+- Risk: codex overload. NOTE: never `pkill -f` a pattern that also appears in your own command line (kills your shell).
+  Known: verify_artifacts.py FAILS (manifest) — deferred to Sun 16:30.
 
 ## Log
+- 13:30 P2 iter11: Part D1 SALT external say-vs-do: E104 result (all 3 predictions held), E105 sol text auditor launched, salt_d1.py, REPORT P2.12.
 - 13:25 P2 iter10: P2.6 final (E95 3-way, all predictions held), P2.7 compressed, C3 post chain unblocked, p2_qwen_cmp.py.
 - 12:36 P2 iter9: Opus review of P2.7/P2.9/P2.10 applied (p2_asym_nash.py competitive benchmark, E45 replication, prediction list).
 - 12:31 P2 iter9: E86 p2aware result (P2.9; labels 20 calls), abstract sentence; asym renumbered P2.10.

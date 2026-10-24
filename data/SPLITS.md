@@ -153,3 +153,9 @@ scorers, thresholds, metric definitions and published numerical estimates are un
 - 2026-10-24 ~12:05 UTC: `replication.py --ds llm_p2rep` computed ONCE (lock `logs/final/P2REP_ONCE.lock`; an earlier attempt
   ~12:04 was killed by the manager's own shell before Python started — no lock, no output). E84 labels and the post-hoc
   pooled n = 90 contrast (E101, registered before p2rep views finished) computed after it.
+
+## External: SALT-NLP/agent-collusion (Part D1, E104/E105), registered 2026-10-24 ~13:20 UTC
+- No tuning on external data → no dev/test split. Population = `main` + `cross_model` conditions, evaluation episodes
+  only (16 conditions × 50 runs × 10 episodes = 8000). Raw parquet in /var/tmp/salt (HF revision sha 2eba8f37).
+- E105 auditor sample: seed 20261024, 120 executed + 120 not-executed episodes, stratified by condition
+  (`salt_d1.py sample`); the sampled episode ids are written to `results/salt/sample.json` before any call.

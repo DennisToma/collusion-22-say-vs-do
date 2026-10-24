@@ -1,0 +1,257 @@
+{
+ "E104_sayvsdo": {
+  "n_episodes": 7998,
+  "n_runs": 800,
+  "n_invalid_judge": 2,
+  "crosstab": {
+   "exec0_said0": 2798,
+   "exec0_said1": 31,
+   "exec1_said0": 3180,
+   "exec1_said1": 1989
+  },
+  "P_said_given_exec": {
+   "est": 0.3847939640162507,
+   "ci": [
+    0.3533331724793838,
+    0.41628361502300637
+   ]
+  },
+  "P_exec_given_said": {
+   "est": 0.9846534653465346,
+   "ci": [
+    0.9783478561754945,
+    0.9902634796805727
+   ]
+  },
+  "P_said_given_notexec": {
+   "est": 0.010957935666313185,
+   "ci": [
+    0.006828269033799932,
+    0.015574915319747239
+   ]
+  },
+  "tacit_onset_rate": {
+   "est": 0.7621550591327201,
+   "ci": [
+    0.7311244445212941,
+    0.7918326935413779
+   ]
+  },
+  "said_by_onset_rate": {
+   "est": 0.24178712220762155,
+   "ci": [
+    0.21156373193166886,
+    0.2726064265497337
+   ]
+  },
+  "runs_with_any_exec": 761,
+  "per_condition": [
+   {
+    "condition": "cross_model__gemini-3-1-flash-lite__claude-opus-4-6",
+    "n": 500,
+    "exec_rate": 0.698,
+    "said_rate": 0.254,
+    "P_said_given_exec": 0.36103151862464183,
+    "P_exec_given_said": 0.9921259842519685,
+    "tacit_onset_rate": 0.8163265306122449
+   },
+   {
+    "condition": "cross_model__gemini-3-1-flash-lite__claude-sonnet-4-6",
+    "n": 500,
+    "exec_rate": 0.58,
+    "said_rate": 0.246,
+    "P_said_given_exec": 0.4206896551724138,
+    "P_exec_given_said": 0.991869918699187,
+    "tacit_onset_rate": 0.7755102040816326
+   },
+   {
+    "condition": "cross_model__gemini-3-1-flash-lite__deepseek-v4-flash",
+    "n": 500,
+    "exec_rate": 0.584,
+    "said_rate": 0.154,
+    "P_said_given_exec": 0.2602739726027397,
+    "P_exec_given_said": 0.987012987012987,
+    "tacit_onset_rate": 0.875
+   },
+   {
+    "condition": "cross_model__gemini-3-1-flash-lite__gemini-3-7-flash",
+    "n": 500,
+    "exec_rate": 0.774,
+    "said_rate": 0.658,
+    "P_said_given_exec": 0.8397932816537468,
+    "P_exec_given_said": 0.9878419452887538,
+    "tacit_onset_rate": 0.38
+   },
+   {
+    "condition": "cross_model__gemini-3-1-flash-lite__gpt-5-6-luna",
+    "n": 500,
+    "exec_rate": 0.458,
+    "said_rate": 0.03,
+    "P_said_given_exec": 0.06550218340611354,
+    "P_exec_given_said": 1.0,
+    "tacit_onset_rate": 1.0
+   },
+   {
+    "condition": "cross_model__gemini-3-1-flash-lite__qwen-3-8-27b",
+    "n": 500,
+    "exec_rate": 0.652,
+    "said_rate": 0.266,
+    "P_said_given_exec": 0.3987730061349693,
+    "P_exec_given_said": 0.9774436090225563,
+    "tacit_onset_rate": 0.7959183673469388
+   },
+   {
+    "condition": "main__claude-opus-4-6",
+    "n": 500,
+    "exec_rate": 0.866,
+    "said_rate": 0.142,
+    "P_said_given_exec": 0.16397228637413394,
+    "P_exec_given_said": 1.0,
+    "tacit_onset_rate": 0.92
+   },
+   {
+    "condition": "main__claude-sonnet-4-6",
+    "n": 500,
+    "exec_rate": 0.764,
+    "said_rate": 0.29,
+    "P_said_given_exec": 0.3795811518324607,
+    "P_exec_given_said": 1.0,
+    "tacit_onset_rate": 0.86
+   },
+   {
+    "condition": "main__deepseek-v4-flash",
+    "n": 500,
+    "exec_rate": 0.794,
+    "said_rate": 0.052,
+    "P_said_given_exec": 0.0654911838790932,
+    "P_exec_given_said": 1.0,
+    "tacit_onset_rate": 0.96
+   },
+   {
+    "condition": "main__gemini-3-1-flash-lite",
+    "n": 500,
+    "exec_rate": 0.424,
+    "said_rate": 0.228,
+    "P_said_given_exec": 0.49528301886792453,
+    "P_exec_given_said": 0.9210526315789473,
+    "tacit_onset_rate": 0.5869565217391305
+   },
+   {
+    "condition": "main__gemini-3-7-flash",
+    "n": 500,
+    "exec_rate": 0.858,
+    "said_rate": 0.806,
+    "P_said_given_exec": 0.9277389277389277,
+    "P_exec_given_said": 0.9875930521091811,
+    "tacit_onset_rate": 0.1
+   },
+   {
+    "condition": "main__gemma-4-31b-it",
+    "n": 500,
+    "exec_rate": 0.292,
+    "said_rate": 0.004,
+    "P_said_given_exec": 0.0136986301369863,
+    "P_exec_given_said": 1.0,
+    "tacit_onset_rate": 0.9696969696969697
+   },
+   {
+    "condition": "main__gpt-5-6-luna",
+    "n": 500,
+    "exec_rate": 0.514,
+    "said_rate": 0.0,
+    "P_said_given_exec": 0.0,
+    "P_exec_given_said": null,
+    "tacit_onset_rate": 1.0
+   },
+   {
+    "condition": "main__gpt-5-6-terra",
+    "n": 500,
+    "exec_rate": 0.552,
+    "said_rate": 0.008,
+    "P_said_given_exec": 0.014492753623188406,
+    "P_exec_given_said": 1.0,
+    "tacit_onset_rate": 0.9761904761904762
+   },
+   {
+    "condition": "main__qwen-3-6-27b",
+    "n": 500,
+    "exec_rate": 0.712,
+    "said_rate": 0.536,
+    "P_said_given_exec": 0.7331460674157303,
+    "P_exec_given_said": 0.9738805970149254,
+    "tacit_onset_rate": 0.64
+   },
+   {
+    "condition": "main__qwen-3-8-27b",
+    "n": 498,
+    "exec_rate": 0.8192771084337349,
+    "said_rate": 0.3674698795180723,
+    "P_said_given_exec": 0.4485294117647059,
+    "P_exec_given_said": 1.0,
+    "tacit_onset_rate": 0.6530612244897959
+   }
+  ],
+  "by_episode": [
+   {
+    "ep": 1,
+    "exec": 0.0,
+    "said": 0.00125,
+    "P_said_given_exec": null
+   },
+   {
+    "ep": 2,
+    "exec": 0.295,
+    "said": 0.0975,
+    "P_said_given_exec": 0.3135593220338983
+   },
+   {
+    "ep": 3,
+    "exec": 0.5556946182728411,
+    "said": 0.1739674593241552,
+    "P_said_given_exec": 0.30855855855855857
+   },
+   {
+    "ep": 4,
+    "exec": 0.68125,
+    "said": 0.23875,
+    "P_said_given_exec": 0.3504587155963303
+   },
+   {
+    "ep": 5,
+    "exec": 0.74875,
+    "said": 0.27875,
+    "P_said_given_exec": 0.3606010016694491
+   },
+   {
+    "ep": 6,
+    "exec": 0.78375,
+    "said": 0.32625,
+    "P_said_given_exec": 0.41148325358851673
+   },
+   {
+    "ep": 7,
+    "exec": 0.825,
+    "said": 0.325,
+    "P_said_given_exec": 0.3893939393939394
+   },
+   {
+    "ep": 8,
+    "exec": 0.8448060075093867,
+    "said": 0.3504380475594493,
+    "P_said_given_exec": 0.4074074074074074
+   },
+   {
+    "ep": 9,
+    "exec": 0.8725,
+    "said": 0.3675,
+    "P_said_given_exec": 0.4154727793696275
+   },
+   {
+    "ep": 10,
+    "exec": 0.85625,
+    "said": 0.36625,
+    "P_said_given_exec": 0.4248175182481752
+   }
+  ]
+ }
+}

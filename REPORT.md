@@ -278,6 +278,27 @@ but luna prices the edge at +1.08, so 9/10 flags exceed what competition predict
 Q1.4 P2.4 reports the cost case in a scripted market: all 30/30 cost-asymmetric no-collusion markets flagged (false positives). Gap 8 (coded public signals) was dropped for budget (two completed,
 unanalysed runs in `data/llm_p2coded`; remainder not generated).
 
+**P2.12 External validity: SALT-NLP agent-collusion (Part D1; E104/E105 registered before analysis/calls; `uv run python salt_d1.py
+sayvsdo|sample|audit|tfidf|report` → `results/analysis/salt_d1.json`; raw data from HF `SALT-NLP/agent-collusion` rev 2eba8f37, not in git).**
+Shi, Zhang & Yang (2026) run two agents that solve tasks, exchange logs over a 200-char channel (5 rounds), then ACCEPT/REJECT each other's
+work under a raw-log-only rule the channel cannot satisfy. Mapping to our labels: *executed* = their `collusion` field (mutual ACCEPT; an act,
+== `both_accept` in all constrained episodes); *said* = their Qwen3.8 judge's explicit-agreement label on the chat (human-validated 100/100).
+Population: `main` + `cross_model` evaluation episodes, 10 seller models, 800 runs × 10 episodes (7998 with a valid judge label).
+
+| quantity (run-cluster bootstrap 95% CI) | value | registered prediction |
+|---|---|---|
+| P(said \| executed) | 0.385 [0.353, 0.416] (1989/5169) | P1 < 0.6 — held |
+| P(executed \| said) | 0.985 [0.978, 0.990] (1989/2020) | P2 > 0.9 — held |
+| P(said \| not executed) | 0.011 [0.007, 0.016] (31/2829) | – |
+| first collusive episode has no agreement in its chat (761 runs with any collusion) | 0.762 [0.731, 0.792] | P3 ≥ 0.5 — held |
+
+The say/do gap depends on the model, as in our P2.6: P(said | executed) is 0.93 for gemini-3.7-flash and 0.73 for qwen-3.6, but 0.16 for
+Claude Opus 4.6, 0.07 for deepseek-v4-flash and ≈ 0 for gpt-5.6-luna, gpt-5.6-terra and gemma-4 (luna executes in 51% of episodes and never
+states an agreement). Caveat: P1/P2 were registered after seeing the pooled crosstab (disclosed in E104); P3 and the per-model split were not.
+Here the action label is a deterministic function of the verdicts, so an action auditor is trivially perfect; the external test is
+whether *text* finds the act. E105 text auditor (frozen-structure gpt-6.1-sol prompt, one version, 120 executed + 120 not, seed 20261024):
+SALT_E105_PENDING
+
 ## v1 overnight summary (frozen 2026-10-24 06:30 UTC; superseded by the Abstract above)
 Does an auditor catch LLM collusion better if it reads what sellers *say* in public as well as what they *do*?
 **On our generator: no resolved run-level detection gain** (a small unadjusted within-market localisation gain with statistics did not repeat on fresh data). We simulate a 4-firm repeated-pricing market with gpt-6-luna sellers; in the
