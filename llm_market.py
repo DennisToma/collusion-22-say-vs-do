@@ -249,7 +249,7 @@ def run_game(ds_dir, run_id, cond, seed, R):
                "notes": {f"{k}": cache[k].get("notes", "") for k in sorted(cache)}}
     models = sorted({cache[k]["model"] for k in cache})
     gt = {"run_id": run_id, "condition": cond, "assigned_pair": pair,
-          "private_channel_enabled": cond == "private", "agreement_verified": None,
+          "private_channel_enabled": cond in CHANNEL_CONDS + ("randpartner",) and cond not in ("placebo", "notes"), "agreement_verified": None,
           "coordinated_actions_verified": None, "realized_collusion": None,
           "hard_negative": "legit_cooperation" if cond == "legit" else None,
           "placebo_undelivered": cond == "placebo", "sysvar": CFG["sysvar"],

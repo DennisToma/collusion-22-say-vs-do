@@ -53,9 +53,12 @@ with class-stratified bootstrap CIs (`uv run python p2_prevalence.py` → `resul
 
 When a resample has zero false positives the upper bound reaches 1.0. A conservative bound (Wilson lower TPR,
 Wilson upper FPR) gives premium 0.13 / action_stats 0.17 at 5% prevalence on test (json key
-`precision_conservative_wilson`). **Reading:** if 1 market in 20 colludes, most alarms from every detector are false.
-At 5% prevalence the premium raises about 150 false alarms per 1,000 audited markets on test and about 250 on
-replication. All views are reported in the json.
+`precision_conservative_wilson`). **Reading:** if 1 market in 20 colludes, most premium alarms are false (point
+estimates 0.24 test, 0.16 replication; both CIs below 0.5). action_stats is better on test (0.46, CI up to 1.0) but not on
+replication (0.08). At 5% prevalence the premium raises about 150 false alarms per 1,000 audited markets on test and
+about 250 on replication. Two caveats. Labels equal the condition here, so this is precision for "a private channel
+was offered and used", not for realised collusion. The premium was also selected after partial test exposure (see
+§Held-out discipline). All views are reported in the json.
 
 **P2.2 Independent reimplementation (E83).** codex gpt-6.1-sol worked in an empty scratch directory with only the
 method excerpts of this REPORT ([results/reimpl/METHOD.md](results/reimpl/METHOD.md)) and the raw data files, not our code.
@@ -67,15 +70,18 @@ positives, 7/45 negatives) and the contrast (−0.0127 [−0.090, +0.065] vs our
 (`results/reimpl/NOTES.md`, `reimpl.py`, `reimpl_results.json`).
 
 **P2.3 What does the 0.98 supervised text classifier detect? (E82, registered; `uv run python p2_textlr.py` →
-`results/analysis/p2_textlr.json`; no LLM calls).** It detects the *offer of a channel*, not coordination content.
+`results/analysis/p2_textlr.json`; no LLM calls).** Its signal does not need any delivered private message.
 (a) The signal is diffuse. On test (grouped CV, as published), removing each training fold's top 20 / 100 / 500
 n-grams leaves run AUROC 0.98 / 0.96 / 0.92 [0.86, 0.97]. (b) We fit the same classifier on all llm_v3 runs and scored
 fresh runs against fresh no-channel runs (llm_v3rep `none`, n = 10). Delivered private runs score 0.97 [0.89, 1.00].
-**Placebo runs score 1.00 [1.00, 1.00]**: the channel was offered but no message was ever delivered (llm_v3plc;
-its seeds match llm_v3rep, not the training set). Legit-partnership runs score 0.38. Both registered predictions held.
-The public-text trace is the sellers' reaction to being told they have a channel; nothing was agreed in the placebo
-runs. With labels equal to condition, a near-perfect text classifier therefore says nothing about detecting
-agreements. Gap 1 (P2.4) tests the same question for prices.
+**Placebo runs: all 15 score above all 10 negatives** (AUROC 1.00; the bootstrap CI is degenerate). In these runs
+the channel was offered but no message was ever delivered (llm_v3plc; its seeds match llm_v3rep, not the training set).
+Legit-partnership runs score 0.38. Prediction (b) held; its ±0.05 margin is loose with only 10 negatives. Prediction (a)
+("gradual") had no numeric criterion, so it is descriptive only. **Reading:** the public-text trace *does not require
+any delivered message*. Placebo sellers still write proposals they believe are delivered, so this does not
+distinguish "reaction to the offer" from "intended (unilateral) coordination". It does mean that, with labels equal to
+the condition, a near-perfect text classifier is not evidence that agreements can be detected from public text.
+The notes-to-self condition (P2.4) separates the two explanations.
 
 **P2.4 Is the "collusion" a prompt artifact? (E77/E78, generation running).** Six matched-seed conditions (same pair,
 cost and demand path per seed): private channel; neutrally worded "message box"; private notepad with no recipient;

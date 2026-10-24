@@ -126,3 +126,13 @@ on `llm_v3rep` (including smoke flags) refuse to recompute these completed evalu
 The receipt and manifest are post-hoc handoff records, not new evidence about registration timing.
 Only safeguards and the inaccurate replication docstring were changed; the protected result bytes,
 scorers, thresholds, metric definitions and published numerical estimates are unchanged.
+
+## Phase 2 datasets (registered 2026-10-24 06:31–06:52 UTC, EXPERIMENTS.tsv E77–E84, before any outcome was viewed)
+- No tuning happens on any Phase 2 dataset. Every Phase 2 analysis uses frozen v1 scorers and the llm_v3 dev
+  thresholds, and is computed on the whole dataset; there is no dev/test split inside these sets.
+- `llm_p2cue` (seed 8100, k = 0..14, conditions private/neutral/notes/randpartner/placebo/none matched per seed,
+  run index = 6k + condition index). `llm_p2para1` / `llm_p2para2` (sysvar 1/2, seed 8100, k = 0..9, private/none).
+- `llm_p2glm` (glm-5.3-flash sellers via Go, seed 8100, k = 0..14, private/none). Uses whatever completes by Sun 15:00.
+- `llm_p2rep` (gap 4, seed 9500, plan private:30,none:20,legit:10, llm_v3 settings): fully HELD-OUT second
+  replication of the frozen premium statistic. Labels by p2_label.py (same JUDGE as label_llm.py for private
+  runs). Premium run AUROC is computed ONCE after all 60 runs are labelled.

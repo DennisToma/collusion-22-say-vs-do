@@ -54,15 +54,15 @@ def main():
         pos = [r for r in ids if labs[r]]; neg = [r for r in ids if not labs[r]]
         res = {"n_pos": len(pos), "n_neg": len(neg), "detectors": {}}
         for k in ["premium"] + LLM_VIEWS + ["fusion"]:
-            fp_ = np.array([S[k][r] >= TH[k] for r in pos]); fn_ = np.array([S[k][r] >= TH[k] for r in neg])
-            pt = stats(fp_.sum(), fn_.sum(), len(pos), len(neg))
-            B = [stats(rng.choice(fp_, len(pos)).sum(), rng.choice(fn_, len(neg)).sum(), len(pos), len(neg))
+            tpf = np.array([S[k][r] >= TH[k] for r in pos]); fpf = np.array([S[k][r] >= TH[k] for r in neg])
+            pt = stats(tpf.sum(), fpf.sum(), len(pos), len(neg))
+            B = [stats(rng.choice(tpf, len(pos)).sum(), rng.choice(fpf, len(neg)).sum(), len(pos), len(neg))
                  for _ in range(2000)]
             res["detectors"][k] = {m: [round(float(pt[m]), 3), round(float(np.nanpercentile([b[m] for b in B], 2.5)), 3),
                                        round(float(np.nanpercentile([b[m] for b in B], 97.5)), 3)] for m in pt}
-            res["detectors"][k]["counts"] = {"tp": int(fp_.sum()), "fp": int(fn_.sum())}
+            res["detectors"][k]["counts"] = {"tp": int(tpf.sum()), "fp": int(fpf.sum())}
             # conservative: Wilson lower TPR bound with Wilson upper FPR bound (bootstrap CI degenerates when FP = 0)
-            tl, fu = wilson(fp_.sum(), len(pos))[0], wilson(fn_.sum(), len(neg))[1]
+            tl, fu = wilson(tpf.sum(), len(pos))[0], wilson(fpf.sum(), len(neg))[1]
             res["detectors"][k]["precision_conservative_wilson"] = {
                 str(pi): round(float(tl * pi / (tl * pi + fu * (1 - pi))), 3) for pi in PI}
         out[name] = res

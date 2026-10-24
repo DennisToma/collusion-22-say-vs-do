@@ -48,9 +48,11 @@ def auc(neg, pos):
 
 
 def auc_ci(neg, pos, n=2000, seed=0):
+    """[AUROC, lo, hi, n_pos above every negative, n_pos, n_neg] (CI degenerates at 1.0: report the counts)."""
     rng = np.random.default_rng(seed); neg, pos = np.asarray(neg), np.asarray(pos)
     b = [auc(rng.choice(neg, len(neg)), rng.choice(pos, len(pos))) for _ in range(n)]
-    return [round(auc(neg, pos), 3), round(float(np.percentile(b, 2.5)), 3), round(float(np.percentile(b, 97.5)), 3)]
+    return [round(auc(neg, pos), 3), round(float(np.percentile(b, 2.5)), 3), round(float(np.percentile(b, 97.5)), 3),
+            int((pos > neg.max()).sum()), len(pos), len(neg)]
 
 
 def fit(texts, y, drop=()):

@@ -9,7 +9,8 @@ none. Paired differences over matched seeds (seed bootstrap, 2000). Agreement ra
     uv run python p2_cue.py --ds llm_p2cue      # -> results/analysis/p2_cue_<ds>.json
     uv run python p2_cue.py --ds llm_p2para1 llm_p2para2 llm_p2ds
 """
-import argparse, json
+import argparse, json, random
+from itertools import combinations
 from pathlib import Path
 import numpy as np
 from final_analysis import premium_scores
@@ -60,16 +61,36 @@ def analyse(ds):
         for w, s in WIN.items():
             row[f"prem_{w}"] = float(((pr[pair[0]] + pr[pair[1]]) / 2)[s].mean() - np.mean([pr[o] for o in oth], 0)[s].mean())
             row[f"markup_{w}"] = float(np.mean([pr[a] for a in AG], 0)[s].mean() - cost[s].mean())
+        row["did_r2_12_minus_r1"] = row["prem_r2_12"] - row["prem_r1"]
+        if g["condition"] == "randpartner":  # E77 amendment: premium ~0 by construction; round-level partner statistic
+            gaps = {"next": [], "same": []}
+            for t in R[:-1]:
+                perm = random.Random(g["seed"] * 100 + t).sample(AG, 4)  # = llm_market.run_game matching
+                m = {frozenset(perm[:2]), frozenset(perm[2:])}
+                for key, tt in (("next", t + 1), ("same", t)):
+                    gap = {frozenset(q): abs(P[rid][tt][q[0]] - P[rid][tt][q[1]]) for q in combinations(AG, 2)}
+                    gaps[key].append(np.mean([v for q, v in gap.items() if q in m]) - np.mean([v for q, v in gap.items() if q not in m]))
+            row["partner_gap_next"] = float(np.mean(gaps["next"]))  # matched-at-t pair |price gap| at t+1 minus unmatched
+            row["partner_gap_same"] = float(np.mean(gaps["same"]))  # same round (messages not yet read): baseline
         if rid in labs:
             row["agreement"] = labs[rid].get("agreement"); row["y"] = labs[rid].get("y")
+            if "unilateral_proposals" in labs[rid]:
+                row["unilateral_proposals"] = labs[rid]["unilateral_proposals"]
         rows.setdefault(g["condition"], {})[g["seed"]] = row
     out = {"ds": ds, "frozen_dev_threshold": round(float(thr), 3), "model": sorted({g["model"] for g in gt.values()}),
            "n": {c: len(v) for c, v in rows.items()}, "by_condition": {}, "paired": {}, "run_auroc_vs_none": {}}
-    keys = [f"prem_{w}" for w in WIN] + [f"markup_{w}" for w in WIN]
+    keys = [f"prem_{w}" for w in WIN] + [f"markup_{w}" for w in WIN] + ["did_r2_12_minus_r1"]
     for c, R in rows.items():
         v = list(R.values())
         e = {k: boot_mean([r[k] for r in v]) for k in keys}
         e["flag_rate"] = [int(sum(r["flag"] for r in v)), len(v)]
+        if c == "randpartner":
+            e["NOTE"] = "assigned-pair premium is ~0 by construction here (matched pairs cancel); use partner_gap_*"
+            for k in ("partner_gap_next", "partner_gap_same"):
+                e[k] = boot_mean([r[k] for r in v])
+            e["partner_gap_next_minus_same"] = boot_mean([r["partner_gap_next"] - r["partner_gap_same"] for r in v])
+        if any("unilateral_proposals" in r for r in v):
+            e["unilateral_proposals_per_run"] = {str(n): sum(r.get("unilateral_proposals") == n for r in v) for n in (0, 1, 2)}
         if any("agreement" in r for r in v):
             ag = [r.get("agreement") for r in v]
             e["agreement_counts"] = {k: ag.count(k) for k in sorted(set(map(str, ag)))}
@@ -83,6 +104,15 @@ def analyse(ds):
             common = sorted(set(rows[c]) & set(rows[ref]))
             out["paired"][f"{c}-{ref}"] = {"n": len(common), **{k: boot_mean([rows[c][s][k] - rows[ref][s][k] for s in common])
                                                                for k in keys}}
+    # E77-amendment H3: notes-none r2_12 vs half the private-none effect (paired seeds, joint bootstrap)
+    if all(c in rows for c in ("private", "notes", "none")):
+        com = sorted(set(rows["private"]) & set(rows["notes"]) & set(rows["none"]))
+        dp = np.array([rows["private"][s_]["prem_r2_12"] - rows["none"][s_]["prem_r2_12"] for s_ in com])
+        dn = np.array([rows["notes"][s_]["prem_r2_12"] - rows["none"][s_]["prem_r2_12"] for s_ in com])
+        rng = np.random.default_rng(1); B = rng.integers(0, len(com), (2000, len(com)))
+        ratio = [dn[b].mean() / dp[b].mean() if dp[b].mean() != 0 else np.nan for b in B]
+        out["H3_notes_over_private_r2_12"] = [round(float(dn.mean() / dp.mean()), 3) if dp.mean() else None,
+                                              round(float(np.nanpercentile(ratio, 2.5)), 3), round(float(np.nanpercentile(ratio, 97.5)), 3)]
     if "none" in rows:
         neg = [r["run_score"] for r in rows["none"].values()]
         for c in rows:
