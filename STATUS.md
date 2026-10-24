@@ -1,16 +1,18 @@
 # STATUS
 
-## Current state (2026-10-24 ~20:00 UTC, Phase 2 iteration 39) — Sat 20:00 checkpoint reached
+## Current state (2026-10-24 ~20:10 UTC, Phase 2 iteration 40) — Sat 20:00 checkpoint reached
 - Headline unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc).
 - All DIRECTION 17:56 directives 1, 2, 4, 5 done (within-agreement E116, E112/E115 in abstract, 19:30 review applied early, E3 dropped). Directive 3 (E113) in progress.
 - **E113:** snapshot7 = 100 games / 3 complete sweeps (Q1.4 E70 on sweep 4; ETA sweeps 3–5 ≈22:40 per Q1.4 STATUS). Coverage 100%, 0 unparsed. NO detector metrics read.
 - iter39: TL;DR item 5 split (replacement result now item 6, Practical 7); header → 20:00 checkpoint, E77–E120. claims 30/30, verify_phase2 26/26. REPORT 711 lines.
 - Checkpoint PDF export of 19:40 stands (next export Sun 16:30).
-- Next E113: keep `snapshot` + `audit` + `coverage` as sweeps land; when Q1.4 STATUS says "6 sweeps complete" (or Sun 08:00) → `preflight`, then `eval` ONCE → ≤10 lines + glance row by Sun 10:00.
+- iter40 (E122): E113 formatter `p2_e1_report.py` written + synthetic-tested BEFORE eval (12/12 unittests); wording fixed in advance (registered k/K headline first).
+- Next E113: keep `snapshot` + `audit` + `coverage` as sweeps land; when Q1.4 STATUS says "6 sweeps complete" (or Sun 08:00) → `preflight`, then `eval` ONCE → `uv run python p2_e1_report.py` → paste P2.16 lines + glance row (replace equal text elsewhere; REPORT ≤ 711) by Sun 10:00.
 - Next review Sun 12:30 (Opus + codex on final claims), numbers freeze Sun 14:00, presentation/EVIDENCE/manifest rebuild Sun 16:30. Never stash/checkout while generators run.
 - Optional Sun: abstract 275 → ~260 words.
 
 ## Log
+- 20:10 P2 iter40: E122 E113 formatter p2_e1_report.py + synthetic test (tests.test_e1_completion 12/12); no metrics read, REPORT unchanged.
 - 20:00 P2 iter39: E113 snapshot7 (100 games, 3 sweeps, coverage OK, no scores read); TL;DR 5 split (E121), header → 20:00; claims 30/30, verify_phase2 26/26.
 - 19:48 P2 iter38: E120 executed-definition sensitivity (p2_strict_sensitivity.py, 0 calls): strict 10–16/20 one-at-a-time, 7–18/20 all 81; tacit-high 17–20/20 → P2.7/glance, C29 (30/30), verify_phase2 26/26.
 - 19:40 P2 iter37: abstract 298→275 words (claims 29/29, 3 snippet texts updated), E113 snapshot6 (90 games, 2 sweeps, coverage 100%, no scores read), checkpoint re-export PASS.

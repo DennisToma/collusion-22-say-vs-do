@@ -213,6 +213,13 @@ class E1CompletionTests(unittest.TestCase):
         self.assertEqual(d['secondary_executed_vs_no_channel']['per_cell'], {})
         self.assertEqual(d['c_per_cell_appendix']['c08']['auroc_text'], 1)
         self.assertIsNone(d['c_per_cell_appendix']['c02']['auroc_text'])
+        import p2_e1_report
+        body, glance = p2_e1_report.render(d)
+        self.assertLessEqual(len(body.splitlines()), 10)
+        self.assertIn('**0/16 cells**', body); self.assertIn('0/8 Qwen cells', body)
+        self.assertIn('8/8 channel vs 0/8 no-channel', body)  # synthetic qwen text flags
+        self.assertIn('exceptions c02 8/8', body)  # synthetic luna board exception (4 firms x 2 rounds)
+        self.assertIn('not run', body); self.assertTrue(glance.startswith('| P2.16 |'))
         e.LOCK.unlink()  # a fresh clone has no ignored local lock
         with self.assertRaisesRegex(ValueError, 'already exists'):
             e.evaluate()
