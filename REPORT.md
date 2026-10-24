@@ -21,7 +21,7 @@ smaller channel premium (−1.24 [−2.41, −0.03]; serving precision differs).
 Every abstract number with its denominator and source key: `results/analysis/claims_denominators.md` (`p2_claims.py`).
 
 **For the merged report (numbers freeze Sun 14:00).**
-- *Answer:* adding public text to prices does not resolvably help detect LLM collusion here; text helps only where the act happens in the conversation.
+- *Answer:* adding public text to prices does not resolvably help detect LLM collusion here. In our markets public text never resolvably beats prices and is *inverted* (run AUROC 0.15–0.36; CI below 0.5 for both Qwen arms) for families that invite rivals publicly in control markets too. The one setting where text predicts execution (SALT, 0.87) is one where the deal itself is struck in the conversation.
 - *Numbers:* combined − best single −0.01 [−0.09, +0.06] (locked test, 95 runs); −0.07 [−0.17, +0.02] (pooled fresh, 90 runs, post hoc); SALT text auditor 0.87 [0.83, 0.91] (240 episodes).
 - *E113 grid (16 Q1.4 cells, registered):* PENDING — pooled cell-stratified Δ on 8 qwen cells lands after Q1.4's 6th sweep (target Sun 00:30).
 - *Lift:* the say-vs-do table (P2.0 below; `results/analysis/p2_say_vs_do.md`) and Figure P2.7 (`figures/p2_strong_llm_p2strongF.png`).
@@ -33,8 +33,8 @@ Every abstract number with its denominator and source key: `results/analysis/cla
    not on fresh data, +0.00 [−0.06, +0.07] pooled n = 90; adding text to it does not, −0.06 [−0.14, +0.01] test.
 2. *The premium replicates (0.94 [0.87, 0.99], 60 fresh runs: 30 private / 20 none / 10 legit) but is confounded* by the pricing notepad,
    wording and legitimate cost/quality edges (P2.10); a round-1-only premium already reaches 0.90 [0.83, 0.96] test AUROC. Quote it only with these.
-3. *Where a family talks decides what text can see:* at base framing luna talks only in private (under strong framing 43% of its no-channel public messages are hold-price calls, P2.7, post hoc); Claude, deepseek and Qwen also in public (text views flag
-   100% of their control markets, run AUROC 0.15–0.36); gpt-6.1-sol proposed coordination in 0/7 private markets. SALT (8000 episodes, 10 models): P(said | executed) 0.385, yet a text auditor reaches 0.87 there (P2.12): text helps when the act happens in the conversation.
+3. *Text can be inverted:* for families that invite rivals publicly in control markets too (Claude, deepseek, Qwen), text views rank controls *above* channel markets (run AUROC 0.15–0.36). Where a family talks decides what text can see: at base framing luna talks only in private (under strong framing 43% of its no-channel public messages are hold-price calls, P2.7, post hoc); Claude, deepseek and Qwen also in public (text views flag
+   100% of their control markets); gpt-6.1-sol proposed coordination in 0/7 private markets. SALT (8000 episodes, 10 models): P(said | executed) 0.385, yet a text auditor reaches 0.87 there (P2.12), one external setting where the deal itself is struck in the conversation.
 4. *Labels disagree:* 14/50 test agreements are kept; on the kept label the premium falls to 0.80 [0.67, 0.90] (test) / 0.76 [0.64, 0.86]
    (pooled fresh) and text + actions shows no resolved gain (−0.03 [−0.14, +0.06] test; −0.03 [−0.13, +0.06] pooled).
 5. *High prices need no channel:* with memory + profit framing 19/20 no-channel markets price ≥ Nash + 2 and 13/20 channel pairs are
@@ -339,8 +339,8 @@ version, 120 executed + 120 not, 7–8 per label per condition, seed 20261024):
 Sol's own "explicit agreement" score reproduces SALT's judge label perfectly on this sample (AUROC 1.00). **Reading:** the say/do gap
 replicates externally (in 62% of executed episodes that episode's chat has no explicit agreement), but here text still *predicts* the act well, including tacit
 cases (0.75 without verdict words), plausibly because the chat is where agents negotiate verification (asking for raw logs vs settling for summaries). That differs from our
-pricing market, where text alone is near chance (TL;DR 1). How much text helps therefore depends on whether the decisive behaviour itself
-happens in the conversation. 0 tuning attempts; one prompt; one run.
+pricing market, where text alone is near chance (TL;DR 1). One hypothesis consistent with both: how much text helps depends on whether the decisive behaviour itself
+happens in the conversation (one external setting, different labels, no action view). 0 tuning attempts; one prompt; one run.
 
 **Part D2 (Q1.4 E68, external double auction; 15 + 15 games): inconclusive.** Chat raises all-round mean asks by +0.39 [+0.06, +0.69]; second-half ask-level AUROC 0.68 [0.46, 0.88], pCMI 0.60 [0.40, 0.80]. This is an action-detector comparison; asks are offers, not paid prices, and the ask effect alone does not verify an agreement. Pinned source: `data/ext_cda_d2/e68_cda.json`; regenerate this citation with `uv run python report_tables.py --external-d2`.
 
