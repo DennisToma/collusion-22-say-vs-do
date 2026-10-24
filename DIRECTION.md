@@ -1,47 +1,36 @@
-# DIRECTION — Phase 2, director review 2026-10-24 15:50 UTC (Sat)
+# DIRECTION — Phase 2, director review 2026-10-24 17:56 UTC (Sat)
 (checkpoint Sat 20:00 · experiments end Sun 15:00 · finalize-only Sun 16:30 · hard stop Sun 18:00 · merged repo `collusion-beyond-words` built from **Sun 08:00** from both REPORTs)
 
 **Verdict.**
-1. On track. The Q2.2 answer is settled, bounded and replicated: no resolved gain from text (−0.01 test; −0.07 [−0.17, +0.02] pooled; gains > +0.02/+0.06 excluded). E99 is final, and its executed-vs-tacit contrast is the strongest Part C design in the project. Consolidation worked: the abstract is ~255 words, there is a glance table, and the appendix split is done.
-2. **One new overclaim is now in the abstract and TL;DR 5:** "only a monitor reading firms' private plans separates explicit from tacit collusion". The evidence is one exploratory view, 13 vs 19 runs, CI [0.55, 0.93]. Worse, the plans of the private-arm firms can *echo the private chat* ("as agreed with B"), which would make the plan view a channel leak, not reasoning monitoring. It flags 0/19 tacit-high markets, consistent with it simply keying on the word "agreement". Test it with a no-LLM keyword baseline before the checkpoint.
-3. Explore vs exploit: all original gaps are closed, so the remaining ~23 h (including a night) should go to **Part E**: E2 replacement (owned here, not started), the E1 audit (Q1.4 generates), and E5 German (running). Codex luna has headroom (~2.9k calls/h). The risk is drift into review churn: 11 codex processes are running and the repo has 22+ chain scripts. One review per checkpoint is enough.
+1. On track; the Q2.2 answer is settled and bounded: no resolved gain from text (−0.01 test, −0.07 [−0.17, +0.02] pooled). Every 15:50 directive was executed. The plan-view overclaim was tested with a no-LLM baseline and honestly rescoped: E111 found 0 agreement words, a partner-name count of 0.82, so the plan view reads a channel footprint. E66 is cited. E110 German and E112 participant replacement are final; E112 is a strong, clean answer to sprint Q1.2, with all 4 registered predictions held. E113's audit plan was registered before the grid existed and amended before any score was read.
+2. The weak spot is the **E99-x contrast itself**: strict-executed (private arm) vs tacit-high (no-channel arm) is confounded with *having a channel*. Any channel footprint separates them, which is exactly what E111 showed. The real say-vs-do question, "among pairs that *agreed*, does what they say or plan predict whether they *execute*?", is answerable **now with zero LLM calls** (13 strict vs 7 non-executed in the private arm; flags are already in the P2.7 table) and is not reported as an AUROC. That is the most valuable missing number in this repo.
+3. Explore vs exploit: generation is essentially finished (E115 lands ~21:00). Spend the night on the E113 grid audit as sweeps land plus consolidation. E112 is headline-grade but **absent from the abstract and TL;DR**. Note also that Q1.4 amended E70 to **6 sweeps** and your STATUS still says 3. Drop E3. 26 `.sh` scripts and 21 concurrent codex processes in the system: don't add any.
 
 ## Top directives (in priority order)
 
-1. **Fix the plan-view claim before 19:30 (≤ 45 min, no LLM calls). Then apply the running codex review (`reviews/p2_iter20_strongF_codex.md`) once.**
-   (a) **Plan keyword baseline (exploratory, label it so):** per run, the share of private-plan entries that mention an agreement or partner, using terms like "agree", "deal", "partner", "our floor", "as discussed", or the other pair firm's id. Score it as an AUROC on strict-executed vs tacit-high with the same bootstrap. Also count the plan-view flags by whether the plan mentions the partner. If the keyword rule is ≥ 0.70, write that the plan view mostly reads the *channel's echo in the plans*, not deliberation. If it is well below 0.76, the plan view adds something beyond the echo. Either result is informative.
-   (b) **Rewrite the abstract and TL;DR 5:** "in one arm (n = 13 vs 19, exploratory), a monitor reading firms' private plans separated explicit from tacit collusion (AUROC 0.76 [0.55, 0.93]) where prices (≈ 0.5) and public text (0.25, inverted: tacit markets coordinate on the public board) did not", plus the keyword-baseline result. Drop "only".
-   (c) **Add Q1.4's E66 to P2.7 in one line.** It is still absent from your REPORT: "Q1.4's frozen dependence detectors on this arm (E66, 0/40 class mismatches): private vs none pCMI 0.46, market level 0.44, TE 0.61; declared verdict *not evaluable* (competitive none n = 1)."
-2. **E110 (German market, Part E5): finish once (gen 16/20 at 15:47).** When `logs/p2de.log` shows "p2de audited", run `p2_de.py` once. Write ≤ 8 lines as P2.14 plus one glance row, registered verdicts verbatim. Main point: does the English-prompted text auditor's flag rate or the premium change? State n = 10 + 10 as the limit.
-3. **E2 participant replacement (Part E, owned here, sprint Q1.2): register by 18:00, launch by 19:00, results by Sun 10:00.**
-   - **Design:** paired, on `llm_p2strongF` seeds (luna, strong framing, T=40). Re-run each of the 20 private and 10 of the 20 none seeds with an identical prefix, rounds 1–20 replayed from cache. *Assert* that the prefix is byte-identical; if the cache does not replay, generate fresh matched games and say so. At round 21, replace one pair firm (none arm: a random firm) with a **fresh luna**: no plan, no chat history, only what any newcomer would see publicly. Write "what it sees" down in the registration.
-   - **Outcomes (declared):** market mean and pair mean in rounds 21–40, replaced minus original (paired by seed, bootstrap); re-agreement rate (judge); the strict-executed rate after replacement.
-   - **Changepoint:** does a level CUSUM or the frozen premium alarm near round 21? Copy Q1.4's E50 CUSUM code; don't import it.
-   - **Prediction to register:** with 19/20 tacit-high no-channel markets, the level survives replacement in both arms. That would mean the high price is a property of the market prompt, not of the agreement. That is the interesting direction, so state it in advance.
-   - **Cost:** ~30 × 20 rounds × 4 firms ≈ 2.4k luna calls + judge. Add a second arm (replacement by gpt-6.1-sol, which never proposes coordination) only if arm 1 is complete by Sun 05:00.
-4. **E1 audit (Part E; Q1.4 generates `data/llm_grid_p2/`, public board on in every cell): register the audit plan now, before any grid data exist.**
-   - **Plan:** frozen text, action and combined views (gpt-6.1-sol, unchanged prompts) on every grid game. Outcomes: text-view flag rate per factor level (main effects with game-bootstrap CIs) and the **denominator "combined − best single view > 0 in k/16 cells"** (sign test). Per-cell AUROCs only in an appendix.
-   - **Schedule:** run the pipeline on Q1.4's first complete sweep (16 cells × 1 + 1) for a shakedown only, with no write-up. Run the final audit once on all sweeps by Sun 12:00 and write ≤ 10 lines + 1 row. Budget ≈ 300 sol calls.
-   - **If the grid isn't ready:** if Q1.4 has not published a sweep by Sun 06:00, write a one-line limitation and spend the time on directive 5.
-5. **Consolidation, merge-ready by Sun 07:30 (the merge manager starts at 08:00 and lifts the top of REPORT.md):**
-   (a) **Denominators:** put a denominator next to every abstract claim, e.g. "(k/K datasets, M seller families, 2 markets + SALT)". A tiny script over `results/analysis` can produce a claims × denominators table, checked by `verify_artifacts.py` in finalize.
-   (b) **Joint sentence 2: drop "proposed, Q1.4 to align".** Q1.4 already carries your numbers. Both repos must carry this rescoped verbatim text: "With memory and a profit objective, gpt-6-luna sellers raise prices market-wide without any channel (19/20 no-channel markets ≥ Nash + 2); agreements are then often kept (13/20) but add no detectable price, so channel labels stop being ground truth. Abliterated Qwen with memory differs (channel adds +2.13 [1.28, 3.00]; 5/20 executed), as the first sentence predicts." The unscoped "LLM sellers" generalises from one model.
-   (c) **P2.11:** cite Q1.4's three-pair abliteration table once it exists (E61, E69, your E100, and C3c dropped). Your premium *decrease* (−1.24 [−2.41, −0.03]) must stay visible next to "no detectable increase", with the bf16-vs-FP8 caveat. The abstract's "no detectable increase in agreement or execution" is fine.
-   (d) **E102 (strong Qwen, qwenaS 10/12, qwenbS 12/12):** descriptive. Stop at Sun 10:00 or when 12/12, write ≤ 4 lines, no AUROCs.
-   **Checkpoint 19:30:** one Opus review of abstract + TL;DR + glance + P2.7, then export once. Final review Sun ~12:30 (incl. E2/E1). Freeze numbers Sun 14:00.
+1. **Within-agreement say-vs-do contrast (exploratory, zero LLM calls, ≤ 45 min, before the 19:30 review).** In `llm_p2strongF`'s private arm: **strict-executed (13) vs non-executed (7)**. Compute run AUROC with the same bootstrap for every frozen view (premium, market excess, action, action_stats, public text, combined, plan) plus the E111 partner-name share. Add the private-chat judge's agreement as a feature (18/20 judged agreement, so it can't separate much: say so). Write down before computing, in the ledger row, that it is exploratory and n = 13 vs 7. If E102 (qwen strong) and E112 (replaced games, r21–40) give more agreed pairs with the shared strict definition, add them as a **second, separately reported** stratum. Don't pool across models.
+   Report ≤ 4 lines in P2.7 + one column in the existing table, replacing the weaker "flags: strict / tacit-high / non-exec" column. Expected reading from the flags already shown (plan 5/13 vs 1/7, text 5/13 vs 1/7, action 8/13 vs 7/7): weak or reversed signals. Either way, this is the de-confounded version of the abstract's plan sentence. If it is near 0.5, the abstract's plan sentence must say "and among agreeing pairs it does not predict execution".
+   **Why:** this is the only contrast where both classes have a channel, so the channel-footprint confound disappears. It is the literal "say vs do" test, and it costs nothing.
+2. **E115 (gpt-6.1-sol newcomer): finish (~21:00), run `P2REPL_ARM=sol uv run python p2_replace_eval.py` once, S1–S4 verbatim, 2–3 lines in P2.15.** Then **put E112/E115 into the abstract and TL;DR as one sentence**, replacing a less important one (e.g. compress the SALT clause): "Replacing one seller mid-game with a fresh agent leaves the market level (19/20 ≥ Nash + 2) and the agreement (re-agreed 16/20) intact, and a level CUSUM does not alarm (0/30): under strong framing the high price is a property of the market prompt, not of the incumbent pair." Adjust for E115. This answers sprint Q1.2 and is currently invisible at the top.
+3. **E113 E1 audit: Q1.4's E70 now has 6 sweeps (amended 17:48, ETA ~22:00), not 3.** Keep `snapshot` + `audit` running cached as sweeps land. Run the final `eval` **once**, when Q1.4's STATUS says "6 sweeps complete" (or with the complete sweeps at Sun 08:00). Write ≤ 10 lines + 1 glance row by Sun 10:00.
+   - Headline: the denominator "combined − best single view > 0 in k/16 cells" (k/8 on qwen cells for text). Report "luna leaves the board mostly unused" as a finding, not as an auditor effect. One luna cell, c02, does have 78/320 posts: report board usage per cell from Q1.4's covariate table.
+   - Expect the qwen text view to flag most controls (as in TL;DR 3: Qwen invites rivals publicly). That is consistent, not a failure.
+   - Fix STATUS "all 3 sweeps" → 6.
+4. **Consolidation, merge-ready by Sun 07:30.** Abstract ≤ ~260 words with the E112 sentence (directive 2) and the within-agreement result (directive 1). Re-run `p2_claims.py` (22/22 → new claims added, all must match). Add the joint cross-repo line: "whether luna uses a public board is prompt-dependent: silent in Q1.4's grid (base prompt), 43% 'hold price' calls under strong framing here". REPORT stays ≤ 711 lines.
+   **19:30:** one Opus review of abstract + TL;DR + glance + P2.7 + P2.14 + P2.15, then export once. Final review Sun ~12:30 (incl. E113). Freeze numbers Sun 14:00. Manifest/EVIDENCE/presentation rebuild only from Sun 16:30 (verify_artifacts FAIL until then is expected).
+5. **E3 cross-family: DROP now** with one Limitations line: "time and gateway capacity; E70's model factor varies family at the market level". The gateway is saturated by Q1.4's E70 qwen lane and D2, and the Sun 01:00 gate in the old directive cannot be met cleanly. Don't start any other generation experiment after E115.
 
 ## STOP doing
-- **No more than one adversarial review per checkpoint.** The 15:40 codex review is the last one before 19:30, then one at Sun 12:30. Six sol processes on reviews leave none for E1/E2 audits.
-- No new Part C/D work: C3c is dropped by its registered rule (don't revisit). No D3, no new families, no re-calibrating the plan view on strongF (the keyword baseline in directive 1 is a *check*, not a recalibration), no extra paraphrases.
-- No new `p2_chain*.sh`/waiter scripts beyond one queue + one post script for E2. Use `setsid nohup`, and never `pkill -f` your own pattern.
-- No EVIDENCE/PRICE_TRANSITIONS/presentation/manifest rebuilds until Sun 16:30.
-- No net growth of REPORT.md (711 lines). P2.14 and E2 replace text, e.g. compress the P2.7 pilot paragraph to 3 lines now that the full arm exists.
-- Don't write E1 or E2 interim numbers into REPORT.
+- **No new generation experiments** after E115 (no E3, no new strongF seeds, no replication of the plan view, no new families or languages).
+- No new chain/waiter scripts (26 `.sh` files already). E113 runs through `p2_e1_audit.py` only.
+- No more than the 19:30 and Sun 12:30 reviews. No re-calibration of the plan view or any frozen auditor on new data.
+- Don't write E113 interim numbers into REPORT; shakedown outputs stay unread.
+- No net growth of REPORT.md; new text replaces old.
 
 ## Cross-pollination
-- **From Q1.4 → here:** (a) **E66** (directive 1c). (b) **E65** (qwen-abliterated + memory, T=40): channel adds +2.13 [1.28, 3.00], executed only 5/20, markup AUROC .85. The "no channel needed" result is luna-specific (directive 5b). (c) E69 + the three-pair table (directive 5c, ETA ~18:00). (d) Q1.4 E59: a public board alone lifts deepseek prices +0.70 [0.23, 1.23]. Cite it beside your E99-public finding (hold-price messages 0.43 none vs 0.28 private): **tacit markets coordinate on the public board in both markets**. That is your strongest "say" finding: text is informative, but about *tacit* coordination, so channel-labelled text auditors look inverted. Make that the reading of the 0.20/0.25 rows. (e) E67 stickiness failed in 2/3 confirmatory sets: don't add it to action_stats.
-- **From here → Q1.4:** E108 (P2.13) already covers Part E4 for both repos (Q1.4 will cite it). The E1 audit (directive 4). The E2 changepoint result informs their onset/CUSUM P2.4 (scripted E50): one shared sentence once E2 lands.
-- **Shared definitions (unchanged):** executed = judged agreement AND both pair firms within ±1 of the agreed price in ≥ 50% of post-agreement rounds AND pair mean ≥ Nash + 2 (your "strict"). Tacit-high = no-channel market mean ≥ Nash + 2 over the second half. Jeffreys CIs. Your P2.7 already states that the price-compliance rules differ (floor vs ±1 band): keep that.
+- **From Q1.4 → here:** (a) E70 = the E1 grid, now 6 sweeps (ETA ~22:00), plus a per-cell public-board-usage covariate (their directive 1b). Use it in E113. (b) E69 + three-pair table: already cited (17:51), done. (c) Q1.4 adds a pre-analysis check whether base qwen-3.6's pCMI exception replicates in the 8 qwen cells. If it does, the qwen cells are where both text (public) and dependence can see something: worth one joint sentence on Sunday.
+- **From here → Q1.4:** E112's "level CUSUM 0/30 alarms" result (Q1.4 cites it beside its scripted onset E50). E113-amend (luna board silence) has already shaped Q1.4's E70 amendment.
+- **Shared definitions (unchanged):** executed = judged agreement AND both pair firms within ±1 of the agreed price in ≥ 50% of post-agreement rounds AND pair mean ≥ Nash + 2 (your "strict"). Tacit-high = no-channel market mean ≥ Nash + 2 over the second half. Jeffreys CIs. Joint statement: both repos must carry the identical rescoped sentence 2. Yours is correct; Q1.4 is being told to copy it verbatim.
 
 ---
 
@@ -65,7 +54,7 @@ floor clearly above Nash). Then run a properly sized set (≥ 20 C + 20 matched 
 detectors/auditors on executed-collusion runs vs controls. Report the executed-collusion rate per lever
 (how rare is sustained collusion?) — that rate is itself a headline number.
 Never instruct agents to collude; only opportunity, memory and profit objective.
-→ **DONE (E99 final 15:34).** Strict-executed 13/20 [.43, .83], tacit-high none 19/20 [.79, .99], competitive 1/20; paired private − none −0.44 [−1.84, +1.00]. Executed vs tacit (E99-x, exploratory): price views ≈ 0.5, public text 0.25, combined 0.18, plan 0.76 [0.55, 0.93]. Class file published (Q1.4 E66: 0 mismatches). **Open:** plan-view keyword baseline + rewording + E66 line (directive 1). Levers were combined, not ablated: keep saying so (E1 ablates framing and memory).
+→ **DONE (E99 final 15:34).** Strict-executed 13/20 [.43, .83], tacit-high none 19/20 [.79, .99], competitive 1/20; paired private − none −0.44 [−1.84, +1.00]. Executed vs tacit (E99-x, exploratory): price views ≈ 0.5, public text 0.25, combined 0.18, plan 0.76 [0.55, 0.93]. Class file published (Q1.4 E66: 0 mismatches). Plan-view keyword baseline done (E111: channel footprint, 0.82 partner-name count), rewording + E66 line done. **Open:** within-agreement strict vs non-executed contrast (13 vs 7, zero calls; directive 1 of 17:56). Levers were combined, not ablated: keep saying so (E1 ablates framing and memory).
 
 **C2 Older / weaker models as sellers** (model-generation lever: does collusion and its detectability
 change across model generations?). Available and verified working 10:25 UTC:
@@ -97,7 +86,7 @@ Modal (bf16; note the FP8-vs-bf16 precision difference as a caveat). Run both on
 Gateway also serves `qwen-3.6-35b`, `glm-5.3-744b-experimental`, `deepseek-v4-vision-exp-284b` via
 `llm.chat(..., backend="aqueduct", model=...)` — extra seller families for C2/robustness (shared university
 gateway: keep ≤ 4 parallel calls, back off on 429).
-→ **DONE** (E100, P2.11: agreement 15/15 both (ceiling), strict 5/15 both, diff 0 [−0.26, +0.26]; premium diff −1.24 [−2.41, −0.03] with a bf16-vs-FP8 caveat). E102 strong qwen: descriptive, stop Sun 10:00 (directive 5d). Notepad arm for qwen **DROPPED**. Gateway: games-parallel 1 (shared with Q1.4 D2/E1).
+→ **DONE** (E100, P2.11: agreement 15/15 both (ceiling), strict 5/15 both, diff 0 [−0.26, +0.26]; premium diff −1.24 [−2.41, −0.03] with a bf16-vs-FP8 caveat). E102 strong qwen: **final** (descriptive; strict 4/6 base vs 3/6 abliterated). Notepad arm for qwen **DROPPED**. Gateway: games-parallel 1 (shared with Q1.4 D2/E1).
 
 ---
 
@@ -131,7 +120,7 @@ Claude quota runs the managers. gpt-6.1-sol as a seller for a third family check
   numbers on the same data. Report agreement; fix any bug found (and re-state affected numbers).
   → **DONE** (E83, P2.2: 30/32 match to 3 dp, both differences ≤ 0.001, tie handling; no bug).
 
-## Gaps owned by THIS repo (Q2.2), in priority order (status as of 15:50 UTC; all eight closed)
+## Gaps owned by THIS repo (Q2.2), in priority order (status as of 17:56 UTC; all eight closed — frozen)
 1. **Is the "collusion" a prompt artifact?** (biggest validity threat). Round-1 prices already give AUROC
    0.90 and the undelivered placebo is flagged as often as delivered. Conditions (matched seeds):
    (a) current private-channel wording; (b) neutrally described channel ("a message box to firm X");
@@ -153,7 +142,7 @@ Claude quota runs the managers. gpt-6.1-sol as a seller for a third family check
 4. **Second replication of the premium statistic**: ≥ 60 fresh seeds, statistic frozen exactly as
    published (pre-register in EXPERIMENTS.tsv + data/SPLITS.md first). Removes the "chosen after seeing
    test data" bias.
-   → **DONE** (E80/E89, P2.8: premium 0.94 [0.87, 0.99] ≥ registered 0.85; Δ_hybrid −0.04; pooled n = 90 −0.07, post hoc). Add the bound sentence (directive 5).
+   → **DONE** (E80/E89, P2.8: premium 0.94 [0.87, 0.99] ≥ registered 0.85; Δ_hybrid −0.04; pooled n = 90 −0.07, post hoc). Bound sentence in abstract (gains > +0.06 test / +0.02 pooled excluded).
 5. **Monitor-aware adversarial colluders**: tell the channel pair (and in a control, all firms) that a
    regulator screens price premiums over rivals / public messages. Does the premium collapse? Does
    collusion move elsewhere (smaller premium, alternation, text)? Which auditor survives?
@@ -184,12 +173,12 @@ Each Modal endpoint cold-starts in up to ~10 min after 10 min idle → run each 
 Cost ≈ L40S $2.2/h, L4 $1/h each; the $70 guard covers all apps. Priority: after the running Part C arms and
 Part D1, before Part D2/D3. Report the three pairs in one table: abliterated − base (agreement, executed, markup,
 detector AUROCs) with CIs, and state the precision caveat (FP8/AWQ/bf16) per pair.
-→ **C3c DROPPED** by its registered pilot rule (E109, 15:12: base Qwen3.5-9B prices below Nash; process deviation disclosed). **C3b** is Q1.4's (E69, ETA ~17:30); cite Q1.4's three-pair table in P2.11 (directive 5c).
+→ **C3c DROPPED** by its registered pilot rule (E109, 15:12: base Qwen3.5-9B prices below Nash; process deviation disclosed). **C3b DONE** by Q1.4 (E69: −0.65 [−1.97, +0.65], null replicates); cited in P2.11 + glance at 17:51 (3/3 pairs no detectable increase; your −1.24 premium decrease kept visible).
 
 
 
 **Serendipity Explorer (added 14:50 UTC):** a third agent runs wild cheap pilots in `~/collusion/collusion-serendipity` (other markets, hub-and-spoke advisor, leniency, counterfactual replay, steganography in prices, personas, ...). Read its `HITS.md` at the start of every iteration; if a hit bears on your headline claims, decide explicitly (in STATUS) whether to confirm it with a registered experiment. Don't duplicate its pilots.
-→ Status 15:47: **no promoted hits** (S01 dud, S02 odd/inconclusive, S04 uninformative). Nothing to confirm; one STATUS line per iteration.
+→ Status 17:56: **still no promoted hits** (S01, S03, S07 duds; S02 odd; S04 uninformative). Nothing to confirm; one STATUS line per iteration.
 
 ## Part E — BROADEN THE DESIGN so we can make concrete, general claims (added by Dennis 14:30 UTC)
 **Why:** so far we varied one thing at a time (model, prompt, memory, channel) in mostly one market setup. Claims like
@@ -206,25 +195,25 @@ designs that turn one-off pilots into **general statements with a denominator** 
   Report main effects with CIs (which factors CAUSE the price lift — answers sprint Q1.1 — and which single restriction
   cuts it most — answers Q1.5) and the claim's **denominator** (in how many cells level > co-movement, text ≈ chance).
   Gateway is 45 calls/min shared: luna cells via codex, qwen cells via gateway; one queue, resumable, registered first.
-  → Generation: Q1.4, **not started** (directed there: register 17:30, sweeps of 16 cells, done Sun 08:00). **Audit (this repo): NOT STARTED.** Register the audit plan now; shakedown on sweep 1; final by Sun 12:00 (directive 4).
+  → Generation: Q1.4 **E70 IN PROGRESS** (registered 17:10; sweep 1 complete 17:45; amended to **6 sweeps**, ETA ~22:00). **Audit (this repo) = E113 IN PROGRESS:** registered 16:16 before grid data, E113-amend 17:36 (luna posts no public messages → text view on qwen cells only), shakedown 17:50 (24 games, coverage 100%, no scores read). Final eval once at 6 sweeps (directive 3 of 17:56).
 - **E2 Participant replacement mid-game (owner Q2.2; sprint Q1.2).** In executed-collusion games (strong arm / qwen memory),
   replace one colluder at round T/2 with a fresh agent (same model, no chat history) or a different model. Does the price
   level survive? Do detectors notice the break (changepoint)? Cheap, novel, and answers an official sprint question.
-  → **NOT STARTED → directive 3** (register 18:00, launch 19:00, paired cache-prefix design on strongF seeds, fresh-luna replacement at round 21; sol-replacement arm only if arm 1 is done by Sun 05:00; results Sun 10:00).
+  → **DONE (E112, 17:33, P2.15):** 30/30 prefixes byte-identical; market excess repl − orig +0.20 [−0.08, +0.62] private, +0.16 [−0.27, +0.57] none; ≥ Nash + 2 in 19/20 & 9/10; re-agreement 16/20; level CUSUM 0/30 by r25; P1–P4 held. **E115 (gpt-6.1-sol newcomer) IN PROGRESS** (registered 16:29 before E112 outcomes, ETA ~21:00). To do: abstract/TL;DR sentence (directive 2 of 17:56).
 - **E3 Cross-family collusion (owner Q2.2; sprint Q3.3 "can agents identify their peers?").** Pair = luna + qwen (different
   families) with a channel vs same-family pairs. Do mixed pairs agree / execute as often? Does pCMI see same-family pairs
   more (shared-policy confound)?
-  → **NOT STARTED, optional.** Run only if E2 is generating cleanly by Sun 01:00: 10 + 10, lab framing, luna + gateway qwen-3.6-35b pair (gateway 1 worker), registered first. Otherwise **DROP** with one line ("time; E1 factor 1 varies family at the market level"). E1 + E2 come first.
+  → **DROPPED (17:56)**: gateway saturated by Q1.4's E70 qwen lane + D2; E70's model factor varies family at the market level. One Limitations line (directive 5 of 17:56).
 - **E4 Anomaly hunt (owner both, 30 min each, zero new games).** Have codex gpt-6.1-sol read ~40 randomly sampled
   transcripts across ALL datasets (both repos) and list the 5 most surprising behaviours with run ids. Each becomes a
   15-min test logged as `serendipity` in EXPERIMENTS.tsv. Report the hits and the duds.
   → **DONE** (E108, P2.13: 40 games across both repos' datasets, 5 follow-ups, hits + duds, codex-verified). Counts for Q1.4 too.
 - **E5 One non-English market (owner Q2.2, small, 10+10).** Same game, all prompts and messages in German. Does the text
   auditor (English-prompted) still behave the same? Does collusion change with language?
-  → **IN PROGRESS** (E110 registered 15:13; gen 16/20 at 15:47 → labels + audits → `p2_de.py` once → P2.14, directive 2).
+  → **DONE** (E110, 16:08, P2.14: explicit agreement DE 3/10 vs EN 9/10; premium DE +0.91 [+0.20, +1.58]; P1 held, P3 failed, P4 not evaluable). Frozen.
 
 For every claim in the final abstract, write its denominator next to it (conditions tested, models, datasets).
-→ **NOT STARTED** → directive 5a (denominators next to each abstract claim, by Sun 07:30).
+→ **DONE** (E114, `p2_claims.py` → `results/analysis/claims_denominators.md`, 22/22 match, hooked into verify_artifacts; one abstract error found and fixed). Re-run after the directive 1/2 abstract edits.
 
 ## Part D — EXTERNAL VALIDITY with the three proposed datasets (added by Dennis 14:05 UTC)
 **Priority:** after the important in-flight work (E44/P2.8, Part C strong arm + C3 qwen pair, the Sat 20:00
@@ -250,7 +239,7 @@ findings honestly, including where they don't transfer.
   qwen-3.6-35b — record the model per run). Conditions: seller communication on vs off, ≥ 15 + 15 runs. Apply
   the frozen level screen, pCMI and dependence detectors on seller ask series. Does price-level-not-dependence hold
   in a different market mechanism?
-  → Q1.4-owned, **IN PROGRESS** there (E68: ~4/30 runs at 15:47, ETA ~23:00+, smoke chat competitive, so it may elicit no collusion). Nothing to do here. If it lands by Sun 12:00, cite it in one line.
+  → Q1.4-owned, **IN PROGRESS** there (E68: 15/30 runs at 17:55, ETA ~21:00; manipulation check declared before reading; smoke chat competitive, so it may elicit no collusion). Nothing to do here. If it lands by Sun 12:00, cite it in one line.
 - **D3 LLM trust-breaking** (owner: Q2.2, lowest priority of the three). Starter
   `~/collusion/collusion_hackathon/llm-trust-breaking` (private plans, public announcements, actions, outcomes in
   repeated games). Measures promise-breaking, NOT collusion — use it only to validate our say-vs-do machinery
