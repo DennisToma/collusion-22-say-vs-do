@@ -1,9 +1,8 @@
 # Say vs. Do: does auditing what AI agents *say* together with what they *do* catch collusion better?
 
 *Apart AI Collusion Sprint, Q2.2 — text + action auditing. v1 (overnight) results are frozen as git tag `v1-overnight`;
-Phase 2 (from 2026-10-24 06:30 UTC) re-tests them. Checkpoint text, 2026-10-24 12:10 UTC: the fresh n = 60
-replication (`llm_p2rep`, P2.8) is final; the deepseek / gpt-6.1-sol numbers and part C (P2.7) are still running and will
-replace the rows marked interim. Exports, slides and offline verification: see [README.md](README.md).*
+Phase 2 (from 2026-10-24 06:30 UTC) re-tests them. Checkpoint text, 2026-10-24 12:35 UTC: P2.8 (fresh n = 60 replication), P2.9 (monitor-aware) and P2.10 (asymmetry) are final;
+deepseek / gpt-6.1-sol market-price columns, sol auditor views and part C (P2.7) are still running and will replace the parts marked interim. Exports, slides and offline verification: see [README.md](README.md).*
 
 ## Abstract
 Does auditing what LLM sellers *say* in public, beyond what they *do*, catch collusion better? We
@@ -28,8 +27,8 @@ premium precision is 0.24. Condition, talk and price labels disagree; detectabil
    the text view flags 1/10 private runs (premium 4/10; registered E94 prediction failed).
 2. *Where the coordination is said decides what text can show.* All 70 luna channel pairs exchange prices or propose
    agreements in private, but an explicit-public-coordination screen flags 0/125 runs. Claude and deepseek sellers invite rivals
-   publicly ("avoid undercutting") in no-channel markets as well. Every message-reading view flags all 10 Claude markets, and 479/480
-   deepseek no-channel public messages match an invitation regex (interim, 10 markets). A supervised text classifier (run AUROC 0.98, within-test CV)
+   publicly ("avoid undercutting") in no-channel markets as well. Every message-reading view flags all 10 Claude markets and all 30 deepseek markets (text and combined 15/15 no-channel), and 479/480
+   deepseek no-channel public messages match an invitation regex (10 markets). A supervised text classifier (run AUROC 0.98, within-test CV)
    picks up condition-linked traces that need no delivered message (fresh placebo runs 1.00, notepad runs 0.86, vs fresh controls).
 3. *The price premium responds to private pricing deliberation and to wording.* A private pricing notepad with no recipient: +1.04
    [+0.65, +1.42] vs +1.61 [+0.92, +2.35] for a real channel (delivery effect unresolved); the same notepad with weather entries
@@ -191,7 +190,7 @@ no view beats the premium (9/10 / 0/10): text 2/10 / 1/10 (AUROC 0.34), action 4
 |---|---|---|---|---|---|
 | gpt-6-luna (llm_p2cue, 15) | 11.94 [11.56, 12.31] | +1.61 [+0.92, +2.35] | 14/15 / 2/15 | text 4/30, combined 5/30 (v1 test `none`) | 7/720 (mostly not invitations) |
 | Claude Sonnet 5.5 (llm_p2claude, 5) | 20.19 [19.66, 20.63] | +0.58 [+0.23, +1.03] | 2/5 / 0/5 | text, combined 5/5 (E91) | 240/240 |
-| deepseek-v4.1-flash (15; market price + regex: interim 10) | 17.04 [16.27, 17.78] | +1.49 [+0.52, +2.48] | 9/15 / 6/15 | pending (E91-ext) | 479/480 |
+| deepseek-v4.1-flash (15; market price + regex: interim 10) | 17.04 [16.27, 17.78] | +1.49 [+0.52, +2.48] | 9/15 / 6/15 | text, combined 15/15 (E91-ext; action 5/15, action_stats 8/15) | 479/480 |
 | gpt-6.1-sol (7; market price + regex: interim 4; same vendor as luna) | 15.25 [14.52, 15.98] | −0.05 [−0.42, +0.32] | 4/7 / 2/7 | pending (E91-ext) | 0/192 |
 
 **Claude** no-channel markets average above joint monopoly from round 1 (all 5; firm-level round-1 prices 18–22). This is above
