@@ -15,10 +15,12 @@
 ## Next steps
 1. (done) shuffle.
 2. mon_chain done → monitor_stratum result into REPORT Exploration (cutoff: no new experiments after 06:30).
-3. Final pass: codex quick re-check of new Exploration paragraphs; keep abstract in sync; FINALIZE from 08:15.
+3. (done 00:50, E44) codex re-check of new sections. Remaining: v3mon into REPORT; keep abstract in sync; FINALIZE from 08:15.
+4. Optional exploration if time: matched-recall legit FPR comparison (ROC at premium TPR) — descriptive only.
 - Risks: v3mon may not finish (20 runs × 12 rounds serial); then report as not completed.
 
 ## Log
+- 00:50 iter 10: codex re-check (E44) applied.
 - 00:40 iter 10: shuffle ablation on test (E43, null). cross-family full (E39), firm-level text cue (E40), fp stratum (E41), final REPORT reviews applied
   (E42), REPORT restructure + abstract + next steps, fig_roc.
 - 00:09 iter 9: LOCKED TEST RUN (E36) after preflight caught 1 hardset failure (E37 fix); REPORT headline/abstract;

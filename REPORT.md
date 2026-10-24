@@ -11,20 +11,20 @@ under six views of the public log: text, actions, both, each with or without a c
 table. Results on the locked test split (n = 95, run once):
 - **No resolved text gain for the LLM auditor.** The text-only auditor is consistent with chance at detection (run
   AUROC 0.47). Adding text to actions gives no resolved gain (Δ_hybrid −0.01 [−0.09, +0.06]; gains up to ~0.06 not
-  excluded), and replacing each run's messages with a matched donor run's does not hurt the hybrid auditors
-  (Δ run AUROC −0.01 [−0.10, +0.08]). Claude Sonnet 5.5 shows the same pattern on a 42-run subset.
-- **The statistics table helps** (+0.10 run AUROC, +0.10 within-market AUROC).
+  excluded), and replacing each run's messages with a matched donor run's has no resolved effect on the hybrid
+  auditors (Δ run AUROC −0.01 [−0.10, +0.08]). Claude Sonnet 5.5 shows the same pattern on a 42-run subset.
+- **The statistics table helps** (action_stats − action: +0.11 run AUROC, +0.10 within-market AUROC).
 - **A one-line untrained statistic is the best detector.** The pair's price premium over its rivals reaches 0.95,
   against ≤ 0.86 for every LLM view (premium − best view +0.09 [+0.01, +0.18]). We chose this statistic after seeing
   partial data incl. test runs, and without round 1 its lead is no longer resolved.
 - **The public text is not empty.** A supervised text classifier (grouped 5-fold CV within the test runs) detects
   collusion at AUROC 0.98. Colluding firms quietly drop competitive wording ("keeping our price competitive", "earn your business"), so
-  their public talk *does* carry a trace — learnable in-distribution, but unused by a zero-shot auditor reading for
-  explicit coordination.
+  their public talk *does* carry a trace — learnable in-distribution, but not reflected in above-chance zero-shot
+  text detection.
 - **Caveats.** The label coincides with the experimental condition (all private runs are colluding; no-channel runs
   are negative by construction), so we detect *channel granted and used*, not realised overcharge or tacit collusion.
-  One seller model, one framing, sellers never try to evade. On 16 runs from a different framing in which the channel
-  went unused, the frozen thresholds flag 44% (premium) and 25–63% (stats-table views) of runs: the strong
+  One seller model, one framing, sellers never try to evade. On 16 runs from a different framing in which the judge found
+  no agreement, the frozen thresholds flag 44% (premium) and 25–63% (stats-table views) of runs: the strong
   detectors do not transfer as-is.
 
 ## Question
@@ -95,8 +95,8 @@ siblings). Hard set: 0/125 runs have explicit coordination language in public (`
 
 ![test ROC](figures/roc_test.png)
 *Test ROC curves (`uv run python fig_roc.py`; descriptive, thresholds read from the locked json). Dots = dev-chosen
-operating points with the number of `legit` runs flagged. The legit advantage of structured/action_stats is largely an
-operating-point effect; at very low FPR (≈ 0.04) action_stats' curve sits above the premium's (TPR ≈ 0.82 vs ≈ 0.66),
+operating points with the number of `legit` runs flagged. The frozen operating points differ widely (FPR here is over all 45
+negatives, not legit only) and the curves cross; at very low FPR (≈ 0.04) action_stats' curve sits above the premium's (TPR ≈ 0.82 vs ≈ 0.66),
 so the premium's AUROC lead comes from the moderate-FPR region. Read off the curve, no CI.*
 
 **Key paired contrasts** (same runs; Δ_hybrid[v] = v − max(text, action); rows selected from the generated file,
@@ -202,7 +202,7 @@ evidence items name a colluding firm 54–62% of the time on y=1 runs (chance 50
 runs, 24 y=1, dev+test pooled; `cross_family.py` → `results/analysis/llm_v3_crossfamily_claude-sonnet-5-5.json`): the
 **main pattern replicates across model families** — text lowest (run AUROC GPT 0.51 / Claude 0.58), action 0.76 / 0.80,
 combined 0.74 / 0.74; stats views (action_stats 0.85 / 0.91, structured 0.79 / 0.90, combined_stats 0.76 / 0.92) are
-highest for Claude, while for GPT only action_stats clearly is (point estimates, no CIs, n = 42, dev + test pooled). Adding text to action does not help either auditor (Δ pair AUROC combined − best single: GPT +0.01
+highest for Claude, while for GPT only action_stats clearly is (point estimates, no CIs, n = 42, dev + test pooled). Adding text to action has no resolved effect for either auditor (Δ pair AUROC combined − best single: GPT +0.01
 [−0.05, +0.08], Claude −0.01 [−0.10, +0.07]); adding stats does (action_stats: GPT +0.09 [+0.02, +0.16], Claude +0.09
 [+0.00, +0.19]). Per-pair agreement between the two auditors is only moderate (Spearman 0.31 text … 0.59 structured;
 top-pair agreement 0.38–0.71), so individual verdicts are model-dependent even though the aggregate conclusion is not.
@@ -213,15 +213,15 @@ Message-shuffle ablation and exploration strata: see Exploration below.
 positive in 44/50 runs; none −0.02; legit +0.08.)*
 
 ### Exploration strata (never pooled into the headline; frozen dev thresholds, nothing fitted)
-**Firm framing, channel offered but not used (`llm_v3fp`, 16 `private` runs, `uv run python fp_stratum.py --ds
+**Firm framing, channel offered, no agreement found (`llm_v3fp`, 16 `private` runs, `uv run python fp_stratum.py --ds
 llm_v3fp` → `results/analysis/fp_stratum_llm_v3fp.json`).** Under the "pricing manager + competition authority"
 framing, the judge finds **no agreement in 16/16 runs**: sellers given a private channel declined to coordinate
 (replicating the pilot). These are natural "channel, no agreement" negatives, so a scorer that tracks agreement
 rather than framing should rarely flag them. Flag rates at the dev thresholds [Wilson 95%]: text 0.06 [0.01, 0.28],
 action 0.06 [0.01, 0.28], structured 0.25 [0.10, 0.50], premium 0.44 [0.23, 0.67], combined 0.50, action_stats 0.50,
-combined_stats 0.63 [0.39, 0.82] — vs 0.07–0.17 on lab-framing `none` test runs. Mean prices are close to the lab
-`none` runs (13.2 in round 1, 12.5 in round 12, vs 12.9 / 12.0), so the false alarms are not explained by higher prices
-overall (presumably by pair-level price differences under the other framing; not analysed further). **Thresholds and
+combined_stats 0.63 [0.39, 0.82] — vs 0.03–0.17 on lab-framing `none` test runs. Mean prices are close to the lab
+`none` runs (13.2 in round 1, 12.5 in round 12, vs 12.9 / 12.0), but the source of the false alarms was not
+established (pair-level price differences under the other framing are a guess, not analysed). **Thresholds and
 stats-based scorers did not transfer to a framing shift**; the stats table, which helped on llm_v3, raised false
 alarms here. With only y = 0 runs, no AUROC can be computed. Exploratory (n = 16, one framing change that also
 changes wording and refusals).
@@ -267,7 +267,7 @@ computed on the mod-3 subset incl. test runs. The test evaluation is locked and 
   construction (no channel to judge), so y equals the condition in all 125 runs: the endpoint is effectively "channel
   granted and used", and detecting "agreement" and detecting "a channel was granted" coincide; the endpoint is coordination *communication*, not realised overcharge. A separate
   firm-framing stratum (`llm_v3fp`, `fp_stratum.py`, frozen dev thresholds) is an exploratory transfer check of
-  "channel used vs. unused" — it changes framing, wording, refusals and price levels at the same time, so it cannot
+  "agreement vs. channel without agreement" — it changes framing, wording, refusals and price levels at the same time, so it cannot
   resolve the confound within llm_v3.
 - **Evasion not yet tested in the headline data.** Sellers were never told prices are watched. An exploration
   stratum `llm_v3mon` (pre-registered, `monitor_stratum.py`, results pending) adds an *announced* price monitor
