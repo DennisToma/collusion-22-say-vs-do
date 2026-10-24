@@ -16,7 +16,7 @@ shrinks the premium to +0.24 [−0.32, +0.81], while the judge still labels ever
 opening price, often for round 1 only (14/50 maintain it). Whether text helps depends on *where* sellers coordinate. Luna coordinates
 privately, so public text adds no resolved gain; Claude Sonnet (and, by regex, deepseek) sellers invite rivals publicly even without
 a channel, so message-reading auditors flag all Claude control markets. gpt-6.1-sol pairs proposed no joint pricing (0/7 agreements) yet price ≈ Nash + 4 without a channel. Told that a regulator screens pair premiums, luna pairs stop agreeing (0/10 pair-warned and 0/10 all-warned vs 10/10 on matched seeds) rather than evade; a pair with a legitimate public cost or quality edge is flagged in 7/10 and 9/10 no-private-channel markets (controls 2/10; for cost, competition itself predicts the flag). At a hypothetical 5% prevalence,
-premium precision is 0.24. Condition, talk and price labels disagree; detectability depends on the
+premium precision is 0.24. On external data (SALT-NLP agent-collusion, 8000 episodes, 10 models), 62% of executed rule-breaking acts come with no explicit agreement, yet a zero-shot text auditor still predicts the act (AUROC 0.87 [0.83, 0.91]; tacit 0.81) because there the decisive behaviour happens in the chat. Condition, talk and price labels disagree; detectability depends on the
 (seller model × prompt) pair.
 
 **TL;DR (each number is repeated with its source below).**
@@ -58,6 +58,7 @@ descriptive post-hoc work is marked as such (e.g. E93) (E77–E95). New datasets
 - *Other sellers (P2.6, final):* each family coordinates in its own place (E95, all 3 predictions held): luna in private only (14/0/16 PRIV/PUB/NEITHER), Claude and deepseek in private *and* public (deepseek invites rivals in 719/720 no-channel public messages; text views flag 100% of their markets), sol nowhere (0 agreements; none-market price 15.27, Nash + 4). Text auditors see coordination only where the family puts it in text.
 - *Monitor-aware sellers (P2.9):* told that a regulator screens pair premiums, luna pairs stop agreeing (0/10 and 0/10 vs 10/10 matched; replicates E45) and whole markets price below the no-channel arm (−1.19 [−1.69, −0.72] markup); for luna this is compliance, not evasion, and strategic deterrence cannot be told apart from a norm response (`p2_aware.json`).
 - *Legitimate asymmetry (P2.10):* with no private channel, a pair with a public +2 cost or quality edge is flagged by the frozen premium in 7/10 and 9/10 markets (no-channel controls 2/10); the static competitive premium of a +2-cost pair is already +1.45 (> threshold), so those flags are what competition predicts; subtracting own cost overcorrects (8/10 still flagged) (`p2_asym_nash.json`) (`p2_asym.json`).
+- *External validity (P2.12, SALT-NLP, Part D1):* executed acts without explicit agreement are the majority (P(said | executed) 0.385 [0.353, 0.416]; strongly model-dependent, 0.93 gemini-3.7 vs ≈ 0 luna); our frozen-structure text auditor still reaches AUROC 0.87 [0.83, 0.91] (tacit 0.81), unlike in our market (`salt_d1.json`).
 - *Shared with Q1.4 (sibling repo):* detectability of LLM collusion by any price statistic is a property of the (seller model × prompt) pair. Relative screens survive a shared model but miss market-wide high prices (our random-partner arm: market markup +2.85 while the assigned-pair premium is ~0 by construction; Claude markets); absolute screens need model- and prompt-matched references.
 
 **P2.1 Precision at realistic prevalence (E81; post-hoc re-expression of saved scores, nothing refit).** The test split
@@ -300,7 +301,20 @@ The say/do gap depends on the model, as in our P2.6. P(said | executed) in the s
 executes in 51% of episodes and never states an agreement). Here the action label is a deterministic function of the verdicts, so an action
 auditor is trivially perfect; the external test is whether *text* finds the act. E105 text auditor (frozen-structure gpt-6.1-sol prompt, one
 version, 120 executed + 120 not, 7–8 per label per condition, seed 20261024):
-SALT_E105_PENDING
+| text auditor (AUROC vs executed, run-cluster bootstrap) | value | registered prediction |
+|---|---|---|
+| sol, all 240 | 0.87 [0.83, 0.91] (flags at ≥ 50: 91/120 executed, 23/120 not) | P1 ≥ 0.75 — held |
+| sol, tacit subset (79 executed with no judged agreement vs 120 not) | 0.81 [0.75, 0.87] | P2 tacit < overall by ≥ 0.05 — held (0.06; CIs overlap) |
+| sol, agreed subset (41 executed with agreement vs 120 not) | 1.00 [0.99, 1.00] | – |
+| sol, chats without the words accept/reject (117; 50 executed) | 0.75 [0.66, 0.84] | – (sensitivity, Opus review) |
+| SALT's own agreement label as a binary screen | 0.66 [0.62, 0.71] | – |
+| TF-IDF + LR, all 8000, folds = held-out *conditions* (8-fold) / runs (5-fold) | 0.91 / 0.91 (within-condition mean 0.89; tacit 0.86; no verdict words 0.84; point estimates) | P3 ≥ 0.75 — held |
+
+Sol's own "explicit agreement" score reproduces SALT's judge label perfectly on this sample (AUROC 1.00). **Reading:** the say/do gap
+replicates externally (most executed acts, 62%, come with no explicit agreement), but here text still *predicts* the act well, including tacit
+cases, because the chat is where agents negotiate verification (asking for raw logs vs settling for summaries). That differs from our
+pricing market, where text alone is near chance (TL;DR 1). How much text helps therefore depends on whether the decisive behaviour itself
+happens in the conversation. 0 tuning attempts; one prompt; one run.
 
 ## v1 overnight summary (frozen 2026-10-24 06:30 UTC; superseded by the Abstract above)
 Does an auditor catch LLM collusion better if it reads what sellers *say* in public as well as what they *do*?

@@ -1,0 +1,200 @@
+{
+ "n_strict_executed": [
+  5,
+  15
+ ],
+ "strict_executed_jeffreys95": [
+  0.14,
+  0.584
+ ],
+ "n_tacit_high_none": [
+  15,
+  15
+ ],
+ "tacit_high_jeffreys95": [
+  0.848,
+  1.0
+ ],
+ "runs": {
+  "llm_p2qwenb_0000": {
+   "cond": "private",
+   "seed": 8100000,
+   "class": "nonexec_private",
+   "market_excess_nash": 9.95
+  },
+  "llm_p2qwenb_0001": {
+   "cond": "none",
+   "seed": 8100000,
+   "class": "tacit_high",
+   "market_excess_nash": 3.61
+  },
+  "llm_p2qwenb_0002": {
+   "cond": "private",
+   "seed": 8100001,
+   "class": "executed",
+   "market_excess_nash": 9.45
+  },
+  "llm_p2qwenb_0003": {
+   "cond": "none",
+   "seed": 8100001,
+   "class": "tacit_high",
+   "market_excess_nash": 8.59
+  },
+  "llm_p2qwenb_0004": {
+   "cond": "private",
+   "seed": 8100002,
+   "class": "nonexec_private",
+   "market_excess_nash": 10.57
+  },
+  "llm_p2qwenb_0005": {
+   "cond": "none",
+   "seed": 8100002,
+   "class": "tacit_high",
+   "market_excess_nash": 9.25
+  },
+  "llm_p2qwenb_0006": {
+   "cond": "private",
+   "seed": 8100003,
+   "class": "nonexec_private",
+   "market_excess_nash": 8.3
+  },
+  "llm_p2qwenb_0007": {
+   "cond": "none",
+   "seed": 8100003,
+   "class": "tacit_high",
+   "market_excess_nash": 6.77
+  },
+  "llm_p2qwenb_0008": {
+   "cond": "private",
+   "seed": 8100004,
+   "class": "nonexec_private",
+   "market_excess_nash": 10.73
+  },
+  "llm_p2qwenb_0009": {
+   "cond": "none",
+   "seed": 8100004,
+   "class": "tacit_high",
+   "market_excess_nash": 3.5
+  },
+  "llm_p2qwenb_0010": {
+   "cond": "private",
+   "seed": 8100005,
+   "class": "executed",
+   "market_excess_nash": 7.36
+  },
+  "llm_p2qwenb_0011": {
+   "cond": "none",
+   "seed": 8100005,
+   "class": "tacit_high",
+   "market_excess_nash": 5.41
+  },
+  "llm_p2qwenb_0012": {
+   "cond": "private",
+   "seed": 8100006,
+   "class": "nonexec_private",
+   "market_excess_nash": 10.7
+  },
+  "llm_p2qwenb_0013": {
+   "cond": "none",
+   "seed": 8100006,
+   "class": "tacit_high",
+   "market_excess_nash": 10.57
+  },
+  "llm_p2qwenb_0014": {
+   "cond": "private",
+   "seed": 8100007,
+   "class": "nonexec_private",
+   "market_excess_nash": 9.61
+  },
+  "llm_p2qwenb_0015": {
+   "cond": "none",
+   "seed": 8100007,
+   "class": "tacit_high",
+   "market_excess_nash": 4.52
+  },
+  "llm_p2qwenb_0016": {
+   "cond": "private",
+   "seed": 8100008,
+   "class": "executed",
+   "market_excess_nash": 8.64
+  },
+  "llm_p2qwenb_0017": {
+   "cond": "none",
+   "seed": 8100008,
+   "class": "tacit_high",
+   "market_excess_nash": 8.64
+  },
+  "llm_p2qwenb_0018": {
+   "cond": "private",
+   "seed": 8100009,
+   "class": "executed",
+   "market_excess_nash": 10.25
+  },
+  "llm_p2qwenb_0019": {
+   "cond": "none",
+   "seed": 8100009,
+   "class": "tacit_high",
+   "market_excess_nash": 7.3
+  },
+  "llm_p2qwenb_0020": {
+   "cond": "private",
+   "seed": 8100010,
+   "class": "nonexec_private",
+   "market_excess_nash": 7.98
+  },
+  "llm_p2qwenb_0021": {
+   "cond": "none",
+   "seed": 8100010,
+   "class": "tacit_high",
+   "market_excess_nash": 4.07
+  },
+  "llm_p2qwenb_0022": {
+   "cond": "private",
+   "seed": 8100011,
+   "class": "executed",
+   "market_excess_nash": 8.93
+  },
+  "llm_p2qwenb_0023": {
+   "cond": "none",
+   "seed": 8100011,
+   "class": "tacit_high",
+   "market_excess_nash": 3.18
+  },
+  "llm_p2qwenb_0024": {
+   "cond": "private",
+   "seed": 8100012,
+   "class": "nonexec_private",
+   "market_excess_nash": 11.27
+  },
+  "llm_p2qwenb_0025": {
+   "cond": "none",
+   "seed": 8100012,
+   "class": "tacit_high",
+   "market_excess_nash": 9.09
+  },
+  "llm_p2qwenb_0026": {
+   "cond": "private",
+   "seed": 8100013,
+   "class": "nonexec_private",
+   "market_excess_nash": 12.98
+  },
+  "llm_p2qwenb_0027": {
+   "cond": "none",
+   "seed": 8100013,
+   "class": "tacit_high",
+   "market_excess_nash": 7.2
+  },
+  "llm_p2qwenb_0028": {
+   "cond": "private",
+   "seed": 8100014,
+   "class": "nonexec_private",
+   "market_excess_nash": 8.73
+  },
+  "llm_p2qwenb_0029": {
+   "cond": "none",
+   "seed": 8100014,
+   "class": "tacit_high",
+   "market_excess_nash": 3.91
+  }
+ }
+}

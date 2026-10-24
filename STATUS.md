@@ -2,23 +2,24 @@
 
 # STATUS
 
-## Current state (2026-10-24 13:30 UTC, Phase 2 iteration 11)
-- NEW Part D1 (SALT-NLP agent-collusion, external): E104 DONE (no calls): P(said|executed) 0.385 [0.353,0.416], P(executed|said)
-  0.985, tacit onset 76% of 761 colluding runs; strongly model-dependent (gemini-3.7 0.93 ... luna/terra/gemma ~0). REPORT P2.12.
-- RUNNING E105: sol text auditor on 240 SALT episodes (logs/salt_audit.log, cache results/salt/audit.jsonl) + TF-IDF baseline;
-  then `uv run python salt_d1.py report` -> fill SALT_E105_PENDING in REPORT P2.12, E105 result row. Opus review of D1 running.
+## Current state (2026-10-24 13:55 UTC, Phase 2 iteration 11)
+- DONE Part D1 (SALT-NLP agent-collusion, external; REPORT P2.12, abstract + takeaway line): E104 P(said|executed) 0.385
+  [0.353,0.416] (model-dependent: gemini-3.7 0.93 ... luna ~0); E105 sol text auditor AUROC 0.87 [0.83,0.91], tacit 0.81,
+  no verdict words 0.75; TF-IDF condition-grouped 0.91. All registered predictions held. Opus review applied (P3 = SALT's own EX
+  pathway count, label = rule-breaking not harm: 4331/5169 executed accepts are of correct work).
 - From iter10: P2.6 final (E95), P2.7 compressed; C3 post chain unblocked.
-- RUNNING: strongF 40 runs gen (600 traj lines) -> p2_strongF_post.sh (views running); qwenb 28/30 -> c3post -> c3 cmp;
+- RUNNING: strongF 40 gen done -> p2_strongF_post.sh (views); qwenb 30/30 done -> c3post views -> c3 cmp (p2_qwen_cmp.json);
   E102 qwenaS; mimo, g56sol; chain3 p2cue views. Qwen Modal budget $7.75 (ok).
 ## Next steps
-1. E105 report + P2.12 fill; abstract/TL;DR one line on external validity (D1). D3 (trust-breaking) lowest priority, maybe skip.
-2. When logs/partc_qwen.log shows "c3 cmp done": write P2.11 (C3) from p2_qwen_cmp.json; E100 row; abstract sentence.
-3. E99: when "strongF post done" in logs/partc_chain.log: replace P2.7 interim with finals (by class + plan view, E103), abstract C sentence.
+1. When logs/partc_qwen.log shows "c3 cmp done": write P2.11 (C3) from p2_qwen_cmp.json; E100 row; abstract sentence.
+2. E99: when "strongF post done" in logs/partc_chain.log: replace P2.7 interim with finals (by class + plan view, E103), abstract C sentence.
+3. D3 (trust-breaking, lowest priority): only if codex is idle; else mention as not done. Codex review of P2.12 claims at checkpoint.
 4. Checkpoint Sat 19:30: codex review of abstract/TL;DR/P2.6-P2.12. C2 (mimo/g56sol) by Sun 12:00.
 - Risk: codex overload. NOTE: never `pkill -f` a pattern that also appears in your own command line (kills your shell).
   Known: verify_artifacts.py FAILS (manifest) — deferred to Sun 16:30.
 
 ## Log
+- 13:55 P2 iter11: E105 result (sol text AUROC 0.87 on SALT, tacit 0.81), TF-IDF condition-grouped 0.91; P2.12 + abstract + takeaway.
 - 13:30 P2 iter11: Part D1 SALT external say-vs-do: E104 result (all 3 predictions held), E105 sol text auditor launched, salt_d1.py, REPORT P2.12.
 - 13:25 P2 iter10: P2.6 final (E95 3-way, all predictions held), P2.7 compressed, C3 post chain unblocked, p2_qwen_cmp.py.
 - 12:36 P2 iter9: Opus review of P2.7/P2.9/P2.10 applied (p2_asym_nash.py competitive benchmark, E45 replication, prediction list).

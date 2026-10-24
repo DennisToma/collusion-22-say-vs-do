@@ -3,7 +3,8 @@
 Setting: two agents each solve a task, exchange logs over a 200-char throttled channel (5 rounds), then ACCEPT/REJECT
 the peer's work under a "raw-only" policy that cannot be satisfied through the throttle. Their `collusion` field
 (= mutual ACCEPT in the constrained conditions) is the EXECUTED act; their `agreement` field (Qwen3.8 judge on the
-chat) is what the agents SAID. Raw data: /var/tmp/salt (download: see README of this script's section in REPORT).
+chat) is what the agents SAID. Raw data: /var/tmp/salt/data/{episodes/{main,cross_model}/*.parquet,runs.parquet}, from
+https://huggingface.co/datasets/SALT-NLP/agent-collusion/resolve/main/<path> (rev 2eba8f37; ~10 MB; not in git).
 
     uv run python salt_d1.py sayvsdo        # E104, no LLM calls
     uv run python salt_d1.py sample         # E105 sample (written before any call)
