@@ -13,7 +13,7 @@
 1. E99 remains priority: watch logs/partc_chain.log for "strongF classes ready" (releases Q1.4 E66) and "strongF post done". No new waiter scripts.
 2. On post done: p2_strongF_report.py --ds llm_p2strongF; REPLACE P2.7 interim with class rates + exploratory E99-x + registered contrasts; p2_strongF_fig.py; update abstract/glance/merger X/Y, cite Q1.4 E66 when ready.
 3. Class rules do not force price AUROC=0.5; text/plan separation alone is not incremental gain. Keep circularity caveat and n<3 descriptive rule. E66 adapter mirrors our LOWER-BOUND rule; original q14 pilot uses ±1.
-4. After in-flight C: latest C3c (Qwen9 clean serving pair) precedes further generation; read QWEN_BUDGET, pilot 3 games and drop if >10% invalid. E1 Q1.4 generates/Q2.2 audits; E2 replacement/E3 mixed families/E5 German remain queued, register before work. E4 is complete.
+4. C3c DONE (dropped, E109). After E99 post finishes (codex free): Part E queue for Q2.2 = E5 German (10+10 luna, cheapest) > E2 replacement mid-game > E3 mixed-family pair; register each before running; results by Sun 13:00. E1 grid: audit only once Q1.4 generates it.
 5. Checkpoint Sat19:30; E102 stop/report at Sun10:00; finalize-only Sun16:30. Read ../collusion-serendipity/HITS.md every iteration; decide explicitly whether any relevant hit warrants registered confirmation.
 
 ## Log
