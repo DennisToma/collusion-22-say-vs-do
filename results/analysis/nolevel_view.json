@@ -1,0 +1,170 @@
+{
+ "llm_v3_dev": {
+  "n_runs": 30,
+  "n_pos": 20,
+  "point": {
+   "action": {
+    "run_auroc": 0.775,
+    "within_market_auroc": 0.845,
+    "pair_id_acc": 0.5167
+   },
+   "action_stats": {
+    "run_auroc": 0.8875,
+    "within_market_auroc": 0.91,
+    "pair_id_acc": 0.75
+   },
+   "action_stats_nolevel": {
+    "run_auroc": 0.7775,
+    "within_market_auroc": 0.86,
+    "pair_id_acc": 0.5
+   },
+   "premium": {
+    "run_auroc": 1.0,
+    "within_market_auroc": 0.98,
+    "pair_id_acc": 0.95
+   }
+  },
+  "contrasts": {
+   "action_stats-action_stats_nolevel:run_auroc": {
+    "delta": 0.11,
+    "ci": [
+     -0.0401,
+     0.2825
+    ]
+   },
+   "action_stats-action_stats_nolevel:within_market_auroc": {
+    "delta": 0.05,
+    "ci": [
+     0.01,
+     0.09
+    ]
+   },
+   "action_stats_nolevel-action:run_auroc": {
+    "delta": 0.0025,
+    "ci": [
+     -0.1475,
+     0.1825
+    ]
+   },
+   "action_stats_nolevel-action:within_market_auroc": {
+    "delta": 0.015,
+    "ci": [
+     0.0,
+     0.04
+    ]
+   }
+  }
+ },
+ "llm_v3_test": {
+  "n_runs": 95,
+  "n_pos": 50,
+  "point": {
+   "action": {
+    "run_auroc": 0.7533,
+    "within_market_auroc": 0.794,
+    "pair_id_acc": 0.42
+   },
+   "action_stats": {
+    "run_auroc": 0.8589,
+    "within_market_auroc": 0.894,
+    "pair_id_acc": 0.66
+   },
+   "action_stats_nolevel": {
+    "run_auroc": 0.7676,
+    "within_market_auroc": 0.86,
+    "pair_id_acc": 0.55
+   },
+   "premium": {
+    "run_auroc": 0.9476,
+    "within_market_auroc": 0.958,
+    "pair_id_acc": 0.89
+   }
+  },
+  "contrasts": {
+   "action_stats-action_stats_nolevel:run_auroc": {
+    "delta": 0.0913,
+    "ci": [
+     0.0244,
+     0.1667
+    ]
+   },
+   "action_stats-action_stats_nolevel:within_market_auroc": {
+    "delta": 0.034,
+    "ci": [
+     -0.008,
+     0.078
+    ]
+   },
+   "action_stats_nolevel-action:run_auroc": {
+    "delta": 0.0142,
+    "ci": [
+     -0.0584,
+     0.0869
+    ]
+   },
+   "action_stats_nolevel-action:within_market_auroc": {
+    "delta": 0.066,
+    "ci": [
+     0.016,
+     0.126
+    ]
+   }
+  }
+ },
+ "llm_v3rep_all": {
+  "n_runs": 30,
+  "n_pos": 15,
+  "point": {
+   "action": {
+    "run_auroc": 0.7556,
+    "within_market_auroc": 0.8133,
+    "pair_id_acc": 0.4667
+   },
+   "action_stats": {
+    "run_auroc": 0.7978,
+    "within_market_auroc": 0.9867,
+    "pair_id_acc": 0.9333
+   },
+   "action_stats_nolevel": {
+    "run_auroc": 0.7111,
+    "within_market_auroc": 0.8667,
+    "pair_id_acc": 0.5333
+   },
+   "premium": {
+    "run_auroc": 0.92,
+    "within_market_auroc": 0.9867,
+    "pair_id_acc": 0.9333
+   }
+  },
+  "contrasts": {
+   "action_stats-action_stats_nolevel:run_auroc": {
+    "delta": 0.0867,
+    "ci": [
+     -0.0356,
+     0.2089
+    ]
+   },
+   "action_stats-action_stats_nolevel:within_market_auroc": {
+    "delta": 0.12,
+    "ci": [
+     0.04,
+     0.2533
+    ]
+   },
+   "action_stats_nolevel-action:run_auroc": {
+    "delta": -0.0444,
+    "ci": [
+     -0.1956,
+     0.1111
+    ]
+   },
+   "action_stats_nolevel-action:within_market_auroc": {
+    "delta": 0.0533,
+    "ci": [
+     -0.1067,
+     0.2267
+    ]
+   }
+  }
+ }
+}

@@ -110,7 +110,7 @@ class ProvenanceIntegrationTests(unittest.TestCase):
         result = subprocess.run([sys.executable, str(self.root / "check_audit_inputs.py")],
                                 cwd="/var/tmp", capture_output=True, text=True, env=env, timeout=45)
         self.assertEqual(result.returncode, 0, result.stderr)
-        self.assertIn("1903", result.stdout)
+        self.assertIn("2058", result.stdout)
         self.assertIn("310", result.stdout)
         self.assertEqual(before, self.state())
 

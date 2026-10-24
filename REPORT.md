@@ -55,7 +55,9 @@ public log under six views (defined in §Setup). Locked test split (n = 95, run 
   effect. Claude Sonnet 5.5 shows the same pattern on 42 runs. Supervised baselines agree: text + actions 0.96 vs
   actions alone 0.96 (text alone 0.98, see below).
 - **A computed statistics table helps** (action_stats − action, run AUROC +0.11 [+0.04, +0.18]). On fresh data the
-  run-level gain is not resolved (+0.04 [−0.10, +0.19]), but the localisation gain is.
+  run-level gain is not resolved (+0.04 [−0.10, +0.19]), but the localisation gain is. A post-hoc column ablation (E71)
+  shows that the run-level gain comes from the price-level columns. With only the co-movement columns, run AUROC is
+  0.77 on test vs 0.86 for the full table (Δ +0.09 [+0.02, +0.17]), close to actions alone at 0.75.
 - **A one-line untrained statistic ranks highest among untrained scorers.** The pair's price premium over its rivals
   reaches 0.95, against ≤ 0.86 for the six original LLM views (+0.09 [+0.01, +0.18]). A post-hoc one-sentence hint
   pointing the auditor at the premium gives action_stats 0.93 vs 0.86 on test (Δ +0.07 [−0.00, +0.15]) but 0.796 vs
@@ -381,6 +383,28 @@ uniform rate (4.5–6.8% of evidence items vs 8.3% uniform), although round 1 is
 the auditor at pair premiums and round-1 prices lifts action_stats on test (run AUROC 0.86 → 0.93, Δ +0.07
 [−0.00, +0.15]) but not on the replication (0.798 → 0.796); neither split is held out for this hint.
 
+**Which table columns help? (`action_stats_nolevel`, post-hoc E71; `uv run python auditors.py --ds llm_v3 --views
+action_stats_nolevel` (+ `--ds llm_v3rep`), then `uv run python nolevel_view.py` → `results/analysis/nolevel_view.json`).**
+Same prompt as action_stats, but the pair table keeps only its co-movement columns (rounds within 1, correlation of price
+changes); pair mean, rivals' mean and premium are removed (155 gpt-6.1-sol calls, one prompt, no tuning; hypothesis
+logged in EXPERIMENTS.tsv before any audit ran). Paired, class-stratified bootstrap over runs:
+
+| split | run AUROC action / no-level / action_stats | full − no-level (run) | within-market action / no-level / action_stats | full − no-level (within) | no-level − action (within) |
+|---|---|---|---|---|---|
+| test (n = 95) | 0.75 / 0.77 / 0.86 | +0.09 [+0.02, +0.17] | 0.79 / 0.86 / 0.89 | +0.03 [−0.01, +0.08] | +0.07 [+0.02, +0.13] |
+| replication (n = 30) | 0.76 / 0.71 / 0.80 | +0.09 [−0.04, +0.21] | 0.81 / 0.87 / 0.99 | +0.12 [+0.04, +0.25] | +0.05 [−0.11, +0.23] |
+| dev (n = 30) | 0.78 / 0.78 / 0.89 | +0.11 [−0.04, +0.28] | 0.85 / 0.86 / 0.91 | +0.05 [+0.01, +0.09] | +0.02 [+0.00, +0.04] |
+
+Pair-ID accuracy (action / no-level / action_stats): test 0.42 / 0.55 / 0.66, replication 0.47 / 0.53 / 0.93.
+Reading: without the level columns, the run-level score falls back to the action-only level on all three splits
+(no-level − action run Δ: test +0.01 [−0.06, +0.09], replication −0.04 [−0.20, +0.11]). The run-level table gain is
+therefore carried by the level columns (pair mean, rivals' mean, premium), and the full-minus-no-level difference is
+resolved on test. The co-movement columns alone improve localisation on test (+0.07 [+0.02, +0.13]), but the larger
+replication localisation gain needs the level columns. This fits the level-vs-variation reading above (and the sibling
+project's finding). It does not separate the premium column from the two mean columns, because the premium is their
+difference. Post hoc, on splits whose results were already known; the registered hypothesis (no-level ≈ action) holds
+at run level and only partly for localisation.
+
 **Dropping the rival comparison: absolute markup over cost (post-hoc E70, `markup_baseline.py`).** The premium compares a
 pair with its rivals, so it is undefined with two firms. Three untrained, comparison-free scores: `markup_pair` (max over
 pairs of pair mean price minus mean common base cost; usable with two firms), `markup_pair_own` (same, with each firm's own
@@ -405,8 +429,8 @@ the 42-run mod-3 subset, all six views (done; text ≈ chance and no text gain f
 12 issues; fixes applied: label leakage, view superset, public partnership info, parse strictness, learner parity,
 resume ids, donor matching).
 
-**Post-hoc input check (iteration 22).** `uv run python check_audit_inputs.py` reconstructs all 2,213 cached
-auditor prompts (44 files): 1,903 match their recorded 64-bit prompt-hash prefix; 310 older rows match only the
+**Post-hoc input check (iteration 22).** `uv run python check_audit_inputs.py` reconstructs all 2,368 cached
+auditor prompts (46 files, incl. the post-hoc E71 view added in iteration 27): 2,058 match their recorded 64-bit prompt-hash prefix; 310 older rows match only the
 recorded length (150 original-view dev, 120 original-view test and 40 cross-family rows), which cannot authenticate
 their historical content. The check also validates public partnership
 metadata, frozen shuffle mappings and unchanged recipient actions, and tests that the current renderer excludes
@@ -511,7 +535,7 @@ computed on the mod-3 subset incl. test runs. The test evaluation is locked and 
    delivered agreement actually changes prices. Add a one-sided placebo (offer to one seller only) to separate
    offer-induced focal pricing from tacit coordination on public prices.
 4. **Auditor design.** The stats-table views already include the premium. A one-sentence premium hint was tested
-   post hoc (§Exploration, E56: mixed). Test it prospectively on a fresh split, ablate the premium column, evaluate any
+   post hoc (§Exploration, E56: mixed). Test it prospectively on a fresh split, repeat the post-hoc level-column ablation (E71) prospectively, evaluate any
    stats-first → LLM cascade on fresh data, and test tuned/few-shot auditors on a fresh split.
 5. **Breadth.** Other seller model families, more firms/rounds, and a second market type.
 
@@ -574,7 +598,7 @@ gain for the LLM auditor (combined − action within +0.005 [−0.05, +0.045]; j
 unimodal auditors). A plausible reason, not tested causally, is that the sellers keep coordination private and their
 public messages are bland. The views that include a *computed pair-statistics table* (action_stats, combined_stats,
 structured) localise better than those without; separately, a single untrained statistic (the pair premium) beats
-every original LLM view on dev. (Whether the table's benefit is the premium row specifically is not ablated.) This fits the sibling project's
+every original LLM view on dev. (A later post-hoc column ablation, E71 in §Exploration, attributes the run-level benefit to the table's level columns.) This fits the sibling project's
 finding that dependence statistics detect coordinated *variation*, not *level*: these colluders coordinate on
 level, and the premium measures level directly.
 
@@ -837,6 +861,8 @@ uv run python early_detection.py --ds llm_v3 && uv run python fig_early.py   # p
 uv run python evidence_rounds.py --ds llm_v3 --split test   # do auditors cite round 1? (descriptive)
 uv run python auditors.py --ds llm_v3 --views action_stats_hint && uv run python auditors.py --ds llm_v3rep --views action_stats_hint
 uv run python hint_view.py                      # premium-hint auditor exploration (E56, post-lock)
+uv run python auditors.py --ds llm_v3 --views action_stats_nolevel && uv run python auditors.py --ds llm_v3rep --views action_stats_nolevel
+uv run python nolevel_view.py                   # level-column ablation of the stats table (E71, post-lock)
 uv run python llm_market.py --ds llm_v3plc --match-ds llm_v3rep --rounds 12 --framing lab   # placebo channel (E58)
 uv run python label_llm.py --ds llm_v3plc && uv run python auditors.py --ds llm_v3plc && uv run python placebo.py
 uv run python replication.py                    # historical run-once command; now guarded by committed completion receipt

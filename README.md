@@ -44,8 +44,8 @@ the pinned environment (NumPy is required):
 uv run python check_audit_inputs.py
 ```
 
-This separate read-only check covers all 2,213 audits in 44 caches, including the
-cross-family, shuffled and post-hoc hint views. It checks 1,903 recorded 64-bit
+This separate read-only check covers all 2,368 audits in 46 caches, including the
+cross-family, shuffled and post-hoc hint and no-level views. It checks 2,058 recorded 64-bit
 prompt-hash prefixes and 310 legacy prompt lengths (150 original-view dev, 120
 original-view test and 40 cross-family rows), public partnership metadata, frozen
 shuffle mappings and preservation of recipient actions. It also checks that the

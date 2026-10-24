@@ -171,12 +171,12 @@ def check_audit_input_receipt(root):
     require(receipt["schema_version"] == 1 and receipt["post_hoc"] is True,
             "invalid post-hoc audit input receipt")
     from check_audit_inputs import source_inventory
-    require(receipt["totals"] == {"recorded_hash_match": 1903, "length_only_match": 310},
+    require(receipt["totals"] == {"recorded_hash_match": 2058, "length_only_match": 310},
             "audit input receipt totals")
     require(receipt["legacy_length_only_by_cohort"] == {"headline_dev": 150, "headline_test": 120, "cross_family": 40},
             "audit input receipt legacy cohorts")
     actual = {p.relative_to(root).as_posix() for p in (root / "results/llm_auditor").glob("*/*/*.jsonl")}
-    require(set(receipt["files"]) == actual and len(actual) == 44, "audit input receipt cache coverage")
+    require(set(receipt["files"]) == actual and len(actual) == 46, "audit input receipt cache coverage")
     require(set(receipt["prompt_hash_coverage"]) == actual, "audit input receipt hash coverage inventory")
     totals = Counter()
     for name, counts in receipt["files"].items():
@@ -234,7 +234,7 @@ def verify(root):
     from check_price_transitions import check as check_transitions
     check_transitions(root)
     print(f"PASS: {n} artifact hashes; 206 runs / 2,472 rounds; 1,236 original-view audits; "
-          "15 matched placebo paths; frozen inputs/receipts; saved CI/contrast consistency; REPORT table/figures; presentation freshness; offline HTML/PDF provenance; 2,213-audit input receipt; evidence source ledger and price-transition census freshness.")
+          "15 matched placebo paths; frozen inputs/receipts; saved CI/contrast consistency; REPORT table/figures; presentation freshness; offline HTML/PDF provenance; 2,368-audit input receipt; evidence source ledger and price-transition census freshness.")
     print("No LLM calls, writes, refitting, or AUROC/bootstrap recomputation. Manifest is post-hoc, not a registration.")
 
 

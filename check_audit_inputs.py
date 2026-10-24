@@ -51,8 +51,9 @@ def inventory():
         files[f"results/llm_auditor/llm_v3/claude-sonnet-5-5/{view}_orig.jsonl"] = {
             f"llm_v3_{i:04d}" for i in range(125) if i % 3 == 0}
     for ds in ("llm_v3", "llm_v3rep"):
-        files[f"results/llm_auditor/{ds}/gpt-6.1-sol/action_stats_hint_orig.jsonl"] = {
-            f"{ds}_{i:04d}" for i in range(DATASETS[ds])}
+        for view in ("action_stats_hint", "action_stats_nolevel"):  # post-hoc E56, E71
+            files[f"results/llm_auditor/{ds}/gpt-6.1-sol/{view}_orig.jsonl"] = {
+                f"{ds}_{i:04d}" for i in range(DATASETS[ds])}
     for view in ("combined", "structured"):
         for seed in range(3):
             files[f"results/llm_auditor/llm_v3/gpt-6.1-sol/{view}_shuffle_s{seed}.jsonl"] = {
@@ -132,7 +133,7 @@ def check_boundaries(renderer, rows, info, view, variant):
             agent.update(private_message=sentinel, notes=sentinel, agreement=sentinel)
     require(renderer.prompt_for(changed, view, changed_info, variant) == prompt and sentinel not in prompt,
             f"{view}/{variant}: private fields affect prompt")
-    if view in ("action", "action_stats", "action_stats_hint"):
+    if view in ("action", "action_stats", "action_stats_hint", "action_stats_nolevel"):
         for row in changed:
             for agent in row["agents"]:
                 agent["public_message"] = "I price at 30. " + sentinel
@@ -147,7 +148,7 @@ def check_boundaries(renderer, rows, info, view, variant):
                 f"{view}/{variant}: numeric actions affect text-only prompt")
     # Positive controls: boundaries alone would also pass a renderer that dropped
     # a whole modality. Check that the original observable streams are retained.
-    if view not in ("action", "action_stats", "action_stats_hint"):
+    if view not in ("action", "action_stats", "action_stats_hint", "action_stats_nolevel"):
         require(all(f"{a['id']} says: \"{a['public_message']}\"" in prompt
                     for row in rows for a in row["agents"]), f"{view}/{variant}: public messages omitted")
     if view != "text":
