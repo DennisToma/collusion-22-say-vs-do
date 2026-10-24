@@ -2,10 +2,10 @@
 
 # STATUS
 
-## Current state (2026-10-24 08:50 UTC, Phase 2 iteration 2 end)
+## Current state (2026-10-24 08:44 UTC, Phase 2 iteration 2 end)
 - RUNNING (bg): p2_chain.sh para1 -> para2 -> p2rep (ETA ~11:00); p2_post labels/analyses para1/2.
-  Families: llm_p2sol (21, codex SIM_PAR 2, ~15 min/run, ETA ~11:00), llm_p2claude (10, ETA ~09:15), llm_p2ds
-  (deepseek thinking-off, Go, ~15 min/run, ETA ~15:00). p2_chain4.sh auto-labels + p2_cue.py each family when done.
+  Families: llm_p2sol (21, codex SIM_PAR 2, ~15 min/run, ETA ~11:00), llm_p2claude (10/10 DONE + analysed 08:08, results/analysis/p2_cue_llm_p2claude.json, not yet written up), llm_p2ds
+  (deepseek thinking-off, Go, 9/30 at 08:44, ETA ~11:30). p2_chain4.sh auto-labels + p2_cue.py each family when done.
   p2_chain3.sh (E89): after sol done -> 6 auditor views on p2cue private/placebo/notes/none; after p2rep -> label + views.
 - DONE P2.5 (E77): notes-to-self (pair notepad, no recipient) premium r2-12 vs none +1.04 [.65,1.42] vs private +1.61;
   private-notes +.56 [-.29,1.48]; H3 FAILED; text LR flags notes .86. Opus review applied (confounds named, no "mostly").
@@ -22,7 +22,7 @@
 6. Tacit-high search in none arms (p2cue none: none reached it? check per_run; Claude seller none run priced 20!).
 
 ## Log
-- 08:50 P2 iter2: P2.5 cue result (E77, H3 failed: notepad gives ~65% of premium), text LR on cue arms (E82b), Opus reviews E84e + P2.5 applied; chain4 for families.
+- 08:44 P2 iter2: P2.5 cue result (E77, H3 failed: notepad gives ~65% of premium), text LR on cue arms (E82b), Opus reviews E84e + P2.5 applied; chain4 for families.
 - 07:58 P2 iter2: seller families sol/Claude/deepseek launched (E79 amendments); E84b/c/d; E89 registered + chain3; REPORT appendix split.
 - 07:10 P2 iter1: E84 behaviour labels (P2.4); gaps 5/7/8 generator + E86-E88 registered, chain2 queued; TL;DR item 6.
 - 06:53 P2 iter1: Opus design review (E85) applied: registration amendment, script fixes, REPORT wording.
