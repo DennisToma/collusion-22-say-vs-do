@@ -1,25 +1,26 @@
 # STATUS
 
-## Current state (2026-10-24 16:42 UTC from date -u, Phase 2 iteration 24)
+## Current state (2026-10-24 17:45 UTC from date -u, Phase 2 iteration 25)
 - Main claim unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc).
-- E99 strongF final (13/20 strict-executed, 19/20 tacit-high none); E111 plan view = channel footprint (partner-name count 0.82 ≥ LLM 0.76);
-  E110 German final (P2.14); E102 strong-Qwen final (P2.11); E114 claims 22/22 OK (re-run 16:30). REPORT 710 lines.
-- **E112 FINAL (17:27 gen, eval once):** P1–P4 all held. Market Δ repl−orig +0.20 [−0.08, +0.62] private, +0.16 [−0.27, +0.57] none;
-  ≥ Nash+2 19/20, 9/10; newcomer re-agrees 16/20 (orig 15/20), executes 15/20; level CUSUM 0/30 by r25. → P2.15 + glance row (REPORT 711).
-- **E115 (new, iter24) registered + queued:** second E2 arm = same 30 seeds/firms, newcomer = gpt-6.1-sol (other 3 firms luna), dataset
-  `llm_p2replS`. `p2_replace_sol.sh` (setsid) waits for "p2repl gen done", then generates (~600 sol + 1800 luna calls; ETA ~20:00–21:00).
-  Predictions S1–S4 in EXPERIMENTS.tsv; fallback guard asserts all 20 newcomer decisions per game are gpt-6.1-sol. Code: llm_market
-  `replace[2]` (no-op for E112), `P2REPL_ARM=sol` switch in p2_replace(.py/_eval.py); both self-tests pass.
-- verify_artifacts manifest FAIL still expected (rebuild deferred to Sun 16:30). Serendipity HITS: not re-read this iteration.
+- E99 strongF, E110 German, E102, E111, E112 (P2.15) final in REPORT; E114 claims 22/22 OK (16:30). REPORT 711 lines.
+- **E115** (sol-newcomer arm of E112) generating since 17:28 (`logs/p2replS_gen.log`, raw/ 3+ games); ETA ~20:00–21:00.
+- **E113 E1 audit: pipeline built (iter25)** — `p2_e1_audit.py snapshot|audit|coverage|eval`. Snapshot of Q1.4 grid →
+  `data/ext_llm_grid_p2` (SHA256SUMS + sibling HEAD; private fields stripped; units = profit/(price − own private cost)).
+  **Coverage finding → E113-amend (registered 17:36, pre-audit):** gpt-6-luna posts NO public message in any grid game
+  (c00–c05, both arms, 0/960 agent-rounds); qwen cells post ~every round. Text view not called on luna cells; text factor
+  effects on the 8 qwen cells only. Shakedown done 17:50: 24 games/12 cells, 60 sol calls, coverage 100%, 0 unparsed, 0 fallback; no scores read.
+- verify_artifacts manifest FAIL still expected (rebuild deferred to Sun 16:30).
 
 ## Next steps
-1. (done) E112 → P2.15. Consider one abstract/TL;DR clause at the 19:30 review ("replacing a firm does not reset the level", P2.15).
-2. E115 gen started 17:28 (`logs/p2replS_gen.log`). When "p2replS gen done": `P2REPL_ARM=sol uv run python p2_replace_eval.py` ONCE → p2_replace_sol.json; S1–S4 into P2.15 (2–3 lines).
-3. Checkpoint 19:30: one Opus review of abstract + TL;DR + glance + P2.7 + P2.14 + P2.15.
-4. P2.11 three-pair table when Q1.4 E69 lands (qb36 not yet 30 at 16:30). E113 E1 audit: Q1.4 has not registered/generated the grid yet;
-   no pipeline written (format unknown). If no sweep by Sun 06:00 → limitation line.
+1. E115: when "p2replS gen done": `P2REPL_ARM=sol uv run python p2_replace_eval.py` ONCE → S1–S4 into P2.15 (2–3 lines).
+2. Checkpoint 19:30: one Opus review of abstract + TL;DR + glance + P2.7 + P2.14 + P2.15.
+3. E1: re-run `snapshot` + `audit` as Q1.4 sweeps land (cached, ~2 sol calls/game); `coverage` only. FINAL `eval` once
+   when all 3 sweeps exist (or by Sun 12:00 with what exists) → ≤ 10 lines + 1 glance row. Note for Q1.4: luna silence on
+   the board makes their grid's "public board on" factor effectively qwen-only.
+4. P2.11 three-pair table when Q1.4 E69 lands.
 
 ## Log
+- 17:45 P2 iter25: E113 E1-audit pipeline p2_e1_audit.py + snapshot (24 games/12 cells); E113-amend (luna posts no public messages in grid) registered pre-audit; shakedown 60 calls, coverage OK (no scores read).
 - 17:35 P2 iter24: E112 final (P1–P4 held) → P2.15 + glance; E115 auto-launched 17:28; REPORT trimmed (limitations / next) to 711 lines.
 - 16:42 P2 iter24: E115 sol-newcomer arm registered + queued (p2_replace_sol.sh); E112 9/30; STATUS iter23 stamp (16:35) was ahead of the clock (actual ≤ 16:27).
 - 16:35 P2 iter23: E102 result (p2_qwen_strong.json) into P2.11/glance; P2.4 detail → appendix (REPORT 710 lines); fixed iter22 timestamps.
