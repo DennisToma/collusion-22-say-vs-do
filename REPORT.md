@@ -33,6 +33,35 @@ test and replication evidence item beside the public log (offline, searchable; n
 5. *Suggested architecture:* always-on action statistics as the screen; LLM audit to explain flagged runs.
    Neither explanation usefulness nor this workflow's end-to-end performance was evaluated.
 
+## Phase 2 results (in progress, from 2026-10-24 06:30 UTC; v1 above frozen as git tag `v1-overnight`)
+
+Phase 2 closes known validity gaps. Every experiment is registered in `EXPERIMENTS.tsv` before its data exist
+(E77–E80). New datasets are named `llm_p2*`. v1 numbers above are unchanged.
+
+**P2.1 Precision at realistic prevalence (E81; post-hoc re-expression of saved scores, nothing refit).** The test split
+has 53% positives, which flatters precision. At the frozen dev thresholds, precision(π) = TPR·π / (TPR·π + FPR·(1−π)),
+with class-stratified bootstrap CIs (`uv run python p2_prevalence.py` → `results/analysis/p2_prevalence.json`):
+
+| detector (frozen dev threshold) | split | TP/pos, FP/neg | precision @ 1% | @ 5% | @ 20% |
+|---|---|---|---|---|---|
+| premium | test (n=95) | 46/50, 7/45 | 0.06 [0.03, 0.13] | 0.24 [0.15, 0.43] | 0.60 [0.46, 0.78] |
+| premium | replication (n=30) | 14/15, 4/15 | 0.03 [0.02, 0.13] | 0.16 [0.09, 0.44] | 0.47 [0.31, 0.79] |
+| action_stats (LLM) | test | 36/50, 2/45 | 0.14 [0.06, 1.0] | 0.46 [0.24, 1.0] | 0.80 [0.60, 1.0] |
+| action_stats (LLM) | replication | 8/15, 5/15 | 0.02 [0.01, 0.05] | 0.08 [0.04, 0.21] | 0.29 [0.15, 0.56] |
+| combined (LLM) | test | 26/50, 9/45 | 0.03 [0.01, 0.06] | 0.12 [0.07, 0.24] | 0.39 [0.27, 0.60] |
+| text (LLM) | test | 5/50, 5/45 | 0.01 [0.00, 0.04] | 0.05 [0.01, 0.16] | 0.18 [0.05, 0.47] |
+
+When a resample has zero false positives the upper bound reaches 1.0. A conservative bound (Wilson lower TPR,
+Wilson upper FPR) gives premium 0.13 / action_stats 0.17 at 5% prevalence on test (json key
+`precision_conservative_wilson`). **Reading:** if 1 market in 20 colludes, most alarms from every detector are false.
+At 5% prevalence the premium raises about 150 false alarms per 1,000 audited markets on test and about 250 on
+replication. All views are reported in the json.
+
+**P2.2 Is the "collusion" a prompt artifact? (E77/E78, generation running).** Six matched-seed conditions (same pair,
+cost and demand path per seed): private channel; neutrally worded "message box"; private notepad with no recipient;
+channel to a random partner that changes each round; placebo (offered, never delivered); no channel.
+Also two paraphrases of the base seller prompt. Results will appear here.
+
 ## Abstract
 Does an auditor catch LLM collusion better if it reads what sellers *say* in public as well as what they *do*?
 **On our generator: no resolved run-level detection gain** (a small unadjusted within-market localisation gain with statistics did not repeat on fresh data). We simulate a 4-firm repeated-pricing market with gpt-6-luna sellers; in the
