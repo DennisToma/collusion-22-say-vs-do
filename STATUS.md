@@ -1,6 +1,6 @@
 # STATUS
 
-## Current state (2026-10-24 23:12 UTC, Phase 2 iteration 59) — following DIRECTION 22:05
+## Current state (2026-10-24 23:28 UTC, Phase 2 iteration 60) — following DIRECTION 22:05
 - Base headline unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc).
 - E113 landed + sealed (iter55): registered P1 weakly held 4/16; Qwen-3.6 stratified combined−action −0.24 [−0.37, −0.09], but prices alone at chance there (pooled 0.52) and text inverted (pooled 0.32); luna posting cells +0.11 [−0.02, +0.24].
 - **DIRECTION #3 adversarial review DONE (E131), pulled forward from Sun 02:00** because its stated condition ("after E113 lands") was met; earlier = more fix time before the 07:30 freeze, same quota. Codex gpt-6.1-sol + Opus subagent; 30 wording/traceability fixes applied (no number recomputed); untraceable deepseek 719/720 + sol "Nash + 4" removed; inversion scoped to point estimates; all executed/kept counts named by rule; amend3 timing disclosed.
@@ -11,6 +11,7 @@
 - Risks: six games/arm/cell in E113; channel labels ≠ executed collusion; Q1.4 may edit joint statement — re-diff before freeze.
 
 ## Log
+- 23:28 P2 iter60: nothing due (E113 sealed, E131 applied); idled per DIRECTION22:05 directive5 — STATUS only, no calls/checks/REPORT edits. Next: joint-statement re-diff + top freeze 07:30.
 - 2026-10-24 23:12 UTC P2 iter59 (Codex fallback): read rules, plan, status, direction, recent ledger and HITS; E113/E131 complete, nothing due before 07:30. HITS still has no promoted hit (including S29, unconfirmed); no confirmation under the freeze. Followed DIRECTION22:05 directive5: STATUS only, REPORT remains current/frozen; no new experiment, calls, snapshots, metric/check reruns or exports. Next: joint-statement re-diff + top freeze 07:30.
 - 23:12 P2 iter58: nothing due (E113 sealed, E131 review applied); idled per DIRECTION22:05 directive5 — STATUS only, no calls/checks/REPORT edits. Next: re-diff joint statement + top freeze 07:30.
 - 23:10 P2 iter57: E131 adversarial review (codex + Opus) of top/P2.0/glance/P2.16, pulled forward from Sun02:00 (E113 landed). Fixed all P1s and most P2s by wording only; claims35/35, verify26/26, joint verbatim True; REPORT707 lines, abstract247 words. One ledger row.
