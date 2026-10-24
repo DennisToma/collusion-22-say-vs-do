@@ -1,22 +1,20 @@
 # STATUS
 
-## Current state (2026-10-24 02:15 UTC, iteration 13)
+## Current state (2026-10-24 02:40 UTC, iteration 14)
 - LOCKED TEST DONE (00:03; never rerun). REPLICATION DONE (02:07, run once; lock logs/final/REPLICATION_ONCE.lock;
-  never rerun). REPORT presentable; all reviews applied thru E53.
-- Replication llm_v3rep (n=30, 15 y=1): 4/4 pre-registered predictions held, P3/P4 narrowly: premium run .92
-  [.79,1.00] vs action_stats .80 (Δ +.12 [-.004,+.29]); text .67; combined-action -.14 [-.30,+.02]; frozen
-  thresholds flag 40-60% of fresh none runs (operating points unstable).
-- E50/E52: round-1 prices are set BEFORE any private message is read, yet channel holders open +4.6 (llm_v3) / +5.0
-  (rep) above rivals → round-1-only premium test run AUROC .90: the premium is largely a treatment-response detector.
-  In REPORT abstract caveats, §Exploration "When does the premium appear?", Limitations, Appendix A (corrected).
-- pipeline.sh bug: its pgrep matches the parent shell cmdline → never exits; kill it manually once audits verify.
+  never rerun). REPORT presentable; reviews applied thru E53.
+- Replication llm_v3rep (n=30): 4/4 pre-registered predictions held (P3/P4 narrowly): premium .92 vs action_stats .80.
+- E50/E52: round-1 (pre-message) premium alone gives run AUROC .90 (test) / .84 (rep) -> treatment-response detector.
+- E54 (new): LLM auditors cite round 1 in only 4.5-10% of evidence items (uniform 8.3%); no-table views at/below
+  uniform -> consistent with auditors missing the opening jump the premium uses (self-report caveat).
+- In flight: codex e2e review (logs/review_iter14_e2e.md) + Opus judge-view review -> apply, tighten abstract.
+- pipeline.sh bug: its pgrep matches the parent shell cmdline -> never exits (no pipeline running now).
 ## Next steps (no new generation after 03:30, no new experiments after 06:30; FINALIZE from 08:15)
-1. Opus-subagent + codex end-to-end review of REPORT for coherence now that all results are in (abstract is long;
-   consider tightening to ~6 bullets with the round-1 finding prominent). Keep numbers traceable.
-2. Optional exploration (no LLM generation): auditor evidence — do LLM auditors cite round 1 as evidence? (evidence.json)
-3. Finalize: figures check, reproduce block, final codex review of REPORT claims.
+1. Apply e2e reviews; tighten abstract to ~6 bullets (round-1 finding prominent).
+2. Finalize: figures check, reproduce block (add evidence_rounds.py), final codex review of REPORT claims.
 
 ## Log
+- 02:40 iter 14: evidence_rounds.py (E54) -> REPORT exploration; e2e reviews launched.
 - 02:15 iter 13: replication run once (E47 result: 4/4 held), round-1 replicates (E52), codex review_iter13_rep applied (E53).
 - 02:05 iter 13: codex review_iter13 applied (E51).
 - 01:50 iter 13: round-1 treatment-response finding (E50), early_detection.py, round1_effect.py, fig_early.py.

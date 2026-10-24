@@ -347,6 +347,20 @@ threshold were not evaluated. Matching rivals' opening prices would remove this 
 ![early detection](figures/early_detection_llm_v3.png)
 *Premium AUROC vs rounds observed (all 125 llm_v3 runs, descriptive; bands = 95% class-stratified run bootstrap).*
 
+**Do the LLM auditors look at round 1? Rarely (post-lock, descriptive; `uv run python evidence_rounds.py --ds llm_v3
+--split test` → `results/analysis/evidence_rounds_llm_v3_test.json`; `--ds llm_v3rep --split all` for the
+replication).** Each audit cites up to 4 evidence items with a round. On the 95 test runs, the share of cited items
+that point to round 1 is 4.5–10% across views (text 6.8%, action 4.5%, combined 5.0%, combined_stats 8.5%,
+action_stats 10.1% [7.7, 12.7], structured 9.0%), against 8.3% if cited rounds were uniform over the 12 rounds. Among
+audits of y = 1 runs, round 1 is cited at all in 16–24% of text/action/combined audits and 42–48% of the stats-table
+views (vs 11–31% of y = 0 audits). Replication (30 runs): 5.8–11.8%. The views with the stats table cite round 1 most
+and are also the best LLM views. The no-table views cite round 1 at or below the uniform rate, yet
+round 1 is where the pair premium is already large. Auditor run scores correlate about equally with the round-1 premium and with
+the rounds-2..12 premium (e.g. action_stats Spearman 0.53 vs 0.57; combined 0.47 vs 0.47). Cited evidence is a
+self-report and need not reflect what drove the score, so this does not prove the auditors ignore round 1. It is
+consistent with the auditors reading the log as a story about later price moves and missing the opening-round jump that
+the premium gets for free.
+
 ## Validity safeguards
 Labels from private chat only (judge blind to prices); same auditor model across views, fallback calls dropped;
 combined is a strict superset of both single views; shuffle donors matched on label *and* condition;
@@ -433,6 +447,7 @@ uv run python deterrence.py                     # agreement / message / markup c
 uv run python matched_recall.py                 # legit/none flags at matched recall (post-lock, descriptive)
 uv run python round1_effect.py --ds llm_v3      # round-1 (pre-message) prices by role (descriptive)
 uv run python early_detection.py --ds llm_v3 && uv run python fig_early.py   # premium AUROC vs rounds observed
+uv run python evidence_rounds.py --ds llm_v3 --split test   # do auditors cite round 1? (descriptive)
 uv run python replication.py                    # pre-registered fresh-split replication (run ONCE; lock in logs/final)
 ./finalize_test.sh                              # the ONE locked test run (sole entry point for --split test headline)
 uv run python auditors.py --ds llm_v3 --auditor claude-sonnet-5-5 --subset mod3   # cross-family subset

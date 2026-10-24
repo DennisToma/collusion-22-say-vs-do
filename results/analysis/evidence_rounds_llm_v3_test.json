@@ -1,0 +1,146 @@
+{
+ "ds": "llm_v3",
+ "split": "test",
+ "auditor": "gpt-6.1-sol",
+ "chance_round1_share": 0.083,
+ "views": {
+  "text": {
+   "n_runs": 95,
+   "n_items": 339,
+   "round1_item_share": [
+    0.068,
+    0.044,
+    0.095
+   ],
+   "round1_item_share_y1": 0.057,
+   "audits_citing_round1_y1": 0.16,
+   "audits_citing_round1_y0": 0.289,
+   "mean_cited_round": 7.97,
+   "spearman_score_vs_round1_premium": [
+    0.168,
+    -0.05,
+    0.353
+   ],
+   "spearman_score_vs_rounds2_12_premium": [
+    -0.071,
+    -0.298,
+    0.145
+   ]
+  },
+  "action": {
+   "n_runs": 95,
+   "n_items": 379,
+   "round1_item_share": [
+    0.045,
+    0.026,
+    0.066
+   ],
+   "round1_item_share_y1": 0.06,
+   "audits_citing_round1_y1": 0.24,
+   "audits_citing_round1_y0": 0.111,
+   "mean_cited_round": 7.36,
+   "spearman_score_vs_round1_premium": [
+    0.381,
+    0.194,
+    0.536
+   ],
+   "spearman_score_vs_rounds2_12_premium": [
+    0.409,
+    0.234,
+    0.569
+   ]
+  },
+  "combined": {
+   "n_runs": 95,
+   "n_items": 379,
+   "round1_item_share": [
+    0.05,
+    0.032,
+    0.071
+   ],
+   "round1_item_share_y1": 0.045,
+   "audits_citing_round1_y1": 0.18,
+   "audits_citing_round1_y0": 0.222,
+   "mean_cited_round": 7.81,
+   "spearman_score_vs_round1_premium": [
+    0.468,
+    0.273,
+    0.633
+   ],
+   "spearman_score_vs_rounds2_12_premium": [
+    0.466,
+    0.288,
+    0.619
+   ]
+  },
+  "combined_stats": {
+   "n_runs": 95,
+   "n_items": 376,
+   "round1_item_share": [
+    0.085,
+    0.061,
+    0.111
+   ],
+   "round1_item_share_y1": 0.105,
+   "audits_citing_round1_y1": 0.42,
+   "audits_citing_round1_y0": 0.244,
+   "mean_cited_round": 7.35,
+   "spearman_score_vs_round1_premium": [
+    0.496,
+    0.33,
+    0.64
+   ],
+   "spearman_score_vs_rounds2_12_premium": [
+    0.456,
+    0.273,
+    0.612
+   ]
+  },
+  "action_stats": {
+   "n_runs": 95,
+   "n_items": 378,
+   "round1_item_share": [
+    0.101,
+    0.077,
+    0.127
+   ],
+   "round1_item_share_y1": 0.12,
+   "audits_citing_round1_y1": 0.48,
+   "audits_citing_round1_y0": 0.311,
+   "mean_cited_round": 6.66,
+   "spearman_score_vs_round1_premium": [
+    0.526,
+    0.369,
+    0.652
+   ],
+   "spearman_score_vs_rounds2_12_premium": [
+    0.571,
+    0.425,
+    0.692
+   ]
+  },
+  "structured": {
+   "n_runs": 95,
+   "n_items": 378,
+   "round1_item_share": [
+    0.09,
+    0.066,
+    0.116
+   ],
+   "round1_item_share_y1": 0.105,
+   "audits_citing_round1_y1": 0.42,
+   "audits_citing_round1_y0": 0.289,
+   "mean_cited_round": 7.45,
+   "spearman_score_vs_round1_premium": [
+    0.555,
+    0.392,
+    0.689
+   ],
+   "spearman_score_vs_rounds2_12_premium": [
+    0.529,
+    0.373,
+    0.665
+   ]
+  }
+ }
+}
