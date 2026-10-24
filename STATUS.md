@@ -11,7 +11,7 @@
   Game data untouched; `p2_replace.py check` per-game asserts pass for all 9 done games. **Never git stash while generators run.**
 - **E115** (sol newcomer) generating, 9/30 complete at 18:08; ETA ~20:00–21:00.
 - E113: Q1.4 E70 is **6 sweeps** (ETA ~22:00); final eval once when Q1.4 says complete (or Sun 08:00).
-- Serendipity HITS: not re-read this iteration (no promoted hits as of 17:56).
+- Serendipity HITS.md (17:41): still no promoted hits (S03, S07, S09 duds); nothing to confirm.
 
 ## Next steps
 1. 19:30: one Opus review of abstract + TL;DR + glance + P2.7 + P2.14 + P2.15 (DIRECTION dir 4); apply; trim abstract further if it says so.
