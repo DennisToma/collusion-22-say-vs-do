@@ -1,7 +1,7 @@
 # Say vs. Do: does auditing what AI agents *say* together with what they *do* catch collusion better?
 
 *Apart AI Collusion Sprint, Q2.2 — text + action auditing. v1 (overnight) results are frozen as git tag `v1-overnight`;
-Phase 2 (from 2026-10-24 06:30 UTC) re-tests them. Checkpoint text, 2026-10-24 19:07 UTC: P2.1–P2.15 final (E115 evaluated 19:20) except the E1 grid audit (E113; 90 snapshot games (2 balanced sweeps), cached audits verified 19:37; final eval once Q1.4's 6 balanced sweeps are complete). E102 (strong-framing Qwen, 6 seeds) is descriptive. Exports: [README.md](README.md).*
+Phase 2 (from 2026-10-24 06:30 UTC) re-tests them. Checkpoint text, 2026-10-24 20:00 UTC: P2.1–P2.15 final (E115 evaluated 19:20) except the E1 grid audit (E113; 100 snapshot games (3 balanced sweeps), cached audits verified 19:58; final eval once Q1.4's 6 balanced sweeps are complete). E102 (strong-framing Qwen, 6 seeds) is descriptive. Exports: [README.md](README.md).*
 
 ## Abstract
 Adding LLM sellers' public messages to their prices gives **no resolved gain** for detecting collusion: combined minus the better
@@ -36,10 +36,10 @@ Every abstract number with its denominator and source key: `results/analysis/cla
    prices (≈ 0.5) and public text (0.25 [0.08, 0.46], inverted; no-channel markets use more hold-price phrases on the public board, 43% vs 28% of messages,
    post hoc, not shown to be agreement) did not; a no-LLM partner-name count does comparably (0.82 [0.66, 0.96]) and no plan uses agreement words (a channel footprint). Within channel pairs
    (13 vs 7, E116, exploratory) no text or plan view resolves execution (plan 0.69 [0.44, 0.91], text 0.61 [0.37, 0.85]; low power); market excess separates partly by construction (0.78 [0.54, 0.96]) and action_stats inverts (0.18 [0.00, 0.42]); in two Qwen strata (5 vs 10 each, E116b) public text 0.73 [0.43, 0.99] / 0.51 [0.25, 0.70].
-   A fresh luna replacing one seller at round 21 re-joins the level and a new agreement with its partner is judged (16/20; originals 15/20); CUSUM 0/30 alarms by round 25 with the threshold set at the originals' maximum (any-round 3/30), P2.15.
+6. *Replacing a seller mid-game (P2.15):* a fresh luna replacing one seller at round 21 re-joins the level and a new agreement with its partner is judged (16/20; originals 15/20); CUSUM 0/30 alarms by round 25 with the threshold set at the originals' maximum (any-round 3/30).
    A gpt-6.1-sol newcomer (E115) instead re-agrees 0/20 and undercuts (own price −3.38 [−4.17, −2.54] vs the replaced firm); the market drops
    −1.34 [−1.79, −0.91] (private) but stays ≥ Nash + 2 in 18/20 and 9/10: the agreement is a property of the pair, the high level largely of the prompt.
-6. *Practical:* premium precision 0.24 at 5% prevalence; legitimate cost/quality edges are flagged 7/10, 9/10 (controls 2/10). Screens
+7. *Practical:* premium precision 0.24 at 5% prevalence; legitimate cost/quality edges are flagged 7/10, 9/10 (controls 2/10). Screens
    need model- and prompt-matched references; our evidence does not support recommending any particular screening architecture.
 
 *Joint statement with Q1.4 (verbatim in both reports):* "Detectability of LLM collusion by any price statistic is a property of the (seller
@@ -51,7 +51,7 @@ this report's own Qwen comparison is P2.11. "Predicts" means "is consistent with
 ## Phase 2 results (from 2026-10-24 06:30 UTC; v1 below frozen as git tag `v1-overnight`)
 
 Phase 2 closes known validity gaps. Generators are registered in `EXPERIMENTS.tsv` before their data exist, analyses and audits before their outputs;
-Phase 2 experiments and checks are E77–E116 (exceptions to pre-registration are marked where they occur, e.g. E104, E99-x); descriptive post-hoc analyses are marked (e.g. E93). New datasets are named `llm_p2*`. v1 numbers below are unchanged.
+Phase 2 experiments and checks are E77–E120 (exceptions to pre-registration are marked where they occur, e.g. E104, E99-x); descriptive post-hoc analyses are marked (e.g. E93). New datasets are named `llm_p2*`. v1 numbers below are unchanged.
 
 **Phase 2 at a glance (one row per gap; details in the § given; every number regenerates from the json).**
 
