@@ -2,23 +2,20 @@
 
 # STATUS
 
-## Current state (2026-10-24 10:25 UTC, Phase 2 iteration 6)
-- !! NEW TOP PRIORITY (DIRECTION, Dennis 10:25): part C — C1 strong/EXECUTED collusion arm (memory, profit framing, messaging
-  every round, T>=40, sol pair; pilot <=10 runs, then >=20 C + 20 A; all detectors on executed runs; executed-collusion rate per lever)
-  and C2 older sellers (Q2.2: gpt-5.6-sol + mimo-v2.5, 10-15 runs each; check r["model"] for silent luna fallback). Coordinate with sibling STATUS.
-- E94 para2 DONE: text flags 1/10 private (premium 4/10) -> P1/P2 FAILED; combined 6/10 vs 2/10 none. para1 control running.
-- NEW E92 (chain5, 10:02): weather-logbook control: logbook-none +0.22 [.05,.40], logbook-notes -0.82 [-1.17,-.45] -> C_strict:
-  notepad premium needs PRICING content, not structure. In Abstract/TL;DR 3/P2.5. codex headline review (E96) applied (16 P1), incl. reimpl 30/32.
-- HEADLINE REWRITTEN (directive 1): REPORT Abstract (250 words) + TL;DR (6 items) now state the Phase 2 Q2.2 answer:
-  (i) text+actions no gain (-0.01 test / -0.14 rep / -0.03 kept label), (ii) premium = offer+wording artifact (notepad 65%, para2 +0.24),
-  (iii) text usefulness depends on WHERE a family coordinates, (iv) labels disagree (14/50 kept). "Suggested architecture" removed.
-  P2.5/P2.6 cut to <=20 lines + 1 table each (full text -> REPORT_APPENDIX.md §P2-detail). Export paragraph -> README only.
-- RUNNING (bg): p2rep 22/60 (ETA ~11:35); sol 18/21; logbook 14/15; ds 30/30 DONE (labels via chain4 after sol).
-  chain3 REORDERED: p2rep label+6 views FIRST, then p2cue audit. NEW one-shot p2_para_views.sh (E94, para2 then para1, workers 1).
-  chain2 (aware/asym/coded after p2rep), chain4 (labels), chain5 (E92 once), chain6 (E91-ext views sol->ds).
-- NEW registered: E94 (frozen views on para2/para1, directive 3), E95 (3-way family label PRIV/PUB/NEITHER, directive 4;
-  p2_family3way.py written + dry-run OK: Claude 5 PRIV + 5 PUB, sol all NEITHER, ds pending judge labels). Ledger timestamp correction row added.
+## Current state (2026-10-24 10:35 UTC, Phase 2 iteration 7)
+- PART C STARTED (DIRECTION top priority). Q2.2 C1 = own market, auditor/text + kept-vs-not-kept focus (Q1.4 does T=60-100
+  long games/dependence detectors; Q1.4 STATUS 09:56 had no part C yet). `llm_market.py --framing strong` (SYSTEM_STRONG:
+  Fish-style long-run profit, unknown end, full price history, persistent private plan for all firms, full private-chat
+  memory, T=40; v1 framings untouched). E97 pilot + E98 C2 REGISTERED (ledger + SPLITS.md) then launched via `p2_partc.sh`:
+  llm_p2strong_luna (3 seeds x private/none), llm_p2strong_sol (2x2), then llm_p2g56sol (gpt-5.6-sol, 7x2); llm_p2mimo (Go, 7x2).
+  Early look (first 7 rounds): luna/sol pairs message "I'll choose independently" -> executed collusion may be rare (= headline rate).
+- `p2_strong.py` (executed rate, Jeffreys CI, fallback-model guard) tested on llm_v3rep: 5/15 executed (matches E84 scale).
+- REPORT P2.7 stub (part C, in progress). Earlier: E94 para2 text 1/10 (P1/P2 failed); para1 control views running.
+- RUNNING (bg): p2rep 42/60; para1 views; chains 2-6 as before; p2_partc.sh (~11:40 luna pilot, ~12:10 sol pilot).
 ## Next steps
+0. PART C: when pilots finish -> `uv run python p2_strong.py --ds llm_p2strong_luna llm_p2strong_sol --min-floor 13 --late 11`
+   -> E97 decision (promote model; full arm n>=20+20 NEW ds llm_p2strongF, new seed, register first) -> then run frozen
+   auditors (text/action/combined/action_stats) + premium on executed vs none. C2: `p2_strong.py --ds llm_p2g56sol llm_p2mimo --min-floor 12 --late 2`.
 1. When para2/para1 views land: `uv run python p2_family_views.py --ds llm_p2para2 llm_p2para1` (auto in script) -> E94 verdict -> abstract if P1 holds.
 2. When chain4 labels ds and chain6 views ds/sol: `uv run python p2_family3way.py` (with regex check, ~60 sol calls) -> E95, P2.6 table.
 3. p2rep views (chain3) -> `replication.py --ds llm_p2rep` ONCE + p2_behaviour on p2rep -> pooled n=90 Δ_hybrid row (TL;DR 1).
@@ -28,6 +25,7 @@
 - Known: verify_artifacts.py FAILS (manifest stale vs new P2 files) — rebuild deferred to Sun 16:30 per DIRECTION.
 
 ## Log
+- 10:35 P2 iter7: part C launched (E97 C1 strong pilot, E98 C2 older sellers registered first); p2_strong.py; REPORT P2.7 stub.
 - 09:57 P2 iter5: codex review of E78+E93 applied (agreement labels qualified, say-vs-do attribution withdrawn, sol wording softened).
 - 09:28 P2 iter5: E78 para2 result (band failed, p2_band.py); E93 review applied, refreshed to 10 ds seeds; E91-ext chain6 launched.
 - 09:25 NOTE: earlier iterations stamped STATUS/EXPERIMENTS times ahead of the VM clock (e.g. E92 amend "09:58" was committed 09:20). Always use `date -u`.
