@@ -538,7 +538,7 @@ Prediction "text view near chance" **failed**: it flags everything.
 
 
 
-## P2.1–P2.3 detail (moved from REPORT.md 2026-10-24 14:20 UTC for length; text unchanged)
+## P2.1–P2.3 detail (moved from REPORT.md 2026-10-24 14:01 UTC for length; text unchanged)
 
 **P2.1 Precision at realistic prevalence (E81; post-hoc re-expression of saved scores, nothing refit).** The test split
 has 53% positives, which flatters precision. At the frozen dev thresholds, precision(π) = TPR·π / (TPR·π + FPR·(1−π)),

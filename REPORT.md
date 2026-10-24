@@ -1,7 +1,7 @@
 # Say vs. Do: does auditing what AI agents *say* together with what they *do* catch collusion better?
 
 *Apart AI Collusion Sprint, Q2.2 — text + action auditing. v1 (overnight) results are frozen as git tag `v1-overnight`;
-Phase 2 (from 2026-10-24 06:30 UTC) re-tests them. Checkpoint text, 2026-10-24 14:25 UTC: all gaps are final except the strong-collusion arm
+Phase 2 (from 2026-10-24 06:30 UTC) re-tests them. Checkpoint text, 2026-10-24 14:03 UTC: all gaps are final except the strong-collusion arm
 (P2.7, E99, evaluating ~16:30 UTC) and the descriptive strong-Qwen pilot (E102). Exports, slides and offline verification: see [README.md](README.md).*
 
 ## Abstract
@@ -241,7 +241,7 @@ but luna prices the edge at +1.08, so 9/10 flags exceed what competition predict
 Q1.4 P2.4 reports the cost case in a scripted market: all 30/30 cost-asymmetric no-collusion markets flagged (false positives). Gap 8 (coded public signals) was dropped for budget (two completed,
 unanalysed runs in `data/llm_p2coded`; remainder not generated).
 
-**P2.11 Abliterated vs base Qwen3.8-27B sellers (C3; E100 registered before generation; computed once 14:05 UTC; `bash p2_c3post.sh`
+**P2.11 Abliterated vs base Qwen3.8-27B sellers (C3; E100 registered before generation; computed once 13:58 UTC; `bash p2_c3post.sh`
 then `uv run python p2_qwen_cmp.py` → `results/analysis/p2_qwen_cmp.json`; per-model `p2_strong_eval_llm_p2qwen{a,b}.json`;
 public-text regex (post hoc) `uv run python p2_qwen_public.py` → `p2_qwen_public.json`).** Lab prompt, T = 12, 15 matched seeds × {private, none} per model;
 base = FP8 via Aqueduct, abliterated = bf16 via Modal (precision confound); 0 fallback runs. Registered: abliterated ≥ base on P1–P3, "supported" only if the CI excludes 0.
