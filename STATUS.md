@@ -1,17 +1,16 @@
 # STATUS
 
-## Current state (2026-10-24 21:10 UTC by `date -u`, Phase 2 iteration 46) — following DIRECTION 20:00
+## Current state (2026-10-24 21:15 UTC by `date -u`, Phase 2 iteration 47) — following DIRECTION 20:00
 - Headline unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc).
-- DIRECTION 20:00 directives 1–3, 5 done; 4 pre-staged (merge block, E113 line PENDING).
-- E113 still blocked on the Q1.4 qwen lane. luna lane finished all 6 sweeps (20:54); all luna cells have 12/12 games. qwen: sweep idx 3 done 20:36; idx 4 is at c10 (c08 20:41, c09 21:04 — the c09 cell took 22 min vs ~5 min/cell in sweep 3, so the lane may be slowing). 14 qwen cell-runs left → ETA ≈ 22:20 at 5 min/cell, ≈ 02:15 at 22 min/cell; both before the registered Sun 08:00 fallback.
-- Snapshot 164 games + cached audit (+6 sol calls), coverage complete, 0 unparsed; preflight refuses (4/6 complete sweeps); `results/analysis/p2_e1_audit.json` absent (no scores read).
-- Luna board posts at final luna count (for the P2.7 line refresh at landing): c07 no-channel 152/480, c04 none 3/480, c02–c05/c07 channel 73–78/480, c06 0/480 both arms.
-- REPORT 698 lines (budget for the landing ≤ 710). Checks from iter45 still valid (REPORT unchanged): claims 31/31; verify_phase2 26/26; tests 13/13.
-- **E113 next:** when `/var/tmp/c14/e1_grid.log` shows "lane qwen-3.6-35b … sweep 5 complete": `snapshot` → `audit` → `coverage` → `preflight` → `eval` ONCE → `uv run python p2_e1_report.py` → insert P2.16 after P2.15, glance row, abstract clause, replace PENDING merge line + header. One ledger row. If Q1.4 says qwen pCMI replicated → joint sentence.
-- Then the ONE abstract pass ≤ 260 words by Sun 07:30. Reviews Sun 12:30; freeze 14:00; exports from 16:30. Never stash/checkout while generators run.
-- Note: the iter45 stamp (21:20) was ahead of the real clock (iter46 started 21:07). Use `date -u` stamps only.
+- Iter47 chunk: correct the staged E113 landing's public-board interpretation before once-only evaluation. The prior formatter falsely said all luna cells have no text and omitted no-channel post counts; now both arms appear and only silent cells are called no-text re-prompt noise. All registered statistics preserved (E127).
+- Evidence for that wording correction: final luna coverage has posts in 5/8 channel and 2/8 no-channel cells; silent cells are c00/c01/c06. This narrows the director's blanket luna-noise shorthand to match the observed board use; no scorer/prompt/threshold/P1 change.
+- E113 pending: 165 snapshot games, all cached audits current (action/combined 165/165, qwen text 69/69), 0 stale/missing/duplicate/unparsed. Luna 6/6 sweeps; qwen 4/6, latest source completion c11 sweep idx4 at 21:15 (snapshot remains the 21:09 capture). No final metrics computed/read; result and once-lock absent; preflight correctly refuses 4/6.
+- Verified: E113 tests 13/13 (both-arm + control-only-post regression), claims 31/31; offline reproduction 26/26 commands and 33/33 outputs exact, originals unchanged; receipt freshness PASS. REPORT 698 lines; abstract/TL;DR untouched; no new experiment, review, or PDF export.
+- **Next:** await Q1.4 six-sweep completion announcement → snapshot → audit → coverage → preflight → eval ONCE → p2_e1_report.py → P2.16/glance/abstract/merge-block landing + one final-snapshot ledger row. Secondary executed labels only if final Q1.4 E70 artifact exists. If qwen pCMI is replicated there, add joint sentence.
+- Then ONE abstract pass ≤260 words by Sun07:30; reviews Sun12:30; freeze14:00; exports16:30. No new generation or snapshot-only commits; never stash/checkout while generators run.
 
 ## Log
+- 21:12 P2 iter47: E127 corrects staged E113 formatter (both-arm posts, silent-only no-text noise); 13/13 synthetic tests; snapshot165 +3 cached audits, all coverage/current-prompt checks pass; preflight refuses4/6, no metrics read. REPORT header + final luna board covariate refreshed; abstract/TL;DR unchanged. Offline reproduction 26/26 commands, 33/33 outputs exact, originals unchanged; receipt freshness PASS.
 - 21:10 P2 iter46: E113 snapshot 164 games + cached audit (+6 calls), coverage complete, preflight refuses 4/6 (no scores read); luna lane done 6/6, qwen idx 4 in progress and maybe slowing (c09 22 min). No ledger row, REPORT unchanged.
 - 21:20 P2 iter45: E113 snapshot 160 games + cached audit, coverage complete (no scores read); REPORT 711→698 lines to fit the E113 landing (verbatim moves to appendix + reflow); claims 31/31, verify 26/26. No ledger row.
 - 21:03 P2 iter44: E113 snapshot 154 games + cached audit, coverage complete (no scores read); qwen lane sweep 5/6 running. Note: a `until ! pgrep -f <pattern>` waiter self-matches its own command line (same bug as E100) — wait on PIDs, not patterns. No ledger row, REPORT unchanged.

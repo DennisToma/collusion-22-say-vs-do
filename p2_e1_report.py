@@ -40,8 +40,9 @@ def render(d):
     tx0, tx1 = tx.get("0", tx.get(0)), tx.get("1", tx.get(1))
     board = d["board_usage_per_cell_arm"]
     luna = [c for c, e in per.items() if not e["model"].startswith("qwen")]
-    used = [f"{c} {board[c]['channel']['posts']}/{board[c]['channel']['agent_rounds']}"
-            for c in luna if board[c]["channel"]["posts"] > 0]
+    used = [f"{c} channel {board[c]['channel']['posts']}/{board[c]['channel']['agent_rounds']}, "
+            f"no-channel {board[c]['no_channel']['posts']}/{board[c]['no_channel']['agent_rounds']}"
+            for c in luna if any(board[c][a]["posts"] > 0 for a in ("channel", "no_channel"))]
     silent = sum(board[c]["channel"]["posts"] == 0 and board[c]["no_channel"]["posts"] == 0 for c in luna)
     ce, te = resolved(d["a_combined_flag_main_effects_all_cells"]), resolved(d["a_text_flag_main_effects_qwen_cells"])
     sec = d["secondary_executed_vs_no_channel"]
@@ -62,9 +63,10 @@ def render(d):
         f"({qs['tie']} ties, {qs['neg']} worse); cell-stratified pooled Δ combined − action {sd(qca)}, combined − text {sd(qct)}.",
         f"Registered P1 over 16 cells: {k}/{K} positive ({al['tie']} ties, {al['neg']} negative; one-sided sign test p = {d['b_sign_test_one_sided_p']}), "
         f"P1 'no systematic gain' {'held' if d['b_P1_held'] else 'failed'}: a weak confirmation, because per-cell max(text, action) selection biases Δ downward and ties count toward P1; the stratified Δ is the informative number.",
-        f"Luna cells have no text input: combined − action {sd(m['luna_stratified_combined_minus_action_noise'])} estimates auditor re-prompt noise, not a text gain"
-        + (f"; posting cells {', '.join(used)} posts/agent-rounds (channel arm; any-arm posting cells {', '.join(m['luna_posting_cells'])}) "
-           f"{sd(m['luna_posting_stratified_combined_minus_action'])} vs silent {sd(m['luna_silent_stratified_combined_minus_action'])}." if m["luna_posting_cells"] else "."),
+        f"Luna combined − action {sd(m['luna_stratified_combined_minus_action_noise'])}; no separate text audit was registered. "
+        + (f"Posting cells (posts/agent-rounds): {'; '.join(used)}; posting-cell Δ "
+           f"{sd(m['luna_posting_stratified_combined_minus_action'])}; " if m["luna_posting_cells"] else "")
+        + f"silent-cell Δ {sd(m['luna_silent_stratified_combined_minus_action'])} estimates auditor re-prompt noise with no text input.",
         f"Unstratified pooled channel-vs-none AUROC (raw scores pooled across cells; descriptive): action {pv('action_all')}, combined {pv('combined_all')}; "
         f"Qwen text {pv('text_qwen')}. Qwen text flags: {tx1[0]}/{tx1[1]} channel vs {tx0[0]}/{tx0[1]} no-channel games (TL;DR 3 predicts control flags: Qwen invites rivals publicly).",
         f"Combined-flag factor main effects with CI excluding 0: {'; '.join(ce) if ce else 'none'}; "
@@ -74,7 +76,7 @@ def render(d):
         f"Source: `results/analysis/p2_e1_audit.json` (`uv run python p2_e1_audit.py eval`, run once; lines by `p2_e1_report.py`).",
     ]
     glance = (f"| P2.16 | E1 factorial grid audit (Q1.4 E70, {d['n_games']} games) | Qwen cells: combined > best single in {qs['pos']}/{qK} "
-              f"({qs['tie']} ties); stratified Δ combined − action {sd(qca)}; luna re-prompt noise {sd(m['luna_stratified_combined_minus_action_noise'])} | `p2_e1_audit.json` |")
+              f"({qs['tie']} ties); stratified Δ combined − action {sd(qca)}; silent luna re-prompt noise {sd(m['luna_silent_stratified_combined_minus_action'])} | `p2_e1_audit.json` |")
     clause = f"no text gain in {qK - qs['pos']}/{qK} Qwen cells of an external 16-cell grid; pooled Δ {sd(qca)}"
     assert len(lines) <= 10
     return "\n".join(lines), glance, clause

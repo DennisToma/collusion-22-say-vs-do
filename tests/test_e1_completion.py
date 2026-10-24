@@ -229,8 +229,18 @@ class E1CompletionTests(unittest.TestCase):
         self.assertLessEqual(len(body.splitlines()), 10)
         self.assertIn('**0/8 cells** (8 ties, 0 worse)', body); self.assertIn('0/16 positive (16 ties', body); self.assertIn('+0.00 [+0.00, +0.00] (8 cells)', body)
         self.assertIn('8/8 channel vs 0/8 no-channel', body)  # synthetic qwen text flags
-        self.assertIn('posting cells c02 8/8', body)  # synthetic luna board exception (4 firms x 2 rounds)
+        self.assertIn('c02 channel 8/8, no-channel 8/8', body)  # both arms, 4 firms x 2 rounds
+        self.assertNotIn('Luna cells have no text input', body)
+        self.assertIn('silent-cell Δ', body); self.assertIn('silent luna re-prompt noise', glance)
         self.assertIn('not run', body); self.assertTrue(glance.startswith('| P2.16 |'))
+        # A control-only posting cell must not disappear from the covariate line.
+        for arm in ('channel', 'no_channel'):
+            d['board_usage_per_cell_arm']['c02'][arm]['posts'] = 0
+        d['board_usage_per_cell_arm']['c07']['no_channel']['posts'] = 3
+        d['amend3']['luna_posting_cells'] = ['c07']
+        body, _, _ = p2_e1_report.render(d)
+        self.assertIn('c07 channel 0/8, no-channel 3/8', body)
+        self.assertNotIn('c02 channel', body)
         e.LOCK.unlink()  # a fresh clone has no ignored local lock
         with self.assertRaisesRegex(ValueError, 'already exists'):
             e.evaluate()
