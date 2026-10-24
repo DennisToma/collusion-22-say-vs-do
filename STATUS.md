@@ -1,25 +1,24 @@
 # STATUS
 
-## Current state (2026-10-24 18:09 UTC from date -u, Phase 2 iteration 28)
+## Current state (2026-10-24 18:13 UTC from date -u, Phase 2 iteration 29)
 - Main claim unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc).
-- **Iter 28 consolidation (DIRECTION 17:56 dirs 2, 4):** E112 replacement sentence now in abstract + TL;DR 5 (luna arm; adjust after E115);
-  abstract compressed 517 → 388 words (pair-stats parenthetical → TL;DR 1; SALT counts → TL;DR 3). Still above the ~260 target: kept
-  because the 17:57 review asked for the bounds/caveats; the 19:30 review decides further cuts. REPORT 701 lines (≤ 711 OK; v1 evidence-check
-  prose → appendix, checkers/tests repointed). p2_claims +C25 (E112) → 27/27 OK.
-- **Incident (disclosed, ledger E115-raw-incident):** a manager `git stash` at 18:04 orphaned the open raw caches of 3 running E115 games. 0012/0016
-  recovered byte-complete from the held inodes; 0014's last 4 raw lines (round 40) were rebuilt from trajectories+private (tagged `reconstructed`).
-  Game data untouched; `p2_replace.py check` per-game asserts pass for all 9 done games. **Never git stash while generators run.**
-- **E115** (sol newcomer) generating, 9/30 complete at 18:08; ETA ~20:00–21:00.
-- E113: Q1.4 E70 is **6 sweeps** (ETA ~22:00); final eval once when Q1.4 says complete (or Sun 08:00).
-- Serendipity HITS.md (17:41): still no promoted hits (S03, S07, S09 duds); nothing to confirm.
+- **Iter 29 (DIRECTION 17:56 dir 4):** abstract 388 → 312 words. The plan-vs-tacit detail (0.76/0.82/0 agreement words/0.25) moved to TL;DR 5;
+  the abstract now leads with the de-confounded E116 result ("among channel pairs, 13 vs 7, neither private plans (0.69 [0.44, 0.91]) nor public text
+  resolvably predicts execution"). p2_claims snippets repointed: **27/27 OK**. REPORT 699 lines.
+- Dir 1 (E116 within-agreement) was already done in iter 27. Second stratum not run (no frozen-view scores, no new calls allowed).
+- Tests: test_audit_inputs (5), test_handoff (5) and test_mechanism_sources (1) FAIL on inventory/manifest staleness, as before this edit
+  (checked against the pre-edit REPORT). Expected until the Sun 16:30 manifest rebuild; the other 3 test files pass.
+- **E115** (sol newcomer) 9/30 complete at 18:12, generator alive; ETA ~20:00–21:00.
+- **E113:** snapshot 48 games / 16 cells (sibling 438fa0973f). Cached audit of the new games running (log /var/tmp/e113_audit.log); no scores read.
+  Q1.4 E70 = 6 sweeps (ETA ~21:30–22:00); final `eval` ONCE when their STATUS says "6 sweeps complete" (or Sun 08:00).
 
 ## Next steps
-1. 19:30: one Opus review of abstract + TL;DR + glance + P2.7 + P2.14 + P2.15 (DIRECTION dir 4); apply; trim abstract further if it says so.
-2. E115: when "p2replS gen done": `P2REPL_ARM=sol uv run python p2_replace_eval.py` ONCE → S1–S4 into P2.15 (+ incident line); adjust the
-   abstract/TL;DR replacement sentence for E115; add claim C26.
-3. E113: `snapshot` + `audit` cached as sweeps land; FINAL `eval` ONCE at 6 sweeps.
+1. 19:30: one Opus review of abstract + TL;DR + glance + P2.7 + P2.14 + P2.15 (DIRECTION dir 4); apply. Abstract 312 words: cut more only if the review says so.
+2. E115: when "p2replS gen done": `P2REPL_ARM=sol uv run python p2_replace_eval.py` ONCE → S1–S4 into P2.15; adjust the replacement sentence; claim C26.
+3. E113: rerun `snapshot` + `audit` (cached) as sweeps land; FINAL `eval` ONCE at 6 sweeps.
 
 ## Log
+- 18:13 P2 iter29: abstract 388→312 words (E116 within-channel result now carries the plan sentence; plan-vs-tacit detail → TL;DR 5); p2_claims 27/27; E113 snapshot 48 games + cached audit started.
 - 18:09 P2 iter28: E112 sentence → abstract/TL;DR; abstract 517→388 words; REPORT 724→701 lines (evidence checks → appendix); C25; E115 raw-cache stash incident fixed + disclosed.
 - 18:00 P2 iter27: E116 within-channel contrast (p2_within_agree.py) → REPORT P2.7/abstract/TL;DR/glance; C24 claim; E3 dropped.
 - 17:58 P2 iter26: Opus checkpoint review (reviews/p2_iter26_checkpoint_opus.md) applied to abstract/TL;DR/glance/P2.15/header; p2_claims +C04c/C22/C23 → 25/25 OK; E1 snapshot 36 games/16 cells, coverage OK.

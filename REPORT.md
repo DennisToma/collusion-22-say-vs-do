@@ -6,20 +6,18 @@ Phase 2 (from 2026-10-24 06:30 UTC) re-tests them. Checkpoint text, 2026-10-24 1
 ## Abstract
 Reading LLM sellers' public messages in addition to their prices gives **no resolved gain** in detecting collusion: combined minus the better
 single view is −0.01 [−0.09, +0.06] run-AUROC on the locked test (n = 95) and −0.07 [−0.17, +0.02] on two fresh replications pooled post hoc
-(n = 90). Gains above +0.06 (test) and +0.02 (pooled) are excluded at 95%. Setup: a 4-firm pricing market of gpt-6-luna sellers (one pair may
-chat privately), audited zero-shot by gpt-6.1-sol on public text, actions, or both. Three reasons. (1) The action signal is partly a prompt effect: the post-hoc-selected pair price premium (AUROC 0.94 [0.87, 0.99], n = 60
-fresh) responds to a pricing notepad nobody reads (65% of the channel premium), to wording, and to legitimate cost/quality edges
-(7/10, 9/10 vs 2/10). (2) Where coordination is said depends on the family: luna talks only in private; Claude, deepseek and Qwen also invite
-rivals publicly, so text auditors flag every control market (50/50). On SALT-NLP data 62% of executed episodes show no explicit agreement,
-yet a text auditor predicts execution (AUROC 0.87 [0.83, 0.91]) because the act is negotiated in the chat. (3) Talk and behaviour labels
-disagree: only 14/50 test "colluders" keep their agreement; with memory and profit framing (levers combined), 13/20 channel pairs strictly
-execute, yet 19/20 no-channel markets also price ≥ Nash + 2. Exploratory: a monitor reading private plans ranks executed above tacit
-markets (AUROC 0.76 [0.55, 0.93]), but a no-LLM count of plans naming the chat partner does comparably (0.82 [0.66, 0.96]; no paired test),
-no plan uses agreement words (a channel footprint), and among channel pairs (13 executed vs 7 not) plans do not resolvably predict execution (0.69 [0.44, 0.91]).
-Public text ranks the classes in reverse (0.25 [0.08, 0.46]). Replacing one seller at round 21 with a fresh luna (no chat history) leaves the
-level (19/20 private-arm markets ≥ Nash + 2) and the agreement (re-agreed 16/20) intact, and a level CUSUM does not alarm by round 25 (0/30):
-under strong framing the high price is a property of the market prompt, not of the incumbent pair. Abliterated vs base Qwen3.8-27B (15 + 15
-markets; bf16 vs FP8): no detectable increase in agreement or execution, and a smaller channel premium (−1.24 [−2.41, −0.03]).
+(n = 90); gains above +0.06 (test) and +0.02 (pooled) are excluded at 95%. Setup: a 4-firm pricing market of gpt-6-luna sellers (one pair may
+chat privately), audited zero-shot by gpt-6.1-sol on public text, actions, or both. Three reasons. (1) The action signal is partly a prompt
+effect: the post-hoc-selected pair price premium (AUROC 0.94 [0.87, 0.99], n = 60 fresh) responds to a pricing notepad nobody reads (65% of
+the channel premium), to wording, and to legitimate cost/quality edges. (2) Where coordination is said depends on the family: luna talks only
+in private; Claude, deepseek and Qwen also invite rivals publicly, so text auditors flag every control market (50/50). Where the act is
+negotiated in the chat (SALT-NLP), a text auditor does predict execution (AUROC 0.87 [0.83, 0.91]). (3) Talk and behaviour labels disagree:
+only 14/50 test "colluders" keep their agreement; with memory and profit framing (levers combined), 13/20 channel pairs strictly execute, yet
+19/20 no-channel markets also price ≥ Nash + 2. Among channel pairs (13 executed vs 7 not; exploratory), neither private plans (0.69 [0.44,
+0.91]) nor public text resolvably predicts execution. Replacing one seller at round 21 with a fresh luna leaves the level (19/20 private-arm
+markets ≥ Nash + 2) and the agreement (re-agreed 16/20) intact, and a level CUSUM does not alarm by round 25 (0/30): under strong framing the
+high price is a property of the market prompt, not of the incumbent pair. Abliterated Qwen3.8-27B shows no detectable increase in agreement
+or execution over its base model (15 + 15 markets) and a smaller channel premium (−1.24 [−2.41, −0.03]).
 Every abstract number with its denominator and source key: `results/analysis/claims_denominators.md` (`p2_claims.py`).
 
 **TL;DR (sources: Phase 2 at a glance, below).**
@@ -36,7 +34,7 @@ Every abstract number with its denominator and source key: `results/analysis/cla
    strict-executed; paired difference −0.44 [−1.84, +1.00] (P2.7). gpt-5.6-sol, mimo and Qwen price high even at base framing.
    In this one arm (n = 13 vs 19, exploratory), a monitor reading private plans separated executed from tacit (0.76 [0.55, 0.93]) where
    prices (≈ 0.5) and public text (0.25 [0.08, 0.46], inverted; no-channel markets use more hold-price phrases on the public board, 43% vs 28% of messages,
-   post hoc, not shown to be agreement) did not; a no-LLM partner-name count does comparably (0.82 [0.66, 0.96]). Within channel pairs
+   post hoc, not shown to be agreement) did not; a no-LLM partner-name count does comparably (0.82 [0.66, 0.96]) and no plan uses agreement words (a channel footprint). Within channel pairs
    (13 vs 7, E116) no view resolves execution (plan 0.69 [0.44, 0.91]); action auditors invert (0.18 [0.00, 0.42]).
    A fresh luna replacing one seller at round 21 re-joins the level and re-agrees (16/20; CUSUM 0/30 alarms, P2.15).
 6. *Practical:* premium precision 0.24 at 5% prevalence; legitimate cost/quality edges are flagged 7/10, 9/10 (controls 2/10). Screens

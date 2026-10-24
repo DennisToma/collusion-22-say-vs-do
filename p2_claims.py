@@ -96,7 +96,7 @@ def _():
 
 
 @claim("C03", "gains above +0.06 (test) / +0.02 (pooled) excluded at 95% (upper CI limits)", "+0.06 / +0.02",
-       "Gains above +0.06 (test) and +0.02 (pooled)", "upper 95% CI limit of C01 (n=95) and C02 (n=90); pooled is post hoc")
+       "gains above +0.06 (test) and +0.02 (pooled)", "upper 95% CI limit of C01 (n=95) and C02 (n=90); pooled is post hoc")
 def _():
     a = pick(FINAL, ("contrasts", "delta_hybrid[combined]:run_auroc", "ci", 1))
     b = pick(POOL, ("condition_label", "contrasts", "delta_hybrid[combined]", "ci", 1))
@@ -148,7 +148,7 @@ def _():
 
 
 @claim("C07", "legitimate cost / quality edges flagged by premium vs controls", "7/10, 9/10 vs 2/10",
-       "7/10, 9/10 vs 2/10",
+       "flagged 7/10, 9/10 (controls 2/10)",
        "10 runs per condition (highcost, quality, plus 10 no-channel reference runs from llm_p2cue); gpt-6-luna; "
        "frozen dev threshold 0.667")
 def _():
@@ -202,7 +202,7 @@ def _():
     return str(len(m)), SALT, "E104_sayvsdo.per_condition[*].condition (parsed)"
 
 
-@claim("C12", "share of executed SALT episodes with no explicit agreement (1 - P(said|exec))", "62% (P(said|exec)=0.385)", "62% of executed episodes",
+@claim("C12", "share of executed SALT episodes with no explicit agreement (1 - P(said|exec))", "62% (P(said|exec)=0.385)", "P(said | executed) 0.385",
        "executed episodes n=5169 (1989 said + 3180 not said), 7998 judged; Qwen judge label for 'said'; episodes are clustered in 800 runs (check CI method in salt script)")
 def _():
     d = pick(SALT, ("E104_sayvsdo",))
@@ -243,7 +243,7 @@ def _():
     return ci(e["paired_excess_private_minus_none"]), REPORTJ, "E99_P3.paired_excess_private_minus_none; n_pairs"
 
 
-@claim("C17", "private-plan LLM monitor AUROC, strict-executed vs tacit-high", "0.76 [0.55, 0.93]", "(AUROC 0.76 [0.55, 0.93])",
+@claim("C17", "private-plan LLM monitor AUROC, strict-executed vs tacit-high", "0.76 [0.55, 0.93]", "(0.76 [0.55, 0.93])",
        "13 strict-executed vs 19 tacit-high markets; EXPLORATORY (E103 plan view registered before plan calls, but classes defined post hoc); "
        "CI [0.55, 0.93]")
 def _():
@@ -254,7 +254,7 @@ def _():
     return r(d[0]) + f" [{r(d[1])}, {r(d[2])}]", EVAL, "detectors.plan.auroc_strict_vs_tacit_high (== keyword file detectors.plan_view...); groups_n"
 
 
-@claim("C18", "no-LLM count of plans naming the chat partner, same contrast", "0.82 [0.66, 0.96]", "does comparably (0.82 [0.66, 0.96]; no paired test)",
+@claim("C18", "no-LLM count of plans naming the chat partner, same contrast", "0.82 [0.66, 0.96]", "does comparably (0.82 [0.66, 0.96])",
        "13 vs 19 markets; EXPLORATORY post hoc keyword detector (E111) K_dir; CI [0.66, 0.96]")
 def _():
     d = pick(KEY, ("detectors", "K_dir", "auroc_strict_vs_tacit_high"))
@@ -269,7 +269,7 @@ def _():
     return f"{k['strict'][0]}/{k['strict'][1]} strict, {k['tacit_high'][0]}/{k['tacit_high'][1]} tacit-high", KEY, "runs_with_term_in_any_plan"
 
 
-@claim("C20", "public-text view AUROC, strict-executed vs tacit-high (inverted)", "0.25 [0.08, 0.46]", "Public text ranks the classes in reverse (0.25 [0.08, 0.46])",
+@claim("C20", "public-text view AUROC, strict-executed vs tacit-high (inverted)", "0.25 [0.08, 0.46]", "public text (0.25 [0.08, 0.46], inverted",
        "13 vs 19 markets; EXPLORATORY (E99-x, added after generation began, before detector scores); CI [0.08, 0.46]")
 def _():
     d = pick(EVAL, ("detectors", "text", "auroc_strict_vs_tacit_high"))
@@ -302,7 +302,7 @@ def _():
 
 
 @claim("C24", "E116 within channel: plan view AUROC strict-executed vs non-executed", "0.69 [0.44, 0.91]",
-       "plans do not resolvably predict execution (0.69 [0.44, 0.91])",
+       "neither private plans (0.69 [0.44, 0.91])",
        "13 strict vs 7 non-executed private markets (llm_p2strongF); exploratory, zero LLM calls, seed bootstrap")
 def _():
     src = "results/analysis/p2_within_agree_llm_p2strongF.json"
