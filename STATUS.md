@@ -2,7 +2,7 @@
 
 # STATUS
 
-## Current state (2026-10-24 12:37 UTC, Phase 2 iteration 9)
+## Current state (2026-10-24 12:36 UTC, Phase 2 iteration 9)
 - DONE gap 5 (E86, P2.9): warned pairs 0/10 + 0/10 agreements (vs 10/10 matched), markets below none (−1.19); compliance, replicates E45;
   deterrence vs norm/refusal response not separable. DEVIATION: p2aware LLM views SKIPPED (no agreement left; saves 80 sol calls).
 - DONE gap 7 (E87, P2.10): premium flags highcost 7/10, quality 9/10 vs none 2/10; own-cost adj. P2 failed. p2_asym_nash.py: competitive
