@@ -1,6 +1,6 @@
 # STATUS
 
-## Current state (2026-10-24 04:32 UTC, iteration 22)
+## Current state (2026-10-24 04:40 UTC, iteration 23)
 - LOCKED TEST DONE (00:03) and REPLICATION DONE (02:07); never rerun. Scientific estimates unchanged.
 - Test: premium run AUROC .95; action_stats .86; combined-minus-best-unimodal -.013 [-.091,+.064].
 - Fresh replication (n=30): premium .92 vs action_stats .80; 4/4 registered rules held (not equivalence).
@@ -9,7 +9,7 @@
 - Recorded 64-bit prompt hashes match 1,903 rows; 310 length-only (150 dev / 120 test / 40 cross-family) cannot authenticate historical content.
 - Frozen donor mappings, recipient actions, public partnership metadata and current-renderer input boundaries pass.
 - REPORT/README disclose provenance limits; refreshed REPORT.pdf remains 25 pages, talk 7 slides; all 8 figures preserved.
-- Offline verifier: 404 hashes; all 27 tests pass; clean Git-index export is write-free without local evaluation locks.
+- Offline verifier: 404 hashes; all 27 tests pass (re-verified iter 23, E67: all checks PASS); clean Git-index export is write-free without local evaluation locks.
 - Independent Codex + Opus review fixes applied; final Codex recheck has no consequential findings. No scientific artifact changed.
 ## Next steps (no new generation after 03:30; no new experiments after 06:30; FINALIZE 08:15)
 1. Keep results frozen; present PRESENTATION.pdf or PRESENTATION.html. Send REPORT.pdf for detail.
@@ -17,6 +17,7 @@
 3. If REPORT.md changes, regenerate handoff exports and update the post-hoc manifest (README instructions).
 
 ## Log
+- 04:40 iter 23: read-only integrity re-check (E67): verifier, handoff/presentation checks, audit-input check, 27 unittests all PASS. No changes to results; remaining open items (evasion, second seller model) need new generation, barred after 03:30.
 - 04:05 iter 18: Figure 1 summary figure (E62) inserted after abstract; reproduce line added.
 - 03:56 iter 17: repro check (E60); final codex+Opus claims audit applied (E61); abstract shortened; appendix D/E.
 - 03:39 iter 16: applied codex + Opus reviews of placebo section (E59).
