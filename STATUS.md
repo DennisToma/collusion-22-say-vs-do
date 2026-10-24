@@ -1,19 +1,19 @@
 # STATUS
 
-## Current state (2026-10-24 04:40 UTC, iteration 23)
-- LOCKED TEST DONE (00:03) and REPLICATION DONE (02:07); never rerun. Scientific estimates unchanged.
+## Current state (2026-10-24 04:47 UTC, iteration 24)
+- LOCKED TEST DONE (00:03), REPLICATION DONE (02:07); never rerun; scientific estimates unchanged.
 - Test: premium run AUROC .95; action_stats .86; combined-minus-best-unimodal -.013 [-.091,+.064].
-- Fresh replication (n=30): premium .92 vs action_stats .80; 4/4 registered rules held (not equivalence).
-- Placebo: premium flags 14/15 with or without delivery; channel/condition confound remains.
-- E66: read-only check_audit_inputs.py reconstructs all 2,213 audits across 44 original/shuffle/hint/cross-family caches.
-- Recorded 64-bit prompt hashes match 1,903 rows; 310 length-only (150 dev / 120 test / 40 cross-family) cannot authenticate historical content.
-- Frozen donor mappings, recipient actions, public partnership metadata and current-renderer input boundaries pass.
-- REPORT/README disclose provenance limits; refreshed REPORT.pdf remains 25 pages, talk 7 slides; all 8 figures preserved.
-- Offline verifier: 404 hashes; all 27 tests pass (re-verified iter 23, E67: all checks PASS); clean Git-index export is write-free without local evaluation locks.
-- Independent Codex + Opus review fixes applied; final Codex recheck has no consequential findings. No scientific artifact changed.
+- Replication (n=30): premium .92 vs action_stats .80; 4/4 registered rules held (not equivalence).
+- Placebo premium flags 14/15 with/without delivery; channel/condition confound remains.
+- E68: EVIDENCE.html exposes all 2,925 original-view test/replication items beside public sources.
+- Only 4 items contain quote-marked phrases (all text view); literal matches do not validate explanations.
+- REPORT/README now explicitly mark the proposed explanation role unvalidated; primary results frozen.
+- Codex + Opus critiques applied; final focused Codex recheck has no consequential findings.
+- 36 tests / 408 hashes pass; 2,213 prompt checks still 1,903 hashes + 310 length-only (not authentication).
+- Refreshed report: 26 pages / 8 figures; talk unchanged at 7 slides; scientific artifact bytes unchanged.
 ## Next steps (no new generation after 03:30; no new experiments after 06:30; FINALIZE 08:15)
 1. Keep results frozen; present PRESENTATION.pdf or PRESENTATION.html. Send REPORT.pdf for detail.
-2. Read-only: python3 -S verify_artifacts.py; uv run python check_audit_inputs.py; python3 -S build_handoff.py --check.
+2. Read-only: python3 -S verify_artifacts.py; uv run python check_audit_inputs.py; python3 -S check_evidence_sources.py --check.
 3. If REPORT.md changes, regenerate handoff exports and update the post-hoc manifest (README instructions).
 
 ## Log
@@ -79,3 +79,5 @@
 - 2026-10-24 04:20 UTC iter 21: E65 portable handoff: saved-result slides PDF, full report PDF and standalone HTML with embedded figures; build_handoff.py + optional locked renderer dependencies and post-hoc source/output receipt. Independent Codex review found absolute VM paths in PDF links; fixed to GitHub links before printing. Checks preserve all 18 headings, 317 cells, 441 report text fragments (including reproduction code), 100 visible slide fragments and 8 figures; 7 slide pages, 25 report pages (2 landscape appendix tables). PDFs have no machine paths or clipped text; relocated standalone HTML works offline without JavaScript at mobile/desktop widths. 401 hashes and 14 isolation tests pass; clean Git-index export verified without locks or writes. Every original scientific data/result/figure/receipt/analysis hash unchanged. No generation, audit calls, metrics, bootstrap or threshold refitting. Review: reviews/iteration21_portable_exports.md.
 
 - 2026-10-24 04:32 UTC iter 22: E66 cached-input provenance: new read-only checker imports the frozen renderer without entering the historical auditor CLI (whose --verify path regenerates metadata). All 44 caches / 2,213 audits reconstruct: 1,903 recorded 64-bit prompt-hash prefixes match; 310 legacy rows have only matching lengths (150 original dev, 120 original test, 40 cross-family). Added public-info/setup checks, frozen donor/context/pair checks, independently checked shuffled recipient actions, injected-private-field and withheld-modality controls, and positive controls for retained observables. Post-hoc receipt freezes individual hash eligibility and all 68 sources; stdlib verifier validates receipt freshness. Codex + Opus critiques applied (complete source/count coverage, hash-vs-length wording, alternate-root identity, missing/stale receipt refusal); final Codex recheck found no consequential issues. All 27 tests and 404 hashes pass; clean Git-index export preserves all file hashes/mtimes/inventory and refuses completed evaluation without local locks. REPORT/README updated; regenerated 25-page report/7-page talk exports preserve 442 report fragments, 317 cells and 8 figures. Every scientific input/cache/result/figure/analysis/evaluation-receipt hash unchanged. No generation, audit calls, AUROC/bootstrap or threshold refitting. Review: reviews/iteration22_audit_inputs.md.
+
+- 2026-10-24 04:47 UTC iter 24: E68 evidence-source coverage and offline ledger: six original GPT views on 95 test + 30 replication runs, 750 audits / 2,925 evidence items (2,229 test, 696 replication), all well-formed anchors; only four quote-marked phrases, all text-view and literally present in cited firm/round (two generic repeated phrases). This does not validate semantic accuracy; REPORT/README now make the untested explanation role explicit. New standard-library renderer/checker hashes all 16 public-data/cache inputs plus its source, preserves every cached observation, exposes all 1,500 public rounds / 6,000 firm observations and ties prose counts to JSON. Codex + Opus reviews applied; final Codex recheck found no consequential issues. Numeric/multiline quotes, malformed anchors, missing semantic support, private-field exclusion, corruption detection and no-JS navigation addressed. All 36 tests, 408 manifest hashes, original prompt checks and browser checks pass; clean Git-index export is write-free without evaluation locks. Refreshed report 26 pages / 443 text fragments / 317 cells / 8 figures; talk remains 7 pages. Every original scientific input/cache/result/figure/analysis/evaluation/provenance receipt hash unchanged. No generation, label judging, auditor calls, AUROC/bootstrap or threshold refitting. Review: reviews/iteration24_evidence_sources.md.

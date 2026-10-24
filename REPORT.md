@@ -11,6 +11,8 @@ Ready to share: [slides PDF](PRESENTATION.pdf), [report PDF](REPORT.pdf), and
 write-up; wide appendix tables use landscape PDF pages. Export with
 `uv run --group handoff python build_handoff.py`; check source/output hashes without writes using
 `python3 -S build_handoff.py --check` (post-hoc rendering receipt; no metrics recomputed).
+The [cached evidence source ledger](EVIDENCE.html) lets reviewers inspect every original-view
+test and replication evidence item beside the public log (offline, searchable; no semantic judging).
 
 ## Abstract
 Does an auditor catch LLM collusion better if it reads what sellers *say* in public as well as what they *do*?
@@ -394,6 +396,22 @@ metadata, frozen shuffle mappings and unchanged recipient actions, and tests tha
 injected private fields and the withheld modality. `data/audit_input_receipt.json` preserves this check after the
 experiments; it is not pre-registration evidence. No model calls, scores, CIs or thresholds are rerun.
 
+**Evidence-check coverage (post-hoc, iteration 24).** `python3 -S check_evidence_sources.py` →
+`results/analysis/evidence_sources.json` and [offline source ledger](EVIDENCE.html). Across the six
+original GPT views, the test caches contain 2,229 evidence items and the replication 696. All have well-formed
+firm/round anchors (firm A–D, integer round 1–12), but only 3 test items and 1 replication item contain quote-marked phrases; all four
+phrases occur in the cited firm's message in the cited round (case/whitespace/Unicode normalization,
+word-boundary substring, punctuation retained; short phrases included). These are coverage counts for
+the saved outputs, not semantic accuracy estimates: marked phrases can be terminology rather than
+source quotations, and literal presence does not validate the surrounding observation. All four are
+text-view items; two quote the generic phrase "considered price", which occurs across multiple firms
+and rounds in their respective runs. The remaining items contain no quote-marked span and were not
+semantically classified. The historical
+price regex check below cannot validate these inferences; its strict same-round check can fail
+legitimate price-transition descriptions. The ledger exposes all public rounds and firms for manual
+comparison, including modalities withheld from the particular auditor view. **The proposed LLM
+explanation role remains unvalidated.** No headline result, cache, threshold or price-check estimate changed.
+
 ## Held-out discipline
 `data/SPLITS.md`: dev = llm_v3_0000–0029, locked test = 0030–0124. The core auditor prompt was written before any
 LLM-market data; the core task text of the six original views was never optimised (0 attempts), but views and comparators were developed adaptively after interim exposure (views
@@ -735,13 +753,15 @@ on test and from 0.65 to 0.75 on the replication. Pointing the auditor at the pr
 the premium's ranking on test, but the gain does not show on the 30 replication runs (where action_stats' pair scores
 already localised near ceiling).
 The test gaps to the premium are unresolved; this establishes neither equivalence nor superiority. A cheaper design is to
-compute the statistic and ask the LLM only for explanation.
+compute the statistic and ask the LLM only for explanation (proposed; explanation quality untested).
 
 ## Appendix E — Reproduce
 The experiments are complete. For a read-only offline check of the shipped artifacts, run
 `python3 verify_artifacts.py` (standard library only; no LLM calls, metric recomputation, or writes).
 For a separate read-only reconstruction of cached auditor inputs, run
 `uv run python check_audit_inputs.py` (requires NumPy; recorded-hash and length-only matches reported separately).
+For a read-only freshness check of the cached evidence source ledger, run
+`python3 -S check_evidence_sources.py --check` (standard library only; literal source locations, no semantic judge).
 The post-hoc manifest and completion receipt were added in iteration 19 to preserve the handoff;
 they are not pre-registration evidence. See [README.md](README.md) for artifact locations and
 safe rendering commands. The generation/audit commands below document how the existing results

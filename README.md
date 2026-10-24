@@ -6,6 +6,10 @@ locally in a browser; it works offline, with presentation controls and Print / P
 Ready to share: [slides PDF](PRESENTATION.pdf), [report PDF](REPORT.pdf), and
 [report HTML](REPORT.html) (all figures embedded; readable as a single offline file).
 [PRESENTATION.md](PRESENTATION.md) contains speaker notes and source hashes.
+The [evidence source ledger](EVIDENCE.html) exposes all 2,925 original-view test and
+replication evidence items alongside the public log. It works offline, with optional
+search/view filters, and reports literal locations for quote-marked spans. It does
+not judge whether the surrounding observation or collusion inference is correct.
 [PLAN.md](PLAN.md) defines the project, [data/SPLITS.md](data/SPLITS.md)
 records evaluation exposure and registration chronology, and [EXPERIMENTS.tsv](EXPERIMENTS.tsv)
 records the experiments. [SCHEMA.md](SCHEMA.md) describes trajectory files.
@@ -26,6 +30,7 @@ The verifier reads a committed SHA-256 manifest, validates cached dataset/audito
 matched placebo market paths, frozen calibration inputs, saved CI/contrast arithmetic,
 the primary report table and image links, presentation freshness against saved JSON, and
 exported HTML/PDF hashes against their post-hoc source receipt.
+It also checks freshness of the cached evidence source ledger.
 It makes no LLM calls and does not recompute
 AUROC, bootstrap intervals, or thresholds. The manifest and completion receipt were recorded
 **after** the experiments in iteration 19; they preserve the handoff, not evidence of
@@ -51,6 +56,22 @@ content. The post-hoc `data/audit_input_receipt.json` records this check and its
 source hashes; the standard-library verifier validates receipt freshness without
 reconstructing prompts. Use this checker for handoff inspection: the historical
 `auditors.py --verify` entry point regenerates public metadata before checking.
+
+To regenerate or check the evidence source ledger (saved caches only, no model calls):
+
+```sh
+python3 -S check_evidence_sources.py
+python3 -S check_evidence_sources.py --check  # read-only, standard library only
+```
+
+The census covers the six original GPT views on 95 test and 30 replication runs.
+Only 4 evidence items contain quote-marked phrases; all four can be located at
+the cited firm and round. All four are text-view items, and two quote the generic
+phrase "considered price" occurring across multiple firms and rounds. This sparse quotation coverage does not validate the
+auditors' explanations. The ledger preserves all evidence and the complete public
+price/message log for manual review, plus market state, units, profits and public
+cost offsets. The renderer reads no private-chat or label files and does not export
+injected agent-private fields. Well-formed source anchors do not establish relevance.
 
 For deterministic table/figure rendering, install the pinned environment with `uv sync --frozen`, then:
 

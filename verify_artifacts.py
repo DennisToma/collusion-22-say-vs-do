@@ -57,7 +57,7 @@ def snapshot_paths(root):
     paths += list((root / "tests").glob("*.py"))
     paths += [root / p for p in ("pyproject.toml", "uv.lock", "SCHEMA.md",
                                "PRESENTATION.html", "PRESENTATION.md",
-                               "REPORT.html", "REPORT.pdf", "PRESENTATION.pdf")]
+                               "REPORT.html", "REPORT.pdf", "PRESENTATION.pdf", "EVIDENCE.html")]
     for folder in ("data", "results", "figures"):
         paths += [p for p in (root / folder).rglob("*")
                   if p.is_file() and p.suffix in (".json", ".jsonl", ".md", ".png")]
@@ -228,8 +228,10 @@ def verify(root):
         require((root / name).read_bytes() == content.encode("utf-8"), f"stale presentation: {name}")
     from build_handoff import check as check_handoff
     check_handoff(root)
+    from check_evidence_sources import check as check_sources
+    check_sources(root)
     print(f"PASS: {n} artifact hashes; 206 runs / 2,472 rounds; 1,236 original-view audits; "
-          "15 matched placebo paths; frozen inputs/receipts; saved CI/contrast consistency; REPORT table/figures; presentation freshness; offline HTML/PDF provenance; 2,213-audit input receipt.")
+          "15 matched placebo paths; frozen inputs/receipts; saved CI/contrast consistency; REPORT table/figures; presentation freshness; offline HTML/PDF provenance; 2,213-audit input receipt; evidence source ledger freshness.")
     print("No LLM calls, writes, refitting, or AUROC/bootstrap recomputation. Manifest is post-hoc, not a registration.")
 
 

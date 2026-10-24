@@ -33,7 +33,7 @@ nav p { margin:0 } nav ul { columns:2; padding-left:22px } nav li { font-size:14
  .wide th:first-child,.wide td:first-child { width:17% }
  pre { font-size:8pt; padding:8pt } a { color:inherit; text-decoration:none }
 }
-</style></head><body><main><p class="export-note">Offline rendering of REPORT.md. Figures are embedded; source links are local in HTML and point to GitHub in PDF. No results recomputed.<br>Source SHA-256: be9cf2568413c961b13072de7139adf2e40bcd4414d7ad01c903ca20d1751440</p><nav aria-label="Contents"><p><strong>Contents</strong></p><ul><li><a href="#section-2">Abstract</a></li><li><a href="#section-4">Question</a></li><li><a href="#section-5">Setup</a></li><li><a href="#section-6">Results</a></li><li><a href="#section-10">Validity safeguards</a></li><li><a href="#section-11">Held-out discipline</a></li><li><a href="#section-12">Limitations</a></li><li><a href="#section-13">What to do next</a></li><li><a href="#section-14">Appendix A — LLM market, DEV split (runs 0000–0029; development only, superseded by the locked test above)</a></li><li><a href="#section-15">Appendix B — Scripted mechanism check (non-LLM baselines, baselines.py, 5-fold CV grouped by run, 320 runs)</a></li><li><a href="#section-16">Appendix C — Additional test-split detail (locked test split, n = 95; moved from §Results for length)</a></li><li><a href="#section-17">Appendix D — Exploration strata detail (moved from §Results for length; text unchanged)</a></li><li><a href="#section-18">Appendix E — Reproduce</a></li></ul></nav><h1 id="section-1">Say vs. Do: does auditing what AI agents <em>say</em> together with what they <em>do</em> catch collusion better?</h1>
+</style></head><body><main><p class="export-note">Offline rendering of REPORT.md. Figures are embedded; source links are local in HTML and point to GitHub in PDF. No results recomputed.<br>Source SHA-256: 6224feb11e6a560c055a771351860c78c8999c35876b8ef36ffa78840f00ea30</p><nav aria-label="Contents"><p><strong>Contents</strong></p><ul><li><a href="#section-2">Abstract</a></li><li><a href="#section-4">Question</a></li><li><a href="#section-5">Setup</a></li><li><a href="#section-6">Results</a></li><li><a href="#section-10">Validity safeguards</a></li><li><a href="#section-11">Held-out discipline</a></li><li><a href="#section-12">Limitations</a></li><li><a href="#section-13">What to do next</a></li><li><a href="#section-14">Appendix A — LLM market, DEV split (runs 0000–0029; development only, superseded by the locked test above)</a></li><li><a href="#section-15">Appendix B — Scripted mechanism check (non-LLM baselines, baselines.py, 5-fold CV grouped by run, 320 runs)</a></li><li><a href="#section-16">Appendix C — Additional test-split detail (locked test split, n = 95; moved from §Results for length)</a></li><li><a href="#section-17">Appendix D — Exploration strata detail (moved from §Results for length; text unchanged)</a></li><li><a href="#section-18">Appendix E — Reproduce</a></li></ul></nav><h1 id="section-1">Say vs. Do: does auditing what AI agents <em>say</em> together with what they <em>do</em> catch collusion better?</h1>
 <p><em>Apart AI Collusion Sprint, Q2.2 — text + action auditing. Status: locked test results in (2026-10-24 00:03 UTC); registered replication run 02:07 UTC (chronology disclosed below); placebo-channel exploration 03:33 UTC. Offline verification: <code>python3 verify_artifacts.py</code>; handoff instructions in <a href="README.md">README.md</a>.</em></p>
 <p>For the five-minute presentation, open <a href="PRESENTATION.html">PRESENTATION.html</a> locally in a browser;
 <a href="PRESENTATION.md">speaker notes and saved-input hashes</a> accompany it. Render with
@@ -43,7 +43,9 @@ Ready to share: <a href="PRESENTATION.pdf">slides PDF</a>, <a href="REPORT.pdf">
 <a href="REPORT.html">offline report HTML with embedded figures</a>. The report exports preserve this full
 write-up; wide appendix tables use landscape PDF pages. Export with
 <code>uv run --group handoff python build_handoff.py</code>; check source/output hashes without writes using
-<code>python3 -S build_handoff.py --check</code> (post-hoc rendering receipt; no metrics recomputed).</p>
+<code>python3 -S build_handoff.py --check</code> (post-hoc rendering receipt; no metrics recomputed).
+The <a href="EVIDENCE.html">cached evidence source ledger</a> lets reviewers inspect every original-view
+test and replication evidence item beside the public log (offline, searchable; no semantic judging).</p>
 <h2 id="section-2">Abstract</h2>
 <p>Does an auditor catch LLM collusion better if it reads what sellers <em>say</em> in public as well as what they <em>do</em>?
 <strong>On our generator: no resolved gain.</strong> We simulate a 4-firm repeated-pricing market with gpt-6-luna sellers; in the
@@ -581,6 +583,21 @@ their historical content. The check also validates public partnership
 metadata, frozen shuffle mappings and unchanged recipient actions, and tests that the current renderer excludes
 injected private fields and the withheld modality. <code>data/audit_input_receipt.json</code> preserves this check after the
 experiments; it is not pre-registration evidence. No model calls, scores, CIs or thresholds are rerun.</p>
+<p><strong>Evidence-check coverage (post-hoc, iteration 24).</strong> <code>python3 -S check_evidence_sources.py</code> →
+<code>results/analysis/evidence_sources.json</code> and <a href="EVIDENCE.html">offline source ledger</a>. Across the six
+original GPT views, the test caches contain 2,229 evidence items and the replication 696. All have well-formed
+firm/round anchors (firm A–D, integer round 1–12), but only 3 test items and 1 replication item contain quote-marked phrases; all four
+phrases occur in the cited firm's message in the cited round (case/whitespace/Unicode normalization,
+word-boundary substring, punctuation retained; short phrases included). These are coverage counts for
+the saved outputs, not semantic accuracy estimates: marked phrases can be terminology rather than
+source quotations, and literal presence does not validate the surrounding observation. All four are
+text-view items; two quote the generic phrase &quot;considered price&quot;, which occurs across multiple firms
+and rounds in their respective runs. The remaining items contain no quote-marked span and were not
+semantically classified. The historical
+price regex check below cannot validate these inferences; its strict same-round check can fail
+legitimate price-transition descriptions. The ledger exposes all public rounds and firms for manual
+comparison, including modalities withheld from the particular auditor view. <strong>The proposed LLM
+explanation role remains unvalidated.</strong> No headline result, cache, threshold or price-check estimate changed.</p>
 <h2 id="section-11">Held-out discipline</h2>
 <p><code>data/SPLITS.md</code>: dev = llm_v3_0000–0029, locked test = 0030–0124. The core auditor prompt was written before any
 LLM-market data; the core task text of the six original views was never optimised (0 attempts), but views and comparators were developed adaptively after interim exposure (views
@@ -1120,12 +1137,14 @@ on test and from 0.65 to 0.75 on the replication. Pointing the auditor at the pr
 the premium's ranking on test, but the gain does not show on the 30 replication runs (where action_stats' pair scores
 already localised near ceiling).
 The test gaps to the premium are unresolved; this establishes neither equivalence nor superiority. A cheaper design is to
-compute the statistic and ask the LLM only for explanation.</p>
+compute the statistic and ask the LLM only for explanation (proposed; explanation quality untested).</p>
 <h2 id="section-18">Appendix E — Reproduce</h2>
 <p>The experiments are complete. For a read-only offline check of the shipped artifacts, run
 <code>python3 verify_artifacts.py</code> (standard library only; no LLM calls, metric recomputation, or writes).
 For a separate read-only reconstruction of cached auditor inputs, run
 <code>uv run python check_audit_inputs.py</code> (requires NumPy; recorded-hash and length-only matches reported separately).
+For a read-only freshness check of the cached evidence source ledger, run
+<code>python3 -S check_evidence_sources.py --check</code> (standard library only; literal source locations, no semantic judge).
 The post-hoc manifest and completion receipt were added in iteration 19 to preserve the handoff;
 they are not pre-registration evidence. See <a href="README.md">README.md</a> for artifact locations and
 safe rendering commands. The generation/audit commands below document how the existing results
