@@ -1,21 +1,22 @@
 # STATUS
 
-## Current state (2026-10-24 16:09 UTC VM clock, Phase 2 iteration 20)
+## Current state (2026-10-24 16:12 UTC VM clock, Phase 2 iteration 21)
 - Main claim unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc).
-- **E99 strongF FINAL (15:34):** strict-executed 13/20 [.43,.83], tacit-high none 19/20 [.79,.99]; paired excess private−none −0.44 [−1.84,+1.00].
-  Executed vs tacit-high (E99-x, exploratory): premium .47, market excess .50, action .57, text .25, combined .18 (reverse), plan .76 [.55,.93].
-  E99 P3 + E103 P1 FAILED; rest held / n.e. REPORT P2.7 replaced; codex review applied (reviews/p2_iter20_strongF_codex.md, wording only).
-  Class file published 15:31 (Q1.4 E66 unblocked). Proposed 2nd joint sentence rewritten (executed NOT rare under strong framing) → Q1.4 to align.
-- **E110 German market FINAL (P2.14):** agreement 3/10 vs 9/10 English (same seeds; P3 FAILED, sellers refuse "Preisabsprachen"),
-  premium still +0.91 [+0.20, +1.58] (P1 held) vs English +1.75. Descriptive n=10+10.
-- E102 qwen strong descriptive until Sun 10:00. Abstract ~260 words (target 250). No generation of ours running now.
+- E99 strongF final: strict-executed 13/20, tacit-high none 19/20; paired private−none −0.44 [−1.84, +1.00].
+- **E111 (new, no LLM, exploratory):** private plans contain NO agreement words (0/39 private-arm runs); a partner-name count separates
+  strict vs tacit-high 0.82 [0.66, 0.96] ≥ LLM plan view 0.76; non-partner-name control 0.42. → plan view = channel footprint, not
+  stated deliberation. Abstract, TL;DR 5, glance, P2.7 reworded ("only" dropped); Q1.4 E66 line added; joint sentence 2 = rescoped text
+  (DIRECTION 5b; Q1.4 REPORT still carries the unscoped "LLM sellers" version → Q1.4 to align).
+- E110 German final (P2.14). REPORT 738 lines (was 734; P2.13 + P2.7 pilot compressed).
 
 ## Next steps
-1. Part E queue (owner Q2.2): E2 participant replacement mid-game in strongF-type executed games (luna, register first; ~10 runs) > E3 mixed-family pair.
-2. Checkpoint Sat 19:30: one Opus review of abstract + glance + P2.7 + P2.14; trim abstract to ≤ 250.
-3. E102 stop/report Sun 10:00; finalize-only Sun 16:30. Read serendipity HITS.md each iteration (16:09: no promoted hits).
+1. **E2 participant replacement (DIRECTION dir 3): register by 18:00, launch by 19:00** — next iteration's whole chunk.
+2. E1 audit plan: register before Q1.4 grid data exist (dir 4).
+3. Checkpoint 19:30: one Opus review of abstract + TL;DR + glance + P2.7 + P2.14.
+4. E102 stop/report Sun 10:00; denominators table (dir 5a); P2.11 three-pair table when Q1.4 E69 lands.
 
 ## Log
+- 16:12 P2 iter21: E111 plan-view keyword baseline (p2_plan_keyword.py); abstract/TL;DR/P2.7 plan claim rescoped; E66 line; joint sentence 2 rescoped.
 - 16:09 P2 iter20: E110 German result (P2.14 + glance); codex review of E99 write-up applied.
 - 15:40 P2 iter20: E99 strongF final → P2.7/abstract/TL;DR/glance; p2_strongF_public.py; E110 German market registered + launched (llm_market --lang de, p2_de.py).
 - 15:14 P2 iter19: C3c E109 registered, pilot run, dropped by registered price rule (base 9B prices below Nash); qwen9 max_tokens fix; REPORT P2.11 line.

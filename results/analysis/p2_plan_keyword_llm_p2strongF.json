@@ -1,0 +1,130 @@
+{
+ "ds": "llm_p2strongF",
+ "n_pos_strict": 13,
+ "n_neg_tacit_high": 19,
+ "detectors": {
+  "K_terms": {
+   "auroc_strict_vs_tacit_high": [
+    0.5,
+    0.5,
+    0.5
+   ],
+   "mean_strict": 0.0,
+   "mean_tacit_high": 0.0
+  },
+  "K_dir": {
+   "auroc_strict_vs_tacit_high": [
+    0.824,
+    0.66,
+    0.958
+   ],
+   "mean_strict": 0.088,
+   "mean_tacit_high": 0.025
+  },
+  "K_other": {
+   "auroc_strict_vs_tacit_high": [
+    0.423,
+    0.189,
+    0.665
+   ],
+   "mean_strict": 0.041,
+   "mean_tacit_high": 0.061
+  },
+  "plan_view": {
+   "auroc_strict_vs_tacit_high": [
+    0.755,
+    0.55,
+    0.933
+   ],
+   "mean_strict": 49.385,
+   "mean_tacit_high": 18.053
+  }
+ },
+ "runs_with_term_in_any_plan": {
+  "strict": [
+   0,
+   13
+  ],
+  "tacit_high": [
+   0,
+   19
+  ],
+  "nonexec_private": [
+   0,
+   7
+  ]
+ },
+ "plan_view_flags_by_term": {
+  "strict_term": [
+   0,
+   0
+  ],
+  "strict_noterm": [
+   5,
+   13
+  ],
+  "tacit_high_term": [
+   0,
+   0
+  ],
+  "tacit_high_noterm": [
+   0,
+   19
+  ]
+ },
+ "per_run_strict": {
+  "llm_p2strongF_0000": {
+   "K_dir": 0.05,
+   "plan_view": 43.0
+  },
+  "llm_p2strongF_0006": {
+   "K_dir": 0.0,
+   "plan_view": 12.0
+  },
+  "llm_p2strongF_0010": {
+   "K_dir": 0.056,
+   "plan_view": 20.0
+  },
+  "llm_p2strongF_0012": {
+   "K_dir": 0.094,
+   "plan_view": 93.0
+  },
+  "llm_p2strongF_0016": {
+   "K_dir": 0.113,
+   "plan_view": 92.0
+  },
+  "llm_p2strongF_0022": {
+   "K_dir": 0.087,
+   "plan_view": 40.0
+  },
+  "llm_p2strongF_0024": {
+   "K_dir": 0.181,
+   "plan_view": 18.0
+  },
+  "llm_p2strongF_0026": {
+   "K_dir": 0.037,
+   "plan_view": 35.0
+  },
+  "llm_p2strongF_0028": {
+   "K_dir": 0.031,
+   "plan_view": 85.0
+  },
+  "llm_p2strongF_0032": {
+   "K_dir": 0.069,
+   "plan_view": 85.0
+  },
+  "llm_p2strongF_0034": {
+   "K_dir": 0.269,
+   "plan_view": 12.0
+  },
+  "llm_p2strongF_0036": {
+   "K_dir": 0.15,
+   "plan_view": 89.0
+  },
+  "llm_p2strongF_0038": {
+   "K_dir": 0.013,
+   "plan_view": 18.0
+  }
+ },
+ "spearman_strict_K_dir_vs_plan_view": 0.199
+}
