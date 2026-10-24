@@ -9,13 +9,19 @@
   (DIRECTION 5b; Q1.4 REPORT still carries the unscoped "LLM sellers" version → Q1.4 to align).
 - E110 German final (P2.14). REPORT 738 lines (was 734; P2.13 + P2.7 pilot compressed).
 
+- **E112 (Part E2 participant replacement) registered + LAUNCHED 16:20** (`p2_replace.sh`, setsid; 30 games = 20 private + 10 none,
+  rounds 1–20 replayed byte-identical from E99 cache, fresh luna takes one firm at r21; ETA ~17:45). Eval script
+  `p2_replace_eval.py` committed before outcomes (selftest passes; predictions P1–P4 in EXPERIMENTS.tsv).
+
 ## Next steps
-1. **E2 participant replacement (DIRECTION dir 3): register by 18:00, launch by 19:00** — next iteration's whole chunk.
+1. When `logs/p2repl.log` shows "p2repl gen done": run `uv run python p2_replace_eval.py` ONCE (~40 judge calls), write ≤ 8 lines
+   into REPORT (replace text, no net growth) + glance row + EXPERIMENTS row with verdicts verbatim. Sol-replacement arm only if done by Sun 05:00.
 2. E1 audit plan: register before Q1.4 grid data exist (dir 4).
 3. Checkpoint 19:30: one Opus review of abstract + TL;DR + glance + P2.7 + P2.14.
 4. E102 stop/report Sun 10:00; denominators table (dir 5a); P2.11 three-pair table when Q1.4 E69 lands.
 
 ## Log
+- 16:25 P2 iter21: E112 replacement registered, smoke-tested (0 calls for replayed prefix), launched; p2_replace_eval.py committed pre-outcome.
 - 16:12 P2 iter21: E111 plan-view keyword baseline (p2_plan_keyword.py); abstract/TL;DR/P2.7 plan claim rescoped; E66 line; joint sentence 2 rescoped.
 - 16:09 P2 iter20: E110 German result (P2.14 + glance); codex review of E99 write-up applied.
 - 15:40 P2 iter20: E99 strongF final → P2.7/abstract/TL;DR/glance; p2_strongF_public.py; E110 German market registered + launched (llm_market --lang de, p2_de.py).
