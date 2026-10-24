@@ -69,3 +69,17 @@
   (not flagged; 0/125 flagged overall). `finalize_test.sh` was then run once by hand: STARTED 23:59, HEADLINE_DONE
   00:03 UTC, no failed steps. This is the single headline run. Hard-set checker model: gpt-6-luna 94 runs,
   deepseek-v4.1-flash 31 runs (cheap-tier backend auto-order).
+
+## llm_v3rep (fresh replication split, iter 12, PRE-REGISTERED 2026-10-24 01:10 UTC before generation)
+- Purpose: the premium statistic was chosen after seeing partial llm_v3 data incl. test runs (REPORT disclosure), so
+  the llm_v3 test split is not fully held-out for it. llm_v3rep is generated AFTER all analysis code and thresholds
+  were frozen: same generator (`llm_market.py`, sim llm-0.3, lab framing, 12 rounds, gpt-6-luna), new seed 9000,
+  plan private:15, none:10, legit:5 (30 runs). Labelled + audited by the unchanged `pipeline.sh`.
+- Pre-registered analysis (`replication.py`, written before any llm_v3rep run exists, run ONCE on the full set):
+  run AUROC and within-market AUROC (positive runs) for premium, premium_r2plus, and the 6 LLM views; FPR/TPR at the
+  FROZEN llm_v3 dev thresholds (`results/analysis/final_llm_v3_gpt-6.1-sol_dev.json`); paired run-bootstrap CI for
+  (premium − best LLM view) where "best" = the view with highest llm_v3 TEST run AUROC (action_stats? taken from
+  final_llm_v3_gpt-6.1-sol_test.json, fixed before generation), and for (action_stats − action), (combined − action).
+  Pre-registered predictions: P1 premium run AUROC ≥ 0.85; P2 text run AUROC CI includes 0.5; P3 premium − best
+  view ≥ 0 (point estimate); P4 combined − action CI includes 0. n = 30 → wide CIs; this is a replication check,
+  not a new headline. Reported as its own section; never pooled with llm_v3.
