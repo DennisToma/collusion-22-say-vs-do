@@ -20,6 +20,13 @@ model, and evasion is untested (under an announced monitor the judge finds coord
 Suggested architecture (not evaluated end to end): always-on action statistics as the screen, LLM audit reserved for
 explaining flagged runs.
 
+![summary](figures/summary.png)
+*Figure 1 (`uv run python fig_summary.py`, read from existing results JSON). (a) Run AUROC with 95% run-bootstrap CIs;
+filled = locked test split (n = 95), hollow = fresh replication (n = 30). The premium comparator was chosen after
+seeing partial dev data; the round-1 replication point is exploratory (computed after `replication.py`). (b) Flag
+rates at frozen dev thresholds in the placebo exploration stratum (15 placebo, 15 matched private, 10 `none`); n is
+small and no scorer resolves placebo from private.*
+
 ### Key results (detail)
 **Answer (on this generator): no resolved detection gain.** Adding what LLM sellers *say* in public to what they *do*
 gives no resolved run-level detection gain, for zero-shot LLM auditors or for supervised baselines (with a statistics
@@ -726,6 +733,7 @@ uv run python textsim.py --split test           # untrained public-text converge
 uv run python report_tables.py --split test     # renders all REPORT tables from results/*.json
 uv run python fig_mechanism.py --split all      # descriptive price paths by condition (no metric)
 uv run python fig_roc.py                        # test ROC + dev operating points (descriptive)
+uv run python fig_summary.py                    # Figure 1 summary (reads existing results JSON only)
 uv run python text_lr_inspect.py                # n-gram / firm-level text cue inspection (descriptive)
 uv run python incremental.py --split test       # premium + LLM view rank-average (run by finalize_test.sh)
 uv run python fp_stratum.py --ds llm_v3fp       # firm-framing exploration stratum
