@@ -2,7 +2,10 @@
 
 # STATUS
 
-## Current state (2026-10-24 14:35 UTC VM clock, Phase 2 iteration 15)
+## Current state (2026-10-24 14:16 UTC VM clock, Phase 2 iteration 16)
+- iter16: directives 2-5 verified already done (abstract 244 words, null bound in abstract+TL;DR, glance table). Added
+  p2_strongF_fig.py (Part C figure, price paths by behaviour class; no LLM calls), smoke-tested on pilot -> figures/p2_strong_llm_p2strong_luna.png.
+  strongF still 24/40 at 14:15 (gen alive, pid 3302642).
 - DONE this iter (consolidation, directive 4 / "no growth"): REPORT 770 -> 692 lines. v1 overnight summary + "Key results (detail)"
   moved to REPORT_APPENDIX (4-line stub + Figure 1 kept). Stale v1 Limitations/What-next ("single family", "evasion not tested")
   rewritten for Phase 2 (ground truth, prompt effect, compliance-not-evasion + dropped coded arm, market-wide spillover, one-family
@@ -12,13 +15,14 @@
   E102 qwenaS/qwenbS (stop Sun 10:00). Qwen budget $11.27/$70 ok. C3c (qwen9) not started: director 13:45 "no new registered experiments".
 ## Next steps
 1. On "strongF post done": `uv run python p2_strongF_report.py --ds llm_p2strongF` -> REPLACE P2.7 full-arm/plan interim text with its
-   markdown (+ E64 caveat: price AUROCs on strict class ~1 by construction vs competitive; E99-x is the decisive contrast). Update glance
+   markdown, then `uv run python p2_strongF_fig.py --ds llm_p2strongF` and embed figures/p2_strong_llm_p2strongF.png in P2.7 (+ E64 caveat: price AUROCs on strict class ~1 by construction vs competitive; E99-x is the decisive contrast). Update glance
    row P2.7, abstract Part C sentence, header; add merger sentence 2 with X/Y = strict count. Quote Q1.4 E66 verdict when it exists.
 2. If gen exits nonzero the echo never fires: check logs/partc_strongF.log; then append the echo manually and let post run.
 3. Light self-check of P2.7; export at 19:30. E102 at Sun 10:00: descriptive line in P2.11.
 - Risk: never `pkill -f` a pattern in your own command line. verify_artifacts.py FAILS (manifest) — deferred to Sun 16:30.
 
 ## Log
+- 14:16 P2 iter16: p2_strongF_fig.py (Part C class-path figure, pilot smoke test); no new experiments, waiting on E99 gen 24/40.
 - 14:35 P2 iter15: REPORT consolidation (v1 summary + v1 limitations -> appendix; Phase-2 Limitations/What-next), 770 -> 692 lines.
 - 14:12 P2 iter14: p2_strongF_report.py formatter (pilot smoke test); P2.4 circularity caveat, E44 cite in P2.7, merger sentence 1.
 - 14:10 P2 iter13: Opus adversarial review (directive 4) applied to abstract/TL;DR/glance/P2.11/P2.12 (14 items, no number changes).
