@@ -1,7 +1,7 @@
 # Say vs. Do — Q2.2
 
-Read [REPORT.md](REPORT.md) for the research question, results, uncertainty, figures,
-and limitations. For the five-minute talk, open [PRESENTATION.html](PRESENTATION.html)
+[REPORT.md](REPORT.md) is the current Phase 2 write-up, including uncertainty and limitations.
+HTML/PDF/slides below still reflect the frozen overnight snapshot pending the scheduled export; for that talk, open [PRESENTATION.html](PRESENTATION.html)
 locally in a browser; it works offline, with presentation controls and Print / PDF.
 Ready to share: [slides PDF](PRESENTATION.pdf), [report PDF](REPORT.pdf), and
 [report HTML](REPORT.html) (all figures embedded; readable as a single offline file).
@@ -22,7 +22,8 @@ ranks strongly, but placebo-channel runs show that elevated premiums and detecto
 flags can arise without delivered private messages. The endpoint is private coordination
 communication, not verified realised overcharge. See the report for the full caveats.
 
-To check this checkout offline, with Python 3.12+ and no installed dependencies or API keys:
+The frozen handoff checks currently reject the added Phase 2 inventory/sources; their refresh is scheduled for Sun 16:30 UTC.
+For the overnight snapshot, check offline with Python 3.12+ and no installed dependencies or API keys:
 
 ```sh
 python3 verify_artifacts.py

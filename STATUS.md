@@ -2,24 +2,21 @@
 
 # STATUS
 
-## Current state (2026-10-24 14:16 UTC VM clock, Phase 2 iteration 16)
-- iter16: directives 2-5 verified already done (abstract 244 words, null bound in abstract+TL;DR, glance table). Added
-  p2_strongF_fig.py (Part C figure, price paths by behaviour class; no LLM calls), smoke-tested on pilot -> figures/p2_strong_llm_p2strong_luna.png.
-  strongF still 24/40 at 14:15 (gen alive, pid 3302642).
-- DONE this iter (consolidation, directive 4 / "no growth"): REPORT 770 -> 692 lines. v1 overnight summary + "Key results (detail)"
-  moved to REPORT_APPENDIX (4-line stub + Figure 1 kept). Stale v1 Limitations/What-next ("single family", "evasion not tested")
-  rewritten for Phase 2 (ground truth, prompt effect, compliance-not-evasion + dropped coded arm, market-wide spillover, one-family
-  headline, SALT construct, stats); v1 text preserved verbatim in appendix. No numbers changed; no new experiments.
-- RUNNING: strongF generation 24/40 at 14:15 (~8 games/h -> gen done ~16:15; post loop polls every 40 min -> "strongF post done"
-  in logs/partc_chain.log ~17:00). Do NOT run p2_strong_eval on partial data (it writes the shared class file Q1.4 E66 waits on).
-  E102 qwenaS/qwenbS (stop Sun 10:00). Qwen budget $11.27/$70 ok. C3c (qwen9) not started: director 13:45 "no new registered experiments".
+## Current state (2026-10-24 14:33 UTC VM clock, Phase 2 iteration 17)
+- Main claim unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc).
+- iter17: hardened existing E99 completion path; exact 40-game/matched-seed/raw-plan coverage, valid terms, current same-model audits, run-once protection.
+- Shared classes now publish BEFORE remaining audits; no partial classes or metrics. Wrapper restarted safely (PID 3033342; old idle wrapper/sleep stopped).
+- Verified: 17 synthetic tests + 7 existing prompt-boundary tests PASS; disposable luna pilot preserves every old JSON key/value; independent Codex review resolved.
+- strongF 27/40 at 14:29 (gen PID 3302642 alive); live --check-only correctly refuses incomplete generation without calls/writes. No full-arm outcomes inspected.
+- E102 strong Qwen continues (stop Sun 10:00); E100/E105 final. No new experiment or scientific estimate this iteration; newest director Part E (14:30) queues broader designs after in-flight C.
+- REPORT remains 692 lines; README now labels static exports as overnight snapshots. Frozen handoff checker rejects Phase 2 cache inventory; refresh deferred to Sun 16:30.
 ## Next steps
-1. On "strongF post done": `uv run python p2_strongF_report.py --ds llm_p2strongF` -> REPLACE P2.7 full-arm/plan interim text with its
-   markdown, then `uv run python p2_strongF_fig.py --ds llm_p2strongF` and embed figures/p2_strong_llm_p2strongF.png in P2.7 (+ E64 caveat: price AUROCs on strict class ~1 by construction vs competitive; E99-x is the decisive contrast). Update glance
-   row P2.7, abstract Part C sentence, header; add merger sentence 2 with X/Y = strict count. Quote Q1.4 E66 verdict when it exists.
-2. If gen exits nonzero the echo never fires: check logs/partc_strongF.log; then append the echo manually and let post run.
-3. Light self-check of P2.7; export at 19:30. E102 at Sun 10:00: descriptive line in P2.11.
-- Risk: never `pkill -f` a pattern in your own command line. verify_artifacts.py FAILS (manifest) — deferred to Sun 16:30.
+1. Watch logs/partc_chain.log: "strongF classes ready" releases Q1.4 E66; "strongF post done" releases report/figure rendering. Full runner log: logs/strongF_post_runner.log.
+2. On post done: p2_strongF_report.py --ds llm_p2strongF; REPLACE P2.7 interim with class rates + E99-x table + registered contrasts, then p2_strongF_fig.py; update glance/abstract/header and merger X/Y. Cite Q1.4 E66 when available.
+3. Interpret E99-x cautiously: class rules do NOT force price AUROC=0.5; a text/plan AUROC alone is not incremental gain over actions. Keep exploratory label and circularity caveat.
+4. On failure: check runner/classes/eval logs and data/SPLITS.md recovery rules. Never append a generation-done marker until --check-only passes; never remove a completed evaluation lock to obtain another estimate.
+5. Checkpoint at Sat 19:30; E102 descriptive cutoff Sun 10:00; frozen handoff/presentation/manifest refresh Sun 16:30. No new waiter scripts.
+6. NEW DIRECTION Part E (14:30, read during iter17): after in-flight Part C, E1 Q1.4 factorial generation/Q2.2 audits; Q2.2 E2 replacement, E3 mixed families, E4 zero-game anomaly hunt, E5 German. Register before work; target Sun 13:00; these are queued, not started.
 
 ## Log
 - 14:16 P2 iter16: p2_strongF_fig.py (Part C class-path figure, pilot smoke test); no new experiments, waiting on E99 gen 24/40.
@@ -132,3 +129,9 @@
 - Directive 1 done: new Abstract/TL;DR (Phase 2 answer), P2.5/P2.6 condensed, appendix §P2-detail. Fixed sol public-invitation cell to the none arm (0/192; was all arms 0/576); luna none 7/720 verified.
 - Directive 2: chain3 restarted with p2rep before p2cue. Directive 3: E94 registered 09:58 + launched. Directive 4: E95 registered 10:02 + p2_family3way.py. Ledger correction row (6 rows stamped after their commit).
 - 10:09 E92 result landed (C_strict); codex review E96 applied to Abstract/TL;DR/takeaways/P2.2/P2.4-P2.6; reimpl corrected to 30/32.
+
+- 14:33 P2 iter17 (fallback Codex manager): E99 completion/provenance hardening and reviewed handoff, no new experiment. Added exact registered seed/condition/model/round/firm checks, raw decision coverage + saved-plan/public-price equality; same-model finite-score/current-prompt coverage on all frozen views; atomic immutable class publication before remaining audits; saved-result/local run-once guards; E103 secondary threshold 58 flags. Existing scalar scorers/class rules/primary thresholds and prior pilot outputs unchanged. Switched only the idle old post wrapper/sleep to the amended flock-protected existing script; generator stayed running.
+- 14:33 iter17 verification: 17 synthetic tests PASS (`uv run python -W ignore::ResourceWarning -m unittest discover -s tests -p test_strongf_completion.py -v`), 7 existing boundaries PASS (`PYTHONPATH=tests uv run python -W ignore::ResourceWarning -m unittest test_audit_inputs.PromptInputTests -v`), bash syntax PASS, disposable pilot old keys/values identical. Live check-only rejected 27/40; no class/result was created. `check_audit_inputs.py` fails at frozen inventory check because Phase 2 added caches, alongside the already-known stale manifest; no handoff artifacts rebuilt.
+- 14:33 iter17 interpretation adjustment to director 1(ii), justified by the code and independent review: strict requires pair excess >=+2 after agreement; tacit-high requires market excess >=+2 in rounds 11–40. Different selections do not guarantee equal price distributions or price AUROC=0.5. Preserved E99-x prediction, but formatter now lists action controls separately and warns that text/plan separation alone does not establish incremental gain. REPORT replacements only (692 lines); no results changed. Review: reviews/p2_iter17_codex_review.md; objective cache-recovery procedure: data/SPLITS.md.
+
+- 14:34 iter17 director steering: DIRECTION.md changed during verification (Dennis 14:30 Part E). Read the new diff and queued its E1–E5 instructions for after in-flight Part C, which is still generating; this supersedes the earlier blanket "no new registered experiments" for those directed designs. Did not start a second research chunk. Director edits will be included intact in the milestone commit.

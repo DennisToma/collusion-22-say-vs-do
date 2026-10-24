@@ -159,3 +159,21 @@ scorers, thresholds, metric definitions and published numerical estimates are un
   only (16 conditions × 50 runs × 10 episodes = 8000). Raw parquet in /var/tmp/salt (HF revision sha 2eba8f37).
 - E105 auditor sample: seed 20261024, 120 executed + 120 not-executed episodes, stratified by condition
   (`salt_d1.py sample`); the sampled episode ids are written to `results/salt/sample.json` before any call.
+
+## E99 completion safeguards (iteration 17, before full-arm outcomes; no tuning)
+- The existing E99 design is unchanged. `p2_strong_eval.py --ds llm_p2strongF --check-only` requires exactly
+  run IDs 0000–0039, seeds 9800000–9800019 × private/none, 40 rounds, luna strong framing, matched pairs/state paths,
+  complete raw round×firm decisions, and agreement between saved/raw plans and public/raw prices. No calls or writes.
+- The existing `p2_strongF_post.sh` now runs `--classes-only` first (price-blind terms may be extracted with the frozen
+  prompt). It publishes `results/analysis/p2_strong_classes_llm_p2strongF.json` atomically for Q1.4; no detector scores
+  are read. A changed published class file is rejected. Only then are remaining cached frozen views completed.
+- Final evaluation requires current prompt hashes and valid same-model scores on all 40 games in text/action/combined/
+  action_stats/plan (including the secondary plan score); E103 retains its documented last-row-per-run cache semantics.
+  Output existence protects a clone from reruns; local `logs/final/STRONGF_ONCE.lock` also prevents overlapping attempts.
+  All n<3 contrasts are descriptive. Frozen 50 primary / 58 secondary plan thresholds are retained. No extra contrast.
+- Recovery BEFORE any metric computation: if a gate rejects a malformed/fallback terms row or an invalid/stale audit,
+  archive the original rows, record IDs and objective failure reasons in EXPERIMENTS.tsv, remove only invalid rows,
+  and retry the unchanged prompt/model. A valid negative label or low score is never a retry reason. Do not change
+  seeds, models, prompts, thresholds or label rules. A seller fallback needs an explicit attrition disclosure; do not
+  silently drop it. If the evaluation lock/output already exists, inspect logs and chronology before any recovery;
+  never remove the lock merely to obtain another estimate. Published results remain the record.

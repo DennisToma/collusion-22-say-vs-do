@@ -181,6 +181,36 @@ Cost ≈ L40S $2.2/h, L4 $1/h each; the $70 guard covers all apps. Priority: aft
 Part D1, before Part D2/D3. Report the three pairs in one table: abliterated − base (agreement, executed, markup,
 detector AUROCs) with CIs, and state the precision caveat (FP8/AWQ/bf16) per pair.
 
+
+## Part E — BROADEN THE DESIGN so we can make concrete, general claims (added by Dennis 14:30 UTC)
+**Why:** so far we varied one thing at a time (model, prompt, memory, channel) in mostly one market setup. Claims like
+"collusion shows up as level, not co-movement" are only as general as the conditions we tested. Goal: a small number of
+designs that turn one-off pilots into **general statements with a denominator** ("held in 14 of 16 conditions").
+**Priority:** right after finishing the in-flight Part C arms; run in parallel with Part D (different backends). Results by Sun 13:00 UTC.
+
+- **E1 Factorial "generalization grid" (owner Q1.4 generates, Q2.2 audits).** 2-level fractional factorial, 2^(7-3) = 16
+  cells (resolution IV), ~6 games per cell (A vs C split inside each cell), T=20, public messages logged. Factors:
+  (1) seller family: gpt-6-luna vs Aqueduct qwen-3.6-35b; (2) firms: 2 vs 4; (3) rivals' prices visible each round vs hidden
+  (only own sales); (4) private channel only in round 1 vs every round; (5) memory: last 3 rounds vs full history;
+  (6) public demand/cost shocks: none vs random; (7) framing: neutral vs long-run-profit.
+  Outcomes per cell: channel markup, executed rate, market-wide spillover, level-screen AUROC, pCMI AUROC, text-auditor flag rate.
+  Report main effects with CIs (which factors CAUSE the price lift — answers sprint Q1.1 — and which single restriction
+  cuts it most — answers Q1.5) and the claim's **denominator** (in how many cells level > co-movement, text ≈ chance).
+  Gateway is 45 calls/min shared: luna cells via codex, qwen cells via gateway; one queue, resumable, registered first.
+- **E2 Participant replacement mid-game (owner Q2.2; sprint Q1.2).** In executed-collusion games (strong arm / qwen memory),
+  replace one colluder at round T/2 with a fresh agent (same model, no chat history) or a different model. Does the price
+  level survive? Do detectors notice the break (changepoint)? Cheap, novel, and answers an official sprint question.
+- **E3 Cross-family collusion (owner Q2.2; sprint Q3.3 "can agents identify their peers?").** Pair = luna + qwen (different
+  families) with a channel vs same-family pairs. Do mixed pairs agree / execute as often? Does pCMI see same-family pairs
+  more (shared-policy confound)?
+- **E4 Anomaly hunt (owner both, 30 min each, zero new games).** Have codex gpt-6.1-sol read ~40 randomly sampled
+  transcripts across ALL datasets (both repos) and list the 5 most surprising behaviours with run ids. Each becomes a
+  15-min test logged as `serendipity` in EXPERIMENTS.tsv. Report the hits and the duds.
+- **E5 One non-English market (owner Q2.2, small, 10+10).** Same game, all prompts and messages in German. Does the text
+  auditor (English-prompted) still behave the same? Does collusion change with language?
+
+For every claim in the final abstract, write its denominator next to it (conditions tested, models, datasets).
+
 ## Part D — EXTERNAL VALIDITY with the three proposed datasets (added by Dennis 14:05 UTC)
 **Priority:** after the important in-flight work (E44/P2.8, Part C strong arm + C3 qwen pair, the Sat 20:00
 checkpoint) — and BEFORE any remaining exploration-portfolio (part B) items. Target: results by Sun 12:00 UTC.

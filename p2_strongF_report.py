@@ -3,7 +3,7 @@ p2_strong_eval_<ds>.json + p2_strong_classes_<ds>.json written by p2_strong_eval
 paired market-excess contrast (private - none per matched seed, seed bootstrap 95% CI, 10k resamples, seed 1) and writes
 results/analysis/p2_strongF_report_<ds>.json.  Usage: uv run python p2_strongF_report.py --ds llm_p2strongF
 """
-import argparse, json
+import argparse, hashlib, json
 from pathlib import Path
 import numpy as np
 
@@ -11,6 +11,11 @@ ap = argparse.ArgumentParser(); ap.add_argument("--ds", default="llm_p2strongF")
 E = json.load(open(f"results/analysis/p2_strong_eval_{a.ds}.json"))
 C = json.load(open(f"results/analysis/p2_strong_classes_{a.ds}.json"))
 D, G, cs = E["detectors"], E["groups_n"], E["class_summary"]
+if a.ds == "llm_p2strongF":
+    assert E.get("audit_coverage") == dict.fromkeys(("text", "action", "combined", "action_stats", "plan"), 40), "incomplete E99 evaluation"
+    assert len(C["runs"]) == 40 and E["behaviour_classes"] == {k: v for k, v in C.items() if k != "runs"}, "class/result mismatch"
+    for path, digest in E["inputs_sha256"].items():
+        assert hashlib.sha256(Path(path).read_bytes()).hexdigest() == digest, f"changed E99 input: {path}"
 
 
 def fmt_au(x):
@@ -24,8 +29,12 @@ def fl(k, g):
     return f"{f[0]}/{f[1]}" if f else "–"
 
 
+def fmt_delta(x):
+    return "–" if x is None else f"{x[0]:+.2f} [{x[1]:+.2f}, {x[2]:+.2f}]"
+
+
 def ci_excl(x):  # 95% CI excludes 0.5
-    return isinstance(x, list) and (x[1] > 0.5 or x[2] < 0.5)
+    return isinstance(x, list) and x[1] is not None and x[2] is not None and (x[1] > 0.5 or x[2] < 0.5)
 
 
 # E99 P3: paired market excess private - none per seed
@@ -40,12 +49,14 @@ p3 = {"paired_excess_private_minus_none": [round(float(pairs.mean()), 2), round(
       "n_pairs": int(len(pairs)), "mean_excess_none": cs["mean_market_excess_nash"]["none"]}
 
 ns, nP = C["n_strict_executed"]; nt, nN = C["n_tacit_high_none"]
+from p2_strong import jeffreys
+nc, nn = jeffreys(nN - nt, nN), jeffreys(nP - ns, nP)
 lines = [f"*Behaviour classes (Jeffreys 95%):* strict-executed private {ns}/{nP} [{C['strict_executed_jeffreys95'][0]:.2f}, "
          f"{C['strict_executed_jeffreys95'][1]:.2f}] (first-floor executed {cs['n_executed']}/{nP}; judged agreement {cs['n_agreed']}/{nP}); "
-         f"non-executed private {G['nonexec_private']}; tacit-high none {nt}/{nN} [{C['tacit_high_jeffreys95'][0]:.2f}, "
-         f"{C['tacit_high_jeffreys95'][1]:.2f}]; competitive none {G['competitive']}. Market mean rounds 11–40: private "
-         f"{cs['mean_market']['private']}, none {cs['mean_market']['none']} (excess over cost-adj. Nash +{cs['mean_market_excess_nash']['private']} / "
-         f"+{cs['mean_market_excess_nash']['none']}); paired private − none excess {p3['paired_excess_private_minus_none']} (n = {p3['n_pairs']} seeds).", "",
+         f"non-executed private {G['nonexec_private']}/{nP} [{nn[0]:.2f}, {nn[1]:.2f}]; tacit-high none {nt}/{nN} [{C['tacit_high_jeffreys95'][0]:.2f}, "
+         f"{C['tacit_high_jeffreys95'][1]:.2f}]; competitive none {G['competitive']}/{nN} [{nc[0]:.2f}, {nc[1]:.2f}]. Market mean rounds 11–40: private "
+         f"{cs['mean_market']['private']}, none {cs['mean_market']['none']} (excess over cost-adj. Nash {cs['mean_market_excess_nash']['private']:+.2f} / "
+         f"{cs['mean_market_excess_nash']['none']:+.2f}); paired private − none excess {fmt_delta(p3['paired_excess_private_minus_none'])} (n = {p3['n_pairs']} seeds).", "",
          f"| view | private vs none | **strict-executed vs tacit-high** (E99-x, exploratory) | executed-or-tacit vs competitive | flags: strict / tacit-high / competitive / non-exec |",
          "|---|---|---|---|---|"]
 order = ["premium", "market_excess_nash", "text", "action", "combined", "action_stats", "plan", "plan_tacit_high"]
@@ -80,8 +91,20 @@ pt = au("plan_tacit_high", "tacit_vs_competitive"); V["E103_P4_tacit_high_key>=0
 X = {k: au(k, "strict_vs_tacit_high") for k in order if k in D}
 V["E99x_price_views_CI_include_0.5"] = None if not all(X.get(k) for k in ("premium", "market_excess_nash")) else \
     bool(all(not ci_excl(X[k]) for k in ("premium", "market_excess_nash")))
-V["E99x_text_or_plan_view_CI_excludes_0.5"] = sorted(k for k in ("text", "action", "combined", "action_stats", "plan", "plan_tacit_high")
-                                                      if X.get(k) and ci_excl(X[k]))
+def separated(keys):
+    available = [k for k in keys if X.get(k)]
+    return sorted(k for k in available if ci_excl(X[k])) if available else None
+
+
+V["E99x_text_or_plan_view_CI_excludes_0.5"] = separated(("text", "combined", "plan", "plan_tacit_high"))
+V["E99x_action_control_CI_excludes_0.5"] = separated(("action", "action_stats"))
+lines += ["", "*Reading guard:* a separated text/plan score alone does not establish an incremental gain over actions; "
+          "compare the action controls too. Strict and tacit-high classes use different price-based selection rules, so neither "
+          "price AUROC nor equality of their price distributions is guaranteed by the design. Thresholds were calibrated at T=12, evaluated here at T=40."]
+sec = D.get("plan_tacit_high", {}).get("flags_secondary_58")
+if sec:
+    lines += [f"E103 secondary pilot-frozen tacit-high threshold 58, flags strict / tacit-high / competitive / non-exec: " +
+              " / ".join(f"{sec[g][0]}/{sec[g][1]}" for g in ("strict", "tacit_high", "competitive", "nonexec_private")) + "."]
 lines += ["", "*Verdicts (True = prediction held; None = not evaluable, n<3 or missing):* " +
           "; ".join(f"{k}: {v}" for k, v in V.items())]
 out = {"ds": a.ds, "E99_P3": p3, "verdicts": V, "markdown": "\n".join(lines)}
