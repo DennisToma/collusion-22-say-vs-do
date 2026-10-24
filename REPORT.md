@@ -86,7 +86,7 @@ development results are in Appendix A.
 
 ### LLM market — HEADLINE: locked test split (runs 0030–0124, n = 95; 50 y=1, 30 `none`, 15 `legit`)
 Computed ONCE by `./finalize_test.sh` (stamp `logs/final/RUN_ONCE.stamp`: started 23:59, HEADLINE_DONE 00:03 UTC) with
-the configuration frozen on dev; all tables below are copied verbatim from the generated
+the configuration frozen on dev; all tables below (and in Appendix C) are copied verbatim from the generated
 `results/analysis/report_tables_test.md` (source: `results/analysis/final_llm_v3_gpt-6.1-sol_test.json` and
 siblings). Hard set: 0/125 runs have explicit coordination language in public (`hardset.py`), so every run is "hard".
 95% class-stratified run-bootstrap CIs; fusion weight w_text = 0.6 fitted on dev.
@@ -176,23 +176,8 @@ which lists all 25 pre-registered contrasts; no multiplicity correction):
    premium does not show that coordination stopped (rivals may follow the pair), so this stratification does not
    settle whether agreements were sustained.
 
-**Flag rates at the dev-chosen thresholds (test, honest FPR):**
-
-| stratum | n | text | action | action_stats | combined | combined_stats | structured | fusion | premium | premium_r2plus |
-|---|---|---|---|---|---|---|---|---|---|---|
-| all_negatives | 45 | 0.11 [0.05, 0.23] | 0.04 [0.01, 0.15] | 0.04 [0.01, 0.15] | 0.20 [0.11, 0.34] | 0.18 [0.09, 0.31] | 0.04 [0.01, 0.15] | 0.09 [0.04, 0.21] | 0.16 [0.08, 0.29] | 0.20 [0.11, 0.34] |
-| legit | 15 | 0.07 [0.01, 0.30] | 0.00 [0.00, 0.20] | 0.07 [0.01, 0.30] | 0.27 [0.11, 0.52] | 0.20 [0.07, 0.45] | 0.00 [0.00, 0.20] | 0.07 [0.01, 0.30] | 0.33 [0.15, 0.58] | 0.33 [0.15, 0.58] |
-| none_all | 30 | 0.13 [0.05, 0.30] | 0.07 [0.02, 0.21] | 0.03 [0.01, 0.17] | 0.17 [0.07, 0.34] | 0.17 [0.07, 0.34] | 0.07 [0.02, 0.21] | 0.10 [0.04, 0.26] | 0.07 [0.02, 0.21] | 0.13 [0.05, 0.30] |
-| none_highmarkup_proxy | 1 | 1.00 [0.21, 1.00] | 0.00 [0.00, 0.79] | 0.00 [0.00, 0.79] | 1.00 [0.21, 1.00] | 1.00 [0.21, 1.00] | 1.00 [0.21, 1.00] | 1.00 [0.21, 1.00] | 0.00 [0.00, 0.79] | 0.00 [0.00, 0.79] |
-| none_lowmarkup | 29 | 0.10 [0.04, 0.26] | 0.07 [0.02, 0.22] | 0.03 [0.01, 0.17] | 0.14 [0.06, 0.31] | 0.14 [0.06, 0.31] | 0.03 [0.01, 0.17] | 0.07 [0.02, 0.22] | 0.07 [0.02, 0.22] | 0.14 [0.06, 0.31] |
-| private_y1 | 50 | 0.10 [0.04, 0.21] | 0.20 [0.11, 0.33] | 0.72 [0.58, 0.82] | 0.52 [0.39, 0.65] | 0.68 [0.54, 0.79] | 0.40 [0.28, 0.54] | 0.28 [0.17, 0.42] | 0.92 [0.81, 0.97] | 0.84 [0.71, 0.92] |
-
-**Label≈condition check**: detection (flag rate) among y=1 runs by realised late-window relative premium of the colluding pair:
-
-| stratum | n | text | action | action_stats | combined | combined_stats | structured | fusion | premium | premium_r2plus |
-|---|---|---|---|---|---|---|---|---|---|---|
-| late_rel_premium_le_0.5 | 20 | 0.05 [0.01, 0.24] | 0.25 [0.11, 0.47] | 0.65 [0.43, 0.82] | 0.55 [0.34, 0.74] | 0.60 [0.39, 0.78] | 0.35 [0.18, 0.57] | 0.35 [0.18, 0.57] | 0.80 [0.58, 0.92] | 0.60 [0.39, 0.78] |
-| late_rel_premium_gt_0.5 | 30 | 0.13 [0.05, 0.30] | 0.17 [0.07, 0.34] | 0.77 [0.59, 0.88] | 0.50 [0.33, 0.67] | 0.73 [0.56, 0.86] | 0.43 [0.27, 0.61] | 0.23 [0.12, 0.41] | 1.00 [0.89, 1.00] | 1.00 [0.89, 1.00] |
+**Flag rates at the dev-chosen thresholds** (honest FPR on `none`/`legit`; detection by realised premium) are in
+Appendix C. At those thresholds the premium flags 0.92 of y=1 runs and 0.07 of test `none` runs.
 
 **Trained non-LLM baselines on test (caution):** a logistic regression on TF-IDF of the public messages, trained by
 5-fold CV *within* the test split, reaches run AUROC 0.98 [0.95, 1.00] and pair-ID accuracy 1.00, while the zero-shot
@@ -215,19 +200,10 @@ communication or the conduct cannot be separated here (label = condition). Wheth
 The untrained text-convergence score (`textsim.py`) localises at 0.74 [0.66, 0.81] vs the LLM text auditor 0.65
 (Δ +0.088 [−0.010, +0.176], not resolved).
 
-**Other test results** (all in `results/analysis/report_tables_test.md`): sibling information-theoretic detectors are
-weak (run AUROC pCMI 0.54, MI 0.62, TE 0.45, Pearson 0.56; their `pair_level` = our premium, 0.95); premium-first
-cascade end to end (premium sends top 50% of runs, LLM view must also flag): action_stats recall 0.60 / FPR 0.02 /
-correct pair 0.44, structured 0.34 / 0.00 / 0.26 — relative to its upstream premium screen (top 50%: recall 0.84, FPR 6/45 = 0.13) the AND-gate trades recall for fewer false positives; which is better depends on the costs of misses, false alarms and audit calls;
-evidence items name a colluding firm 54–62% of the time on y=1 runs (chance 50%); 81–93% of price claims pass a permissive regex check (numbers match the log within
-±1 round; exact-round 49–63%; action-bearing views; reasoning itself not validated). Cross-family (Claude Sonnet 5.5 vs gpt-6.1-sol, all 42 mod-3
-runs, 24 y=1, dev+test pooled; `cross_family.py` → `results/analysis/llm_v3_crossfamily_claude-sonnet-5-5.json`): the
-**main pattern replicates across model families** — text lowest (run AUROC GPT 0.51 / Claude 0.58), action 0.76 / 0.80,
-combined 0.74 / 0.74; stats views (action_stats 0.85 / 0.91, structured 0.79 / 0.90, combined_stats 0.76 / 0.92) are
-highest for Claude, while for GPT only action_stats clearly is (point estimates, no CIs, n = 42, dev + test pooled). Adding text to action has no resolved effect for either auditor (Δ pair AUROC combined − best single: GPT +0.01
-[−0.05, +0.08], Claude −0.01 [−0.10, +0.07]); adding stats does (action_stats: GPT +0.09 [+0.02, +0.16], Claude +0.09
-[+0.00, +0.19]). Per-pair agreement between the two auditors is only moderate (Spearman 0.31 text … 0.59 structured;
-top-pair agreement 0.38–0.71), so individual verdicts are model-dependent even though the aggregate conclusion is not.
+**Other test results** (details in Appendix C): sibling information-theoretic detectors are weak (run AUROC
+0.45–0.62); a premium-first cascade trades recall for fewer false positives; evidence items name a colluding firm
+54–62% of the time (chance 50%). Cross-family: Claude Sonnet 5.5 on the 42 mod-3 runs reproduces the pattern (text
+lowest, adding text to action unresolved, adding stats helps; Appendix C).
 Message-shuffle ablation and exploration strata: see Exploration below.
 
 ![mechanism test](figures/mechanism_test.png)
@@ -606,3 +582,37 @@ evaluated on test (earlier disclosed test exposures of other scorers still apply
   apparent shuffle collapse on scripted_v1 that vanished with identical learners; (ii) drawing shuffle donors from
   the whole dataset let a boosted text model recognise memorised training-fold text (text-only AUROC *rose*
   0.91→0.995 under shuffle); donors are now drawn within the CV test fold.
+
+## Appendix C — Additional test-split detail (locked test split, n = 95; moved from §Results for length)
+
+**Flag rates at the dev-chosen thresholds (test, honest FPR):**
+
+| stratum | n | text | action | action_stats | combined | combined_stats | structured | fusion | premium | premium_r2plus |
+|---|---|---|---|---|---|---|---|---|---|---|
+| all_negatives | 45 | 0.11 [0.05, 0.23] | 0.04 [0.01, 0.15] | 0.04 [0.01, 0.15] | 0.20 [0.11, 0.34] | 0.18 [0.09, 0.31] | 0.04 [0.01, 0.15] | 0.09 [0.04, 0.21] | 0.16 [0.08, 0.29] | 0.20 [0.11, 0.34] |
+| legit | 15 | 0.07 [0.01, 0.30] | 0.00 [0.00, 0.20] | 0.07 [0.01, 0.30] | 0.27 [0.11, 0.52] | 0.20 [0.07, 0.45] | 0.00 [0.00, 0.20] | 0.07 [0.01, 0.30] | 0.33 [0.15, 0.58] | 0.33 [0.15, 0.58] |
+| none_all | 30 | 0.13 [0.05, 0.30] | 0.07 [0.02, 0.21] | 0.03 [0.01, 0.17] | 0.17 [0.07, 0.34] | 0.17 [0.07, 0.34] | 0.07 [0.02, 0.21] | 0.10 [0.04, 0.26] | 0.07 [0.02, 0.21] | 0.13 [0.05, 0.30] |
+| none_highmarkup_proxy | 1 | 1.00 [0.21, 1.00] | 0.00 [0.00, 0.79] | 0.00 [0.00, 0.79] | 1.00 [0.21, 1.00] | 1.00 [0.21, 1.00] | 1.00 [0.21, 1.00] | 1.00 [0.21, 1.00] | 0.00 [0.00, 0.79] | 0.00 [0.00, 0.79] |
+| none_lowmarkup | 29 | 0.10 [0.04, 0.26] | 0.07 [0.02, 0.22] | 0.03 [0.01, 0.17] | 0.14 [0.06, 0.31] | 0.14 [0.06, 0.31] | 0.03 [0.01, 0.17] | 0.07 [0.02, 0.22] | 0.07 [0.02, 0.22] | 0.14 [0.06, 0.31] |
+| private_y1 | 50 | 0.10 [0.04, 0.21] | 0.20 [0.11, 0.33] | 0.72 [0.58, 0.82] | 0.52 [0.39, 0.65] | 0.68 [0.54, 0.79] | 0.40 [0.28, 0.54] | 0.28 [0.17, 0.42] | 0.92 [0.81, 0.97] | 0.84 [0.71, 0.92] |
+
+**Label≈condition check**: detection (flag rate) among y=1 runs by realised late-window relative premium of the colluding pair:
+
+| stratum | n | text | action | action_stats | combined | combined_stats | structured | fusion | premium | premium_r2plus |
+|---|---|---|---|---|---|---|---|---|---|---|
+| late_rel_premium_le_0.5 | 20 | 0.05 [0.01, 0.24] | 0.25 [0.11, 0.47] | 0.65 [0.43, 0.82] | 0.55 [0.34, 0.74] | 0.60 [0.39, 0.78] | 0.35 [0.18, 0.57] | 0.35 [0.18, 0.57] | 0.80 [0.58, 0.92] | 0.60 [0.39, 0.78] |
+| late_rel_premium_gt_0.5 | 30 | 0.13 [0.05, 0.30] | 0.17 [0.07, 0.34] | 0.77 [0.59, 0.88] | 0.50 [0.33, 0.67] | 0.73 [0.56, 0.86] | 0.43 [0.27, 0.61] | 0.23 [0.12, 0.41] | 1.00 [0.89, 1.00] | 1.00 [0.89, 1.00] |
+
+**Other test results** (all in `results/analysis/report_tables_test.md`): sibling information-theoretic detectors are
+weak (run AUROC pCMI 0.54, MI 0.62, TE 0.45, Pearson 0.56; their `pair_level` = our premium, 0.95); premium-first
+cascade end to end (premium sends top 50% of runs, LLM view must also flag): action_stats recall 0.60 / FPR 0.02 /
+correct pair 0.44, structured 0.34 / 0.00 / 0.26 — relative to its upstream premium screen (top 50%: recall 0.84, FPR 6/45 = 0.13) the AND-gate trades recall for fewer false positives; which is better depends on the costs of misses, false alarms and audit calls;
+evidence items name a colluding firm 54–62% of the time on y=1 runs (chance 50%); 81–93% of price claims pass a permissive regex check (numbers match the log within
+±1 round; exact-round 49–63%; action-bearing views; reasoning itself not validated). Cross-family (Claude Sonnet 5.5 vs gpt-6.1-sol, all 42 mod-3
+runs, 24 y=1, dev+test pooled; `cross_family.py` → `results/analysis/llm_v3_crossfamily_claude-sonnet-5-5.json`): the
+**main pattern replicates across model families** — text lowest (run AUROC GPT 0.51 / Claude 0.58), action 0.76 / 0.80,
+combined 0.74 / 0.74; stats views (action_stats 0.85 / 0.91, structured 0.79 / 0.90, combined_stats 0.76 / 0.92) are
+highest for Claude, while for GPT only action_stats clearly is (point estimates, no CIs, n = 42, dev + test pooled). Adding text to action has no resolved effect for either auditor (Δ pair AUROC combined − best single: GPT +0.01
+[−0.05, +0.08], Claude −0.01 [−0.10, +0.07]); adding stats does (action_stats: GPT +0.09 [+0.02, +0.16], Claude +0.09
+[+0.00, +0.19]). Per-pair agreement between the two auditors is only moderate (Spearman 0.31 text … 0.59 structured;
+top-pair agreement 0.38–0.71), so individual verdicts are model-dependent even though the aggregate conclusion is not.

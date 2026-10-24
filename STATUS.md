@@ -1,6 +1,6 @@
 # STATUS
 
-## Current state (2026-10-24 02:40 UTC, iteration 14)
+## Current state (2026-10-24 02:20 UTC, iteration 14)
 - LOCKED TEST DONE (00:03; never rerun). REPLICATION DONE (02:07, run once; lock logs/final/REPLICATION_ONCE.lock;
   never rerun). REPORT presentable; reviews applied thru E53.
 - Replication llm_v3rep (n=30): 4/4 pre-registered predictions held (P3/P4 narrowly): premium .92 vs action_stats .80.
@@ -11,12 +11,14 @@
   replicate: -.007 [-.040,+.020]). Not applied: section cuts to appendix (optional), replication.py docstring (hashed).
 - pipeline.sh bug: its pgrep matches the parent shell cmdline -> never exits (no pipeline running now).
 ## Next steps (no new generation after 03:30, no new experiments after 06:30; FINALIZE from 08:15)
-1. Optional: move dense test subsections (flag-rate tables, n-gram counts, evidence/cascade) to an appendix (Opus judge).
+1. Done: flag-rate tables + 'other test results' moved to Appendix C. Remaining: final codex review of REPORT claims
+   (after any further edits), figures check.
 2. Finalize: figures check, reproduce block (add evidence_rounds.py), final codex review of REPORT claims.
 
 ## Log
-- 03:05 iter 14: applied e2e reviews (E55).
-- 02:40 iter 14: evidence_rounds.py (E54) -> REPORT exploration; e2e reviews launched.
+- 02:25 iter 14: REPORT restructure (flag-rate tables, other test results -> Appendix C; numbers unchanged).
+- 02:20 iter 14: applied e2e reviews (E55).
+- 02:16 iter 14: evidence_rounds.py (E54) -> REPORT exploration; e2e reviews launched.
 - 02:15 iter 13: replication run once (E47 result: 4/4 held), round-1 replicates (E52), codex review_iter13_rep applied (E53).
 - 02:05 iter 13: codex review_iter13 applied (E51).
 - 01:50 iter 13: round-1 treatment-response finding (E50), early_detection.py, round1_effect.py, fig_early.py.
