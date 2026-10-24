@@ -120,6 +120,14 @@ def _():
             "contrasts['combined_stats-action_stats:run_auroc']{delta,ci}")
 
 
+@claim("C04c", "same pair-statistics gain on fresh data (action_stats minus better single view), two replications pooled",
+       "+0.00 [-0.06, +0.07]", "+0.00 [-0.06, +0.07] pooled n = 90",
+       "n=90 runs (30 llm_v3rep + 60 llm_p2rep, label = channel condition); post hoc pooling; added 2026-10-24 17:57 (iter26 review: test gain did not replicate)")
+def _():
+    return (dci(pick(POOL, ("condition_label", "contrasts", "delta_hybrid[action_stats]"))), POOL,
+            "condition_label.contrasts['delta_hybrid[action_stats]']{delta,ci}")
+
+
 @claim("C05", "pair price premium AUROC, fresh replication", "0.94 [0.87, 0.99]", "0.94 [0.87, 0.99]",
        "n=60 runs (llm_p2rep: 30 private / 20 none / 10 legit); premium selected post hoc after v1; replication registered")
 def _():
@@ -235,7 +243,7 @@ def _():
     return ci(e["paired_excess_private_minus_none"]), REPORTJ, "E99_P3.paired_excess_private_minus_none; n_pairs"
 
 
-@claim("C17", "private-plan LLM monitor AUROC, strict-executed vs tacit-high", "0.76 [0.55, 0.93]", "(AUROC 0.76)",
+@claim("C17", "private-plan LLM monitor AUROC, strict-executed vs tacit-high", "0.76 [0.55, 0.93]", "(AUROC 0.76 [0.55, 0.93])",
        "13 strict-executed vs 19 tacit-high markets; EXPLORATORY (E103 plan view registered before plan calls, but classes defined post hoc); "
        "CI [0.55, 0.93]")
 def _():
@@ -246,7 +254,7 @@ def _():
     return r(d[0]) + f" [{r(d[1])}, {r(d[2])}]", EVAL, "detectors.plan.auroc_strict_vs_tacit_high (== keyword file detectors.plan_view...); groups_n"
 
 
-@claim("C18", "no-LLM count of plans naming the chat partner, same contrast", "0.82 [0.66, 0.96]", "does as well (0.82)",
+@claim("C18", "no-LLM count of plans naming the chat partner, same contrast", "0.82 [0.66, 0.96]", "does comparably (0.82 [0.66, 0.96]; no paired test)",
        "13 vs 19 markets; EXPLORATORY post hoc keyword detector (E111) K_dir; CI [0.66, 0.96]")
 def _():
     d = pick(KEY, ("detectors", "K_dir", "auroc_strict_vs_tacit_high"))
@@ -261,7 +269,7 @@ def _():
     return f"{k['strict'][0]}/{k['strict'][1]} strict, {k['tacit_high'][0]}/{k['tacit_high'][1]} tacit-high", KEY, "runs_with_term_in_any_plan"
 
 
-@claim("C20", "public-text view AUROC, strict-executed vs tacit-high (inverted)", "0.25 [0.08, 0.46]", "Public text ranks the classes in reverse (0.25)",
+@claim("C20", "public-text view AUROC, strict-executed vs tacit-high (inverted)", "0.25 [0.08, 0.46]", "Public text ranks the classes in reverse (0.25 [0.08, 0.46])",
        "13 vs 19 markets; EXPLORATORY (E99-x, added after generation began, before detector scores); CI [0.08, 0.46]")
 def _():
     d = pick(EVAL, ("detectors", "text", "auroc_strict_vs_tacit_high"))
@@ -276,6 +284,21 @@ def _():
     e = pick(QWEN, ("P2_executed_rate", "diff_newcombe95"))
     assert pick(QWEN, ("P1_agreement_rate", "base")) == [15, 15] == pick(QWEN, ("P1_agreement_rate", "abliterated"))
     return f"{ci(a)}; {ci(e)}", QWEN, "P1_agreement_rate.diff_newcombe95; P2_executed_rate.diff_newcombe95"
+
+
+@claim("C22", "SALT-NLP: gpt-6.1-sol text auditor AUROC for execution", "0.87 [0.83, 0.91]", "(AUROC 0.87 [0.83, 0.91])",
+       "n=240 sampled SALT episodes (120 executed; 79 tacit) audited by gpt-6.1-sol (E105); external data")
+def _():
+    d = pick(SALT, ("E105_audit",))
+    assert d["n"] == 240 and d["n_exec"] == 120
+    return ci([d["auroc"]["est"], *d["auroc"]["ci"]], False), SALT, "E105_audit.auroc{est,ci}; n; n_exec"
+
+
+@claim("C23", "abliterated minus base Qwen: paired channel premium difference", "-1.24 [-2.41, -0.03]",
+       "smaller channel premium (-1.24 [-2.41, -0.03])",
+       "15 vs 15 private markets with matched none; bootstrap; registered P3 (abliterated >= base) not supported; bf16 vs FP8 serving confound")
+def _():
+    return ci(pick(QWEN, ("P3_paired_premium", "diff_boot95"))), QWEN, "P3_paired_premium.diff_boot95"
 
 
 def run():

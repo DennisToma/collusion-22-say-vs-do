@@ -1,2 +1,2 @@
-Snapshot of /home/factory/collusion/collusion-14-infotheory/data/llm_grid_p2_* (complete games only), sibling HEAD 9d3faa16fcf777b54759a5ef3d9dcd6146979698.
+Snapshot of /home/factory/collusion/collusion-14-infotheory/data/llm_grid_p2_* (complete games only), sibling HEAD bed8ae975912b491338fb44a73bf99ee7027a4ce.
 private_message, private_chat and reasoning_notes removed (auditors never see them).

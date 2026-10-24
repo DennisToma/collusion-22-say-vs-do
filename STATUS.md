@@ -1,25 +1,23 @@
 # STATUS
 
-## Current state (2026-10-24 17:51 UTC from date -u, Phase 2 iteration 25)
+## Current state (2026-10-24 17:58 UTC from date -u, Phase 2 iteration 26)
 - Main claim unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc).
-- E99 strongF, E110 German, E102, E111, E112 (P2.15) final in REPORT; E114 claims 22/22 OK (16:30). REPORT 711 lines.
-- **E115** (sol-newcomer arm of E112) generating since 17:28 (`logs/p2replS_gen.log`, raw/ 3+ games); ETA ~20:00–21:00.
-- **E113 E1 audit: pipeline built (iter25)** — `p2_e1_audit.py snapshot|audit|coverage|eval`. Snapshot of Q1.4 grid →
-  `data/ext_llm_grid_p2` (SHA256SUMS + sibling HEAD; private fields stripped; units = profit/(price − own private cost)).
-  **Coverage finding → E113-amend (registered 17:36, pre-audit):** gpt-6-luna posts NO public message in any grid game
-  (c00–c05, both arms, 0/960 agent-rounds); qwen cells post ~every round. Text view not called on luna cells; text factor
-  effects on the 8 qwen cells only. Shakedown done 17:50: 24 games/12 cells, 60 sol calls, coverage 100%, 0 unparsed, 0 fallback; no scores read.
+- E99, E110, E102, E111, E112 final in REPORT. **Checkpoint Opus review done (iter26, early)**: 19/19 spot-checked numbers match;
+  4 P1 + 8 P2 framing fixes applied (abstract now says action_stats test gain did NOT replicate, +0.00 pooled; SALT text auditor 0.87
+  stated next to 62%; plan view "comparably, no paired test"; P2.15 reading limited to one firm's memory; joint-statement Qwen numbers
+  labelled as Q1.4 E65). p2_claims 25/25 OK (new C04c, C22, C23). REPORT 717 lines; abstract ~400 words (over the ~255 target: trim at final pass).
+- **E115** (sol-newcomer arm of E112) generating (`logs/p2replS_gen.log`, 7/30 raw at 17:55); ETA ~20:00–21:00.
+- **E113 E1 audit**: snapshot refreshed 36 games / 16 cells (first sweep complete); audit cached; coverage 100%, 0 unparsed; no scores read.
 - verify_artifacts manifest FAIL still expected (rebuild deferred to Sun 16:30).
 
 ## Next steps
-1. E115: when "p2replS gen done": `P2REPL_ARM=sol uv run python p2_replace_eval.py` ONCE → S1–S4 into P2.15 (2–3 lines).
-2. Checkpoint 19:30: one Opus review of abstract + TL;DR + glance + P2.7 + P2.14 + P2.15.
-3. E1: re-run `snapshot` + `audit` as Q1.4 sweeps land (cached, ~2 sol calls/game); `coverage` only. FINAL `eval` once
-   when all 3 sweeps exist (or by Sun 12:00 with what exists) → ≤ 10 lines + 1 glance row. Note for Q1.4: luna silence on
-   the board makes their grid's "public board on" factor effectively qwen-only.
-4. (done 17:51) P2.11 three-pair line + glance cite Q1.4 E61/E69.
+1. E115: when "p2replS gen done": `P2REPL_ARM=sol uv run python p2_replace_eval.py` ONCE → S1–S4 into P2.15 (2–3 lines) + glance.
+2. Checkpoint review is DONE (do not run another before Sun 12:30 per DIRECTION). Remaining P3-3 (registration exceptions) partly applied.
+3. E1: re-run `snapshot` + `audit` (+ `coverage`) as Q1.4 sweeps 2–3 land; FINAL `eval` once when all 3 sweeps exist (or Sun 12:00).
+4. Optional low-cost: trim abstract toward ~300 words without dropping the review's qualifiers.
 
 ## Log
+- 17:58 P2 iter26: Opus checkpoint review (reviews/p2_iter26_checkpoint_opus.md) applied to abstract/TL;DR/glance/P2.15/header; p2_claims +C04c/C22/C23 → 25/25 OK; E1 snapshot 36 games/16 cells, coverage OK.
 - 17:51 P2 iter25: P2.11 three-pair abliteration line (Q1.4 E61, E69 + ours) + glance; p2_claims 22/22 OK; REPORT 711 lines.
 - 17:48 P2 iter25: E113 E1-audit pipeline p2_e1_audit.py + snapshot (24 games/12 cells); E113-amend (luna posts no public messages in grid) registered pre-audit; shakedown 60 calls, coverage OK (no scores read).
 - 17:35 P2 iter24: E112 final (P1–P4 held) → P2.15 + glance; E115 auto-launched 17:28; REPORT trimmed (limitations / next) to 711 lines.
