@@ -20,7 +20,8 @@
 3. p2rep views (chain3) -> `replication.py --ds llm_p2rep` ONCE + p2_behaviour on p2rep -> pooled n=90 Δ_hybrid row (TL;DR 1).
 4. E92 logbook once (chain5); finals for sol/ds replace interim rows; then p2aware views (directive 5).
 5. codex headline review APPLIED (E96). Next review Sun ~13:00 after finals.
-- Risk: codex load ~7 parallel incl. Q1.4; p2rep views may land ~13:00.
+- Risk: codex load ~7 parallel incl. Q1.4 (para2 views 34/80 at 10:09, slow); p2rep views may land ~13:00.
+- Known: verify_artifacts.py FAILS (manifest stale vs new P2 files) — rebuild deferred to Sun 16:30 per DIRECTION.
 
 ## Log
 - 09:57 P2 iter5: codex review of E78+E93 applied (agreement labels qualified, say-vs-do attribution withdrawn, sol wording softened).
