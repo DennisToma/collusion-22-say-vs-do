@@ -7,13 +7,15 @@
 - E50/E52: round-1 (pre-message) premium alone gives run AUROC .90 (test) / .84 (rep) -> treatment-response detector.
 - E54 (new): LLM auditors cite round 1 in only 4.5-10% of evidence items (uniform 8.3%); no-table views at/below
   uniform -> consistent with auditors missing the opening jump the premium uses (self-report caveat).
-- In flight: codex e2e review (logs/review_iter14_e2e.md) + Opus judge-view review -> apply, tighten abstract.
+- E55: codex e2e + Opus judge reviews APPLIED (new abstract w/ direct answer; combined_stats localisation gain did NOT
+  replicate: -.007 [-.040,+.020]). Not applied: section cuts to appendix (optional), replication.py docstring (hashed).
 - pipeline.sh bug: its pgrep matches the parent shell cmdline -> never exits (no pipeline running now).
 ## Next steps (no new generation after 03:30, no new experiments after 06:30; FINALIZE from 08:15)
-1. Apply e2e reviews; tighten abstract to ~6 bullets (round-1 finding prominent).
+1. Optional: move dense test subsections (flag-rate tables, n-gram counts, evidence/cascade) to an appendix (Opus judge).
 2. Finalize: figures check, reproduce block (add evidence_rounds.py), final codex review of REPORT claims.
 
 ## Log
+- 03:05 iter 14: applied e2e reviews (E55).
 - 02:40 iter 14: evidence_rounds.py (E54) -> REPORT exploration; e2e reviews launched.
 - 02:15 iter 13: replication run once (E47 result: 4/4 held), round-1 replicates (E52), codex review_iter13_rep applied (E53).
 - 02:05 iter 13: codex review_iter13 applied (E51).

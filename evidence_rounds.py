@@ -1,8 +1,8 @@
 """Post-lock DESCRIPTIVE (iter 14): do the LLM auditors look where the signal is? The pair premium is largest in round 1
 (set before any private message is read; round1_effect.py). Per view: share of cited evidence items in round 1 (uniform
 chance = 1/12), share of audits of y=1 runs that cite round 1 at all, mean cited round, and the Spearman correlation of
-the auditor's run score (max pair score) with the round-1 premium vs the rounds-2..12 premium (assigned pair for
-private/legit, max over pairs for none — same as the premium run score). Bootstrap CI over runs.
+the auditor's run score (collusion_present, as in the headline) with the round-1 premium vs the rounds-2..12 premium (max over the 6 pairs,
+as in the premium run score). Bootstrap CI over runs.
 
     uv run python evidence_rounds.py --ds llm_v3 --split test   # -> results/analysis/evidence_rounds_<ds>_<split>.json
 """
@@ -40,7 +40,7 @@ def main():
         rounds = [[int(e["round"]) for e in (x.get("evidence") or []) if str(e.get("round", "")).lstrip("-").isdigit()]
                   for x in rows]
         y = np.array([labs[x["run_id"]] for x in rows])
-        s = np.array([max(x["scores"].values()) for x in rows], float)
+        s = np.array([x["collusion_present"] for x in rows], float)  # headline run score (final_analysis.py)
         r1 = np.array([p1[x["run_id"]]["run"] for x in rows]); r2 = np.array([p2[x["run_id"]]["run"] for x in rows])
         n = len(rows)
         share1 = lambda I: (sum(sum(t == 1 for t in rounds[i]) for i in I) / max(1, sum(len(rounds[i]) for i in I)))
