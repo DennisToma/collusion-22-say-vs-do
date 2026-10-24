@@ -2,7 +2,9 @@
 
 # STATUS
 
-## Current state (2026-10-24 10:03 UTC, Phase 2 iteration 6)
+## Current state (2026-10-24 10:09 UTC, Phase 2 iteration 6)
+- NEW E92 (chain5, 10:02): weather-logbook control: logbook-none +0.22 [.05,.40], logbook-notes -0.82 [-1.17,-.45] -> C_strict:
+  notepad premium needs PRICING content, not structure. In Abstract/TL;DR 3/P2.5. codex headline review (E96) applied (16 P1), incl. reimpl 30/32.
 - HEADLINE REWRITTEN (directive 1): REPORT Abstract (250 words) + TL;DR (6 items) now state the Phase 2 Q2.2 answer:
   (i) text+actions no gain (-0.01 test / -0.14 rep / -0.03 kept label), (ii) premium = offer+wording artifact (notepad 65%, para2 +0.24),
   (iii) text usefulness depends on WHERE a family coordinates, (iv) labels disagree (14/50 kept). "Suggested architecture" removed.
@@ -17,7 +19,7 @@
 2. When chain4 labels ds and chain6 views ds/sol: `uv run python p2_family3way.py` (with regex check, ~60 sol calls) -> E95, P2.6 table.
 3. p2rep views (chain3) -> `replication.py --ds llm_p2rep` ONCE + p2_behaviour on p2rep -> pooled n=90 Δ_hybrid row (TL;DR 1).
 4. E92 logbook once (chain5); finals for sol/ds replace interim rows; then p2aware views (directive 5).
-5. Apply codex headline review (reviews/review_iter6_codex_headline.md) if not yet applied.
+5. codex headline review APPLIED (E96). Next review Sun ~13:00 after finals.
 - Risk: codex load ~7 parallel incl. Q1.4; p2rep views may land ~13:00.
 
 ## Log
@@ -113,3 +115,4 @@
 ### 2026-10-24 10:03 UTC (P2 iter6)
 - Directive 1 done: new Abstract/TL;DR (Phase 2 answer), P2.5/P2.6 condensed, appendix §P2-detail. Fixed sol public-invitation cell to the none arm (0/192; was all arms 0/576); luna none 7/720 verified.
 - Directive 2: chain3 restarted with p2rep before p2cue. Directive 3: E94 registered 09:58 + launched. Directive 4: E95 registered 10:02 + p2_family3way.py. Ledger correction row (6 rows stamped after their commit).
+- 10:09 E92 result landed (C_strict); codex review E96 applied to Abstract/TL;DR/takeaways/P2.2/P2.4-P2.6; reimpl corrected to 30/32.
