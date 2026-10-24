@@ -11,9 +11,11 @@
   tacit_high tracks market height (luna 45-92, sol 4-5). Frozen: thr 50 both scores + 58 tacit_high.
 - p2_strongF_post.sh RUNNING: prefetches labels/views/plan every 40 min (cache only), then on "strongF gen done" runs everything once.
 - RUNNING: chain6b (ds views 56/120), C3 qwen (a 16, b 8) -> p2_c3post.sh auto, E102 qwen strong, mimo 5/14, g56sol 4/14, chain3 p2cue.
-- codex review of Abstract/TL;DR/P2.4-P2.9 launched 12:20 -> logs/review_iter9p2_codex.md (apply next iteration).
+- codex review (logs/review_iter9p2_codex.md, 25 items) APPLIED 12:35: v3rep −0.14 [−0.33,−0.02] now in abstract/TL;DR; ds/sol final premium
+  (+1.49, −0.05; flags 9/15|6/15, 4/7|2/7); ≥F−1 rule; first-floor-compliance naming; E99-amend exposure; E103 target mismatch; asym 7/10 intersection.
+  NOT applied: H3/market-price ds/sol interim columns (wait for P2.6 finals); heterogeneous-cost benchmark (noted as not tried).
 ## Next steps
-1. Apply logs/review_iter9p2_codex.md fixes to REPORT.
+1. P2.6 market-price + regex columns for ds/sol still interim (10 / 4 seeds) -> refresh with p2_family.py after chain6b.
 2. C3: when logs show "c3 strong done": write REPORT P2.10 (C3 qwen) from results/analysis/p2_qwen.json + p2_strong_eval_llm_p2qwen{a,b}.json; E100 result row.
 3. chain6b done -> P2.6 finals + E95 3-way (p2_family3way.py) + E91-ext rows; E94 para1 close (one row + one line).
 4. E99: when "strongF post done" in logs/partc_chain.log: P2.7 final from p2_strong_eval_llm_p2strongF.json (by class + plan view, E103 P1-P4 verdicts),
@@ -22,6 +24,7 @@
 - Risk: codex overload (~35 codex procs across repos). Known: verify_artifacts.py FAILS (manifest) — deferred to Sun 16:30.
 
 ## Log
+- 12:36 P2 iter9: codex review applied to abstract/TL;DR/P2.4-P2.9; p2_strong_eval enforces n<3 descriptive rule.
 - 12:20 P2 iter9: E87 asym result (P2.9; cost-adj P2 failed); E99-amend + E103 plan view registered, pilot calibration; strongF post chain w/ prefetch; p2coded killed; codex review launched.
 - 12:10 P2 iter8: p2rep computed once (E80/E89 held; P2.8), E84 on p2rep, pooled E101; chain6 0-call bug -> chain6b; C3 qwen E100 + E102 launched; strong pilot final.
 - 11:39 P2 iter7: luna pilot final 2/3 executed (strict 2/3); seed 2 executed floor 18 but matched no-channel market also 18.0 -> executed adds ~0 over tacit. g56sol started.

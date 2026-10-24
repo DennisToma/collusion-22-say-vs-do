@@ -109,16 +109,8 @@
     0.0,
     1.0
    ],
-   "auroc_exec_or_tacit_vs_competitive": [
-    0.5,
-    0.0,
-    1.0
-   ],
-   "auroc_tacit_vs_competitive": [
-    0.5,
-    0.0,
-    1.0
-   ]
+   "auroc_exec_or_tacit_vs_competitive": "descriptive_only(n<3)",
+   "auroc_tacit_vs_competitive": "descriptive_only(n<3)"
   },
   "market_excess_nash": {
    "threshold": null,
@@ -142,110 +134,134 @@
     1.0,
     1.0
    ],
-   "auroc_exec_or_tacit_vs_competitive": [
-    1.0,
-    1.0,
-    1.0
-   ],
-   "auroc_tacit_vs_competitive": [
-    1.0,
-    1.0,
-    1.0
-   ]
+   "auroc_exec_or_tacit_vs_competitive": "descriptive_only(n<3)",
+   "auroc_tacit_vs_competitive": "descriptive_only(n<3)"
   },
   "plan": {
    "threshold": 50.0,
    "flags": {
     "none": [
      0,
-     1
+     3
     ],
     "private_all": [
-     0,
-     0
+     1,
+     3
     ],
     "executed": [
      0,
-     0
+     2
     ],
     "strict": [
      0,
-     0
+     2
     ],
     "abandoned": [
-     0,
-     0
+     1,
+     1
     ],
     "tacit_high": [
      0,
-     0
+     2
     ],
     "competitive": [
      0,
      1
     ],
     "nonexec_private": [
-     0,
-     0
+     1,
+     1
     ],
     "exec_or_tacit": [
      0,
-     0
+     4
     ]
    },
-   "auroc_private_vs_none": null,
-   "auroc_executed_vs_none": null,
-   "auroc_strict_vs_none": null,
-   "auroc_executed_vs_abandoned": null,
-   "auroc_exec_or_tacit_vs_competitive": null,
-   "auroc_tacit_vs_competitive": null
+   "auroc_private_vs_none": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "auroc_executed_vs_none": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "auroc_strict_vs_none": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "auroc_executed_vs_abandoned": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "auroc_exec_or_tacit_vs_competitive": "descriptive_only(n<3)",
+   "auroc_tacit_vs_competitive": "descriptive_only(n<3)"
   },
   "plan_tacit_high": {
    "threshold": 50.0,
    "flags": {
     "none": [
-     0,
-     1
+     2,
+     3
     ],
     "private_all": [
-     0,
-     0
+     3,
+     3
     ],
     "executed": [
-     0,
-     0
+     2,
+     2
     ],
     "strict": [
-     0,
-     0
+     2,
+     2
     ],
     "abandoned": [
-     0,
-     0
+     1,
+     1
     ],
     "tacit_high": [
-     0,
-     0
+     2,
+     2
     ],
     "competitive": [
      0,
      1
     ],
     "nonexec_private": [
-     0,
-     0
+     1,
+     1
     ],
     "exec_or_tacit": [
-     0,
-     0
+     4,
+     4
     ]
    },
-   "auroc_private_vs_none": null,
-   "auroc_executed_vs_none": null,
-   "auroc_strict_vs_none": null,
-   "auroc_executed_vs_abandoned": null,
-   "auroc_exec_or_tacit_vs_competitive": null,
-   "auroc_tacit_vs_competitive": null
+   "auroc_private_vs_none": [
+    0.778,
+    0.778,
+    1.0
+   ],
+   "auroc_executed_vs_none": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "auroc_strict_vs_none": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "auroc_executed_vs_abandoned": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "auroc_exec_or_tacit_vs_competitive": "descriptive_only(n<3)",
+   "auroc_tacit_vs_competitive": "descriptive_only(n<3)"
   }
  },
  "behaviour_classes": {

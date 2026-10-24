@@ -84,6 +84,8 @@ for k, S in scores.items():
         Pi = [r for r in groups[P] if r in S]; Ni = [r for r in groups[N] if r in S]
         au = auroc([S[r] for r in Pi], [S[r] for r in Ni])
         e[f"auroc_{name}"] = [round(au, 3)] + boot(S, runs, Pi, Ni) if au is not None else None
+        if name in ("exec_or_tacit_vs_competitive", "tacit_vs_competitive") and min(len(Pi), len(Ni)) < 3:
+            e[f"auroc_{name}"] = "descriptive_only(n<3)"  # E99-amend: report flag counts only
     out["detectors"][k] = e
 p = Path(f"results/analysis/p2_strong_eval_{a.ds}.json"); p.write_text(json.dumps(out, indent=1))
 print(json.dumps(out["groups_n"])); print(json.dumps(out["behaviour_classes"]))
