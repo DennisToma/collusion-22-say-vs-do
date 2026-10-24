@@ -4,17 +4,22 @@
   "sha256": {
     "PRESENTATION.html": "826358433b6b5e018ee07f01cb79959eb38d4a06981853406d6b2ba29c458536",
     "PRESENTATION.md": "bb7fdbef0c4a6cdee254c934d9e05aa8e495dee3e77e6c047b202214a2ec7d5d",
+    "PRESENTATION.pdf": "996214fcb8effedd4ccba36aa80125d7190b7ac072ba60ce0f107267f78003d1",
+    "REPORT.html": "e0e05321d229729849c6bbbb9c687576a21079e7053c0cdcfe58d89245543f4c",
+    "REPORT.pdf": "a1d28ee3a8961fe437112156282848161cd1a1fafeefbaa5cd84d906a3bf5353",
     "SCHEMA.md": "edc9416f4b2cdfa7754d7032f1592b34327ea7eb11afcad93f358cd9e19560c8",
     "after_gen.sh": "efa09eae4f4f05961d419beac382b162aa5739b09d26dadf7eff0bc67c8b556f",
     "analyze_llm.py": "2f98ff200219f8236b409fa0acbe396bd92c1d590af64b5073c5c3d3994ac76f",
     "auditors.py": "5e23db0b1ed6686d53fc754fe4d7b6148b3cf8bb477902973332f4c4b4de8045",
     "auto_finalize.sh": "3a87bbf9760154326f072ee79f4e1c354aba43e8e5c74f0d566f701597674037",
     "baselines.py": "a952d32e029ae0c76e5a81a0e9ba9701da0bc378ab332f4ec1518b22514b81aa",
+    "build_handoff.py": "be92c2fd26f4ad99658f8de0103704e88dc14c9205dcaaf0177a6012070a8dc0",
     "build_presentation.py": "a9ba03d43aedb1c7b100fb952bf0ea1a20b9a7a5a04adf3ff44011865d43e6ba",
     "cost.py": "610e123e5c92d477d3d43f92a9800a689692aa3797cba4addbdfde3d9b9c290e",
     "cross_family.py": "a33127ecbc9ed6b25ad983cacf418c5ed66888ff9d566bd05c2dfb511c63831d",
     "data/SPLITS.md": "aacf77d08d6fc6c3b0bd18024075d63b1e21a812915626a7cf108fc670fc9e39",
     "data/evaluation_receipt.json": "50aa3159822c6d9d30725bea5273ac94353ce9d26d9c4bec6cc65a5b9210c9ec",
+    "data/handoff_exports.json": "5a99d9f5f774366f00fd43639f3a2ce3f5d23769d921e6acd922987df6cbe10d",
     "data/llm_v2/ground_truth.jsonl": "5bf5c05d85b272a3d88b509d7377e66a67397e6f5b54d803163daef984ac3977",
     "data/llm_v2/private.jsonl": "833298116e7a737cfc0f7d7d1fed0b4bc1763f551c8b4abcfc462fcac2546fd4",
     "data/llm_v2/raw/llm_v2_0000.jsonl": "317d22d4a24cb0a86ff3277fee7034546d487c02b4727268775d737cb13fffe5",
@@ -303,7 +308,7 @@
     "pipeline.sh": "4b1e2364b24aac9a4b2a42b2237f512edb8f14cad09acb31fa98bba4122cfba9",
     "placebo.py": "0e166ccf373063ae80aa25a39e1f6dacb1f0a82dd9171261c285ca79d434262c",
     "plc_chain.sh": "27a6874729565146708d12670cedd6639e94ed1262f7487839cacf0094b9bec9",
-    "pyproject.toml": "124dd77fb08a3c651052c94ea5a79eca84b6c69b4d8098d27ff9beefa1929a98",
+    "pyproject.toml": "8130f584f097c1d3b97842e575e1fcda5a040dd70879f598fba1a087b5415663",
     "replication.py": "509dfb86aca2e479aef53a330fc243e16d90d7cce609438cc7db36a29851bdfd",
     "report_tables.py": "a03872979a1fa3dcac3fc4cacb536862c2afa7e8fa8f11cbda5b223e77c7c0ec",
     "results/analysis/cost_llm_v3.json": "7d7db1796393cb27a962e74bf82614b31e9acbba23bf428f3a4d9c09a636c306",
@@ -393,11 +398,11 @@
     "show_run.py": "451b5051c1f5a46df1b914e476957d10f061c3eb3f8c269fa27b6c5a20db4a25",
     "shuffle_analysis.py": "819e39b7083dbd451ea3ddb971f411eb8ac75b15ddfb12bf39f04a3fa48ac224",
     "sim.py": "0964ce2009a056667c40d9f8c5cedea7bc0ae1287307fe2b5d089871a27c5042",
-    "tests/test_handoff.py": "3e296863f39734b90a5ae877261624458eb3e180b78986afaf26b0701d299ed7",
+    "tests/test_handoff.py": "18c2ce4b823b134fe41bbb1d0e10c03bc376debc08389f6e8f2b54439267f160",
     "text_lr_inspect.py": "2b0152c9f8e33d2b436b04962cd92749780f5efd37c0a4f4357c52b9b944664b",
     "textsim.py": "b99342ed5988fd5e8868f8504b58ead939ef7dbcf6c652b324a64947a528014e",
-    "uv.lock": "b6d151aafed1081cb42f0bd0da71dd8faf8b81cf4b9dd8ed80a1118bcfeff700",
-    "verify_artifacts.py": "ef5437621decb57e1936d935bdc6ce84e21c7a0bb597e6505062814b035342e1"
+    "uv.lock": "0d1bee5eeeb9d063226811156e63d8c6837ae6053c8771755ed06547a6668b6a",
+    "verify_artifacts.py": "e78fefd2889af91c01cc5cde24a486433e2aca19301b20b72105195d68f9fda1"
   },
   "updates": [
     {
@@ -411,6 +416,25 @@
       ],
       "changed": [
         "tests/test_handoff.py",
+        "verify_artifacts.py"
+      ]
+    }
+  ],
+  "extensions": [
+    {
+      "recorded_utc": "2026-10-24T04:20:08.306174+00:00",
+      "note": "Iteration 21: post-hoc offline report HTML/PDF and slides PDF handoff; source/output export receipt; optional renderer dependencies. Scientific artifacts unchanged.",
+      "added": [
+        "PRESENTATION.pdf",
+        "REPORT.html",
+        "REPORT.pdf",
+        "build_handoff.py",
+        "data/handoff_exports.json"
+      ],
+      "updated": [
+        "pyproject.toml",
+        "tests/test_handoff.py",
+        "uv.lock",
         "verify_artifacts.py"
       ]
     }

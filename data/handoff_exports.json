@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "recorded_utc": "2026-10-24T04:19:33.160918+00:00",
+  "note": "Post-hoc rendering provenance only, not pre-registration. PDF bytes vary with renderer/time.",
+  "pdf_source_link_base": "https://github.com/DennisToma/collusion-22-say-vs-do/blob/main/",
+  "sources_sha256": {
+    "PRESENTATION.html": "826358433b6b5e018ee07f01cb79959eb38d4a06981853406d6b2ba29c458536",
+    "PRESENTATION.md": "bb7fdbef0c4a6cdee254c934d9e05aa8e495dee3e77e6c047b202214a2ec7d5d",
+    "REPORT.md": "ceb43f7cccc00efa1df7f13b53e23762eda1b3a296a52f742ab93f9b5170810a",
+    "build_handoff.py": "be92c2fd26f4ad99658f8de0103704e88dc14c9205dcaaf0177a6012070a8dc0",
+    "build_presentation.py": "a9ba03d43aedb1c7b100fb952bf0ea1a20b9a7a5a04adf3ff44011865d43e6ba",
+    "figures/auroc_dev.png": "46c592b475fb12fcbd750dae7eadce3f10f9941db6ed769f22837cc1af2b92f7",
+    "figures/auroc_test.png": "05623abefacb644c3ccbcf7f10fbf2f8420a6dd6158e3441b273400efe219566",
+    "figures/early_detection_llm_v3.png": "8c5d20bc740e4211d97725b07925a81d1826d54006c3721e6eb5fdc5a23dbe3d",
+    "figures/mechanism_dev.png": "f81facc3f567590ec1bfbdcad019b2980d44ace4e3bad162462e0951da39f1a6",
+    "figures/mechanism_test.png": "5b4b8091ed234027c489724fd75ad1a016c582d11fe205e5a02ec5038c2b3553",
+    "figures/placebo_premium.png": "a0113f4d83c469a2776df2a971e247686ffbf891fd79eb62f1d922be0ac22557",
+    "figures/roc_test.png": "1414344bc59f3bee014c9e0ec6cc28b8f795cad86a5e6b02bf36dfcb7709d167",
+    "figures/summary.png": "738ed0a09a3c93094d2831f9bceb8112f541e806cb5fd704cff0f29dd77bbeda",
+    "pyproject.toml": "8130f584f097c1d3b97842e575e1fcda5a040dd70879f598fba1a087b5415663",
+    "uv.lock": "0d1bee5eeeb9d063226811156e63d8c6837ae6053c8771755ed06547a6668b6a"
+  },
+  "renderer": {
+    "chromium": "156.0.8078.4",
+    "markdown-it-py": "4.2.0",
+    "playwright": "1.64.1",
+    "pypdf": "6.21.2"
+  },
+  "checks": {
+    "report_pages": 25,
+    "report_headings": 18,
+    "report_table_cells": 317,
+    "report_text_fragments": 441,
+    "embedded_figures": 8,
+    "presentation_pages": 7,
+    "presentation_text_fragments": 100
+  },
+  "outputs": {
+    "REPORT.html": {
+      "sha256": "e0e05321d229729849c6bbbb9c687576a21079e7053c0cdcfe58d89245543f4c",
+      "bytes": 1144013
+    },
+    "REPORT.pdf": {
+      "sha256": "a1d28ee3a8961fe437112156282848161cd1a1fafeefbaa5cd84d906a3bf5353",
+      "bytes": 942964
+    },
+    "PRESENTATION.pdf": {
+      "sha256": "996214fcb8effedd4ccba36aa80125d7190b7ac072ba60ce0f107267f78003d1",
+      "bytes": 65533
+    }
+  }
+}

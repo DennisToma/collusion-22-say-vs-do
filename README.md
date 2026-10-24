@@ -3,6 +3,8 @@
 Read [REPORT.md](REPORT.md) for the research question, results, uncertainty, figures,
 and limitations. For the five-minute talk, open [PRESENTATION.html](PRESENTATION.html)
 locally in a browser; it works offline, with presentation controls and Print / PDF.
+Ready to share: [slides PDF](PRESENTATION.pdf), [report PDF](REPORT.pdf), and
+[report HTML](REPORT.html) (all figures embedded; readable as a single offline file).
 [PRESENTATION.md](PRESENTATION.md) contains speaker notes and source hashes.
 [PLAN.md](PLAN.md) defines the project, [data/SPLITS.md](data/SPLITS.md)
 records evaluation exposure and registration chronology, and [EXPERIMENTS.tsv](EXPERIMENTS.tsv)
@@ -22,7 +24,8 @@ python3 verify_artifacts.py
 
 The verifier reads a committed SHA-256 manifest, validates cached dataset/auditor coverage,
 matched placebo market paths, frozen calibration inputs, saved CI/contrast arithmetic,
-the primary report table and image links, and presentation freshness against saved JSON.
+the primary report table and image links, presentation freshness against saved JSON, and
+exported HTML/PDF hashes against their post-hoc source receipt.
 It makes no LLM calls and does not recompute
 AUROC, bootstrap intervals, or thresholds. The manifest and completion receipt were recorded
 **after** the experiments in iteration 19; they preserve the handoff, not evidence of
@@ -40,7 +43,26 @@ python3 build_presentation.py --check  # read-only, byte-for-byte freshness chec
 
 These render from saved results; they do not refit detectors. More generator, audit, and
 post-hoc analysis commands are in REPORT Appendix E. Generated artifacts already ship with
-the repository. Re-rendering images in a different environment may change their byte hashes.
+the repository.
+
+To regenerate the shareable HTML/PDF files (rendering only; optional browser dependencies):
+
+```sh
+uv sync --frozen --group handoff
+uv run --group handoff playwright install chromium
+uv run --group handoff python build_handoff.py
+python3 -S build_handoff.py --check  # read-only; standard library, no browser needed
+```
+
+The report HTML embeds the existing PNG figures and preserves the complete Markdown report.
+PDF export checks all report text fragments (including headings and table cells), figure
+loading, and one page per slide.
+Wide appendix tables use landscape pages. `data/handoff_exports.json` records source/output
+hashes and renderer versions after export. PDF bytes can vary with renderer, fonts and creation
+time; re-exporting requires updating the post-hoc artifact manifest as well. HTML source links
+require the repository. PDF source links open the GitHub repository on `main` (network required
+when clicked); the receipt identifies the exact exported sources. No external resources are
+fetched during rendering. Re-rendering images may also change their byte hashes.
 
 The headline test and fresh replication are **complete and must not be rerun**. Their
 saved outputs are `results/analysis/final_llm_v3_gpt-6.1-sol_test.json` and

@@ -6,6 +6,11 @@ For the five-minute presentation, open [PRESENTATION.html](PRESENTATION.html) lo
 [speaker notes and saved-input hashes](PRESENTATION.md) accompany it. Render with
 `python3 build_presentation.py`, or check freshness without writes using
 `python3 build_presentation.py --check`. It reads existing results only; no estimates change.
+Ready to share: [slides PDF](PRESENTATION.pdf), [report PDF](REPORT.pdf), and
+[offline report HTML with embedded figures](REPORT.html). The report exports preserve this full
+write-up; wide appendix tables use landscape PDF pages. Export with
+`uv run --group handoff python build_handoff.py`; check source/output hashes without writes using
+`python3 -S build_handoff.py --check` (post-hoc rendering receipt; no metrics recomputed).
 
 ## Abstract
 Does an auditor catch LLM collusion better if it reads what sellers *say* in public as well as what they *do*?

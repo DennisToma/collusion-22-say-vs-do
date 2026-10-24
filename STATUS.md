@@ -1,17 +1,18 @@
 # STATUS
 
-## Current state (2026-10-24 04:07 UTC, iteration 20)
+## Current state (2026-10-24 04:20 UTC, iteration 21)
 - LOCKED TEST DONE (00:03) and REPLICATION DONE (02:07); never rerun. Scientific estimates unchanged.
 - Test: premium run AUROC .95; action_stats .86; combined-minus-best-unimodal -.013 [-.091,+.064].
-- Fresh replication (n=30): premium .92 vs action_stats .80; 4/4 registered decision rules held (not equivalence).
+- Fresh replication (n=30): premium .92 vs action_stats .80; 4/4 registered rules held (not equivalence).
 - Placebo: premium flags 14/15 with or without delivery; channel/condition confound remains.
-- E64: offline 7-slide PRESENTATION.html + speaker notes, generated only from saved JSON; README/REPORT linked.
-- Independent Codex review applied; lab framing, premium table inclusion, replication timing visible on slides.
-- Verified 396 artifact hashes, 206 runs/2472 rounds, 1236 audits; all 11 handoff tests pass with uv.
-- Browser: navigation/offline/mobile pass; no overflow at five desktop sizes; Print/PDF gives 7 pages.
+- E65: ready-to-share PRESENTATION.pdf (7 pages), REPORT.pdf (25), REPORT.html (8 embedded figures).
+- Export validates 441 report text fragments + 100 slide fragments; all scientific artifact hashes unchanged.
+- Independent Codex review caught machine-local PDF links; fixed to GitHub, verified all 35 links.
+- Offline verifier: 401 hashes; 206 runs/2472 rounds; 1236 audits; all 14 handoff tests pass.
 ## Next steps (no new generation after 03:30; no new experiments after 06:30; FINALIZE 08:15)
-1. Keep results frozen; run python3 verify_artifacts.py or python3 build_presentation.py --check for read-only checks.
-2. Final presentation corrections only if needed; use PRESENTATION.html for the five-minute talk.
+1. Keep results frozen; present PRESENTATION.pdf or PRESENTATION.html. Send REPORT.pdf for detail.
+2. Read-only: python3 -S verify_artifacts.py; python3 -S build_handoff.py --check.
+3. If REPORT.md changes, regenerate handoff exports and update the post-hoc manifest (README instructions).
 
 ## Log
 - 04:05 iter 18: Figure 1 summary figure (E62) inserted after abstract; reproduce line added.
@@ -71,3 +72,5 @@
 - 03:59 iter 19 verification: Git-index-only export passes offline verifier and completion guard without logs/final/; all exported file hashes unchanged. Initial export assertion incorrectly expected no logs/ directory (six review files are tracked); corrected to check missing evaluation locks and unchanged inventory. No product failure or metric rerun.
 
 - 04:07 iter 20: E64 presentation-only handoff: build_presentation.py renders seven offline HTML slides plus speaker notes and SHA-256 source hashes from existing JSON; --check is write-free. REPORT/README link it; verifier and post-hoc manifest cover freshness (396 hashes). Independent Codex reviewer found no blocking issues; all 3 minor caveats applied. Chromium checked navigation, JavaScript-disabled reading, zero external requests, local links, desktop/mobile layout and 7-page print. All 11 tests pass via uv (initial system-Python invocation lacked sklearn, so evaluator-import assertions failed before any metrics). All pre-existing scientific data/results/figures/receipts/analysis hashes unchanged. No generation, LLM audit calls, metrics, bootstrap or threshold refitting. Review: reviews/iteration20_presentation.md.
+
+- 2026-10-24 04:20 UTC iter 21: E65 portable handoff: saved-result slides PDF, full report PDF and standalone HTML with embedded figures; build_handoff.py + optional locked renderer dependencies and post-hoc source/output receipt. Independent Codex review found absolute VM paths in PDF links; fixed to GitHub links before printing. Checks preserve all 18 headings, 317 cells, 441 report text fragments (including reproduction code), 100 visible slide fragments and 8 figures; 7 slide pages, 25 report pages (2 landscape appendix tables). PDFs have no machine paths or clipped text; relocated standalone HTML works offline without JavaScript at mobile/desktop widths. 401 hashes and 14 isolation tests pass; clean Git-index export verified without locks or writes. Every original scientific data/result/figure/receipt/analysis hash unchanged. No generation, audit calls, metrics, bootstrap or threshold refitting. Review: reviews/iteration21_portable_exports.md.
