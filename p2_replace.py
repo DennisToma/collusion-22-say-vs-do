@@ -10,13 +10,18 @@ random.Random(seed * 7 + 1) (fixed before generation). The original run's rounds
     SIM_PAR=3 uv run python p2_replace.py gen --games-parallel 3      # generation (resumable; cache per run)
     uv run python p2_replace.py check                                 # prefix identity + coverage only
 """
-import argparse, json, random, shutil, threading
+import argparse, json, os, random, shutil, threading
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 import llm_market as M
 
-SRC, DS, T0, R = "llm_p2strongF", "llm_p2repl", 20, 40
+SRC, T0, R = "llm_p2strongF", 20, 40
 MODEL = "gpt-6-luna"
+# E115 (second arm, registered after E112): P2REPL_ARM=sol -> same design, newcomer = gpt-6.1-sol, dataset llm_p2replS
+ARM = os.environ.get("P2REPL_ARM", "luna")
+assert ARM in ("luna", "sol"), ARM
+DS = "llm_p2repl" if ARM == "luna" else "llm_p2replS"
+NEW_MODEL = MODEL if ARM == "luna" else "gpt-6.1-sol"
 
 
 def design():
@@ -58,7 +63,13 @@ def check(strict=True):
         if d["rid"] not in gts:
             continue
         g = gts[d["rid"]]
-        assert g["replaced"] == {"round0": T0, "firm": d["firm"]} and g["model"] == MODEL, f"{d['rid']}: gt/model {g['model']}"
+        assert g["replaced"]["round0"] == T0 and g["replaced"]["firm"] == d["firm"], d["rid"]
+        want = {MODEL, NEW_MODEL}  # fallback guard: llm.py silently falls back to luna on an unknown/limited model
+        assert set(g["model"].split(",")) == want, f"{d['rid']}: gt/model {g['model']}"
+        if ARM == "sol":
+            rawd = [json.loads(l) for l in raw.read_text().splitlines()]
+            fresh = [x["model"] for x in rawd if int(x["key"].split(":")[0]) >= T0 and x["key"].split(":")[1] == d["firm"]]
+            assert len(fresh) == R - T0 and set(fresh) == {NEW_MODEL}, f"{d['rid']}: newcomer models {set(fresh)}"
         for t in range(T0):
             a, b = dict(new[(d["rid"], t)]), dict(orig[(d["src"], t)])
             a.pop("run_id"); b.pop("run_id")
@@ -83,7 +94,7 @@ def gen(par):
         raw = D / "raw" / f"{d['rid']}.jsonl"
         if not raw.exists():
             raw.write_text("\n".join(prefix_lines(d["src"])) + "\n")
-        traj, private, gt = M.run_game(D, d["rid"], d["cond"], d["seed"], R, replace=(T0, d["firm"]))
+        traj, private, gt = M.run_game(D, d["rid"], d["cond"], d["seed"], R, replace=(T0, d["firm"]) if ARM == "luna" else (T0, d["firm"], NEW_MODEL))
         assert gt["assigned_pair"] == d["pair"], d["rid"]
         with lock:
             for fn, rows in (("trajectories.jsonl", traj), ("private.jsonl", [private]), ("ground_truth.jsonl", [gt])):

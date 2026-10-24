@@ -8,7 +8,7 @@ import argparse, json
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 import numpy as np
-from p2_replace import SRC, DS, T0, R, design, check
+from p2_replace import SRC, DS, T0, R, ARM, design, check
 from p2_strong import jeffreys
 
 PAIRS = [(0, 1), (0, 2), (0, 3), (1, 2), (1, 3), (2, 3)]
@@ -125,7 +125,7 @@ def main():
         out["arms"][c] = A
     if not a.selftest:
         from p2_behaviour import extract
-        cache_f = Path("data") / DS / "terms_post21.jsonl"
+        cache_f = Path("data") / "llm_p2repl" / "terms_post21.jsonl"  # keyed by (ds, run_id): E115 reuses E112's original-run judgements
         E = [(d, e) for d, e in zip(design(), rows) if d["cond"] == "private"]
         jobs = [(ds, rid, d["pair"]) for d, _ in E for ds, rid in ((SRC, d["src"]), (DS, d["rid"]))]
         with ThreadPoolExecutor(2) as ex:
@@ -144,13 +144,20 @@ def main():
                                                            for t in ("orig", "repl")}
         out["judge_models"] = judges; out["post21_terms"] = per
         A, Z = out["arms"]["private"], out["arms"]["none"]
+        own = A["O3_firm_repl_minus_orig"]
         out["verdicts"] = {
+            "S1_newcomer_own_excess_CI_includes_0_private": own[1] <= 0 <= own[2],
+            "S2_level_survives": A["O6_market_excess_ge2"]["repl"][0] >= 14 and Z["O6_market_excess_ge2"]["repl"][0] >= 7,
+            "S3_reagree_le9of20": agreed["repl"] <= 9,
+            "S4_level_cusum_le4of30": A["O7a_level_cusum_alarm_by_r25_repl"][0] + Z["O7a_level_cusum_alarm_by_r25_repl"][0] <= 4,
+        } if ARM == "sol" else {
             "P1_level_survives": A["O6_market_excess_ge2"]["repl"][0] >= 16 and Z["O6_market_excess_ge2"]["repl"][0] >= 8,
             "P2_paired_CI_includes_0": all(x["O1_market_repl_minus_orig"][1] <= 0 <= x["O1_market_repl_minus_orig"][2] for x in (A, Z)),
             "P3_reagree_ge10of20": agreed["repl"] >= 10,
             "P4_level_cusum_le4of30": A["O7a_level_cusum_alarm_by_r25_repl"][0] + Z["O7a_level_cusum_alarm_by_r25_repl"][0] <= 4}
     out["runs"] = [{k: v for k, v in e.items() if "cusum" not in k and "e50" not in k} for e in rows]
-    p = Path("results/analysis/p2_replace_selftest.json" if a.selftest else "results/analysis/p2_replace.json")
+    p = Path("results/analysis/p2_replace_selftest.json" if a.selftest else
+             "results/analysis/p2_replace.json" if ARM == "luna" else "results/analysis/p2_replace_sol.json")
     p.write_text(json.dumps(out, indent=1))
     print(json.dumps({k: v for k, v in out.items() if k not in ("runs", "post21_terms")}, indent=1)); print("->", p)
 
