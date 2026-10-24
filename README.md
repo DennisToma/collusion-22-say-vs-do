@@ -32,7 +32,8 @@ The verifier reads a committed SHA-256 manifest, validates cached dataset/audito
 matched placebo market paths, frozen calibration inputs, saved CI/contrast arithmetic,
 the primary report table and image links, presentation freshness against saved JSON, and
 exported HTML/PDF hashes against their post-hoc source receipt.
-It also checks freshness of the cached evidence source ledger and price-transition census.
+It also checks freshness of the cached evidence source ledger and price-transition census,
+and reconstructs the existing mechanism figure's means, normal bands and caption summaries from public prices.
 It makes no LLM calls and does not recompute
 AUROC, bootstrap intervals, or thresholds. The manifest and completion receipt were recorded
 **after** the experiments in iteration 19; they preserve the handoff, not evidence of
@@ -89,6 +90,22 @@ To regenerate or check it without model calls:
 python3 -S check_price_transitions.py
 python3 -S check_price_transitions.py --check  # read-only, standard library only
 ```
+
+The existing mechanism figures' numerical sources are also shipped as
+`results/analysis/mechanism_sources.json`. They include each split's per-round pair/rival
+means, pointwise normal bands (mean ± 1.96 sample SE), per-run rounds-9–12 premiums and
+inputs for the two report captions. The source record was added after the experiments; it replaces
+the captions' dependence on ignored local stdout logs. It reads only public prices and
+assignment metadata, and does not infer agreement-driven effects. To regenerate or check:
+
+```sh
+python3 -S check_mechanism_sources.py
+python3 -S check_mechanism_sources.py --check  # read-only, standard library only
+```
+
+This command leaves the shipped PNG files and all detection estimates unchanged.
+The historical `fig_mechanism.py --split test/all` renderer still requires its local
+completion stamp; use this portable source check to inspect the existing figures in a clone.
 
 For deterministic table/figure rendering, install the pinned environment with `uv sync --frozen`, then:
 

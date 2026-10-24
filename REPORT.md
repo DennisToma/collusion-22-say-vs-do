@@ -264,8 +264,13 @@ lowest, adding text to action unresolved, adding stats helps; Appendix C).
 Message-shuffle ablation and exploration strata: see Exploration below.
 
 ![mechanism test](figures/mechanism_test.png)
-*(Descriptive, `fig_mechanism.py --split test` → `logs/mechanism_test.txt`: private pairs' late-window premium +1.02,
-positive in 44/50 runs; none −0.02; legit +0.08.)*
+*Descriptive test: late-window (rounds 9–12) pair-minus-rivals premium +1.02 (none -0.02, legit +0.08), positive in 44/50 private runs.*
+The numerical sources for this figure and the dev figure are preserved in
+`results/analysis/mechanism_sources.json`; reproduce them with `python3 -S check_mechanism_sources.py`,
+or check them without writes using `python3 -S check_mechanism_sources.py --check`.
+This post-hoc source record reconstructs the original per-round means and pointwise normal bands
+(mean ± 1.96 sample SE across runs), plus the original caption summaries. The bands are not simultaneous
+intervals, and these condition summaries do not establish agreement-driven price effects.
 
 ### Replication on a fresh split (`llm_v3rep`, pre-registered, run once 02:07 UTC)
 Because the premium was chosen after a look at partial data including test runs, we generated 30 new runs with the
@@ -609,10 +614,10 @@ round 1 the premium still matches or beats every original LLM view on dev, but n
 (premium_r2plus − structured: run +0.09 [−0.10, +0.29]; it still beats text, and action/combined on
 localisation). The LLM auditors also see round 1.
 ![mechanism dev](figures/mechanism_dev.png)
-*Descriptive (dev, `uv run python fig_mechanism.py --split dev` → `logs/mechanism_dev.txt`):* private pairs open
-near 17–18 vs ≈ 12.5 for the rivals, fall back within ~3 rounds, but on average stay above the rivals to the end:
-late-window (rounds 9–12) pair-minus-rivals premium +0.90 (none −0.07, legit +0.15), positive in 12/20 private runs.
-So the signal is a large round-1 gap plus a smaller persistent gap that roughly 40% of private pairs lose.
+*Descriptive dev: private pairs' mean opening price 17.35 vs 12.53 for rivals; late-window (rounds 9–12) pair-minus-rivals premium +0.90 (none -0.07, legit +0.15), positive in 12/20 private runs.*
+Source: `results/analysis/mechanism_sources.json` (same saved-price reconstruction as the test caption).
+The figure shows a large opening gap and a smaller late-window gap; 8/20 private pairs have a
+non-positive average gap in rounds 9–12. This does not measure whether an agreement persisted.
 **Label ≈ condition:** all 20 dev `private` runs are labelled y = 1 (19 explicit, 1 info-exchange), so on this
 generator "agreement" and "had a channel" coincide; see Limitations.
 Paired contrasts (dev, from the generated file): Δ_hybrid[combined] run +0.052 [−0.123, +0.210], within +0.005
@@ -860,6 +865,8 @@ For a read-only freshness check of the cached evidence source ledger, run
 `python3 -S check_evidence_sources.py --check` (standard library only; literal source locations, no semantic judge).
 For a separate read-only check of leading price-transition endpoints, run
 `python3 -S check_price_transitions.py --check` (standard library only; selective grammar, no semantic judge).
+For a read-only reconstruction of the existing mechanism figure's numerical sources and captions, run
+`python3 -S check_mechanism_sources.py --check` (standard library only; descriptive public-price means and normal bands).
 The post-hoc manifest and completion receipt were added in iteration 19 to preserve the handoff;
 they are not pre-registration evidence. See [README.md](README.md) for artifact locations and
 safe rendering commands. The generation/audit commands below document how the existing results
@@ -878,6 +885,7 @@ uv run python baselines.py --ds llm_v3 --learner lr --split test   # CV inside t
 uv run python textsim.py --split test           # untrained public-text convergence
 uv run python report_tables.py --split test     # renders all REPORT tables from results/*.json
 uv run python fig_mechanism.py --split all      # descriptive price paths by condition (no metric)
+python3 -S check_mechanism_sources.py           # preserve existing figure/caption sources; no figure or detection rerun
 uv run python fig_roc.py                        # test ROC + dev operating points (descriptive)
 uv run python fig_summary.py                    # Figure 1 summary (reads existing results JSON only)
 uv run python text_lr_inspect.py                # n-gram / firm-level text cue inspection (descriptive)

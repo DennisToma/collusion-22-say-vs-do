@@ -233,8 +233,10 @@ def verify(root):
     check_sources(root)
     from check_price_transitions import check as check_transitions
     check_transitions(root)
+    from check_mechanism_sources import check as check_mechanism
+    check_mechanism(root)
     print(f"PASS: {n} artifact hashes; 206 runs / 2,472 rounds; 1,236 original-view audits; "
-          "15 matched placebo paths; frozen inputs/receipts; saved CI/contrast consistency; REPORT table/figures; presentation freshness; offline HTML/PDF provenance; 2,368-audit input receipt; evidence source ledger and price-transition census freshness.")
+          "15 matched placebo paths; frozen inputs/receipts; saved CI/contrast consistency; REPORT table/figures; presentation freshness; offline HTML/PDF provenance; 2,368-audit input receipt; evidence source ledger and price-transition census freshness; mechanism figure numerical sources/captions.")
     print("No LLM calls, writes, refitting, or AUROC/bootstrap recomputation. Manifest is post-hoc, not a registration.")
 
 

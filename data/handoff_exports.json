@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "recorded_utc": "2026-10-24T06:16:25.302216+00:00",
+  "recorded_utc": "2026-10-24T06:25:12.507383+00:00",
   "note": "Post-hoc rendering provenance only, not pre-registration. PDF bytes vary with renderer/time.",
   "pdf_source_link_base": "https://github.com/DennisToma/collusion-22-say-vs-do/blob/main/",
   "sources_sha256": {
     "PRESENTATION.html": "1bbf8c0b4509cfd5df42332d3a9e0bfd7a793e3622ff1b60d5c1d85b6d5f057d",
     "PRESENTATION.md": "0499ca70945d8bf5b13c7db54df8787bdddcb36bd9bd4c55df46569140403ab3",
-    "REPORT.md": "5d7c8fc4cb982e65f71cb99181e47d4594428c45c50b43885c5e5b010ae32f27",
+    "REPORT.md": "1fea357c595b2c1712e511915340b5e644ff78494a06f591bab42a55216011f8",
     "build_handoff.py": "be92c2fd26f4ad99658f8de0103704e88dc14c9205dcaaf0177a6012070a8dc0",
     "build_presentation.py": "86195ebfe6fca92e2825492a721061448c1980cb015b6f10b6c1d183c9560f60",
     "figures/auroc_dev.png": "46c592b475fb12fcbd750dae7eadce3f10f9941db6ed769f22837cc1af2b92f7",
@@ -37,15 +37,15 @@
   },
   "outputs": {
     "REPORT.html": {
-      "sha256": "e200b693dcd20bfc021099015ff9b8f8a2900aa50a2e34d0c7fd8e6037372c54",
-      "bytes": 1161220
+      "sha256": "b55f007796f972c2f9c0d6706eccc6a47ff0397a29443ff3119affc8186511d7",
+      "bytes": 1162131
     },
     "REPORT.pdf": {
-      "sha256": "49c5c41811c57e9d62f55a9b96018990bb26787fdf9babf94666ec8e17a9755f",
-      "bytes": 976775
+      "sha256": "d6db657f664ecfd2f2605ba025f6b702b55c4dc6c8817c1620f61b523b3b1aab",
+      "bytes": 978472
     },
     "PRESENTATION.pdf": {
-      "sha256": "753fa329e220559c8e4b0c4292014409f6d41fe4b0e8b39b63384e8ac375e232",
+      "sha256": "af7f96a872d97e171c2a096b2610264b7b18e4bffb518d8bbec2d1cb90470d8e",
       "bytes": 66801
     }
   }
