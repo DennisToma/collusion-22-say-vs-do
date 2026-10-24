@@ -7,14 +7,16 @@
 - E56: premium hint lifts action_stats on test (.86->.93) not on rep (inconclusive).
 - E58 (NEW, registered before generation): PLACEBO channel (offered, never delivered; 15 seeds matched to rep private):
   pair premium identical (r2-12 +1.09 vs +1.06, d +.03 [-.54,+.49]); premium flags 14/15 vs 14/15; all LLM views flag
-  placebo >= private; nothing separates them. => every detector detects the channel OFFER, not agreement. In REPORT
+  placebo >= private; nothing separates them => delivered private coordination not needed for the conduct signal
+  (focal opening vs tacit public-price coordination not separated). In REPORT
   (abstract bullet, exploration section + figures/placebo_premium.png, limitations, next steps).
 ## Next steps (no new generation after 03:30 [respected: E58 launched 03:12]; no new experiments after 06:30; FINALIZE 08:15)
-1. Apply codex review logs/review_iter16_placebo.md (running).
+1. Done: placebo reviews applied (E59). E58 is exploratory (no pre-gen registration claim).
 2. Final end-to-end codex + Opus review of REPORT claims (~05:00-06:00), apply; trim length.
 3. Gotcha: pgrep -f / pkill -f patterns match the calling shell's own command line (killed shell twice). Use pgrep -f "python X" | grep -v $$.
 
 ## Log
+- 03:50 iter 16: applied codex + Opus reviews of placebo section (E59).
 - 03:40 iter 16: placebo stratum E58 (generator condition placebo, placebo.py, 90 audits, REPORT); codex review launched.
 - 02:37 iter 15: codex review_iter15_hint applied (E57).
 - 02:32 iter 15: action_stats_hint exploration (E56, 155 gpt-6.1-sol calls), hint_view.py, REPORT section + abstract sentence; codex review launched.

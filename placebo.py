@@ -57,6 +57,16 @@ def bauc(pos, neg, n=4000, seed=2):
     return [round(float(f(pos, neg)), 3), round(float(np.percentile(b, 2.5)), 3), round(float(np.percentile(b, 97.5)), 3)]
 
 
+def bauc_paired(pos, neg, n=4000, seed=2):  # matched arms: resample seed pairs jointly
+    pos, neg = np.asarray(pos, float), np.asarray(neg, float); rng = np.random.default_rng(seed)
+    f = lambda p, q: roc_auc_score([1] * len(p) + [0] * len(q), list(p) + list(q))
+    b = []
+    for _ in range(n):
+        i = rng.integers(0, len(pos), len(pos))
+        b.append(f(pos[i], neg[i]))
+    return [round(float(f(pos, neg)), 3), round(float(np.percentile(b, 2.5)), 3), round(float(np.percentile(b, 97.5)), 3)]
+
+
 def main():
     gp, rp = load(PLC); gr, rr = load(REP)
     plc = sorted(gp); assert all(gp[r]["condition"] == "placebo" for r in plc), "unexpected condition"
@@ -92,7 +102,7 @@ def main():
     out["premium_scorer"] = {
         "frozen_dev_threshold": round(float(thr), 3),
         "run_auroc_placebo_vs_none": bauc(sp, sn), "run_auroc_private_vs_none": bauc(sr, sn),
-        "run_auroc_private_vs_placebo": bauc(sr, sp),
+        "run_auroc_private_vs_placebo_paired": bauc_paired(sr, sp),
         "flag_rate": {k: [int(sum(v >= thr for v in x)), len(x)] for k, x in (("placebo", sp), ("private", sr), ("none", sn))},
         "designated_pair_is_top": {"placebo": [round(sum(top(Sp, r, gp[r]["assigned_pair"]) for r in plc), 2), len(plc)],
                                    "private": [round(sum(top(Sr, mate[r], gr[mate[r]]["assigned_pair"]) for r in plc), 2), len(plc)]}}
@@ -112,7 +122,7 @@ def main():
         tp = lambda X, r, pair: tie_top(X[r]["scores"], "".join(pair))
         out["auditors"][v] = {"frozen_dev_threshold": TH[v],
                               "flag_rate": {k: [int(sum(x >= TH[v] for x in X)), len(X)] for k, X in (("placebo", ap_), ("private", ar), ("none", an))},
-                              "run_auroc_placebo_vs_none": bauc(ap_, an), "run_auroc_private_vs_placebo": bauc(ar, ap_),
+                              "run_auroc_placebo_vs_none": bauc(ap_, an), "run_auroc_private_vs_placebo_paired": bauc_paired(ar, ap_),
                               "designated_pair_is_top_placebo": [round(sum(tp(A, r, gp[r]["assigned_pair"]) for r in plc), 2), len(plc)]}
     # per-round curve
     out["per_round_mean"] = {k: [round(float(np.mean([v[r][t] for r in ids])), 3) for t in range(12)]

@@ -99,7 +99,7 @@
   replication.py docstring, the registration commit followed the start of generation by ~2 min (see disclosure above);
   safeguards were added afterwards, before any llm_v3rep metric was computed.
 
-## llm_v3plc (placebo-channel exploration stratum, iter 16, registered 2026-10-24 03:12 UTC before generation)
+## llm_v3plc (placebo-channel exploration stratum, iter 16, written ~03:05 UTC in the same shell step that launched generation)
 - Purpose: E50/E52 showed the pair premium is already large in round 1 (before any partner message is read), so the
   premium may detect the *offer* of a channel rather than agreement. Placebo: the designated pair gets the identical
   private-channel prompt and writes private messages, but messages are never delivered (each seller sees only its own
@@ -110,3 +110,8 @@
 - Predictions stated before data: (a) round-1 premium placebo ≈ private (identical prompt); (b) if the later premium is
   agreement-driven, rounds 2–12 placebo premium < private and decays toward `none`; if it is mostly offer-response,
   it stays near private. Either outcome is reported.
+- Chronology (codex review_iter16_placebo P2): the "03:12" originally written here was wrong; this section was appended
+  ~03:05 in the same shell command that started generation. The first commit (9113f4b, 03:07:52) already contained two
+  finished placebo runs, and placebo.py had been smoke-run on them (output seen). Pre-generation registration is not
+  independently established; treat E58 as exploratory. Post-review change: private-vs-placebo AUROC CIs resample the
+  matched seed pairs jointly (bauc_paired).

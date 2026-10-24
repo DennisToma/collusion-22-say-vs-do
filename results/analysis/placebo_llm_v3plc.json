@@ -170,10 +170,10 @@
    0.7,
    1.0
   ],
-  "run_auroc_private_vs_placebo": [
+  "run_auroc_private_vs_placebo_paired": [
    0.46,
    0.253,
-   0.671
+   0.66
   ],
   "flag_rate": {
    "placebo": [
@@ -222,10 +222,10 @@
     0.183,
     0.6
    ],
-   "run_auroc_private_vs_placebo": [
+   "run_auroc_private_vs_placebo_paired": [
     0.684,
-    0.487,
-    0.867
+    0.493,
+    0.858
    ],
    "designated_pair_is_top_placebo": [
     4.17,
@@ -253,10 +253,10 @@
     0.617,
     0.96
    ],
-   "run_auroc_private_vs_placebo": [
+   "run_auroc_private_vs_placebo_paired": [
     0.378,
-    0.171,
-    0.591
+    0.156,
+    0.616
    ],
    "designated_pair_is_top_placebo": [
     5.0,
@@ -284,10 +284,10 @@
     0.54,
     0.92
    ],
-   "run_auroc_private_vs_placebo": [
+   "run_auroc_private_vs_placebo_paired": [
     0.307,
-    0.12,
-    0.518
+    0.116,
+    0.54
    ],
    "designated_pair_is_top_placebo": [
     8.0,
@@ -315,10 +315,10 @@
     0.597,
     0.947
    ],
-   "run_auroc_private_vs_placebo": [
+   "run_auroc_private_vs_placebo_paired": [
     0.418,
-    0.216,
-    0.629
+    0.182,
+    0.662
    ],
    "designated_pair_is_top_placebo": [
     11.0,
@@ -346,10 +346,10 @@
     0.433,
     0.85
    ],
-   "run_auroc_private_vs_placebo": [
+   "run_auroc_private_vs_placebo_paired": [
     0.436,
-    0.222,
-    0.649
+    0.193,
+    0.687
    ],
    "designated_pair_is_top_placebo": [
     10.5,
@@ -377,10 +377,10 @@
     0.4,
     0.837
    ],
-   "run_auroc_private_vs_placebo": [
+   "run_auroc_private_vs_placebo_paired": [
     0.402,
-    0.193,
-    0.609
+    0.189,
+    0.611
    ],
    "designated_pair_is_top_placebo": [
     9.5,
