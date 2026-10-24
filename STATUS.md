@@ -1,26 +1,27 @@
-> **PHASE 2 STARTED 2026-10-24 06:45 UTC** - v1 frozen as tag v1-overnight. New experiments are OPEN again; work queue = DIRECTION.md gap list. Ignore older no-new-experiments / finalize notes below.
+> **PHASE 2** (from 2026-10-24 06:30 UTC). v1 frozen as tag v1-overnight. Work queue = DIRECTION.md gaps.
 
 # STATUS
 
-## Current state (2026-10-24 06:18 UTC, iteration 31)
-- LOCKED TEST DONE (00:03), REPLICATION DONE (02:07); never rerun; detection estimates unchanged.
-- Test: premium run AUROC .95; action_stats .86; combined-minus-best-unimodal -.013 [-.091,+.064].
-- Replication (n=30): premium .92 vs action_stats .80; 4/4 registered rules held (not equivalence).
-- Validity: label = condition; opening prices discriminate; premium flags placebo/delivered 14/15 each.
-- Post-hoc E70: markup test .92-.95, rep .80-.84. E71: level-column removal lowers test detection .86->.77.
-- E74: GPT/Claude binary label agreement 115/115; 85 pos + 30 neg, uniform within each stratum; sub-labels differ.
-- Iter31: Codex + Opus summary reviews applied; causal/metric/uncertainty wording tightened; six judge Q&As added.
-- Iter31: talk includes E74; fixed focused-control keyboard shortcuts; every slide checked at five desktop sizes.
-- Checks: 47 tests / 424 hashes / 2,368 audit inputs PASS; source ledgers + export freshness PASS.
-- Handoff: 28-page REPORT.pdf, 7-page PRESENTATION.pdf; all scientific artifacts unchanged (417/424 prior hashes unchanged).
-- Risks remain: generator/condition confound, one seller model, evasion and semantic explanation quality unvalidated.
+## Current state (2026-10-24 07:05 UTC, Phase 2 iteration 1)
+- Generator: new matched-seed conditions neutral / notes / randpartner (`--matched`); v1 prompts byte-identical (fake-chat diff).
+- RUNNING (bg): `p2_chain.sh` -> llm_p2cue (90 runs: 6 conds x 15 seeds; ~25 luna calls/min, ETA ~09:00) -> llm_p2para1/2
+  (40) -> llm_p2rep (60, gap 4). `p2_post.sh` labels (`p2_label.py`) + analyses (`p2_cue.py`) cue/para once each finishes.
+  Second family: llm_p2glm (glm-5.3-flash via Go, 30 runs; slow, shared lock). deepseek aborted (empty replies, E79 deviation).
+- DONE: E81 precision@5% prevalence: premium .24 test / .16 rep; action_stats .46 / .08 (most alarms false).
+- DONE: E83 independent codex reimplementation from REPORT text: 31/32 numbers match to 3 dp, no bug.
+- DONE: E82 text LR explained: placebo (no delivery) runs score AUROC 1.00 vs fresh none -> text detects channel OFFER.
+- REPORT: new "Phase 2 results" section above Abstract (P2.1–P2.4).
+- verify_artifacts.py now FAILS by design (v1 inventory manifest); verify v1 at tag v1-overnight; rebuild manifest at finalize.
 
-## Next steps (no new experiments after 06:30; FINALIZE 08:15)
-1. Keep detection results frozen; present PRESENTATION.pdf or PRESENTATION.html; judge Q&As are in PRESENTATION.md.
-2. Read-only checks: python3 -S verify_artifacts.py; uv run python check_audit_inputs.py.
-3. If prose/talk changes, rebuild presentation/exports then refresh post-hoc manifest; do not rerun completed evaluations.
+## Next steps
+1. When llm_p2cue labelled: read results/analysis/p2_cue_llm_p2cue.json, write P2.4 (gap 1 headline), rerun p2_textlr.py (adds cue conds).
+2. Gap 2 (labels by behaviour): label "agreement followed?" from chat + prices; channel-but-no-agreement / tacit-high runs.
+3. After llm_p2rep: label_llm-equivalent labels + frozen premium (E80; computed once). Gap 3: glm analysis when done.
+4. Gaps 5, 7, 8 (monitor-aware, cost asymmetry, coded public text) need new generation -> queue after p2rep (by Sun 15:00).
+5. Adversarial codex + Opus review of Phase 2 section before Sat 20:00.
 
 ## Log
+- 07:05 P2 iter1: generator conds + matched seeds; E77-E83 registered; E81/E82/E83 done; generation launched (codex + Go).
 - 06:20 iter 30: TL;DR block in REPORT (E75); handoff exports + manifest rebuilt; all verifiers/tests PASS. No new experiments from here.
 - 06:10 iter 29: E74 cross-family label re-judge (label_xfam.py, 115 Sonnet calls), REPORT, exports, manifest; codex review logs/review_iter29_xfam_label.md.
 - 05:50 iter 28: final claims audit (E73), codex + Opus; framing fixes in REPORT; exports/manifest rebuilt; test phrase updated.

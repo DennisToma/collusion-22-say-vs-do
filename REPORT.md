@@ -57,7 +57,27 @@ Wilson upper FPR) gives premium 0.13 / action_stats 0.17 at 5% prevalence on tes
 At 5% prevalence the premium raises about 150 false alarms per 1,000 audited markets on test and about 250 on
 replication. All views are reported in the json.
 
-**P2.2 Is the "collusion" a prompt artifact? (E77/E78, generation running).** Six matched-seed conditions (same pair,
+**P2.2 Independent reimplementation (E83).** codex gpt-6.1-sol worked in an empty scratch directory with only the
+method excerpts of this REPORT ([results/reimpl/METHOD.md](results/reimpl/METHOD.md)) and the raw data files, not our code.
+It reimplemented the premium scorer, the four metrics, bootstrap CIs, the dev Youden threshold and the
+combined − best-unimodal contrast. On the locked test and the replication split, 31 of 32 point estimates agree with ours to 3 decimals.
+The one exception is the replication premium pooled-pair AUROC, 0.9832 vs our 0.9836: a single tied pair comparison
+out of 2,475, because its exact integer ties differ from our float means. The threshold (0.667), test flags (46/50
+positives, 7/45 negatives) and the contrast (−0.0127 [−0.090, +0.065] vs our −0.013 [−0.091, +0.064]) also match. No bug was found
+(`results/reimpl/NOTES.md`, `reimpl.py`, `reimpl_results.json`).
+
+**P2.3 What does the 0.98 supervised text classifier detect? (E82, registered; `uv run python p2_textlr.py` →
+`results/analysis/p2_textlr.json`; no LLM calls).** It detects the *offer of a channel*, not coordination content.
+(a) The signal is diffuse. On test (grouped CV, as published), removing each training fold's top 20 / 100 / 500
+n-grams leaves run AUROC 0.98 / 0.96 / 0.92 [0.86, 0.97]. (b) We fit the same classifier on all llm_v3 runs and scored
+fresh runs against fresh no-channel runs (llm_v3rep `none`, n = 10). Delivered private runs score 0.97 [0.89, 1.00].
+**Placebo runs score 1.00 [1.00, 1.00]**: the channel was offered but no message was ever delivered (llm_v3plc;
+its seeds match llm_v3rep, not the training set). Legit-partnership runs score 0.38. Both registered predictions held.
+The public-text trace is the sellers' reaction to being told they have a channel; nothing was agreed in the placebo
+runs. With labels equal to condition, a near-perfect text classifier therefore says nothing about detecting
+agreements. Gap 1 (P2.4) tests the same question for prices.
+
+**P2.4 Is the "collusion" a prompt artifact? (E77/E78, generation running).** Six matched-seed conditions (same pair,
 cost and demand path per seed): private channel; neutrally worded "message box"; private notepad with no recipient;
 channel to a random partner that changes each round; placebo (offered, never delivered); no channel.
 Also two paraphrases of the base seller prompt. Results will appear here.

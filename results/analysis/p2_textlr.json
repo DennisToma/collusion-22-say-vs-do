@@ -1,0 +1,74 @@
+{
+ "note": "E82; same learner as baselines.py; transfer model fit on all llm_v3 (descriptive transfer, not tuning)",
+ "ablation_test_cv": {
+  "0": {
+   "run_auroc": [
+    0.98,
+    0.956,
+    0.998
+   ],
+   "pair_id_acc": 1.0
+  },
+  "20": {
+   "run_auroc": [
+    0.976,
+    0.946,
+    0.996
+   ],
+   "pair_id_acc": 0.96
+  },
+  "50": {
+   "run_auroc": [
+    0.972,
+    0.937,
+    0.997
+   ],
+   "pair_id_acc": 0.98
+  },
+  "100": {
+   "run_auroc": [
+    0.96,
+    0.916,
+    0.993
+   ],
+   "pair_id_acc": 0.94
+  },
+  "200": {
+   "run_auroc": [
+    0.958,
+    0.912,
+    0.993
+   ],
+   "pair_id_acc": 0.86
+  },
+  "500": {
+   "run_auroc": [
+    0.917,
+    0.856,
+    0.973
+   ],
+   "pair_id_acc": 0.82
+  }
+ },
+ "transfer_run_auroc_vs_rep_none": {
+  "negatives": "llm_v3rep none (n=10)",
+  "llm_v3rep:private": [
+   0.967,
+   0.887,
+   1.0
+  ],
+  "llm_v3rep:legit": [
+   0.38,
+   0.08,
+   0.72
+  ],
+  "llm_v3plc:placebo": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "pair_id_acc": {
+   "llm_v3rep:private": 1.0
+  }
+ }
+}
