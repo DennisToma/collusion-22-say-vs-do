@@ -137,7 +137,7 @@ def _():
 
 
 @claim("C06", "unread pricing notepad premium as share of channel premium (rounds 2-12)", "65% (1.04/1.61)",
-       "65% of the channel premium",
+       "point ratio 65%",
        "n=15 seeds per arm (llm_p2cue: notes vs none, private vs none, paired by seed); gpt-6-luna; registered arms, ratio is derived")
 def _():
     n = pick(CUE, ("paired", "notes-none", "prem_r2_12", 0))
@@ -186,7 +186,7 @@ def _():
     return f"{r(min(v))}-{r(max(v))}", f"{FAM} + {QEVAL.format('{a,b}')}", "views.text.auroc_private_vs_none[0] (min,max over 4)"
 
 
-@claim("C10", "SALT-NLP episodes", "8000", "8000 episodes",
+@claim("C10", "SALT-NLP episodes", "8000", None,
        "episodes = 7998 with valid judge label + 2 invalid-judge episodes; 800 runs; external data (SALT-NLP)")
 def _():
     d = pick(SALT, ("E104_sayvsdo",))
@@ -194,7 +194,7 @@ def _():
     return str(d["n_episodes"] + d["n_invalid_judge"]), SALT, "E104_sayvsdo.n_episodes + n_invalid_judge; crosstab sum"
 
 
-@claim("C11", "SALT distinct models", "10", "10 models",
+@claim("C11", "SALT distinct models", "10", None,
        "distinct model names parsed from per_condition ids (main__X and cross_model__A__B); 16 conditions x 500 episodes")
 def _():
     pc = pick(SALT, ("E104_sayvsdo", "per_condition"))
@@ -277,7 +277,7 @@ def _():
 
 
 @claim("C21", "abliterated vs base Qwen: executed markets each arm; agreement at ceiling", "13/15; 13/15",
-       "13/15 under the registered floor rule; agreement at ceiling)",
+       "13/15 under the registered floor rule, diff 0 [−0.26, +0.26]; agreement at ceiling)",
        "15 vs 15 private markets (llm_p2qwena vs llm_p2qwenb); execution diff 0.00 [-0.26, +0.26] Newcombe; agreement 15/15 both; registered (C3), predictions not supported")
 def _():
     assert pick(QWEN, ("P1_agreement_rate", "base")) == [15, 15] == pick(QWEN, ("P1_agreement_rate", "abliterated"))
@@ -294,7 +294,7 @@ def _():
 
 
 @claim("C21b", "abliterated vs base Qwen: Q2.2 strict-executed each arm (lower-bound compliance)", "5/15; 5/15",
-       "executes no more than its base model (strict 5/15 both",
+       "no detectable execution difference from its base model (strict 5/15 both",
        "15 private markets per model; Q2.2 strict: F>=12, both pair prices>=F-1 in >=50% of later rounds, >=10 later rounds, post-agreement pair excess>=2; p2_strong.py via p2_strong_eval.py, not a +/-1 band or Q1.4 E70 rule")
 def _():
     a = json.loads((ROOT / A / "p2_strong_classes_llm_p2qwena.json").read_text())["n_strict_executed"]
@@ -320,7 +320,7 @@ def _():
 
 
 @claim("C27", "E116b within agreement, Qwen abliterated / base: public text AUROC strict vs non-executed", "0.73 [0.43, 0.99]; 0.51 [0.25, 0.70]",
-       "public text 0.73 [0.43, 0.99] / 0.51 [0.25, 0.70]",
+       None,
        "5 strict vs 10 non-executed private markets per model (llm_p2qwena, llm_p2qwenb; 15/15 judged agreement each); exploratory, not pooled")
 def _():
     v = []
@@ -390,7 +390,7 @@ def _():
 
 
 @claim("C32", "E113 combined-minus-best-single cell signs: Qwen positive/tie/negative; all cells positive/tie/negative",
-       "0/8; 0; 8; 4/16; 1; 11", "0/8 Qwen cells (0 ties, 8 worse)",
+       "0/8; 0; 8; 4/16; 1; 11", "0/8 Qwen cells positive",
        "8 Qwen cells and all 16 Q1.4 E70 cells, 6 games per arm per cell; best-single max selection biases delta downward; ties count toward registered P1, so held P1 is weak confirmation")
 def _():
     src = A + "p2_e1_audit.json"
@@ -402,7 +402,7 @@ def _():
 
 
 @claim("C33", "E113 Qwen text inversion and flags in channel / no-channel arms",
-       "0.32 [0.24, 0.42]; 48/48; 48/48", "Qwen grid text is inverted (0.32 [0.24, 0.42])",
+       "0.32 [0.24, 0.42]; 48/48; 48/48", "Qwen-grid text is inverted (pooled 0.32 [0.24, 0.42]",
        "96 games in 8 Qwen E70 cells (48 channel, 48 no-channel); unstratified pooled text AUROC and frozen dev threshold flags; game-bootstrap CI, not an independent replication of Q1.4 data")
 def _():
     src = A + "p2_e1_audit.json"

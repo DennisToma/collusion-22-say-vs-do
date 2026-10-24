@@ -1,7 +1,7 @@
 {
- "started_utc": "2026-10-24T22:32:49.591509+00:00",
+ "started_utc": "2026-10-24T23:05:40.532317+00:00",
  "kind": "post-hoc computational reproduction",
- "git_head": "08f6f4a84bc8d7bae1b0ebc0586acac5eede5d5e",
+ "git_head": "b3431de88ece91efe95c9bbd9339516f6f2b9972",
  "python": "3.12.15 (main, Oct 21 2026, 17:47:06) [Clang 23.1.3 ]",
  "dependencies": {
   "numpy": "2.5.4",
@@ -979,7 +979,7 @@
   "p2_aware.py": "e0cad6534d903136afc72edfd1a41d58a055f9aad1b282f98af63f37b5f67bfd",
   "p2_band.py": "928fa70f09eba67cc2bd388c0301bad804292f705f86168d228f056b09b48245",
   "p2_behaviour.py": "1d839a33e8cfe966a4b1b8142727738eefbd3c9cabcaa3d82c3bbf9b5e617682",
-  "p2_claims.py": "baf0bad0c3ea8bbaa26335c2e4cbc713c378029f43608af4f3cad6e235958dc0",
+  "p2_claims.py": "accdb76ddd3936501cc6c81541a179db85aa8c42e82bcf13a65c5553daa0fd5b",
   "p2_cue.py": "6314057e4f579b1c7280e138506707638a326f39132feb4d9c8b414c13661a14",
   "p2_cue_verdict.py": "d38268e367a87f2f0b39523cd5b8063bba479348c249756d3aaa975881416ee3",
   "p2_de.py": "9798a2419ab7e2f90a78850eb7b52a726f437da97d37f0d230b308a66be1131c",
@@ -1263,7 +1263,7 @@
    ],
    "returncode": 0,
    "error": null,
-   "seconds": 10.29,
+   "seconds": 8.96,
    "outputs": {
     "results/analysis/p2_cue_llm_p2cue.json": {
      "state": "match",
@@ -1304,7 +1304,7 @@
    ],
    "returncode": 0,
    "error": null,
-   "seconds": 1.05,
+   "seconds": 0.68,
    "outputs": {
     "results/analysis/p2_cue_verdict_llm_p2cue.json": {
      "state": "match",
@@ -1320,7 +1320,7 @@
    ],
    "returncode": 0,
    "error": null,
-   "seconds": 1.47,
+   "seconds": 1.13,
    "outputs": {
     "results/analysis/p2_band.json": {
      "state": "match",
@@ -1336,7 +1336,7 @@
    ],
    "returncode": 0,
    "error": null,
-   "seconds": 7.6,
+   "seconds": 6.58,
    "outputs": {
     "results/analysis/p2_aware.json": {
      "state": "match",
@@ -1352,7 +1352,7 @@
    ],
    "returncode": 0,
    "error": null,
-   "seconds": 0.11,
+   "seconds": 0.13,
    "outputs": {
     "results/analysis/p2_asym.json": {
      "state": "match",
@@ -1368,7 +1368,7 @@
    ],
    "returncode": 0,
    "error": null,
-   "seconds": 0.12,
+   "seconds": 0.14,
    "outputs": {
     "results/analysis/p2_asym_nash.json": {
      "state": "match",
@@ -1384,7 +1384,7 @@
    ],
    "returncode": 0,
    "error": null,
-   "seconds": 10.8,
+   "seconds": 9.55,
    "outputs": {
     "results/analysis/p2_logbook.json": {
      "state": "match",
@@ -1400,7 +1400,7 @@
    ],
    "returncode": 0,
    "error": null,
-   "seconds": 4.26,
+   "seconds": 3.88,
    "outputs": {
     "results/analysis/p2_de.json": {
      "state": "match",
@@ -1416,7 +1416,7 @@
    ],
    "returncode": 0,
    "error": null,
-   "seconds": 2.15,
+   "seconds": 1.82,
    "outputs": {
     "results/analysis/p2_prevalence.json": {
      "state": "match",
@@ -1438,7 +1438,7 @@
    ],
    "returncode": 0,
    "error": null,
-   "seconds": 12.5,
+   "seconds": 10.74,
    "outputs": {
     "results/analysis/p2_family_views.json": {
      "state": "match",
@@ -1454,7 +1454,7 @@
    ],
    "returncode": 0,
    "error": null,
-   "seconds": 14.86,
+   "seconds": 14.31,
    "outputs": {
     "results/analysis/p2_family3way.json": {
      "state": "match",
@@ -1478,7 +1478,7 @@
    ],
    "returncode": 0,
    "error": null,
-   "seconds": 1.29,
+   "seconds": 1.18,
    "outputs": {
     "results/analysis/p2_strongF.json": {
      "state": "match",
@@ -1503,7 +1503,7 @@
    ],
    "returncode": 0,
    "error": null,
-   "seconds": 0.99,
+   "seconds": 1.03,
    "outputs": {
     "results/analysis/p2_c2older.json": {
      "state": "match",
@@ -1528,7 +1528,7 @@
    ],
    "returncode": 0,
    "error": null,
-   "seconds": 1.12,
+   "seconds": 1.06,
    "outputs": {
     "results/analysis/p2_qwen.json": {
      "state": "match",
@@ -1553,7 +1553,7 @@
    ],
    "returncode": 0,
    "error": null,
-   "seconds": 1.3,
+   "seconds": 1.06,
    "outputs": {
     "results/analysis/p2_qwen_strong.json": {
      "state": "match",
@@ -1569,7 +1569,7 @@
    ],
    "returncode": 0,
    "error": null,
-   "seconds": 0.83,
+   "seconds": 0.78,
    "outputs": {
     "results/analysis/p2_qwen_cmp.json": {
      "state": "match",
@@ -1585,7 +1585,7 @@
    ],
    "returncode": 0,
    "error": null,
-   "seconds": 0.1,
+   "seconds": 0.11,
    "outputs": {
     "results/analysis/p2_qwen_public.json": {
      "state": "match",
@@ -1617,7 +1617,7 @@
    ],
    "returncode": 0,
    "error": null,
-   "seconds": 1.21,
+   "seconds": 1.15,
    "outputs": {
     "results/analysis/p2_strongF_report_llm_p2strongF.json": {
      "state": "match",
@@ -1633,7 +1633,7 @@
    ],
    "returncode": 0,
    "error": null,
-   "seconds": 2.11,
+   "seconds": 1.7,
    "outputs": {
     "results/analysis/p2_plan_keyword_llm_p2strongF.json": {
      "state": "match",
@@ -1652,7 +1652,7 @@
    ],
    "returncode": 0,
    "error": null,
-   "seconds": 2.81,
+   "seconds": 2.88,
    "outputs": {
     "results/analysis/p2_within_agree_llm_p2strongF.json": {
      "state": "match",
@@ -1678,7 +1678,7 @@
    ],
    "returncode": 0,
    "error": null,
-   "seconds": 10.13,
+   "seconds": 9.18,
    "outputs": {
     "results/analysis/p2_strict_sensitivity.json": {
      "state": "match",
@@ -1694,7 +1694,7 @@
    ],
    "returncode": 0,
    "error": null,
-   "seconds": 42.44,
+   "seconds": 44.16,
    "outputs": {
     "results/analysis/p2_behaviour.json": {
      "state": "match",
@@ -1714,7 +1714,7 @@
    ],
    "returncode": 0,
    "error": null,
-   "seconds": 19.36,
+   "seconds": 20.81,
    "outputs": {
     "results/analysis/p2_behaviour_p2rep.json": {
      "state": "match",
@@ -1730,7 +1730,7 @@
    ],
    "returncode": 0,
    "error": null,
-   "seconds": 85.28,
+   "seconds": 91.27,
    "outputs": {
     "results/analysis/p2_textlr.json": {
      "state": "match",
@@ -1746,7 +1746,7 @@
    ],
    "returncode": 0,
    "error": null,
-   "seconds": 47.8,
+   "seconds": 51.65,
    "outputs": {
     "results/analysis/p2_pool_rep.json": {
      "state": "match",
@@ -1764,5 +1764,5 @@
  "n_outputs": 33,
  "n_outputs_matched": 33,
  "passed": true,
- "finished_utc": "2026-10-24T22:37:32.158312+00:00"
+ "finished_utc": "2026-10-24T23:10:27.042433+00:00"
 }
