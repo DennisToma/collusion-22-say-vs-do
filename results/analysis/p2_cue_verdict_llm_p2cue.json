@@ -155,8 +155,7 @@
     15
    ],
    "agreement_counts": {
-    "None": 0,
-    "explicit": 5,
+    "explicit": 14,
     "info_exchange": 1
    },
    "unilateral_proposals_per_run": null,
@@ -183,8 +182,8 @@
     15
    ],
    "agreement_counts": {
-    "None": 0,
-    "explicit": 5
+    "explicit": 14,
+    "info_exchange": 1
    },
    "unilateral_proposals_per_run": null,
    "partner_gap_next_minus_same": null
@@ -210,8 +209,7 @@
     15
    ],
    "agreement_counts": {
-    "None": 0,
-    "no_channel": 5
+    "no_channel": 15
    },
    "unilateral_proposals_per_run": null,
    "partner_gap_next_minus_same": null
@@ -237,8 +235,7 @@
     15
    ],
    "agreement_counts": {
-    "None": 0,
-    "explicit": 5
+    "explicit": 15
    },
    "unilateral_proposals_per_run": null,
    "partner_gap_next_minus_same": [
@@ -268,13 +265,12 @@
     15
    ],
    "agreement_counts": {
-    "None": 0,
-    "placebo_undelivered": 5
+    "placebo_undelivered": 15
    },
    "unilateral_proposals_per_run": {
     "0": 0,
     "1": 0,
-    "2": 5
+    "2": 15
    },
    "partner_gap_next_minus_same": null
   },
@@ -299,8 +295,7 @@
     15
    ],
    "agreement_counts": {
-    "None": 0,
-    "no_channel": 5
+    "no_channel": 15
    },
    "unilateral_proposals_per_run": null,
    "partner_gap_next_minus_same": null

@@ -68,6 +68,7 @@
    "pair_id_acc": 0.82
   }
  },
+ "n_p2cue_runs": 90,
  "transfer_run_auroc_vs_rep_none": {
   "negatives": "llm_v3rep none (n=10)",
   "llm_v3rep:private": [
@@ -96,6 +97,62 @@
   ],
   "pair_id_acc": {
    "llm_v3rep:private": 1.0
-  }
+  },
+  "llm_p2cue:neutral": [
+   1.0,
+   1.0,
+   1.0,
+   15,
+   15,
+   10
+  ],
+  "assigned_pair_top_rate": {
+   "llm_p2cue:neutral": 1.0,
+   "llm_p2cue:none": 0.2,
+   "llm_p2cue:notes": 0.933,
+   "llm_p2cue:placebo": 1.0,
+   "llm_p2cue:private": 1.0,
+   "llm_p2cue:randpartner": 0.067
+  },
+  "llm_p2cue:none": [
+   0.4,
+   0.16,
+   0.653,
+   0,
+   15,
+   10
+  ],
+  "llm_p2cue:notes": [
+   0.86,
+   0.7,
+   0.98,
+   9,
+   15,
+   10
+  ],
+  "llm_p2cue:placebo": [
+   0.96,
+   0.873,
+   1.0,
+   13,
+   15,
+   10
+  ],
+  "llm_p2cue:private": [
+   1.0,
+   1.0,
+   1.0,
+   15,
+   15,
+   10
+  ],
+  "llm_p2cue:randpartner": [
+   1.0,
+   1.0,
+   1.0,
+   15,
+   15,
+   10
+  ]
  }
 }
