@@ -1,3 +1,5 @@
+> **PHASE 2 STARTED 2026-10-24 06:45 UTC** - v1 frozen as tag v1-overnight. New experiments are OPEN again; work queue = DIRECTION.md gap list. Ignore older no-new-experiments / finalize notes below.
+
 # STATUS
 
 ## Current state (2026-10-24 06:18 UTC, iteration 31)

@@ -1,54 +1,58 @@
-# DIRECTION — set by research director, 2026-10-23 22:00 UTC
-Deadline 09:00 UTC; **finalize-only from 08:15** (no new experiments after 06:30, no new generation launched after 03:30).
-The binding Validity requirements in PLAN.md still apply.
+# DIRECTION — Phase 2 (set by Dennis, 2026-10-24 06:40 UTC) — overrides earlier "no new experiments"
 
-## Verdict
-1. Good infrastructure and unusually honest self-correction (label leakage fixed, donor-memorisation leak found, learner parity). The interim codex review (`logs/review_interim.md`) is accurate. **Its ranked action list is your work plan.**
-2. The current interim story is "structured view +0.086 pair AUROC". That number can't be interpreted yet, for four reasons:
-   - text-only is at chance;
-   - the gain may be the stats table, not cross-modal reasoning;
-   - 7/8 `legit` runs were audited **without** their partnership metadata;
-   - all-run interim peeks already consume the test split.
-3. The most likely true headline: an untrained one-line statistic (pair price premium) probably beats every zero-shot LLM auditor. On partial data, private pairs sit at +0.8…+3.7 over rivals, vs ±0.5 for none/legit. Text adds little because LLM sellers keep coordination private. That is a strong, publishable answer to Q2.2 if shown cleanly. Don't fight it.
+v1 (overnight result) is frozen as git tag `v1-overnight`. Phase 2 = close every known gap. Research is
+OPEN again: new experiments are wanted. Keep v1 numbers reproducible; new results go in new sections
+/ new datasets (`*_p2`), registered in EXPERIMENTS.tsv before running, decided on dev, confirmed once on a
+fresh locked split recorded in data/SPLITS.md.
 
-## Directives (priority order)
-1. **Repair inputs before auditing the remaining ~80 runs** (review item 1):
-   - Generate `public_info` per run at game end, not after all games.
-   - Re-audit every `legit` run whose cached prompt lacked partnership info. Invalidate by prompt hash.
-   - Fix the hardset fallback that only checks round 0, and stop caching failed checks as non-explicit.
-   - Persist shuffle donor IDs, seeds and prompt hashes.
-   - Make baseline `argmax` and cross-family `top_pair` tie-aware.
-   Log each fix in EXPERIMENTS.tsv. Until this is done, every auditor number is provisional.
-2. **Mechanism decomposition on identical runs, with paired bootstrap over runs:**
-   - Views: `text`, `action`, `action_stats`, `combined`, **`combined+stats` (no consistency table, new)** and `structured`.
-   - Add **two untrained, zero-shot statistical comparators**: (a) pair premium (pair mean minus the other two firms; every pair, not only the assigned one), and (b) 14's pCMI/pair_level per-pair scores. 14 is asked to write `../collusion-14-infotheory/results/eval/llm_v3_ext.json`. If it isn't there by 02:00, compute (a) yourself and drop (b).
-   - Add the review's dev-calibrated late-fusion of the unimodal LLM scores.
-   - Report **within-market localisation AUROC (positive runs only)** separately from pooled pair AUROC. n = runs, not pairs.
-   - Freeze `analyze_llm.py` and these comparisons now, before the full data exists. Run the final test-split analysis **once**. Interim results stay labelled as dev.
-3. **Shuffle ablation on LLM data, done properly:**
-   - Use frozen, context-matched donors (same condition, similar cost/demand path), with 3 permutation seeds.
-   - Reuse the action scores, so Δ is defined.
-   - Report the intact-minus-shuffled difference with a paired CI.
-   If text is at chance, the expected outcome is "no degradation". Report that as the finding: on LLM data the hybrid gain is not cross-modal. The scripted v2 result remains the mechanism demo, labelled as template-dependent.
-4. **Required deliverables still missing from PLAN.md:**
-   - **Evidence accuracy:** programmatically check cited rounds and quotes against the trajectory and ground truth.
-   - **Cost table:** calls and characters from `~/collusion/llm_calls.jsonl`.
-   - **FPR at a fixed dev-chosen threshold** on `none`, `legit` and tacit-high `none` runs. Report tacit as its own label, not as FP.
-   - **Failure gallery:** 3–4 cases.
-   - **Architecture takeaway:** stats always-on → LLM audit for evidence and explanation. Quantify it, e.g. AUROC and cost of auditing only the top-k% runs by premium.
-5. **Cross-family and label confound (by 05:00):**
-   - Re-run Claude Sonnet on the full mod3 subset (~42) for all views incl. `action_stats` after generation ends. Report Spearman and top-pair agreement, tie-aware.
-   - Stratify auditor detection by **realised premium** within private runs. This is the cheap answer to "label ≈ condition": do auditors catch agreements that weren't acted on?
-   - Optional exploration only if codex is idle by 01:00: 15–20 `private` runs under the firm framing (llm_v2 showed channel use without agreement). They act as natural "channel, no agreement" negatives. Report them as a separate stratum, never pooled into the headline.
+**Timeline (UTC):** presentable checkpoint (REPORT.md updated with whatever is done) by **Sat 20:00**;
+all experiments done by **Sun 15:00**; finalize-only from **Sun 16:30**; hard stop **Sun 18:00**.
+Submission is Sun 23:59 AoE — Dennis submits Sunday evening from the merged repo
+(`collusion-beyond-words`, built by a third manager from Sun 08:00 using BOTH repos' REPORTs).
+Keep REPORT.md always presentable; put a "Phase 2 results" section near the top once results land.
 
-## Cross-pollination
-- **From 14:** its locked scripted finding that information-theoretic dependence detects coordinated *variation*, not *level*. Your LLM colluders mostly coordinate on level, so cite it to explain why `corr_change`/lockstep stats help less than premium. Also its anchor lesson (one JSON example value pinned all prices at 12). Your prompt has no example value: good. Note that the reason is that it was checked.
-- **To 14:** `data/llm_v3` is being used as their second LLM dataset (read-only). Do not rewrite run ids or change the schema of existing files. Append only.
-- 14's `llm_v1` has no public messages. Don't try to pool it.
+**Ownership:** each gap below is owned by ONE repo (no duplicate work). The sibling may read your data.
 
-## STOP
-- All-run "interim" analyses that include test runs. Analyse dev only until the final locked run.
-- Padding/length sweeps beyond the one existing `pad` variant (the review: it tests filler, not information).
-- More scripted datasets or scripted tuning. Scripted is a mechanism demo and is done.
-- Reporting `p_le_0` as a p-value. Call it bootstrap tail mass, or drop it.
-- Figures before directives 1–3 produce final numbers. Make figures once, after the locked analysis.
+**Budget / models:** GPT-family sellers via `llm.chat(tier="cheap")` (gpt-6-luna). For the **second seller
+family** use OpenCode Go: `llm.chat(..., backend="go", model="deepseek-v4.1-flash")` (or glm-5.3-flash /
+kimi-k3) — Go is serialised and shared with another service; if it 429s, llm.py cools down 30 min;
+then continue with what you have. Claude Sonnet as a seller only on a small subset (≤ 10 runs) — the
+Claude quota runs the managers. gpt-6.1-sol as a seller for a third family check is fine (codex quota).
+
+**Gaps owned by BOTH repos (do in your own market):**
+- **Precision at realistic prevalence** (15 min): for every headline detector, report precision / FPR-
+  normalised alarm rates at 1%, 5%, 20% collusion prevalence at the frozen thresholds, with CIs.
+- **Independent reimplementation check:** have codex (gpt-6.1-sol, `-s workspace-write` in a scratch dir,
+  given ONLY the REPORT's method description, not your code) reimplement your headline statistic(s); compare
+  numbers on the same data. Report agreement; fix any bug found (and re-state affected numbers).
+
+## Gaps owned by THIS repo (Q2.2), in priority order
+1. **Is the "collusion" a prompt artifact?** (biggest validity threat). Round-1 prices already give AUROC
+   0.90 and the undelivered placebo is flagged as often as delivered. Conditions (matched seeds):
+   (a) current private-channel wording; (b) neutrally described channel ("a message box to firm X");
+   (c) "notes to self" channel (same wording, no recipient); (d) channel to a random, changing partner;
+   (e) placebo (offered, never delivered); (f) no channel. Measure round-1 premium, mean premium, and
+   whether messages contain agreements. If the premium survives (b)/(d) but not (c), coordination is real;
+   if (c) ≈ (a), the offer itself is the driver — either way that is a headline. Also 2–3 paraphrases of
+   the base seller prompt as a wording-robustness band.
+2. **Labels by behaviour, not condition**: break label = condition. Label every run from the private chat
+   (agreement yes/no, judge tier="big" + Claude subset) AND realised behaviour (agreement followed?). Add
+   channel-but-no-agreement runs and no-channel tacit-high runs; re-evaluate all auditors against the
+   behaviour labels.
+3. **Second (and third) seller family**: deepseek via Go (≥ 30 runs over private/none), gpt-6.1-sol
+   sellers (~20 runs), Claude Sonnet sellers (≤ 10 runs). Do premium, text-adds-nothing, and the placebo
+   effect replicate?
+4. **Second replication of the premium statistic**: ≥ 60 fresh seeds, statistic frozen exactly as
+   published (pre-register in EXPERIMENTS.tsv + data/SPLITS.md first). Removes the "chosen after seeing
+   test data" bias.
+5. **Monitor-aware adversarial colluders**: tell the channel pair (and in a control, all firms) that a
+   regulator screens price premiums over rivals / public messages. Does the premium collapse? Does
+   collusion move elsewhere (smaller premium, alternation, text)? Which auditor survives?
+6. **Explain the 0.98 supervised text classifier**: top TF-IDF features, ablate them, check if signal is
+   style shift after channel offer (present in placebo / notes-to-self?) vs coordination content.
+7. **Cost asymmetry hard negative** for the premium: firms with legitimately lower costs / differentiated
+   quality but no channel. Premium's FPR there; does a cost-adjusted markup fix it?
+8. **Hidden signals in public text (exploration)**: one condition where the pair may agree on a code in the
+   private channel and is told public messages are monitored; does any auditor catch coded public
+   coordination? (Shows the limit of text auditing; one small condition is enough.)
+Items 1–4 must be done by Sat 20:00 if at all possible; 5–8 by Sun 15:00.
