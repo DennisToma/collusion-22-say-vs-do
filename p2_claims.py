@@ -344,6 +344,16 @@ def _():
     return f"{ra[0]}/{ra[1]}; {l[0]}/{l[1]}", src, "arms.private.O4_reagreement_floor_ge13.repl; arms.private.O6_market_excess_ge2.repl"
 
 
+@claim("C29", "E120 definition sensitivity (P2.7 body): strict-executed one-at-a-time range; full grid; tacit-high range", "10-16/20; 7-18/20; 17-20/20",
+       None, "llm_p2strongF, frozen judge terms, 81 threshold combinations; exploratory, zero LLM calls; registered 13/20 reproduced")
+def _():
+    src = "results/analysis/p2_strict_sensitivity.json"
+    d = json.load(open(src))["llm_p2strongF"]
+    assert (d["registered"]["k"], d["registered"]["n"], d["n_cells"]) == (13, 20, 81)
+    o, g, t = d["strict_range_one_at_a_time"], d["strict_range_all"], [x["k"] for x in d["tacit_high"]]
+    return f"{o[0]}-{o[1]}/20; {g[0]}-{g[1]}/20; {min(t)}-{max(t)}/20", src, "strict_range_one_at_a_time; strict_range_all; tacit_high[].k"
+
+
 def run():
     text = abstract_text()
     rows = []

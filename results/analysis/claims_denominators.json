@@ -346,5 +346,17 @@
   "key_path": "arms.private.O4_reagreement_floor_ge13.repl; arms.private.O6_market_excess_ge2.repl",
   "status": "OK",
   "in_report_abstract": true
+ },
+ {
+  "id": "C29",
+  "claim": "E120 definition sensitivity (P2.7 body): strict-executed one-at-a-time range; full grid; tacit-high range",
+  "expected": "10-16/20; 7-18/20; 17-20/20",
+  "denominator": "llm_p2strongF, frozen judge terms, 81 threshold combinations; exploratory, zero LLM calls; registered 13/20 reproduced",
+  "note": "",
+  "value": "10-16/20; 7-18/20; 17-20/20",
+  "source": "results/analysis/p2_strict_sensitivity.json",
+  "key_path": "strict_range_one_at_a_time; strict_range_all; tacit_high[].k",
+  "status": "OK",
+  "in_report_abstract": true
  }
 ]

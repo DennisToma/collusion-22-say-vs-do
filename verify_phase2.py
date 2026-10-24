@@ -47,6 +47,7 @@ CASES = [
     case('p2_plan_keyword.py', outputs=['results/analysis/p2_plan_keyword_llm_p2strongF.json']),
     case('p2_within_agree.py', ['llm_p2strongF', 'llm_p2qwena', 'llm_p2qwenb'],
          [f'results/analysis/p2_within_agree_{d}.json' for d in ('llm_p2strongF', 'llm_p2qwena', 'llm_p2qwenb')]),
+    case('p2_strict_sensitivity.py'),
     case('p2_behaviour.py'),
     case('p2_behaviour.py', ['--ds', 'llm_p2rep', '--out', 'results/analysis/p2_behaviour_p2rep.json'],
          ['results/analysis/p2_behaviour_p2rep.json']),
