@@ -18,8 +18,9 @@ public log under six views (defined in §Setup). Locked test split (n = 95, run 
 - **A computed statistics table helps** (action_stats − action, run AUROC +0.11 [+0.04, +0.18]). On fresh data the
   run-level gain is not resolved (+0.04 [−0.10, +0.19]), but the localisation gain is.
 - **A one-line untrained statistic ranks highest among untrained scorers.** The pair's price premium over its rivals
-  reaches 0.95, against ≤ 0.86 for every LLM view (+0.09 [+0.01, +0.18]). A one-sentence hint pointing the auditor at
-  the premium (post hoc) raises action_stats to 0.93 on test but not on the replication (0.80). It was chosen after seeing partial data, and
+  reaches 0.95, against ≤ 0.86 for the six original LLM views (+0.09 [+0.01, +0.18]). A post-hoc one-sentence hint
+  pointing the auditor at the premium gives action_stats 0.93 vs 0.86 on test (Δ +0.07 [−0.00, +0.15]) but 0.796 vs
+  0.798 on the replication; neither dataset was held out for the hint. The premium comparator was chosen after seeing partial data, and
   **round-1 prices alone give 0.90**. Those prices are set before any partner message is read. So the premium largely
   detects the response to being *offered* a channel, not agreement-driven pricing.
 - **The public text carries a learnable trace.** A supervised TF-IDF classifier reaches 0.98 (grouped CV within the
@@ -144,7 +145,7 @@ which lists all 25 pre-registered contrasts; no multiplicity correction):
    action_stats within +0.036 [+0.008, +0.072]; dev +0.020 [0.000, +0.050]) and no detection gain (run −0.061
    [−0.138, +0.014]). This is the only positive say+do signal on LLM data: nominal, unadjusted (25 contrast families × 3 metrics are reported, no multiplicity correction), and small; dev's lower bound is 0.000. It **did not repeat on the fresh replication split**: combined_stats − action_stats within −0.007 [−0.040, +0.020] (`replication_llm_v3rep.json`; not a registered contrast).
 3. **The untrained premium has the highest run AUROC among the zero-shot LLM views and untrained comparators.** (The supervised text baseline scores higher, 0.98, under within-split CV, a different regime.) Pair premium run AUROC 0.95
-   [0.90, 0.98] vs best LLM view 0.86 (action_stats; premium − action_stats +0.089 [+0.010, +0.182], premium −
+   [0.90, 0.98] vs best original LLM view 0.86 (action_stats; premium − action_stats +0.089 [+0.010, +0.182], premium −
    structured +0.112 [+0.026, +0.197]). For localisation the premium also has the highest point
    estimates (pair-ID 0.89 vs 0.73 combined_stats / 0.70 structured); its within-market advantage over structured
    (+0.034 [−0.016, +0.078]) and combined_stats (+0.028 [−0.022, +0.080]) is unresolved, over action_stats it
@@ -319,7 +320,7 @@ messages contain a digit (138/140; regex only, not a validated "names a price" m
 at 15"). The channel-holding pair therefore opens higher on average before receiving any partner message, consistent
 with anticipation of coordination. As a result the premium from **round 1 alone** gives run AUROC 0.90
 [0.83, 0.96] and within-market AUROC 0.93 [0.89, 0.96] on the test runs (0.91 / 0.94 on all 125), close to the full
-12-round premium (0.95 / 0.96) and above every LLM view's run-AUROC point estimate, though below combined_stats on
+12-round premium (0.95 / 0.96) and above every original LLM view's run-AUROC point estimate (below the post-hoc hinted view, 0.93), though below combined_stats on
 localisation (0.926 vs 0.930; no paired CIs for these comparisons). Dropping round 1, the premium over rounds 2..k has
 test run AUROC 0.877 at k = 2, falls to 0.855 at k = 4, and reaches 0.904 at k = 12, so later prices also distinguish
 the conditions. In exploratory analyses of `llm_v3rep` performed after `replication.py`, the round-1 private-pair premium is
@@ -350,20 +351,20 @@ llm_v3 --views action_stats_hint` (+ `--ds llm_v3rep`), then `uv run python hint
 `results/analysis/hint_view.json`).** This view is `action_stats` plus one fixed sentence. The sentence says that
 colluding pairs typically price above the other two firms, often from round 1, and asks the auditor to check each
 pair's premium and round-1 prices. We wrote it once, after the locked test and the replication, using what those
-analyses had shown. It was not tuned on any split. Because the hint encodes knowledge taken from the test and replication data,
+analyses had shown. No further prompt search followed this data-informed revision. Because the hint encodes knowledge taken from the test and replication data,
 neither split is held out for it. Paired, class-stratified bootstrap over runs:
 - **Test (n = 95).** Run AUROC rises from 0.86 to 0.93 (Δ +0.07 [−0.00, +0.15]). Within-market AUROC rises from 0.89 to 0.96
   (Δ +0.06 [+0.02, +0.11]). Pair-ID rises from 0.66 to 0.83. The remaining gap to the premium is +0.02 [−0.02, +0.07]
   (run) and +0.00 [−0.03, +0.03] (within-market).
-- **Replication (n = 30).** No run-level change: 0.80 vs 0.80, Δ −0.00 [−0.18, +0.16]. Within-market AUROC is
-  0.99 for both, at ceiling. The premium stays ahead at 0.92 (Δ +0.12 [−0.03, +0.28]).
+- **Replication (n = 30).** No resolved run-level gain: 0.796 vs 0.798, Δ −0.002 [−0.18, +0.16]. Within-market AUROC is
+  0.99 for both, near ceiling. The premium's point estimate remains higher at 0.92 (Δ +0.12 [−0.03, +0.28]).
 - **Dev (n = 30).** Run AUROC 0.93 vs 0.89; within-market 0.98 vs 0.91. Neither change is resolved.
 
 The hint makes the run score track the premium more closely: Spearman with the max-pair premium rises from 0.60 to 0.87
 on test and from 0.65 to 0.75 on the replication. Pointing the auditor at the premium can therefore recover much of
-the premium's ranking on test, but the gain does not show on the 30 replication runs (where the run score already
-localised at ceiling).
-Even at best, a hinted LLM auditor roughly matches a one-line statistic rather than beating it. A cheaper design is to
+the premium's ranking on test, but the gain does not show on the 30 replication runs (where action_stats' pair scores
+already localised near ceiling).
+The test gaps to the premium are unresolved; this establishes neither equivalence nor superiority. A cheaper design is to
 compute the statistic and ask the LLM only for explanation.
 
 ## Validity safeguards
@@ -376,7 +377,7 @@ resume ids, donor matching).
 
 ## Held-out discipline
 `data/SPLITS.md`: dev = llm_v3_0000–0029, locked test = 0030–0124. The core auditor prompt was written before any
-LLM-market data; there were 0 prompt-optimisation attempts, but views and comparators were developed adaptively after interim exposure (views
+LLM-market data; there were 0 prompt-optimisation attempts on the six original views, but views and comparators were developed adaptively after interim exposure (views
 `action_stats`/`combined_stats` added, public-partnership info rendering fixed; all before the locked test run,
 logged in EXPERIMENTS.tsv). `final_analysis.py` (frozen 22:15 UTC) calibrates the
 fusion weight and the FPR thresholds on dev, so the headline is test-only, computed once. Disclosure: interim
@@ -407,7 +408,7 @@ computed on the mod-3 subset incl. test runs. The test evaluation is locked and 
 - Single seller model family (GPT, gpt-6-luna), single framing for the headline data, 12 rounds, 4 firms.
 - Agreement labels from one LLM judge (gpt-6.1-sol, same family as the auditor; blind to prices); manually
   spot-checked on 3 dev chats + pilots.
-- Zero-shot auditors with one prompt (0 tuning attempts); a tuned or few-shot auditor might use the stats table better.
+- Zero-shot auditors with one prompt per view (0 tuning attempts on the six original views; the post-hoc hint view E56 is one data-informed revision); a tuned or few-shot auditor might use the stats table better.
 - Small dev split (30 runs, base rate 2/3) → dev-fitted thresholds and fusion weight are noisy. The Youden rule breaks
   ties toward the higher threshold: conservative on FPR only — with perfect dev separation (premium) the cut sits at
   the lowest dev-positive score, which can cost test TPR.
@@ -500,7 +501,7 @@ Why the premium is so strong: private-channel sellers choose their opening price
 same call, before reading a partner message (see §Exploration "When does the premium appear?"; earlier versions
 wrongly said the pair "agrees in round 1"), while the rivals open at ≈ 12. In three inspected dev chats (0005, 0012,
 0016), sellers lower their opening prices after rivals undercut them; this does not establish that coordination ends. The opening-round gap alone carries much of the signal; without
-round 1 the premium still matches or beats every LLM view on dev, but no longer significantly vs structured/action_stats
+round 1 the premium still matches or beats every original LLM view on dev, but no longer significantly vs structured/action_stats
 (premium_r2plus − structured: run +0.09 [−0.10, +0.29]; it still beats text, and action/combined on
 localisation). The LLM auditors also see round 1.
 ![mechanism dev](figures/mechanism_dev.png)
@@ -523,7 +524,7 @@ gain for the LLM auditor (combined − action within +0.005 [−0.05, +0.045]; j
 unimodal auditors). A plausible reason, not tested causally, is that the sellers keep coordination private and their
 public messages are bland. The views that include a *computed pair-statistics table* (action_stats, combined_stats,
 structured) localise better than those without; separately, a single untrained statistic (the pair premium) beats
-every LLM view. (Whether the table's benefit is the premium row specifically is not ablated.) This fits the sibling project's
+every original LLM view on dev. (Whether the table's benefit is the premium row specifically is not ablated.) This fits the sibling project's
 finding that dependence statistics detect coordinated *variation*, not *level*: these colluders coordinate on
 level, and the premium measures level directly.
 

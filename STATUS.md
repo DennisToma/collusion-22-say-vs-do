@@ -10,11 +10,12 @@
   (+.06 [+.02,+.11]), gap to premium +.02 n.s.; replication run .80->.80 (no gain). Inconclusive; in REPORT + abstract.
 - Figures checked (auroc_test, early_detection): fine.
 ## Next steps (no new generation after 03:30, no new experiments after 06:30; FINALIZE from 08:15)
-1. Apply codex review logs/review_iter15_hint.md if not yet applied.
+1. Done: codex review_iter15_hint applied (E57).
 2. Final codex review of full REPORT claims near finalize; optional: cross-family check of hint view (Claude) - low value.
 3. Finalize: trim length if possible (REPORT ~640 lines), push.
 
 ## Log
+- 02:58 iter 15: codex review_iter15_hint applied (E57).
 - 02:45 iter 15: action_stats_hint exploration (E56, 155 gpt-6.1-sol calls), hint_view.py, REPORT section + abstract sentence; codex review launched.
 - 02:21 iter 14: REPORT restructure (flag-rate tables, other test results -> Appendix C; numbers unchanged).
 - 02:20 iter 14: applied e2e reviews (E55).
