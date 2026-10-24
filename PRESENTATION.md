@@ -6,21 +6,21 @@ Allow roughly 40 seconds per slide. Full methods, uncertainty, chronology, cost 
 
 ## 1. Does reading what sellers say improve action auditing?
 
-Open with the answer to Q2.2, then state the validity limit immediately. The negative finding is about these zero-shot auditors and these public messages. It does not establish that text cannot help in other settings or after training.
+Open with the answer to Q2.2, then state the validity limit immediately. The negative finding is about these zero-shot auditors and these public messages. It does not establish that text cannot help in other settings or after training. No resolved gain means the interval includes zero, not that the methods are equivalent.
 
 Saved sources: [test](results/analysis/final_llm_v3_gpt-6.1-sol_test.json), [placebo](results/analysis/placebo_llm_v3plc.json).
 
 ## 2. What was observed, and what was labelled?
 
-Sellers were given profit objectives and an opportunity to communicate, not instructions to collude. The operational label includes explicit agreements and price-intention exchanges. A judge-positive chat is not evidence that the private exchange caused the prices. The full report documents the lab framing, pilots, and all six input views.
+Sellers were given profit objectives and an opportunity to communicate, not instructions to collude. The operational label includes explicit agreements and price-intention exchanges. A judge-positive chat is not evidence that the private exchange caused the prices. The post-hoc label re-judge agrees on the binary endpoint in 115/115 private chats (85 positive, 30 negative; main, replication, firm-framing and monitored strata). Each stratum is uniform, so this does not test within-stratum discrimination; the explicit-agreement versus intention-exchange sub-label differs between judges. Agreement is a robustness check, not independent ground truth. The full report documents the lab framing, pilots, and all six input views.
 
-Saved sources: [test](results/analysis/final_llm_v3_gpt-6.1-sol_test.json), [rep](results/analysis/replication_llm_v3rep.json).
+Saved sources: [test](results/analysis/final_llm_v3_gpt-6.1-sol_test.json), [rep](results/analysis/replication_llm_v3rep.json), [labels](results/label_xfam.json).
 
-## 3. Summarising actions helps more than adding public text
+## 3. Action summaries: detection and localisation
 
-Premium has the highest point estimate among these untrained scorers. Do not call it the best detector in general: the report also has supervised baselines. The six original LLM views are all shown, so the graphic does not hide a stronger original view. The fresh sample checks direction but does not resolve the premium's lead.
+Premium has the highest run-AUROC point estimate among these untrained scorers. Do not call it the best detector in general: the report also has supervised baselines. The six original LLM views are all shown, so the graphic does not hide a stronger original view. The fresh sample checks direction but does not resolve the premium's lead. The later column ablation removes three level columns together: it lowers test detection performance, but does not isolate the premium column or establish what the auditor reasons about. The judge-question notes give the saved contrasts and their uncertainty.
 
-Saved sources: [test](results/analysis/final_llm_v3_gpt-6.1-sol_test.json), [rep](results/analysis/replication_llm_v3rep.json).
+Saved sources: [test](results/analysis/final_llm_v3_gpt-6.1-sol_test.json), [rep](results/analysis/replication_llm_v3rep.json), [nolevel](results/analysis/nolevel_view.json).
 
 ## 4. Paired comparisons separate text from statistics
 
@@ -46,12 +46,43 @@ Close on the narrow answer and the stronger experimental design it motivates. Th
 
 Saved sources: [test](results/analysis/final_llm_v3_gpt-6.1-sol_test.json), [rep](results/analysis/replication_llm_v3rep.json), [placebo](results/analysis/placebo_llm_v3plc.json).
 
+## Likely judge questions
+
+These answers use the existing frozen results. They add no estimates and are not extra slides.
+
+### Are you detecting collusion or just the channel condition?
+
+The endpoint is judge-labelled private coordination communication (an agreement or price-intention exchange), not agreement-caused overcharge. In the main dataset it coincides with the private-channel condition. Opening prices already discriminate before any partner message is received, and the premium flags 14/15 undelivered-channel runs versus 14/15 matched delivered runs. That limits the conduct interpretation; it does not identify each detector's cues or establish equivalence of the two arms. Public-price coordination remains possible. Sources: [early](results/analysis/early_detection_llm_v3.json), [placebo](results/analysis/placebo_llm_v3plc.json).
+
+### Does the negative finding mean public text is useless?
+
+No. For the tested zero-shot auditor, combined minus the best single modality has run-AUROC change -0.01 [-0.09, +0.06]. The interval leaves room for gains and losses. Text with statistics has a small unadjusted within-market localisation gain on test that did not repeat. The supervised public-text classifier reaches 0.98 run AUROC under grouped five-fold CV within the test split, using other folds' labels. This is a different training regime and shows a learnable trace, not a zero-shot gain. Sources: [test](results/analysis/final_llm_v3_gpt-6.1-sol_test.json), [replication](results/analysis/replication_llm_v3rep.json), [supervised](results/baselines/llm_v3_lr_test.json).
+
+### Is the statistics-table gain just the premium column?
+
+Not isolated. A post-hoc ablation removes pair mean price, rival mean price and premium together, retaining proximity and change-correlation columns. On test, full minus reduced table run AUROC is +0.09 [+0.02, +0.17]; reduced table minus actions alone has localisation gain +0.07 [+0.02, +0.13]. Run-level full-minus-reduced differences on dev and replication are unresolved; localisation findings differ across splits. This tests information presentation, not the auditor's internal reasoning. Source: [column ablation](results/analysis/nolevel_view.json).
+
+### How reliable are the private-chat labels?
+
+A post-hoc Claude Sonnet re-judge agrees with GPT on the binary label in 115/115 private chats across the main, replication, firm-framing and monitored datasets. These include 85 positives and 30 negatives; each stratum is uniform, so this does not test within-stratum discrimination. Both read private chat without prices. They disagree more on agreement versus intention exchange (three-class kappa 0.33 main, 0.38 replication); these sub-labels are not endpoints. Binary agreement does not establish correctness, conduct, or generalisation. Source: [label check](results/label_xfam.json).
+
+### Was the test fully blind, and what did the replication establish?
+
+The premium comparator was selected after partial test exposure. The full test evaluation ran once. Replication registration followed the start of generation but preceded metrics; some raw output and later progress lines were seen. All four registered replication rules held, but they include interval-based rules and do not establish equivalence. The registered combined-minus-action replication contrast is -0.14 [-0.30, +0.02]. Some exploratory text contrasts are negative with intervals excluding zero. Sources: [exposure chronology](data/SPLITS.md), [replication](results/analysis/replication_llm_v3rep.json).
+
+### Is the proposed screening-and-explanation workflow ready to deploy?
+
+No deployment claim was tested. The frozen premium threshold flags 40% of 10 fresh no-channel runs (a small sample). Literal quotation and selective price-transition checks do not validate explanation accuracy or usefulness. A premium-filtered AND-gate was analysed descriptively; the proposed explanatory workflow was not evaluated end to end. Sources: [replication](results/analysis/replication_llm_v3rep.json), [limitations and source checks](REPORT.md).
+
 ## Source hashes
 
-These hashes identify the saved inputs used to render the talk. They are post-hoc provenance, not evidence of pre-registration.
+These hashes identify the saved inputs used to render the talk and judge-question notes. They are post-hoc provenance, not evidence of pre-registration.
 
 - `results/analysis/final_llm_v3_gpt-6.1-sol_test.json`: `2a4c19a68a511453493f6c615ad44f575ef2f5da74543f3ab6d82d14a2679355`
 - `results/analysis/replication_llm_v3rep.json`: `bf7169d63d9b9b72afc8cc70cc68659e2204ae156b758e5f75cc3753ea067b0d`
 - `results/analysis/early_detection_llm_v3.json`: `eab2c0297539787808bece94e19aecb20bacfb5edbeb6b324ac70fcf6e3f46c6`
 - `results/analysis/placebo_llm_v3plc.json`: `db9a7b1cc674577db00fdacfb9d301d447b4f72aa4132fbc4f59e043125cf008`
 - `results/analysis/monitor_stratum_llm_v3mon.json`: `fcbf1f0036d5c328d1bd241213690ef5cdc2dc3ddbf7beaf693c999c90e99d45`
+- `results/label_xfam.json`: `e532a431d4e0ab9574242e04907e169c66fe13ae889b21ab5a8504ae0a95bdf7`
+- `results/analysis/nolevel_view.json`: `9ad6e2510047b194ba7f53a0992fad81472dd80877270560040da8cefb4d1d25`
+- `results/baselines/llm_v3_lr_test.json`: `5c05f054e7104e9417f6bb95ddddc841055e193418fc46a29e9ba9bf53a3d654`

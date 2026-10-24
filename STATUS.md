@@ -1,25 +1,22 @@
 # STATUS
 
-## Current state (2026-10-24 06:20 UTC, iteration 30)
+## Current state (2026-10-24 06:18 UTC, iteration 31)
 - LOCKED TEST DONE (00:03), REPLICATION DONE (02:07); never rerun; detection estimates unchanged.
 - Test: premium run AUROC .95; action_stats .86; combined-minus-best-unimodal -.013 [-.091,+.064].
 - Replication (n=30): premium .92 vs action_stats .80; 4/4 registered rules held (not equivalence).
-- Placebo premium flags 14/15 with/without delivery; channel/condition confound remains.
-- E70 (post-hoc): comparison-free markup over cost test .92-.95, rep .80-.84.
-- NEW E71 (post-hoc, hypothesis registered first): stats table without its 3 level columns -> test run AUROC .77 vs
-  full .86 (d +.09 [+.02,+.17]; action .75); dev/rep differences unresolved; proximity/corr columns add test
-  localisation +.07 [+.02,+.13]. Codex review applied (logs/review_iter27_nolevel.md).
-- iter28: fresh full-REPORT claims audit (codex + Opus, logs/review_iter28_final_*.md): numbers all matched JSON;
-  ~25 framing fixes applied (replication text nominally hurts, E71 localisation mixed, 'resolved' defined, placebo wording).
-- NEW E74 (label-only): Claude Sonnet re-judge of all 115 private chats agrees with GPT judge on binary y 115/115;
-  explicit-vs-info_exchange sub-label differs (κ .33/.38). REPORT Labels + Limitations updated; codex review applied.
-- iter30: plain-language 5-point TL;DR added above the Abstract (numbers verbatim; no new analysis); exports 28 pages.
-- 47 tests / 424 hashes / 2,368 audit inputs pass; exports rebuilt (27 pages); talk unchanged at 7 slides.
+- Validity: label = condition; opening prices discriminate; premium flags placebo/delivered 14/15 each.
+- Post-hoc E70: markup test .92-.95, rep .80-.84. E71: level-column removal lowers test detection .86->.77.
+- E74: GPT/Claude binary label agreement 115/115; 85 pos + 30 neg, uniform within each stratum; sub-labels differ.
+- Iter31: Codex + Opus summary reviews applied; causal/metric/uncertainty wording tightened; six judge Q&As added.
+- Iter31: talk includes E74; fixed focused-control keyboard shortcuts; every slide checked at five desktop sizes.
+- Checks: 47 tests / 424 hashes / 2,368 audit inputs PASS; source ledgers + export freshness PASS.
+- Handoff: 28-page REPORT.pdf, 7-page PRESENTATION.pdf; all scientific artifacts unchanged (417/424 prior hashes unchanged).
+- Risks remain: generator/condition confound, one seller model, evasion and semantic explanation quality unvalidated.
+
 ## Next steps (no new experiments after 06:30; FINALIZE 08:15)
-1. Keep detection results frozen; present PRESENTATION.pdf or PRESENTATION.html. Send REPORT.pdf for detail.
-2. Read-only: python3 -S verify_artifacts.py; uv run python check_audit_inputs.py; python3 -S check_price_transitions.py --check.
-3. If REPORT.md changes, rerun build_handoff.py, then re-record the manifest (rm data/artifact_manifest.json; verify_artifacts.py --write-manifest).
-4. After 06:30: no new experiments. Polish only; FINALIZE 08:15.
+1. Keep detection results frozen; present PRESENTATION.pdf or PRESENTATION.html; judge Q&As are in PRESENTATION.md.
+2. Read-only checks: python3 -S verify_artifacts.py; uv run python check_audit_inputs.py.
+3. If prose/talk changes, rebuild presentation/exports then refresh post-hoc manifest; do not rerun completed evaluations.
 
 ## Log
 - 06:20 iter 30: TL;DR block in REPORT (E75); handoff exports + manifest rebuilt; all verifiers/tests PASS. No new experiments from here.
@@ -93,3 +90,6 @@
 - 2026-10-24 04:47 UTC iter 24: E68 evidence-source coverage and offline ledger: six original GPT views on 95 test + 30 replication runs, 750 audits / 2,925 evidence items (2,229 test, 696 replication), all well-formed anchors; only four quote-marked phrases, all text-view and literally present in cited firm/round (two generic repeated phrases). This does not validate semantic accuracy; REPORT/README now make the untested explanation role explicit. New standard-library renderer/checker hashes all 16 public-data/cache inputs plus its source, preserves every cached observation, exposes all 1,500 public rounds / 6,000 firm observations and ties prose counts to JSON. Codex + Opus reviews applied; final Codex recheck found no consequential issues. Numeric/multiline quotes, malformed anchors, missing semantic support, private-field exclusion, corruption detection and no-JS navigation addressed. All 36 tests, 408 manifest hashes, original prompt checks and browser checks pass; clean Git-index export is write-free without evaluation locks. Refreshed report 26 pages / 443 text fragments / 317 cells / 8 figures; talk remains 7 pages. Every original scientific input/cache/result/figure/analysis/evaluation/provenance receipt hash unchanged. No generation, label judging, auditor calls, AUROC/bootstrap or threshold refitting. Review: reviews/iteration24_evidence_sources.md.
 
 - 2026-10-24 05:03 UTC iter 25: E69 selective price-transition source census: 51/2,229 test + 6/696 replication items, six original GPT views. All parsed endpoint pairs match public logs (54 adjacent, 3 earlier starts); this is not semantic accuracy. Concrete 18→16→14 example demonstrates failure of historical same-round and ±1-round number proxies; historical outputs untouched. Codex + Opus reviews confirmed counts; Opus identified grammar bias against jointly/simultaneously wording. Kept validation grammar fixed, disclosed omissions and absent advance commit/registration, and added a separately labelled lexical diagnostic exposing 52+17 unparsed numeric-span items (can describe costs/later clauses; never counted as endpoint successes). Stronger REPORT/README count guards, missing-private-files checks, multi-firm/invalid-anchor/negative controls and historical-regex counterexample tests. Final Codex rechecks found no consequential issues. 47 tests / 412 hashes pass; 403 pre-existing manifested artifacts unchanged, including every scientific input/cache/result/figure/analysis/evaluation/provenance receipt. Refreshed 26-page report preserves 444 text fragments, 317 cells and 8 figures; talk remains 7 pages. Clean Git-index export passes all six read-only checkers and completed-evaluation refusal without locks; hashes/mtimes/inventory unchanged. No seller generation, label judging, new scientific audit calls, AUROC/bootstrap or threshold refitting. Review: reviews/iteration25_price_transitions.md.
+
+
+- 2026-10-24 06:18 UTC iter 31: E76 summary/handoff finalization. Independent Codex and Opus reviews applied to TL;DR, abstract, README and talk: remove unsupported causal explanations, distinguish run detection from within-market localisation and test from replication, clarify raw-action/statistics views and non-equivalence. Added six source-linked presenter Q&As, E74 label robustness on slide 2 and uniform-stratum caveat in notes; repaired stale monitor judge caveat. Browser QA exposed a pre-existing focus/keyboard bug (Present retained focus; ArrowRight was ignored); fixed while preserving native Space activation, reproduced before/after, and asserted all seven slide transitions. Actual all-slide QA found and fixed slide 3 overflow at 1024x768. Five desktop layouts, mobile, no-JS reading and offline checks pass. Exports preserve 28 report / 7 talk pages, 341 cells, 477 report + 102 slide fragments and 8 figures. All 47 tests, 424 hashes, 2,368 audit-input checks and source/export freshness pass. Every scientific input/cache/result/figure/analysis/receipt unchanged; 417/424 previous manifested files identical. Review: reviews/iteration31_summary_handoff.md. No experiments, model audits, label judging, AUROC/bootstrap or threshold recomputation. Inherited log timestamps are retained unchanged; this entry uses date -u.

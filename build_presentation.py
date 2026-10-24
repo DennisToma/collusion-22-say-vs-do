@@ -19,6 +19,9 @@ SOURCES = {
     "early": "results/analysis/early_detection_llm_v3.json",
     "placebo": "results/analysis/placebo_llm_v3plc.json",
     "monitor": "results/analysis/monitor_stratum_llm_v3mon.json",
+    "labels": "results/label_xfam.json",
+    "nolevel": "results/analysis/nolevel_view.json",
+    "supervised": "results/baselines/llm_v3_lr_test.json",
 }
 VIEWS = ("text", "action", "combined", "action_stats", "combined_stats", "structured", "premium")
 LABELS = {"text": "Public text", "action": "Actions", "combined": "Text + actions",
@@ -155,8 +158,11 @@ JS = """
   };
   document.getElementById('print').onclick = () => window.print();
   document.addEventListener('keydown', event => {
-    if (event.target.closest('button, a, summary, input, textarea, select')) return;
+    if (event.target.closest('input, textarea, select, [contenteditable]')) return;
     if (!document.body.classList.contains('presenting')) return;
+    // Preserve native Space activation, while arrows and Escape still work
+    // immediately after clicking a presentation control (which keeps focus).
+    if (event.key === ' ' && event.target.closest('button, a, summary')) return;
     if (['ArrowRight', 'PageDown', ' '].includes(event.key)) { event.preventDefault(); show(index + 1); }
     if (['ArrowLeft', 'PageUp'].includes(event.key)) { event.preventDefault(); show(index - 1); }
     if (event.key === 'Home') { event.preventDefault(); show(0); }
@@ -172,13 +178,18 @@ def render(root=ROOT):
     raw = {key: (root / path).read_bytes() for key, path in SOURCES.items()}
     data = {key: json.loads(value) for key, value in raw.items()}
     t, r, e, p, m = (data[key] for key in ("test", "rep", "early", "placebo", "monitor"))
+    labels = data["labels"]["datasets"]
+    label_agree = sum(row["binary_agree"] for row in labels.values())
+    label_n = sum(row["n"] for row in labels.values())
+    label_pos = sum(row["gpt_y1"] for row in labels.values())
+    nl = data["nolevel"]["llm_v3_test"]
     slides = []
 
     def add(title, body, notes, sources):
         slides.append((title, body, notes, sources))
 
     add("Does reading what sellers say improve action auditing?", f"""<p class="lead"><strong>On this generator, no resolved detection gain.</strong><br>
-Computed action summaries help; a simple price statistic ranks strongly.</p>
+Computed action summaries improve localisation; a simple price statistic ranks strongly.</p>
 <div class="grid"><div class="card"><h2>Adding public text</h2>
 <p class="metric">{t['contrasts']['delta_hybrid[combined]:run_auroc']['delta']:+.2f}</p>
 <p>Test run-AUROC change vs the best single modality</p>
@@ -189,7 +200,8 @@ Flags stay frequent when private messages are never delivered.</p></div></div>
 This is a generator-specific comparison. The CI does not establish equivalence.</p>""",
         "Open with the answer to Q2.2, then state the validity limit immediately. "
         "The negative finding is about these zero-shot auditors and these public messages. "
-        "It does not establish that text cannot help in other settings or after training.", ["test", "placebo"])
+        "It does not establish that text cannot help in other settings or after training. "
+        "No resolved gain means the interval includes zero, not that the methods are equivalent.", ["test", "placebo"])
 
     add("What was observed, and what was labelled?", f"""
 <div class="grid"><div><h2>Market and split</h2><ul>
@@ -206,30 +218,41 @@ fresh replication n = {r['n_runs']}.</li></ul></div>
 A judge reads private chat only, never prices. Private chat is hidden from auditors.
 In the main dataset every private-channel run is positive: label = condition.
 This is not a verified-overcharge label.</div>
+<p class="small">Post-hoc label check: GPT and Claude Sonnet agree on the binary label in
+{label_agree}/{label_n} private chats across four datasets using the same judge template;
+agreement does not establish correctness.</p>
 <p class="small">Same auditor model, same cases, public partnership notice in every view.
 Run AUROC measures detection; within-market AUROC measures pair localisation in positive runs.</p>""",
         "Sellers were given profit objectives and an opportunity to communicate, not instructions to collude. "
         "The operational label includes explicit agreements and price-intention exchanges. "
         "A judge-positive chat is not evidence that the private exchange caused the prices. "
-        "The full report documents the lab framing, pilots, and all six input views.", ["test", "rep"])
+        f"The post-hoc label re-judge agrees on the binary endpoint in {label_agree}/{label_n} private chats "
+        f"({label_pos} positive, {label_n - label_pos} negative; main, replication, firm-framing and monitored strata). "
+        "Each stratum is uniform, so this does not test within-stratum discrimination; the explicit-agreement versus intention-exchange "
+        "sub-label differs between judges. Agreement is a robustness check, not independent ground truth. "
+        "The full report documents the lab framing, pilots, and all six input views.", ["test", "rep", "labels"])
 
     chart_table = table(["Scorer", f"Test (n = {t['n_runs']})", f"Replication (n = {r['n_runs']})"],
                         [[esc(LABELS[v]), ci(t["point_ci"][v]["run_auroc"]),
                           ci(r["point_ci"][v]["run_auroc"])] for v in VIEWS])
-    add("Summarising actions helps more than adding public text", f"""
+    add("Action summaries: detection and localisation", f"""
 {auroc_chart(t, r)}
 <details class="values"><summary>Accessible numerical table: run AUROC [95% CI]</summary>{chart_table}</details>
 <p class="small">Filled blue = test (n = {t['n_runs']}); hollow orange = fresh replication (n = {r['n_runs']}).
 The chart compares the six original LLM views and the premium. Premium = pair mean price minus rival mean price;
 run score = maximum over pairs. The statistics table already includes the premium; its contribution was not isolated.</p>
+<p class="small">Statistics improve pair localisation in both samples; the detection gain is resolved on test only.</p>
 <div class="callout caution small">Premium selection used partial data including test runs.
 The test evaluation ran once, but was not fully blind. Replication analysis was registered after generation began,
 before metrics. Its intervals are wide; the premium's registered advantage over action_stats is unresolved.</div>
 <p class="small">A supervised TF-IDF baseline also learns a public-text trace (REPORT, within-split CV);
 that is a different training regime from these zero-shot auditors.</p>""",
-        "Premium has the highest point estimate among these untrained scorers. Do not call it the best detector in general: "
+        "Premium has the highest run-AUROC point estimate among these untrained scorers. Do not call it the best detector in general: "
         "the report also has supervised baselines. The six original LLM views are all shown, so the graphic does not hide "
-        "a stronger original view. The fresh sample checks direction but does not resolve the premium's lead.", ["test", "rep"])
+        "a stronger original view. The fresh sample checks direction but does not resolve the premium's lead. "
+        "The later column ablation removes three level columns together: it lowers test detection performance, "
+        "but does not isolate the premium column or establish what the auditor reasons about. "
+        "The judge-question notes give the saved contrasts and their uncertainty.", ["test", "rep", "nolevel"])
 
     rows = [
         ["Raw text gain · run AUROC", delta(t, "delta_hybrid[combined]:run_auroc"),
@@ -247,7 +270,7 @@ that is a different training regime from these zero-shot auditors.</p>""",
 Statistics gain = action_stats − action. Text with statistics = combined_stats − action_stats.</p>
 <ul><li>No resolved positive detection gain from raw text in either sample.</li>
 <li>The statistics table improves localisation in both samples.</li>
-<li>The small nominal text-with-statistics localisation gain on test did not repeat.</li></ul>
+<li>The small unadjusted text-with-statistics within-market localisation gain on test did not repeat.</li></ul>
 <div class="callout small">Class-stratified paired run-bootstrap intervals. Test contrasts are nominal, unadjusted
 for multiple comparisons. Text-with-statistics on replication is exploratory. CI inclusion is not equivalence.</div>""",
         "The two raw-text cells use the contrasts registered for each evaluation; do not describe them as identical definitions. "
@@ -307,6 +330,7 @@ reliable evasion detection, or transfer across seller models.</li>
 replicate across seller models and market designs, and test concealed opening-price cues.</li></ul>
 <div class="callout"><strong>Read and verify:</strong> <a href="REPORT.md">REPORT.md</a> ·
 <a href="README.md">README.md</a> · <a href="data/SPLITS.md">split/exposure chronology</a><br>
+<a href="PRESENTATION.md">Speaker notes and judge questions</a><br>
 <code>python3 verify_artifacts.py</code><br><code>python3 build_presentation.py --check</code></div>
 <p class="small">Saved results and data ship with the repo. No model calls or locked-evaluation reruns are needed.
 This talk is generated from saved JSON, with full SHA-256 source hashes in PRESENTATION.md.</p>""",
@@ -334,7 +358,62 @@ This talk is generated from saved JSON, with full SHA-256 source hashes in PRESE
                         f'<details><summary>Speaker notes</summary><p>{esc(note)}</p></details></section>')
         notes += [f"## {i}. {title}\n", note + "\n",
                   "Saved sources: " + ", ".join(f"[{key}]({SOURCES[key]})" for key in sources) + ".\n"]
-    notes += ["## Source hashes\n", "These hashes identify the saved inputs used to render the talk. "
+    notes += ["## Likely judge questions\n",
+              "These answers use the existing frozen results. They add no estimates and are not extra slides.\n",
+              "### Are you detecting collusion or just the channel condition?\n",
+              "The endpoint is judge-labelled private coordination communication (an agreement or price-intention "
+              "exchange), not agreement-caused overcharge. In the main dataset it coincides with the private-channel "
+              "condition. Opening prices already discriminate before any partner message is received, and "
+              f"the premium flags {prem['placebo'][0]}/{prem['placebo'][1]} undelivered-channel runs versus "
+              f"{prem['private'][0]}/{prem['private'][1]} matched delivered runs. "
+              "That limits the conduct interpretation; it does not identify each detector's cues or establish "
+              "equivalence of the two arms. Public-price coordination remains possible. "
+              f"Sources: [early]({SOURCES['early']}), [placebo]({SOURCES['placebo']}).\n",
+              "### Does the negative finding mean public text is useless?\n",
+              "No. For the tested zero-shot auditor, combined minus the best single modality has run-AUROC change "
+              f"{delta(t, 'delta_hybrid[combined]:run_auroc', digits=2)}. The interval leaves room for gains and "
+              "losses. Text with statistics has a small unadjusted within-market localisation gain on test that did not repeat. "
+              f"The supervised public-text classifier reaches {data['supervised']['hard']['text']['run_auroc'][0]:.2f} "
+              "run AUROC under grouped five-fold CV within the test split, using other folds' labels. "
+              "This is a different training regime and shows a learnable trace, not a zero-shot gain. "
+              f"Sources: [test]({SOURCES['test']}), [replication]({SOURCES['rep']}), "
+              f"[supervised]({SOURCES['supervised']}).\n",
+              "### Is the statistics-table gain just the premium column?\n",
+              "Not isolated. A post-hoc ablation removes pair mean price, rival mean price and premium together, "
+              "retaining proximity and change-correlation columns. On test, full minus reduced table run AUROC is "
+              f"{delta(nl, 'action_stats-action_stats_nolevel:run_auroc', digits=2)}; reduced table minus actions "
+              "alone has localisation gain "
+              f"{delta(nl, 'action_stats_nolevel-action:within_market_auroc', digits=2)}. "
+              "Run-level full-minus-reduced differences on dev and replication are unresolved; localisation "
+              "findings differ across splits. This tests information presentation, not the auditor's internal reasoning. "
+              f"Source: [column ablation]({SOURCES['nolevel']}).\n",
+              "### How reliable are the private-chat labels?\n",
+              f"A post-hoc Claude Sonnet re-judge agrees with GPT on the binary label in {label_agree}/{label_n} "
+              "private chats across the main, replication, firm-framing and monitored datasets. "
+              f"These include {label_pos} positives and {label_n - label_pos} negatives; each stratum is uniform, "
+              "so this does not test within-stratum discrimination. "
+              "Both read private chat without prices. They disagree more on agreement versus intention exchange "
+              f"(three-class kappa {labels['llm_v3']['kappa_3class']:.2f} main, "
+              f"{labels['llm_v3rep']['kappa_3class']:.2f} replication); these sub-labels are not endpoints. "
+              "Binary agreement does not establish correctness, conduct, or generalisation. "
+              f"Source: [label check]({SOURCES['labels']}).\n",
+              "### Was the test fully blind, and what did the replication establish?\n",
+              "The premium comparator was selected after partial test exposure. The full test evaluation ran once. "
+              "Replication registration followed the start of generation but preceded metrics; some raw output and "
+              "later progress lines were seen. All four registered replication rules held, but they include "
+              "interval-based rules and do not establish equivalence. The registered combined-minus-action "
+              f"replication contrast is {delta(r, 'combined-action:run_auroc', digits=2)}. "
+              "Some exploratory text contrasts are negative with intervals excluding zero. "
+              f"Sources: [exposure chronology](data/SPLITS.md), [replication]({SOURCES['rep']}).\n",
+              "### Is the proposed screening-and-explanation workflow ready to deploy?\n",
+              "No deployment claim was tested. The frozen premium threshold flags "
+              f"{r['flag_rate_frozen_dev_thresholds']['premium']['none'][0]:.0%} of "
+              f"{rep_none_n} fresh no-channel runs (a small sample). "
+              "Literal quotation and selective price-transition checks do not validate explanation accuracy "
+              "or usefulness. A premium-filtered AND-gate was analysed descriptively; the proposed explanatory "
+              "workflow was not evaluated end to end. "
+              f"Sources: [replication]({SOURCES['rep']}), [limitations and source checks](REPORT.md).\n"]
+    notes += ["## Source hashes\n", "These hashes identify the saved inputs used to render the talk and judge-question notes. "
               "They are post-hoc provenance, not evidence of pre-registration.\n"]
     for key, path in SOURCES.items():
         notes.append(f"- `{path}`: `{hashlib.sha256(raw[key]).hexdigest()}`")

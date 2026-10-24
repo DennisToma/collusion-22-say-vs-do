@@ -5,7 +5,8 @@ and limitations. For the five-minute talk, open [PRESENTATION.html](PRESENTATION
 locally in a browser; it works offline, with presentation controls and Print / PDF.
 Ready to share: [slides PDF](PRESENTATION.pdf), [report PDF](REPORT.pdf), and
 [report HTML](REPORT.html) (all figures embedded; readable as a single offline file).
-[PRESENTATION.md](PRESENTATION.md) contains speaker notes and source hashes.
+[PRESENTATION.md](PRESENTATION.md) contains speaker notes, answers to likely judge questions,
+and source hashes.
 The [evidence source ledger](EVIDENCE.html) exposes all 2,925 original-view test and
 replication evidence items alongside the public log. It works offline, with optional
 search/view filters, and reports literal locations for quote-marked spans. It does
@@ -15,7 +16,8 @@ records evaluation exposure and registration chronology, and [EXPERIMENTS.tsv](E
 records the experiments. [SCHEMA.md](SCHEMA.md) describes trajectory files.
 
 The finding on this generator is no resolved detection gain from adding public text
-to zero-shot action auditing. Computed action summaries help. A simple price premium
+to zero-shot action auditing. Computed action summaries improve pair localisation in both
+samples; their detection gain is resolved on test only. A simple price premium
 ranks strongly, but placebo-channel runs show that elevated premiums and detector
 flags can arise without delivered private messages. The endpoint is private coordination
 communication, not verified realised overcharge. See the report for the full caveats.

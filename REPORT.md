@@ -3,7 +3,7 @@
 *Apart AI Collusion Sprint, Q2.2 — text + action auditing. Status: locked test results in (2026-10-24 00:03 UTC); registered replication run 02:07 UTC (chronology disclosed below); placebo-channel exploration 03:33 UTC; post-hoc markup baseline (E70) and stats-table column ablation (E71) 05:20–05:35 UTC (exploratory, headline unchanged). Offline verification: `python3 verify_artifacts.py`; handoff instructions in [README.md](README.md).*
 
 For the five-minute presentation, open [PRESENTATION.html](PRESENTATION.html) locally in a browser;
-[speaker notes and saved-input hashes](PRESENTATION.md) accompany it. Render with
+[speaker notes, judge questions and saved-input hashes](PRESENTATION.md) accompany it. Render with
 `python3 build_presentation.py`, or check freshness without writes using
 `python3 build_presentation.py --check`. It reads existing results only; no estimates change.
 Ready to share: [slides PDF](PRESENTATION.pdf), [report PDF](REPORT.pdf), and
@@ -15,33 +15,39 @@ The [cached evidence source ledger](EVIDENCE.html) lets reviewers inspect every 
 test and replication evidence item beside the public log (offline, searchable; no semantic judging).
 
 **TL;DR (plain-language summary; every number is repeated with its source below).**
+
 1. *Question:* does a zero-shot LLM auditor detect collusion better if it reads sellers' public messages as well as
-   their prices? *On our generator: no resolved gain.* Locked test (n = 95): text alone run AUROC 0.47 (chance); text +
-   actions 0.74 vs actions alone 0.75; combined minus best single modality −0.01 [−0.09, +0.06].
-2. *Why:* LLM sellers given a private chat all use it (70/70 private pairs), but the explicit-public-coordination
-   screen flags 0/125 runs, so the public text gives the tested zero-shot auditor little to read.
-3. *What helps:* summarising the actions. A computed statistics table adds +0.11 [+0.04, +0.18]; an untrained
+   their prices? *On our generator: no resolved run-level detection gain.* Locked test (n = 95): text alone run AUROC
+   0.47 [0.36, 0.58] (consistent with chance); text + actions 0.74 vs actions alone 0.75; combined minus best single modality
+   −0.01 [−0.09, +0.06]. A small unadjusted within-market localisation gain with statistics did not repeat on fresh data.
+2. *What the messages show:* all 70 private pairs exchange price intentions or propose agreements, while the
+   explicit-public-coordination screen flags 0/125 runs. Public text still carries a learnable trace for a supervised
+   classifier; why the zero-shot text-only auditor is near chance is not established.
+3. *What helps:* summarising the actions. A computed statistics table adds +0.11 [+0.04, +0.18] run AUROC on test
+   (detection gain unresolved on replication; pair localisation improves in both samples). An untrained
    pair price premium reaches 0.95 (chosen after partial test exposure; 0.92 on a 30-run replication).
-4. *Caution:* the label equals the condition. Round-1 prices (set before any partner message) already give 0.90, and
-   a placebo channel that is offered but never delivered is flagged as often (premium 14/15 vs 14/15). The detectors
-   respond to the channel offer; they need not be detecting a delivered agreement.
-5. *Suggested architecture (not evaluated end-to-end):* always-on action statistics as the screen; LLM audit to
-   explain flagged runs.
+4. *Caution:* the label equals the condition in the main dataset. Round-1 prices (set before any partner message is
+   received) already give 0.90 run AUROC. The premium flags 14/15 placebo-channel runs with no private-message
+   delivery and 14/15 matched delivered runs. Flags can occur without delivery; the cues each detector uses and
+   equivalence between these arms are not established.
+5. *Suggested architecture:* always-on action statistics as the screen; LLM audit to explain flagged runs.
+   Neither explanation usefulness nor this workflow's end-to-end performance was evaluated.
 
 ## Abstract
 Does an auditor catch LLM collusion better if it reads what sellers *say* in public as well as what they *do*?
-**On our generator: no resolved run-level detection gain** (a small nominal localisation gain with statistics did not repeat on fresh data). We simulate a 4-firm repeated-pricing market with gpt-6-luna sellers; in the
+**On our generator: no resolved run-level detection gain** (a small unadjusted within-market localisation gain with statistics did not repeat on fresh data). We simulate a 4-firm repeated-pricing market with gpt-6-luna sellers; in the
 `private` condition one pair gets a private chat. Sellers are never told to collude, yet all 70 private pairs use it to
 exchange prices or propose agreements, while a screen for explicit public coordination flags 0/125 runs. Zero-shot
-gpt-6.1-sol auditors score each firm pair from the public log, seeing text only, actions only, or both; the action-bearing views also come with a computed statistics table
-(there is no text + statistics view). On the locked test split (n = 95, run once), text alone is at chance (run AUROC
-0.47), combined text + actions gives 0.74 vs actions alone 0.75, and combined minus the best single modality is −0.01 [−0.09, +0.06] ("resolved" throughout = 95% run-bootstrap CI excludes 0; no multiplicity correction). A statistics table helps (+0.11
-[+0.04, +0.18]). An untrained one-line statistic selected after partial test exposure, the pair's price premium over its rivals, reaches 0.95 against ≤ 0.86
+gpt-6.1-sol auditors score each firm pair from the public log, seeing text only, actions only, or both. Further views
+add a computed statistics table to the action log, with or without text; a structured view also adds a stated-vs-actual
+price table. No view gives statistics without the raw action log. On the locked test split (n = 95, run once), text
+alone is consistent with chance (run AUROC 0.47), combined text + actions gives 0.74 vs actions alone 0.75, and combined minus the best single modality is −0.01 [−0.09, +0.06] ("resolved" throughout = 95% run-bootstrap CI excludes 0; no multiplicity correction). A statistics table helps test detection (+0.11
+[+0.04, +0.18]; unresolved on replication) and improves localisation in both samples. An untrained one-line statistic selected after partial test exposure, the pair's price premium over its rivals, reaches 0.95 against ≤ 0.86
 for the six original LLM views. But round-1 prices alone give 0.90, and they are set before any partner message is read; and when
 private messages are offered but never delivered (placebo, 15 matched seeds), the premium flags 14/15 placebo vs 14/15 matched
 delivered runs (no difference resolved; equivalence not tested). So high premiums and detector flags occur without delivered private
-messages; the round-1 gap shows a channel-offer response, which the placebo cannot separate from tacit coordination on public prices. A replication
-on 30 fresh runs keeps the premium on top (0.92) and does not resolve a gain from adding text; if anything text hurt (combined − action −0.14 [−0.30, +0.02]). Public text still
+messages; the round-1 gap indicates a response to the channel offer or its prompt framing, which the placebo cannot separate from tacit coordination on public prices. A replication
+on 30 fresh runs keeps the premium's run-AUROC point estimate highest (0.92, lead unresolved) and does not resolve a gain from adding text; if anything text hurt (combined − action −0.14 [−0.30, +0.02]). Public text still
 carries a learnable trace: supervised TF-IDF reaches 0.98 (five-fold CV grouped by run within the test split, a different regime from the zero-shot auditors). Caveats: the label coincides with the condition, one seller
 model, and evasion is untested (under an announced monitor the judge finds coordination talk in 0/14 runs).
 Suggested architecture: always-on action statistics as the screen, LLM audit reserved for explaining flagged runs;
@@ -65,7 +71,7 @@ private chat channel. Sellers are never told to collude, yet all 70 private pair
 private chat), and
 the explicit-public-coordination screen flags 0/125 runs. Zero-shot gpt-6.1-sol auditors score every firm pair from the
 public log under six views (defined in §Setup). Locked test split (n = 95, run once):
-- **Text adds nothing resolved.** Text-only run AUROC is 0.47 (chance). Combined minus the best single modality is
+- **Text adds nothing resolved.** Text-only run AUROC is 0.47 (consistent with chance). Combined minus the best single modality is
   −0.01 [−0.09, +0.06] (gains up to ~0.06 not excluded). Replacing messages with a matched donor run's has no resolved
   effect. Claude Sonnet 5.5 shows the same pattern on 42 runs (dev + test pooled; pair-AUROC contrasts, run AUROCs without CIs). Supervised baselines agree: text + actions 0.96 vs
   actions alone 0.96 (text alone 0.98, see below; trained within the test split on labels that equal the condition).
@@ -242,7 +248,7 @@ Appendix C. At those thresholds the premium flags 0.92 of y=1 runs and 0.07 of t
 
 **Trained non-LLM baselines on test (caution):** a logistic regression on TF-IDF of the public messages, trained by
 5-fold CV *within* the test split, reaches run AUROC 0.98 [0.95, 1.00] and pair-ID accuracy 1.00, while the zero-shot
-LLM text auditor is at chance. Shuffling messages within label+condition does not hurt it (0.97). So the public text
+LLM text auditor has run AUROC consistent with chance. Shuffling messages within label+condition does not hurt it (0.97). So the public text
 *does* carry a strong condition-linked signal that no public message states explicitly (0/125 hard-set flags) and the
 zero-shot LLM does not use. Post-headline inspection (descriptive, Appendix C) suggests the cue is mostly what colluders *stop* saying
 (e.g. "keeping" in 67/140 colluding firms' messages vs 133/140 rivals and 139/140 `none` firms): an indirect trace that
@@ -799,8 +805,9 @@ vs 1488/1680 (88.6%) on llm_v3; independence/refusal phrases (e.g. "I can't coor
 613/1680 (36.5%). Mean markup over cost in monitored private runs is 6.16 vs 6.27 in monitored `none` runs (llm_v3:
 private 7.66, none 5.84); assigned-pair premium +0.23 (llm_v3 private +1.65); premium > 1 in 1/14 runs (llm_v3 61%)
 — close to no-channel levels, though not shown equivalent. So on this sample, announcing a monitor coincides with no
-coordination talk rather than with hidden coordination. Caveats: n = 14, one seller model, one judge whose
-reliability on refusal-style chats was not independently checked; we cannot distinguish safety-triggered refusal from
+coordination talk rather than with hidden coordination. Caveats: n = 14, one seller model; the later E74 Claude
+re-judge agrees on all 14 negative private-chat labels, but correctness on refusal-style chats remains unvalidated.
+We cannot distinguish safety-triggered refusal from
 strategic deterrence, nor exclude tacit coordination, and it says nothing about how a model that does try to evade
 would look. **False alarms on this stratum** (all 20 runs are y = 0; frozen dev thresholds; `uv run python
 monitor_stratum.py --ds llm_v3mon` → `results/analysis/monitor_stratum_llm_v3mon.json`), flag rate on the 14

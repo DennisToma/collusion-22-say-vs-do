@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
-  "recorded_utc": "2026-10-24T06:06:43.145679+00:00",
+  "recorded_utc": "2026-10-24T06:16:25.302216+00:00",
   "note": "Post-hoc rendering provenance only, not pre-registration. PDF bytes vary with renderer/time.",
   "pdf_source_link_base": "https://github.com/DennisToma/collusion-22-say-vs-do/blob/main/",
   "sources_sha256": {
-    "PRESENTATION.html": "826358433b6b5e018ee07f01cb79959eb38d4a06981853406d6b2ba29c458536",
-    "PRESENTATION.md": "bb7fdbef0c4a6cdee254c934d9e05aa8e495dee3e77e6c047b202214a2ec7d5d",
-    "REPORT.md": "96feafa8056a08d1b9e809b197cecc550d9cc1c4fb33bf30680f90cb2cb6a544",
+    "PRESENTATION.html": "1bbf8c0b4509cfd5df42332d3a9e0bfd7a793e3622ff1b60d5c1d85b6d5f057d",
+    "PRESENTATION.md": "0499ca70945d8bf5b13c7db54df8787bdddcb36bd9bd4c55df46569140403ab3",
+    "REPORT.md": "5d7c8fc4cb982e65f71cb99181e47d4594428c45c50b43885c5e5b010ae32f27",
     "build_handoff.py": "be92c2fd26f4ad99658f8de0103704e88dc14c9205dcaaf0177a6012070a8dc0",
-    "build_presentation.py": "a9ba03d43aedb1c7b100fb952bf0ea1a20b9a7a5a04adf3ff44011865d43e6ba",
+    "build_presentation.py": "86195ebfe6fca92e2825492a721061448c1980cb015b6f10b6c1d183c9560f60",
     "figures/auroc_dev.png": "46c592b475fb12fcbd750dae7eadce3f10f9941db6ed769f22837cc1af2b92f7",
     "figures/auroc_test.png": "05623abefacb644c3ccbcf7f10fbf2f8420a6dd6158e3441b273400efe219566",
     "figures/early_detection_llm_v3.png": "8c5d20bc740e4211d97725b07925a81d1826d54006c3721e6eb5fdc5a23dbe3d",
@@ -33,20 +33,20 @@
     "report_text_fragments": 477,
     "embedded_figures": 8,
     "presentation_pages": 7,
-    "presentation_text_fragments": 100
+    "presentation_text_fragments": 102
   },
   "outputs": {
     "REPORT.html": {
-      "sha256": "ef761afbb4644b3b03f9095e08cdd6ae78691a672d63a83617182f001e70759c",
-      "bytes": 1160337
+      "sha256": "e200b693dcd20bfc021099015ff9b8f8a2900aa50a2e34d0c7fd8e6037372c54",
+      "bytes": 1161220
     },
     "REPORT.pdf": {
-      "sha256": "0954c9a5a18e6f4778cf3e9ce5195f10529971cf2106861d33cb1a7d99063a3c",
-      "bytes": 975223
+      "sha256": "49c5c41811c57e9d62f55a9b96018990bb26787fdf9babf94666ec8e17a9755f",
+      "bytes": 976775
     },
     "PRESENTATION.pdf": {
-      "sha256": "f628a41e7af850d7670467ae8cc766598cf4992e90a67ea47eb69aa63ea4104b",
-      "bytes": 65533
+      "sha256": "753fa329e220559c8e4b0c4292014409f6d41fe4b0e8b39b63384e8ac375e232",
+      "bytes": 66801
     }
   }
 }
