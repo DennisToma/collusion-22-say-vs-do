@@ -1,12 +1,12 @@
 # STATUS
 
-## Current state (2026-10-24 21:59 UTC by `date -u`, Phase 2 iteration 50) — following DIRECTION 20:00
+## Current state (2026-10-24 22:03 UTC by `date -u`, Phase 2 iteration 50) — following DIRECTION 20:00
 - Headline unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc).
 - Iter50 milestone: Q1.4 final D2 cited in REPORT P2.12; inconclusive, 15+15 games. Chat ask effect +0.39 [+0.06,+0.69]; ask-level AUROC0.68 [0.46,0.88], pCMI0.60 [0.40,0.80]. Offers distinguished from paid prices; no agreement inference from the ask effect alone.
 - D2 source pinned at sibling9cee046 with result/producer SHA256 and regeneration via report_tables.py --external-d2; exact source bytes and REPORT citation checked; E130 ledger row. No new generation or local detector analysis.
 - E113 pending: snapshot180 games; action/combined180/180 and Qwen text84/84 current, zero stale/missing/duplicate/unparsed; +24 calls since iter49. Luna6/6, Qwen5/6 balanced sweeps; sixth-sweep c08/c09 done, c10 active. No final result/once-lock; no E113 metrics computed/inspected.
 - E113 verification:14/14 synthetic tests; thresholds equal frozen dev artifact. Direct source fidelity, quantity rounding and modality noninterference pass at176 games/14,080 agent-rounds/432 prompts (no metrics).
-- Verification: claims32/32; offline reproduction26/26 commands,33/33 JSON outputs exact, originals unchanged; receipt freshness PASS. REPORT707 lines; abstract/merge block/TL;DR untouched.
+- Verification: claims32/32; offline reproduction26/26 commands,33/33 JSON outputs exact, originals unchanged; receipt freshness PASS (final refresh includes pinned D2 files). REPORT707 lines; abstract/merge block/TL;DR untouched.
 - Execution endpoints remain distinct (iter49): Q2.2 first-floor/strict, replacement O5 and Q1.4 E70. Preserve frozen labels; no common ±1-band claim or pooling.
 - **Next:** await Q1.4 “6 sweeps complete” → final snapshot/audits/coverage → preflight → eval ONCE → p2_e1_report.py → P2.16/glance/abstract/merge block + ONE final-snapshot ledger row. Secondary labels only from published E70; joint pCMI sentence only if Q1.4 reports replication.
 - **Open delay:** c10 sixth-sweep generator remains alive but last seller-cache response21:45:48 UTC (unchanged at21:59); no cause established. Q1.4 STATUS21:55 forecasts22:30–22:45 completion; that ETA may slip. Sibling untouched.
@@ -186,4 +186,4 @@
 
 - 2026-10-24 21:53 UTC P2 iter50 milestone: E130 final Q1.4 D2 citation landed (inconclusive; ask effect+0.39 [+0.06,+0.69], level0.68/pCMI0.60 with CIs spanning chance), pinned source + formatter; claims32/32, offline26/26 commands/33 outputs exact. E113 cache180 games/5 balanced sweeps, no metrics read; direct fidelity/noninterference check176 games passes. Continues awaiting sixth sweep; abstract/TL;DR unchanged.
 
-- 2026-10-24 21:59 UTC P2 iter50 handoff: D2 milestone3aa8e97 pushed; source grid still5/6, real preflight refuses before metrics, no final result/lock. c10 last seller-cache response21:45:48 (process alive; source completion ETA may slip). Ended eligible work after D2 landing per DIRECTION stop-polishing rule rather than waiting on the sibling; next iteration resumes E113 only when six sweeps are announced. Final receipt refresh with pinned D2 files tracked is still running; do not claim it passed until completion.
+- 2026-10-24 21:59 UTC P2 iter50 handoff: D2 milestone3aa8e97 pushed; source grid still5/6, real preflight refuses before metrics, no final result/lock. c10 last seller-cache response21:45:48 (process alive; source completion ETA may slip). Ended eligible work after D2 landing per DIRECTION stop-polishing rule rather than waiting on the sibling; next iteration resumes E113 only when six sweeps are announced. Final receipt refresh with pinned D2 files tracked PASS:26/26 commands,33/33 outputs exact, originals unchanged; freshness checked before push. A bookkeeping field-name check failed after completion (originals_unchanged vs original_sources_unchanged); corrected without changing any scientific result.
