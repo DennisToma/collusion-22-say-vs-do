@@ -167,7 +167,9 @@ testing 19 too"); gpt-6.1-sol 0/2. The high price was already market-wide (round
 `./p2_strongF_post.sh`, then `uv run python p2_strongF_report.py` → `p2_strongF_report_llm_p2strongF.json`, `p2_strong_eval_llm_p2strongF.json`).*
 **Executed collusion does occur, and so do high prices without any channel.** Strict-executed 13/20 private markets [Jeffreys 0.43, 0.83]
 (first-floor executed 14/20; judged agreement 18/20); **tacit-high 19/20 no-channel markets [0.79, 0.99]**; competitive 1/20. Market mean rounds 11–40: 16.4 private vs
-16.9 none (Nash + 4.9 / + 5.4); paired private − none −0.44 [−1.84, +1.00] (Figure: `figures/p2_strong_llm_p2strongF.png`).
+16.9 none (Nash + 4.9 / + 5.4); paired private − none −0.44 [−1.84, +1.00] (Figure P2.7: executed and tacit-high price paths overlap).
+
+![Figure P2.7: strongF price paths by behaviour class](figures/p2_strong_llm_p2strongF.png)
 
 | view (frozen) | private vs none | **strict-executed vs tacit-high** (E99-x, exploratory) | **strict vs non-executed, both with channel** (E116, exploratory, 13 vs 7; 5/7 non-executed agreed) |
 |---|---|---|---|

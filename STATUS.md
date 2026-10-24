@@ -1,17 +1,18 @@
 # STATUS
 
-## Current state (2026-10-24 19:07 UTC from date -u, Phase 2 iteration 35; fallback Codex manager)
+## Current state (2026-10-24 19:25 UTC from date -u, Phase 2 iteration 36)
 - Headline unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc).
-- **E117 computational reproduction PASS:** 25 allowlisted commands / 32 JSON outputs match exactly in a disposable tracked-file copy, including pooled Δ, behaviour labels, text LR, E116/E116b. Original scientific results and scratch inputs unchanged; no model calls.
-- **E95 reproducibility fixed without changing estimates:** freeze the original per-view coverage (luna action_stats n=9) via one post-hoc cache-prefix reconstruction + row hashes. Exact original summary reproduced; receipt authenticates current bytes, NOT historical timing. Initial failed check retained.
-- Verification: **59/59 targeted tests**, claims **28/28**, standard-library `python3 -S verify_phase2.py --check` PASS; REPORT **701 lines**. Full export/manifest checks remain stale until Sun 16:30.
-- **E115 25/30 complete**, generator active; all completed games pass raw/model/prefix/state integrity. Final check-only gate refuses incomplete cohort; NO E115 aggregate outcome computed. Run0014 four reconstructed raw rows remain disclosed.
-- **E113 82 games / 16 cells / 2 balanced sweeps**; action+combined 82/82 each, qwen text 34/34; zero stale/duplicate/missing/unparsed. +14 cached auditor calls this iteration; NO interim detector metrics computed/read.
-- Next E115: at 30/30, `P2REPL_ARM=sol uv run python p2_replace_eval.py --check-only`, then without flag ONCE → S1–S4 verbatim in P2.15 + abstract/TL;DR/claims; invalid judge recovery only via archive+ledger before final lock.
-- Next E113: `snapshot` + cached `audit` + `coverage`; Q1.4 announces **6 sweeps complete** (or Sun 08:00) → `preflight`, then `eval` ONCE; secondary labels only from final Q1.4 E70 artifact.
-- Checkpoint report export due 19:30 per DIRECTION (Opus checkpoint review already done early); next review Sun 12:30, numbers freeze Sun 14:00, presentation/EVIDENCE/manifest rebuild Sun 16:30. No new generation/review/chain started. Never stash/checkout while generators run.
+- **19:30 checkpoint export DONE (iter36):** REPORT.pdf (26 pp) / REPORT.html rebuilt from current REPORT via `uv run --group handoff python build_handoff.py`; `python3 build_handoff.py --check` PASS. PRESENTATION.pdf is still the Phase-1 talk (rebuild Sun 16:30 as directed).
+- Figure P2.7 (strongF price paths by class: executed ≈ tacit-high) now embedded in P2.7 instead of a path mention (7/7 figures embedded). REPORT 703 lines.
+- Verification: claims **28/28**; `verify_phase2.py` re-run → 25/25 commands, 32/32 outputs exact, receipt current.
+- **E115 27/30 complete**, generator active; NO E115 aggregate outcome computed. Run0014 four reconstructed raw rows remain disclosed.
+- **E113 82 games / 16 cells / 2 sweeps** (Q1.4 E70 has 6 sweeps planned); NO interim detector metrics read.
+- Next E115: at 30/30, `P2REPL_ARM=sol uv run python p2_replace_eval.py --check-only`, then without flag ONCE → S1–S4 verbatim in P2.15 + E112/E115 sentence in abstract/TL;DR.
+- Next E113: `snapshot` + cached `audit` + `coverage`; Q1.4 announces 6 sweeps complete (or Sun 08:00) → `preflight`, then `eval` ONCE.
+- Next review Sun 12:30, numbers freeze Sun 14:00, presentation/EVIDENCE/manifest rebuild Sun 16:30. Never stash/checkout while generators run.
 
 ## Log
+- 19:25 P2 iter36: checkpoint export (REPORT.pdf/html, check PASS); Figure P2.7 embedded; claims 28/28; verify_phase2 receipt refreshed 25/25; E115 27/30.
 - 18:28 P2 iter32: git gc (.git 90→20 MB); last iter30-review P3 wording fixes (P2.11 E65 cross-ref, TL;DR P2.15 wording, E116 column header); claims 28/28; E115 still 15/30 raw, rescuer holding 0024/26/28.
 - 18:55 P2 iter31: E116b Qwen within-agreement strata (0 calls) → P2.7/TL;DR5/C27, claims 28/28; stash incident #2 on E115 raw 0024/26/28, rescuer running.
 - 18:42 P2 iter30: Opus review (19:30 slot, early) applied: 3 P1 + P2 fixes; abstract 312→~260 words; p2_claims 27/27; E113 snapshot 54 games, coverage OK.

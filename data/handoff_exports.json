@@ -1,24 +1,23 @@
 {
   "schema_version": 1,
-  "recorded_utc": "2026-10-24T06:25:12.507383+00:00",
+  "recorded_utc": "2026-10-24T19:09:18.276611+00:00",
   "note": "Post-hoc rendering provenance only, not pre-registration. PDF bytes vary with renderer/time.",
   "pdf_source_link_base": "https://github.com/DennisToma/collusion-22-say-vs-do/blob/main/",
   "sources_sha256": {
     "PRESENTATION.html": "1bbf8c0b4509cfd5df42332d3a9e0bfd7a793e3622ff1b60d5c1d85b6d5f057d",
     "PRESENTATION.md": "0499ca70945d8bf5b13c7db54df8787bdddcb36bd9bd4c55df46569140403ab3",
-    "REPORT.md": "1fea357c595b2c1712e511915340b5e644ff78494a06f591bab42a55216011f8",
+    "REPORT.md": "fca7774d82157fbcf119e68cf204367a0fc31b9620c5aa13b0ac9e481cbb1c2c",
     "build_handoff.py": "be92c2fd26f4ad99658f8de0103704e88dc14c9205dcaaf0177a6012070a8dc0",
     "build_presentation.py": "86195ebfe6fca92e2825492a721061448c1980cb015b6f10b6c1d183c9560f60",
-    "figures/auroc_dev.png": "46c592b475fb12fcbd750dae7eadce3f10f9941db6ed769f22837cc1af2b92f7",
     "figures/auroc_test.png": "05623abefacb644c3ccbcf7f10fbf2f8420a6dd6158e3441b273400efe219566",
-    "figures/early_detection_llm_v3.png": "8c5d20bc740e4211d97725b07925a81d1826d54006c3721e6eb5fdc5a23dbe3d",
-    "figures/mechanism_dev.png": "f81facc3f567590ec1bfbdcad019b2980d44ace4e3bad162462e0951da39f1a6",
     "figures/mechanism_test.png": "5b4b8091ed234027c489724fd75ad1a016c582d11fe205e5a02ec5038c2b3553",
-    "figures/placebo_premium.png": "a0113f4d83c469a2776df2a971e247686ffbf891fd79eb62f1d922be0ac22557",
+    "figures/p2_cue_rounds.png": "d1c486c05eb6f9d1c650ca46c3e0f7c68ba86365c9f0267cc7280f6b54ddf46d",
+    "figures/p2_serendipity.png": "459f2fbf38e6fe56fea1621a1aacec2796a0e917dc13a0382563ea9668c5f032",
+    "figures/p2_strong_llm_p2strongF.png": "bbf2ec30711b505b0c59d2b080f75f10a5d2bdae1c4c9e9f1d1ec22c8ca2f79a",
     "figures/roc_test.png": "1414344bc59f3bee014c9e0ec6cc28b8f795cad86a5e6b02bf36dfcb7709d167",
     "figures/summary.png": "738ed0a09a3c93094d2831f9bceb8112f541e806cb5fd704cff0f29dd77bbeda",
-    "pyproject.toml": "8130f584f097c1d3b97842e575e1fcda5a040dd70879f598fba1a087b5415663",
-    "uv.lock": "0d1bee5eeeb9d063226811156e63d8c6837ae6053c8771755ed06547a6668b6a"
+    "pyproject.toml": "2b3fab6b1b7e0552645c39ec8416ee1f1129b867163547e3be8d090092e63476",
+    "uv.lock": "2d31c84cc34cbd05679c5ff195da21c710f1b15fd718e7d84664f288abc6f099"
   },
   "renderer": {
     "chromium": "156.0.8078.4",
@@ -27,25 +26,25 @@
     "pypdf": "6.21.2"
   },
   "checks": {
-    "report_pages": 28,
-    "report_headings": 18,
-    "report_table_cells": 341,
-    "report_text_fragments": 477,
-    "embedded_figures": 8,
+    "report_pages": 26,
+    "report_headings": 15,
+    "report_table_cells": 450,
+    "report_text_fragments": 560,
+    "embedded_figures": 7,
     "presentation_pages": 7,
     "presentation_text_fragments": 102
   },
   "outputs": {
     "REPORT.html": {
-      "sha256": "b55f007796f972c2f9c0d6706eccc6a47ff0397a29443ff3119affc8186511d7",
-      "bytes": 1162131
+      "sha256": "6730ad9e44d84a80b3db879ae8d379c8d5685b44cd339acd7d05bd54f3d749b0",
+      "bytes": 1474631
     },
     "REPORT.pdf": {
-      "sha256": "d6db657f664ecfd2f2605ba025f6b702b55c4dc6c8817c1620f61b523b3b1aab",
-      "bytes": 978472
+      "sha256": "01161d8715db73ca1d6d4be3639b2df8c0fa4ebdd2c047ad94d3bf4bba931df7",
+      "bytes": 1125050
     },
     "PRESENTATION.pdf": {
-      "sha256": "af7f96a872d97e171c2a096b2610264b7b18e4bffb518d8bbec2d1cb90470d8e",
+      "sha256": "7e812fbfce516b110508020ced0c5ed4840fc9ec943318426199fc11e1f6868c",
       "bytes": 66801
     }
   }
