@@ -11,8 +11,8 @@
   "limits": "A match does not check intermediate prices, duration, timing words, market context, subsequent clauses, or any causal/coordination inference. A mismatch requires source review; it is not a hallucination label. Unparsed items are never counted as successes.",
   "lexical_diagnostic": "Added after first census on review: numeric from-X-to-Y spans anywhere in unparsed items. These may describe costs or later clauses, not necessarily price claims. They never count as endpoint checks.",
   "sources_sha256": {
-    "check_evidence_sources.py": "3f05718f1b42276ceb684fe3a81b34e20870e73e2e6d274ee0ac5380280359b6",
-    "check_price_transitions.py": "bbebc25920fd53b1c076e0ad3bec0e81f78b720e0ff7c978ce7164a6b7075b9f",
+    "check_evidence_sources.py": "8a6241b1b01db3c8fa3c9e1087c31d1bbcf569469fae6902ab7c403cda5990a6",
+    "check_price_transitions.py": "a70c746e596afe71dc7dff1f1437697f091494093e7e2b9584c22b5ad40d79f0",
     "data/llm_v3/public_info.jsonl": "858b29e9743be5f85db0e32c832e9d82c42852559e47bf65c1b4ac2c34a5d65d",
     "data/llm_v3/trajectories.jsonl": "1df3de14590f27a61047dd2f91891fae6d72785bf619039c9da9adb05cd74128",
     "data/llm_v3rep/public_info.jsonl": "fe3a6deb16d0741ad864d2174b16cc813638190658d9e42b294cfc83442d608b",

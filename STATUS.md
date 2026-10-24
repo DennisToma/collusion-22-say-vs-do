@@ -1,24 +1,26 @@
 # STATUS
 
-## Current state (2026-10-24 18:00 UTC from date -u, Phase 2 iteration 27)
+## Current state (2026-10-24 18:10 UTC from date -u, Phase 2 iteration 28)
 - Main claim unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc).
-- **E116 (new, DIRECTION 17:56 dir 1, zero calls, exploratory):** within-channel strict-executed (13) vs non-executed (7) on llm_p2strongF:
-  plan 0.69 [0.44, 0.91], partner-name share 0.73 [0.50, 0.92], public text 0.61, combined 0.52; action auditors INVERTED (action_stats
-  0.18 [0.00, 0.42]); judged agreement 13/13 vs 5/7. → No text/plan view resolves execution once both classes have a channel. In REPORT
-  P2.7 (new table column replacing flags column + 4 lines), abstract, TL;DR 5, glance. p2_claims +C24 → 26/26 OK.
-  Second stratum (E102/E112) not run: no frozen-view scores exist for those runs, no new calls allowed.
-- E3 cross-family DROPPED (Limitations line + ledger row). REPORT 723 lines (directive says ≤ 711: trim at 19:30 review pass).
-- **E115** (sol newcomer) generating, 9/30 raw at 18:00; ETA ~20:00–21:00.
-- E113: Q1.4 E70 is now **6 sweeps** (ETA ~22:00), not 3.
+- **Iter 28 consolidation (DIRECTION 17:56 dirs 2, 4):** E112 replacement sentence now in abstract + TL;DR 5 (luna arm; adjust after E115);
+  abstract compressed 517 → 388 words (pair-stats parenthetical → TL;DR 1; SALT counts → TL;DR 3). Still above the ~260 target: kept
+  because the 17:57 review asked for the bounds/caveats; the 19:30 review decides further cuts. REPORT 701 lines (≤ 711 OK; v1 evidence-check
+  prose → appendix, checkers/tests repointed). p2_claims +C25 (E112) → 27/27 OK.
+- **Incident (disclosed, ledger E115-raw-incident):** a manager `git stash` at 18:04 orphaned the open raw caches of 3 running E115 games. 0012/0016
+  recovered byte-complete from the held inodes; 0014's last 4 raw lines (round 40) were rebuilt from trajectories+private (tagged `reconstructed`).
+  Game data untouched; `p2_replace.py check` per-game asserts pass for all 9 done games. **Never git stash while generators run.**
+- **E115** (sol newcomer) generating, 9/30 complete at 18:08; ETA ~20:00–21:00.
+- E113: Q1.4 E70 is **6 sweeps** (ETA ~22:00); final eval once when Q1.4 says complete (or Sun 08:00).
+- Serendipity HITS: not re-read this iteration (no promoted hits as of 17:56).
 
 ## Next steps
-1. E115: when "p2replS gen done": `P2REPL_ARM=sol uv run python p2_replace_eval.py` ONCE → S1–S4 into P2.15; then E112/E115 sentence
-   into abstract + TL;DR (DIRECTION dir 2 wording), replacing/compressing the SALT clause.
-2. 19:30: one Opus review of abstract + TL;DR + glance + P2.7 + P2.14 + P2.15; trim REPORT to ≤ 711 lines; abstract ≤ ~260 words.
-3. E113: `snapshot` + `audit` cached as sweeps land; FINAL `eval` ONCE when Q1.4 STATUS says 6 sweeps complete (or Sun 08:00).
-4. Joint cross-repo line on luna board usage (DIRECTION dir 4) still to add.
+1. 19:30: one Opus review of abstract + TL;DR + glance + P2.7 + P2.14 + P2.15 (DIRECTION dir 4); apply; trim abstract further if it says so.
+2. E115: when "p2replS gen done": `P2REPL_ARM=sol uv run python p2_replace_eval.py` ONCE → S1–S4 into P2.15 (+ incident line); adjust the
+   abstract/TL;DR replacement sentence for E115; add claim C26.
+3. E113: `snapshot` + `audit` cached as sweeps land; FINAL `eval` ONCE at 6 sweeps.
 
 ## Log
+- 18:10 P2 iter28: E112 sentence → abstract/TL;DR; abstract 517→388 words; REPORT 724→701 lines (evidence checks → appendix); C25; E115 raw-cache stash incident fixed + disclosed.
 - 18:00 P2 iter27: E116 within-channel contrast (p2_within_agree.py) → REPORT P2.7/abstract/TL;DR/glance; C24 claim; E3 dropped.
 - 17:58 P2 iter26: Opus checkpoint review (reviews/p2_iter26_checkpoint_opus.md) applied to abstract/TL;DR/glance/P2.15/header; p2_claims +C04c/C22/C23 → 25/25 OK; E1 snapshot 36 games/16 cells, coverage OK.
 - 17:51 P2 iter25: P2.11 three-pair abliteration line (Q1.4 E61, E69 + ours) + glance; p2_claims 22/22 OK; REPORT 711 lines.

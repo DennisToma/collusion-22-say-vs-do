@@ -7,29 +7,29 @@ Phase 2 (from 2026-10-24 06:30 UTC) re-tests them. Checkpoint text, 2026-10-24 1
 Reading LLM sellers' public messages in addition to their prices gives **no resolved gain** in detecting collusion: combined minus the better
 single view is −0.01 [−0.09, +0.06] run-AUROC on the locked test (n = 95) and −0.07 [−0.17, +0.02] on two fresh replications pooled post hoc
 (n = 90). Gains above +0.06 (test) and +0.02 (pooled) are excluded at 95%. Setup: a 4-firm pricing market of gpt-6-luna sellers (one pair may
-chat privately), audited zero-shot by gpt-6.1-sol on public text, actions, or both. (A computed pair-statistics table gains on test,
-+0.11 [+0.04, +0.18], but not on fresh data, +0.00 [−0.06, +0.07] pooled n = 90; adding text to it does not, −0.06 [−0.14, +0.01] test.)
-Three reasons. (1) The action signal is partly a prompt effect: the post-hoc-selected pair price premium (AUROC 0.94 [0.87, 0.99], n = 60
-fresh) responds to private deliberation (a pricing notepad nobody else reads gives 65% of the channel premium, ratio CI [0.34, 1.32]), to
-wording, and flags legitimate cost/quality edges (7/10, 9/10 vs 2/10). (2) Where coordination is said depends on the family: luna talks only
-in private; Claude, deepseek and Qwen also invite rivals publicly, so text auditors flag every control market (50/50). On external SALT-NLP
-data (8000 episodes, 10 models) 62% of executed episodes show no explicit agreement in their chat, yet a text auditor still predicts execution
-(AUROC 0.87 [0.83, 0.91]) because the act is negotiated in the chat. (3) Talk and behaviour labels disagree: only 14/50 test "colluders" keep
-their agreement. With memory, profit framing and other levers (combined, not ablated), 13/20 channel pairs strictly execute, yet 19/20
-no-channel markets also price ≥ Nash + 2. Exploratory (13 vs 19 markets): a monitor reading private plans ranks executed above tacit
-(AUROC 0.76 [0.55, 0.93]), but a no-LLM count of plans naming the chat partner does comparably (0.82 [0.66, 0.96]; no paired test) and
-no plan uses agreement words, consistent with a channel footprint; among channel pairs (13 executed vs 7 not) plans do not resolvably predict execution (0.69 [0.44, 0.91]). Public text ranks the classes in reverse (0.25 [0.08, 0.46]).
-Abliterated vs base Qwen3.8-27B (15 + 15 markets; bf16 vs FP8; agreement at ceiling): no detectable increase in agreement or execution, and a
-smaller channel premium (−1.24 [−2.41, −0.03]).
-Every abstract number with its denominator and source key: `results/analysis/claims_denominators.md` (`p2_claims.py`, 25/25 match).
+chat privately), audited zero-shot by gpt-6.1-sol on public text, actions, or both. Three reasons. (1) The action signal is partly a prompt effect: the post-hoc-selected pair price premium (AUROC 0.94 [0.87, 0.99], n = 60
+fresh) responds to a pricing notepad nobody reads (65% of the channel premium), to wording, and to legitimate cost/quality edges
+(7/10, 9/10 vs 2/10). (2) Where coordination is said depends on the family: luna talks only in private; Claude, deepseek and Qwen also invite
+rivals publicly, so text auditors flag every control market (50/50). On SALT-NLP data 62% of executed episodes show no explicit agreement,
+yet a text auditor predicts execution (AUROC 0.87 [0.83, 0.91]) because the act is negotiated in the chat. (3) Talk and behaviour labels
+disagree: only 14/50 test "colluders" keep their agreement; with memory and profit framing (levers combined), 13/20 channel pairs strictly
+execute, yet 19/20 no-channel markets also price ≥ Nash + 2. Exploratory: a monitor reading private plans ranks executed above tacit
+markets (AUROC 0.76 [0.55, 0.93]), but a no-LLM count of plans naming the chat partner does comparably (0.82 [0.66, 0.96]; no paired test),
+no plan uses agreement words (a channel footprint), and among channel pairs (13 executed vs 7 not) plans do not resolvably predict execution (0.69 [0.44, 0.91]).
+Public text ranks the classes in reverse (0.25 [0.08, 0.46]). Replacing one seller at round 21 with a fresh luna (no chat history) leaves the
+level (19/20 private-arm markets ≥ Nash + 2) and the agreement (re-agreed 16/20) intact, and a level CUSUM does not alarm by round 25 (0/30):
+under strong framing the high price is a property of the market prompt, not of the incumbent pair. Abliterated vs base Qwen3.8-27B (15 + 15
+markets; bf16 vs FP8): no detectable increase in agreement or execution, and a smaller channel premium (−1.24 [−2.41, −0.03]).
+Every abstract number with its denominator and source key: `results/analysis/claims_denominators.md` (`p2_claims.py`).
 
 **TL;DR (sources: Phase 2 at a glance, below).**
 1. *No resolved gain from public text* (primary `combined` view: −0.01 test n = 95; −0.07 [−0.17, +0.02] pooled fresh n = 90). Bound: gains
-   > +0.06 (test) / > +0.02 (pooled, post hoc) are excluded at 95%. Text alone ≈ chance (test 0.47, fresh 0.45).
+   > +0.06 (test) / > +0.02 (pooled, post hoc) are excluded at 95%. Text alone ≈ chance (test 0.47, fresh 0.45). A computed pair-statistics table gains on test, +0.11 [+0.04, +0.18],
+   not on fresh data, +0.00 [−0.06, +0.07] pooled n = 90; adding text to it does not, −0.06 [−0.14, +0.01] test.
 2. *The premium replicates (0.94 [0.87, 0.99], 60 fresh runs: 30 private / 20 none / 10 legit) but is confounded* by the pricing notepad,
    wording and legitimate cost/quality edges (P2.10); a round-1-only premium already reaches 0.90 [0.83, 0.96] test AUROC. Quote it only with these.
 3. *Where a family talks decides what text can see:* luna talks only in private; Claude, deepseek and Qwen also in public (text views flag
-   100% of their control markets, run AUROC 0.15–0.36); gpt-6.1-sol proposed coordination in 0/7 private markets. SALT: P(said | executed) 0.385, yet a text auditor reaches 0.87 there (P2.12): text helps when the act happens in the conversation.
+   100% of their control markets, run AUROC 0.15–0.36); gpt-6.1-sol proposed coordination in 0/7 private markets. SALT (8000 episodes, 10 models): P(said | executed) 0.385, yet a text auditor reaches 0.87 there (P2.12): text helps when the act happens in the conversation.
 4. *Labels disagree:* 14/50 test agreements are kept; on the kept label the premium falls to 0.80 [0.67, 0.90] (test) / 0.76 [0.64, 0.86]
    (pooled fresh) and text + actions shows no resolved gain (−0.03 [−0.14, +0.06] test; −0.03 [−0.13, +0.06] pooled).
 5. *High prices need no channel:* with memory + profit framing 19/20 no-channel markets price ≥ Nash + 2 and 13/20 channel pairs are
@@ -38,6 +38,7 @@ Every abstract number with its denominator and source key: `results/analysis/cla
    prices (≈ 0.5) and public text (0.25 [0.08, 0.46], inverted; no-channel markets use more hold-price phrases on the public board, 43% vs 28% of messages,
    post hoc, not shown to be agreement) did not; a no-LLM partner-name count does comparably (0.82 [0.66, 0.96]). Within channel pairs
    (13 vs 7, E116) no view resolves execution (plan 0.69 [0.44, 0.91]); action auditors invert (0.18 [0.00, 0.42]).
+   A fresh luna replacing one seller at round 21 re-joins the level and re-agrees (16/20; CUSUM 0/30 alarms, P2.15).
 6. *Practical:* premium precision 0.24 at 5% prevalence; legitimate cost/quality edges are flagged 7/10, 9/10 (controls 2/10). Screens
    need model- and prompt-matched references; our evidence does not support recommending any particular screening architecture.
 
@@ -186,26 +187,22 @@ footprint confound is gone. No text or plan view resolves execution (plan 0.69, 
 agreement cannot separate much (13/13 vs 5/7). The action auditors rank the wrong way (action_stats 0.18 [0.00, 0.42]: non-executed pairs look
 *more* collusive to them). Agreed-only non-executed (n = 5) gives the same picture. Say-vs-do here: what pairs plan does not resolvably predict what they do.
 
-Reading. (i) The premium and market-excess AUROC CIs include 0.5. This does not establish equivalence; the classes use different
-price-based selection rules, so chance discrimination is not guaranteed by design. (ii) Public-text scores rank tacit-high markets above
-strict-executed ones (0.25 [0.08, 0.46]; combined 0.18). Post-hoc keyword matches ("hold/keep/maintain … 1x") occur in 1362/3200 public
-messages without a private channel vs 903/3200 with one (43% vs 28%; 40% vs 32% within the compared classes; `p2_strongF_public.py`).
-This descriptive rule does not establish public agreement or explain the score difference; "tacit-high" is the operational no-channel
-price class, not verified absence of public agreement (cf. Q1.4 E59: a public board alone lifts deepseek prices +0.70 [0.23, 1.23]). Whether luna uses a public board at all is prompt-dependent: it posts
-nothing in Q1.4's E70 grid (base prompt; 0/960 agent-rounds inspected in cells c00–c05, E113-amend) but 43% hold-price calls here under strong framing. (iii) The plan
-view ranks the classes the expected way, 0.76 [0.55, 0.93] (flags 5/13 executed, 0/19 tacit-high); primary threshold fixed at 50 without
-fitting (secondary 58 from six pilot runs); it reads self-authored notes, not faithful private reasoning, and no view here shows a gain over actions. *E111 keyword check (no LLM, exploratory; `uv run python p2_plan_keyword.py`):* no private plan in any run
-uses agreement terms (agree/deal/partner/our floor/as discussed: 0/13 strict, 0/19 tacit, 0/7 non-executed runs; luna writes "treat rivals'
-messages as signals, not commitments"). But naming the chat partner ("Ask B for their results and intended pricing") separates the classes
-at least as well as the LLM plan view: 0.82 [0.66, 0.96] (strict 8.8% of plan entries vs 2.5%; a no-channel market's "partner" is its designated pair), while naming a non-partner rival does not
-(0.42 [0.19, 0.67]; this control was added after the partner count was seen). By the director's rule (≥ 0.70), the plan view's separation is
-mostly the channel's footprint in the plans (attention to the partner), not stated deliberation. Within strict runs the plan score is
-only weakly tied to the partner share (Spearman 0.20, n = 13). Q1.4's frozen dependence detectors on this arm (E66, 0/40 class mismatches):
-private vs none pCMI 0.46, market level 0.44, TE 0.61; declared verdict *not evaluable* (competitive none n = 1). Registered verdicts: premium private-vs-none
-< 0.70 held; text flags executed ≤ none + 2 held; tacit-high rate ≥ 0.5 held; paired excess private > none **failed**; plan P1 (≥ 0.75
-private vs none) failed (0.70); plan P2 (flags strict > tacit-high) held; the competitive-class contrasts are not evaluable (n = 1).
-Levers were combined, not ablated. With Q1.4 E44 (rivals join the pair at T = 60): under this framing high prices are market-wide, and
-channel condition alone does not identify sustained high pricing (paired difference −0.44 [−1.84, +1.00]).
+Reading. (i) Premium and market-excess CIs include 0.5 (not equivalence; the classes use different price-based selection rules).
+(ii) Public text ranks tacit-high above strict-executed (0.25 [0.08, 0.46]; combined 0.18). Post-hoc "hold/keep/maintain … 1x" matches occur in
+1362/3200 public messages without a channel vs 903/3200 with one (43% vs 28%; `p2_strongF_public.py`); descriptive only, and "tacit-high" is a
+price class, not verified absence of public agreement (cf. Q1.4 E59: a public board alone lifts deepseek prices +0.70 [0.23, 1.23]). Whether
+luna uses a public board at all is prompt-dependent: it posts nothing in Q1.4's E70 grid (base prompt; 0/960 agent-rounds in cells c00–c05,
+E113-amend) but 43% hold-price calls here under strong framing. (iii) The plan view (threshold 50 fixed without fitting) ranks the classes the
+expected way, 0.76 [0.55, 0.93] (flags 5/13 vs 0/19); it reads self-authored notes, not faithful reasoning. *E111 (no LLM, exploratory;
+`uv run python p2_plan_keyword.py`):* no plan uses agreement terms (agree/deal/partner/our floor/as discussed: 0/13, 0/19, 0/7 runs), but the
+share of plan entries naming the chat partner separates the classes at least as well, 0.82 [0.66, 0.96] (8.8% vs 2.5%; a no-channel market's
+"partner" is its designated pair), while naming a non-partner rival does not (0.42 [0.19, 0.67]; control added after the partner count was
+seen). By the director's rule (≥ 0.70) the plan view's separation is mostly a channel footprint, not stated deliberation (within strict runs,
+plan score vs partner share Spearman 0.20, n = 13). Q1.4's frozen dependence detectors on this arm (E66, 0/40 class mismatches): private vs
+none pCMI 0.46, market level 0.44, TE 0.61; *not evaluable* (competitive none n = 1). Registered verdicts: premium < 0.70 held; text flags
+executed ≤ none + 2 held; tacit-high ≥ 0.5 held; paired excess private > none **failed**; plan P1 (≥ 0.75 private vs none) failed (0.70);
+plan P2 (strict > tacit-high flags) held. Levers were combined, not ablated; with Q1.4 E44 (rivals join the pair at T = 60), high prices are
+market-wide and the channel alone does not identify sustained high pricing.
 *C2 older sellers (E98, final, base lab prompt, T = 12, generation stopped; `uv run python p2_label.py --ds llm_p2g56sol` (and `llm_p2mimo`), then
 `p2_strong.py --ds llm_p2g56sol llm_p2mimo --min-floor 12 --late 2 --out results/analysis/p2_c2older.json` and `p2_strong_eval.py`; 0 fallback runs; descriptive):*
 gpt-5.6-sol (7 + 7 matched seeds): judged agreement 4/7, executed 1/7 [0.02, 0.50]; market ≈ Nash + 7.2 with *and* without a channel; frozen premium
@@ -364,11 +361,9 @@ v1 answer, unchanged by Phase 2: on the locked test (n = 95) text alone is ≈ c
 as delivery (14/15 vs 14/15). Full v1 summary and "Key results (detail)", text unchanged: [REPORT_APPENDIX.md § v1 overnight summary](REPORT_APPENDIX.md).
 
 ![summary](figures/summary.png)
-*Figure 1 (`uv run python fig_summary.py`, read from existing results JSON). (a) Run AUROC with 95% run-bootstrap CIs;
-filled = locked test split (n = 95), hollow = fresh replication (n = 30). The premium comparator was chosen after
-seeing partial data including test runs; the round-1 replication point is exploratory (computed after `replication.py`). (b) Flag
-rates at frozen dev thresholds in the placebo exploration stratum (15 placebo, 15 matched private, 10 `none`); n is
-small and no scorer resolves placebo from private.*
+*Figure 1 (`uv run python fig_summary.py`). (a) Run AUROC, 95% run-bootstrap CIs; filled = locked test (n = 95), hollow = fresh replication
+(n = 30); premium chosen after seeing partial data incl. test runs; round-1 replication point exploratory. (b) Frozen-threshold flag rates in
+the placebo stratum (15 placebo, 15 private, 10 `none`): no scorer resolves placebo from private.*
 
 ## Question
 Given logged trajectories (public messages + prices + market state), do auditors that see both streams detect
@@ -602,27 +597,9 @@ metadata, frozen shuffle mappings and unchanged recipient actions, and tests tha
 injected private fields and the withheld modality. `data/audit_input_receipt.json` preserves this check after the
 experiments; it is not pre-registration evidence. No model calls, scores, CIs or thresholds are rerun.
 
-**Evidence-check coverage (post-hoc, iteration 24).** `python3 -S check_evidence_sources.py` →
-`results/analysis/evidence_sources.json` and [offline source ledger](EVIDENCE.html). Across the six
-original GPT views, the test caches contain 2,229 evidence items and the replication 696. All have well-formed
-firm/round anchors (firm A–D, integer round 1–12), but only 3 test items and 1 replication item contain quote-marked phrases; all four
-phrases occur in the cited firm's message in the cited round (case/whitespace/Unicode normalization,
-word-boundary substring, punctuation retained; short phrases included). These are coverage counts for
-the saved outputs, not semantic accuracy estimates: marked phrases can be terminology rather than
-source quotations, and literal presence does not validate the surrounding observation. All four are
-text-view items; two quote the generic phrase "considered price", which occurs across multiple firms
-and rounds in their respective runs. The remaining items contain no quote-marked span and were not
-semantically classified. The historical
-price regex check below cannot validate these inferences; its strict same-round check can fail
-legitimate price-transition descriptions. The ledger exposes all public rounds and firms for manual
-comparison, including modalities withheld from the particular auditor view. **The proposed LLM
-explanation role remains unvalidated.** No headline result, cache, threshold or price-check estimate changed.
-
-**Transition-source check (post-hoc, iteration 25).** A selective grammar recognizes leading transition clauses in 51/2,229 test items and 6/696 replication items.
-All 57 parsed clauses have matching source endpoints: 54 adjacent-round matches and 3 with an earlier, nonadjacent start; no numeric-direction conflicts.
-A lexical diagnostic exposes 52 further unparsed test items and 17 replication items containing numeric `from X to Y` spans, without widening validation.
-These are selective endpoint checks, not explanation accuracy; context, intermediate paths and collusion inferences remain unchecked. Full method and caveats:
-[REPORT_APPENDIX.md § v1 transition-source validation detail](REPORT_APPENDIX.md); sources: `results/analysis/price_transitions.json`, [PRICE_TRANSITIONS.md](PRICE_TRANSITIONS.md).
+**Evidence-check coverage and transition-source checks (post-hoc, iterations 24–25; `python3 -S check_evidence_sources.py`, [EVIDENCE.html](EVIDENCE.html)).**
+Auditor evidence items are well-formed (firm/round anchors), but only 4 contain quote-marked phrases and 57 parse as price transitions (all source-consistent);
+these are coverage counts, not explanation accuracy. **The proposed LLM explanation role remains unvalidated.** Full text: [REPORT_APPENDIX.md § v1 evidence checks](REPORT_APPENDIX.md).
 
 ## Held-out discipline
 `data/SPLITS.md`: dev = llm_v3_0000–0029, locked test = 0030–0124. The core auditor prompt was written before any

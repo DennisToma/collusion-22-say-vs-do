@@ -311,6 +311,19 @@ def _():
     return ci(d["views"]["plan"]["auroc_strict_vs_nonexec"], False), src, "views.plan.auroc_strict_vs_nonexec"
 
 
+@claim("C25", "E112 participant replacement (luna newcomer): private-arm markets >= Nash + 2 after replacement; re-agreement; level CUSUM alarms by r25",
+       "19/20; 16/20; 0/30", "(19/20 private-arm markets ≥ Nash + 2) and the agreement (re-agreed 16/20) intact, and a level CUSUM does not alarm by round 25 (0/30)",
+       "30 paired games (20 private + 10 none) replayed from llm_p2strongF, newcomer from round 21; registered E112, all 4 predictions held; CUSUM count over 20 + 10 replaced games")
+def _():
+    src = "results/analysis/p2_replace.json"
+    a = json.load(open(src))["arms"]
+    ge2 = a["private"]["O6_market_excess_ge2"]["repl"]
+    ra = a["private"]["O4_reagreement_floor_ge13"]["repl"]
+    cu = [a[k]["O7a_level_cusum_alarm_by_r25_repl"] for k in ("private", "none")]
+    v = f"{ge2[0]}/{ge2[1]}; {ra[0]}/{ra[1]}; {sum(x[0] for x in cu)}/{sum(x[1] for x in cu)}"
+    return v, src, "arms.private.O6_market_excess_ge2.repl; arms.private.O4_reagreement_floor_ge13.repl; arms.*.O7a_level_cusum_alarm_by_r25_repl"
+
+
 def run():
     text = abstract_text()
     rows = []

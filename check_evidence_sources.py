@@ -256,7 +256,7 @@ def check_claims(root, result):
     ntest, nrep = (sum(s["n_items"] for s in cohort.values()) for cohort in (test, rep))
     qtest, qrep = (sum(s["items_with_marked_span"] for s in cohort.values()) for cohort in (test, rep))
     claims = {
-        "REPORT.md": (f"test caches contain {ntest:,} evidence items and the replication {nrep:,}",
+        "REPORT_APPENDIX.md": (f"test caches contain {ntest:,} evidence items and the replication {nrep:,}",
                       f"only {qtest} test items and {qrep} replication item contain quote-marked phrases"),
         "README.md": (f"all {ntest + nrep:,} original-view test and replication evidence items",
                       f"Only {qtest + qrep} evidence items contain quote-marked phrases"),

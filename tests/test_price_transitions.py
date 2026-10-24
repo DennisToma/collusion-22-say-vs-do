@@ -174,12 +174,12 @@ class TransitionHandoffTests(unittest.TestCase):
         self.assertIn("stale price-transition census", result.stderr)
         self.assertEqual(before, self.state())
         path.write_bytes((ROOT / checker.OUTPUTS[0]).read_bytes())
-        report = self.root / "REPORT.md"
+        report = self.root / "REPORT_APPENDIX.md"
         report.write_text(report.read_text().replace("51/2,229 test items", "52/2,229 test items"))
         before = self.state()
         result = self.run_copy(sys.executable, "-S", "check_price_transitions.py", "--check")
         self.assertNotEqual(result.returncode, 0)
-        self.assertIn("REPORT.md coverage differs", result.stderr)
+        self.assertIn("REPORT_APPENDIX.md coverage differs", result.stderr)
         self.assertEqual(before, self.state())
 
 

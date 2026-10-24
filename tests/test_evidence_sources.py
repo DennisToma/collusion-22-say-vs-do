@@ -115,7 +115,7 @@ class SourceLedgerIntegrationTests(unittest.TestCase):
         self.assertIn('stale evidence source ledger', result.stderr)
 
     def test_coverage_prose_must_match_source_counts(self):
-        path = self.root / 'REPORT.md'
+        path = self.root / 'REPORT_APPENDIX.md'
         path.write_text(path.read_text().replace('2,229 evidence items', '2,228 evidence items'))
         result = self.run_copy(sys.executable, '-S', 'check_evidence_sources.py', '--check')
         self.assertNotEqual(result.returncode, 0)

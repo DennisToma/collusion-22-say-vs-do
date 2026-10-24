@@ -224,7 +224,7 @@ def check_claims(root, result):
         total.update(c)
         statuses.update(s)
     claims = {
-        "REPORT.md": (
+        "REPORT_APPENDIX.md": (
             f'leading transition clauses in {parts[0]} test items and {parts[1]} replication items',
             f'All {total["parsed_items"]} parsed clauses have matching source endpoints',
             f'{statuses["adjacent_endpoints_match"]} adjacent-round matches and {statuses["earlier_endpoints_match"]} with an earlier, nonadjacent start',

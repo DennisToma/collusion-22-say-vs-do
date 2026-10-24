@@ -23,7 +23,7 @@ class HandoffTests(unittest.TestCase):
         self.tmp = tempfile.TemporaryDirectory(prefix="say-vs-do-handoff-", dir="/var/tmp")
         self.addCleanup(self.tmp.cleanup)
         self.root = Path(self.tmp.name)
-        paths = verifier.snapshot_paths(ROOT) + [verifier.MANIFEST, "REPORT.md", "README.md"]
+        paths = verifier.snapshot_paths(ROOT) + [verifier.MANIFEST, "REPORT.md", "REPORT_APPENDIX.md", "README.md"]
         for name in paths:
             dest = self.root / name
             dest.parent.mkdir(parents=True, exist_ok=True)

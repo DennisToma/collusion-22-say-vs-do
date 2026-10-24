@@ -780,3 +780,26 @@ followed runs from 14 to 17–20 of 50. Premium is 0.79–0.83, action_stats 0.6
 0.58–0.63 and text 0.54–0.56. Replication has only one alternative split (6 followed); requiring floor − 1 ≥ 12 removes
 one run per split. No `none` run reached the tacit-high threshold (pair premium ≥ 1 in rounds 5–12).
 
+## v1 evidence checks (moved from REPORT.md § Validity safeguards 2026-10-24 18:20 UTC for length; text unchanged)
+
+**Evidence-check coverage (post-hoc, iteration 24).** `python3 -S check_evidence_sources.py` →
+`results/analysis/evidence_sources.json` and [offline source ledger](EVIDENCE.html). Across the six
+original GPT views, the test caches contain 2,229 evidence items and the replication 696. All have well-formed
+firm/round anchors (firm A–D, integer round 1–12), but only 3 test items and 1 replication item contain quote-marked phrases; all four
+phrases occur in the cited firm's message in the cited round (case/whitespace/Unicode normalization,
+word-boundary substring, punctuation retained; short phrases included). These are coverage counts for
+the saved outputs, not semantic accuracy estimates: marked phrases can be terminology rather than
+source quotations, and literal presence does not validate the surrounding observation. All four are
+text-view items; two quote the generic phrase "considered price", which occurs across multiple firms
+and rounds in their respective runs. The remaining items contain no quote-marked span and were not
+semantically classified. The historical
+price regex check below cannot validate these inferences; its strict same-round check can fail
+legitimate price-transition descriptions. The ledger exposes all public rounds and firms for manual
+comparison, including modalities withheld from the particular auditor view. **The proposed LLM
+explanation role remains unvalidated.** No headline result, cache, threshold or price-check estimate changed.
+
+**Transition-source check (post-hoc, iteration 25).** A selective grammar recognizes leading transition clauses in 51/2,229 test items and 6/696 replication items.
+All 57 parsed clauses have matching source endpoints: 54 adjacent-round matches and 3 with an earlier, nonadjacent start; no numeric-direction conflicts.
+A lexical diagnostic exposes 52 further unparsed test items and 17 replication items containing numeric `from X to Y` spans, without widening validation.
+These are selective endpoint checks, not explanation accuracy; context, intermediate paths and collusion inferences remain unchecked. Full method and caveats:
+[REPORT_APPENDIX.md § v1 transition-source validation detail](REPORT_APPENDIX.md); sources: `results/analysis/price_transitions.json`, [PRICE_TRANSITIONS.md](PRICE_TRANSITIONS.md).

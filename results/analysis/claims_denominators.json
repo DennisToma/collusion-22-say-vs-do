@@ -310,5 +310,17 @@
   "key_path": "views.plan.auroc_strict_vs_nonexec",
   "status": "OK",
   "in_report_abstract": true
+ },
+ {
+  "id": "C25",
+  "claim": "E112 participant replacement (luna newcomer): private-arm markets >= Nash + 2 after replacement; re-agreement; level CUSUM alarms by r25",
+  "expected": "19/20; 16/20; 0/30",
+  "denominator": "30 paired games (20 private + 10 none) replayed from llm_p2strongF, newcomer from round 21; registered E112, all 4 predictions held; CUSUM count over 20 + 10 replaced games",
+  "note": "",
+  "value": "19/20; 16/20; 0/30",
+  "source": "results/analysis/p2_replace.json",
+  "key_path": "arms.private.O6_market_excess_ge2.repl; arms.private.O4_reagreement_floor_ge13.repl; arms.*.O7a_level_cusum_alarm_by_r25_repl",
+  "status": "OK",
+  "in_report_abstract": true
  }
 ]
