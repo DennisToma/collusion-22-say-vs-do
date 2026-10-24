@@ -30,7 +30,7 @@ The verifier reads a committed SHA-256 manifest, validates cached dataset/audito
 matched placebo market paths, frozen calibration inputs, saved CI/contrast arithmetic,
 the primary report table and image links, presentation freshness against saved JSON, and
 exported HTML/PDF hashes against their post-hoc source receipt.
-It also checks freshness of the cached evidence source ledger.
+It also checks freshness of the cached evidence source ledger and price-transition census.
 It makes no LLM calls and does not recompute
 AUROC, bootstrap intervals, or thresholds. The manifest and completion receipt were recorded
 **after** the experiments in iteration 19; they preserve the handoff, not evidence of
@@ -72,6 +72,21 @@ auditors' explanations. The ledger preserves all evidence and the complete publi
 price/message log for manual review, plus market state, units, profits and public
 cost offsets. The renderer reads no private-chat or label files and does not export
 injected agent-private fields. Well-formed source anchors do not establish relevance.
+
+The separate [price-transition census](PRICE_TRANSITIONS.md) checks narrowly parsed
+leading `from X to Y` price clauses against source endpoints. It recognizes 57 items
+out of the 2,925; 54 match adjacent rounds and three have an earlier start. This explains
+why checking both numbers against a single round can reject an endpoint-consistent transition.
+The checker leaves other clauses, timing/duration and collusion inferences unvalidated;
+it does not estimate explanation accuracy. Its grammar omits wording such as "jointly raised"
+and "decrease", limiting assurance about coordination claims. The census also exposes
+unparsed numeric from-to spans (including possible cost statements) without validating them.
+To regenerate or check it without model calls:
+
+```sh
+python3 -S check_price_transitions.py
+python3 -S check_price_transitions.py --check  # read-only, standard library only
+```
 
 For deterministic table/figure rendering, install the pinned environment with `uv sync --frozen`, then:
 

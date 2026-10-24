@@ -1,13 +1,14 @@
 {
-  "recorded_utc": "2026-10-24T04:46:09.671722+00:00",
-  "note": "Post-hoc handoff snapshot extended in iteration 24 for a literal evidence source ledger; not proof of pre-registration, historical prompts, or semantic accuracy.",
+  "recorded_utc": "2026-10-24T05:01:24.526417+00:00",
+  "note": "Post-hoc handoff snapshot extended in iteration 25 for a selective price-transition source census; not proof of pre-registration, historical prompts, or semantic accuracy.",
   "sha256": {
     "EVIDENCE.html": "78ef13c820234bc0ace1c64c01c5f71c3430908733631deee7bcef1b5f2b6266",
     "PRESENTATION.html": "826358433b6b5e018ee07f01cb79959eb38d4a06981853406d6b2ba29c458536",
     "PRESENTATION.md": "bb7fdbef0c4a6cdee254c934d9e05aa8e495dee3e77e6c047b202214a2ec7d5d",
-    "PRESENTATION.pdf": "bd38450575c4b5558334f4563ed3e06cc317f65e5877d65bee61f737bd760993",
-    "REPORT.html": "7e988ddea1b10124726e0968efd315358b8a0bed1bee22e26238933186ad5662",
-    "REPORT.pdf": "2d1b652837c1b1d4eedac0fcd813e5596731049a49582660c62dea4c0d311d8e",
+    "PRESENTATION.pdf": "5a12f4aed71ce75d1aff884724056bb143f37d6a56e738babdab76f2a1d36d85",
+    "PRICE_TRANSITIONS.md": "c6689633f20d3bf38fe28412eb9b9f3738564a40652d6d194e985fc30c2906c3",
+    "REPORT.html": "d50d7fa55185f24662f90d1bddb1901c0b4b20ff65fd152cb4a08a5ab6762e02",
+    "REPORT.pdf": "1b5b09093aa733a966a33ddd7a39606b4c5d8b66af4f394ac7da12e2576cefd4",
     "SCHEMA.md": "edc9416f4b2cdfa7754d7032f1592b34327ea7eb11afcad93f358cd9e19560c8",
     "after_gen.sh": "efa09eae4f4f05961d419beac382b162aa5739b09d26dadf7eff0bc67c8b556f",
     "analyze_llm.py": "2f98ff200219f8236b409fa0acbe396bd92c1d590af64b5073c5c3d3994ac76f",
@@ -18,12 +19,13 @@
     "build_presentation.py": "a9ba03d43aedb1c7b100fb952bf0ea1a20b9a7a5a04adf3ff44011865d43e6ba",
     "check_audit_inputs.py": "5ff3816d850ba0d29337be25bfe0197bcf93bed6a5d4b21969f7bc047d88c0e2",
     "check_evidence_sources.py": "3f05718f1b42276ceb684fe3a81b34e20870e73e2e6d274ee0ac5380280359b6",
+    "check_price_transitions.py": "bbebc25920fd53b1c076e0ad3bec0e81f78b720e0ff7c978ce7164a6b7075b9f",
     "cost.py": "610e123e5c92d477d3d43f92a9800a689692aa3797cba4addbdfde3d9b9c290e",
     "cross_family.py": "a33127ecbc9ed6b25ad983cacf418c5ed66888ff9d566bd05c2dfb511c63831d",
     "data/SPLITS.md": "aacf77d08d6fc6c3b0bd18024075d63b1e21a812915626a7cf108fc670fc9e39",
     "data/audit_input_receipt.json": "558ff8e080f2f47b2bb0ba76ef9a594ba062ea895afd28ba6fc352ff68701999",
     "data/evaluation_receipt.json": "50aa3159822c6d9d30725bea5273ac94353ce9d26d9c4bec6cc65a5b9210c9ec",
-    "data/handoff_exports.json": "823f2fcd91ba1c304398b5e538fc721d1f18ac84f728f485e66bb67f23b8d5e1",
+    "data/handoff_exports.json": "df7b6505707e03475d69cdc7c4083b2158d4df1f02424314ad6c693de09f6551",
     "data/llm_v2/ground_truth.jsonl": "5bf5c05d85b272a3d88b509d7377e66a67397e6f5b54d803163daef984ac3977",
     "data/llm_v2/private.jsonl": "833298116e7a737cfc0f7d7d1fed0b4bc1763f551c8b4abcfc462fcac2546fd4",
     "data/llm_v2/raw/llm_v2_0000.jsonl": "317d22d4a24cb0a86ff3277fee7034546d487c02b4727268775d737cb13fffe5",
@@ -337,6 +339,7 @@
     "results/analysis/matched_recall_llm_v3_test.json": "883d462b9360f06598e8aa699a1cfebcc7aaecdf2e4f668037cb28fa7ac1e145",
     "results/analysis/monitor_stratum_llm_v3mon.json": "fcbf1f0036d5c328d1bd241213690ef5cdc2dc3ddbf7beaf693c999c90e99d45",
     "results/analysis/placebo_llm_v3plc.json": "db9a7b1cc674577db00fdacfb9d301d447b4f72aa4132fbc4f59e043125cf008",
+    "results/analysis/price_transitions.json": "b1fa99924cb47593a31f466a0312111944d1eeb816b78fffcb8f70c4af27afb1",
     "results/analysis/replication_llm_v3rep.json": "bf7169d63d9b9b72afc8cc70cc68659e2204ae156b758e5f75cc3753ea067b0d",
     "results/analysis/report_tables_dev.md": "2ca750ff44c333fd4c1abcc30d50c61a885574ad9b5a19a7d222d98302fb3409",
     "results/analysis/report_tables_test.md": "a7294dbbf0f63ce57f55c5ae64038081fd13f5018546c478d8f3f9b61a5d10bf",
@@ -406,10 +409,11 @@
     "tests/test_audit_inputs.py": "19952511da9a9cdbeb6b3fd56d5eec3bb1599107ebced3b4f0cd45cd5ca2e74f",
     "tests/test_evidence_sources.py": "0aaa4d4c348876d2e40adf5236e55a862bfcd49dadfec7893dc43b067e7606d3",
     "tests/test_handoff.py": "18c2ce4b823b134fe41bbb1d0e10c03bc376debc08389f6e8f2b54439267f160",
+    "tests/test_price_transitions.py": "d6c78216d203220c7c31a3f660b8de04f1189848650b25c76db5401a26e9aea8",
     "text_lr_inspect.py": "2b0152c9f8e33d2b436b04962cd92749780f5efd37c0a4f4357c52b9b944664b",
     "textsim.py": "b99342ed5988fd5e8868f8504b58ead939ef7dbcf6c652b324a64947a528014e",
     "uv.lock": "0d1bee5eeeb9d063226811156e63d8c6837ae6053c8771755ed06547a6668b6a",
-    "verify_artifacts.py": "8b828199b166ce9658d11eb7b4c792eeaffec6b174ccd870562084f195b4ef3a"
+    "verify_artifacts.py": "b81728db1cf6f4cbe7d3d5bf029c6d1cab83b72c6ab5775b932eb2564ed047bc"
   },
   "updates": [
     {
@@ -453,6 +457,24 @@
         "check_audit_inputs.py",
         "data/audit_input_receipt.json",
         "tests/test_audit_inputs.py"
+      ],
+      "updated": [
+        "PRESENTATION.pdf",
+        "REPORT.html",
+        "REPORT.pdf",
+        "data/handoff_exports.json",
+        "verify_artifacts.py"
+      ]
+    },
+    {
+      "recorded_utc": "2026-10-24T05:01:24.526417+00:00",
+      "iteration": 25,
+      "note": "Selective leading price-transition endpoint census; frozen scientific artifacts unchanged. Report exports refreshed. Existing manifest update/extension history retained.",
+      "added": [
+        "PRICE_TRANSITIONS.md",
+        "check_price_transitions.py",
+        "results/analysis/price_transitions.json",
+        "tests/test_price_transitions.py"
       ],
       "updated": [
         "PRESENTATION.pdf",

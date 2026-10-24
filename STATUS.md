@@ -1,19 +1,19 @@
 # STATUS
 
-## Current state (2026-10-24 04:47 UTC, iteration 24)
-- LOCKED TEST DONE (00:03), REPLICATION DONE (02:07); never rerun; scientific estimates unchanged.
+## Current state (2026-10-24 05:03 UTC, iteration 25)
+- LOCKED TEST DONE (00:03), REPLICATION DONE (02:07); never rerun; detection estimates unchanged.
 - Test: premium run AUROC .95; action_stats .86; combined-minus-best-unimodal -.013 [-.091,+.064].
 - Replication (n=30): premium .92 vs action_stats .80; 4/4 registered rules held (not equivalence).
 - Placebo premium flags 14/15 with/without delivery; channel/condition confound remains.
-- E68: EVIDENCE.html exposes all 2,925 original-view test/replication items beside public sources.
-- Only 4 items contain quote-marked phrases (all text view); literal matches do not validate explanations.
-- REPORT/README now explicitly mark the proposed explanation role unvalidated; primary results frozen.
-- Codex + Opus critiques applied; final focused Codex recheck has no consequential findings.
-- 36 tests / 408 hashes pass; 2,213 prompt checks still 1,903 hashes + 310 length-only (not authentication).
+- E69: 57/2,925 evidence items have parsed leading price transitions; 54 adjacent + 3 earlier endpoints match.
+- Grammar omits joint/simultaneous wording; 52+17 further numeric-span items exposed without validation labels.
+- Endpoint agreement is not explanation accuracy; the proposed explanation role remains unvalidated.
+- Codex + Opus critiques applied; final Codex diagnostic recheck has no consequential findings.
+- 47 tests / 412 hashes pass; clean export write-free; 2,213 prompts still 1,903 hashes + 310 length-only.
 - Refreshed report: 26 pages / 8 figures; talk unchanged at 7 slides; scientific artifact bytes unchanged.
 ## Next steps (no new generation after 03:30; no new experiments after 06:30; FINALIZE 08:15)
-1. Keep results frozen; present PRESENTATION.pdf or PRESENTATION.html. Send REPORT.pdf for detail.
-2. Read-only: python3 -S verify_artifacts.py; uv run python check_audit_inputs.py; python3 -S check_evidence_sources.py --check.
+1. Keep detection results frozen; present PRESENTATION.pdf or PRESENTATION.html. Send REPORT.pdf for detail.
+2. Read-only: python3 -S verify_artifacts.py; uv run python check_audit_inputs.py; python3 -S check_price_transitions.py --check.
 3. If REPORT.md changes, regenerate handoff exports and update the post-hoc manifest (README instructions).
 
 ## Log
@@ -81,3 +81,5 @@
 - 2026-10-24 04:32 UTC iter 22: E66 cached-input provenance: new read-only checker imports the frozen renderer without entering the historical auditor CLI (whose --verify path regenerates metadata). All 44 caches / 2,213 audits reconstruct: 1,903 recorded 64-bit prompt-hash prefixes match; 310 legacy rows have only matching lengths (150 original dev, 120 original test, 40 cross-family). Added public-info/setup checks, frozen donor/context/pair checks, independently checked shuffled recipient actions, injected-private-field and withheld-modality controls, and positive controls for retained observables. Post-hoc receipt freezes individual hash eligibility and all 68 sources; stdlib verifier validates receipt freshness. Codex + Opus critiques applied (complete source/count coverage, hash-vs-length wording, alternate-root identity, missing/stale receipt refusal); final Codex recheck found no consequential issues. All 27 tests and 404 hashes pass; clean Git-index export preserves all file hashes/mtimes/inventory and refuses completed evaluation without local locks. REPORT/README updated; regenerated 25-page report/7-page talk exports preserve 442 report fragments, 317 cells and 8 figures. Every scientific input/cache/result/figure/analysis/evaluation-receipt hash unchanged. No generation, audit calls, AUROC/bootstrap or threshold refitting. Review: reviews/iteration22_audit_inputs.md.
 
 - 2026-10-24 04:47 UTC iter 24: E68 evidence-source coverage and offline ledger: six original GPT views on 95 test + 30 replication runs, 750 audits / 2,925 evidence items (2,229 test, 696 replication), all well-formed anchors; only four quote-marked phrases, all text-view and literally present in cited firm/round (two generic repeated phrases). This does not validate semantic accuracy; REPORT/README now make the untested explanation role explicit. New standard-library renderer/checker hashes all 16 public-data/cache inputs plus its source, preserves every cached observation, exposes all 1,500 public rounds / 6,000 firm observations and ties prose counts to JSON. Codex + Opus reviews applied; final Codex recheck found no consequential issues. Numeric/multiline quotes, malformed anchors, missing semantic support, private-field exclusion, corruption detection and no-JS navigation addressed. All 36 tests, 408 manifest hashes, original prompt checks and browser checks pass; clean Git-index export is write-free without evaluation locks. Refreshed report 26 pages / 443 text fragments / 317 cells / 8 figures; talk remains 7 pages. Every original scientific input/cache/result/figure/analysis/evaluation/provenance receipt hash unchanged. No generation, label judging, auditor calls, AUROC/bootstrap or threshold refitting. Review: reviews/iteration24_evidence_sources.md.
+
+- 2026-10-24 05:03 UTC iter 25: E69 selective price-transition source census: 51/2,229 test + 6/696 replication items, six original GPT views. All parsed endpoint pairs match public logs (54 adjacent, 3 earlier starts); this is not semantic accuracy. Concrete 18→16→14 example demonstrates failure of historical same-round and ±1-round number proxies; historical outputs untouched. Codex + Opus reviews confirmed counts; Opus identified grammar bias against jointly/simultaneously wording. Kept validation grammar fixed, disclosed omissions and absent advance commit/registration, and added a separately labelled lexical diagnostic exposing 52+17 unparsed numeric-span items (can describe costs/later clauses; never counted as endpoint successes). Stronger REPORT/README count guards, missing-private-files checks, multi-firm/invalid-anchor/negative controls and historical-regex counterexample tests. Final Codex rechecks found no consequential issues. 47 tests / 412 hashes pass; 403 pre-existing manifested artifacts unchanged, including every scientific input/cache/result/figure/analysis/evaluation/provenance receipt. Refreshed 26-page report preserves 444 text fragments, 317 cells and 8 figures; talk remains 7 pages. Clean Git-index export passes all six read-only checkers and completed-evaluation refusal without locks; hashes/mtimes/inventory unchanged. No seller generation, label judging, new scientific audit calls, AUROC/bootstrap or threshold refitting. Review: reviews/iteration25_price_transitions.md.
