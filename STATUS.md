@@ -1,8 +1,8 @@
 # STATUS
 
-## Current state (2026-10-24 02:45 UTC, iteration 15)
+## Current state (2026-10-24 02:38 UTC, iteration 15)
 - LOCKED TEST DONE (00:03; never rerun). REPLICATION DONE (02:07, run once; lock logs/final/REPLICATION_ONCE.lock;
-  never rerun). REPORT presentable; reviews applied thru E55 (+E56 review pending/applied below).
+  never rerun). REPORT presentable; reviews applied thru E57.
 - Replication llm_v3rep (n=30): 4/4 pre-registered predictions held (P3/P4 narrowly): premium .92 vs action_stats .80.
 - E50/E52: round-1 (pre-message) premium alone gives run AUROC .90 (test) / .84 (rep) -> treatment-response detector.
 - E54: auditors cite round 1 at ~uniform rate (4.5-10% of items).
@@ -15,8 +15,8 @@
 3. Finalize: trim length if possible (REPORT ~640 lines), push.
 
 ## Log
-- 02:58 iter 15: codex review_iter15_hint applied (E57).
-- 02:45 iter 15: action_stats_hint exploration (E56, 155 gpt-6.1-sol calls), hint_view.py, REPORT section + abstract sentence; codex review launched.
+- 02:37 iter 15: codex review_iter15_hint applied (E57).
+- 02:32 iter 15: action_stats_hint exploration (E56, 155 gpt-6.1-sol calls), hint_view.py, REPORT section + abstract sentence; codex review launched.
 - 02:21 iter 14: REPORT restructure (flag-rate tables, other test results -> Appendix C; numbers unchanged).
 - 02:20 iter 14: applied e2e reviews (E55).
 - 02:16 iter 14: evidence_rounds.py (E54) -> REPORT exploration; e2e reviews launched.
