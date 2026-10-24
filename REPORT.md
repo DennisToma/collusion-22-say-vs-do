@@ -4,10 +4,10 @@
 
 ## Abstract
 We build a 4-firm repeated-pricing market with LLM sellers (gpt-6-luna). In the `private` condition, one pair of firms
-gets a private chat channel. Sellers are never told to collude (private-condition sellers must send a private message each round; its content is
-free), yet all 70 private pairs use the channel to coordinate, and our public-coordination checker flags none of the
-125 runs. Zero-shot LLM auditors (gpt-6.1-sol) score every
-firm pair under six views of the public log: text, actions, both, each with or without a computed pair-statistics
+gets a private chat channel. Sellers are never told to collude (private-condition sellers must send a
+private message each round; its content is free), yet all 70 private pairs use the channel to coordinate, and our
+public-coordination checker flags none of the 125 runs. Zero-shot LLM auditors (gpt-6.1-sol) score every firm pair
+under six views of the public log: text, actions, both, each with or without a computed pair-statistics
 table. Results on the locked test split (n = 95, run once):
 - **No resolved text gain for the LLM auditor.** The text-only auditor is consistent with chance at detection (run
   AUROC 0.47). Adding text to actions gives no resolved gain (Δ_hybrid −0.01 [−0.09, +0.06]; gains up to ~0.06 not
@@ -23,7 +23,9 @@ table. Results on the locked test split (n = 95, run once):
   explicit coordination.
 - **Caveats.** The label coincides with the experimental condition (all private runs are colluding; no-channel runs
   are negative by construction), so we detect *channel granted and used*, not realised overcharge or tacit collusion.
-  One seller model, one framing, sellers never try to evade.
+  One seller model, one framing, sellers never try to evade. On 16 runs from a different framing in which the channel
+  went unused, the frozen thresholds flag 44% (premium) and 25–63% (stats-table views) of runs: the strong
+  detectors do not transfer as-is.
 
 ## Question
 Given logged trajectories (public messages + prices + market state), do auditors that see both streams detect
