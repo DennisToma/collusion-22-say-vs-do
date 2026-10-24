@@ -2,7 +2,7 @@
 
 # STATUS
 
-## Current state (2026-10-24 07:15 UTC, Phase 2 iteration 1)
+## Current state (2026-10-24 07:10 UTC, Phase 2 iteration 1)
 - RUNNING (bg): `p2_chain.sh` llm_p2cue (6 conds x 15 seeds; ~30/90 runs at 07:10, ETA ~08:30) -> llm_p2para1/2 (40)
   -> llm_p2rep (60, gap 4); then `p2_chain2.sh` -> llm_p2aware (20), llm_p2asym (20), llm_p2coded (10).
   `p2_post.sh` auto-labels (p2_label.py) + analyses (p2_cue.py) cue/para1/para2. llm_p2glm (glm-5.3-flash, Go, slow ~1 run/2h).
@@ -22,7 +22,7 @@
 5. Optional: LLM auditor views on p2cue placebo/notes/neutral (tests which detectors respond to the offer).
 
 ## Log
-- 07:15 P2 iter1: E84 behaviour labels (P2.4); gaps 5/7/8 generator + E86-E88 registered, chain2 queued; TL;DR item 6.
+- 07:10 P2 iter1: E84 behaviour labels (P2.4); gaps 5/7/8 generator + E86-E88 registered, chain2 queued; TL;DR item 6.
 - 06:53 P2 iter1: Opus design review (E85) applied: registration amendment, script fixes, REPORT wording.
 - 06:43 P2 iter1: generator conds + matched seeds; E77-E83 registered; E81/E82/E83 done; generation launched (codex + Go).
 - 06:20 iter 30: TL;DR block in REPORT (E75); handoff exports + manifest rebuilt; all verifiers/tests PASS. No new experiments from here.
