@@ -20,7 +20,8 @@ from scipy.stats import beta
 from p2_behaviour import terms
 
 REQ = {"llm_p2strong_luna": "gpt-6-luna", "llm_p2strong_sol": "gpt-6.1-sol", "llm_p2g56sol": "gpt-5.6-sol",
-       "llm_p2mimo": "mimo-v2.5"}
+       "llm_p2mimo": "mimo-v2.5",
+       "llm_p2qwenb": "qwen-base(aqueduct qwen-3.8-27b)", "llm_p2qwena": "qwen-abliterated"}
 
 
 def jeffreys(k, n):

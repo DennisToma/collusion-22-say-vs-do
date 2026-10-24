@@ -149,3 +149,7 @@ scorers, thresholds, metric definitions and published numerical estimates are un
   matched private/none k=0..6 (C2). No tuning; whole sets analysed once; fallback-model runs excluded.
 - `llm_p2strongF` (E99, registered before generation): C1 full arm, gpt-6-luna, --framing strong, T=40, seed 9800, matched
   private/none k=0..19 (run index 2k + cond). Held out: no tuning; analysed once by p2_strong_eval.py.
+
+- 2026-10-24 ~12:05 UTC: `replication.py --ds llm_p2rep` computed ONCE (lock `logs/final/P2REP_ONCE.lock`; an earlier attempt
+  ~12:04 was killed by the manager's own shell before Python started — no lock, no output). E84 labels and the post-hoc
+  pooled n = 90 contrast (E101, registered before p2rep views finished) computed after it.

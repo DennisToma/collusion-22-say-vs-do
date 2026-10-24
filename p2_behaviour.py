@@ -96,7 +96,8 @@ def classes(ds, T, tol=1, frac=0.5, min_floor=12):
 
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--ds", nargs="+", default=["llm_v3", "llm_v3rep"])
-    ap.add_argument("--terms-only", action="store_true"); a = ap.parse_args()
+    ap.add_argument("--terms-only", action="store_true")
+    ap.add_argument("--out", default="results/analysis/p2_behaviour.json"); a = ap.parse_args()
     dev = json.load(open("results/analysis/final_llm_v3_gpt-6.1-sol_dev.json")); TH = dev["thresholds_dev_youden"]
     out = {"thresholds": "frozen llm_v3 dev Youden", "datasets": {}}
     for ds in a.ds:
@@ -166,7 +167,7 @@ def main():
         out["datasets"][ds] = res
         print(ds, json.dumps({k: v for k, v in res.items() if k != "per_run"}, indent=1))
     if not a.terms_only:
-        Path("results/analysis/p2_behaviour.json").write_text(json.dumps(out, indent=1))
+        Path(a.out).write_text(json.dumps(out, indent=1))
 
 
 if __name__ == "__main__":
