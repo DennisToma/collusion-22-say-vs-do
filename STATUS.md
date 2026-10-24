@@ -2,7 +2,7 @@
 
 # STATUS
 
-## Current state (2026-10-24 07:05 UTC, Phase 2 iteration 1)
+## Current state (2026-10-24 06:43 UTC, Phase 2 iteration 1)
 - Generator: new matched-seed conditions neutral / notes / randpartner (`--matched`); v1 prompts byte-identical (fake-chat diff).
 - RUNNING (bg): `p2_chain.sh` -> llm_p2cue (90 runs: 6 conds x 15 seeds; ~25 luna calls/min, ETA ~09:00) -> llm_p2para1/2
   (40) -> llm_p2rep (60, gap 4). `p2_post.sh` labels (`p2_label.py`) + analyses (`p2_cue.py`) cue/para once each finishes.
@@ -21,7 +21,7 @@
 5. Adversarial codex + Opus review of Phase 2 section before Sat 20:00.
 
 ## Log
-- 07:05 P2 iter1: generator conds + matched seeds; E77-E83 registered; E81/E82/E83 done; generation launched (codex + Go).
+- 06:43 P2 iter1: generator conds + matched seeds; E77-E83 registered; E81/E82/E83 done; generation launched (codex + Go).
 - 06:20 iter 30: TL;DR block in REPORT (E75); handoff exports + manifest rebuilt; all verifiers/tests PASS. No new experiments from here.
 - 06:10 iter 29: E74 cross-family label re-judge (label_xfam.py, 115 Sonnet calls), REPORT, exports, manifest; codex review logs/review_iter29_xfam_label.md.
 - 05:50 iter 28: final claims audit (E73), codex + Opus; framing fixes in REPORT; exports/manifest rebuilt; test phrase updated.
