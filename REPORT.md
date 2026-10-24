@@ -1,7 +1,7 @@
 # Say vs. Do: does auditing what AI agents *say* together with what they *do* catch collusion better?
 
 *Apart AI Collusion Sprint, Q2.2 — text + action auditing. v1 (overnight) results are frozen as git tag `v1-overnight`;
-Phase 2 (from 2026-10-24 06:30 UTC) re-tests them. Checkpoint text, 2026-10-24 18:40 UTC: P2.1–P2.15 final except the second P2.15 arm (E115, gpt-6.1-sol newcomer; generating) and the E1 grid audit (E113; cached audit of 54 snapshot games done, final eval once Q1.4's 6 sweeps are complete). E102 (strong-framing Qwen, 6 seeds) is descriptive. Exports: [README.md](README.md).*
+Phase 2 (from 2026-10-24 06:30 UTC) re-tests them. Checkpoint text, 2026-10-24 18:39 UTC: P2.1–P2.15 final except the second P2.15 arm (E115, gpt-6.1-sol newcomer; generating) and the E1 grid audit (E113; 74 snapshot games, cached audits verified; final eval once Q1.4's 6 balanced sweeps are complete). E102 (strong-framing Qwen, 6 seeds) is descriptive. Exports: [README.md](README.md).*
 
 ## Abstract
 Adding LLM sellers' public messages to their prices gives **no resolved gain** for detecting collusion: combined minus the better
@@ -191,8 +191,8 @@ Reading. (i) Premium and market-excess CIs include 0.5 (not equivalence; the cla
 (ii) Public text ranks tacit-high above strict-executed (0.25 [0.08, 0.46]; combined 0.18). Post-hoc "hold/keep/maintain … 1x" matches occur in
 1362/3200 public messages without a channel vs 903/3200 with one (43% vs 28%; `p2_strongF_public.py`); descriptive only, and "tacit-high" is a
 price class, not verified absence of public agreement (cf. Q1.4 E59: a public board alone lifts deepseek prices +0.70 [0.23, 1.23]). Whether
-luna uses a public board at all is prompt-dependent: it posts nothing in Q1.4's E70 grid (base prompt; 0/960 agent-rounds in cells c00–c05,
-E113-amend) but 43% hold-price calls here under strong framing. (iii) The plan view (threshold 50 fixed without fitting) ranks the classes the
+luna uses a public board is prompt-dependent: Q1.4's E70 grid leaves it mostly unused, including c02/c07 exceptions (E113-amend2;
+board-use counts: `p2_e1_audit.py coverage` → `p2_e1_coverage.json`), versus 43% hold-price calls here under strong framing. (iii) The plan view (threshold 50 fixed without fitting) ranks the classes the
 expected way, 0.76 [0.55, 0.93] (flags 5/13 vs 0/19); it reads self-authored notes, not faithful reasoning. *E111 (no LLM, exploratory;
 `uv run python p2_plan_keyword.py`):* no plan uses agreement terms (agree/deal/partner/our floor/as discussed: 0/13, 0/19, 0/7 runs), but the
 share of plan entries naming the chat partner separates the classes at least as well, 0.82 [0.66, 0.96] (8.8% vs 2.5%; a no-channel market's

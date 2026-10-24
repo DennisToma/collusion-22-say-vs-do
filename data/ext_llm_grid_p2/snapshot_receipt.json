@@ -1,0 +1,43 @@
+{
+ "sibling_head": "f9ccb83cbe91fc5fcc5a3f2e03718b13073344e9",
+ "source_files_sha256": [
+  "438d69ddaea16b9516eb3d7f30b5ac9c9aa7c73afc144ffc09c48c3fa03e0d6f  llm_grid_p2_c00/trajectories.jsonl",
+  "33053830ec56ed34618777ad1d9a6f1081f12ade124ded67b8303ba5a2b6af18  llm_grid_p2_c00/ground_truth.jsonl",
+  "0b28ed213c142b9177db084482c608e36eb36be30d29b0bba709031bace4a534  llm_grid_p2_c01/trajectories.jsonl",
+  "9e6ef0c926dfb2ac9d7b9ee8fda22719f787df8126a080af7cfb4bb63b01450a  llm_grid_p2_c01/ground_truth.jsonl",
+  "fe2e6991288c4b17d43c4595ed5bfaf68f3411c995f9b6771d30e7e4b0c04cd1  llm_grid_p2_c02/trajectories.jsonl",
+  "c7075c3557752e8b978015d1f9a5a4f8a4d0f984a8e7d5f16a614e8438e9abef  llm_grid_p2_c02/ground_truth.jsonl",
+  "84472cef464c75684eed104c22120c30db2c61f92fc15c3750fabcc32057b6ef  llm_grid_p2_c03/trajectories.jsonl",
+  "6805b6ac4b3b299efebfc5320cc855eb7ad3775b65546cab351d45e29a87d94a  llm_grid_p2_c03/ground_truth.jsonl",
+  "f0beb35f039912bed86fee875eef8b27524919e45c52546feda84ecfd5330ef7  llm_grid_p2_c04/trajectories.jsonl",
+  "4406aa6a033606a1f08dc5e030c01a725fd882d3e494a04729084b674e187189  llm_grid_p2_c04/ground_truth.jsonl",
+  "74d87bb2efac39aa4f404be18a46015ea1ee5271064de920f084f10a6bcdaa00  llm_grid_p2_c05/trajectories.jsonl",
+  "7b7c5b1d23d490f986ac2492c8dab7fa17fb4f0c7d645518e16202cea78e4fda  llm_grid_p2_c05/ground_truth.jsonl",
+  "7604f307b31456daab9a5d654feafec38e6b8406b05b356a132105fbd34bc5a0  llm_grid_p2_c06/trajectories.jsonl",
+  "085b24d8b24b6b71ee7d159fec11c8a4c6d0ad2541fbe6722077cfbce097db17  llm_grid_p2_c06/ground_truth.jsonl",
+  "a68c67a5c5d7716198b14ddc1c39ffeebb1bc219545cf9b7854895b4511b4905  llm_grid_p2_c07/trajectories.jsonl",
+  "5170bde2148860507dd388f83efb812bc5953062d5ca94b2027a3226f40b2af0  llm_grid_p2_c07/ground_truth.jsonl",
+  "90500d3fa3abad6a70add8d92e968ed4df772ad8c303751172aaf1b787c84695  llm_grid_p2_c08/trajectories.jsonl",
+  "ff219cab9e4280228f505e878549fe70f7ea1f8e567f077e6175fe36fc042e18  llm_grid_p2_c08/ground_truth.jsonl",
+  "9ccc6f5837305f0f2e8b5050e83867319b21baace9454726060b32452d5816a3  llm_grid_p2_c09/trajectories.jsonl",
+  "b24ee265fedf53fec507827472b194642b4e4021c57406433c3f501170dca038  llm_grid_p2_c09/ground_truth.jsonl",
+  "f542335467f3e657329bbcbee68ded8b912b0c2f77eecd0149227f462169e934  llm_grid_p2_c10/trajectories.jsonl",
+  "829ce4f389f33f39f61f1f1d7578cb41e8811b1115535f6ddcc9f0a172e23d97  llm_grid_p2_c10/ground_truth.jsonl",
+  "39310cbabd94d1bd07dd321f4d61ab329bc09831212792e494af3de2c4e67739  llm_grid_p2_c11/trajectories.jsonl",
+  "777ba88e7297906e3308c777f160a67eb61afc2484aa2c979c8ea1342f35e7e8  llm_grid_p2_c11/ground_truth.jsonl",
+  "2597b9fb37d124b288aa54cf0e97cc0a224fbb7748e6ca93ccb6682e07452c0b  llm_grid_p2_c12/trajectories.jsonl",
+  "a5e1cfa9cdbd2e85e57bdd8d1ce123b79f7461ed7d1905ebb88d091f9f21fdf9  llm_grid_p2_c12/ground_truth.jsonl",
+  "86a9b86c46d5eee94bea96a41bb927c45af1f31311dd9870e79bb4d5e369afd7  llm_grid_p2_c13/trajectories.jsonl",
+  "b32ff7d76a323e2078a9ef66058703cff98162c375e7954a3638a772c80ada4c  llm_grid_p2_c13/ground_truth.jsonl",
+  "6d6a7c57499475c28a719dea2c64f090326f73e23572a351bf1d0caccfb1f453  llm_grid_p2_c14/trajectories.jsonl",
+  "7ccf8c7bb80aefaba2ba3a7c71cffa925e4349b04318aa8ab215f2bbdc20c891  llm_grid_p2_c14/ground_truth.jsonl",
+  "3aff38e44349c7db2f7577114c4b7a5173f86a727585c5d07ca1ab4f0ba0232c  llm_grid_p2_c15/trajectories.jsonl",
+  "653f3312cbef11f4bf2d506eca8cc04b223158dd6a1f50ea32837ccf3b48a980  llm_grid_p2_c15/ground_truth.jsonl"
+ ],
+ "snapshot_sha256": {
+  "trajectories.jsonl": "18d62c6441311203b5530a7a63ce13ef39401eead333f800f8f6a6e50e7fdfcd",
+  "ground_truth.jsonl": "32ebdd538c734b31638cbfa6a5cc1efe7add1c3c35467018145378745fdb3bd8",
+  "labels.jsonl": "c3309b48bf6e4828124979b337f16183d05109a784bec2230b3a340f0b34bfe5",
+  "grid_manifest.json": "467c44cef7c686fd1defe205369ddbea04deca43a03dac0fadd8300a57ff8115"
+ }
+}

@@ -192,3 +192,9 @@ scorers, thresholds, metric definitions and published numerical estimates are un
 - 20 fresh runs: `llm_market.py --ds llm_p2de --framing lab --lang de --rounds 12 --matched private,none --matched-n 10 --seed 8100`.
   Seeds 8100000-8100009 = same cost/demand paths as llm_p2cue private/none k 0-9 (paired English comparison).
 - Pure evaluation set for frozen labeler/auditors (no tuning on it). Descriptive; registered predictions in EXPERIMENTS.tsv E110-de-reg.
+
+## E113 external factorial grid (registered E113/E113-amend; safeguards E113-amend2)
+- No tuning or interim metric inspection. Frozen v1 gpt-6.1-sol prompts and dev thresholds; audit action/combined on all 16 cells, text only on 8 qwen cells. Luna can post in some cells; the early blanket-silence observation was corrected before final evaluation.
+- Final evaluation ONCE on complete contiguous sweeps (each = 16 cells × two arms). Wait for Q1.4's six-sweep completion announcement, or use complete sweeps at Sun 08:00 UTC. Ignore partial later sweeps. Both arms of every included cell must have current, unique same-model audit records. No exclusion based on score or outcome.
+- `p2_e1_audit.py preflight` checks local snapshot digests, exact rounds/firms, seller model/arm, audit provenance and valid scores without metrics. Final lock: `logs/final/E113_ONCE.lock`; portable refusal: existing `results/analysis/p2_e1_audit.json`. Never remove either to recompute a result.
+- Per-cell/arm board usage is a covariate, not an interim detector result. The 16-cell comparison uses action as luna's single comparator; qwen's three-view comparison is also reported separately as k/8. Secondary execution labels are copied from Q1.4's published final E70 result, with a source digest, or marked unavailable at the primary evaluation cutoff.

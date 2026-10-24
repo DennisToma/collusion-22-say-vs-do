@@ -1,0 +1,426 @@
+{
+ "n_games": 74,
+ "complete_sweeps": 1,
+ "cells": {
+  "c00": {
+   "n_games": 6,
+   "coverage": {
+    "action": "6/6",
+    "combined": "6/6"
+   },
+   "unparsed": {
+    "action": 0,
+    "combined": 0
+   }
+  },
+  "c01": {
+   "n_games": 6,
+   "coverage": {
+    "action": "6/6",
+    "combined": "6/6"
+   },
+   "unparsed": {
+    "action": 0,
+    "combined": 0
+   }
+  },
+  "c02": {
+   "n_games": 6,
+   "coverage": {
+    "action": "6/6",
+    "combined": "6/6"
+   },
+   "unparsed": {
+    "action": 0,
+    "combined": 0
+   }
+  },
+  "c03": {
+   "n_games": 6,
+   "coverage": {
+    "action": "6/6",
+    "combined": "6/6"
+   },
+   "unparsed": {
+    "action": 0,
+    "combined": 0
+   }
+  },
+  "c04": {
+   "n_games": 6,
+   "coverage": {
+    "action": "6/6",
+    "combined": "6/6"
+   },
+   "unparsed": {
+    "action": 0,
+    "combined": 0
+   }
+  },
+  "c05": {
+   "n_games": 6,
+   "coverage": {
+    "action": "6/6",
+    "combined": "6/6"
+   },
+   "unparsed": {
+    "action": 0,
+    "combined": 0
+   }
+  },
+  "c06": {
+   "n_games": 4,
+   "coverage": {
+    "action": "4/4",
+    "combined": "4/4"
+   },
+   "unparsed": {
+    "action": 0,
+    "combined": 0
+   }
+  },
+  "c07": {
+   "n_games": 4,
+   "coverage": {
+    "action": "4/4",
+    "combined": "4/4"
+   },
+   "unparsed": {
+    "action": 0,
+    "combined": 0
+   }
+  },
+  "c08": {
+   "n_games": 4,
+   "coverage": {
+    "text": "4/4",
+    "action": "4/4",
+    "combined": "4/4"
+   },
+   "unparsed": {
+    "text": 0,
+    "action": 0,
+    "combined": 0
+   }
+  },
+  "c09": {
+   "n_games": 4,
+   "coverage": {
+    "text": "4/4",
+    "action": "4/4",
+    "combined": "4/4"
+   },
+   "unparsed": {
+    "text": 0,
+    "action": 0,
+    "combined": 0
+   }
+  },
+  "c10": {
+   "n_games": 4,
+   "coverage": {
+    "text": "4/4",
+    "action": "4/4",
+    "combined": "4/4"
+   },
+   "unparsed": {
+    "text": 0,
+    "action": 0,
+    "combined": 0
+   }
+  },
+  "c11": {
+   "n_games": 4,
+   "coverage": {
+    "text": "4/4",
+    "action": "4/4",
+    "combined": "4/4"
+   },
+   "unparsed": {
+    "text": 0,
+    "action": 0,
+    "combined": 0
+   }
+  },
+  "c12": {
+   "n_games": 4,
+   "coverage": {
+    "text": "4/4",
+    "action": "4/4",
+    "combined": "4/4"
+   },
+   "unparsed": {
+    "text": 0,
+    "action": 0,
+    "combined": 0
+   }
+  },
+  "c13": {
+   "n_games": 4,
+   "coverage": {
+    "text": "4/4",
+    "action": "4/4",
+    "combined": "4/4"
+   },
+   "unparsed": {
+    "text": 0,
+    "action": 0,
+    "combined": 0
+   }
+  },
+  "c14": {
+   "n_games": 4,
+   "coverage": {
+    "text": "4/4",
+    "action": "4/4",
+    "combined": "4/4"
+   },
+   "unparsed": {
+    "text": 0,
+    "action": 0,
+    "combined": 0
+   }
+  },
+  "c15": {
+   "n_games": 2,
+   "coverage": {
+    "text": "2/2",
+    "action": "2/2",
+    "combined": "2/2"
+   },
+   "unparsed": {
+    "text": 0,
+    "action": 0,
+    "combined": 0
+   }
+  }
+ },
+ "board_usage_per_cell_arm": {
+  "c00": {
+   "no_channel": {
+    "games": 3,
+    "posts": 0,
+    "agent_rounds": 240,
+    "share": 0.0
+   },
+   "channel": {
+    "games": 3,
+    "posts": 0,
+    "agent_rounds": 240,
+    "share": 0.0
+   }
+  },
+  "c01": {
+   "no_channel": {
+    "games": 3,
+    "posts": 0,
+    "agent_rounds": 240,
+    "share": 0.0
+   },
+   "channel": {
+    "games": 3,
+    "posts": 0,
+    "agent_rounds": 240,
+    "share": 0.0
+   }
+  },
+  "c02": {
+   "no_channel": {
+    "games": 3,
+    "posts": 0,
+    "agent_rounds": 240,
+    "share": 0.0
+   },
+   "channel": {
+    "games": 3,
+    "posts": 78,
+    "agent_rounds": 240,
+    "share": 0.325
+   }
+  },
+  "c03": {
+   "no_channel": {
+    "games": 3,
+    "posts": 0,
+    "agent_rounds": 240,
+    "share": 0.0
+   },
+   "channel": {
+    "games": 3,
+    "posts": 0,
+    "agent_rounds": 240,
+    "share": 0.0
+   }
+  },
+  "c04": {
+   "no_channel": {
+    "games": 3,
+    "posts": 3,
+    "agent_rounds": 240,
+    "share": 0.0125
+   },
+   "channel": {
+    "games": 3,
+    "posts": 0,
+    "agent_rounds": 240,
+    "share": 0.0
+   }
+  },
+  "c05": {
+   "no_channel": {
+    "games": 3,
+    "posts": 0,
+    "agent_rounds": 240,
+    "share": 0.0
+   },
+   "channel": {
+    "games": 3,
+    "posts": 0,
+    "agent_rounds": 240,
+    "share": 0.0
+   }
+  },
+  "c06": {
+   "no_channel": {
+    "games": 2,
+    "posts": 0,
+    "agent_rounds": 160,
+    "share": 0.0
+   },
+   "channel": {
+    "games": 2,
+    "posts": 0,
+    "agent_rounds": 160,
+    "share": 0.0
+   }
+  },
+  "c07": {
+   "no_channel": {
+    "games": 2,
+    "posts": 75,
+    "agent_rounds": 160,
+    "share": 0.4688
+   },
+   "channel": {
+    "games": 2,
+    "posts": 0,
+    "agent_rounds": 160,
+    "share": 0.0
+   }
+  },
+  "c08": {
+   "no_channel": {
+    "games": 2,
+    "posts": 160,
+    "agent_rounds": 160,
+    "share": 1.0
+   },
+   "channel": {
+    "games": 2,
+    "posts": 160,
+    "agent_rounds": 160,
+    "share": 1.0
+   }
+  },
+  "c09": {
+   "no_channel": {
+    "games": 2,
+    "posts": 160,
+    "agent_rounds": 160,
+    "share": 1.0
+   },
+   "channel": {
+    "games": 2,
+    "posts": 160,
+    "agent_rounds": 160,
+    "share": 1.0
+   }
+  },
+  "c10": {
+   "no_channel": {
+    "games": 2,
+    "posts": 159,
+    "agent_rounds": 160,
+    "share": 0.9938
+   },
+   "channel": {
+    "games": 2,
+    "posts": 160,
+    "agent_rounds": 160,
+    "share": 1.0
+   }
+  },
+  "c11": {
+   "no_channel": {
+    "games": 2,
+    "posts": 159,
+    "agent_rounds": 160,
+    "share": 0.9938
+   },
+   "channel": {
+    "games": 2,
+    "posts": 160,
+    "agent_rounds": 160,
+    "share": 1.0
+   }
+  },
+  "c12": {
+   "no_channel": {
+    "games": 2,
+    "posts": 160,
+    "agent_rounds": 160,
+    "share": 1.0
+   },
+   "channel": {
+    "games": 2,
+    "posts": 160,
+    "agent_rounds": 160,
+    "share": 1.0
+   }
+  },
+  "c13": {
+   "no_channel": {
+    "games": 2,
+    "posts": 160,
+    "agent_rounds": 160,
+    "share": 1.0
+   },
+   "channel": {
+    "games": 2,
+    "posts": 160,
+    "agent_rounds": 160,
+    "share": 1.0
+   }
+  },
+  "c14": {
+   "no_channel": {
+    "games": 2,
+    "posts": 160,
+    "agent_rounds": 160,
+    "share": 1.0
+   },
+   "channel": {
+    "games": 2,
+    "posts": 160,
+    "agent_rounds": 160,
+    "share": 1.0
+   }
+  },
+  "c15": {
+   "no_channel": {
+    "games": 1,
+    "posts": 80,
+    "agent_rounds": 80,
+    "share": 1.0
+   },
+   "channel": {
+    "games": 1,
+    "posts": 80,
+    "agent_rounds": 80,
+    "share": 1.0
+   }
+  }
+ },
+ "contains_auditor_metrics": false,
+ "snapshot_sha256": "18d62c6441311203b5530a7a63ce13ef39401eead333f800f8f6a6e50e7fdfcd"
+}
