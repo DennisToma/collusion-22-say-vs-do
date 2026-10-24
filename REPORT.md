@@ -1,7 +1,7 @@
 # Say vs. Do: does auditing what AI agents *say* together with what they *do* catch collusion better?
 
 *Apart AI Collusion Sprint, Q2.2 — text + action auditing. v1 (overnight) results are frozen as git tag `v1-overnight`;
-Phase 2 (from 2026-10-24 06:30 UTC) re-tests them. Checkpoint text, 2026-10-24 18:48 UTC: P2.1–P2.15 final except the second P2.15 arm (E115, gpt-6.1-sol newcomer; generating) and the E1 grid audit (E113; 76 snapshot games, cached audits verified; final eval once Q1.4's 6 balanced sweeps are complete). E102 (strong-framing Qwen, 6 seeds) is descriptive. Exports: [README.md](README.md).*
+Phase 2 (from 2026-10-24 06:30 UTC) re-tests them. Checkpoint text, 2026-10-24 19:07 UTC: P2.1–P2.15 final except the second P2.15 arm (E115, gpt-6.1-sol newcomer; generating) and the E1 grid audit (E113; 82 snapshot games, cached audits verified; final eval once Q1.4's 6 balanced sweeps are complete). E102 (strong-framing Qwen, 6 seeds) is descriptive. Exports: [README.md](README.md).*
 
 ## Abstract
 Adding LLM sellers' public messages to their prices gives **no resolved gain** for detecting collusion: combined minus the better
@@ -644,8 +644,10 @@ computed on the mod-3 subset incl. test runs. The test evaluation is locked and 
 5. **Lever ablation** of the strong arm (memory, framing, horizon, messaging cadence) to find which produces executed collusion.
 
 ## Appendix E — Reproduce
-The experiments are complete. For a read-only offline check of the shipped artifacts, run
-`python3 verify_artifacts.py` (standard library only; no LLM calls, metric recomputation, or writes).
+Completed Phase 2 analyses: `uv run python verify_phase2.py` reproduces 32 JSON outputs from 25 allowlisted commands in a disposable copy, with model/network/process calls blocked (E117; `phase2_reproduction.json`).
+Read-only receipt freshness: `python3 -S verify_phase2.py --check`. Sealed evaluations, active E113/E115 and untracked SALT raw data are excluded; saved scientific results stay unchanged.
+E95's original partial coverage (luna action_stats n = 9) uses a post-hoc cache-prefix reconstruction (`data/p2_family3way_scope.json`), not contemporaneous provenance.
+The v1 artifact check, `python3 verify_artifacts.py` (standard library; no writes or metric recomputation), remains stale until the Sun 16:30 refresh.
 For a separate read-only reconstruction of cached auditor inputs, run
 `uv run python check_audit_inputs.py` (requires NumPy; recorded-hash and length-only matches reported separately).
 For a read-only freshness check of the cached evidence source ledger, run
@@ -654,10 +656,8 @@ For a separate read-only check of leading price-transition endpoints, run
 `python3 -S check_price_transitions.py --check` (standard library only; selective grammar, no semantic judge).
 For a read-only reconstruction of the existing mechanism figure's numerical sources and captions, run
 `python3 -S check_mechanism_sources.py --check` (standard library only; descriptive public-price means and normal bands).
-The post-hoc manifest and completion receipt were added in iteration 19 to preserve the handoff;
-they are not pre-registration evidence. See [README.md](README.md) for artifact locations and
-safe rendering commands. The generation/audit commands below document how the existing results
-were produced; the two completed run-once entry points now refuse to rerun even in a fresh clone.
+The iteration-19 manifest/completion receipt preserves the handoff; it is not pre-registration evidence. See [README.md](README.md) for artifacts and rendering commands.
+The commands below document how existing results were produced; the completed v1 run-once entry points refuse reruns even in a fresh clone.
 
 ```
 uv run python llm_market.py --ds llm_v3 --plan private:70,none:35,legit:20 --rounds 12 --framing lab --games-parallel 2 --seed 3000

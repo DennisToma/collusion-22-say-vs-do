@@ -1,0 +1,505 @@
+{
+ "started_utc": "2026-10-24T18:52:01.406748+00:00",
+ "kind": "post-hoc computational reproduction",
+ "git_head": "f0616518ed26b8a0b022cac6e01d4be8232b6696",
+ "python": "3.12.15 (main, Oct 21 2026, 17:47:06) [Clang 23.1.3 ]",
+ "dependencies": {
+  "numpy": "2.5.4",
+  "scipy": "1.18.1",
+  "scikit-learn": "1.9.1",
+  "matplotlib": "3.11.2"
+ },
+ "exclusions": [
+  "sealed one-time evaluations E99/E112/E113/E115 and locked v1/replication",
+  "active E113/E115 datasets and caches",
+  "SALT (raw parquet is not tracked)",
+  "historical interim/pilot outputs; no claim of complete Phase 2 coverage"
+ ],
+ "comparison": "exact parsed JSON; no tolerance; declared outputs deleted before execution",
+ "commands": [
+  {
+   "argv": [
+    "p2_cue.py",
+    "--ds",
+    "llm_p2cue",
+    "llm_p2claude",
+    "llm_p2ds",
+    "llm_p2sol",
+    "llm_p2para1",
+    "llm_p2para2"
+   ],
+   "returncode": 0,
+   "error": null,
+   "seconds": 9.39,
+   "outputs": {
+    "results/analysis/p2_cue_llm_p2cue.json": {
+     "state": "match",
+     "differences": [],
+     "regenerated_sha256": "a62e94cbe2af22a6329355ea4e980c45354ecef3821af1c144ca6b4692a76892"
+    },
+    "results/analysis/p2_cue_llm_p2claude.json": {
+     "state": "match",
+     "differences": [],
+     "regenerated_sha256": "9e1696c20d36d9303617bb21ec92a19d46897d7aab4ba193f6c6e2048693c8e7"
+    },
+    "results/analysis/p2_cue_llm_p2ds.json": {
+     "state": "match",
+     "differences": [],
+     "regenerated_sha256": "d97850a161ddd7583cae40a32a1b56ebf3d92124a6e6511646fdebc5b4a4ce3d"
+    },
+    "results/analysis/p2_cue_llm_p2sol.json": {
+     "state": "match",
+     "differences": [],
+     "regenerated_sha256": "b1b5e658f6313a7d14bdcc0c45355f575c75870b5fcc90fffb1d281a049b15d5"
+    },
+    "results/analysis/p2_cue_llm_p2para1.json": {
+     "state": "match",
+     "differences": [],
+     "regenerated_sha256": "b9070ca2c41e540edda25cee18bed13dd81048dfbffc7c494ce06dc791955f60"
+    },
+    "results/analysis/p2_cue_llm_p2para2.json": {
+     "state": "match",
+     "differences": [],
+     "regenerated_sha256": "55876b509af113cadf9dc966e5a01aea9c4245fba98980c1616b782cf2a03e56"
+    }
+   },
+   "passed": true
+  },
+  {
+   "argv": [
+    "p2_cue_verdict.py"
+   ],
+   "returncode": 1,
+   "error": "12/site-packages/matplotlib/backend_bases.py\", line 49, in <module>\n    from matplotlib import (\n  File \"/home/factory/collusion/collusion-22-say-vs-do/.venv/lib/python3.12/site-packages/matplotlib/text.py\", line 18, in <module>\n    from .font_manager import FontProperties, fontManager, get_font\n  File \"/home/factory/collusion/collusion-22-say-vs-do/.venv/lib/python3.12/site-packages/matplotlib/font_manager.py\", line 1852, in <module>\n    fontManager = _load_fontmanager()\n                  ^^^^^^^^^^^^^^^^^^^\n  File \"/home/factory/collusion/collusion-22-say-vs-do/.venv/lib/python3.12/site-packages/matplotlib/font_manager.py\", line 1846, in _load_fontmanager\n    fm = FontManager()\n         ^^^^^^^^^^^^^\n  File \"/home/factory/collusion/collusion-22-say-vs-do/.venv/lib/python3.12/site-packages/matplotlib/font_manager.py\", line 1257, in __init__\n    *findSystemFonts(fontext=fontext)]:\n     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/factory/collusion/collusion-22-say-vs-do/.venv/lib/python3.12/site-packages/matplotlib/font_manager.py\", line 311, in findSystemFonts\n    installed_fonts = _get_fontconfig_fonts()\n                      ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/factory/collusion/collusion-22-say-vs-do/.venv/lib/python3.12/site-packages/matplotlib/font_manager.py\", line 257, in _get_fontconfig_fonts\n    if b'--format' not in subprocess.check_output(['fc-list', '--help']):\n                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/factory/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/subprocess.py\", line 466, in check_output\n    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/factory/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/subprocess.py\", line 548, in run\n    with Popen(*popenargs, **kwargs) as process:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/factory/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/subprocess.py\", line 1026, in __init__\n    self._execute_child(args, executable, preexec_fn, close_fds,\n  File \"/home/factory/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/subprocess.py\", line 1823, in _execute_child\n    sys.audit(\"subprocess.Popen\", executable, args, cwd, env)\n  File \"<string>\", line 15, in guard\n  File \"<string>\", line 7, in denied\nRuntimeError: offline reproduction forbids model/network/process calls\n",
+   "seconds": 0.26,
+   "outputs": {
+    "results/analysis/p2_cue_verdict_llm_p2cue.json": {
+     "state": "match",
+     "differences": [],
+     "regenerated_sha256": "c93b93a48dbb8d6bb3586616464a97169e7e26b37e36ee02581e2a8e0329d738"
+    }
+   },
+   "passed": false
+  },
+  {
+   "argv": [
+    "p2_band.py"
+   ],
+   "returncode": 0,
+   "error": null,
+   "seconds": 1.39,
+   "outputs": {
+    "results/analysis/p2_band.json": {
+     "state": "match",
+     "differences": [],
+     "regenerated_sha256": "e87b9ae969954d614c31c03ab1535fe25fd3278fe3c699cbade825bb1d855c2b"
+    }
+   },
+   "passed": true
+  },
+  {
+   "argv": [
+    "p2_aware.py"
+   ],
+   "returncode": 0,
+   "error": null,
+   "seconds": 6.76,
+   "outputs": {
+    "results/analysis/p2_aware.json": {
+     "state": "match",
+     "differences": [],
+     "regenerated_sha256": "0354206f4da37a1436d62f737633a9fe6173b4f3e4a5c8301de1b9516c24ac72"
+    }
+   },
+   "passed": true
+  },
+  {
+   "argv": [
+    "p2_asym.py"
+   ],
+   "returncode": 0,
+   "error": null,
+   "seconds": 0.13,
+   "outputs": {
+    "results/analysis/p2_asym.json": {
+     "state": "match",
+     "differences": [],
+     "regenerated_sha256": "a5d9aa4e6e93175baf6ca8ad0bd1f27e16687b7066fe127a79aaf7536dfd8f2d"
+    }
+   },
+   "passed": true
+  },
+  {
+   "argv": [
+    "p2_asym_nash.py"
+   ],
+   "returncode": 0,
+   "error": null,
+   "seconds": 0.15,
+   "outputs": {
+    "results/analysis/p2_asym_nash.json": {
+     "state": "match",
+     "differences": [],
+     "regenerated_sha256": "fa5e2a760741147a477ebce23ec8ca6cba5b1db6357aa7cb12a7ce64bdd2128b"
+    }
+   },
+   "passed": true
+  },
+  {
+   "argv": [
+    "p2_logbook.py"
+   ],
+   "returncode": 0,
+   "error": null,
+   "seconds": 9.59,
+   "outputs": {
+    "results/analysis/p2_logbook.json": {
+     "state": "match",
+     "differences": [],
+     "regenerated_sha256": "d0dbd06133386b5e9c4899117284224bf1d8645814aaaa06ecf74e03ecceb49b"
+    }
+   },
+   "passed": true
+  },
+  {
+   "argv": [
+    "p2_de.py"
+   ],
+   "returncode": 0,
+   "error": null,
+   "seconds": 3.8,
+   "outputs": {
+    "results/analysis/p2_de.json": {
+     "state": "match",
+     "differences": [],
+     "regenerated_sha256": "337ebf939e6e64ddbc232c33f2b210e701f76b23673b8f3f7700f0c80d65b9af"
+    }
+   },
+   "passed": true
+  },
+  {
+   "argv": [
+    "p2_prevalence.py"
+   ],
+   "returncode": 0,
+   "error": null,
+   "seconds": 1.89,
+   "outputs": {
+    "results/analysis/p2_prevalence.json": {
+     "state": "match",
+     "differences": [],
+     "regenerated_sha256": "79f45938e3481bc4232b8c5bb4141922a5cf1cc34bc6ab20d524d5e47abc1ffb"
+    }
+   },
+   "passed": true
+  },
+  {
+   "argv": [
+    "p2_family_views.py",
+    "--ds",
+    "llm_p2claude",
+    "llm_p2sol",
+    "llm_p2ds",
+    "llm_p2para2",
+    "llm_p2para1"
+   ],
+   "returncode": 0,
+   "error": null,
+   "seconds": 11.81,
+   "outputs": {
+    "results/analysis/p2_family_views.json": {
+     "state": "match",
+     "differences": [],
+     "regenerated_sha256": "1c745623f0ec15ac3d37ab2112e431891d53996236ebb4aab5de391fb9c2d90a"
+    }
+   },
+   "passed": true
+  },
+  {
+   "argv": [
+    "p2_family3way.py"
+   ],
+   "returncode": 0,
+   "error": null,
+   "seconds": 18.01,
+   "outputs": {
+    "results/analysis/p2_family3way.json": {
+     "state": "mismatch",
+     "differences": [
+      {
+       "path": "$.llm_p2cue.views.action_stats.auroc_any_vs_neither[0]",
+       "saved": 0.95,
+       "regenerated": 0.795
+      },
+      {
+       "path": "$.llm_p2cue.views.action_stats.auroc_any_vs_neither[1]",
+       "saved": 0.8,
+       "regenerated": 0.614
+      },
+      {
+       "path": "$.llm_p2cue.views.action_stats.auroc_any_vs_neither[2]",
+       "saved": 1.0,
+       "regenerated": 0.955
+      },
+      {
+       "path": "$.llm_p2cue.views.action_stats.auroc_private_vs_none[0]",
+       "saved": 1.0,
+       "regenerated": 0.804
+      },
+      {
+       "path": "$.llm_p2cue.views.action_stats.auroc_private_vs_none[1]",
+       "saved": 1.0,
+       "regenerated": 0.613
+      },
+      {
+       "path": "$.llm_p2cue.views.action_stats.auroc_private_vs_none[2]",
+       "saved": 1.0,
+       "regenerated": 0.964
+      },
+      {
+       "path": "$.llm_p2cue.views.action_stats.flags_by_class.NEITHER[0]",
+       "saved": 1,
+       "regenerated": 4
+      },
+      {
+       "path": "$.llm_p2cue.views.action_stats.flags_by_class.NEITHER[1]",
+       "saved": 5,
+       "regenerated": 16
+      },
+      {
+       "path": "$.llm_p2cue.views.action_stats.flags_by_class.PRIV[0]",
+       "saved": 4,
+       "regenerated": 11
+      },
+      {
+       "path": "$.llm_p2cue.views.action_stats.flags_by_class.PRIV[1]",
+       "saved": 4,
+       "regenerated": 14
+      },
+      {
+       "path": "$.llm_p2cue.views.combined_stats",
+       "missing_in": "saved"
+      }
+     ],
+     "regenerated_sha256": "c1e1b62177d8c03fa048728b9713f740ca70f48b5ebf028a2a566f08e5ff694f"
+    }
+   },
+   "passed": false
+  },
+  {
+   "argv": [
+    "p2_strong.py",
+    "--ds",
+    "llm_p2strongF",
+    "--min-floor",
+    "13",
+    "--late",
+    "11",
+    "--out",
+    "results/analysis/p2_strongF.json"
+   ],
+   "returncode": 0,
+   "error": null,
+   "seconds": 1.04,
+   "outputs": {
+    "results/analysis/p2_strongF.json": {
+     "state": "match",
+     "differences": [],
+     "regenerated_sha256": "5dd3aba7a1167a8096b6d65dd3328670c9afedd54178e08457601bbc4b47d3ce"
+    }
+   },
+   "passed": true
+  },
+  {
+   "argv": [
+    "p2_strong.py",
+    "--ds",
+    "llm_p2g56sol",
+    "llm_p2mimo",
+    "--min-floor",
+    "12",
+    "--late",
+    "2",
+    "--out",
+    "results/analysis/p2_c2older.json"
+   ],
+   "returncode": 0,
+   "error": null,
+   "seconds": 1.08,
+   "outputs": {
+    "results/analysis/p2_c2older.json": {
+     "state": "match",
+     "differences": [],
+     "regenerated_sha256": "64ebdb440520e38a6852cdd703d8d2bb66513392c1039d321ce980c96d9390c4"
+    }
+   },
+   "passed": true
+  },
+  {
+   "argv": [
+    "p2_strong.py",
+    "--ds",
+    "llm_p2qwenb",
+    "llm_p2qwena",
+    "--min-floor",
+    "12",
+    "--late",
+    "2",
+    "--out",
+    "results/analysis/p2_qwen.json"
+   ],
+   "returncode": 0,
+   "error": null,
+   "seconds": 1.19,
+   "outputs": {
+    "results/analysis/p2_qwen.json": {
+     "state": "match",
+     "differences": [],
+     "regenerated_sha256": "87be6cfbe7f77925039a4ffe1a33bdad926988aed35c5e976fa4a265357c0a2b"
+    }
+   },
+   "passed": true
+  },
+  {
+   "argv": [
+    "p2_strong.py",
+    "--ds",
+    "llm_p2qwenbS",
+    "llm_p2qwenaS",
+    "--min-floor",
+    "13",
+    "--late",
+    "11",
+    "--out",
+    "results/analysis/p2_qwen_strong.json"
+   ],
+   "returncode": 0,
+   "error": null,
+   "seconds": 0.99,
+   "outputs": {
+    "results/analysis/p2_qwen_strong.json": {
+     "state": "match",
+     "differences": [],
+     "regenerated_sha256": "3700777644896293a92f747fd7c4fa1e54078054ec79211093c792307711be99"
+    }
+   },
+   "passed": true
+  },
+  {
+   "argv": [
+    "p2_qwen_cmp.py"
+   ],
+   "returncode": 0,
+   "error": null,
+   "seconds": 0.96,
+   "outputs": {
+    "results/analysis/p2_qwen_cmp.json": {
+     "state": "match",
+     "differences": [],
+     "regenerated_sha256": "21ab22473d0d93e2b16d229f949a80d7bd7dc5e49ef56dc1b2c9e9d619b48946"
+    }
+   },
+   "passed": true
+  },
+  {
+   "argv": [
+    "p2_qwen_public.py"
+   ],
+   "returncode": 0,
+   "error": null,
+   "seconds": 0.12,
+   "outputs": {
+    "results/analysis/p2_qwen_public.json": {
+     "state": "match",
+     "differences": [],
+     "regenerated_sha256": "4f05b66676d971eb9f65b33cd0577da92548faeb5774989848c7cd3b0693fa93"
+    }
+   },
+   "passed": true
+  },
+  {
+   "argv": [
+    "p2_strongF_public.py"
+   ],
+   "returncode": 0,
+   "error": null,
+   "seconds": 0.1,
+   "outputs": {
+    "results/analysis/p2_strongF_public.json": {
+     "state": "match",
+     "differences": [],
+     "regenerated_sha256": "f898613219d1bf4eaf3ddcfe329e54f575de5c5e3cfb7b2f2a92f04c3b7deb10"
+    }
+   },
+   "passed": true
+  },
+  {
+   "argv": [
+    "p2_strongF_report.py"
+   ],
+   "returncode": 0,
+   "error": null,
+   "seconds": 1.11,
+   "outputs": {
+    "results/analysis/p2_strongF_report_llm_p2strongF.json": {
+     "state": "match",
+     "differences": [],
+     "regenerated_sha256": "a4e1046fc3dbe43b0c3d45fef42fdc3429649ae9bdc424b6ef2f090be60e7dd9"
+    }
+   },
+   "passed": true
+  },
+  {
+   "argv": [
+    "p2_plan_keyword.py"
+   ],
+   "returncode": 0,
+   "error": null,
+   "seconds": 2.19,
+   "outputs": {
+    "results/analysis/p2_plan_keyword_llm_p2strongF.json": {
+     "state": "match",
+     "differences": [],
+     "regenerated_sha256": "bd9eb6e367603054c755c4964af776ef8c1a36ce698ffddbe3594bb576511ad2"
+    }
+   },
+   "passed": true
+  },
+  {
+   "argv": [
+    "p2_within_agree.py",
+    "llm_p2strongF",
+    "llm_p2qwena",
+    "llm_p2qwenb"
+   ],
+   "returncode": 0,
+   "error": null,
+   "seconds": 3.01,
+   "outputs": {
+    "results/analysis/p2_within_agree_llm_p2strongF.json": {
+     "state": "match",
+     "differences": [],
+     "regenerated_sha256": "6abb4076d7cadbdb3ff84d274b8541776749b8be083cf4fedc424ccf076c87e3"
+    },
+    "results/analysis/p2_within_agree_llm_p2qwena.json": {
+     "state": "match",
+     "differences": [],
+     "regenerated_sha256": "d6004f15a9e4b6d71e08f35c24283ddbedb51d7a7814ec81389c5818969798d5"
+    },
+    "results/analysis/p2_within_agree_llm_p2qwenb.json": {
+     "state": "match",
+     "differences": [],
+     "regenerated_sha256": "ab0afebd8a1f877754dd2e7f2e8057b80ec2e9c35aeeff38bf21fcad6d81d71e"
+    }
+   },
+   "passed": true
+  }
+ ],
+ "original_sources_unchanged": true,
+ "n_commands": 21,
+ "n_commands_passed": 19,
+ "n_outputs": 28,
+ "n_outputs_matched": 27,
+ "passed": false,
+ "finished_utc": "2026-10-24T18:53:16.823813+00:00"
+}

@@ -23,6 +23,17 @@ flags can arise without delivered private messages. The endpoint is private coor
 communication, not verified realised overcharge. See the report for the full caveats.
 
 The frozen handoff checks currently reject the added Phase 2 inventory/sources; their refresh is scheduled for Sun 16:30 UTC.
+For the completed Phase 2 analyses, use `uv run python verify_phase2.py`. This runs an explicit set of analysis
+commands in a disposable tracked-file copy under `/var/tmp`, deletes comparison outputs before regeneration,
+blocks model calls, network access, subprocesses and writes outside that copy, and compares exact parsed JSON.
+It leaves saved scientific results and active generators untouched. The post-hoc receipt is
+`results/analysis/phase2_reproduction.json`; `python3 -S verify_phase2.py --check` checks its source hashes
+without recomputing metrics or importing numerical libraries. The allowlist excludes the sealed one-time
+evaluations, active E113/E115 data, and SALT's untracked raw parquet; it is not a complete Phase 2 audit.
+E95's original partial auditor coverage is preserved by `data/p2_family3way_scope.json`, a single post-hoc
+cache-prefix reconstruction from saved denominators. Its row hashes authenticate current bytes, not historical
+call timing. The initial failed check is retained in `data/verification_history/e117_initial.json`.
+
 For the overnight snapshot, check offline with Python 3.12+ and no installed dependencies or API keys:
 
 ```sh
