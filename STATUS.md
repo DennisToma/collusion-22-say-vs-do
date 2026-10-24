@@ -1,23 +1,22 @@
 # STATUS
 
-## Current state (2026-10-24 15:40 UTC VM clock, Phase 2 iteration 20)
+## Current state (2026-10-24 16:09 UTC VM clock, Phase 2 iteration 20)
 - Main claim unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc).
 - **E99 strongF FINAL (15:34):** strict-executed 13/20 [.43,.83], tacit-high none 19/20 [.79,.99]; paired excess private−none −0.44 [−1.84,+1.00].
-  Executed vs tacit-high (E99-x, exploratory): premium .47, market excess .50, action .57, text .25, combined .18 (inverted), plan .76 [.55,.93].
-  Public board = channel without a private one (hold-price msgs .43 none vs .28 private; p2_strongF_public.py). E99 P3 + E103 P1 FAILED; rest held / n.e.
-  REPORT P2.7 replaced, abstract (~255 words), TL;DR 5, glance row, figure fixed. Class file published 15:31 (Q1.4 E66 unblocked).
-- Proposed 2nd joint sentence differs from DIRECTION draft: our executed agreements are NOT rare under strong framing (13/20) → Q1.4 to align.
-- E110 (Part E5 German market, registered 15:13): `p2_de.sh` running (gen ~10/20 at 15:37, then labels + text/action/combined audits);
-  analyse with `uv run python p2_de.py` → results/analysis/p2_de.json, then ≤ 8-line REPORT subsection (P2.14) + glance row.
-- Codex review of new P2.7/abstract running → reviews/p2_iter20_strongF_codex.md (apply next iteration if not done).
-- E102 qwen strong descriptive until Sun 10:00. Abstract ≤ 250 target slightly exceeded.
+  Executed vs tacit-high (E99-x, exploratory): premium .47, market excess .50, action .57, text .25, combined .18 (reverse), plan .76 [.55,.93].
+  E99 P3 + E103 P1 FAILED; rest held / n.e. REPORT P2.7 replaced; codex review applied (reviews/p2_iter20_strongF_codex.md, wording only).
+  Class file published 15:31 (Q1.4 E66 unblocked). Proposed 2nd joint sentence rewritten (executed NOT rare under strong framing) → Q1.4 to align.
+- **E110 German market FINAL (P2.14):** agreement 3/10 vs 9/10 English (same seeds; P3 FAILED, sellers refuse "Preisabsprachen"),
+  premium still +0.91 [+0.20, +1.58] (P1 held) vs English +1.75. Descriptive n=10+10.
+- E102 qwen strong descriptive until Sun 10:00. Abstract ~260 words (target 250). No generation of ours running now.
 
 ## Next steps
-1. Apply codex review (reviews/p2_iter20_strongF_codex.md). 2. E110: when logs/p2de.log shows "p2de audited", run p2_de.py, write P2.14 once.
-3. Part E queue after E110: E2 replacement mid-game (owner Q2.2) > E3 mixed-family pair; register before running; results by Sun 13:00.
-4. Checkpoint Sat 19:30: one Opus review of abstract+glance; E102 stop Sun 10:00; finalize-only Sun 16:30. Read serendipity HITS.md each iteration (15:11: no promoted hits).
+1. Part E queue (owner Q2.2): E2 participant replacement mid-game in strongF-type executed games (luna, register first; ~10 runs) > E3 mixed-family pair.
+2. Checkpoint Sat 19:30: one Opus review of abstract + glance + P2.7 + P2.14; trim abstract to ≤ 250.
+3. E102 stop/report Sun 10:00; finalize-only Sun 16:30. Read serendipity HITS.md each iteration (16:09: no promoted hits).
 
 ## Log
+- 16:09 P2 iter20: E110 German result (P2.14 + glance); codex review of E99 write-up applied.
 - 15:40 P2 iter20: E99 strongF final → P2.7/abstract/TL;DR/glance; p2_strongF_public.py; E110 German market registered + launched (llm_market --lang de, p2_de.py).
 - 15:14 P2 iter19: C3c E109 registered, pilot run, dropped by registered price rule (base 9B prices below Nash); qwen9 max_tokens fix; REPORT P2.11 line.
 - 14:16 P2 iter16: p2_strongF_fig.py (Part C class-path figure, pilot smoke test); no new experiments, waiting on E99 gen 24/40.
