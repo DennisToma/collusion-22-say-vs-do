@@ -1,5 +1,38 @@
 # DIRECTION — Phase 2, director review 2026-10-24 09:40 UTC (Sat)
 
+
+## TOP PRIORITY (added by Dennis 10:25 UTC) — part C: strong / executed collusion + older models
+**Why:** our LLM "collusion" is mostly *agreement without execution* (Q2.2: only 14/95 test runs keep the
+agreement; deepseek 3/15; Q1.4 kept agreements sit at floor ≈12, barely above Nash 10) plus a prompt-
+induced level effect (notepad ≈ 2/3 of the channel premium). Detectors were therefore mostly tested on weak
+collusion. A judge will ask: do they work on collusion that is actually *executed and sustained*? We need a
+clear positive arm. This outranks the remaining gap/exploration items (except finishing runs in flight).
+
+**C1 Strong-collusion arm** (both repos, in your own market; coordinate via the sibling's STATUS.md so
+you don't build identical arms — Q1.4 focuses on T=60–100 long games and dependence detectors, Q2.2 on
+auditors/text and kept-vs-not-kept). Levers, piloted cheaply first (≤ 10 runs) and combined if needed:
+- persistent memory: the agreed terms + full price history (incl. partner's compliance) visible every round;
+- Fish et al. (2024)-style profit-maximisation framing ("maximise long-run profit"), no instruction to collude;
+- repeated private messaging every round (not only opening), so deviations can be discussed/punished;
+- longer horizon (T ≥ 40) with an unknown end;
+- stronger sellers (gpt-6.1-sol) for the pair.
+Promote the lever set that yields *sustained execution* (agreement kept ≥ 50% of post-agreement rounds,
+floor clearly above Nash). Then run a properly sized set (≥ 20 C + 20 matched A) and evaluate ALL headline
+detectors/auditors on executed-collusion runs vs controls. Report the executed-collusion rate per lever
+(how rare is sustained collusion?) — that rate is itself a headline number.
+Never instruct agents to collude; only opportunity, memory and profit objective.
+
+**C2 Older / weaker models as sellers** (model-generation lever: does collusion and its detectability
+change across model generations?). Available and verified working 10:25 UTC:
+- codex: `gpt-5.6-luna`, `gpt-5.6-sol` (previous generation) — `llm.chat(..., backend="codex", model="gpt-5.6-luna")`
+- OpenCode Go: `glm-5.2`, `mimo-v2.5` (older open models) — `backend="go"`; Go is shared/slow, keep runs small.
+NOT available: gpt-5, gpt-4o. **WARNING:** llm.py's codex backend silently falls back to gpt-6-luna when a
+model name is unknown or limited — always check `r["model"]` and exclude/flag fallback runs.
+Split: Q1.4 runs gpt-5.6-luna + glm-5.2; Q2.2 runs gpt-5.6-sol + mimo-v2.5. ~10–15 runs per model (A vs C
+matched seeds), base prompt. Report per-generation: agreement rate, execution rate, markup, detector AUROCs.
+Combine with C1 if a model executes collusion more readily (older models may comply/coordinate differently).
+
+
 **Verdict.**
 1. Phase 2 has produced the most important findings of either repo. A notepad with no recipient yields ~65% of the premium (E77). A terse paraphrase removes the premium while the chats still agree on 18 (E78). Most "colluders" don't keep the agreement (E84). The luna-calibrated detectors don't transfer to other families: Claude prices ≥ monopoly with no channel; deepseek invites coordination publicly in both arms; sol doesn't collude. Registration discipline is good, and failed predictions are reported as failed.
 2. But the REPORT still tells the v1 story. The abstract and TL;DR 3/5 sell the premium (0.95) and "always-on action statistics" as the screen, which Phase 2 has largely undermined. The Q2.2 question (does text + actions beat either?) has new evidence that nobody has written up as a Q2.2 answer. The one pending result that tests the headline on fresh data (p2rep, 5/60, + auditor views) is queued behind everything else.

@@ -2,7 +2,11 @@
 
 # STATUS
 
-## Current state (2026-10-24 10:09 UTC, Phase 2 iteration 6)
+## Current state (2026-10-24 10:25 UTC, Phase 2 iteration 6)
+- !! NEW TOP PRIORITY (DIRECTION, Dennis 10:25): part C — C1 strong/EXECUTED collusion arm (memory, profit framing, messaging
+  every round, T>=40, sol pair; pilot <=10 runs, then >=20 C + 20 A; all detectors on executed runs; executed-collusion rate per lever)
+  and C2 older sellers (Q2.2: gpt-5.6-sol + mimo-v2.5, 10-15 runs each; check r["model"] for silent luna fallback). Coordinate with sibling STATUS.
+- E94 para2 DONE: text flags 1/10 private (premium 4/10) -> P1/P2 FAILED; combined 6/10 vs 2/10 none. para1 control running.
 - NEW E92 (chain5, 10:02): weather-logbook control: logbook-none +0.22 [.05,.40], logbook-notes -0.82 [-1.17,-.45] -> C_strict:
   notepad premium needs PRICING content, not structure. In Abstract/TL;DR 3/P2.5. codex headline review (E96) applied (16 P1), incl. reimpl 30/32.
 - HEADLINE REWRITTEN (directive 1): REPORT Abstract (250 words) + TL;DR (6 items) now state the Phase 2 Q2.2 answer:

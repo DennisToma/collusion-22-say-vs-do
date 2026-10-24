@@ -23,7 +23,8 @@ premium precision is 0.24. Condition, talk and price labels disagree; detectabil
 **TL;DR (each number is repeated with its source below).**
 1. *Q2.2 answer: adding public text to actions gives no resolved gain for zero-shot LLM auditors.* Combined − best
    single modality: −0.01 [−0.09, +0.06] (locked test, n = 95), −0.14 [−0.33, −0.02] (fresh replication, n = 30; exploratory contrast), −0.03
-   [−0.14, +0.06] (kept-agreement label). Text alone is at chance on test (0.47). A fresh n = 60 re-test (E80/E89) is running.
+   [−0.14, +0.06] (kept-agreement label). Text alone is at chance on test (0.47). On terse-wording runs, where chats still agree but the premium shrinks,
+   the text view flags 1/10 private runs (premium 4/10; registered E94 prediction failed). A fresh n = 60 re-test (E80/E89) is running.
 2. *Where the coordination is said decides what text can show.* All 70 luna channel pairs exchange prices or propose
    agreements in private, but an explicit-public-coordination screen flags 0/125 runs. Claude and deepseek sellers invite rivals
    publicly ("avoid undercutting") in no-channel markets as well. Every message-reading view flags all 10 Claude markets, and 479/480
@@ -172,6 +173,8 @@ Caveats: logbook arm generated ~1–3 h after the others (batch drift not in CIs
 **Reading:** private pricing deliberation with no recipient yields a substantial premium (ratio to the channel 0.65
 [0.34, 1.32]); wording substantially reduces it (remaining effect unresolved). "Agreement in chat" and "premium" measure
 different things.
+Frozen auditors on the terse wording (E94, registered; `p2_family_views.json`): flags private / none text 1/10 / 2/10, action 5/10 / 3/10,
+combined 6/10 / 2/10 (AUROC 0.74 [0.48, 0.96]), action_stats 5/10 / 4/10. The prediction that text views beat the premium **failed**.
 
 ![Figure P2.5](figures/p2_cue_rounds.png)
 

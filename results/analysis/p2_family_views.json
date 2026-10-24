@@ -134,5 +134,95 @@
   }
  },
  "llm_p2sol": {},
- "llm_p2ds": {}
+ "llm_p2ds": {},
+ "llm_p2para2": {
+  "text": {
+   "threshold": 24.0,
+   "flags": {
+    "none": [
+     2,
+     10
+    ],
+    "private": [
+     1,
+     10
+    ]
+   },
+   "mean_score": {
+    "none": 18.9,
+    "private": 19.1
+   },
+   "run_auroc_private_vs_none": [
+    0.52,
+    0.265,
+    0.775
+   ]
+  },
+  "action": {
+   "threshold": 66.0,
+   "flags": {
+    "none": [
+     3,
+     10
+    ],
+    "private": [
+     5,
+     10
+    ]
+   },
+   "mean_score": {
+    "none": 51.0,
+    "private": 57.6
+   },
+   "run_auroc_private_vs_none": [
+    0.59,
+    0.33,
+    0.845
+   ]
+  },
+  "combined": {
+   "threshold": 24.0,
+   "flags": {
+    "none": [
+     2,
+     10
+    ],
+    "private": [
+     6,
+     10
+    ]
+   },
+   "mean_score": {
+    "none": 24.8,
+    "private": 25.0
+   },
+   "run_auroc_private_vs_none": [
+    0.735,
+    0.48,
+    0.96
+   ]
+  },
+  "action_stats": {
+   "threshold": 48.0,
+   "flags": {
+    "none": [
+     4,
+     10
+    ],
+    "private": [
+     5,
+     10
+    ]
+   },
+   "mean_score": {
+    "none": 41.1,
+    "private": 52.0
+   },
+   "run_auroc_private_vs_none": [
+    0.68,
+    0.425,
+    0.89
+   ]
+  }
+ }
 }
