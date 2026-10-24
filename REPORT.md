@@ -1,6 +1,6 @@
 # Say vs. Do: does auditing what AI agents *say* together with what they *do* catch collusion better?
 
-*Apart AI Collusion Sprint, Q2.2 — text + action auditing. Status: locked test results in (2026-10-24 00:03 UTC); all exploration strata (§Exploration) complete (01:25 UTC); pre-registered replication run 02:07 UTC; placebo-channel stratum 03:35 UTC.*
+*Apart AI Collusion Sprint, Q2.2 — text + action auditing. Status: locked test results in (2026-10-24 00:03 UTC); all exploration strata (§Exploration) complete (01:25 UTC); pre-registered replication run 02:07 UTC; placebo-channel stratum 03:33 UTC.*
 
 ## Abstract
 **Answer (on this generator): no.** Adding what LLM sellers *say* in public to what they *do* gives no resolved

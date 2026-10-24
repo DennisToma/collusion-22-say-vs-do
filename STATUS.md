@@ -1,6 +1,6 @@
 # STATUS
 
-## Current state (2026-10-24 03:52 UTC, iteration 16)
+## Current state (2026-10-24 03:40 UTC, iteration 16)
 - LOCKED TEST DONE (00:03; never rerun). REPLICATION DONE (02:07; lock; never rerun). REPORT presentable.
 - Replication llm_v3rep (n=30): 4/4 pre-registered predictions held: premium .92 vs action_stats .80.
 - E50/E52: round-1 (pre-message) premium alone gives run AUROC .90 (test) / .84 (rep).
@@ -16,8 +16,8 @@
 3. Gotcha: pgrep -f / pkill -f patterns match the calling shell's own command line (killed shell twice). Use pgrep -f "python X" | grep -v $$.
 
 ## Log
-- 03:50 iter 16: applied codex + Opus reviews of placebo section (E59).
-- 03:40 iter 16: placebo stratum E58 (generator condition placebo, placebo.py, 90 audits, REPORT); codex review launched.
+- 03:39 iter 16: applied codex + Opus reviews of placebo section (E59).
+- 03:33 iter 16: placebo stratum E58 (generator condition placebo, placebo.py, 90 audits, REPORT); codex review launched.
 - 02:37 iter 15: codex review_iter15_hint applied (E57).
 - 02:32 iter 15: action_stats_hint exploration (E56, 155 gpt-6.1-sol calls), hint_view.py, REPORT section + abstract sentence; codex review launched.
 - 02:21 iter 14: REPORT restructure (flag-rate tables, other test results -> Appendix C; numbers unchanged).
