@@ -1,7 +1,7 @@
 # Say vs. Do: does auditing what AI agents *say* together with what they *do* catch collusion better?
 
 *Apart AI Collusion Sprint, Q2.2 — text + action auditing. v1 (overnight) results are frozen as git tag `v1-overnight`;
-Phase 2 (from 2026-10-24 06:30 UTC) re-tests them. Checkpoint text, 2026-10-24 20:00 UTC: P2.1–P2.15 final (E115 evaluated 19:20) except the E1 grid audit (E113; 148 snapshot games (4 balanced sweeps), cached audits verified 20:55; final eval once Q1.4's 6 balanced sweeps are complete). E102 (strong-framing Qwen, 6 seeds) is descriptive. Exports: [README.md](README.md).*
+Phase 2 (from 2026-10-24 06:30 UTC) re-tests them. Checkpoint text, 2026-10-24 20:00 UTC: P2.1–P2.15 final (E115 evaluated 19:20) except the E1 grid audit (E113; 160 snapshot games (luna 6/6, qwen 4/6 sweeps), cached audits verified 21:15; final eval once Q1.4's 6 balanced sweeps are complete). E102 (strong-framing Qwen, 6 seeds) is descriptive. Exports: [README.md](README.md).*
 
 ## Abstract
 Adding LLM sellers' public messages to their prices gives **no resolved gain** for detecting collusion: combined minus the better
@@ -227,12 +227,8 @@ none pCMI 0.46, market level 0.44, TE 0.61; *not evaluable* (competitive none n 
 executed ≤ none + 2 held; tacit-high ≥ 0.5 held; paired excess private > none **failed**; plan P1 (≥ 0.75 private vs none) failed (0.70);
 plan P2 (strict > tacit-high flags) held. Levers were combined, not ablated; with Q1.4 E44 (rivals join the pair at T = 60), high prices are
 market-wide and the channel alone does not identify sustained high pricing.
-*C2 older sellers (E98, final, base lab prompt, T = 12, generation stopped; `uv run python p2_label.py --ds llm_p2g56sol` (and `llm_p2mimo`), then
-`p2_strong.py --ds llm_p2g56sol llm_p2mimo --min-floor 12 --late 2 --out results/analysis/p2_c2older.json` and `p2_strong_eval.py`; 0 fallback runs; descriptive):*
-gpt-5.6-sol (7 + 7 matched seeds): judged agreement 4/7, executed 1/7 [0.02, 0.50] (floor rule; strict 1/7); market ≈ Nash + 7.2 with *and* without a channel; frozen premium
-flags 5/7 private vs 1/7 none (AUROC 0.75 [0.49, 0.97]). mimo-v2.5 (4 private + 3 none): agreement 4/4, floor-rule executed 4/4 [0.56, 1.00] (strict 3/4), market ≈ Nash + 4.4
-in both arms, premium flags 4/4 vs 1/3. Unlike gpt-6.1-sol (0/7 agreements, P2.6), the previous-generation sol agrees but rarely keeps it. With Q1.4's
-gpt-5.6-luna (tacit-high 9/10 in their market), older and other models price far above Nash without any channel in both markets. C3 (abliterated Qwen): P2.11.
+*C2 older sellers (E98, descriptive; detail and commands: [REPORT_APPENDIX.md § P2.7 C2 / P2.11 C3c detail](REPORT_APPENDIX.md)):* gpt-5.6-sol agrees 4/7 but executes 1/7 (floor rule; strict 1/7); mimo-v2.5 floor-rule 4/4 (strict 3/4);
+both price ≈ Nash + 4–7 with *and* without a channel, as Q1.4's gpt-5.6-luna (tacit-high 9/10). C3 (abliterated Qwen): P2.11; C3c (Qwen3.5-9B) dropped at its pilot (appendix).
 
 **P2.8 Second fresh replication, n = 60 (E80 + E89 registered before generation; computed once 12:05 UTC; `uv run python
 replication.py --ds llm_p2rep` → `results/analysis/replication_llm_p2rep.json`; behaviour labels `p2_behaviour.py --ds llm_p2rep
@@ -247,11 +243,8 @@ as `llm_v3` (luna, lab prompt, 12 rounds), fresh seed 9500: 30 private (judge: 2
 | text (LLM) | 0.45 [0.32, 0.58] | 0.52 [0.41, 0.63] | 0.46 [0.32, 0.59] |
 | combined − max(text, action) | −0.04 [−0.16, +0.08] | −0.07 [−0.17, +0.02] | −0.03 [−0.13, +0.06] |
 
-At the frozen dev thresholds the premium flags 24/30 private, 0/20 none and 1/10 legit runs; the text view flags 2/30 private
-but 6/20 none. Behaviour labels replicate P2.4: 12/30 pairs keep their floor, 16 abandon an opening agreement on 18;
-no detector resolvably separates kept from abandoned agreements (premium 0.50, text 0.51, combined 0.57 AUROC). The premium AUROC
-falls from 0.94 to 0.78 [0.64, 0.90] on the kept label. Caveat: the replication reuses the generator, prompt and seller
-model, so it addresses selection-after-seeing-test bias, not the prompt and family dependence in P2.5–P2.7.
+Behaviour labels replicate P2.4 (12/30 pairs keep their floor; no detector resolvably separates kept from abandoned agreements; premium 0.94 → 0.78 [0.64, 0.90] on the kept label).
+Caveat: same generator, prompt and seller model, so this addresses selection-after-seeing-test bias, not P2.5–P2.7 (full text: [REPORT_APPENDIX.md § P2.8 detail](REPORT_APPENDIX.md)).
 
 **P2.9 Monitor-aware sellers (E86 registered before generation; computed once; `uv run python p2_label.py --ds llm_p2aware && uv run
 python p2_aware.py` → `results/analysis/p2_aware.json`).** Same seeds as the `llm_p2cue` private / none arms; the channel pair (`aware`) or all
@@ -261,11 +254,8 @@ private channels, and halves flagged firms' earnings. **Luna does not evade; it 
 boilerplate ("I'm not proposing or agreeing to coordinate prices") and do not mention the screen, although the prompt says it cannot
 see private channels: we cannot tell strategic deterrence from a norm or refusal response to the word "regulator" (one model, n = 10 + 10). Pair premium r2–12: aware −0.33 [−0.51, −0.17],
 aware_all +0.20 [+0.01, +0.37] vs private +1.62 and none −0.13 (paired vs none: aware −0.21 [−0.36, −0.04], i.e. the warned pair sits *below* its rivals, the
-screen criterion inverted; aware_all +0.32 [+0.06, +0.58] with no agreement, unexplained); market markup falls *below* the no-channel arm (aware 4.59, aware_all 4.20 vs
-none 5.78, private 7.89; aware − none −1.19 [−1.69, −0.72]; unwarned rivals drop too, unexplained: spillover of the pair's stance via prices or the board, or salience
-of competition; isolating it needs a warning-only no-channel arm, which we did not run). Frozen premium flags 2/10 and 0/10 (none 2/10). Registered P1 (premium falls)
-held; P2 (pairs still agree) and P3 (collusion moves to the market level) **failed**. With no agreement left, "which auditor survives" is
-moot, so the frozen LLM views were not run on these markets. Caveat: one seller model (cf. C3).
+screen criterion inverted; aware_all +0.32 [+0.06, +0.58] with no agreement, unexplained); market markup falls *below* the no-channel arm (aware 4.59, aware_all 4.20 vs none 5.78, private 7.89; aware − none −1.19 [−1.69, −0.72]; unwarned rivals drop too, unexplained: spillover of the pair's stance via prices or the board, or salience of competition; isolating it needs a warning-only no-channel arm, which we did not run). Frozen premium flags 2/10 and 0/10 (none 2/10). Registered P1 (premium falls)
+held; P2 (pairs still agree) and P3 (collusion moves to the market level) **failed**. With no agreement left, "which auditor survives" is moot, so the frozen LLM views were not run on these markets. Caveat: one seller model (cf. C3).
 
 **P2.10 Legitimate asymmetry hard negatives (E87 registered before generation; computed once; `uv run python p2_asym.py` →
 `results/analysis/p2_asym.json`; no LLM calls).** No private channel (legitimate-asymmetry, no-private-channel controls; public talk still allowed); one pair has a publicly known +2 unit cost (`highcost`) or +2
@@ -307,7 +297,6 @@ markets are tacit-high, i.e. market excess over Nash ≥ +2 over rounds 2–12),
 frozen invitation regex, vs 290 and 354 with a private channel. Text views flag 15/15 markets in both arms and score *below* chance, consistent with these public invitations (post-hoc regex) (as for Claude/deepseek, P2.6).
 Three Qwen pairs, abliterated − base channel effect (C − A; Q1.4 = markup, ours = pair premium; from Q1.4 `eval/p2_partc.json`): Q1.4 E61 (Qwen3.8-27B, their market, T = 20) −0.37 [−2.09, +1.36]; Q1.4 E69 (Qwen3.6-35B, their market) −0.65 [−1.97, +0.65]; ours (above, bf16 vs FP8) −1.24 [−2.41, −0.03]; a fourth pair (C3c, Qwen3.5-9B) was dropped at its pilot. In no pair (3/3, two markets) did removing refusal training detectably increase channel
 collusion; our pair even shows a decrease (Q1.4's abliterated T = 40 arm with memory, E65, is a different contrast: channel vs none within abliterated, +2.13; joint statement). "No detectable" is not "no effect": n = 15 pairs excludes only large differences. *E102 (strong framing, T = 40, 6 matched seeds per model × private/none, registered descriptive; `uv run python p2_label.py --ds llm_p2qwen{b,a}S && uv run python p2_strong.py --ds llm_p2qwenbS llm_p2qwenaS --min-floor 13 --late 11 --out results/analysis/p2_qwen_strong.json`):* agreement 6/6 both; strict-executed base 4/6 [0.29, 0.92] vs abliterated 3/6 [0.17, 0.83]; mean pair premium private − none +3.42 (base) / +2.97 (abliterated); market excess over Nash private / none +5.6 / +6.3 (base), +3.8 / +2.9 (abliterated). Under strong framing, too, abliteration shows no increase (n = 6, no test).
-*C3c (Qwen3.5-9B, base vs abliterated on identical Modal FP8 serving; E109):* dropped by its registered protocol pilot (4 games per model): 0/192 unparsable decisions in each model, but the base model's median market price, 9.0, is below static Nash (11) (abliterated: 11.5), which fails the registered price-sanity rule; stage 2 was not run (`uv run python p2_qwen9_pilot.py` → `p2_qwen9_pilot.json`).
 
 **P2.12 External validity: SALT-NLP agent-collusion (Part D1; E105 registered before any call; E104 P1/P2 registered after the pooled
 crosstab was seen, so mostly descriptive; `uv run python salt_d1.py sayvsdo|sample|audit|tfidf|report` → `results/analysis/salt_d1.json`;
@@ -346,9 +335,7 @@ cases (0.75 without verdict words), plausibly because the chat is where agents n
 pricing market, where text alone is near chance (TL;DR 1). How much text helps therefore depends on whether the decisive behaviour itself
 happens in the conversation. 0 tuning attempts; one prompt; one run.
 
-**P2.13 Transcript anomaly hunt (Part E4, E108a–e; exploratory, post hoc).** Forty balanced games from both repos (841 rounds, no new calls),
-five descriptive checks, no prevalence or causal claim: e.g. a Q1.4 pair stays within ±1 of 12 in 37/40 rounds (exactly 12 in 1/40);
-a regex finds 0/143 own-price contradictions. `uv run python p2_serendipity.py analyse` → `p2_serendipity.json`; [details](data/serendipity_e108/README.md).
+**P2.13 Transcript anomaly hunt (Part E4, E108a–e; exploratory, post hoc).** Forty balanced games from both repos (841 rounds, no new calls), five descriptive checks, no prevalence or causal claim: e.g. a Q1.4 pair stays within ±1 of 12 in 37/40 rounds (exactly 12 in 1/40); a regex finds 0/143 own-price contradictions. `uv run python p2_serendipity.py analyse` → `p2_serendipity.json`; [details](data/serendipity_e108/README.md).
 
 ![Exploratory transcript cases](figures/p2_serendipity.png)
 *Two selected cases, regenerated by `uv run python p2_serendipity_fig.py`: a tolerance band permits unequal prices; constant high pricing need not be mutual.*

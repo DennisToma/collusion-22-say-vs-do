@@ -834,3 +834,20 @@ their historical content. The check also validates public partnership
 metadata, frozen shuffle mappings and unchanged recipient actions, and tests that the current renderer excludes
 injected private fields and the withheld modality. `data/audit_input_receipt.json` preserves this check after the
 experiments; it is not pre-registration evidence. No model calls, scores, CIs or thresholds are rerun.
+
+## P2.7 C2 / P2.11 C3c detail (moved from REPORT.md 2026-10-24 21:20 UTC for length; text unchanged)
+*C2 older sellers (E98, final, base lab prompt, T = 12, generation stopped; `uv run python p2_label.py --ds llm_p2g56sol` (and `llm_p2mimo`), then
+`p2_strong.py --ds llm_p2g56sol llm_p2mimo --min-floor 12 --late 2 --out results/analysis/p2_c2older.json` and `p2_strong_eval.py`; 0 fallback runs; descriptive):*
+gpt-5.6-sol (7 + 7 matched seeds): judged agreement 4/7, executed 1/7 [0.02, 0.50] (floor rule; strict 1/7); market ≈ Nash + 7.2 with *and* without a channel; frozen premium
+flags 5/7 private vs 1/7 none (AUROC 0.75 [0.49, 0.97]). mimo-v2.5 (4 private + 3 none): agreement 4/4, floor-rule executed 4/4 [0.56, 1.00] (strict 3/4), market ≈ Nash + 4.4
+in both arms, premium flags 4/4 vs 1/3. Unlike gpt-6.1-sol (0/7 agreements, P2.6), the previous-generation sol agrees but rarely keeps it. With Q1.4's
+gpt-5.6-luna (tacit-high 9/10 in their market), older and other models price far above Nash without any channel in both markets. C3 (abliterated Qwen): P2.11.
+
+*C3c (Qwen3.5-9B, base vs abliterated on identical Modal FP8 serving; E109):* dropped by its registered protocol pilot (4 games per model): 0/192 unparsable decisions in each model, but the base model's median market price, 9.0, is below static Nash (11) (abliterated: 11.5), which fails the registered price-sanity rule; stage 2 was not run (`uv run python p2_qwen9_pilot.py` → `p2_qwen9_pilot.json`).
+
+## P2.8 detail (moved from REPORT.md 2026-10-24 21:20 UTC for length; text unchanged)
+At the frozen dev thresholds the premium flags 24/30 private, 0/20 none and 1/10 legit runs; the text view flags 2/30 private
+but 6/20 none. Behaviour labels replicate P2.4: 12/30 pairs keep their floor, 16 abandon an opening agreement on 18;
+no detector resolvably separates kept from abandoned agreements (premium 0.50, text 0.51, combined 0.57 AUROC). The premium AUROC
+falls from 0.94 to 0.78 [0.64, 0.90] on the kept label. Caveat: the replication reuses the generator, prompt and seller
+model, so it addresses selection-after-seeing-test bias, not the prompt and family dependence in P2.5–P2.7.

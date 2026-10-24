@@ -1,15 +1,16 @@
 # STATUS
 
-## Current state (2026-10-24 21:03 UTC by `date -u`, Phase 2 iteration 44) — following DIRECTION 20:00
+## Current state (2026-10-24 21:20 UTC by `date -u`, Phase 2 iteration 45) — following DIRECTION 20:00
 - Headline unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc).
-- DIRECTION 20:00 directives 1–3, 5 done. Directive 4 pre-staged (E126): "For the merged report" block under the abstract (answer, 3 numbers, E113 PENDING line, what to lift, what not to quote) + P2.0 say-vs-do table (E125) in REPORT. Made room by moving Held-out discipline + input-check detail to REPORT_APPENDIX (text unchanged, 3-/1-line summaries kept). REPORT 711 lines; claims 31/31; verify_phase2 26/26, 33/33 outputs (receipt refreshed: iter41 changed report_tables.py).
-- E113 still blocked: snapshot 154/192 games (21:00); luna lane 6/6 sweeps done 20:54, qwen lane at sweep index 4 (sweep 3 done 20:36, ~40 min/sweep) → ETA ≈ 22:00–22:30. Cached audit + coverage complete, 0 unparsed (no scores read). Serendipity HITS: no promoted hits.
-- Luna board-use cross-check for Q1.4 (coverage only): posts in 7/82 luna games, 4/8 cells (c02 D_001; c03 C_003; c04 B_002, D_004; c07 B_001, B_004, D_003); posting is per-game, ~75–80 posts/400 agent-rounds per posting cell-arm. REPORT P2.7 line updated (was 'c02/c07').
-- **E113 next:** when Q1.4 STATUS says "6 sweeps complete": `snapshot` → `audit` → `coverage` → `preflight` → `eval` ONCE → `uv run python p2_e1_report.py` → P2.16 lines + glance row + abstract clause + replace the PENDING line in the merge block (REPORT ≤ 711: the E113 stub text in header/P2 must shrink to fit). If Q1.4 says qwen pCMI replicated → joint sentence.
-- Then the ONE abstract pass ≤ 260 words (drop SALT "8000 episodes, 10 models" or Qwen premium-diff clause) by Sun 07:30.
-- Reviews: Sun 12:30 only. Freeze 14:00. Exports/presentation from 16:30. Never stash/checkout while generators run.
+- DIRECTION 20:00 directives 1–3, 5 done; 4 pre-staged (merge block, E113 line PENDING).
+- E113 still blocked on Q1.4 qwen lane: luna 6/6 sweeps (20:54); qwen sweep idx 3 done 20:36, idx 4 running (~50 min/sweep) → 6 sweeps ≈ 22:15–22:40. Snapshot 160 games + cached audit, coverage complete, 0 unparsed (no scores read). Board posts now: c07 no-channel 152/480, c04 none 3/480; channel arms c02–c05/c07 73–78/480 → refresh the P2.7 luna board-use line ("7/82 games, 4/8 cells, at 4 sweeps") at landing from `p2_e1_coverage.json`.
+- Room made for the landing: REPORT 711 → 698 lines (C2 older-seller + C3c detail and P2.8 behaviour paragraph → REPORT_APPENDIX verbatim with 2-line summaries; P2.9/P2.13 reflowed, words unchanged). Budget: P2.16 ≤ 10 lines + glance row + blank = 12 → ≤ 710.
+- Checks: claims 31/31; verify_phase2 receipt current 26/26, 33/33; tests.test_e1_completion 13/13.
+- **E113 next:** when Q1.4 STATUS / `/var/tmp/c14/e1_grid.log` shows "lane qwen-3.6-35b … sweep 5 complete": `snapshot` → `audit` → `coverage` → `preflight` → `eval` ONCE → `uv run python p2_e1_report.py` → insert P2.16 after P2.15, glance row, abstract clause, replace PENDING merge line + header. One ledger row. If Q1.4 says qwen pCMI replicated → joint sentence.
+- Then the ONE abstract pass ≤ 260 words by Sun 07:30. Reviews Sun 12:30; freeze 14:00; exports from 16:30. Never stash/checkout while generators run.
 
 ## Log
+- 21:20 P2 iter45: E113 snapshot 160 games + cached audit, coverage complete (no scores read); REPORT 711→698 lines to fit the E113 landing (verbatim moves to appendix + reflow); claims 31/31, verify 26/26. No ledger row.
 - 21:03 P2 iter44: E113 snapshot 154 games + cached audit, coverage complete (no scores read); qwen lane sweep 5/6 running. Note: a `until ! pgrep -f <pattern>` waiter self-matches its own command line (same bug as E100) — wait on PIDs, not patterns. No ledger row, REPORT unchanged.
 - 20:57 P2 iter43: E113 still waiting (4/6 sweeps, 148 games, cached audit, no scores read); stale luna board-use statement fixed in REPORT (7/82 games, 4/8 cells) + header snapshot count; claims 31/31, verify_phase2 26/26. No ledger row (per DIRECTION: one row at final snapshot).
 - 20:40 P2 iter42: E126 merge block + P2.0 say-vs-do table in REPORT (directive 4 pre-staged, E113 line PENDING); Held-out/input-check detail → appendix; claims 31/31, verify_phase2 26/26 receipt refreshed; E113 snapshot 142 games + cached audit, coverage complete (no scores read).
