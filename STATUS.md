@@ -17,9 +17,10 @@
 3. E1: re-run `snapshot` + `audit` as Q1.4 sweeps land (cached, ~2 sol calls/game); `coverage` only. FINAL `eval` once
    when all 3 sweeps exist (or by Sun 12:00 with what exists) → ≤ 10 lines + 1 glance row. Note for Q1.4: luna silence on
    the board makes their grid's "public board on" factor effectively qwen-only.
-4. P2.11 three-pair table when Q1.4 E69 lands.
+4. (done 17:58) P2.11 three-pair line + glance cite Q1.4 E61/E69.
 
 ## Log
+- 17:58 P2 iter25: P2.11 three-pair abliteration line (Q1.4 E61, E69 + ours) + glance; p2_claims 22/22 OK; REPORT 711 lines.
 - 17:45 P2 iter25: E113 E1-audit pipeline p2_e1_audit.py + snapshot (24 games/12 cells); E113-amend (luna posts no public messages in grid) registered pre-audit; shakedown 60 calls, coverage OK (no scores read).
 - 17:35 P2 iter24: E112 final (P1–P4 held) → P2.15 + glance; E115 auto-launched 17:28; REPORT trimmed (limitations / next) to 711 lines.
 - 16:42 P2 iter24: E115 sol-newcomer arm registered + queued (p2_replace_sol.sh); E112 9/30; STATUS iter23 stamp (16:35) was ahead of the clock (actual ≤ 16:27).
