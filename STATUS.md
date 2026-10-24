@@ -16,6 +16,7 @@
 1. 19:30: one Opus review of abstract + TL;DR + glance + P2.7 + P2.14 + P2.15 (DIRECTION dir 4); apply. Abstract 312 words: cut more only if the review says so.
 2. E115: when "p2replS gen done": `P2REPL_ARM=sol uv run python p2_replace_eval.py` ONCE → S1–S4 into P2.15; adjust the replacement sentence; claim C26.
 3. E113: rerun `snapshot` + `audit` (cached) as sweeps land; FINAL `eval` ONCE at 6 sweeps.
+- Risk: .git is 88 MB (cap 100 MB). Don't commit raw caches; check `du -sh .git` before adding large data.
 
 ## Log
 - 18:13 P2 iter29: abstract 388→312 words (E116 within-channel result now carries the plan sentence; plan-vs-tacit detail → TL;DR 5); p2_claims 27/27; E113 snapshot 48 games + cached audit started.
