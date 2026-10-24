@@ -1,6 +1,6 @@
 # Say vs. Do: does auditing what AI agents *say* together with what they *do* catch collusion better?
 
-*Apart AI Collusion Sprint, Q2.2 — text + action auditing. Status: locked test results in (2026-10-24 00:03 UTC); all exploration strata (§Exploration) complete (01:25 UTC); pre-registered replication run 02:07 UTC.*
+*Apart AI Collusion Sprint, Q2.2 — text + action auditing. Status: locked test results in (2026-10-24 00:03 UTC); all exploration strata (§Exploration) complete (01:25 UTC); pre-registered replication run 02:07 UTC; placebo-channel stratum 03:35 UTC.*
 
 ## Abstract
 **Answer (on this generator): no.** Adding what LLM sellers *say* in public to what they *do* gives no resolved
@@ -28,7 +28,12 @@ public log under six views (defined in §Setup). Locked test split (n = 95, run 
 - **Replication on 30 fresh runs** (analysis registered after generation began, before any metrics; 4/4 decision rules
   satisfied): premium 0.92 [0.79, 1.00] vs action_stats 0.80, a gap that is not resolved. Text scores 0.67;
   combined − action is −0.14 [−0.30, +0.02].
-- **Caveats.** The label coincides with the condition: we detect *channel granted and used*. We used one seller model,
+- **Placebo channel (exploration, 15 matched seeds).** When the channel is offered but messages are never delivered,
+  so no agreement can form, the pair premium is unchanged (rounds 2–12: +1.09 vs +1.06, Δ +0.03 [−0.54, +0.49]).
+  Every scorer flags placebo runs as often as real ones (premium 14/15 vs 14/15) and none separates them. What all
+  detectors here pick up is the channel *offer*, not the agreement.
+- **Caveats.** The label coincides with the condition: we detect *channel granted and used*, and the placebo shows
+  the conduct signal does not need the channel to be used. We used one seller model,
   and sellers never try to evade. Frozen thresholds flag 4/10 fresh `none` runs and 25–63% of runs under a shifted
   framing. With an announced price monitor, no agreements form (0/14), so evasion is untested.
 
@@ -334,6 +339,36 @@ threshold were not evaluated. Matching rivals' opening prices would remove this 
 ![early detection](figures/early_detection_llm_v3.png)
 *Premium AUROC vs rounds observed (all 125 llm_v3 runs, descriptive; bands = 95% class-stratified run bootstrap).*
 
+**Placebo channel: is any of the premium agreement-driven? (`llm_v3plc`, E58; registered in `data/SPLITS.md` with
+predictions before generation; `uv run python llm_market.py --ds llm_v3plc --match-ds llm_v3rep --rounds 12 --framing
+lab`, labels + the six frozen auditor views as usual, then `uv run python placebo.py` →
+`results/analysis/placebo_llm_v3plc.json`, `figures/placebo_premium.png`).** For each of the 15 `private` replication
+runs we re-ran the same seed (same designated pair, cost and demand path) with the *identical* channel prompt, but the
+private messages are never delivered: each seller sees only its own messages, so the partner appears silent and no
+agreement can form (all 15 `llm_v3rep` private runs have a judge-verified agreement). Paired bootstrap over the 15
+seeds; `none` = the 10 `llm_v3rep` no-channel runs:
+- **Designated-pair premium is the same with and without delivery.** Round 1: placebo +5.30 vs private +5.03 (Δ +0.27
+  [−0.47, +1.07]); rounds 2–12: +1.09 vs +1.06 (Δ +0.03 [−0.54, +0.49]); rounds 7–12: +0.82 vs +0.72; `none` +0.06
+  (rounds 2–12). Pair markup over cost 7.91 vs 7.88 (Δ +0.03 [−0.66, +0.71]); rivals 6.46 vs 6.49 (`none` 6.26–6.28).
+  Prediction (b) of the registration, "mostly offer-response", holds: we resolve no premium attributable to delivered
+  agreements (differences beyond roughly ±0.5–0.7 price units are not excluded at n = 15).
+- **Every detector flags placebo runs as collusion.** At the frozen dev thresholds the premium flags 14/15 placebo
+  runs and 14/15 matched private runs (`none` 4/10) and ranks the designated pair first in 13.5/15 (tie-aware) vs 14/15.
+  Premium run AUROC private-vs-placebo is 0.46 [0.25, 0.67]. The LLM views flag placebo runs at least as often as the
+  private runs (action_stats 12/15 vs 8/15, combined 11/15 vs 8/15, structured 8/15 vs 6/15, text 1/15 vs 1/15) and none
+  separates private from placebo runs: run AUROC 0.31–0.44 for the five action-bearing views, text 0.68 [0.49, 0.87].
+- **Interpretation.** On this generator the action signal that every scorer uses is produced by *being offered* a
+  private channel, not by the agreement made on it; within these 15 seeds, delivered agreements leave no measurable
+  trace in prices. Detecting the agreement itself (our label) from public data would need something else, and the
+  zero-shot auditors' public-text view does not supply it here (its CI includes 0.5). This turns the label = condition caveat into a measured result: the headline
+  detectors detect "channel offered", and the y = 1 label adds nothing visible in conduct. Caveats: exploratory, one
+  seed set (n = 15 pairs), one seller model; placebo sellers can notice the partner's silence, which may itself change
+  behaviour; in both arms the premium falls from about +5 in round 1 to about +1 from round 3 on (figure), so a seller model
+  that sustains a high agreed price could differ.
+
+![placebo premium](figures/placebo_premium.png)
+*Designated-pair premium by round: delivered channel vs placebo (same 15 seeds) vs no channel; bands = 95% run bootstrap.*
+
 **Round-1 citations by the LLM auditors (post-lock, descriptive; `uv run python evidence_rounds.py --ds llm_v3
 --split test` → `results/analysis/evidence_rounds_llm_v3_test.json`; `--ds llm_v3rep --split all` for the
 replication).** Each audit cites up to 4 evidence items, each tied to a round. On the 95 test runs, round 1 accounts for
@@ -395,7 +430,9 @@ computed on the mod-3 subset incl. test runs. The test evaluation is locked and 
   granted and used", and detecting "agreement" and detecting "a channel was granted" coincide; the endpoint is coordination *communication*, not realised overcharge. A separate
   firm-framing stratum (`llm_v3fp`, `fp_stratum.py`, frozen dev thresholds) is an exploratory transfer check of
   "agreement vs. channel without agreement" — it changes framing, wording, refusals and price levels at the same time, so it cannot
-  resolve the confound within llm_v3.
+  resolve the confound within llm_v3. The placebo stratum (`llm_v3plc`, same seeds and prompt, messages never
+  delivered) does address it within one generator: premium and auditor flags are the same without any agreement, so
+  our conduct-based detectors measure the channel offer, not agreement (n = 15, exploratory).
 - **Evasion not tested.** Sellers in the headline data were never told prices are watched. In the exploration
   stratum `llm_v3mon`, with an announced price monitor the judge found no agreements (0/14), so no evasive
   colluders were produced; robustness of the premium to evasion remains open.
@@ -425,8 +462,9 @@ computed on the mod-3 subset incl. test runs. The test evaluation is locked and 
 2. **Make text matter.** Text should become necessary when conduct alone is ambiguous: legit cooperation that moves
    prices, or collusion signalled in public through innocuous-looking wording (a supervised text model already finds
    such a trace here). Train/transfer that text model across seller models and framings before trusting it.
-3. **Label ≠ condition.** Generate runs where the private channel is offered but often declined within the *same*
-   framing, so detection of agreement can be separated from detection of channel access.
+3. **Label ≠ condition.** The placebo stratum shows that the conduct signal here comes from the channel offer.
+   A useful benchmark needs seller models (or games) where a delivered agreement changes prices relative to a placebo
+   channel; only then can "detects agreement" be tested. Placebo-matched negatives should be part of any such benchmark.
 4. **Auditor design.** The stats-table views already include the premium. A one-sentence premium hint was tested
    post hoc (§Exploration, E56: mixed). Test it prospectively on a fresh split, ablate the premium column, evaluate any
    stats-first → LLM cascade on fresh data, and test tuned/few-shot auditors on a fresh split.
@@ -457,6 +495,8 @@ uv run python early_detection.py --ds llm_v3 && uv run python fig_early.py   # p
 uv run python evidence_rounds.py --ds llm_v3 --split test   # do auditors cite round 1? (descriptive)
 uv run python auditors.py --ds llm_v3 --views action_stats_hint && uv run python auditors.py --ds llm_v3rep --views action_stats_hint
 uv run python hint_view.py                      # premium-hint auditor exploration (E56, post-lock)
+uv run python llm_market.py --ds llm_v3plc --match-ds llm_v3rep --rounds 12 --framing lab   # placebo channel (E58)
+uv run python label_llm.py --ds llm_v3plc && uv run python auditors.py --ds llm_v3plc && uv run python placebo.py
 uv run python replication.py                    # pre-registered fresh-split replication (run ONCE; lock in logs/final)
 ./finalize_test.sh                              # the ONE locked test run (sole entry point for --split test headline)
 uv run python auditors.py --ds llm_v3 --auditor claude-sonnet-5-5 --subset mod3   # cross-family subset

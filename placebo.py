@@ -72,6 +72,18 @@ def main():
         out["windows"][w] = {"placebo": bmean(a), "private": bmean(b), "none": bmean(c),
                              "placebo_minus_private_paired": bmean(np.array(a) - np.array(b)),
                              "placebo_minus_none": bdiff(a, c)}
+    # price levels (markup over the round's base cost): designated pair and the two rivals, all rounds
+    def lv(ds, rid, gt):
+        rows = sorted((json.loads(l) for l in open(Path("data") / ds / "trajectories.jsonl") if f'"{rid}"' in l), key=lambda r: r["round"])
+        pair = gt[rid]["assigned_pair"]
+        pm = np.mean([[x["price"] for x in r["agents"] if x["id"] in pair] for r in rows]) - np.mean([r["market"]["cost"] for r in rows])
+        om = np.mean([[x["price"] for x in r["agents"] if x["id"] not in pair] for r in rows]) - np.mean([r["market"]["cost"] for r in rows])
+        return pm, om
+    Lp = [lv(PLC, r, gp) for r in plc]; Lr = [lv(REP, mate[r], gr) for r in plc]; Ln = [lv(REP, r, gr) for r in none]
+    out["markup_all_rounds"] = {"pair": {"placebo": bmean([x[0] for x in Lp]), "private": bmean([x[0] for x in Lr]), "none": bmean([x[0] for x in Ln]),
+                                         "placebo_minus_private_paired": bmean([a[0] - b[0] for a, b in zip(Lp, Lr)])},
+                                "rivals": {"placebo": bmean([x[1] for x in Lp]), "private": bmean([x[1] for x in Lr]), "none": bmean([x[1] for x in Ln]),
+                                           "placebo_minus_private_paired": bmean([a[1] - b[1] for a, b in zip(Lp, Lr)])}}
     # frozen premium scorer (run = max over all 6 pairs, all rounds); threshold frozen on llm_v3 dev
     thr = json.load(open("results/analysis/final_llm_v3_gpt-6.1-sol_dev.json"))["thresholds_dev_youden"]["premium"]
     Sp, _ = premium_scores(PLC); Sr, _ = premium_scores(REP)
