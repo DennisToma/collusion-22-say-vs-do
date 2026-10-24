@@ -87,7 +87,7 @@ def main():
         lo, hi = np.percentile(X[B].mean(1), [2.5, 97.5], axis=0)
         ax.plot(t, X.mean(0), marker="o", ms=3, label=f"{c} (n={len(X)})"); ax.fill_between(t, lo, hi, alpha=.12)
     ax.axhline(0, color="grey", lw=.8); ax.set_xlabel("round"); ax.set_ylabel("assigned-pair premium (price units)")
-    ax.set_title(f"{a.ds}: assigned pair minus other two firms, by arm (seed-bootstrap 95% band)")
+    ax.set_title(f"{a.ds}: pair premium by arm (95% seed-bootstrap band)", fontsize=10)
     ax.legend(fontsize=8, ncol=2); fig.tight_layout()
     Path("figures").mkdir(exist_ok=True); fig.savefig("figures/p2_cue_rounds.png", dpi=150)
 

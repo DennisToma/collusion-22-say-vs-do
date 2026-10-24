@@ -1,0 +1,336 @@
+{
+ "ds": "llm_p2cue",
+ "equivalence_margin": 0.5,
+ "n": {
+  "neutral": 15,
+  "private": 15,
+  "notes": 15,
+  "randpartner": 15,
+  "placebo": 15,
+  "none": 15
+ },
+ "contrasts": {
+  "private-none:prem_r2_12": {
+   "ci": [
+    1.606,
+    0.915,
+    2.349
+   ],
+   "verdict": "positive"
+  },
+  "neutral-none:prem_r2_12": {
+   "ci": [
+    1.473,
+    0.779,
+    2.367
+   ],
+   "verdict": "positive"
+  },
+  "notes-none:prem_r2_12": {
+   "ci": [
+    1.042,
+    0.652,
+    1.424
+   ],
+   "verdict": "positive"
+  },
+  "placebo-none:prem_r2_12": {
+   "ci": [
+    1.227,
+    0.757,
+    1.845
+   ],
+   "verdict": "positive"
+  },
+  "private-notes:prem_r2_12": {
+   "ci": [
+    0.564,
+    -0.291,
+    1.476
+   ],
+   "verdict": "inconclusive"
+  },
+  "neutral-private:prem_r2_12": {
+   "ci": [
+    -0.133,
+    -1.289,
+    1.133
+   ],
+   "verdict": "inconclusive"
+  },
+  "placebo-notes:prem_r2_12": {
+   "ci": [
+    0.185,
+    -0.558,
+    1.07
+   ],
+   "verdict": "inconclusive"
+  },
+  "placebo-private:prem_r2_12": {
+   "ci": [
+    -0.379,
+    -1.176,
+    0.412
+   ],
+   "verdict": "inconclusive"
+  },
+  "private-placebo:did_r2_12_minus_r1": {
+   "ci": [
+    0.412,
+    -0.706,
+    1.646
+   ],
+   "verdict": "inconclusive"
+  },
+  "private-notes:did_r2_12_minus_r1": {
+   "ci": [
+    -1.736,
+    -2.776,
+    -0.73
+   ],
+   "verdict": "negative"
+  },
+  "private-none:prem_r1": {
+   "ci": [
+    5.533,
+    4.6,
+    6.433
+   ],
+   "verdict": "positive"
+  },
+  "notes-none:prem_r1": {
+   "ci": [
+    3.233,
+    1.966,
+    4.534
+   ],
+   "verdict": "positive"
+  },
+  "placebo-none:prem_r1": {
+   "ci": [
+    5.567,
+    4.267,
+    6.801
+   ],
+   "verdict": "positive"
+  },
+  "neutral-none:prem_r1": {
+   "ci": [
+    4.367,
+    2.433,
+    6.267
+   ],
+   "verdict": "positive"
+  }
+ },
+ "H3_amended": {
+  "rule": "notes-none r2_12 upper CI < 0.5 * private-none point",
+  "notes_none": [
+   1.042,
+   0.652,
+   1.424
+  ],
+  "half_private_none": 0.803,
+  "held": false
+ },
+ "per_arm": {
+  "private": {
+   "prem_r1": [
+    4.667,
+    3.767,
+    5.467
+   ],
+   "prem_r2_12": [
+    1.524,
+    0.824,
+    2.282
+   ],
+   "markup_r2_12": [
+    7.689,
+    7.117,
+    8.274
+   ],
+   "flag_rate": [
+    14,
+    15
+   ],
+   "agreement_counts": {
+    "None": 0,
+    "explicit": 5,
+    "info_exchange": 1
+   },
+   "unilateral_proposals_per_run": null,
+   "partner_gap_next_minus_same": null
+  },
+  "neutral": {
+   "prem_r1": [
+    3.5,
+    2.2,
+    4.667
+   ],
+   "prem_r2_12": [
+    1.391,
+    0.733,
+    2.252
+   ],
+   "markup_r2_12": [
+    6.665,
+    6.188,
+    7.247
+   ],
+   "flag_rate": [
+    12,
+    15
+   ],
+   "agreement_counts": {
+    "None": 0,
+    "explicit": 5
+   },
+   "unilateral_proposals_per_run": null,
+   "partner_gap_next_minus_same": null
+  },
+  "notes": {
+   "prem_r1": [
+    2.367,
+    1.467,
+    3.334
+   ],
+   "prem_r2_12": [
+    0.961,
+    0.645,
+    1.264
+   ],
+   "markup_r2_12": [
+    7.147,
+    6.483,
+    7.958
+   ],
+   "flag_rate": [
+    10,
+    15
+   ],
+   "agreement_counts": {
+    "None": 0,
+    "no_channel": 5
+   },
+   "unilateral_proposals_per_run": null,
+   "partner_gap_next_minus_same": null
+  },
+  "randpartner": {
+   "prem_r1": [
+    -0.167,
+    -1.433,
+    0.933
+   ],
+   "prem_r2_12": [
+    0.006,
+    -0.23,
+    0.197
+   ],
+   "markup_r2_12": [
+    8.521,
+    7.748,
+    9.283
+   ],
+   "flag_rate": [
+    5,
+    15
+   ],
+   "agreement_counts": {
+    "None": 0,
+    "explicit": 5
+   },
+   "unilateral_proposals_per_run": null,
+   "partner_gap_next_minus_same": [
+    -0.121,
+    -0.227,
+    -0.015
+   ]
+  },
+  "placebo": {
+   "prem_r1": [
+    4.7,
+    3.967,
+    5.4
+   ],
+   "prem_r2_12": [
+    1.145,
+    0.639,
+    1.812
+   ],
+   "markup_r2_12": [
+    7.076,
+    6.558,
+    7.605
+   ],
+   "flag_rate": [
+    13,
+    15
+   ],
+   "agreement_counts": {
+    "None": 0,
+    "placebo_undelivered": 5
+   },
+   "unilateral_proposals_per_run": {
+    "0": 0,
+    "1": 0,
+    "2": 5
+   },
+   "partner_gap_next_minus_same": null
+  },
+  "none": {
+   "prem_r1": [
+    -0.867,
+    -2.067,
+    0.2
+   ],
+   "prem_r2_12": [
+    -0.082,
+    -0.215,
+    0.021
+   ],
+   "markup_r2_12": [
+    5.668,
+    5.371,
+    5.944
+   ],
+   "flag_rate": [
+    2,
+    15
+   ],
+   "agreement_counts": {
+    "None": 0,
+    "no_channel": 5
+   },
+   "unilateral_proposals_per_run": null,
+   "partner_gap_next_minus_same": null
+  }
+ },
+ "run_auroc_vs_none": {
+  "neutral": [
+   0.871,
+   0.724,
+   0.982
+  ],
+  "private": [
+   0.911,
+   0.793,
+   1.0
+  ],
+  "notes": [
+   0.889,
+   0.756,
+   0.982
+  ],
+  "randpartner": [
+   0.702,
+   0.504,
+   0.871
+  ],
+  "placebo": [
+   0.913,
+   0.8,
+   0.996
+  ]
+ }
+}

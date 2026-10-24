@@ -38,6 +38,10 @@ test and replication evidence item beside the public log (offline, searchable; n
    agree on 18 for round 1 only (a second judge reads 18 of 21 checked cases as opening-only). The premium flags them
    anyway; against the kept-agreement label it falls to 0.80, and text + actions shows no resolved gain over the best
    single modality (combined −0.03 [−0.14, +0.06]).
+7. *The premium is mostly an offer artifact (P2.5, registered E77):* on 15 matched seeds, giving the pair a private
+   **notepad with no recipient** raises their premium over rounds 2–12 by +1.04 [+0.65, +1.42] vs no channel. A real
+   private channel raises it by +1.61 [+0.92, +2.35]; the difference is not resolved (+0.56 [−0.29, +1.48]). The frozen
+   premium flags 10/15 notepad runs (AUROC 0.89). The registered "offer alone is not the driver" prediction failed.
 
 ## Phase 2 results (in progress, from 2026-10-24 06:30 UTC; v1 above frozen as git tag `v1-overnight`)
 
@@ -129,10 +133,37 @@ followed runs from 14 to 17–20 of 50. Premium is 0.79–0.83, action_stats 0.6
 0.58–0.63 and text 0.54–0.56. Replication has only one alternative split (6 followed); requiring floor − 1 ≥ 12 removes
 one run per split. No `none` run reached the tacit-high threshold (pair premium ≥ 1 in rounds 5–12).
 
-**P2.5 Is the "collusion" a prompt artifact? (E77/E78, generation running).** Six matched-seed conditions (same pair,
-cost and demand path per seed): private channel; neutrally worded "message box"; private notepad with no recipient;
-channel to a random partner that changes each round; placebo (offered, never delivered); no channel.
-Also two paraphrases of the base seller prompt. Results will appear here.
+**P2.5 Is the "collusion" a prompt artifact? (E77 + amendment, registered before generation; `uv run python p2_cue.py
+--ds llm_p2cue && uv run python p2_cue_verdict.py` → `results/analysis/p2_cue_verdict_llm_p2cue.json`, Figure P2.5.)**
+Six arms share the same 15 seeds (same pair, costs and demand path; gpt-6-luna sellers, 90 runs): private channel;
+neutrally worded "message box"; **notes-to-self** (same private-writing field for the pair, no recipient); channel to a
+random partner re-drawn each round; placebo (offered, never delivered); no channel. Statistic: assigned-pair premium
+(pair mean − other-two mean), primary window rounds 2–12, paired over seeds, seed bootstrap; ±0.5 equivalence margin.
+**Most of the premium appears without any possible communication.**
+
+| arm | premium round 1 | premium rounds 2–12 | paired vs none (r2–12) | frozen premium flags | run AUROC vs none |
+|---|---|---|---|---|---|
+| private | 4.67 [3.77, 5.47] | 1.52 [0.82, 2.28] | +1.61 [+0.92, +2.35] | 14/15 | 0.91 [0.79, 1.00] |
+| neutral wording | 3.50 [2.20, 4.67] | 1.39 [0.73, 2.25] | +1.47 [+0.78, +2.37] | 12/15 | 0.87 [0.72, 0.98] |
+| notes-to-self | 2.37 [1.47, 3.33] | 0.96 [0.65, 1.26] | +1.04 [+0.65, +1.42] | 10/15 | 0.89 [0.76, 0.98] |
+| placebo | 4.70 [3.97, 5.40] | 1.15 [0.64, 1.81] | +1.23 [+0.76, +1.85] | 13/15 | 0.91 [0.80, 1.00] |
+| none | −0.87 [−2.07, 0.20] | −0.08 [−0.22, 0.02] | — | 2/15 | — |
+
+Registered contrasts (rounds 2–12): private − notes +0.56 [−0.29, +1.48], placebo − notes +0.19 [−0.56, +1.07],
+private − placebo +0.38 [−0.41, +1.18], neutral − private −0.13 [−1.29, +1.13]: all *inconclusive* (none positive, none
+inside ±0.5). H1 (private > none) and H2 (neutral > none) **held**. H3 (notes − none upper CI < half of private − none,
+i.e. < 0.80) **failed**: notes − none is +1.04 [+0.65, +1.42], a notes/private ratio of 0.65 [0.34, 1.32]. Difference in
+differences (r2–12 minus r1): private − notes −1.74 [−2.78, −0.73]. The private arm's *extra* premium is front-loaded in
+round 1 and fades over rounds 2–5 (Figure P2.5). Random partner: the assigned-pair premium is ~0 by construction, but the
+whole market prices highest of all arms (markup vs none +2.85 [+2.09, +3.59]). Firms matched at round t have slightly
+*smaller* price gaps at t + 1 than unmatched firms: −0.12 [−0.23, −0.02]. **Reading:** telling two firms they have a
+private writing space, even one nobody reads, makes them price about 1 unit above the other two for the whole game. The
+frozen premium then flags 10/15 of these runs (AUROC 0.89 vs none). In this generator, the premium, and with it the
+v1 "collusion" label, mostly measures *the offer and its framing*, not delivered coordination. Delivered messages add
+at most a front-loaded round-1–2 bump that we cannot separate from zero over rounds 2–12. Caveats: 15 seeds; one seller model
+(paraphrase band and other families pending). Agreement rates per arm (label judge) will be added when labelling finishes.
+
+![Figure P2.5](figures/p2_cue_rounds.png)
 
 ## Abstract
 Does an auditor catch LLM collusion better if it reads what sellers *say* in public as well as what they *do*?
