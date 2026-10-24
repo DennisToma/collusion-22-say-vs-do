@@ -2,25 +2,24 @@
 
 # STATUS
 
-## Current state (2026-10-24 12:36 UTC, Phase 2 iteration 9)
-- DONE gap 5 (E86, P2.9): warned pairs 0/10 + 0/10 agreements (vs 10/10 matched), markets below none (−1.19); compliance, replicates E45;
-  deterrence vs norm/refusal response not separable. DEVIATION: p2aware LLM views SKIPPED (no agreement left; saves 80 sol calls).
-- DONE gap 7 (E87, P2.10): premium flags highcost 7/10, quality 9/10 vs none 2/10; own-cost adj. P2 failed. p2_asym_nash.py: competitive
-  highcost premium +1.45 (> thr) so those flags are competition-predicted; quality competitive +0.57 < thr (luna +1.08). Gap 8 killed.
-- DONE E94 closed (para1 P3 held). E91-ext deepseek views final (text/combined flag 15/15 none; P1/P2 held). sol views running (chain6b).
-- E99 strongF 7/40 (ETA ~18:00). REGISTERED E99-amend (behaviour classes) + E103 plan view; pilot calibration done (collusion_present J=0;
-  tacit_high thr 58). p2_strongF_post.sh RUNNING (prefetch every 40 min, then everything once on "strongF gen done").
-- Reviews this iter: codex (logs/review_iter9p2_codex.md) + Opus subagent, both APPLIED (v3rep −0.14 [−0.33,−0.02] in abstract; ds/sol finals).
-- RUNNING: chain6b (sol views → p2_family3way), C3 qwen (a 22, b 11) → p2_c3post.sh auto, E102, mimo 6/14, g56sol 6/14, chain3 p2cue.
+## Current state (2026-10-24 13:25 UTC, Phase 2 iteration 10)
+- DONE P2.6 final (E95 3-way + E91-ext sol + ds/sol market finals): location PRIV/PUB/NEITHER luna 14/0/16, Claude 5/5/0, ds 15/15/0,
+  sol 0/0/21; all 3 E95 predictions held; ds none 17.20 [16.54,17.81], sol none 15.27 (Nash+4, no agreements). One table in REPORT.
+- DONE P2.7 compressed to ~20 lines (pilot + registered predictions); final numbers replace it when E99 lands.
+- FIXED: stale wrapper shell (cmdline contained the c3post pgrep pattern) blocked p2_c3post.sh + E102 qwenaS; killed 13:05.
+  NOTE for future iterations: don't type the literal "--ds llm_p2qwen? " pattern in your own shell commands while pgrep loops wait on it.
+- E100 compare: p2_qwen_cmp.py (Newcombe / bootstrap, smoke-tested on pilots) + p2_qwen_cmp_wait.sh runs it once after c3post.
+- RUNNING: strongF 17/40 (ETA ~17:30) -> p2_strongF_post.sh; qwenb 23/30 (ETA ~13:45) -> c3post (qwena views running now) -> c3 cmp;
+  E102 qwenaS started 13:07; mimo 8/14, g56sol 8/14; chain3 p2cue views.
 ## Next steps
-1. P2.6 market-price + regex columns for ds/sol still interim (10 / 4 seeds) -> refresh with p2_family.py after chain6b.
-2. C3: when logs show "c3 strong done": write REPORT P2.11 (C3 qwen) from results/analysis/p2_qwen.json + p2_strong_eval_llm_p2qwen{a,b}.json; E100 result row.
-3. chain6b done -> P2.6 finals + E95 3-way (p2_family3way.py) + E91-ext rows; E94 para1 close (one row + one line).
-4. E99: when "strongF post done" in logs/partc_chain.log: P2.7 final from p2_strong_eval_llm_p2strongF.json (by class + plan view, E103 P1-P4 verdicts),
-   E99/E103 result rows, abstract C-part sentence + merger sentence. Checkpoint Sat 19:30 regardless (interim labelled).
-- Risk: codex overload (~35 codex procs across repos). Known: verify_artifacts.py FAILS (manifest) — deferred to Sun 16:30.
+1. When logs/partc_qwen.log shows "c3 cmp done": write P2.11 (C3) from p2_qwen_cmp.json + p2_strong_eval_llm_p2qwen{a,b}.json; E100 result row; abstract sentence.
+2. E99: when "strongF post done" in logs/partc_chain.log: replace P2.7 interim with finals (by class + plan view, E103 P1-P4), E99/E103 rows,
+   abstract C sentence + merger sentence, takeaway line for part C. Checkpoint Sat 19:30 regardless (interim labelled).
+3. C2 (mimo/g56sol) by Sun 12:00 with p2_strong.py --min-floor 12 --late 2. Codex review of abstract/TL;DR/P2.6-P2.7 after E99.
+- Risk: codex overload. Known: verify_artifacts.py FAILS (manifest) — deferred to Sun 16:30.
 
 ## Log
+- 13:25 P2 iter10: P2.6 final (E95 3-way, all predictions held), P2.7 compressed, C3 post chain unblocked, p2_qwen_cmp.py.
 - 12:36 P2 iter9: Opus review of P2.7/P2.9/P2.10 applied (p2_asym_nash.py competitive benchmark, E45 replication, prediction list).
 - 12:31 P2 iter9: E86 p2aware result (P2.9; labels 20 calls), abstract sentence; asym renumbered P2.10.
 - 12:27 P2 iter9: codex review applied to abstract/TL;DR/P2.4-P2.9; p2_strong_eval enforces n<3 descriptive rule.
