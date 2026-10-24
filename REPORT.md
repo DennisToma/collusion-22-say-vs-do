@@ -191,7 +191,8 @@ price-based selection rules, so chance discrimination is not guaranteed by desig
 strict-executed ones (0.25 [0.08, 0.46]; combined 0.18). Post-hoc keyword matches ("hold/keep/maintain … 1x") occur in 1362/3200 public
 messages without a private channel vs 903/3200 with one (43% vs 28%; 40% vs 32% within the compared classes; `p2_strongF_public.py`).
 This descriptive rule does not establish public agreement or explain the score difference; "tacit-high" is the operational no-channel
-price class, not verified absence of public agreement (cf. Q1.4 E59: a public board alone lifts deepseek prices +0.70 [0.23, 1.23]). (iii) The plan
+price class, not verified absence of public agreement (cf. Q1.4 E59: a public board alone lifts deepseek prices +0.70 [0.23, 1.23]). Whether luna uses a public board at all is prompt-dependent: it posts
+nothing in Q1.4's E70 grid (base prompt; 0/960 agent-rounds inspected in cells c00–c05, E113-amend) but 43% hold-price calls here under strong framing. (iii) The plan
 view ranks the classes the expected way, 0.76 [0.55, 0.93] (flags 5/13 executed, 0/19 tacit-high); primary threshold fixed at 50 without
 fitting (secondary 58 from six pilot runs); it reads self-authored notes, not faithful private reasoning, and no view here shows a gain over actions. *E111 keyword check (no LLM, exploratory; `uv run python p2_plan_keyword.py`):* no private plan in any run
 uses agreement terms (agree/deal/partner/our floor/as discussed: 0/13 strict, 0/19 tacit, 0/7 non-executed runs; luna writes "treat rivals'
