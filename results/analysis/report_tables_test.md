@@ -137,15 +137,15 @@ Cascade end-to-end (run sent by premium AND flagged by the LLM view at its dev t
 | action_stats | 378 | 0.62 (n=200) | 0.81 (n=199) | 0.53 |
 | structured | 378 | 0.57 (n=200) | 0.92 (n=148) | 0.39 |
 
-**Cross-family** (gpt-6.1-sol vs claude-sonnet-5-5; ALL runs both auditors scored (mod-3 subset, dev + test, not split-filtered); n = 18 runs, 9 y=1):
+**Cross-family** (gpt-6.1-sol vs claude-sonnet-5-5; ALL runs both auditors scored (mod-3 subset, dev + test, not split-filtered); n = 42 runs, 24 y=1):
 
 | view | pair AUROC gpt-6.1-sol | pair AUROC claude-sonnet-5-5 | Spearman | top-pair agreement |
 |---|---|---|---|---|
-| text | 0.60 | 0.61 | 0.42 | 0.34 |
-| action | 0.78 | 0.79 | 0.49 | 0.55 |
-| combined | 0.75 | 0.78 | 0.63 | 0.69 |
-| structured | 0.84 | 0.91 | 0.60 | 0.56 |
-| action_stats | 0.89 | 0.87 | 0.47 | 0.69 |
-| combined_stats | 0.86 | 0.91 | 0.55 | 0.67 |
+| text | 0.64 | 0.67 | 0.31 | 0.38 |
+| action | 0.76 | 0.78 | 0.47 | 0.60 |
+| combined | 0.77 | 0.77 | 0.57 | 0.62 |
+| structured | 0.85 | 0.86 | 0.58 | 0.64 |
+| action_stats | 0.85 | 0.87 | 0.52 | 0.71 |
+| combined_stats | 0.85 | 0.89 | 0.54 | 0.58 |
 
 _pending: shuffle, llm_v3fp stratum_

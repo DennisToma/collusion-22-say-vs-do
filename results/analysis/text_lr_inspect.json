@@ -381,5 +381,259 @@
     120
    ]
   }
+ },
+ "firm_level_counts_by_role [k_firms_using, n_firms]": {
+  "considered": {
+   "colluder": [
+    25,
+    140
+   ],
+   "firm_legit_run": [
+    0,
+    80
+   ],
+   "firm_none_run": [
+    0,
+    140
+   ],
+   "other_firm_private_run": [
+    11,
+    140
+   ]
+  },
+  "considered price": {
+   "colluder": [
+    25,
+    140
+   ],
+   "firm_legit_run": [
+    0,
+    80
+   ],
+   "firm_none_run": [
+    0,
+    140
+   ],
+   "other_firm_private_run": [
+    11,
+    140
+   ]
+  },
+  "adjusting our": {
+   "colluder": [
+    51,
+    140
+   ],
+   "firm_legit_run": [
+    6,
+    80
+   ],
+   "firm_none_run": [
+    21,
+    140
+   ],
+   "other_firm_private_run": [
+    12,
+    140
+   ]
+  },
+  "at considered": {
+   "colluder": [
+    0,
+    140
+   ],
+   "firm_legit_run": [
+    0,
+    80
+   ],
+   "firm_none_run": [
+    0,
+    140
+   ],
+   "other_firm_private_run": [
+    0,
+    140
+   ]
+  },
+  "service": {
+   "colluder": [
+    95,
+    140
+   ],
+   "firm_legit_run": [
+    51,
+    80
+   ],
+   "firm_none_run": [
+    39,
+    140
+   ],
+   "other_firm_private_run": [
+    72,
+    140
+   ]
+  },
+  "re adjusting": {
+   "colluder": [
+    53,
+    140
+   ],
+   "firm_legit_run": [
+    10,
+    80
+   ],
+   "firm_none_run": [
+    22,
+    140
+   ],
+   "other_firm_private_run": [
+    21,
+    140
+   ]
+  },
+  "supports reliable": {
+   "colluder": [
+    36,
+    140
+   ],
+   "firm_legit_run": [
+    4,
+    80
+   ],
+   "firm_none_run": [
+    11,
+    140
+   ],
+   "other_firm_private_run": [
+    8,
+    140
+   ]
+  },
+  "and cost": {
+   "colluder": [
+    27,
+    140
+   ],
+   "firm_legit_run": [
+    0,
+    80
+   ],
+   "firm_none_run": [
+    4,
+    140
+   ],
+   "other_firm_private_run": [
+    20,
+    140
+   ]
+  },
+  "keeping": {
+   "colluder": [
+    67,
+    140
+   ],
+   "firm_legit_run": [
+    59,
+    80
+   ],
+   "firm_none_run": [
+    139,
+    140
+   ],
+   "other_firm_private_run": [
+    133,
+    140
+   ]
+  },
+  "keeping our": {
+   "colluder": [
+    31,
+    140
+   ],
+   "firm_legit_run": [
+    37,
+    80
+   ],
+   "firm_none_run": [
+    93,
+    140
+   ],
+   "other_firm_private_run": [
+    96,
+    140
+   ]
+  },
+  "re keeping": {
+   "colluder": [
+    41,
+    140
+   ],
+   "firm_legit_run": [
+    45,
+    80
+   ],
+   "firm_none_run": [
+    105,
+    140
+   ],
+   "other_firm_private_run": [
+    98,
+    140
+   ]
+  },
+  "business": {
+   "colluder": [
+    6,
+    140
+   ],
+   "firm_legit_run": [
+    23,
+    80
+   ],
+   "firm_none_run": [
+    56,
+    140
+   ],
+   "other_firm_private_run": [
+    45,
+    140
+   ]
+  },
+  "price competitive": {
+   "colluder": [
+    11,
+    140
+   ],
+   "firm_legit_run": [
+    23,
+    80
+   ],
+   "firm_none_run": [
+    54,
+    140
+   ],
+   "other_firm_private_run": [
+    51,
+    140
+   ]
+  },
+  "competitive while": {
+   "colluder": [
+    19,
+    140
+   ],
+   "firm_legit_run": [
+    19,
+    80
+   ],
+   "firm_none_run": [
+    53,
+    140
+   ],
+   "other_firm_private_run": [
+    73,
+    140
+   ]
+  }
  }
 }

@@ -29,8 +29,26 @@ def rate(term, sel):
 groups = {"colluding_pair": lambda r: r["y"] == 1, "other_pairs_private_runs": lambda r: r["cond"] == "private" and r["y"] == 0,
           "pairs_none_runs": lambda r: r["cond"] == "none", "pairs_legit_runs": lambda r: r["cond"] == "legit"}
 occ = {t: {g: rate(t, f) for g, f in groups.items()} for t, _ in top_pos[:12]}
+# firm-level view (review_report_opus P1.4): is the cue pair-specific? per firm, all its public messages; role =
+# colluder (assigned firm, private run, y=1) / other firm in a private run / any firm in none / legit runs
+firms = []
+for rid in sorted(r for r in runs if r in labs):
+    y1 = labs[rid]["agreement"] in ("explicit", "info_exchange"); ap = set(gt[rid]["assigned_pair"]); c = gt[rid]["condition"]
+    txt = {}
+    for row in runs[rid]:
+        for ag in row["agents"]:
+            txt.setdefault(ag["id"], []).append((ag.get("public_message") or "").lower())
+    for fid, ms in txt.items():
+        role = ("colluder" if (c == "private" and y1 and fid in ap) else "other_firm_private_run") if c == "private" else f"firm_{c}_run"
+        firms.append({"role": role, "text": " ".join(ms)})
+roles = sorted({f["role"] for f in firms})
+terms = [t for t, _ in top_pos[:8]] + [t for t, _ in top_neg[:6]] + ["keeping our"]
+firm_occ = {t: {ro: [sum(bool(re.search(r"\b" + re.escape(t) + r"\b", f["text"])) for f in firms if f["role"] == ro),
+                     sum(f["role"] == ro for f in firms)] for ro in roles} for t in dict.fromkeys(terms)}
 out = {"note": "descriptive fit on all 125 runs after the locked headline; not an evaluation", "top_positive": top_pos,
-       "top_negative": top_neg, "occurrence_rate_of_top_positive_ngrams": occ}
+       "top_negative": top_neg, "occurrence_rate_of_top_positive_ngrams": occ,
+       "firm_level_counts_by_role [k_firms_using, n_firms]": firm_occ}
 Path("results/analysis/text_lr_inspect.json").write_text(json.dumps(out, indent=1))
 print("TOP +", top_pos); print("TOP -", top_neg)
 for t, v in occ.items(): print(f"{t!r:30} " + "  ".join(f"{g}={r}" for g, (r, n) in v.items()))
+for t, v in firm_occ.items(): print(f"{t!r:30} " + "  ".join(f"{ro}={k}/{n}" for ro, (k, n) in v.items()))
