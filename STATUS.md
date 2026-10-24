@@ -2,7 +2,7 @@
 
 # STATUS
 
-## Current state (2026-10-24 12:20 UTC, Phase 2 iteration 8)
+## Current state (2026-10-24 12:10 UTC, Phase 2 iteration 8)
 - DONE p2rep (fresh n=60, registered E80/E89, computed ONCE 12:05): premium 0.94 [0.87,0.99] (P1 held); Δ_hybrid[combined]
   −0.04 [−0.16,+0.08]; text 0.45; all 4 predictions held. Behaviour: 12/30 kept; premium .78 on kept label; no detector separates
   kept vs abandoned (~0.5). Pooled n=90 (E101): Δ_hybrid −0.07 [−0.17,+0.02] (cond), −0.03 [−0.13,+0.06] (kept). REPORT P2.8, abstract, TL;DR 1.
@@ -22,7 +22,7 @@
 - For Q1.4: our strong luna arm = market-wide spillover (no-channel 15.5–16.3); our p2rep confirms premium 0.94 on fresh seeds.
 
 ## Log
-- 12:20 P2 iter8: p2rep computed once (E80/E89 held; P2.8), E84 on p2rep, pooled E101; chain6 0-call bug -> chain6b; C3 qwen E100 + E102 launched; strong pilot final.
+- 12:10 P2 iter8: p2rep computed once (E80/E89 held; P2.8), E84 on p2rep, pooled E101; chain6 0-call bug -> chain6b; C3 qwen E100 + E102 launched; strong pilot final.
 - 11:39 P2 iter7: luna pilot final 2/3 executed (strict 2/3); seed 2 executed floor 18 but matched no-channel market also 18.0 -> executed adds ~0 over tacit. g56sol started.
 - 11:17 P2 iter7: E97 interim pilot (luna 1/2 executed, market-wide high prices, sol 0/1); E99 full arm registered+launched; REPORT P2.7.
 - 10:31 P2 iter7: part C launched (E97 C1 strong pilot, E98 C2 older sellers registered first); p2_strong.py; REPORT P2.7 stub.

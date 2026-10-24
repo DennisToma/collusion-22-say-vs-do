@@ -216,7 +216,9 @@ any channel** (Nash 10–13), pair premium −0.22…+0.17 in every run. *Final 
 no agreement in 0/2 chats; `p2_strong_pilot_final.json`). So the strong levers raise prices tacitly for everyone, which a pair-relative screen cannot see by
 construction (cf. Q1.4 P2.8 spillover). Full arm `llm_p2strongF` (20 + 20 matched seeds, E99) is generating; its
 predictions (premium AUROC < 0.70; market excess over Nash needs a no-channel reference) were registered before data.
-C2 (previous-generation sellers gpt-5.6-sol, mimo-v2.5, base prompt, 7 + 7 seeds) is generating.
+C2 (previous-generation sellers gpt-5.6-sol, mimo-v2.5, base prompt, 7 + 7 seeds) is generating. C3 (does safety training suppress collusion?): base vs refusal-ablated (abliterated)
+Qwen3.8-27B sellers, base prompt, 15 + 15 matched seeds each (E100), then the strong lever set, 6 + 6 each (E102), registered before
+generation and generating.
 
 **P2.8 Second fresh replication, n = 60 (E80 + E89 registered before generation; computed once 12:05 UTC; `uv run python
 replication.py --ds llm_p2rep` → `results/analysis/replication_llm_p2rep.json`; behaviour labels `p2_behaviour.py --ds llm_p2rep
