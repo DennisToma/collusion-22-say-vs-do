@@ -1,25 +1,25 @@
 # Say vs. Do: does auditing what AI agents *say* together with what they *do* catch collusion better?
 
 *Apart AI Collusion Sprint, Q2.2 — text + action auditing. v1 (overnight) results are frozen as git tag `v1-overnight`;
-Phase 2 (from 2026-10-24 06:30 UTC) re-tests them. Checkpoint text, 2026-10-24 15:37 UTC: all original gaps and the strong-collusion arm
-(P2.7, E99) are final; open: the descriptive strong-Qwen pilot (E102) and the German-market check (E110, Part E5). Exports, slides and offline verification: see [README.md](README.md).*
+Phase 2 (from 2026-10-24 06:30 UTC) re-tests them. Checkpoint text, 2026-10-24 16:45 UTC: all original gaps, P2.7 (E99) and P2.14 (E110) are final; running: participant replacement (E112, Part E2), strong-Qwen pilot (E102, descriptive). Exports: [README.md](README.md).*
 
 ## Abstract
 Reading LLM sellers' public messages in addition to their prices gives **no resolved gain** in detecting collusion: combined minus the better
 single view is −0.01 [−0.09, +0.06] run-AUROC on the locked test (n = 95) and −0.07 [−0.17, +0.02] on two fresh replications pooled post hoc
 (n = 90). Gains above +0.06 (test) and +0.02 (pooled) are excluded at 95%. Setup: a
 4-firm pricing market of gpt-6-luna sellers (one pair may chat privately), audited zero-shot by gpt-6.1-sol on public text, actions, or both.
-(Adding a pair-statistics table gains on test, +0.08 [+0.00, +0.17]; adding text to that table does not.)
-Three reasons. (1) The action signal is partly a prompt effect: the post-hoc-selected pair price premium (AUROC 0.94 [0.87, 0.99] fresh)
+(A computed pair-statistics table added to the action view gains on test, +0.11 [+0.04, +0.18]; adding text to it does not, −0.06 [−0.14, +0.01].)
+Three reasons. (1) The action signal is partly a prompt effect: the post-hoc-selected pair price premium (AUROC 0.94 [0.87, 0.99], n = 60 fresh)
 responds to private pricing deliberation (an unread pricing notepad gives 65% of the channel premium), to wording,
 and flags legitimate cost/quality edges (7/10, 9/10 vs 2/10). (2) Where coordination is said depends on the family: luna talks only in
-private; Claude, deepseek and Qwen also invite rivals publicly, so text auditors flag every control market. On external SALT-NLP data
+private; Claude, deepseek and Qwen also invite rivals publicly, so text auditors flag every control market (50/50). On external SALT-NLP data
 (8000 episodes, 10 models) 62% of executed episodes show no explicit agreement in their chat. (3) Talk and behaviour labels disagree: only 14/50 test "colluders" keep their agreement.
 With memory and a profit objective, 13/20 channel pairs strictly execute agreements, yet 19/20 no-channel markets also price ≥ Nash + 2
 (paired difference unresolved). Exploratory (13 vs 19 markets): an LLM monitor reading firms' private plans ranks executed above tacit
 (AUROC 0.76), but a no-LLM count of plans naming the chat partner does as well (0.82), and no plan uses agreement words: the plans carry a
 channel footprint, not stated collusion. Public text ranks the classes in reverse (0.25).
-Abliterated vs base Qwen: no detectable increase in agreement or execution.
+Abliterated vs base Qwen (15 + 15 markets): no detectable increase in agreement or execution.
+Every abstract number with its denominator and source key: `results/analysis/claims_denominators.md` (`p2_claims.py`, 22/22 match).
 
 **TL;DR (sources: Phase 2 at a glance, below).**
 1. *No resolved gain from public text* (primary `combined` view: −0.01 test n = 95; −0.07 [−0.17, +0.02] pooled fresh n = 90). Bound: gains
