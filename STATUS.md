@@ -9,14 +9,19 @@
   REPORT section "Replication on a fresh split" (+abstract line). Not pooled with llm_v3.
 - NEW (E48): matched-recall legit check → LLM views have NO advantage over premium on legit at equal recall
   (REPORT finding 4 rewritten).
-- codex review of replication.py/matched_recall running → logs/review_iter12.md (apply fixes BEFORE running replication).
+- codex review_iter12 APPLIED (E49): prereg chronology disclosed, finding 4 = mixed at moderate recall / premium better at high recall,
+  replication.py hardened (exact cohort, run-once lock logs/final/REPLICATION_ONCE.lock, hashes).
+- 01:30: 20/30 rep games generated; ETA generation ~01:45, label+audit (pipeline.sh) ~02:20.
 ## Next steps
-1. Apply logs/review_iter12.md; wait for REP_DONE; run replication.py once; write REPORT section; commit.
+1. When logs/gen_v3rep.log ends with REP_DONE: `uv run python auditors.py --ds llm_v3rep --verify`, then
+   `uv run python replication.py` ONCE; fill REPORT §Replication (replace PENDING) + abstract bullet; EXPERIMENTS E47 row result; commit.
+   If an audit view is missing, rerun `./pipeline.sh llm_v3rep` first (lock only taken by a full run).
 2. No new generation after 03:30, no new experiments after 06:30; FINALIZE from 08:15 (final REPORT review by codex).
 - Risks: codex usage limits shared with sibling (it runs 4 workers) → generation could slow; if not done by ~05:30,
   run with --allow-partial NOT allowed for headline; report as incomplete instead.
 
 ## Log
+- 01:35 iter 12: codex review_iter12 applied (E49).
 - 01:10 iter 12: llm_v3rep replication pre-registered + launched (E47); matched-recall legit (E48); codex review started.
 - 01:25 iter 11: monitor_stratum FP (E46) + codex review fixes in REPORT.
 - 01:00 iter 11: v3mon deterrence result (E45) → REPORT; codex review started.
