@@ -2,20 +2,23 @@
 
 # STATUS
 
-## Current state (2026-10-24 10:31 UTC, Phase 2 iteration 7)
-- PART C STARTED (DIRECTION top priority). Q2.2 C1 = own market, auditor/text + kept-vs-not-kept focus (Q1.4 does T=60-100
-  long games/dependence detectors; Q1.4 STATUS 09:56 had no part C yet). `llm_market.py --framing strong` (SYSTEM_STRONG:
-  Fish-style long-run profit, unknown end, full price history, persistent private plan for all firms, full private-chat
-  memory, T=40; v1 framings untouched). E97 pilot + E98 C2 REGISTERED (ledger + SPLITS.md) then launched via `p2_partc.sh`:
-  llm_p2strong_luna (3 seeds x private/none), llm_p2strong_sol (2x2), then llm_p2g56sol (gpt-5.6-sol, 7x2); llm_p2mimo (Go, 7x2).
-  Early look (first 7 rounds): luna/sol pairs message "I'll choose independently" -> executed collusion may be rare (= headline rate).
-- `p2_strong.py` (executed rate, Jeffreys CI, fallback-model guard) tested on llm_v3rep: 5/15 executed (matches E84 scale).
-- REPORT P2.7 stub (part C, in progress). Earlier: E94 para2 text 1/10 (P1/P2 failed); para1 control views running.
-- RUNNING (bg): p2rep 42/60; para1 views; chains 2-6 as before; p2_partc.sh (~11:40 luna pilot, ~12:10 sol pilot).
+## Current state (2026-10-24 11:17 UTC, Phase 2 iteration 7)
+- PART C (DIRECTION top priority). Q2.2 C1 = own market, auditor/text + kept-vs-not-kept focus (Q1.4: long games/dependence).
+  `llm_market.py --framing strong` (Fish-style long-run profit, unknown end, full price history, persistent private plan for
+  ALL firms, full private-chat memory, T=40). E97 pilot + E98 C2 registered first; codex design review -> E97-amend (strict
+  executed, cost-adjusted Nash excess). Tools: `p2_strong.py` (classes, Jeffreys), `p2_strong_eval.py` (frozen detectors by class).
+- E97 INTERIM pilot (6/10 runs): luna executed 1/2 (floor 19 kept 26/26), sol 0/1. KEY: luna's high prices are MARKET-WIDE
+  (market r11-40 15.2/18.1 private vs 12.2/16.3 none; Nash 10-13; pair premium ~0) -> pair-relative premium blind. REPORT P2.7.
+- E99 FULL ARM registered + launched 11:16 (`p2_strongF.sh`, llm_p2strongF, luna, seed 9800, 20+20, games-parallel 3; ~25 min/run
+  -> ETA ~18:00-19:00). Predictions registered (premium AUROC<0.70; text flags executed <= none+2).
+- RUNNING: pilot luna seed 2 + sol seed 1 (~11:45/12:15), then g56sol (C2); mimo 4/14 (Go). p2rep 60/60 GENERATED; chain3 auditing
+  p2rep (workers 2); chain2 p2aware 9/20; para1 views.
 ## Next steps
-0. PART C: when pilots finish -> `uv run python p2_strong.py --ds llm_p2strong_luna llm_p2strong_sol --min-floor 13 --late 11`
-   -> E97 decision (promote model; full arm n>=20+20 NEW ds llm_p2strongF, new seed, register first) -> then run frozen
-   auditors (text/action/combined/action_stats) + premium on executed vs none. C2: `p2_strong.py --ds llm_p2g56sol llm_p2mimo --min-floor 12 --late 2`.
+0. PART C: (a) pilot rest done -> rerun p2_strong.py on pilots (final pilot row, decision fixed). (b) E99 when complete (or Sun 12:00):
+   `uv run python auditors.py --ds llm_p2strongF --views text,action,combined,action_stats --workers 2` then
+   `uv run python p2_strong_eval.py --ds llm_p2strongF --min-floor 13 --late 11` ONCE -> P2.7 + abstract/TL;DR (executed rate = headline).
+   (c) C2 done -> `uv run python p2_strong.py --ds llm_p2g56sol llm_p2mimo --min-floor 12 --late 2` + p2_strong_eval per ds (+ auditors).
+   (d) Tell Q1.4 (via our STATUS; never write there): strong luna arm = market-wide spillover, no-channel at 16.3.
 1. When para2/para1 views land: `uv run python p2_family_views.py --ds llm_p2para2 llm_p2para1` (auto in script) -> E94 verdict -> abstract if P1 holds.
 2. When chain4 labels ds and chain6 views ds/sol: `uv run python p2_family3way.py` (with regex check, ~60 sol calls) -> E95, P2.6 table.
 3. p2rep views (chain3) -> `replication.py --ds llm_p2rep` ONCE + p2_behaviour on p2rep -> pooled n=90 Δ_hybrid row (TL;DR 1).
@@ -25,6 +28,7 @@
 - Known: verify_artifacts.py FAILS (manifest stale vs new P2 files) — rebuild deferred to Sun 16:30 per DIRECTION.
 
 ## Log
+- 11:17 P2 iter7: E97 interim pilot (luna 1/2 executed, market-wide high prices, sol 0/1); E99 full arm registered+launched; REPORT P2.7.
 - 10:31 P2 iter7: part C launched (E97 C1 strong pilot, E98 C2 older sellers registered first); p2_strong.py; REPORT P2.7 stub.
 - 09:57 P2 iter5: codex review of E78+E93 applied (agreement labels qualified, say-vs-do attribution withdrawn, sol wording softened).
 - 09:28 P2 iter5: E78 para2 result (band failed, p2_band.py); E93 review applied, refreshed to 10 ds seeds; E91-ext chain6 launched.

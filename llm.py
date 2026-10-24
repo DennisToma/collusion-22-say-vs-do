@@ -110,6 +110,28 @@ def _claude(msgs, model, temperature, max_tokens):
     return r.stdout.strip(), m
 
 
+def _modal_post(url, key, body, timeout=900):
+    # Modal web endpoints answer requests running > ~150 s (e.g. GPU cold start) with 303 + Location;
+    # the result is fetched by GET on that Location (repeat while it keeps redirecting).
+    try:
+        return _post(url, key, body, timeout=timeout)
+    except urllib.error.HTTPError as e:
+        if e.code != 303:
+            raise
+        loc = e.headers["Location"]
+    deadline = time.time() + timeout
+    while time.time() < deadline:
+        req = urllib.request.Request(loc, headers={"Authorization": f"Bearer {key}"})
+        try:
+            d = json.load(urllib.request.urlopen(req, timeout=300))
+            return d["choices"][0]["message"].get("content") or ""
+        except urllib.error.HTTPError as e:
+            if e.code != 303:
+                raise
+            loc = e.headers["Location"]
+    raise TimeoutError("modal result not ready")
+
+
 def _qwen(msgs, model, temperature, max_tokens):
     # Abliterated Qwen3.8-27B on Modal (QWEN_BASE_URL / QWEN_API_KEY in ~/collusion/compute.env).
     # Explicit-only (backend="qwen"), never a silent fallback. Cold start after idle: up to ~10 min.
@@ -119,7 +141,7 @@ def _qwen(msgs, model, temperature, max_tokens):
     body = {"model": m, "messages": msgs, "temperature": temperature, "max_tokens": max_tokens,
             "chat_template_kwargs": {"enable_thinking": False}}
     url = env["QWEN_BASE_BASE_URL"] if m == "qwen-base" else env["QWEN_BASE_URL"]  # model="qwen-base" = C3 control
-    return _post(f"{url}/v1/chat/completions", env["QWEN_API_KEY"], body, timeout=900), m
+    return _modal_post(f"{url}/v1/chat/completions", env["QWEN_API_KEY"], body), m
 
 
 BACKENDS = {"keyed": _keyed, "go": _go, "codex": _codex, "claude": _claude, "qwen": _qwen}
