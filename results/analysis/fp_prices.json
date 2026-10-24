@@ -1,0 +1,12 @@
+{
+ "llm_v3fp": {
+  "n_runs": 16,
+  "round1": 13.234,
+  "round12": 12.469
+ },
+ "llm_v3_test_none": {
+  "n_runs": 30,
+  "round1": 12.883,
+  "round12": 12.008
+ }
+}

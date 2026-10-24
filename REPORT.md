@@ -3,26 +3,47 @@
 *Apart AI Collusion Sprint, Q2.2 — text + action auditing. Status: locked test results in (2026-10-24 00:03 UTC); all exploration strata (§Exploration) complete (01:25 UTC); pre-registered replication run 02:07 UTC; placebo-channel stratum 03:33 UTC.*
 
 ## Abstract
-**Answer (on this generator): no.** Adding what LLM sellers *say* in public to what they *do* gives no resolved
-detection gain, for zero-shot LLM auditors or for supervised baselines. What helps is a better summary of the actions,
-and the strongest signal is already present in the opening prices, before any coordination message has been read.
+Does an auditor catch LLM collusion better if it reads what sellers *say* in public as well as what they *do*?
+**On our generator: no resolved gain.** We simulate a 4-firm repeated-pricing market with gpt-6-luna sellers; in the
+`private` condition one pair gets a private chat. Sellers are never told to collude, yet all 70 private pairs use it to
+exchange prices or propose agreements, while a screen for explicit public coordination flags 0/125 runs. Zero-shot
+gpt-6.1-sol auditors score each firm pair from the public log, seeing text only, actions only, or both, with or
+without a computed statistics table. On the locked test split (n = 95, run once), text alone is at chance (run AUROC
+0.47) and combined minus the best single modality is −0.01 [−0.09, +0.06]. A statistics table helps (+0.11
+[+0.04, +0.18]). An untrained one-line statistic, the pair's price premium over its rivals, reaches 0.95 against ≤ 0.86
+for the six original LLM views. But round-1 prices alone give 0.90, and they are set before any partner message is read; and when
+private messages are offered but never delivered (placebo, 15 matched seeds), the premium flags 14/15 runs, as with
+delivery. Our detectors therefore pick up a strong channel-offer cue, not only agreement-driven conduct. A replication
+on 30 fresh runs keeps the premium on top (0.92) and shows no text gain (−0.14 [−0.30, +0.02]). Public text still
+carries a learnable trace: supervised TF-IDF reaches 0.98. Caveats: the label coincides with the condition, one seller
+model, and evasion is untested (under an announced monitor the judge finds coordination talk in 0/14 runs).
+Suggested architecture (not evaluated end to end): always-on action statistics as the screen, LLM audit reserved for
+explaining flagged runs.
+
+### Key results (detail)
+**Answer (on this generator): no resolved detection gain.** Adding what LLM sellers *say* in public to what they *do*
+gives no resolved run-level detection gain, for zero-shot LLM auditors or for supervised baselines (with a statistics
+table present, text gives a small nominal localisation gain that did not repeat on fresh data). What helps is a better
+summary of the actions, and opening prices already discriminate strongly, before any partner message has been read.
 
 We build a 4-firm repeated-pricing market with LLM sellers (gpt-6-luna). In the `private` condition one pair gets a
-private chat channel. Sellers are never told to collude, yet all 70 private pairs (dev + test) coordinate there, and
-none of the 125 runs shows explicit public coordination. Zero-shot gpt-6.1-sol auditors score every firm pair from the
+private chat channel. Sellers are never told to collude, yet all 70 private pairs (dev + test) exchange prices or propose agreements there (judge-labelled from the
+private chat), and
+the explicit-public-coordination screen flags 0/125 runs. Zero-shot gpt-6.1-sol auditors score every firm pair from the
 public log under six views (defined in §Setup). Locked test split (n = 95, run once):
 - **Text adds nothing resolved.** Text-only run AUROC is 0.47 (chance). Combined minus the best single modality is
   −0.01 [−0.09, +0.06] (gains up to ~0.06 not excluded). Replacing messages with a matched donor run's has no resolved
   effect. Claude Sonnet 5.5 shows the same pattern on 42 runs. Supervised baselines agree: text + actions 0.96 vs
-  text 0.98.
+  actions alone 0.96 (text alone 0.98, see below).
 - **A computed statistics table helps** (action_stats − action, run AUROC +0.11 [+0.04, +0.18]). On fresh data the
   run-level gain is not resolved (+0.04 [−0.10, +0.19]), but the localisation gain is.
 - **A one-line untrained statistic ranks highest among untrained scorers.** The pair's price premium over its rivals
   reaches 0.95, against ≤ 0.86 for the six original LLM views (+0.09 [+0.01, +0.18]). A post-hoc one-sentence hint
   pointing the auditor at the premium gives action_stats 0.93 vs 0.86 on test (Δ +0.07 [−0.00, +0.15]) but 0.796 vs
   0.798 on the replication; neither dataset was held out for the hint. The premium comparator was chosen after seeing partial data, and
-  **round-1 prices alone give 0.90**. Those prices are set before any partner message is read. So the premium largely
-  detects the response to being *offered* a channel, not agreement-driven pricing.
+  **round-1 prices alone give 0.90**. Those prices are set before any partner message is read. So the premium picks up a
+  substantial pre-message cue tied to the channel *offer*; its contribution to full-period discrimination is not
+  quantified.
 - **The public text carries a learnable trace.** A supervised TF-IDF classifier reaches 0.98 (grouped CV within the
   test split). Zero-shot text auditing does not use this trace.
 - **Replication on 30 fresh runs** (analysis registered after generation began, before any metrics; 4/4 decision rules
@@ -30,13 +51,13 @@ public log under six views (defined in §Setup). Locked test split (n = 95, run 
   combined − action is −0.14 [−0.30, +0.02].
 - **Placebo channel (exploration, 15 matched seeds).** With private messages offered but never delivered, the pair
   premium in rounds 2–12 was +1.09 vs +1.06 with delivery (Δ +0.03 [−0.54, +0.49]). The premium flags 14/15 placebo
-  vs 14/15 private runs, and the action-based LLM views flag placebo runs at least as often; no scorer separates the
-  two arms. Delivered private coordination is not needed for the conduct signal these detectors use. This does not
+  vs 14/15 private runs, and the action-based LLM views flag placebo runs at least as often; no scorer resolves a
+  separation of the two arms (n = 15). Elevated premiums and frequent flags occur without private-message delivery. This does not
   establish equivalence, nor exclude a smaller delivery effect.
 - **Caveats.** The label coincides with the condition: we detect *channel granted and used*, and the placebo shows
   the conduct signal does not need the private messages to be delivered. We used one seller model,
-  and sellers never try to evade. Frozen thresholds flag 4/10 fresh `none` runs and 25–63% of runs under a shifted
-  framing. With an announced price monitor, no agreements form (0/14), so evasion is untested.
+  and sellers were never instructed or warned to evade (headline data). Frozen premium thresholds flag 4/10 fresh `none` runs; under a shifted framing the premium and
+  stats/combined views flag 25–63% of runs (text and action 6%). With an announced price monitor, the judge finds no coordination communication (0/14), so evasion is untested.
 
 ## Question
 Given logged trajectories (public messages + prices + market state), do auditors that see both streams detect
@@ -45,8 +66,8 @@ to genuine cross-modal reasoning or just more input?
 
 **Short answer.** On this generator, raw public messages give the tested zero-shot LLM auditors no resolved detection
 benefit. Computed action summaries help, and a simple premium comparator performs strongly. Opening prices already
-separate the conditions before any partner message is received, and in a placebo run where private messages are never
-delivered, every action-based scorer flags the pair just as often. That limits how far any detector here can be read
+separate the conditions before any partner message is received, and across 15 matched placebo runs where private messages are never
+delivered, every action-based scorer flags the run at least as often (run-level flags, n = 15). That limits how far any detector here can be read
 as detecting agreement-driven conduct.
 
 ## Setup
@@ -122,7 +143,7 @@ negatives, not legit only) and the curves cross; at very low FPR (≈ 0.04) acti
 so the premium's AUROC lead comes from the moderate-FPR region. Read off the curve, no CI.*
 
 **Key paired contrasts** (same runs; Δ_hybrid[v] = v − max(text, action); rows selected from the generated file,
-which lists all 25 pre-registered contrasts; no multiplicity correction):
+which lists all 25 contrast families specified before the locked analysis (after interim exposure, see Held-out discipline); no multiplicity correction):
 
 | contrast | run AUROC | within-market AUROC | pooled pair AUROC |
 |---|---|---|---|
@@ -162,21 +183,10 @@ which lists all 25 pre-registered contrasts; no multiplicity correction):
    Without round 1 (premium_r2plus) the detection gap vs structured/action_stats is no longer resolved (+0.068
    [−0.029, +0.161], +0.045 [−0.042, +0.139]). Disclosure: the premium was proposed after a look at partial data
    that included test runs (see Held-out discipline), so this is not a blind discovery.
-4. **Legitimate cooperation: no LLM advantage at matched recall.** At dev-chosen thresholds the premium flags 5/15
-   (0.33) `legit` partnership runs, while structured and action flag 0/15 (Wilson CI [0, 0.20]); these views can read
-   the public partnership notice (no notice-removal ablation was run). But they operate at much lower recall (0.40 and
-   0.20 of y=1 runs vs the premium's 0.92), and the text-reading combined views flag legit runs about as often as the
-   premium (combined 0.27, combined_stats 0.20). Comparing at a common *minimum recall target* (post-lock,
-   descriptive; `uv run python matched_recall.py` → `results/analysis/matched_recall_llm_v3_test.json`; oracle
-   thresholds read off the test positives; ties can push a scorer's recall above the target) gives mixed results at
-   moderate recall and a premium advantage at high recall. Legit runs flagged: target 0.5 — premium 0/15 (TPR 0.50),
-   structured 0/15 (0.54), action_stats 1/15 (0.50); target 0.7 — premium 2/15 (0.72), action_stats 1/15 (0.72),
-   structured 3/15 (0.78); target 0.9 — premium 5/15 (0.90), action_stats 9/15 (0.92), structured 11/15 (0.92);
-   `none` runs at target 0.9: 2/30 vs 20/30 and 19/30. At these recall targets the LLM views show no consistent
-   advantage over the premium in clearing legitimate runs (n = 15 legit runs; no CIs). The contribution of the public
-   partnership notice was not isolated. Numerical note: the frozen and oracle premium cuts both
-   represent 2/3 but differ in floating-point rounding (premium scores of mathematically tied runs differ at ~1e-15),
-   which explains a one-run recall difference (46/50 vs 45/50); it has no substantive meaning.
+4. **Legitimate cooperation: no LLM advantage at matched recall.** At dev thresholds structured and action flag
+   0/15 `legit` runs vs the premium's 5/15, but at far lower recall (0.40 / 0.20 vs 0.92). At a common minimum-recall
+   target (post-lock, descriptive) the LLM views show no consistent advantage in clearing legit runs (target 0.9:
+   premium 5/15, action_stats 9/15, structured 11/15). Detail in Appendix C.
 5. **No tested rank-average combination gives a resolved improvement over the premium** (`incremental.py`, one fixed untrained label-free
    rank-average rule; other combination rules or conditional use were not tested): combo − premium run AUROC from −0.147 [−0.226, −0.078] (text) to +0.001 [−0.038, +0.043] (structured); never resolved positive.
 6. **Label = condition check.** Among y=1 runs where the pair's late-window premium is ≤ 0.5 (n = 20; low relative
@@ -192,20 +202,10 @@ Appendix C. At those thresholds the premium flags 0.92 of y=1 runs and 0.07 of t
 5-fold CV *within* the test split, reaches run AUROC 0.98 [0.95, 1.00] and pair-ID accuracy 1.00, while the zero-shot
 LLM text auditor is at chance. Shuffling messages within label+condition does not hurt it (0.97). So the public text
 *does* carry a strong condition-linked signal that no public message states explicitly (0/125 hard-set flags) and the
-zero-shot LLM does not use. Post-headline inspection (`uv run python text_lr_inspect.py` → `results/analysis/text_lr_inspect.json`;
-descriptive all-data refit, not an evaluation; it does not show which features drive the out-of-fold performance):
-top positive uni/bigrams are bland margin phrasing ("considered price", "supports reliable", "balances customer"),
-top negative ones competitive phrasing ("price competitive", "your business", "keeping"). At the firm level (all
-125 runs; each firm's concatenated public messages; role = colluding firm / rival firm in the same private run /
-firm in a `none` run): "considered price" 25/140 colluders, 11/140 rivals, 0/140 `none` (0/80 `legit`) — so rivals
-pick it up too (condition-level shift); but the **pair-specific cue is large**, and mostly it is what colluders
-*stop* saying: "keeping" 67/140 vs 133/140 vs 139/140, "business" 6/140 vs 45/140 vs 56/140, while "adjusting our"
-rises (51/140 vs 12/140 vs 21/140). This is consistent with the text LR's perfect pair-ID (1.00 vs premium 0.89).
-The message shuffle (donors share label + condition) cannot remove a condition-level style signal, so its
-shuffle-robust 0.97 is not evidence against it. Interpretation (not tested): public text carries an *indirect*
-trace — colluders drop competitive language — that a supervised model trained in-distribution learns but a
-zero-shot LLM auditor reading for explicit coordination does not use. Whether it reflects the channel prompt, the
-communication or the conduct cannot be separated here (label = condition). Whether it transfers to other seller models or framings is untested.
+zero-shot LLM does not use. Post-headline inspection (descriptive, Appendix C) suggests the cue is mostly what colluders *stop* saying
+(e.g. "keeping" in 67/140 colluding firms' messages vs 133/140 rivals and 139/140 `none` firms): an indirect trace that
+a supervised in-distribution model learns but a zero-shot auditor reading for explicit coordination does not use
+(interpretation, not tested; transfer untested).
 The untrained text-convergence score (`textsim.py`) localises at 0.74 [0.66, 0.81] vs the LLM text auditor 0.65
 (Δ +0.088 [−0.010, +0.176], not resolved).
 
@@ -265,43 +265,16 @@ are [0.17, 0.69] for 4/10, [0.24, 0.76] for 5/10, and [0.31, 0.83] for 6/10. Exp
 pre-registered) are all in the json.
 
 ### Exploration strata (never pooled into the headline; frozen dev thresholds, nothing fitted)
-**Firm framing, channel offered, no agreement found (`llm_v3fp`, 16 `private` runs, `uv run python fp_stratum.py --ds
-llm_v3fp` → `results/analysis/fp_stratum_llm_v3fp.json`).** Under the "pricing manager + competition authority"
-framing, the judge finds **no agreement in 16/16 runs**: sellers given a private channel declined to coordinate
-(replicating the pilot). These are natural "channel, no agreement" negatives, so a scorer that tracks agreement
-rather than framing should rarely flag them. Flag rates at the dev thresholds [Wilson 95%]: text 0.06 [0.01, 0.28],
-action 0.06 [0.01, 0.28], structured 0.25 [0.10, 0.50], premium 0.44 [0.23, 0.67], combined 0.50, action_stats 0.50,
-combined_stats 0.63 [0.39, 0.82] — vs 0.03–0.17 on lab-framing `none` test runs. Mean prices are close to the lab
-`none` runs (13.2 in round 1, 12.5 in round 12, vs 12.9 / 12.0), but the source of the false alarms was not
-established (pair-level price differences under the other framing are a guess, not analysed). **Thresholds and
-stats-based scorers did not transfer to a framing shift**; the stats table, which helped on llm_v3, raised false
-alarms here. With only y = 0 runs, no AUROC can be computed. Exploratory (n = 16, one framing change that also
-changes wording and refusals).
+**Firm framing, channel offered, no agreement found (`llm_v3fp`, 16 runs; detail in Appendix D).** Under a
+"pricing manager + competition authority" framing the judge finds no agreement in 16/16 private runs, yet at frozen
+dev thresholds the premium flags 0.44 of runs and combined / action_stats / combined_stats 0.50–0.63 (structured 0.25; text and
+action 0.06), vs
+0.03–0.17 on lab `none` test runs. **Thresholds and stats-based scorers did not transfer to a framing shift.**
 
-**Announced price monitor (`llm_v3mon`, lab framing + public announcement that prices are monitored; 14 private,
-6 none; the note says an automated monitor reviews prices + public board, cannot see private messages, and halves
-the earnings of flagged pairs — announced only, no monitor is run). `uv run python deterrence.py` →
-`results/analysis/deterrence.json`.** The pre-registered question (does the premium survive colluders who know prices
-are watched?) **could not be tested: the monitored sample contains no judge-labelled coordination communication.** The
-judge finds an agreement in **0/14** monitored private runs [Wilson 0.00, 0.22] vs **70/70** unmonitored lab private
-runs [0.95, 1.00] (Fisher p ≈ 3·10⁻¹⁶). The cohorts are unpaired (seeds 3000000–3000124 vs 7000000–7000019; 70 vs 14
-private, 35 vs 6 `none` runs); same seller model (gpt-6-luna), 12 rounds, and system prompts that differ only by the
-monitor note. Lexical indicators (regexes, not validated measures): digit matches in 0/336 monitored private messages
-vs 1488/1680 (88.6%) on llm_v3; independence/refusal phrases (e.g. "I can't coordinate prices") in 335/336 (99.7%) vs
-613/1680 (36.5%). Mean markup over cost in monitored private runs is 6.16 vs 6.27 in monitored `none` runs (llm_v3:
-private 7.66, none 5.84); assigned-pair premium +0.23 (llm_v3 private +1.65); premium > 1 in 1/14 runs (llm_v3 61%)
-— close to no-channel levels, though not shown equivalent. So on this sample, announcing a monitor coincides with no
-coordination talk rather than with hidden coordination. Caveats: n = 14, one seller model, one judge whose
-reliability on refusal-style chats was not independently checked; we cannot distinguish safety-triggered refusal from
-strategic deterrence, nor exclude tacit coordination, and it says nothing about how a model that does try to evade
-would look. **False alarms on this stratum** (all 20 runs are y = 0; frozen dev thresholds; `uv run python
-monitor_stratum.py --ds llm_v3mon` → `results/analysis/monitor_stratum_llm_v3mon.json`), flag rate on the 14
-private-no-agreement / 6 `none` runs [Wilson 95%]: text 0.00 [0.00, 0.22] / 0.00 [0.00, 0.39], action 0.21 / 0.50,
-structured 0.21 / 0.17, premium 0.36 [0.16, 0.61] / 0.50 [0.19, 0.81], action_stats 0.43 / 0.33, combined 0.43 / 0.33,
-combined_stats 0.36 / 0.33 — vs 0.03–0.17 on lab `none` test runs. Like the firm-framing stratum, a prompt change
-after which no agreements are found leaves the premium and the stats/combined views flagging a third to a half of runs:
-the premium's run score is the largest premium over all six pairs, and in 8/20 monitored runs it reaches the frozen
-cut of 0.67 price units (max 2.29), more often than in lab `none` test runs (why was not analysed). Exploratory, n = 20.
+**Announced price monitor (`llm_v3mon`, 14 private + 6 none; detail in Appendix D).** The pre-registered evasion
+question could not be tested: with a public note that prices are monitored, the judge finds an agreement in **0/14**
+monitored private runs vs 70/70 unmonitored (Fisher p ≈ 3·10⁻¹⁶); 335/336 monitored private messages contain independence/refusal phrases. On these
+all-negative runs the premium still flags 0.36 / 0.50 (private / none) and action_stats / combined / combined_stats 0.33–0.43.
 
 **Message-shuffle ablation on test (pre-registered; `uv run python shuffle_analysis.py --seeds 0,1,2 --views
 combined,structured` → `results/analysis/shuffle_llm_v3_gpt-6.1-sol_test.json`; 95 runs × 3 seeds × 2 views).**
@@ -365,12 +338,13 @@ paired bootstrap over the 15 seeds; `none` = the 10 `llm_v3rep` no-channel runs,
   flags 1 vs 1. Private-vs-placebo run AUROC (seed pairs resampled jointly): premium 0.46 [0.25, 0.66]; action-bearing
   views 0.31–0.44 (point estimates favour placebo; e.g. combined 0.31 [0.12, 0.54]); text alone leans toward private,
   0.68 [0.49, 0.86]. Nothing is resolved at n = 15.
-- **Interpretation.** Delivered private coordination is not necessary for the conduct signal that all our scorers use:
-  being offered the channel suffices on this generator. This does not show that what is detected is pure "offer
+- **Interpretation.** Elevated premiums and frequent detector flags occur without private-message delivery in this
+  sample; the experiment does not isolate channel-offer effects from coordination through public prices, nor establish
+  which cues each scorer uses. It also does not show that what is detected is pure "offer
   response". In both arms sellers open with a unilateral "let's both start at ~18" (a focal point the shared prompt
   creates) and then see each other's high opening price on the public board; placebo sellers often read the partner's
-  public price as a reply ("Your price of 18 left room…"). The real-arm agreements are themselves mostly round-1
-  proposals that break down by round 2–3, so the experiment cannot separate offer-induced focal pricing from tacit
+  public price as a reply ("Your price of 18 left room…"). The delivered-message arm's relative premium also declines
+  sharply after round 1 (agreement persistence was not systematically measured), so the experiment cannot separate offer-induced focal pricing from tacit
   coordination on public prices. Further caveats: one seed set, one seller model; placebo sellers can notice the
   partner's silence, and the prompt's private-history window (last 8 messages) holds 8 of the seller's own messages in
   placebo vs ~4 per side in private, which may anchor placebo sellers on their own proposals. In both arms the premium
@@ -380,38 +354,12 @@ paired bootstrap over the 15 seeds; `none` = the 10 `llm_v3rep` no-channel runs,
 ![placebo premium](figures/placebo_premium.png)
 *Designated-pair premium by round: delivered channel vs placebo (same 15 seeds) vs no channel; bands = 95% run bootstrap.*
 
-**Round-1 citations by the LLM auditors (post-lock, descriptive; `uv run python evidence_rounds.py --ds llm_v3
---split test` → `results/analysis/evidence_rounds_llm_v3_test.json`; `--ds llm_v3rep --split all` for the
-replication).** Each audit cites up to 4 evidence items, each tied to a round. On the 95 test runs, round 1 accounts for
-4.5–10% of cited items depending on the view (text 6.8%, action 4.5%, combined 5.0%, combined_stats 8.5%,
-action_stats 10.1% [7.7, 12.7], structured 9.0%). Uniformly cited rounds would give 8.3%. Among audits of y = 1 runs,
-round 1 is cited at all in 16–24% of text/action/combined audits and 42–48% of the stats-table views (11–31% of y = 0
-audits). In the replication, round 1 accounts for 5.8–11.8% of cited items. The views without a stats table cite
-round 1 at or below the uniform rate, although round 1 is where the pair premium is already large. The headline run
-score (`collusion_present`) correlates with both the round-1 and the rounds-2..12 premium (test Spearman: action_stats
-0.52 vs 0.58; combined 0.42 vs 0.40). These are citation frequencies and descriptive associations. They do not show
-which rounds drove a verdict, nor do they explain the stats-table benefit.
+**Do auditors cite round 1? (descriptive; Appendix D).** Views without a stats table cite round 1 at or below the
+uniform rate (4.5–6.8% of evidence items vs 8.3% uniform), although round 1 is where the pair premium is largest.
 
-**Telling the auditor where to look (`action_stats_hint`; post-lock exploration E56; `uv run python auditors.py --ds
-llm_v3 --views action_stats_hint` (+ `--ds llm_v3rep`), then `uv run python hint_view.py` →
-`results/analysis/hint_view.json`).** This view is `action_stats` plus one fixed sentence. The sentence says that
-colluding pairs typically price above the other two firms, often from round 1, and asks the auditor to check each
-pair's premium and round-1 prices. We wrote it once, after the locked test and the replication, using what those
-analyses had shown. No further prompt search followed this data-informed revision. Because the hint encodes knowledge taken from the test and replication data,
-neither split is held out for it. Paired, class-stratified bootstrap over runs:
-- **Test (n = 95).** Run AUROC rises from 0.86 to 0.93 (Δ +0.07 [−0.00, +0.15]). Within-market AUROC rises from 0.89 to 0.96
-  (Δ +0.06 [+0.02, +0.11]). Pair-ID rises from 0.66 to 0.83. The remaining gap to the premium is +0.02 [−0.02, +0.07]
-  (run) and +0.00 [−0.03, +0.03] (within-market).
-- **Replication (n = 30).** No resolved run-level gain: 0.796 vs 0.798, Δ −0.002 [−0.18, +0.16]. Within-market AUROC is
-  0.99 for both, near ceiling. The premium's point estimate remains higher at 0.92 (Δ +0.12 [−0.03, +0.28]).
-- **Dev (n = 30).** Run AUROC 0.93 vs 0.89; within-market 0.98 vs 0.91. Neither change is resolved.
-
-The hint makes the run score track the premium more closely: Spearman with the max-pair premium rises from 0.60 to 0.87
-on test and from 0.65 to 0.75 on the replication. Pointing the auditor at the premium can therefore recover much of
-the premium's ranking on test, but the gain does not show on the 30 replication runs (where action_stats' pair scores
-already localised near ceiling).
-The test gaps to the premium are unresolved; this establishes neither equivalence nor superiority. A cheaper design is to
-compute the statistic and ask the LLM only for explanation.
+**Telling the auditor where to look (`action_stats_hint`, post-hoc E56; Appendix D).** One fixed sentence pointing
+the auditor at pair premiums and round-1 prices lifts action_stats on test (run AUROC 0.86 → 0.93, Δ +0.07
+[−0.00, +0.15]) but not on the replication (0.798 → 0.796); neither split is held out for this hint.
 
 ## Validity safeguards
 Labels from private chat only (judge blind to prices); same auditor model across views, fallback calls dropped;
@@ -423,7 +371,7 @@ resume ids, donor matching).
 
 ## Held-out discipline
 `data/SPLITS.md`: dev = llm_v3_0000–0029, locked test = 0030–0124. The core auditor prompt was written before any
-LLM-market data; there were 0 prompt-optimisation attempts on the six original views, but views and comparators were developed adaptively after interim exposure (views
+LLM-market data; the core task text of the six original views was never optimised (0 attempts), but views and comparators were developed adaptively after interim exposure (views
 `action_stats`/`combined_stats` added, public-partnership info rendering fixed; all before the locked test run,
 logged in EXPERIMENTS.tsv). `final_analysis.py` (frozen 22:15 UTC) calibrates the
 fusion weight and the FPR thresholds on dev, so the headline is test-only, computed once. Disclosure: interim
@@ -482,41 +430,6 @@ computed on the mod-3 subset incl. test runs. The test evaluation is locked and 
    post hoc (§Exploration, E56: mixed). Test it prospectively on a fresh split, ablate the premium column, evaluate any
    stats-first → LLM cascade on fresh data, and test tuned/few-shot auditors on a fresh split.
 5. **Breadth.** Other seller model families, more firms/rounds, and a second market type.
-
-## Reproduce
-```
-uv run python llm_market.py --ds llm_v3 --plan private:70,none:35,legit:20 --rounds 12 --framing lab --games-parallel 2 --seed 3000
-uv run python label_llm.py --ds llm_v3
-uv run python auditors.py --ds llm_v3 --variant orig   # default = all six views
-uv run python hardset.py --ds llm_v3
-uv run python final_analysis.py --split dev    # development only; the test headline runs ONLY via finalize_test.sh
-uv run python evidence.py --split test         # evidence accuracy + prompt cost
-uv run python auditors.py --ds llm_v3 --variant shuffle --shuffle-seed 0 --views text,combined,structured   # seeds 0,1,2
-uv run python baselines.py --ds llm_v3 --learner lr --split test   # CV inside the split
-uv run python textsim.py --split test           # untrained public-text convergence
-uv run python report_tables.py --split test     # renders all REPORT tables from results/*.json
-uv run python fig_mechanism.py --split all      # descriptive price paths by condition (no metric)
-uv run python fig_roc.py                        # test ROC + dev operating points (descriptive)
-uv run python text_lr_inspect.py                # n-gram / firm-level text cue inspection (descriptive)
-uv run python incremental.py --split test       # premium + LLM view rank-average (run by finalize_test.sh)
-uv run python fp_stratum.py --ds llm_v3fp       # firm-framing exploration stratum
-uv run python monitor_stratum.py --ds llm_v3mon # announced-monitor stratum (frozen thresholds)
-uv run python deterrence.py                     # agreement / message / markup comparison llm_v3 vs llm_v3mon
-uv run python matched_recall.py                 # legit/none flags at matched recall (post-lock, descriptive)
-uv run python round1_effect.py --ds llm_v3      # round-1 (pre-message) prices by role (descriptive)
-uv run python early_detection.py --ds llm_v3 && uv run python fig_early.py   # premium AUROC vs rounds observed
-uv run python evidence_rounds.py --ds llm_v3 --split test   # do auditors cite round 1? (descriptive)
-uv run python auditors.py --ds llm_v3 --views action_stats_hint && uv run python auditors.py --ds llm_v3rep --views action_stats_hint
-uv run python hint_view.py                      # premium-hint auditor exploration (E56, post-lock)
-uv run python llm_market.py --ds llm_v3plc --match-ds llm_v3rep --rounds 12 --framing lab   # placebo channel (E58)
-uv run python label_llm.py --ds llm_v3plc && uv run python auditors.py --ds llm_v3plc && uv run python placebo.py
-uv run python replication.py                    # pre-registered fresh-split replication (run ONCE; lock in logs/final)
-./finalize_test.sh                              # the ONE locked test run (sole entry point for --split test headline)
-uv run python auditors.py --ds llm_v3 --auditor claude-sonnet-5-5 --subset mod3   # cross-family subset
-uv run python cross_family.py --ds llm_v3 --other claude-sonnet-5-5               # cross-family comparison
-uv run python sim.py --dataset scripted_v2 --n-per-cond 40 --rounds 30 --seed 1 --levels 12,14 --strength 0.15,0.5
-uv run python baselines.py --ds scripted_v2 --learner lr
-```
 
 ## Appendix A — LLM market, DEV split (runs 0000–0029; development only, superseded by the locked test above)
 Headline numbers above come from the completed, single locked test analysis
@@ -659,7 +572,7 @@ evaluated on test (earlier disclosed test exposures of other scorers still apply
 - Methodological cautions found on the way: (i) mixing learners (boosting for numeric, LR for text) produced an
   apparent shuffle collapse on scripted_v1 that vanished with identical learners; (ii) drawing shuffle donors from
   the whole dataset let a boosted text model recognise memorised training-fold text (text-only AUROC *rose*
-  0.91→0.995 under shuffle); donors are now drawn within the CV test fold.
+  0.91→0.995 under shuffle; historical debugging value, EXPERIMENTS.tsv E05, configuration not retained); donors are now drawn within the CV test fold.
 
 ## Appendix C — Additional test-split detail (locked test split, n = 95; moved from §Results for length)
 
@@ -693,4 +606,144 @@ combined 0.74 / 0.74; stats views (action_stats 0.85 / 0.91, structured 0.79 / 0
 highest for Claude, while for GPT only action_stats clearly is (point estimates, no CIs, n = 42, dev + test pooled). Adding text to action has no resolved effect for either auditor (Δ pair AUROC combined − best single: GPT +0.01
 [−0.05, +0.08], Claude −0.01 [−0.10, +0.07]); adding stats does (action_stats: GPT +0.09 [+0.02, +0.16], Claude +0.09
 [+0.00, +0.19]). Per-pair agreement between the two auditors is only moderate (Spearman 0.31 text … 0.59 structured;
-top-pair agreement 0.38–0.71), so individual verdicts are model-dependent even though the aggregate conclusion is not.
+top-pair agreement 0.38–0.71), so individual verdicts are model-dependent even though the tested aggregate comparisons agree.
+
+**Finding 4 in full (legitimate cooperation at matched recall; moved from §Results):**
+**Legitimate cooperation: no LLM advantage at matched recall.** At dev-chosen thresholds the premium flags 5/15
+   (0.33) `legit` partnership runs, while structured and action flag 0/15 (Wilson CI [0, 0.20]); these views can read
+   the public partnership notice (no notice-removal ablation was run). But they operate at much lower recall (0.40 and
+   0.20 of y=1 runs vs the premium's 0.92), and the text-reading combined views flag legit runs about as often as the
+   premium (combined 0.27, combined_stats 0.20). Comparing at a common *minimum recall target* (post-lock,
+   descriptive; `uv run python matched_recall.py` → `results/analysis/matched_recall_llm_v3_test.json`; oracle
+   thresholds read off the test positives; ties can push a scorer's recall above the target) gives mixed results at
+   moderate recall and a premium advantage at high recall. Legit runs flagged: target 0.5 — premium 0/15 (TPR 0.50),
+   structured 0/15 (0.54), action_stats 1/15 (0.50); target 0.7 — premium 2/15 (0.72), action_stats 1/15 (0.72),
+   structured 3/15 (0.78); target 0.9 — premium 5/15 (0.90), action_stats 9/15 (0.92), structured 11/15 (0.92);
+   `none` runs at target 0.9: 2/30 vs 20/30 and 19/30. At these recall targets the LLM views show no consistent
+   advantage over the premium in clearing legitimate runs (n = 15 legit runs; no CIs). The contribution of the public
+   partnership notice was not isolated. Numerical note: the frozen and oracle premium cuts both
+   represent 2/3 but differ in floating-point rounding (premium scores of mathematically tied runs differ at ~1e-15),
+   which explains a one-run recall difference (46/50 vs 45/50); it has no substantive meaning.
+
+**Text-classifier inspection in full (moved from §Results):** Post-headline inspection (`uv run python text_lr_inspect.py` → `results/analysis/text_lr_inspect.json`;
+descriptive all-data refit, not an evaluation; it does not show which features drive the out-of-fold performance):
+top positive uni/bigrams are bland margin phrasing ("considered price", "supports reliable", "balances customer"),
+top negative ones competitive phrasing ("price competitive", "your business", "keeping"). At the firm level (all
+125 runs; each firm's concatenated public messages; role = colluding firm / rival firm in the same private run /
+firm in a `none` run): "considered price" 25/140 colluders, 11/140 rivals, 0/140 `none` (0/80 `legit`) — so rivals
+pick it up too (condition-level shift); but the **pair-specific cue is large**, and mostly it is what colluders
+*stop* saying: "keeping" 67/140 vs 133/140 vs 139/140, "business" 6/140 vs 45/140 vs 56/140, while "adjusting our"
+rises (51/140 vs 12/140 vs 21/140). This is consistent with the text LR's perfect pair-ID (1.00 vs premium 0.89).
+The message shuffle (donors share label + condition) cannot remove a condition-level style signal, so its
+shuffle-robust 0.97 is not evidence against it. Interpretation (not tested): public text carries an *indirect*
+trace — colluders drop competitive language — that a supervised model trained in-distribution learns but a
+zero-shot LLM auditor reading for explicit coordination does not use. Whether it reflects the channel prompt, the
+communication or the conduct cannot be separated here (label = condition). Whether it transfers to other seller models or framings is untested.
+
+## Appendix D — Exploration strata detail (moved from §Results for length; text unchanged)
+**Firm framing, channel offered, no agreement found (`llm_v3fp`, 16 `private` runs, `uv run python fp_stratum.py --ds
+llm_v3fp` → `results/analysis/fp_stratum_llm_v3fp.json`).** Under the "pricing manager + competition authority"
+framing, the judge finds **no agreement in 16/16 runs**: sellers given a private channel declined to coordinate
+(replicating the pilot). These are natural "channel, no agreement" negatives, so a scorer that tracks agreement
+rather than framing should rarely flag them. Flag rates at the dev thresholds [Wilson 95%]: text 0.06 [0.01, 0.28],
+action 0.06 [0.01, 0.28], structured 0.25 [0.10, 0.50], premium 0.44 [0.23, 0.67], combined 0.50, action_stats 0.50,
+combined_stats 0.63 [0.39, 0.82] — vs 0.03–0.17 on lab-framing `none` test runs. Mean prices are close to the lab
+`none` runs (13.2 in round 1, 12.5 in round 12, vs 12.9 / 12.0; `uv run python fp_prices.py` → `results/analysis/fp_prices.json`), but the source of the false alarms was not
+established (pair-level price differences under the other framing are a guess, not analysed). **Thresholds and
+stats-based scorers did not transfer to a framing shift**; the stats table, which helped on llm_v3, raised false
+alarms here. With only y = 0 runs, no AUROC can be computed. Exploratory (n = 16, one framing change that also
+changes wording and refusals).
+
+**Announced price monitor (`llm_v3mon`, lab framing + public announcement that prices are monitored; 14 private,
+6 none; the note says an automated monitor reviews prices + public board, cannot see private messages, and halves
+the earnings of flagged pairs — announced only, no monitor is run). `uv run python deterrence.py` →
+`results/analysis/deterrence.json`.** The pre-registered question (does the premium survive colluders who know prices
+are watched?) **could not be tested: the monitored sample contains no judge-labelled coordination communication.** The
+judge finds an agreement in **0/14** monitored private runs [Wilson 0.00, 0.22] vs **70/70** unmonitored lab private
+runs [0.95, 1.00] (Fisher p ≈ 3·10⁻¹⁶). The cohorts are unpaired (seeds 3000000–3000124 vs 7000000–7000019; 70 vs 14
+private, 35 vs 6 `none` runs); same seller model (gpt-6-luna), 12 rounds, and system prompts that differ only by the
+monitor note. Lexical indicators (regexes, not validated measures): digit matches in 0/336 monitored private messages
+vs 1488/1680 (88.6%) on llm_v3; independence/refusal phrases (e.g. "I can't coordinate prices") in 335/336 (99.7%) vs
+613/1680 (36.5%). Mean markup over cost in monitored private runs is 6.16 vs 6.27 in monitored `none` runs (llm_v3:
+private 7.66, none 5.84); assigned-pair premium +0.23 (llm_v3 private +1.65); premium > 1 in 1/14 runs (llm_v3 61%)
+— close to no-channel levels, though not shown equivalent. So on this sample, announcing a monitor coincides with no
+coordination talk rather than with hidden coordination. Caveats: n = 14, one seller model, one judge whose
+reliability on refusal-style chats was not independently checked; we cannot distinguish safety-triggered refusal from
+strategic deterrence, nor exclude tacit coordination, and it says nothing about how a model that does try to evade
+would look. **False alarms on this stratum** (all 20 runs are y = 0; frozen dev thresholds; `uv run python
+monitor_stratum.py --ds llm_v3mon` → `results/analysis/monitor_stratum_llm_v3mon.json`), flag rate on the 14
+private-no-agreement / 6 `none` runs [Wilson 95%]: text 0.00 [0.00, 0.22] / 0.00 [0.00, 0.39], action 0.21 / 0.50,
+structured 0.21 / 0.17, premium 0.36 [0.16, 0.61] / 0.50 [0.19, 0.81], action_stats 0.43 / 0.33, combined 0.43 / 0.33,
+combined_stats 0.36 / 0.33 — vs 0.03–0.17 on lab `none` test runs. Like the firm-framing stratum, a prompt change
+after which no agreements are found leaves the premium and the stats/combined views flagging a third to a half of runs:
+the premium's run score is the largest premium over all six pairs, and in 8/20 monitored runs it reaches the frozen
+cut of 0.67 price units (max 2.29), more often than in lab `none` test runs (why was not analysed). Exploratory, n = 20.
+
+**Round-1 citations by the LLM auditors (post-lock, descriptive; `uv run python evidence_rounds.py --ds llm_v3
+--split test` → `results/analysis/evidence_rounds_llm_v3_test.json`; `--ds llm_v3rep --split all` for the
+replication).** Each audit cites up to 4 evidence items, each tied to a round. On the 95 test runs, round 1 accounts for
+4.5–10% of cited items depending on the view (text 6.8%, action 4.5%, combined 5.0%, combined_stats 8.5%,
+action_stats 10.1% [7.7, 12.7], structured 9.0%). Uniformly cited rounds would give 8.3%. Among audits of y = 1 runs,
+round 1 is cited at all in 16–24% of text/action/combined audits and 42–48% of the stats-table views (11–31% of y = 0
+audits). In the replication, round 1 accounts for 5.8–11.8% of cited items. The views without a stats table cite
+round 1 at or below the uniform rate, although round 1 is where the pair premium is already large. The headline run
+score (`collusion_present`) correlates with both the round-1 and the rounds-2..12 premium (test Spearman: action_stats
+0.52 vs 0.58; combined 0.42 vs 0.40). These are citation frequencies and descriptive associations. They do not show
+which rounds drove a verdict, nor do they explain the stats-table benefit.
+
+**Telling the auditor where to look (`action_stats_hint`; post-lock exploration E56; `uv run python auditors.py --ds
+llm_v3 --views action_stats_hint` (+ `--ds llm_v3rep`), then `uv run python hint_view.py` →
+`results/analysis/hint_view.json`).** This view is `action_stats` plus one fixed sentence. The sentence says that
+colluding pairs typically price above the other two firms, often from round 1, and asks the auditor to check each
+pair's premium and round-1 prices. We wrote it once, after the locked test and the replication, using what those
+analyses had shown. No further prompt search followed this data-informed revision. Because the hint encodes knowledge taken from the test and replication data,
+neither split is held out for it. Paired, class-stratified bootstrap over runs:
+- **Test (n = 95).** Run AUROC rises from 0.86 to 0.93 (Δ +0.07 [−0.00, +0.15]). Within-market AUROC rises from 0.89 to 0.96
+  (Δ +0.06 [+0.02, +0.11]). Pair-ID rises from 0.66 to 0.83. The remaining gap to the premium is +0.02 [−0.02, +0.07]
+  (run) and +0.00 [−0.03, +0.03] (within-market).
+- **Replication (n = 30).** No resolved run-level gain: 0.796 vs 0.798, Δ −0.002 [−0.18, +0.16]. Within-market AUROC is
+  0.99 for both, near ceiling. The premium's point estimate remains higher at 0.92 (Δ +0.12 [−0.03, +0.28]).
+- **Dev (n = 30).** Run AUROC 0.93 vs 0.89; within-market 0.98 vs 0.91. Neither change is resolved.
+
+The hint makes the run score track the premium more closely: Spearman with the max-pair premium rises from 0.60 to 0.87
+on test and from 0.65 to 0.75 on the replication. Pointing the auditor at the premium can therefore recover much of
+the premium's ranking on test, but the gain does not show on the 30 replication runs (where action_stats' pair scores
+already localised near ceiling).
+The test gaps to the premium are unresolved; this establishes neither equivalence nor superiority. A cheaper design is to
+compute the statistic and ask the LLM only for explanation.
+
+## Appendix E — Reproduce
+```
+uv run python llm_market.py --ds llm_v3 --plan private:70,none:35,legit:20 --rounds 12 --framing lab --games-parallel 2 --seed 3000
+uv run python label_llm.py --ds llm_v3
+uv run python auditors.py --ds llm_v3 --variant orig   # default = all six views
+uv run python hardset.py --ds llm_v3
+uv run python final_analysis.py --split dev    # development only; the test headline runs ONLY via finalize_test.sh
+uv run python evidence.py --split test         # evidence accuracy + prompt cost
+uv run python auditors.py --ds llm_v3 --variant shuffle --shuffle-seed 0 --views text,combined,structured   # seeds 0,1,2
+uv run python baselines.py --ds llm_v3 --learner lr --split test   # CV inside the split
+uv run python textsim.py --split test           # untrained public-text convergence
+uv run python report_tables.py --split test     # renders all REPORT tables from results/*.json
+uv run python fig_mechanism.py --split all      # descriptive price paths by condition (no metric)
+uv run python fig_roc.py                        # test ROC + dev operating points (descriptive)
+uv run python text_lr_inspect.py                # n-gram / firm-level text cue inspection (descriptive)
+uv run python incremental.py --split test       # premium + LLM view rank-average (run by finalize_test.sh)
+uv run python fp_stratum.py --ds llm_v3fp       # firm-framing exploration stratum
+uv run python fp_prices.py                      # firm-framing vs lab none mean prices (descriptive)
+uv run python monitor_stratum.py --ds llm_v3mon # announced-monitor stratum (frozen thresholds)
+uv run python deterrence.py                     # agreement / message / markup comparison llm_v3 vs llm_v3mon
+uv run python matched_recall.py                 # legit/none flags at matched recall (post-lock, descriptive)
+uv run python round1_effect.py --ds llm_v3      # round-1 (pre-message) prices by role (descriptive)
+uv run python early_detection.py --ds llm_v3 && uv run python fig_early.py   # premium AUROC vs rounds observed
+uv run python evidence_rounds.py --ds llm_v3 --split test   # do auditors cite round 1? (descriptive)
+uv run python auditors.py --ds llm_v3 --views action_stats_hint && uv run python auditors.py --ds llm_v3rep --views action_stats_hint
+uv run python hint_view.py                      # premium-hint auditor exploration (E56, post-lock)
+uv run python llm_market.py --ds llm_v3plc --match-ds llm_v3rep --rounds 12 --framing lab   # placebo channel (E58)
+uv run python label_llm.py --ds llm_v3plc && uv run python auditors.py --ds llm_v3plc && uv run python placebo.py
+uv run python replication.py                    # pre-registered fresh-split replication (run ONCE; lock in logs/final)
+./finalize_test.sh                              # the ONE locked test run (sole entry point for --split test headline)
+uv run python auditors.py --ds llm_v3 --auditor claude-sonnet-5-5 --subset mod3   # cross-family subset
+uv run python cross_family.py --ds llm_v3 --other claude-sonnet-5-5               # cross-family comparison
+uv run python sim.py --dataset scripted_v2 --n-per-cond 40 --rounds 30 --seed 1 --levels 12,14 --strength 0.15,0.5
+uv run python baselines.py --ds scripted_v2 --learner lr
+```

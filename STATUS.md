@@ -1,21 +1,20 @@
 # STATUS
 
-## Current state (2026-10-24 03:40 UTC, iteration 16)
+## Current state (2026-10-24 03:56 UTC, iteration 17)
 - LOCKED TEST DONE (00:03; never rerun). REPLICATION DONE (02:07; lock; never rerun). REPORT presentable.
 - Replication llm_v3rep (n=30): 4/4 pre-registered predictions held: premium .92 vs action_stats .80.
 - E50/E52: round-1 (pre-message) premium alone gives run AUROC .90 (test) / .84 (rep).
-- E56: premium hint lifts action_stats on test (.86->.93) not on rep (inconclusive).
-- E58 (NEW, exploratory; plan written at launch, not pre-gen registered): PLACEBO channel (offered, never delivered; 15 seeds matched to rep private):
-  pair premium ~same (r2-12 +1.09 vs +1.06, d +.03 [-.54,+.49]); premium flags 14/15 vs 14/15; all LLM views flag
-  placebo >= private; nothing separates them => delivered private coordination not needed for the conduct signal
-  (focal opening vs tacit public-price coordination not separated). In REPORT
-  (abstract bullet, exploration section + figures/placebo_premium.png, limitations, next steps).
-## Next steps (no new generation after 03:30 [respected: E58 launched ~03:05]; no new experiments after 06:30; FINALIZE 08:15)
-1. Done: placebo reviews applied (E59). E58 is exploratory (no pre-gen registration claim).
-2. Final end-to-end codex + Opus review of REPORT claims (~05:00-06:00), apply; trim length.
-3. Gotcha: pgrep -f / pkill -f patterns match the calling shell's own command line (killed shell twice). Use pgrep -f "python X" | grep -v $$.
+- E58 placebo (exploratory): premium/LLM views flag placebo >= private; nothing separates them.
+- E60: 11 post-hoc scripts rerun -> results byte-identical. E61: final codex + Opus claims audit applied (no numeric
+  mismatches; wording softened; new short abstract + "Key results"; detail moved to Appendices C-E; fp_prices.py).
+## Next steps (no new experiments after 06:30; FINALIZE 08:15)
+1. Optional: further trim (replication P1-P4 narrative -> SPLITS pointer; What-to-do-next to 3 items); figure polish
+   (abstract-level summary figure: run AUROC per scorer, test + rep, with CIs from existing json).
+2. Final read-through for consistency after trims; push.
+3. Gotcha: pgrep -f / pkill -f patterns match the calling shell's own command line. Use pgrep -f "python X" | grep -v $$.
 
 ## Log
+- 03:56 iter 17: repro check (E60); final codex+Opus claims audit applied (E61); abstract shortened; appendix D/E.
 - 03:39 iter 16: applied codex + Opus reviews of placebo section (E59).
 - 03:33 iter 16: placebo stratum E58 (generator condition placebo, placebo.py, 90 audits, REPORT); codex review launched.
 - 02:37 iter 15: codex review_iter15_hint applied (E57).
