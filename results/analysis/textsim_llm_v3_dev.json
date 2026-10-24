@@ -41,12 +41,12 @@
   "textsim": {
    "pair_auroc": [
     0.7856,
-    0.6631,
-    0.875
+    0.6665,
+    0.8791
    ],
    "within_market_auroc": [
     0.81,
-    0.68,
+    0.69,
     0.91
    ],
    "run_auroc": [
@@ -57,7 +57,7 @@
    "pair_id_acc": [
     0.55,
     0.35,
-    0.8
+    0.75
    ]
   },
   "premium": {
@@ -85,30 +85,30 @@
   "text": {
    "pair_auroc": [
     0.5642,
-    0.4464,
-    0.6797
+    0.4453,
+    0.6808
    ],
    "within_market_auroc": [
     0.615,
-    0.505,
-    0.72
+    0.5,
+    0.725
    ],
    "run_auroc": [
     0.575,
     0.3675,
-    0.7801
+    0.775
    ],
    "pair_id_acc": [
     0.3083,
     0.175,
-    0.45
+    0.4502
    ]
   },
   "structured": {
    "pair_auroc": [
     0.8894,
-    0.7815,
-    0.9602
+    0.7842,
+    0.9611
    ],
    "within_market_auroc": [
     0.905,
@@ -117,13 +117,13 @@
    ],
    "run_auroc": [
     0.8325,
-    0.665,
-    0.955
+    0.6675,
+    0.9575
    ],
    "pair_id_acc": [
     0.7,
     0.5,
-    0.85
+    0.9
    ]
   }
  },
@@ -131,22 +131,22 @@
   "textsim-text:run_auroc": {
    "delta": -0.1,
    "ci": [
-    -0.455,
-    0.1976
+    -0.4426,
+    0.205
    ]
   },
   "textsim-text:within_market_auroc": {
    "delta": 0.195,
    "ci": [
-    0.0699,
+    0.07,
     0.3101
    ]
   },
   "textsim-premium:run_auroc": {
    "delta": -0.525,
    "ci": [
-    -0.7801,
-    -0.2749
+    -0.77,
+    -0.27
    ]
   },
   "textsim-premium:within_market_auroc": {

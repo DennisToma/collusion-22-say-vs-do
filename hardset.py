@@ -41,9 +41,9 @@ def main():
         kw = [x["public_message"] for r in rows for x in r["agents"] if EXPLICIT_PUBLIC.search(x["public_message"] or "")]
         msgs = "\n".join(f"round {r['round'] + 1} {x['id']}: {x['public_message']}" for r in rows for x in r["agents"])
         llm, quote, model = None, "", None
-        for _ in range(3):
+        for mt in (200, 1000, 3000):  # larger budget on retry: reasoning models can return empty text at 200
             try:
-                resp = chat(PROMPT.format(msgs=msgs), tier="cheap", temperature=0, max_tokens=200)
+                resp = chat(PROMPT.format(msgs=msgs), tier="cheap", temperature=0, max_tokens=mt)
                 j = json.loads(re.search(r"\{.*\}", resp["text"], re.S).group(0))
                 llm, quote, model = bool(j["explicit"]), j.get("quote", ""), resp["model"]
                 break

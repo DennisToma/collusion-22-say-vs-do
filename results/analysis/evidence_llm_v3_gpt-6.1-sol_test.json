@@ -1,0 +1,229 @@
+{
+ "split": "test",
+ "auditor": "gpt-6.1-sol",
+ "views": {
+  "text": {
+   "n_audits": 95,
+   "n_items": 339,
+   "valid": {
+    "rate": 1.0,
+    "n": 339
+   },
+   "on_pair": {
+    "rate": 0.537,
+    "n": 175
+   },
+   "price_exact": {
+    "rate": 0.444,
+    "n": 9
+   },
+   "price_ok": {
+    "rate": 0.444,
+    "n": 9
+   },
+   "price_any_ok": {
+    "rate": 0.444,
+    "n": 9
+   },
+   "quote_ok": {
+    "rate": 1.0,
+    "n": 1
+   },
+   "has_price_claim": {
+    "rate": 0.027,
+    "n": 339
+   },
+   "cost": {
+    "calls": 95,
+    "mean_prompt_chars": 9212,
+    "est_prompt_tokens": 2303
+   }
+  },
+  "action": {
+   "n_audits": 95,
+   "n_items": 379,
+   "valid": {
+    "rate": 1.0,
+    "n": 379
+   },
+   "on_pair": {
+    "rate": 0.535,
+    "n": 200
+   },
+   "price_exact": {
+    "rate": 0.585,
+    "n": 207
+   },
+   "price_ok": {
+    "rate": 0.903,
+    "n": 207
+   },
+   "price_any_ok": {
+    "rate": 0.942,
+    "n": 207
+   },
+   "quote_ok": {
+    "rate": null,
+    "n": 0
+   },
+   "has_price_claim": {
+    "rate": 0.546,
+    "n": 379
+   },
+   "cost": {
+    "calls": 95,
+    "mean_prompt_chars": 3280,
+    "est_prompt_tokens": 820
+   }
+  },
+  "combined": {
+   "n_audits": 95,
+   "n_items": 379,
+   "valid": {
+    "rate": 1.0,
+    "n": 379
+   },
+   "on_pair": {
+    "rate": 0.545,
+    "n": 200
+   },
+   "price_exact": {
+    "rate": 0.632,
+    "n": 171
+   },
+   "price_ok": {
+    "rate": 0.93,
+    "n": 171
+   },
+   "price_any_ok": {
+    "rate": 0.982,
+    "n": 171
+   },
+   "quote_ok": {
+    "rate": null,
+    "n": 0
+   },
+   "has_price_claim": {
+    "rate": 0.451,
+    "n": 379
+   },
+   "cost": {
+    "calls": 95,
+    "mean_prompt_chars": 11379,
+    "est_prompt_tokens": 2845
+   }
+  },
+  "combined_stats": {
+   "n_audits": 95,
+   "n_items": 376,
+   "valid": {
+    "rate": 1.0,
+    "n": 376
+   },
+   "on_pair": {
+    "rate": 0.6,
+    "n": 200
+   },
+   "price_exact": {
+    "rate": 0.568,
+    "n": 176
+   },
+   "price_ok": {
+    "rate": 0.886,
+    "n": 176
+   },
+   "price_any_ok": {
+    "rate": 0.977,
+    "n": 176
+   },
+   "quote_ok": {
+    "rate": null,
+    "n": 0
+   },
+   "has_price_claim": {
+    "rate": 0.468,
+    "n": 376
+   },
+   "cost": {
+    "calls": 95,
+    "mean_prompt_chars": 11776,
+    "est_prompt_tokens": 2944
+   }
+  },
+  "action_stats": {
+   "n_audits": 95,
+   "n_items": 378,
+   "valid": {
+    "rate": 1.0,
+    "n": 378
+   },
+   "on_pair": {
+    "rate": 0.625,
+    "n": 200
+   },
+   "price_exact": {
+    "rate": 0.487,
+    "n": 199
+   },
+   "price_ok": {
+    "rate": 0.809,
+    "n": 199
+   },
+   "price_any_ok": {
+    "rate": 0.93,
+    "n": 199
+   },
+   "quote_ok": {
+    "rate": null,
+    "n": 0
+   },
+   "has_price_claim": {
+    "rate": 0.526,
+    "n": 378
+   },
+   "cost": {
+    "calls": 95,
+    "mean_prompt_chars": 3676,
+    "est_prompt_tokens": 919
+   }
+  },
+  "structured": {
+   "n_audits": 95,
+   "n_items": 378,
+   "valid": {
+    "rate": 1.0,
+    "n": 378
+   },
+   "on_pair": {
+    "rate": 0.575,
+    "n": 200
+   },
+   "price_exact": {
+    "rate": 0.568,
+    "n": 148
+   },
+   "price_ok": {
+    "rate": 0.919,
+    "n": 148
+   },
+   "price_any_ok": {
+    "rate": 0.966,
+    "n": 148
+   },
+   "quote_ok": {
+    "rate": null,
+    "n": 0
+   },
+   "has_price_claim": {
+    "rate": 0.392,
+    "n": 378
+   },
+   "cost": {
+    "calls": 95,
+    "mean_prompt_chars": 12000,
+    "est_prompt_tokens": 3000
+   }
+  }
+ },
+ "note": "price checks are over items with >=1 extracted price claim (coverage = has_price_claim); an item citing a price that matches a firm other than the cited one fails price_exact/price_ok; invalid round/firm items count as failures only in `valid`"
+}

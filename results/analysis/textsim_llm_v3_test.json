@@ -1,0 +1,225 @@
+{
+ "dataset": "llm_v3",
+ "split": "test",
+ "auditor": "gpt-6.1-sol",
+ "run_ids": [
+  "llm_v3_0030",
+  "llm_v3_0031",
+  "llm_v3_0032",
+  "llm_v3_0033",
+  "llm_v3_0034",
+  "llm_v3_0035",
+  "llm_v3_0036",
+  "llm_v3_0037",
+  "llm_v3_0038",
+  "llm_v3_0039",
+  "llm_v3_0040",
+  "llm_v3_0041",
+  "llm_v3_0042",
+  "llm_v3_0043",
+  "llm_v3_0044",
+  "llm_v3_0045",
+  "llm_v3_0046",
+  "llm_v3_0047",
+  "llm_v3_0048",
+  "llm_v3_0049",
+  "llm_v3_0050",
+  "llm_v3_0051",
+  "llm_v3_0052",
+  "llm_v3_0053",
+  "llm_v3_0054",
+  "llm_v3_0055",
+  "llm_v3_0056",
+  "llm_v3_0057",
+  "llm_v3_0058",
+  "llm_v3_0059",
+  "llm_v3_0060",
+  "llm_v3_0061",
+  "llm_v3_0062",
+  "llm_v3_0063",
+  "llm_v3_0064",
+  "llm_v3_0065",
+  "llm_v3_0066",
+  "llm_v3_0067",
+  "llm_v3_0068",
+  "llm_v3_0069",
+  "llm_v3_0070",
+  "llm_v3_0071",
+  "llm_v3_0072",
+  "llm_v3_0073",
+  "llm_v3_0074",
+  "llm_v3_0075",
+  "llm_v3_0076",
+  "llm_v3_0077",
+  "llm_v3_0078",
+  "llm_v3_0079",
+  "llm_v3_0080",
+  "llm_v3_0081",
+  "llm_v3_0082",
+  "llm_v3_0083",
+  "llm_v3_0084",
+  "llm_v3_0085",
+  "llm_v3_0086",
+  "llm_v3_0087",
+  "llm_v3_0088",
+  "llm_v3_0089",
+  "llm_v3_0090",
+  "llm_v3_0091",
+  "llm_v3_0092",
+  "llm_v3_0093",
+  "llm_v3_0094",
+  "llm_v3_0095",
+  "llm_v3_0096",
+  "llm_v3_0097",
+  "llm_v3_0098",
+  "llm_v3_0099",
+  "llm_v3_0100",
+  "llm_v3_0101",
+  "llm_v3_0102",
+  "llm_v3_0103",
+  "llm_v3_0104",
+  "llm_v3_0105",
+  "llm_v3_0106",
+  "llm_v3_0107",
+  "llm_v3_0108",
+  "llm_v3_0109",
+  "llm_v3_0110",
+  "llm_v3_0111",
+  "llm_v3_0112",
+  "llm_v3_0113",
+  "llm_v3_0114",
+  "llm_v3_0115",
+  "llm_v3_0116",
+  "llm_v3_0117",
+  "llm_v3_0118",
+  "llm_v3_0119",
+  "llm_v3_0120",
+  "llm_v3_0121",
+  "llm_v3_0122",
+  "llm_v3_0123",
+  "llm_v3_0124"
+ ],
+ "vectorizer_fit": "dev runs only",
+ "n_runs": 95,
+ "n_pos": 50,
+ "point_ci": {
+  "textsim": {
+   "pair_auroc": [
+    0.7394,
+    0.6699,
+    0.8045
+   ],
+   "within_market_auroc": [
+    0.736,
+    0.66,
+    0.808
+   ],
+   "run_auroc": [
+    0.5444,
+    0.4182,
+    0.6698
+   ],
+   "pair_id_acc": [
+    0.36,
+    0.24,
+    0.5
+   ]
+  },
+  "premium": {
+   "pair_auroc": [
+    0.9589,
+    0.9213,
+    0.9856
+   ],
+   "within_market_auroc": [
+    0.958,
+    0.9119,
+    0.992
+   ],
+   "run_auroc": [
+    0.9476,
+    0.9038,
+    0.9804
+   ],
+   "pair_id_acc": [
+    0.89,
+    0.79,
+    0.97
+   ]
+  },
+  "text": {
+   "pair_auroc": [
+    0.5982,
+    0.5264,
+    0.6713
+   ],
+   "within_market_auroc": [
+    0.648,
+    0.586,
+    0.712
+   ],
+   "run_auroc": [
+    0.472,
+    0.3647,
+    0.5807
+   ],
+   "pair_id_acc": [
+    0.3533,
+    0.26,
+    0.46
+   ]
+  },
+  "structured": {
+   "pair_auroc": [
+    0.8943,
+    0.8455,
+    0.9374
+   ],
+   "within_market_auroc": [
+    0.924,
+    0.888,
+    0.956
+   ],
+   "run_auroc": [
+    0.836,
+    0.7489,
+    0.9118
+   ],
+   "pair_id_acc": [
+    0.6967,
+    0.57,
+    0.82
+   ]
+  }
+ },
+ "contrasts": {
+  "textsim-text:run_auroc": {
+   "delta": 0.0724,
+   "ci": [
+    -0.0804,
+    0.2367
+   ]
+  },
+  "textsim-text:within_market_auroc": {
+   "delta": 0.088,
+   "ci": [
+    -0.01,
+    0.176
+   ]
+  },
+  "textsim-premium:run_auroc": {
+   "delta": -0.4031,
+   "ci": [
+    -0.5269,
+    -0.2818
+   ]
+  },
+  "textsim-premium:within_market_auroc": {
+   "delta": -0.222,
+   "ci": [
+    -0.316,
+    -0.128
+   ]
+  }
+ }
+}

@@ -93,26 +93,26 @@ Cascade end-to-end (run sent by premium AND flagged by the LLM view at its dev t
 
 | features | run AUROC | pooled pair AUROC | pair-ID acc | run AUROC, messages shuffled |
 |---|---|---|---|---|
-| text | 0.79 [0.60, 0.92] | 0.79 [0.69, 0.89] | 0.90 [0.73, 1.00] | 0.81 [0.62, 0.94] |
-| action | 0.95 [0.85, 1.00] | 0.99 [0.98, 1.00] | 0.95 [0.83, 1.00] | 0.95 [0.85, 1.00] |
-| combined | 0.96 [0.85, 1.00] | 0.99 [0.98, 1.00] | 0.95 [0.83, 1.00] | 0.94 [0.83, 1.00] |
-| structured | 0.95 [0.83, 1.00] | 0.99 [0.98, 1.00] | 0.95 [0.83, 1.00] | 0.93 [0.79, 1.00] |
-| all | 0.95 [0.83, 1.00] | 0.99 [0.98, 1.00] | 0.95 [0.83, 1.00] | 0.93 [0.80, 1.00] |
+| text | 0.79 [0.61, 0.93] | 0.79 [0.70, 0.89] | 0.90 [0.75, 1.00] | 0.81 [0.63, 0.94] |
+| action | 0.95 [0.86, 1.00] | 0.99 [0.98, 1.00] | 0.95 [0.82, 1.00] | 0.95 [0.86, 1.00] |
+| combined | 0.96 [0.87, 1.00] | 0.99 [0.98, 1.00] | 0.95 [0.82, 1.00] | 0.94 [0.84, 1.00] |
+| structured | 0.95 [0.83, 1.00] | 0.99 [0.98, 1.00] | 0.95 [0.82, 1.00] | 0.93 [0.80, 1.00] |
+| all | 0.95 [0.84, 1.00] | 0.99 [0.98, 1.00] | 0.95 [0.82, 1.00] | 0.93 [0.80, 1.00] |
 
 **Untrained public-text convergence** (`textsim.py`: TF-IDF cosine of the pair's public messages minus other pairs; vectorizer fit on dev text only; n = 30; class-stratified run-bootstrap):
 
 | scorer | run AUROC | within-market AUROC | pair-ID acc |
 |---|---|---|---|
-| textsim | 0.47 [0.24, 0.72] | 0.81 [0.68, 0.91] | 0.55 [0.35, 0.80] |
+| textsim | 0.47 [0.24, 0.72] | 0.81 [0.69, 0.91] | 0.55 [0.35, 0.75] |
 | premium | 1.00 [1.00, 1.00] | 0.98 [0.94, 1.00] | 0.95 [0.85, 1.00] |
-| text | 0.57 [0.37, 0.78] | 0.61 [0.51, 0.72] | 0.31 [0.17, 0.45] |
-| structured | 0.83 [0.67, 0.95] | 0.91 [0.80, 0.97] | 0.70 [0.50, 0.85] |
+| text | 0.57 [0.37, 0.78] | 0.61 [0.50, 0.72] | 0.31 [0.17, 0.45] |
+| structured | 0.83 [0.67, 0.96] | 0.91 [0.80, 0.97] | 0.70 [0.50, 0.90] |
 
 | contrast | Δ [95% CI] |
 |---|---|
-| textsim-text:run_auroc | -0.100 [-0.455, +0.198] |
+| textsim-text:run_auroc | -0.100 [-0.443, +0.205] |
 | textsim-text:within_market_auroc | +0.195 [+0.070, +0.310] |
-| textsim-premium:run_auroc | -0.525 [-0.780, -0.275] |
+| textsim-premium:run_auroc | -0.525 [-0.770, -0.270] |
 | textsim-premium:within_market_auroc | -0.170 [-0.300, -0.060] |
 
 **Does an LLM view add to the premium?** (`incremental.py`: untrained, label-free percentile-rank average of premium and the view; n = 30; paired class-stratified run-bootstrap):

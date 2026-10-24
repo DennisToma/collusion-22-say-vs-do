@@ -1377,6 +1377,13 @@
  "external_infotheory": {
   "source": "../collusion-14-infotheory/results/eval/llm_v3_ext.json",
   "n_runs_in_file": 74,
+  "coverage": {
+   "pcmi": "30/30 runs of the split",
+   "mi": "30/30 runs of the split",
+   "te": "30/30 runs of the split",
+   "pearson": "30/30 runs of the split",
+   "pair_level": "30/30 runs of the split"
+  },
   "pcmi": {
    "n": 30,
    "n_pos": 20,

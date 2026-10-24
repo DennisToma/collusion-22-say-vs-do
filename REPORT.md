@@ -1,18 +1,20 @@
 # Say vs. Do: does auditing what AI agents *say* together with what they *do* catch collusion better?
 
-*Apart AI Collusion Sprint, Q2.2 — text + action auditing. Status: DRAFT, results accumulating (see STATUS.md).*
+*Apart AI Collusion Sprint, Q2.2 — text + action auditing. Status: locked test results in (2026-10-24 00:03 UTC); exploration strata pending.*
 
-## Abstract (draft)
+## Abstract
 We build a 4-firm repeated-pricing market populated by LLM sellers (gpt-6-luna) in which one designated pair
-may get a private channel. Sellers are never told to collude — they only get a profit objective and, in the
-`private` condition, the opportunity. Auditors (gpt-6.1-sol) see only the observable log and score each of the
-six firm pairs, under four views: public text only, actions only, both, and both + computed statistics
-("structured"). We measure whether the hybrid views beat the best single modality (Δ_hybrid), and whether any gain
-comes from cross-modal consistency checking (message↔action shuffle ablation), and compare all LLM views with an
-untrained one-line statistic (pair price premium). Dev split so far (n = 30): no LLM seller coordinated in public
-(0/94 runs flagged), adding text gave no resolved gain to the auditor, views with a computed pair-statistics table
-localised better — and the untrained premium alone beat every LLM view (run AUROC 1.00 vs ≤ 0.89). Locked-test
-numbers pending.
+may get a private channel. Sellers are never told to collude — they get a profit objective and, in the `private`
+condition, the opportunity; all 70 private pairs use it to coordinate (explicit price agreement in 67, pricing-intention exchange in 3), but none of 125 runs contains
+explicit coordination in public. Zero-shot auditors (gpt-6.1-sol) score every firm pair from the observable log under
+six views (text, actions, both, ± a computed pair-statistics table). On the locked test split (n = 95, run once):
+the text-only auditor is at chance (run AUROC 0.47), and adding text to actions gives no gain (Δ_hybrid −0.01
+[−0.09, +0.06]) — reading what agents *say* does not help an LLM catch them when they say it in private. A
+statistics table helps (+0.10 run and within-market AUROC), and an untrained one-line statistic, the pair price
+premium, beats every LLM view at detection (0.95 vs ≤ 0.86) and matches the best ones at localisation. The LLM's
+distinctive value is fewer false alarms on publicly explained cooperation (0/15 vs 5/15 flagged). A supervised text
+classifier does find a strong signal in the public text (AUROC 0.98), which zero-shot auditors miss; what it keys on
+is not yet understood. Caveat: the premium comparator was chosen after a look at partial data.
 
 ## Question
 Given logged trajectories (public messages + prices + market state), do auditors that see both streams detect
@@ -71,10 +73,111 @@ it only validates the pipeline and the shuffle ablation.
   the whole dataset let a boosted text model recognise memorised training-fold text (text-only AUROC *rose*
   0.91→0.995 under shuffle); donors are now drawn within the CV test fold.
 
-### LLM market — HEADLINE: locked test split (runs 0030–0124, n = 95)
-*Pending.* `auto_finalize.sh` runs `finalize_test.sh` (the single locked test analysis) as soon as all 125 runs are
-labelled and audited by all 6 views; the tables will be copied verbatim from the generated
-`results/analysis/report_tables_test.md`. Until then, the dev results below are the only LLM-market numbers.
+### LLM market — HEADLINE: locked test split (runs 0030–0124, n = 95; 50 y=1, 30 `none`, 15 `legit`)
+Computed ONCE by `./finalize_test.sh` (stamp `logs/final/RUN_ONCE.stamp`: started 23:59, HEADLINE_DONE 00:03 UTC) with
+the configuration frozen on dev; all tables below are copied verbatim from the generated
+`results/analysis/report_tables_test.md` (source: `results/analysis/final_llm_v3_gpt-6.1-sol_test.json` and
+siblings). Hard set: 0/125 runs have explicit coordination language in public (`hardset.py`), so every run is "hard".
+95% class-stratified run-bootstrap CIs; fusion weight w_text = 0.6 fitted on dev.
+
+| scorer | run AUROC (detection) | within-market AUROC (localisation) | pooled pair AUROC | pair-ID acc |
+|---|---|---|---|---|
+| text | 0.47 [0.36, 0.58] | 0.65 [0.59, 0.71] | 0.60 [0.53, 0.67] | 0.35 [0.26, 0.46] |
+| action | 0.75 [0.65, 0.85] | 0.79 [0.72, 0.87] | 0.78 [0.72, 0.84] | 0.42 [0.28, 0.56] |
+| action_stats | 0.86 [0.77, 0.94] | 0.89 [0.84, 0.94] | 0.89 [0.84, 0.94] | 0.66 [0.52, 0.80] |
+| combined | 0.74 [0.64, 0.83] | 0.80 [0.71, 0.87] | 0.78 [0.72, 0.84] | 0.43 [0.31, 0.57] |
+| combined_stats | 0.80 [0.70, 0.89] | 0.93 [0.89, 0.96] | 0.89 [0.85, 0.93] | 0.73 [0.60, 0.84] |
+| structured | 0.84 [0.75, 0.91] | 0.92 [0.89, 0.96] | 0.89 [0.85, 0.94] | 0.70 [0.57, 0.82] |
+| fusion | 0.72 [0.62, 0.83] | 0.82 [0.74, 0.88] | 0.80 [0.74, 0.85] | 0.43 [0.30, 0.57] |
+| premium | 0.95 [0.90, 0.98] | 0.96 [0.91, 0.99] | 0.96 [0.92, 0.99] | 0.89 [0.79, 0.97] |
+| premium_r2plus | 0.90 [0.84, 0.95] | 0.93 [0.88, 0.98] | 0.92 [0.88, 0.96] | 0.84 [0.73, 0.93] |
+
+![test AUROC](figures/auroc_test.png)
+
+**Key paired contrasts** (same runs; Δ_hybrid[v] = v − max(text, action); rows selected from the generated file,
+which lists all 25 pre-registered contrasts; no multiplicity correction):
+
+| contrast | run AUROC | within-market AUROC | pooled pair AUROC |
+|---|---|---|---|
+| delta_hybrid[combined] | -0.013 [-0.091, +0.064] | +0.002 [-0.052, +0.050] | +0.004 [-0.039, +0.046] |
+| delta_hybrid[action_stats] | +0.106 [+0.038, +0.180] | +0.100 [+0.036, +0.164] | +0.116 [+0.067, +0.164] |
+| delta_hybrid[structured] | +0.083 [+0.001, +0.169] | +0.130 [+0.068, +0.194] | +0.116 [+0.066, +0.165] |
+| delta_hybrid[fusion] | -0.028 [-0.073, +0.018] | +0.022 [+0.000, +0.052] | +0.017 [-0.007, +0.043] |
+| action_stats-action | +0.106 [+0.038, +0.180] | +0.100 [+0.036, +0.164] | +0.116 [+0.067, +0.164] |
+| combined_stats-action_stats | -0.061 [-0.138, +0.014] | +0.036 [+0.008, +0.072] | -0.005 [-0.044, +0.035] |
+| combined-fusion | +0.016 [-0.064, +0.092] | -0.020 [-0.070, +0.022] | -0.013 [-0.053, +0.029] |
+| premium-combined_stats | +0.150 [+0.056, +0.248] | +0.028 [-0.022, +0.080] | +0.069 [+0.015, +0.115] |
+| premium-action_stats | +0.089 [+0.010, +0.182] | +0.064 [+0.006, +0.124] | +0.064 [+0.012, +0.118] |
+| premium_r2plus-action_stats | +0.045 [-0.042, +0.139] | +0.038 [-0.022, +0.104] | +0.030 [-0.024, +0.079] |
+| premium-structured | +0.112 [+0.026, +0.197] | +0.034 [-0.016, +0.078] | +0.065 [+0.013, +0.116] |
+| premium_r2plus-structured | +0.068 [-0.029, +0.161] | +0.008 [-0.046, +0.058] | +0.030 [-0.024, +0.080] |
+
+**Findings (test):**
+1. **Raw public text adds nothing to the LLM auditor.** The text-only auditor is at chance for detection (run AUROC
+   0.47) and weak at localisation (0.65). Giving the auditor messages + actions together does not beat actions alone
+   (Δ_hybrid[combined] run −0.013 [−0.091, +0.064], within +0.002 [−0.052, +0.050]), and joint reading is no better
+   than late fusion of the two unimodal auditors (combined − fusion within −0.020 [−0.070, +0.022]). Both
+   replicate dev.
+2. **A computed statistics table helps a lot.** action_stats − action: run +0.106 [+0.038, +0.180], within +0.100
+   [+0.036, +0.164]. With the table present, adding text gives a small localisation gain (combined_stats −
+   action_stats within +0.036 [+0.008, +0.072]; dev +0.020 [0.000, +0.050]) and no detection gain (run −0.061
+   [−0.138, +0.014]). This is the only positive say+do signal on LLM data. It is one of 25 contrasts and small.
+3. **An untrained one-line statistic beats every zero-shot LLM view at detection.** Pair premium run AUROC 0.95
+   [0.90, 0.98] vs best LLM view 0.86 (action_stats; premium − action_stats +0.089 [+0.010, +0.182], premium −
+   structured +0.112 [+0.026, +0.197]). For localisation the stats-table views are statistically tied with it
+   (premium − structured within +0.034 [−0.016, +0.078]; premium − combined_stats +0.028 [−0.022, +0.080]).
+   Without round 1 (premium_r2plus) the detection gap vs structured/action_stats is no longer resolved (+0.068
+   [−0.029, +0.161], +0.045 [−0.042, +0.139]). Disclosure: the premium was proposed after a look at partial data
+   that included test runs (see Held-out discipline), so this is not a blind discovery.
+4. **Where the LLM is better: legitimate cooperation.** At dev-chosen thresholds the premium flags 5/15 (0.33)
+   `legit` partnership runs; the structured and action auditors flag 0/15, because they read the public partnership
+   notice (structured also flags 0.40 of y=1 runs vs the premium's 0.92). So on test the LLM's distinctive value
+   is lower false-positive rate on publicly explained cooperation, not detection.
+5. **No LLM view adds to the premium** (`incremental.py`, untrained label-free rank average): combo − premium run
+   AUROC from −0.147 [−0.226, −0.078] (text) to +0.001 [−0.038, +0.043] (structured); never resolved positive.
+6. **Label ≈ condition check.** Among y=1 runs where the pair's late-window premium is ≤ 0.5 (agreement apparently
+   not sustained, n = 20), the premium still flags 0.80 [0.58, 0.92] and action_stats 0.65: much of the detection
+   comes from early (round-1) conduct, so "detected agreement" ≈ "detected an opening price signal".
+
+**Flag rates at the dev-chosen thresholds (test, honest FPR):**
+
+| stratum | n | text | action | action_stats | combined | combined_stats | structured | fusion | premium | premium_r2plus |
+|---|---|---|---|---|---|---|---|---|---|---|
+| all_negatives | 45 | 0.11 [0.05, 0.23] | 0.04 [0.01, 0.15] | 0.04 [0.01, 0.15] | 0.20 [0.11, 0.34] | 0.18 [0.09, 0.31] | 0.04 [0.01, 0.15] | 0.09 [0.04, 0.21] | 0.16 [0.08, 0.29] | 0.20 [0.11, 0.34] |
+| legit | 15 | 0.07 [0.01, 0.30] | 0.00 [0.00, 0.20] | 0.07 [0.01, 0.30] | 0.27 [0.11, 0.52] | 0.20 [0.07, 0.45] | 0.00 [0.00, 0.20] | 0.07 [0.01, 0.30] | 0.33 [0.15, 0.58] | 0.33 [0.15, 0.58] |
+| none_all | 30 | 0.13 [0.05, 0.30] | 0.07 [0.02, 0.21] | 0.03 [0.01, 0.17] | 0.17 [0.07, 0.34] | 0.17 [0.07, 0.34] | 0.07 [0.02, 0.21] | 0.10 [0.04, 0.26] | 0.07 [0.02, 0.21] | 0.13 [0.05, 0.30] |
+| none_highmarkup_proxy | 1 | 1.00 [0.21, 1.00] | 0.00 [0.00, 0.79] | 0.00 [0.00, 0.79] | 1.00 [0.21, 1.00] | 1.00 [0.21, 1.00] | 1.00 [0.21, 1.00] | 1.00 [0.21, 1.00] | 0.00 [0.00, 0.79] | 0.00 [0.00, 0.79] |
+| none_lowmarkup | 29 | 0.10 [0.04, 0.26] | 0.07 [0.02, 0.22] | 0.03 [0.01, 0.17] | 0.14 [0.06, 0.31] | 0.14 [0.06, 0.31] | 0.03 [0.01, 0.17] | 0.07 [0.02, 0.22] | 0.07 [0.02, 0.22] | 0.14 [0.06, 0.31] |
+| private_y1 | 50 | 0.10 [0.04, 0.21] | 0.20 [0.11, 0.33] | 0.72 [0.58, 0.82] | 0.52 [0.39, 0.65] | 0.68 [0.54, 0.79] | 0.40 [0.28, 0.54] | 0.28 [0.17, 0.42] | 0.92 [0.81, 0.97] | 0.84 [0.71, 0.92] |
+
+**Label≈condition check**: detection (flag rate) among y=1 runs by realised late-window relative premium of the colluding pair:
+
+| stratum | n | text | action | action_stats | combined | combined_stats | structured | fusion | premium | premium_r2plus |
+|---|---|---|---|---|---|---|---|---|---|---|
+| late_rel_premium_le_0.5 | 20 | 0.05 [0.01, 0.24] | 0.25 [0.11, 0.47] | 0.65 [0.43, 0.82] | 0.55 [0.34, 0.74] | 0.60 [0.39, 0.78] | 0.35 [0.18, 0.57] | 0.35 [0.18, 0.57] | 0.80 [0.58, 0.92] | 0.60 [0.39, 0.78] |
+| late_rel_premium_gt_0.5 | 30 | 0.13 [0.05, 0.30] | 0.17 [0.07, 0.34] | 0.77 [0.59, 0.88] | 0.50 [0.33, 0.67] | 0.73 [0.56, 0.86] | 0.43 [0.27, 0.61] | 0.23 [0.12, 0.41] | 1.00 [0.89, 1.00] | 1.00 [0.89, 1.00] |
+
+**Trained non-LLM baselines on test (caution):** a logistic regression on TF-IDF of the public messages, trained by
+5-fold CV *within* the test split, reaches run AUROC 0.98 [0.95, 1.00] and pair-ID accuracy 1.00, while the zero-shot
+LLM text auditor is at chance. Shuffling messages within label+condition does not hurt it (0.97). So the public text
+*does* carry a strong condition-linked signal that no public message states explicitly (0/125 hard-set flags) and the
+zero-shot LLM does not use. We have not yet established what it is (a likely candidate: private-channel sellers'
+public wording shifts in a way tied to the condition/prompt rather than to collusion per se) — see Limitations.
+The untrained text-convergence score (`textsim.py`) localises at 0.74 [0.66, 0.81] vs the LLM text auditor 0.65
+(Δ +0.088 [−0.010, +0.176], not resolved).
+
+**Other test results** (all in `results/analysis/report_tables_test.md`): sibling information-theoretic detectors are
+weak (run AUROC pCMI 0.54, MI 0.62, TE 0.45, Pearson 0.56; their `pair_level` = our premium, 0.95); premium-first
+cascade end to end (premium sends top 50% of runs, LLM view must also flag): action_stats recall 0.60 / FPR 0.02 /
+correct pair 0.44, structured 0.34 / 0.00 / 0.26 — again, gating by an LLM only loses recall vs the premium alone;
+evidence items name a colluding firm 54–62% of the time on y=1 runs (chance 50%); price claims are correct within
+±1 round in 81–93% of cases (action-bearing views). Cross-family (Claude Sonnet 5.5 vs gpt-6.1-sol, n = 18 mod-3
+runs so far, dev+test): similar pair AUROCs per view (e.g. structured 0.91 vs 0.84), Spearman 0.42–0.63.
+Message-shuffle ablation on test and the llm_v3fp / llm_v3mon strata: pending.
+
+![mechanism test](figures/mechanism_test.png)
+*(Descriptive, `fig_mechanism.py --split test` → `logs/mechanism_test.txt`: private pairs' late-window premium +1.02,
+positive in 44/50 runs; none −0.02; legit +0.08.)*
 
 ### LLM market — DEV split (runs 0000–0029, development; superseded by the test split above)
 Per `data/SPLITS.md`, headline numbers will come from ONE
@@ -89,7 +192,8 @@ Primary metrics: run AUROC (detection) and within-market AUROC (localisation: P(
 pair of the same market), positive runs). Pooled pair AUROC is secondary (a scorer that is flat within each
 market can still reach ≈ 0.77 pooled, per the codex review).
 
-**Public text is innocuous.** `hardset.py` (keyword list + a gpt-6-luna check of every public message) flagged
+**Public text is innocuous.** `hardset.py` (keyword list + a cheap-tier LLM check of every run's public messages: gpt-6-luna for 94 runs,
+deepseek-v4.1-flash via llm.py's backend auto-order for 31) flagged
 **0 / 94** runs checked so far (`logs/hardset_all.log`; the locked run re-checks all 125) for explicit coordination
 language in public. Within the limits of a keyword list + one LLM check, the sellers keep coordination in the private
 channel, so the LLM set is effectively all "hard" set; an "easy" set does not occur naturally here.

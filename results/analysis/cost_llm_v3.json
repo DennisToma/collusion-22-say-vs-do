@@ -3,91 +3,92 @@
  "token_estimate": "chars/4",
  "audits": {
   "claude-sonnet-5-5/action": {
-   "calls": 18,
-   "mean_prompt_chars": 3298,
-   "mean_prompt_tokens_est": 824,
-   "total_prompt_chars": 59358
+   "calls": 42,
+   "mean_prompt_chars": 3283,
+   "mean_prompt_tokens_est": 821,
+   "total_prompt_chars": 137885
   },
   "claude-sonnet-5-5/action_stats": {
-   "calls": 18,
-   "mean_prompt_chars": 3694,
-   "mean_prompt_tokens_est": 923,
-   "total_prompt_chars": 66489
+   "calls": 42,
+   "mean_prompt_chars": 3679,
+   "mean_prompt_tokens_est": 920,
+   "total_prompt_chars": 154532
   },
   "claude-sonnet-5-5/combined": {
-   "calls": 18,
-   "mean_prompt_chars": 11405,
-   "mean_prompt_tokens_est": 2851,
-   "total_prompt_chars": 205293
+   "calls": 42,
+   "mean_prompt_chars": 11375,
+   "mean_prompt_tokens_est": 2844,
+   "total_prompt_chars": 477741
   },
   "claude-sonnet-5-5/combined_stats": {
-   "calls": 18,
-   "mean_prompt_chars": 11801,
-   "mean_prompt_tokens_est": 2950,
-   "total_prompt_chars": 212424
+   "calls": 42,
+   "mean_prompt_chars": 11771,
+   "mean_prompt_tokens_est": 2943,
+   "total_prompt_chars": 494388
   },
   "claude-sonnet-5-5/structured": {
-   "calls": 18,
-   "mean_prompt_chars": 12024,
-   "mean_prompt_tokens_est": 3006,
-   "total_prompt_chars": 216438
+   "calls": 42,
+   "mean_prompt_chars": 11997,
+   "mean_prompt_tokens_est": 2999,
+   "total_prompt_chars": 503858
   },
   "claude-sonnet-5-5/text": {
-   "calls": 18,
-   "mean_prompt_chars": 9228,
-   "mean_prompt_tokens_est": 2307,
-   "total_prompt_chars": 166105
+   "calls": 42,
+   "mean_prompt_chars": 9205,
+   "mean_prompt_tokens_est": 2301,
+   "total_prompt_chars": 386609
   },
   "gpt-6.1-sol/action": {
-   "calls": 63,
-   "mean_prompt_chars": 3279,
+   "calls": 125,
+   "mean_prompt_chars": 3280,
    "mean_prompt_tokens_est": 820,
-   "total_prompt_chars": 206599
+   "total_prompt_chars": 410017
   },
   "gpt-6.1-sol/action_stats": {
-   "calls": 63,
-   "mean_prompt_chars": 3675,
+   "calls": 125,
+   "mean_prompt_chars": 3676,
    "mean_prompt_tokens_est": 919,
-   "total_prompt_chars": 231533
+   "total_prompt_chars": 459537
   },
   "gpt-6.1-sol/combined": {
-   "calls": 63,
-   "mean_prompt_chars": 11433,
-   "mean_prompt_tokens_est": 2858,
-   "total_prompt_chars": 720263
+   "calls": 125,
+   "mean_prompt_chars": 11395,
+   "mean_prompt_tokens_est": 2849,
+   "total_prompt_chars": 1424356
   },
   "gpt-6.1-sol/combined_stats": {
-   "calls": 5,
-   "mean_prompt_chars": 11816,
-   "mean_prompt_tokens_est": 2954,
-   "total_prompt_chars": 59079
+   "calls": 125,
+   "mean_prompt_chars": 11791,
+   "mean_prompt_tokens_est": 2948,
+   "total_prompt_chars": 1473876
   },
   "gpt-6.1-sol/structured": {
-   "calls": 63,
-   "mean_prompt_chars": 12055,
-   "mean_prompt_tokens_est": 3014,
-   "total_prompt_chars": 759485
+   "calls": 125,
+   "mean_prompt_chars": 12017,
+   "mean_prompt_tokens_est": 3004,
+   "total_prompt_chars": 1502142
   },
   "gpt-6.1-sol/text": {
-   "calls": 63,
-   "mean_prompt_chars": 9266,
-   "mean_prompt_tokens_est": 2316,
-   "total_prompt_chars": 583727
+   "calls": 125,
+   "mean_prompt_chars": 9227,
+   "mean_prompt_tokens_est": 2307,
+   "total_prompt_chars": 1153374
   }
  },
  "generation": {
-  "runs": 68,
-  "seller_calls": 3244,
-  "seller_calls_per_run": 47.7
+  "runs": 125,
+  "seller_calls": 6000,
+  "seller_calls_per_run": 48.0
  },
  "premium": {
   "llm_calls_per_run": 0,
   "note": "pair mean price minus other two firms; O(rounds) arithmetic"
  },
  "global_call_log_shared": {
-  "codex/gpt-6-luna": 8143,
-  "codex/gpt-6.1-sol": 422,
+  "codex/gpt-6-luna": 14888,
+  "codex/gpt-6.1-sol": 1212,
   "claude/claude-sonnet-5-5": 2,
-  "codex/gpt-5.6-terra": 1
+  "codex/gpt-5.6-terra": 1,
+  "go/deepseek-v4.1-flash": 379
  }
 }

@@ -1,0 +1,1380 @@
+{
+ "seed": 1,
+ "map": {
+  "llm_v3_0000": {
+   "donor": "llm_v3_0043",
+   "amap": {
+    "C": "A",
+    "D": "C",
+    "A": "D",
+    "B": "B"
+   },
+   "same_condition": true,
+   "ctx_l1": 11.0
+  },
+  "llm_v3_0001": {
+   "donor": "llm_v3_0117",
+   "amap": {
+    "A": "A",
+    "B": "D",
+    "C": "C",
+    "D": "B"
+   },
+   "same_condition": true,
+   "ctx_l1": 14.0
+  },
+  "llm_v3_0002": {
+   "donor": "llm_v3_0114",
+   "amap": {
+    "A": "A",
+    "D": "D",
+    "B": "B",
+    "C": "C"
+   },
+   "same_condition": true,
+   "ctx_l1": 12.0
+  },
+  "llm_v3_0003": {
+   "donor": "llm_v3_0120",
+   "amap": {
+    "B": "B",
+    "D": "C",
+    "A": "A",
+    "C": "D"
+   },
+   "same_condition": true,
+   "ctx_l1": 12.0
+  },
+  "llm_v3_0004": {
+   "donor": "llm_v3_0116",
+   "amap": {
+    "A": "A",
+    "C": "B",
+    "B": "D",
+    "D": "C"
+   },
+   "same_condition": true,
+   "ctx_l1": 7.0
+  },
+  "llm_v3_0005": {
+   "donor": "llm_v3_0065",
+   "amap": {
+    "A": "A",
+    "B": "C",
+    "C": "D",
+    "D": "B"
+   },
+   "same_condition": true,
+   "ctx_l1": 10.0
+  },
+  "llm_v3_0006": {
+   "donor": "llm_v3_0013",
+   "amap": {
+    "A": "A",
+    "C": "B",
+    "B": "C",
+    "D": "D"
+   },
+   "same_condition": true,
+   "ctx_l1": 13.0
+  },
+  "llm_v3_0007": {
+   "donor": "llm_v3_0004",
+   "amap": {
+    "A": "A",
+    "D": "C",
+    "B": "D",
+    "C": "B"
+   },
+   "same_condition": true,
+   "ctx_l1": 8.0
+  },
+  "llm_v3_0008": {
+   "donor": "llm_v3_0041",
+   "amap": {
+    "A": "A",
+    "C": "C",
+    "B": "B",
+    "D": "D"
+   },
+   "same_condition": true,
+   "ctx_l1": 11.0
+  },
+  "llm_v3_0009": {
+   "donor": "llm_v3_0056",
+   "amap": {
+    "A": "A",
+    "D": "D",
+    "B": "C",
+    "C": "B"
+   },
+   "same_condition": true,
+   "ctx_l1": 15.0
+  },
+  "llm_v3_0010": {
+   "donor": "llm_v3_0003",
+   "amap": {
+    "B": "B",
+    "D": "D",
+    "A": "C",
+    "C": "A"
+   },
+   "same_condition": true,
+   "ctx_l1": 9.0
+  },
+  "llm_v3_0011": {
+   "donor": "llm_v3_0112",
+   "amap": {
+    "A": "B",
+    "D": "D",
+    "B": "C",
+    "C": "A"
+   },
+   "same_condition": true,
+   "ctx_l1": 9.0
+  },
+  "llm_v3_0012": {
+   "donor": "llm_v3_0081",
+   "amap": {
+    "C": "A",
+    "D": "D",
+    "A": "C",
+    "B": "B"
+   },
+   "same_condition": true,
+   "ctx_l1": 5.0
+  },
+  "llm_v3_0013": {
+   "donor": "llm_v3_0004",
+   "amap": {
+    "A": "A",
+    "B": "C",
+    "C": "D",
+    "D": "B"
+   },
+   "same_condition": true,
+   "ctx_l1": 11.0
+  },
+  "llm_v3_0014": {
+   "donor": "llm_v3_0053",
+   "amap": {
+    "B": "B",
+    "D": "C",
+    "A": "D",
+    "C": "A"
+   },
+   "same_condition": true,
+   "ctx_l1": 13.0
+  },
+  "llm_v3_0015": {
+   "donor": "llm_v3_0068",
+   "amap": {
+    "C": "A",
+    "D": "D",
+    "A": "C",
+    "B": "B"
+   },
+   "same_condition": true,
+   "ctx_l1": 14.0
+  },
+  "llm_v3_0016": {
+   "donor": "llm_v3_0045",
+   "amap": {
+    "A": "C",
+    "C": "D",
+    "B": "B",
+    "D": "A"
+   },
+   "same_condition": true,
+   "ctx_l1": 9.0
+  },
+  "llm_v3_0017": {
+   "donor": "llm_v3_0049",
+   "amap": {
+    "B": "A",
+    "C": "B",
+    "A": "C",
+    "D": "D"
+   },
+   "same_condition": true,
+   "ctx_l1": 11.0
+  },
+  "llm_v3_0018": {
+   "donor": "llm_v3_0057",
+   "amap": {
+    "B": "B",
+    "D": "D",
+    "A": "C",
+    "C": "A"
+   },
+   "same_condition": true,
+   "ctx_l1": 13.0
+  },
+  "llm_v3_0019": {
+   "donor": "llm_v3_0010",
+   "amap": {
+    "A": "B",
+    "B": "D",
+    "C": "C",
+    "D": "A"
+   },
+   "same_condition": true,
+   "ctx_l1": 10.0
+  },
+  "llm_v3_0020": {
+   "donor": "llm_v3_0025",
+   "amap": {
+    "B": "B",
+    "C": "C",
+    "A": "D",
+    "D": "A"
+   },
+   "same_condition": true,
+   "ctx_l1": 13.0
+  },
+  "llm_v3_0021": {
+   "donor": "llm_v3_0070",
+   "amap": {
+    "A": "A",
+    "C": "D",
+    "B": "B",
+    "D": "C"
+   },
+   "same_condition": true,
+   "ctx_l1": 17.0
+  },
+  "llm_v3_0022": {
+   "donor": "llm_v3_0052",
+   "amap": {
+    "A": "A",
+    "C": "C",
+    "B": "B",
+    "D": "D"
+   },
+   "same_condition": true,
+   "ctx_l1": 9.0
+  },
+  "llm_v3_0023": {
+   "donor": "llm_v3_0065",
+   "amap": {
+    "A": "A",
+    "C": "C",
+    "B": "D",
+    "D": "B"
+   },
+   "same_condition": true,
+   "ctx_l1": 12.0
+  },
+  "llm_v3_0024": {
+   "donor": "llm_v3_0016",
+   "amap": {
+    "B": "A",
+    "C": "C",
+    "A": "B",
+    "D": "D"
+   },
+   "same_condition": true,
+   "ctx_l1": 12.0
+  },
+  "llm_v3_0025": {
+   "donor": "llm_v3_0076",
+   "amap": {
+    "B": "C",
+    "C": "D",
+    "A": "A",
+    "D": "B"
+   },
+   "same_condition": true,
+   "ctx_l1": 8.0
+  },
+  "llm_v3_0026": {
+   "donor": "llm_v3_0012",
+   "amap": {
+    "B": "C",
+    "C": "D",
+    "A": "A",
+    "D": "B"
+   },
+   "same_condition": true,
+   "ctx_l1": 10.0
+  },
+  "llm_v3_0027": {
+   "donor": "llm_v3_0096",
+   "amap": {
+    "A": "B",
+    "B": "C",
+    "C": "D",
+    "D": "A"
+   },
+   "same_condition": true,
+   "ctx_l1": 18.0
+  },
+  "llm_v3_0028": {
+   "donor": "llm_v3_0064",
+   "amap": {
+    "A": "B",
+    "D": "D",
+    "B": "A",
+    "C": "C"
+   },
+   "same_condition": true,
+   "ctx_l1": 9.0
+  },
+  "llm_v3_0029": {
+   "donor": "llm_v3_0065",
+   "amap": {
+    "A": "A",
+    "D": "C",
+    "B": "B",
+    "C": "D"
+   },
+   "same_condition": true,
+   "ctx_l1": 11.0
+  },
+  "llm_v3_0030": {
+   "donor": "llm_v3_0041",
+   "amap": {
+    "A": "A",
+    "B": "C",
+    "C": "B",
+    "D": "D"
+   },
+   "same_condition": true,
+   "ctx_l1": 12.0
+  },
+  "llm_v3_0031": {
+   "donor": "llm_v3_0049",
+   "amap": {
+    "B": "A",
+    "C": "B",
+    "A": "D",
+    "D": "C"
+   },
+   "same_condition": true,
+   "ctx_l1": 8.0
+  },
+  "llm_v3_0032": {
+   "donor": "llm_v3_0031",
+   "amap": {
+    "A": "B",
+    "B": "C",
+    "C": "D",
+    "D": "A"
+   },
+   "same_condition": true,
+   "ctx_l1": 8.0
+  },
+  "llm_v3_0033": {
+   "donor": "llm_v3_0075",
+   "amap": {
+    "C": "A",
+    "D": "C",
+    "A": "B",
+    "B": "D"
+   },
+   "same_condition": true,
+   "ctx_l1": 10.0
+  },
+  "llm_v3_0034": {
+   "donor": "llm_v3_0088",
+   "amap": {
+    "A": "C",
+    "B": "D",
+    "C": "B",
+    "D": "A"
+   },
+   "same_condition": true,
+   "ctx_l1": 14.0
+  },
+  "llm_v3_0035": {
+   "donor": "llm_v3_0091",
+   "amap": {
+    "A": "A",
+    "D": "C",
+    "B": "B",
+    "C": "D"
+   },
+   "same_condition": true,
+   "ctx_l1": 12.0
+  },
+  "llm_v3_0036": {
+   "donor": "llm_v3_0092",
+   "amap": {
+    "B": "A",
+    "D": "D",
+    "A": "B",
+    "C": "C"
+   },
+   "same_condition": true,
+   "ctx_l1": 16.0
+  },
+  "llm_v3_0037": {
+   "donor": "llm_v3_0124",
+   "amap": {
+    "B": "C",
+    "D": "D",
+    "A": "B",
+    "C": "A"
+   },
+   "same_condition": true,
+   "ctx_l1": 8.0
+  },
+  "llm_v3_0038": {
+   "donor": "llm_v3_0088",
+   "amap": {
+    "A": "C",
+    "D": "D",
+    "B": "A",
+    "C": "B"
+   },
+   "same_condition": true,
+   "ctx_l1": 12.0
+  },
+  "llm_v3_0039": {
+   "donor": "llm_v3_0101",
+   "amap": {
+    "B": "B",
+    "C": "D",
+    "A": "A",
+    "D": "C"
+   },
+   "same_condition": true,
+   "ctx_l1": 11.0
+  },
+  "llm_v3_0040": {
+   "donor": "llm_v3_0033",
+   "amap": {
+    "B": "C",
+    "C": "D",
+    "A": "B",
+    "D": "A"
+   },
+   "same_condition": true,
+   "ctx_l1": 12.0
+  },
+  "llm_v3_0041": {
+   "donor": "llm_v3_0056",
+   "amap": {
+    "A": "A",
+    "C": "D",
+    "B": "C",
+    "D": "B"
+   },
+   "same_condition": true,
+   "ctx_l1": 6.0
+  },
+  "llm_v3_0042": {
+   "donor": "llm_v3_0088",
+   "amap": {
+    "C": "C",
+    "D": "D",
+    "A": "A",
+    "B": "B"
+   },
+   "same_condition": true,
+   "ctx_l1": 14.0
+  },
+  "llm_v3_0043": {
+   "donor": "llm_v3_0039",
+   "amap": {
+    "A": "B",
+    "C": "C",
+    "B": "D",
+    "D": "A"
+   },
+   "same_condition": true,
+   "ctx_l1": 13.0
+  },
+  "llm_v3_0044": {
+   "donor": "llm_v3_0089",
+   "amap": {
+    "A": "B",
+    "D": "C",
+    "B": "D",
+    "C": "A"
+   },
+   "same_condition": true,
+   "ctx_l1": 12.0
+  },
+  "llm_v3_0045": {
+   "donor": "llm_v3_0116",
+   "amap": {
+    "C": "A",
+    "D": "B",
+    "A": "D",
+    "B": "C"
+   },
+   "same_condition": true,
+   "ctx_l1": 5.0
+  },
+  "llm_v3_0046": {
+   "donor": "llm_v3_0057",
+   "amap": {
+    "C": "B",
+    "D": "D",
+    "A": "C",
+    "B": "A"
+   },
+   "same_condition": true,
+   "ctx_l1": 10.0
+  },
+  "llm_v3_0047": {
+   "donor": "llm_v3_0065",
+   "amap": {
+    "A": "A",
+    "D": "C",
+    "B": "B",
+    "C": "D"
+   },
+   "same_condition": true,
+   "ctx_l1": 9.0
+  },
+  "llm_v3_0048": {
+   "donor": "llm_v3_0046",
+   "amap": {
+    "B": "C",
+    "D": "D",
+    "A": "A",
+    "C": "B"
+   },
+   "same_condition": true,
+   "ctx_l1": 15.0
+  },
+  "llm_v3_0049": {
+   "donor": "llm_v3_0058",
+   "amap": {
+    "A": "A",
+    "B": "C",
+    "C": "B",
+    "D": "D"
+   },
+   "same_condition": true,
+   "ctx_l1": 8.0
+  },
+  "llm_v3_0050": {
+   "donor": "llm_v3_0029",
+   "amap": {
+    "B": "A",
+    "D": "D",
+    "A": "C",
+    "C": "B"
+   },
+   "same_condition": true,
+   "ctx_l1": 14.0
+  },
+  "llm_v3_0051": {
+   "donor": "llm_v3_0028",
+   "amap": {
+    "A": "A",
+    "B": "D",
+    "C": "C",
+    "D": "B"
+   },
+   "same_condition": true,
+   "ctx_l1": 10.0
+  },
+  "llm_v3_0052": {
+   "donor": "llm_v3_0097",
+   "amap": {
+    "A": "A",
+    "C": "C",
+    "B": "D",
+    "D": "B"
+   },
+   "same_condition": true,
+   "ctx_l1": 12.0
+  },
+  "llm_v3_0053": {
+   "donor": "llm_v3_0014",
+   "amap": {
+    "B": "B",
+    "C": "D",
+    "A": "C",
+    "D": "A"
+   },
+   "same_condition": true,
+   "ctx_l1": 13.0
+  },
+  "llm_v3_0054": {
+   "donor": "llm_v3_0074",
+   "amap": {
+    "B": "B",
+    "C": "C",
+    "A": "A",
+    "D": "D"
+   },
+   "same_condition": true,
+   "ctx_l1": 20.0
+  },
+  "llm_v3_0055": {
+   "donor": "llm_v3_0028",
+   "amap": {
+    "B": "A",
+    "C": "D",
+    "A": "C",
+    "D": "B"
+   },
+   "same_condition": true,
+   "ctx_l1": 17.0
+  },
+  "llm_v3_0056": {
+   "donor": "llm_v3_0083",
+   "amap": {
+    "A": "A",
+    "D": "C",
+    "B": "B",
+    "C": "D"
+   },
+   "same_condition": true,
+   "ctx_l1": 9.0
+  },
+  "llm_v3_0057": {
+   "donor": "llm_v3_0048",
+   "amap": {
+    "B": "B",
+    "D": "D",
+    "A": "A",
+    "C": "C"
+   },
+   "same_condition": true,
+   "ctx_l1": 11.0
+  },
+  "llm_v3_0058": {
+   "donor": "llm_v3_0032",
+   "amap": {
+    "A": "A",
+    "C": "B",
+    "B": "C",
+    "D": "D"
+   },
+   "same_condition": true,
+   "ctx_l1": 8.0
+  },
+  "llm_v3_0059": {
+   "donor": "llm_v3_0072",
+   "amap": {
+    "B": "A",
+    "C": "C",
+    "A": "B",
+    "D": "D"
+   },
+   "same_condition": true,
+   "ctx_l1": 9.0
+  },
+  "llm_v3_0060": {
+   "donor": "llm_v3_0084",
+   "amap": {
+    "A": "A",
+    "B": "D",
+    "C": "C",
+    "D": "B"
+   },
+   "same_condition": true,
+   "ctx_l1": 11.0
+  },
+  "llm_v3_0061": {
+   "donor": "llm_v3_0023",
+   "amap": {
+    "A": "A",
+    "D": "C",
+    "B": "D",
+    "C": "B"
+   },
+   "same_condition": true,
+   "ctx_l1": 11.0
+  },
+  "llm_v3_0062": {
+   "donor": "llm_v3_0037",
+   "amap": {
+    "A": "B",
+    "B": "D",
+    "C": "C",
+    "D": "A"
+   },
+   "same_condition": true,
+   "ctx_l1": 15.0
+  },
+  "llm_v3_0063": {
+   "donor": "llm_v3_0045",
+   "amap": {
+    "A": "C",
+    "D": "D",
+    "B": "A",
+    "C": "B"
+   },
+   "same_condition": true,
+   "ctx_l1": 9.0
+  },
+  "llm_v3_0064": {
+   "donor": "llm_v3_0037",
+   "amap": {
+    "B": "B",
+    "D": "D",
+    "A": "C",
+    "C": "A"
+   },
+   "same_condition": true,
+   "ctx_l1": 8.0
+  },
+  "llm_v3_0065": {
+   "donor": "llm_v3_0112",
+   "amap": {
+    "A": "B",
+    "C": "D",
+    "B": "C",
+    "D": "A"
+   },
+   "same_condition": true,
+   "ctx_l1": 4.0
+  },
+  "llm_v3_0066": {
+   "donor": "llm_v3_0060",
+   "amap": {
+    "B": "A",
+    "C": "B",
+    "A": "D",
+    "D": "C"
+   },
+   "same_condition": true,
+   "ctx_l1": 15.0
+  },
+  "llm_v3_0067": {
+   "donor": "llm_v3_0051",
+   "amap": {
+    "C": "A",
+    "D": "B",
+    "A": "D",
+    "B": "C"
+   },
+   "same_condition": true,
+   "ctx_l1": 10.0
+  },
+  "llm_v3_0068": {
+   "donor": "llm_v3_0033",
+   "amap": {
+    "A": "C",
+    "D": "D",
+    "B": "B",
+    "C": "A"
+   },
+   "same_condition": true,
+   "ctx_l1": 14.0
+  },
+  "llm_v3_0069": {
+   "donor": "llm_v3_0075",
+   "amap": {
+    "B": "A",
+    "C": "C",
+    "A": "D",
+    "D": "B"
+   },
+   "same_condition": true,
+   "ctx_l1": 10.0
+  },
+  "llm_v3_0070": {
+   "donor": "llm_v3_0076",
+   "amap": {
+    "A": "C",
+    "D": "D",
+    "B": "A",
+    "C": "B"
+   },
+   "same_condition": true,
+   "ctx_l1": 10.0
+  },
+  "llm_v3_0071": {
+   "donor": "llm_v3_0111",
+   "amap": {
+    "A": "A",
+    "D": "C",
+    "B": "D",
+    "C": "B"
+   },
+   "same_condition": true,
+   "ctx_l1": 7.0
+  },
+  "llm_v3_0072": {
+   "donor": "llm_v3_0059",
+   "amap": {
+    "A": "B",
+    "C": "C",
+    "B": "A",
+    "D": "D"
+   },
+   "same_condition": true,
+   "ctx_l1": 9.0
+  },
+  "llm_v3_0073": {
+   "donor": "llm_v3_0010",
+   "amap": {
+    "A": "B",
+    "D": "D",
+    "B": "C",
+    "C": "A"
+   },
+   "same_condition": true,
+   "ctx_l1": 11.0
+  },
+  "llm_v3_0074": {
+   "donor": "llm_v3_0098",
+   "amap": {
+    "B": "B",
+    "C": "C",
+    "A": "A",
+    "D": "D"
+   },
+   "same_condition": true,
+   "ctx_l1": 18.0
+  },
+  "llm_v3_0075": {
+   "donor": "llm_v3_0089",
+   "amap": {
+    "A": "B",
+    "C": "C",
+    "B": "A",
+    "D": "D"
+   },
+   "same_condition": true,
+   "ctx_l1": 10.0
+  },
+  "llm_v3_0076": {
+   "donor": "llm_v3_0096",
+   "amap": {
+    "C": "B",
+    "D": "C",
+    "A": "A",
+    "B": "D"
+   },
+   "same_condition": true,
+   "ctx_l1": 9.0
+  },
+  "llm_v3_0077": {
+   "donor": "llm_v3_0102",
+   "amap": {
+    "A": "B",
+    "C": "C",
+    "B": "A",
+    "D": "D"
+   },
+   "same_condition": true,
+   "ctx_l1": 10.0
+  },
+  "llm_v3_0078": {
+   "donor": "llm_v3_0035",
+   "amap": {
+    "A": "A",
+    "D": "D",
+    "B": "C",
+    "C": "B"
+   },
+   "same_condition": true,
+   "ctx_l1": 12.0
+  },
+  "llm_v3_0079": {
+   "donor": "llm_v3_0005",
+   "amap": {
+    "A": "A",
+    "C": "B",
+    "B": "C",
+    "D": "D"
+   },
+   "same_condition": true,
+   "ctx_l1": 14.0
+  },
+  "llm_v3_0080": {
+   "donor": "llm_v3_0039",
+   "amap": {
+    "A": "B",
+    "B": "C",
+    "C": "A",
+    "D": "D"
+   },
+   "same_condition": true,
+   "ctx_l1": 11.0
+  },
+  "llm_v3_0081": {
+   "donor": "llm_v3_0012",
+   "amap": {
+    "A": "C",
+    "D": "D",
+    "B": "A",
+    "C": "B"
+   },
+   "same_condition": true,
+   "ctx_l1": 5.0
+  },
+  "llm_v3_0082": {
+   "donor": "llm_v3_0014",
+   "amap": {
+    "B": "B",
+    "C": "D",
+    "A": "A",
+    "D": "C"
+   },
+   "same_condition": true,
+   "ctx_l1": 10.0
+  },
+  "llm_v3_0083": {
+   "donor": "llm_v3_0072",
+   "amap": {
+    "A": "A",
+    "C": "C",
+    "B": "D",
+    "D": "B"
+   },
+   "same_condition": true,
+   "ctx_l1": 10.0
+  },
+  "llm_v3_0084": {
+   "donor": "llm_v3_0060",
+   "amap": {
+    "A": "A",
+    "D": "B",
+    "B": "C",
+    "C": "D"
+   },
+   "same_condition": true,
+   "ctx_l1": 11.0
+  },
+  "llm_v3_0085": {
+   "donor": "llm_v3_0048",
+   "amap": {
+    "A": "B",
+    "C": "D",
+    "B": "C",
+    "D": "A"
+   },
+   "same_condition": true,
+   "ctx_l1": 11.0
+  },
+  "llm_v3_0086": {
+   "donor": "llm_v3_0047",
+   "amap": {
+    "B": "A",
+    "D": "D",
+    "A": "B",
+    "C": "C"
+   },
+   "same_condition": true,
+   "ctx_l1": 8.0
+  },
+  "llm_v3_0087": {
+   "donor": "llm_v3_0028",
+   "amap": {
+    "B": "A",
+    "C": "D",
+    "A": "C",
+    "D": "B"
+   },
+   "same_condition": true,
+   "ctx_l1": 9.0
+  },
+  "llm_v3_0088": {
+   "donor": "llm_v3_0034",
+   "amap": {
+    "C": "A",
+    "D": "B",
+    "A": "D",
+    "B": "C"
+   },
+   "same_condition": true,
+   "ctx_l1": 14.0
+  },
+  "llm_v3_0089": {
+   "donor": "llm_v3_0033",
+   "amap": {
+    "B": "C",
+    "C": "D",
+    "A": "A",
+    "D": "B"
+   },
+   "same_condition": true,
+   "ctx_l1": 10.0
+  },
+  "llm_v3_0090": {
+   "donor": "llm_v3_0049",
+   "amap": {
+    "C": "A",
+    "D": "B",
+    "A": "D",
+    "B": "C"
+   },
+   "same_condition": true,
+   "ctx_l1": 9.0
+  },
+  "llm_v3_0091": {
+   "donor": "llm_v3_0077",
+   "amap": {
+    "A": "A",
+    "C": "C",
+    "B": "B",
+    "D": "D"
+   },
+   "same_condition": true,
+   "ctx_l1": 9.0
+  },
+  "llm_v3_0092": {
+   "donor": "llm_v3_0020",
+   "amap": {
+    "A": "B",
+    "D": "C",
+    "B": "D",
+    "C": "A"
+   },
+   "same_condition": true,
+   "ctx_l1": 13.0
+  },
+  "llm_v3_0093": {
+   "donor": "llm_v3_0086",
+   "amap": {
+    "A": "B",
+    "B": "D",
+    "C": "A",
+    "D": "C"
+   },
+   "same_condition": true,
+   "ctx_l1": 8.0
+  },
+  "llm_v3_0094": {
+   "donor": "llm_v3_0013",
+   "amap": {
+    "B": "A",
+    "D": "B",
+    "A": "C",
+    "C": "D"
+   },
+   "same_condition": true,
+   "ctx_l1": 13.0
+  },
+  "llm_v3_0095": {
+   "donor": "llm_v3_0041",
+   "amap": {
+    "B": "A",
+    "C": "C",
+    "A": "B",
+    "D": "D"
+   },
+   "same_condition": true,
+   "ctx_l1": 11.0
+  },
+  "llm_v3_0096": {
+   "donor": "llm_v3_0117",
+   "amap": {
+    "B": "A",
+    "C": "D",
+    "A": "C",
+    "D": "B"
+   },
+   "same_condition": true,
+   "ctx_l1": 8.0
+  },
+  "llm_v3_0097": {
+   "donor": "llm_v3_0022",
+   "amap": {
+    "A": "A",
+    "C": "C",
+    "B": "B",
+    "D": "D"
+   },
+   "same_condition": true,
+   "ctx_l1": 11.0
+  },
+  "llm_v3_0098": {
+   "donor": "llm_v3_0036",
+   "amap": {
+    "B": "B",
+    "C": "D",
+    "A": "C",
+    "D": "A"
+   },
+   "same_condition": true,
+   "ctx_l1": 16.0
+  },
+  "llm_v3_0099": {
+   "donor": "llm_v3_0083",
+   "amap": {
+    "A": "A",
+    "B": "C",
+    "C": "B",
+    "D": "D"
+   },
+   "same_condition": true,
+   "ctx_l1": 11.0
+  },
+  "llm_v3_0100": {
+   "donor": "llm_v3_0112",
+   "amap": {
+    "C": "B",
+    "D": "D",
+    "A": "C",
+    "B": "A"
+   },
+   "same_condition": true,
+   "ctx_l1": 13.0
+  },
+  "llm_v3_0101": {
+   "donor": "llm_v3_0037",
+   "amap": {
+    "B": "B",
+    "D": "D",
+    "A": "A",
+    "C": "C"
+   },
+   "same_condition": true,
+   "ctx_l1": 11.0
+  },
+  "llm_v3_0102": {
+   "donor": "llm_v3_0051",
+   "amap": {
+    "B": "A",
+    "C": "B",
+    "A": "D",
+    "D": "C"
+   },
+   "same_condition": true,
+   "ctx_l1": 8.0
+  },
+  "llm_v3_0103": {
+   "donor": "llm_v3_0052",
+   "amap": {
+    "A": "A",
+    "C": "C",
+    "B": "D",
+    "D": "B"
+   },
+   "same_condition": true,
+   "ctx_l1": 13.0
+  },
+  "llm_v3_0104": {
+   "donor": "llm_v3_0025",
+   "amap": {
+    "A": "B",
+    "D": "C",
+    "B": "D",
+    "C": "A"
+   },
+   "same_condition": true,
+   "ctx_l1": 17.0
+  },
+  "llm_v3_0105": {
+   "donor": "llm_v3_0046",
+   "amap": {
+    "C": "C",
+    "D": "D",
+    "A": "A",
+    "B": "B"
+   },
+   "same_condition": true,
+   "ctx_l1": 16.0
+  },
+  "llm_v3_0106": {
+   "donor": "llm_v3_0093",
+   "amap": {
+    "A": "A",
+    "C": "B",
+    "B": "D",
+    "D": "C"
+   },
+   "same_condition": true,
+   "ctx_l1": 11.0
+  },
+  "llm_v3_0107": {
+   "donor": "llm_v3_0096",
+   "amap": {
+    "B": "B",
+    "D": "C",
+    "A": "D",
+    "C": "A"
+   },
+   "same_condition": true,
+   "ctx_l1": 17.0
+  },
+  "llm_v3_0108": {
+   "donor": "llm_v3_0032",
+   "amap": {
+    "A": "A",
+    "C": "B",
+    "B": "D",
+    "D": "C"
+   },
+   "same_condition": true,
+   "ctx_l1": 13.0
+  },
+  "llm_v3_0109": {
+   "donor": "llm_v3_0010",
+   "amap": {
+    "C": "B",
+    "D": "D",
+    "A": "A",
+    "B": "C"
+   },
+   "same_condition": true,
+   "ctx_l1": 9.0
+  },
+  "llm_v3_0110": {
+   "donor": "llm_v3_0093",
+   "amap": {
+    "C": "A",
+    "D": "B",
+    "A": "D",
+    "B": "C"
+   },
+   "same_condition": true,
+   "ctx_l1": 9.0
+  },
+  "llm_v3_0111": {
+   "donor": "llm_v3_0081",
+   "amap": {
+    "A": "A",
+    "C": "D",
+    "B": "C",
+    "D": "B"
+   },
+   "same_condition": true,
+   "ctx_l1": 7.0
+  },
+  "llm_v3_0112": {
+   "donor": "llm_v3_0093",
+   "amap": {
+    "B": "A",
+    "D": "B",
+    "A": "C",
+    "C": "D"
+   },
+   "same_condition": true,
+   "ctx_l1": 9.0
+  },
+  "llm_v3_0113": {
+   "donor": "llm_v3_0057",
+   "amap": {
+    "A": "B",
+    "B": "D",
+    "C": "A",
+    "D": "C"
+   },
+   "same_condition": true,
+   "ctx_l1": 14.0
+  },
+  "llm_v3_0114": {
+   "donor": "llm_v3_0028",
+   "amap": {
+    "A": "A",
+    "D": "D",
+    "B": "B",
+    "C": "C"
+   },
+   "same_condition": true,
+   "ctx_l1": 10.0
+  },
+  "llm_v3_0115": {
+   "donor": "llm_v3_0048",
+   "amap": {
+    "B": "B",
+    "D": "D",
+    "A": "A",
+    "C": "C"
+   },
+   "same_condition": true,
+   "ctx_l1": 15.0
+  },
+  "llm_v3_0116": {
+   "donor": "llm_v3_0004",
+   "amap": {
+    "A": "A",
+    "B": "C",
+    "C": "D",
+    "D": "B"
+   },
+   "same_condition": true,
+   "ctx_l1": 7.0
+  },
+  "llm_v3_0117": {
+   "donor": "llm_v3_0096",
+   "amap": {
+    "A": "B",
+    "D": "C",
+    "B": "D",
+    "C": "A"
+   },
+   "same_condition": true,
+   "ctx_l1": 8.0
+  },
+  "llm_v3_0118": {
+   "donor": "llm_v3_0102",
+   "amap": {
+    "A": "B",
+    "D": "C",
+    "B": "D",
+    "C": "A"
+   },
+   "same_condition": true,
+   "ctx_l1": 12.0
+  },
+  "llm_v3_0119": {
+   "donor": "llm_v3_0097",
+   "amap": {
+    "C": "A",
+    "D": "C",
+    "A": "B",
+    "B": "D"
+   },
+   "same_condition": true,
+   "ctx_l1": 12.0
+  },
+  "llm_v3_0120": {
+   "donor": "llm_v3_0032",
+   "amap": {
+    "B": "A",
+    "C": "B",
+    "A": "C",
+    "D": "D"
+   },
+   "same_condition": true,
+   "ctx_l1": 6.0
+  },
+  "llm_v3_0121": {
+   "donor": "llm_v3_0013",
+   "amap": {
+    "A": "A",
+    "D": "B",
+    "B": "D",
+    "C": "C"
+   },
+   "same_condition": true,
+   "ctx_l1": 14.0
+  },
+  "llm_v3_0122": {
+   "donor": "llm_v3_0120",
+   "amap": {
+    "A": "B",
+    "B": "C",
+    "C": "A",
+    "D": "D"
+   },
+   "same_condition": true,
+   "ctx_l1": 12.0
+  },
+  "llm_v3_0123": {
+   "donor": "llm_v3_0045",
+   "amap": {
+    "A": "C",
+    "B": "D",
+    "C": "A",
+    "D": "B"
+   },
+   "same_condition": true,
+   "ctx_l1": 9.0
+  },
+  "llm_v3_0124": {
+   "donor": "llm_v3_0028",
+   "amap": {
+    "C": "A",
+    "D": "D",
+    "A": "C",
+    "B": "B"
+   },
+   "same_condition": true,
+   "ctx_l1": 11.0
+  }
+ }
+}

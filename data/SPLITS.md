@@ -63,3 +63,9 @@
   labelled and `auditors.py --verify` (read-only: one current-prompt-hash audit per labelled run per view, no
   duplicates) passes twice with no llm_v3 labeller/auditor running; `finalize_test.sh` preflight also runs `--verify`.
   `fig_mechanism.py` (descriptive price paths) refuses `--split test/all` before HEADLINE_DONE. No scorer changed.
+- **Locked test run (iter 9).** `auto_finalize.sh` started `finalize_test.sh` at 23:45; its PREFLIGHT failed (before the
+  lock, no test metric computed) because the hard-set LLM check of run 0106 returned empty text (deepseek-v4.1-flash
+  at max_tokens=200). `hardset.py` now retries with a larger token budget (200 → 1000 → 3000); 0106 then checked
+  (not flagged; 0/125 flagged overall). `finalize_test.sh` was then run once by hand: STARTED 23:59, HEADLINE_DONE
+  00:03 UTC, no failed steps. This is the single headline run. Hard-set checker model: gpt-6-luna 94 runs,
+  deepseek-v4.1-flash 31 runs (cheap-tier backend auto-order).
