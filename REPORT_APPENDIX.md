@@ -425,7 +425,7 @@ compute the statistic and ask the LLM only for explanation (proposed; explanatio
 
 
 
-## P2-detail — full P2.5 and P2.6 text (moved from REPORT.md 2026-10-24 ~10:30 UTC for length; text unchanged, interim numbers as of 09:57 UTC)
+## P2-detail — full P2.5 and P2.6 text (moved from REPORT.md 2026-10-24 10:00 UTC for length; text unchanged, interim numbers as of 09:57 UTC)
 
 **P2.5 Is the "collusion" a prompt artifact? (E77 + amendment, registered before generation; `uv run python p2_cue.py
 --ds llm_p2cue && uv run python p2_cue_verdict.py` → `results/analysis/p2_cue_verdict_llm_p2cue.json`, Figure P2.5.)**

@@ -1,7 +1,7 @@
 # Say vs. Do: does auditing what AI agents *say* together with what they *do* catch collusion better?
 
 *Apart AI Collusion Sprint, Q2.2 — text + action auditing. v1 (overnight) results are frozen as git tag `v1-overnight`;
-Phase 2 (from 2026-10-24 06:30 UTC) re-tests them. Interim checkpoint text, 2026-10-24 ~10:30 UTC: the fresh n = 60
+Phase 2 (from 2026-10-24 06:30 UTC) re-tests them. Interim checkpoint text, 2026-10-24 10:03 UTC: the fresh n = 60
 replication (`llm_p2rep`) and the final deepseek / gpt-6.1-sol numbers are still running and will replace the rows marked
 interim. Exports, slides and offline verification: see [README.md](README.md).*
 

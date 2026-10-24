@@ -2,7 +2,7 @@
 
 # STATUS
 
-## Current state (2026-10-24 10:25 UTC, Phase 2 iteration 6)
+## Current state (2026-10-24 10:03 UTC, Phase 2 iteration 6)
 - HEADLINE REWRITTEN (directive 1): REPORT Abstract (250 words) + TL;DR (6 items) now state the Phase 2 Q2.2 answer:
   (i) text+actions no gain (-0.01 test / -0.14 rep / -0.03 kept label), (ii) premium = offer+wording artifact (notepad 65%, para2 +0.24),
   (iii) text usefulness depends on WHERE a family coordinates, (iv) labels disagree (14/50 kept). "Suggested architecture" removed.
@@ -110,6 +110,6 @@
 
 - 2026-10-24 06:18 UTC iter 31: E76 summary/handoff finalization. Independent Codex and Opus reviews applied to TL;DR, abstract, README and talk: remove unsupported causal explanations, distinguish run detection from within-market localisation and test from replication, clarify raw-action/statistics views and non-equivalence. Added six source-linked presenter Q&As, E74 label robustness on slide 2 and uniform-stratum caveat in notes; repaired stale monitor judge caveat. Browser QA exposed a pre-existing focus/keyboard bug (Present retained focus; ArrowRight was ignored); fixed while preserving native Space activation, reproduced before/after, and asserted all seven slide transitions. Actual all-slide QA found and fixed slide 3 overflow at 1024x768. Five desktop layouts, mobile, no-JS reading and offline checks pass. Exports preserve 28 report / 7 talk pages, 341 cells, 477 report + 102 slide fragments and 8 figures. All 47 tests, 424 hashes, 2,368 audit-input checks and source/export freshness pass. Every scientific input/cache/result/figure/analysis/receipt unchanged; 417/424 previous manifested files identical. Review: reviews/iteration31_summary_handoff.md. No experiments, model audits, label judging, AUROC/bootstrap or threshold recomputation. Inherited log timestamps are retained unchanged; this entry uses date -u.
 
-### 2026-10-24 10:25 UTC (P2 iter6)
+### 2026-10-24 10:03 UTC (P2 iter6)
 - Directive 1 done: new Abstract/TL;DR (Phase 2 answer), P2.5/P2.6 condensed, appendix §P2-detail. Fixed sol public-invitation cell to the none arm (0/192; was all arms 0/576); luna none 7/720 verified.
 - Directive 2: chain3 restarted with p2rep before p2cue. Directive 3: E94 registered 09:58 + launched. Directive 4: E95 registered 10:02 + p2_family3way.py. Ledger correction row (6 rows stamped after their commit).
