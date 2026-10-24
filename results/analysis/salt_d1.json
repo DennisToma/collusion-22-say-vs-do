@@ -276,5 +276,24 @@
     "P_said_given_exec": 0.4248175182481752
    }
   ]
+ },
+ "E105_tfidf": {
+  "n": 8000,
+  "by_condition": {
+   "pooled_auroc": 0.905417643424162,
+   "mean_within_condition_auroc": 0.8863683540233217,
+   "n_conditions": 16,
+   "auroc_no_verdict_words": 0.8352904070197296,
+   "n_no_verdict_words": 3613,
+   "auroc_tacit": 0.8615562425107434
+  },
+  "by_run": {
+   "pooled_auroc": 0.9085233067275221,
+   "mean_within_condition_auroc": 0.8819385602825971,
+   "n_conditions": 16,
+   "auroc_no_verdict_words": 0.842331215962397,
+   "n_no_verdict_words": 3613,
+   "auroc_tacit": 0.865700205197294
+  }
  }
 }

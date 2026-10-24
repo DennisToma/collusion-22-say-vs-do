@@ -223,8 +223,13 @@ def tfidf():
         d["s"] = s
         within = [auc(q[q.executed].s, q[~q.executed].s) for _, q in d.groupby("condition_id")]
         within = [w for w in within if w is not None]
+        nw = d[~pd.Series(X).str.contains(r"accept|reject", case=False).values]
+        sv = d[d.said.notna()]
+        tac = sv[~(sv.executed & sv.said.astype(bool))]
         out[name] = {"pooled_auroc": auc(d[d.executed].s, d[~d.executed].s),
-                     "mean_within_condition_auroc": float(np.mean(within)), "n_conditions": len(within)}
+                     "mean_within_condition_auroc": float(np.mean(within)), "n_conditions": len(within),
+                     "auroc_no_verdict_words": auc(nw[nw.executed].s, nw[~nw.executed].s), "n_no_verdict_words": int(len(nw)),
+                     "auroc_tacit": auc(tac[tac.executed].s, tac[~tac.executed].s)}
     res(OUT, "E105_tfidf", out)
     print(out)
 
