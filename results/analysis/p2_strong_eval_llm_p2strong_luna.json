@@ -110,7 +110,8 @@
     1.0
    ],
    "auroc_exec_or_tacit_vs_competitive": "descriptive_only(n<3)",
-   "auroc_tacit_vs_competitive": "descriptive_only(n<3)"
+   "auroc_tacit_vs_competitive": "descriptive_only(n<3)",
+   "auroc_strict_vs_tacit_high": "descriptive_only(n<3)"
   },
   "market_excess_nash": {
    "threshold": null,
@@ -135,7 +136,8 @@
     1.0
    ],
    "auroc_exec_or_tacit_vs_competitive": "descriptive_only(n<3)",
-   "auroc_tacit_vs_competitive": "descriptive_only(n<3)"
+   "auroc_tacit_vs_competitive": "descriptive_only(n<3)",
+   "auroc_strict_vs_tacit_high": "descriptive_only(n<3)"
   },
   "plan": {
    "threshold": 50.0,
@@ -198,7 +200,8 @@
     0.0
    ],
    "auroc_exec_or_tacit_vs_competitive": "descriptive_only(n<3)",
-   "auroc_tacit_vs_competitive": "descriptive_only(n<3)"
+   "auroc_tacit_vs_competitive": "descriptive_only(n<3)",
+   "auroc_strict_vs_tacit_high": "descriptive_only(n<3)"
   },
   "plan_tacit_high": {
    "threshold": 50.0,
@@ -261,7 +264,8 @@
     1.0
    ],
    "auroc_exec_or_tacit_vs_competitive": "descriptive_only(n<3)",
-   "auroc_tacit_vs_competitive": "descriptive_only(n<3)"
+   "auroc_tacit_vs_competitive": "descriptive_only(n<3)",
+   "auroc_strict_vs_tacit_high": "descriptive_only(n<3)"
   }
  },
  "behaviour_classes": {

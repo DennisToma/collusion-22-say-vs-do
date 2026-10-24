@@ -11,12 +11,14 @@
   writes p2_strong_classes_llm_p2strongF.json; E102 qwenaS/qwenbS (stop Sun 10:00, descriptive).
 ## Next steps
 1. When "strongF post done" in logs/partc_chain.log: replace P2.7 strong-arm text with finals (directive 1: class counts, executed-private
-   vs tacit-high-none AUROCs for all views incl. plan; mark exploratory). Update glance row P2.7 + abstract Part C sentence + header.
+   vs tacit-high-none AUROCs = new key auroc_strict_vs_tacit_high (E99-x, registered
+   exploratory 14:33 before any strongF score), all views incl. plan). Update glance row P2.7 + abstract Part C sentence + header.
 2. Then ONE adversarial review (Opus subagent) of abstract + glance + P2.7 + P2.11 + P2.12; apply; export at 19:30.
 3. E102 at Sun 10:00: descriptive line in P2.11.
 - Risk: never `pkill -f` a pattern in your own command line. verify_artifacts.py FAILS (manifest) — deferred to Sun 16:30.
 
 ## Log
+- 14:35 P2 iter12: E99-x exploratory strict-executed vs tacit-high contrast registered + added to p2_strong_eval.py (pilot smoke test: old keys unchanged).
 - 14:25 P2 iter12: E100 C3 result (P2.11), E98 C2 final, abstract/TL;DR/glance consolidation, P2.1-3 -> appendix.
 - 13:55 P2 iter11: E105 result (sol text AUROC 0.87 on SALT, tacit 0.81), TF-IDF condition-grouped 0.91; P2.12 + abstract + takeaway.
 - 13:30 P2 iter11: Part D1 SALT external say-vs-do: E104 result (all 3 predictions held), E105 sol text auditor launched, salt_d1.py, REPORT P2.12.
