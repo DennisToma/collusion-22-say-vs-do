@@ -242,7 +242,7 @@ none 5.84), assigned-pair premium +0.23 (llm_v3 private +1.65), premium > 1 in 1
 sellers respond to an announced monitor with *compliance*, not evasion — a deterrence result, not a detection
 result. Caveat: one seller model, 14 runs, different seeds; the refusal-style wording suggests the note triggers the
 model's safety behaviour rather than a strategic cost–benefit trade-off, so it says nothing about how a model that
-does try to evade would look. MONFP_PLACEHOLDER
+does try to evade would look. MONFP: auditor flag rates on this stratum (frozen thresholds, `monitor_stratum.py`) pending.
 
 **Message-shuffle ablation on test (pre-registered; `uv run python shuffle_analysis.py --seeds 0,1,2 --views
 combined,structured` → `results/analysis/shuffle_llm_v3_gpt-6.1-sol_test.json`; 95 runs × 3 seeds × 2 views).**

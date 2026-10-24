@@ -1,25 +1,22 @@
 # STATUS
 
-## Current state (2026-10-24 00:35 UTC, iteration 10)
-- LOCKED TEST DONE (00:03; do NOT rerun final_analysis --split test). REPORT restructured for judges: abstract rewritten,
-  headline test → Exploration strata → Validity/Held-out/Limitations/Next steps/Reproduce → App. A dev, App. B scripted.
-- Final REPORT reviews DONE (codex logs/review_report_codex.md + Opus subagent): all tables match sources; overclaims
-  fixed (null≠equivalence, 'tied'→unresolved, legit = operating-point effect, label = condition, multiplicity 25×3).
-- Cross-family full (42 runs): text null + no text gain replicate for Claude; stats views best for Claude.
-- Firm-level text cue: colluders DROP competitive wording ("keeping" 67/140 vs rivals 133/140) → text LR pair-ID 1.00.
-- llm_v3fp (firm framing): 16/16 channel-unused; frozen thresholds FP: premium .44, action_stats .50, structured .25,
-  text/action .06 → stats scorers don't transfer across framing (in REPORT Exploration).
-- New fig: figures/roc_test.png (fig_roc.py).
-- Shuffle (test, 3 seeds): no degradation (combined run Δ −.011 [−.10,+.08]) → in REPORT + abstract (E43).
-- Running: llm_v3mon generation (mon_chain → pipeline → monitor_stratum).
+## Current state (2026-10-24 01:05 UTC, iteration 11)
+- LOCKED TEST DONE (00:03; do NOT rerun final_analysis --split test). REPORT is presentable (abstract, headline test,
+  Exploration strata, limitations, reproduce, appendices). All reviews applied through E44.
+- NEW (E45): llm_v3mon announced price monitor → DETERRENCE: agreements 0/14 vs 70/70 lab (Fisher p=3e-16), 0/336
+  private msgs with numbers, markup back to none level. Evasion test impossible (no positives). In REPORT
+  Exploration + abstract bullet + Limitations/Next steps; deterrence.py → results/analysis/deterrence.json.
+- Running: v3mon combined_stats audits → monitor_stratum.py (FP flag rates on 14 private-no-agreement + 6 none runs);
+  codex review of the deterrence paragraph (logs/review_iter11_deterrence.md).
 ## Next steps
-1. (done) shuffle.
-2. mon_chain done → monitor_stratum result into REPORT Exploration (cutoff: no new experiments after 06:30).
-3. (done 00:50, E44) codex re-check of new sections. Remaining: v3mon into REPORT; keep abstract in sync; FINALIZE from 08:15.
-4. Optional exploration if time: matched-recall legit FPR comparison (ROC at premium TPR) — descriptive only.
-- Risks: v3mon may not finish (20 runs × 12 rounds serial); then report as not completed.
+1. When mon_chain prints MON_CHAIN_DONE: replace "MONFP: ... pending." sentence in REPORT with monitor_stratum flag rates
+   (results/analysis/monitor_stratum_llm_v3mon.json). Apply codex review fixes.
+2. Optional (descriptive): matched-recall legit FPR comparison; figure polish. No new generation after 03:30,
+   no new experiments after 06:30; FINALIZE from 08:15.
+- Risks: none major; REPORT must not ship with MONFP_PLACEHOLDER (grep before commit).
 
 ## Log
+- 01:00 iter 11: v3mon deterrence result (E45) → REPORT; codex review started.
 - 00:50 iter 10: codex re-check (E44) applied.
 - 00:40 iter 10: shuffle ablation on test (E43, null). cross-family full (E39), firm-level text cue (E40), fp stratum (E41), final REPORT reviews applied
   (E42), REPORT restructure + abstract + next steps, fig_roc.
