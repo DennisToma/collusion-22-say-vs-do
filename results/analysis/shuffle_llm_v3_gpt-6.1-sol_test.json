@@ -1,0 +1,167 @@
+{
+ "seeds": [
+  0,
+  1,
+  2
+ ],
+ "views": {
+  "combined": {
+   "n_runs": 95,
+   "n_seeds_present": 3
+  },
+  "structured": {
+   "n_runs": 95,
+   "n_seeds_present": 3
+  }
+ },
+ "n_common": 95,
+ "n_pos": 50,
+ "point_ci": {
+  "action": {
+   "run_auroc": [
+    0.7533,
+    0.6529,
+    0.8498
+   ],
+   "within_market_auroc": [
+    0.794,
+    0.716,
+    0.866
+   ],
+   "pair_auroc": [
+    0.7788,
+    0.7164,
+    0.8429
+   ]
+  },
+  "combined": {
+   "run_auroc": [
+    0.7407,
+    0.6398,
+    0.83
+   ],
+   "within_market_auroc": [
+    0.796,
+    0.7139,
+    0.872
+   ],
+   "pair_auroc": [
+    0.7823,
+    0.7248,
+    0.8384
+   ]
+  },
+  "combined_shuf": {
+   "run_auroc": [
+    0.752,
+    0.6502,
+    0.8496
+   ],
+   "within_market_auroc": [
+    0.842,
+    0.77,
+    0.908
+   ],
+   "pair_auroc": [
+    0.8002,
+    0.7412,
+    0.8572
+   ]
+  },
+  "structured": {
+   "run_auroc": [
+    0.836,
+    0.7489,
+    0.9118
+   ],
+   "within_market_auroc": [
+    0.924,
+    0.888,
+    0.956
+   ],
+   "pair_auroc": [
+    0.8943,
+    0.8455,
+    0.9374
+   ]
+  },
+  "structured_shuf": {
+   "run_auroc": [
+    0.8549,
+    0.768,
+    0.9287
+   ],
+   "within_market_auroc": [
+    0.904,
+    0.856,
+    0.948
+   ],
+   "pair_auroc": [
+    0.9022,
+    0.8557,
+    0.9417
+   ]
+  }
+ },
+ "intact_minus_shuffled": {
+  "combined:run_auroc": {
+   "delta": -0.0113,
+   "ci": [
+    -0.1013,
+    0.0782
+   ]
+  },
+  "combined:within_market_auroc": {
+   "delta": -0.046,
+   "ci": [
+    -0.098,
+    -0.002
+   ]
+  },
+  "combined:pair_auroc": {
+   "delta": -0.0178,
+   "ci": [
+    -0.0627,
+    0.0264
+   ]
+  },
+  "structured:run_auroc": {
+   "delta": -0.0189,
+   "ci": [
+    -0.094,
+    0.0607
+   ]
+  },
+  "structured:within_market_auroc": {
+   "delta": 0.02,
+   "ci": [
+    -0.008,
+    0.054
+   ]
+  },
+  "structured:pair_auroc": {
+   "delta": -0.0079,
+   "ci": [
+    -0.0418,
+    0.0244
+   ]
+  }
+ },
+ "donor_quality": [
+  {
+   "seed": 0,
+   "same_condition": 1.0,
+   "mean_ctx_l1": 10.93
+  },
+  {
+   "seed": 1,
+   "same_condition": 1.0,
+   "mean_ctx_l1": 11.06
+  },
+  {
+   "seed": 2,
+   "same_condition": 1.0,
+   "mean_ctx_l1": 10.94
+  }
+ ]
+}

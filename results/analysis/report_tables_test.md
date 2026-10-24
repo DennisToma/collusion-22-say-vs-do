@@ -137,6 +137,17 @@ Cascade end-to-end (run sent by premium AND flagged by the LLM view at its dev t
 | action_stats | 378 | 0.62 (n=200) | 0.81 (n=199) | 0.53 |
 | structured | 378 | 0.57 (n=200) | 0.92 (n=148) | 0.39 |
 
+**Shuffle ablation** (messages from context-matched donor runs; n = 95, 50 y=1; seeds pooled):
+
+| view:metric | intact − shuffled [95% CI] |
+|---|---|
+| combined:run_auroc | -0.011 [-0.101, +0.078] |
+| combined:within_market_auroc | -0.046 [-0.098, -0.002] |
+| combined:pair_auroc | -0.018 [-0.063, +0.026] |
+| structured:run_auroc | -0.019 [-0.094, +0.061] |
+| structured:within_market_auroc | +0.020 [-0.008, +0.054] |
+| structured:pair_auroc | -0.008 [-0.042, +0.024] |
+
 **Cross-family** (gpt-6.1-sol vs claude-sonnet-5-5; ALL runs both auditors scored (mod-3 subset, dev + test, not split-filtered); n = 42 runs, 24 y=1):
 
 | view | pair AUROC gpt-6.1-sol | pair AUROC claude-sonnet-5-5 | Spearman | top-pair agreement |
@@ -148,4 +159,15 @@ Cascade end-to-end (run sent by premium AND flagged by the LLM view at its dev t
 | action_stats | 0.85 | 0.87 | 0.52 | 0.71 |
 | combined_stats | 0.85 | 0.89 | 0.54 | 0.58 |
 
-_pending: shuffle, llm_v3fp stratum_
+**Exploratory transfer stratum llm_v3fp** (firm framing, private channel; n = 16; agreement counts {'none': 16}; thresholds from `results/analysis/final_llm_v3_gpt-6.1-sol_dev.json` (dev Youden)). Flag rate [Wilson 95% CI]; AUROC y=1 vs y=0 only if both classes exist:
+
+| scorer | flag rate y1_agreement (n=0) | flag rate y0_channel_no_agreement (n=16) | AUROC y1 vs y0 | within-market AUROC (y=1) |
+|---|---|---|---|---|
+| text | – | 0.06 [0.01, 0.28] | – | – |
+| action | – | 0.06 [0.01, 0.28] | – | – |
+| combined | – | 0.50 [0.28, 0.72] | – | – |
+| combined_stats | – | 0.62 [0.39, 0.81] | – | – |
+| action_stats | – | 0.50 [0.28, 0.72] | – | – |
+| structured | – | 0.25 [0.10, 0.49] | – | – |
+| premium | – | 0.44 [0.23, 0.67] | – | – |
+| premium_r2plus | – | 0.44 [0.23, 0.67] | – | – |

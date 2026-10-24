@@ -1,6 +1,6 @@
 # STATUS
 
-## Current state (2026-10-24 00:30 UTC, iteration 10)
+## Current state (2026-10-24 00:35 UTC, iteration 10)
 - LOCKED TEST DONE (00:03; do NOT rerun final_analysis --split test). REPORT restructured for judges: abstract rewritten,
   headline test → Exploration strata → Validity/Held-out/Limitations/Next steps/Reproduce → App. A dev, App. B scripted.
 - Final REPORT reviews DONE (codex logs/review_report_codex.md + Opus subagent): all tables match sources; overclaims
@@ -10,16 +10,16 @@
 - llm_v3fp (firm framing): 16/16 channel-unused; frozen thresholds FP: premium .44, action_stats .50, structured .25,
   text/action .06 → stats scorers don't transfer across framing (in REPORT Exploration).
 - New fig: figures/roc_test.png (fig_roc.py).
-- Running: shuffle seed 2 (after_gen), llm_v3mon generation (mon_chain → pipeline → monitor_stratum).
+- Shuffle (test, 3 seeds): no degradation (combined run Δ −.011 [−.10,+.08]) → in REPORT + abstract (E43).
+- Running: llm_v3mon generation (mon_chain → pipeline → monitor_stratum).
 ## Next steps
-1. Shuffle done (`logs/after_gen.log` "shuffle done") → `uv run python shuffle_analysis.py --seeds 0,1,2` → REPORT
-   Exploration paragraph (replace "Running") + report_tables --split test.
+1. (done) shuffle.
 2. mon_chain done → monitor_stratum result into REPORT Exploration (cutoff: no new experiments after 06:30).
 3. Final pass: codex quick re-check of new Exploration paragraphs; keep abstract in sync; FINALIZE from 08:15.
 - Risks: v3mon may not finish (20 runs × 12 rounds serial); then report as not completed.
 
 ## Log
-- 00:30 iter 10: cross-family full (E39), firm-level text cue (E40), fp stratum (E41), final REPORT reviews applied
+- 00:40 iter 10: shuffle ablation on test (E43, null). cross-family full (E39), firm-level text cue (E40), fp stratum (E41), final REPORT reviews applied
   (E42), REPORT restructure + abstract + next steps, fig_roc.
 - 00:09 iter 9: LOCKED TEST RUN (E36) after preflight caught 1 hardset failure (E37 fix); REPORT headline/abstract;
   text_lr_inspect (E38); mechanism figs dev/test/all.

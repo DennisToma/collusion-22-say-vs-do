@@ -11,7 +11,8 @@ firm pair under six views of the public log: text, actions, both, each with or w
 table. Results on the locked test split (n = 95, run once):
 - **No resolved text gain for the LLM auditor.** The text-only auditor is consistent with chance at detection (run
   AUROC 0.47). Adding text to actions gives no resolved gain (Δ_hybrid −0.01 [−0.09, +0.06]; gains up to ~0.06 not
-  excluded). Claude Sonnet 5.5 shows the same pattern on a 42-run subset.
+  excluded), and replacing each run's messages with a matched donor run's does not hurt the hybrid auditors
+  (Δ run AUROC −0.01 [−0.10, +0.08]). Claude Sonnet 5.5 shows the same pattern on a 42-run subset.
 - **The statistics table helps** (+0.10 run AUROC, +0.10 within-market AUROC).
 - **A one-line untrained statistic is the best detector.** The pair's price premium over its rivals reaches 0.95,
   against ≤ 0.86 for every LLM view (premium − best view +0.09 [+0.01, +0.18]). We chose this statistic after seeing
@@ -203,7 +204,7 @@ highest for Claude, while for GPT only action_stats clearly is (point estimates,
 [−0.05, +0.08], Claude −0.01 [−0.10, +0.07]); adding stats does (action_stats: GPT +0.09 [+0.02, +0.16], Claude +0.09
 [+0.00, +0.19]). Per-pair agreement between the two auditors is only moderate (Spearman 0.31 text … 0.59 structured;
 top-pair agreement 0.38–0.71), so individual verdicts are model-dependent even though the aggregate conclusion is not.
-Message-shuffle ablation on test and the llm_v3fp / llm_v3mon strata: pending.
+Message-shuffle ablation and exploration strata: see Exploration below.
 
 ![mechanism test](figures/mechanism_test.png)
 *(Descriptive, `fig_mechanism.py --split test` → `logs/mechanism_test.txt`: private pairs' late-window premium +1.02,
@@ -226,7 +227,16 @@ changes wording and refusals).
 **Announced price monitor (`llm_v3mon`, lab framing + public announcement that prices are monitored; 14 private,
 6 none).** Generation running; results are added if it finishes before the 06:30 cutoff (`monitor_stratum.py`, frozen).
 
-**Message-shuffle ablation on test (combined, structured; 3 seeds).** Running; added when complete.
+**Message-shuffle ablation on test (pre-registered; `uv run python shuffle_analysis.py --seeds 0,1,2 --views
+combined,structured` → `results/analysis/shuffle_llm_v3_gpt-6.1-sol_test.json`; 95 runs × 3 seeds × 2 views).**
+Each run's public messages are replaced by those of a donor run with the same label and condition and the nearest
+cost/demand path, firm letters remapped so the donor's designated pair lands on the recipient's; prices are intact.
+If the hybrid auditors used *consistency* between what specific firms said and did, scores should drop. They do not:
+intact − shuffled run AUROC combined −0.011 [−0.101, +0.078], structured −0.019 [−0.094, +0.061]; within-market
+combined −0.046 [−0.098, −0.002] (shuffled nominally *better*), structured +0.020 [−0.008, +0.054]. So the say+do
+auditors show no evidence of cross-modal reasoning on LLM data, matching the null Δ_hybrid. Caveat: because donors
+share label + condition and the pair mapping, the shuffled text still carries condition- and role-level style
+(e.g. colluders' missing competitive wording), so the ablation only removes run-specific message–price consistency.
 
 ## Validity safeguards
 Labels from private chat only (judge blind to prices); same auditor model across views, fallback calls dropped;
