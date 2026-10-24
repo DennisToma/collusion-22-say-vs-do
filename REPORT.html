@@ -33,9 +33,9 @@ nav p { margin:0 } nav ul { columns:2; padding-left:22px } nav li { font-size:14
  .wide th:first-child,.wide td:first-child { width:17% }
  pre { font-size:8pt; padding:8pt } a { color:inherit; text-decoration:none }
 }
-</style></head><body><main><p class="export-note">Offline rendering of REPORT.md. Figures are embedded; source links are local in HTML and point to GitHub in PDF. No results recomputed.<br>Source SHA-256: 69b3db31f71eb07b4b118efaf342d696908dcf9eb496e4a1071b5a574a0a98c2</p><nav aria-label="Contents"><p><strong>Contents</strong></p><ul><li><a href="#section-2">Abstract</a></li><li><a href="#section-3">Phase 2 results (from 2026-10-24 06:30 UTC; v1 below frozen as git tag v1-overnight)</a></li><li><a href="#section-4">v1 overnight summary (frozen 2026-10-24 06:30 UTC; superseded by the Abstract above)</a></li><li><a href="#section-5">Question</a></li><li><a href="#section-6">Setup</a></li><li><a href="#section-7">Results</a></li><li><a href="#section-11">Validity safeguards</a></li><li><a href="#section-12">Held-out discipline</a></li><li><a href="#section-13">Limitations</a></li><li><a href="#section-14">What to do next</a></li><li><a href="#section-15">Appendix E — Reproduce</a></li></ul></nav><h1 id="section-1">Say vs. Do: does auditing what AI agents <em>say</em> together with what they <em>do</em> catch collusion better?</h1>
+</style></head><body><main><p class="export-note">Offline rendering of REPORT.md. Figures are embedded; source links are local in HTML and point to GitHub in PDF. No results recomputed.<br>Source SHA-256: bffd0277288e586d667264ff0d146a2a4fb89b82a721e40027664220daa574bc</p><nav aria-label="Contents"><p><strong>Contents</strong></p><ul><li><a href="#section-2">Abstract</a></li><li><a href="#section-3">Phase 2 results (from 2026-10-24 06:30 UTC; v1 below frozen as git tag v1-overnight)</a></li><li><a href="#section-4">v1 overnight summary (frozen 2026-10-24 06:30 UTC; superseded by the Abstract above)</a></li><li><a href="#section-5">Question</a></li><li><a href="#section-6">Setup</a></li><li><a href="#section-7">Results</a></li><li><a href="#section-11">Validity safeguards</a></li><li><a href="#section-12">Held-out discipline</a></li><li><a href="#section-13">Limitations</a></li><li><a href="#section-14">What to do next</a></li><li><a href="#section-15">Appendix E — Reproduce</a></li></ul></nav><h1 id="section-1">Say vs. Do: does auditing what AI agents <em>say</em> together with what they <em>do</em> catch collusion better?</h1>
 <p><em>Apart AI Collusion Sprint, Q2.2 — text + action auditing. v1 (overnight) results are frozen as git tag <code>v1-overnight</code>;
-Phase 2 (from 2026-10-24 06:30 UTC) re-tests them. Checkpoint text, 2026-10-24 19:07 UTC: P2.1–P2.15 final (E115 evaluated 19:20) except the E1 grid audit (E113; 82 snapshot games, cached audits verified; final eval once Q1.4's 6 balanced sweeps are complete). E102 (strong-framing Qwen, 6 seeds) is descriptive. Exports: <a href="README.md">README.md</a>.</em></p>
+Phase 2 (from 2026-10-24 06:30 UTC) re-tests them. Checkpoint text, 2026-10-24 19:07 UTC: P2.1–P2.15 final (E115 evaluated 19:20) except the E1 grid audit (E113; 90 snapshot games (2 balanced sweeps), cached audits verified 19:37; final eval once Q1.4's 6 balanced sweeps are complete). E102 (strong-framing Qwen, 6 seeds) is descriptive. Exports: <a href="README.md">README.md</a>.</em></p>
 <h2 id="section-2">Abstract</h2>
 <p>Adding LLM sellers' public messages to their prices gives <strong>no resolved gain</strong> for detecting collusion: combined minus the better
 single view is −0.01 [−0.09, +0.06] run-AUROC on the locked test (n = 95) and −0.07 [−0.17, +0.02] on two fresh replications pooled
@@ -43,15 +43,14 @@ post hoc (n = 90), excluding gains above +0.06 (test) and +0.02 (pooled). Setup:
 may chat privately); zero-shot gpt-6.1-sol auditors read public text, actions, or both. (1) The action signal is partly a prompt
 effect: the post-hoc-selected pair price premium (AUROC 0.94 [0.87, 0.99], n = 60 fresh) also responds to an unread pricing notepad
 (65% of the channel premium), to wording and to legitimate cost/quality edges. (2) Where coordination is voiced depends on the family:
-at base framing luna proposes it only in private; Claude, deepseek and Qwen also invite rivals publicly, so text auditors flag every
+luna proposes it only in private; Claude, deepseek and Qwen also invite rivals publicly, so text auditors flag every
 control market (50/50). When the deal is struck in chat (SALT-NLP), text predicts execution (AUROC 0.87 [0.83, 0.91]). (3) Talk and
-behaviour labels disagree: only 14/50 test &quot;colluders&quot; keep their agreement. With memory and profit framing (levers combined), 13/20
-channel pairs strictly execute, yet 19/20 no-channel markets also price ≥ Nash + 2. Exploratory: within channel pairs (13 executed vs
-7 not), no text or plan view resolves execution (private plans 0.69 [0.44, 0.91]; low power). Swapping one seller at round 21
-for a fresh luna changes neither the market level (+0.20 [−0.08, +0.62]) nor re-agreement (16/20 vs 15/20); a gpt-6.1-sol newcomer
-never re-agrees (0/20), yet 18/20 markets stay ≥ Nash + 2.
-Abliterated Qwen3.8-27B executes no more than its base model (13/15 both; agreement at ceiling) with a smaller channel premium
-(−1.24 [−2.41, −0.03]; serving precision differs).
+behaviour labels disagree: only 14/50 test &quot;colluders&quot; keep their agreement. With memory and profit framing, 13/20
+channel pairs strictly execute, yet 19/20 no-channel markets also price ≥ Nash + 2; among channel pairs (13 executed vs
+7 not, exploratory) no text or plan view resolves execution (plans 0.69 [0.44, 0.91]). A fresh luna swapped in at round 21
+changes neither the level (+0.20 [−0.08, +0.62]) nor re-agreement (16/20 vs 15/20); a gpt-6.1-sol newcomer
+re-agrees 0/20, yet 18/20 markets stay ≥ Nash + 2. Abliterated Qwen3.8-27B executes no more than its base model (13/15 both; agreement at ceiling) with a
+smaller channel premium (−1.24 [−2.41, −0.03]; serving precision differs).
 Every abstract number with its denominator and source key: <code>results/analysis/claims_denominators.md</code> (<code>p2_claims.py</code>).</p>
 <p><strong>TL;DR (sources: Phase 2 at a glance, below).</strong></p>
 <ol>

@@ -1,7 +1,7 @@
 # Say vs. Do: does auditing what AI agents *say* together with what they *do* catch collusion better?
 
 *Apart AI Collusion Sprint, Q2.2 — text + action auditing. v1 (overnight) results are frozen as git tag `v1-overnight`;
-Phase 2 (from 2026-10-24 06:30 UTC) re-tests them. Checkpoint text, 2026-10-24 19:07 UTC: P2.1–P2.15 final (E115 evaluated 19:20) except the E1 grid audit (E113; 82 snapshot games, cached audits verified; final eval once Q1.4's 6 balanced sweeps are complete). E102 (strong-framing Qwen, 6 seeds) is descriptive. Exports: [README.md](README.md).*
+Phase 2 (from 2026-10-24 06:30 UTC) re-tests them. Checkpoint text, 2026-10-24 19:07 UTC: P2.1–P2.15 final (E115 evaluated 19:20) except the E1 grid audit (E113; 90 snapshot games (2 balanced sweeps), cached audits verified 19:37; final eval once Q1.4's 6 balanced sweeps are complete). E102 (strong-framing Qwen, 6 seeds) is descriptive. Exports: [README.md](README.md).*
 
 ## Abstract
 Adding LLM sellers' public messages to their prices gives **no resolved gain** for detecting collusion: combined minus the better
@@ -10,15 +10,14 @@ post hoc (n = 90), excluding gains above +0.06 (test) and +0.02 (pooled). Setup:
 may chat privately); zero-shot gpt-6.1-sol auditors read public text, actions, or both. (1) The action signal is partly a prompt
 effect: the post-hoc-selected pair price premium (AUROC 0.94 [0.87, 0.99], n = 60 fresh) also responds to an unread pricing notepad
 (65% of the channel premium), to wording and to legitimate cost/quality edges. (2) Where coordination is voiced depends on the family:
-at base framing luna proposes it only in private; Claude, deepseek and Qwen also invite rivals publicly, so text auditors flag every
+luna proposes it only in private; Claude, deepseek and Qwen also invite rivals publicly, so text auditors flag every
 control market (50/50). When the deal is struck in chat (SALT-NLP), text predicts execution (AUROC 0.87 [0.83, 0.91]). (3) Talk and
-behaviour labels disagree: only 14/50 test "colluders" keep their agreement. With memory and profit framing (levers combined), 13/20
-channel pairs strictly execute, yet 19/20 no-channel markets also price ≥ Nash + 2. Exploratory: within channel pairs (13 executed vs
-7 not), no text or plan view resolves execution (private plans 0.69 [0.44, 0.91]; low power). Swapping one seller at round 21
-for a fresh luna changes neither the market level (+0.20 [−0.08, +0.62]) nor re-agreement (16/20 vs 15/20); a gpt-6.1-sol newcomer
-never re-agrees (0/20), yet 18/20 markets stay ≥ Nash + 2.
-Abliterated Qwen3.8-27B executes no more than its base model (13/15 both; agreement at ceiling) with a smaller channel premium
-(−1.24 [−2.41, −0.03]; serving precision differs).
+behaviour labels disagree: only 14/50 test "colluders" keep their agreement. With memory and profit framing, 13/20
+channel pairs strictly execute, yet 19/20 no-channel markets also price ≥ Nash + 2; among channel pairs (13 executed vs
+7 not, exploratory) no text or plan view resolves execution (plans 0.69 [0.44, 0.91]). A fresh luna swapped in at round 21
+changes neither the level (+0.20 [−0.08, +0.62]) nor re-agreement (16/20 vs 15/20); a gpt-6.1-sol newcomer
+re-agrees 0/20, yet 18/20 markets stay ≥ Nash + 2. Abliterated Qwen3.8-27B executes no more than its base model (13/15 both; agreement at ceiling) with a
+smaller channel premium (−1.24 [−2.41, −0.03]; serving precision differs).
 Every abstract number with its denominator and source key: `results/analysis/claims_denominators.md` (`p2_claims.py`).
 
 **TL;DR (sources: Phase 2 at a glance, below).**

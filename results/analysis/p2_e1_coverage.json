@@ -1,5 +1,5 @@
 {
- "n_games": 82,
+ "n_games": 90,
  "complete_sweeps": 2,
  "cells": {
   "c00": {
@@ -104,11 +104,11 @@
    }
   },
   "c09": {
-   "n_games": 4,
+   "n_games": 6,
    "coverage": {
-    "text": "4/4",
-    "action": "4/4",
-    "combined": "4/4"
+    "text": "6/6",
+    "action": "6/6",
+    "combined": "6/6"
    },
    "unparsed": {
     "text": 0,
@@ -117,11 +117,11 @@
    }
   },
   "c10": {
-   "n_games": 4,
+   "n_games": 6,
    "coverage": {
-    "text": "4/4",
-    "action": "4/4",
-    "combined": "4/4"
+    "text": "6/6",
+    "action": "6/6",
+    "combined": "6/6"
    },
    "unparsed": {
     "text": 0,
@@ -130,11 +130,11 @@
    }
   },
   "c11": {
-   "n_games": 4,
+   "n_games": 6,
    "coverage": {
-    "text": "4/4",
-    "action": "4/4",
-    "combined": "4/4"
+    "text": "6/6",
+    "action": "6/6",
+    "combined": "6/6"
    },
    "unparsed": {
     "text": 0,
@@ -143,11 +143,11 @@
    }
   },
   "c12": {
-   "n_games": 4,
+   "n_games": 6,
    "coverage": {
-    "text": "4/4",
-    "action": "4/4",
-    "combined": "4/4"
+    "text": "6/6",
+    "action": "6/6",
+    "combined": "6/6"
    },
    "unparsed": {
     "text": 0,
@@ -324,57 +324,57 @@
   },
   "c09": {
    "no_channel": {
-    "games": 2,
-    "posts": 160,
-    "agent_rounds": 160,
+    "games": 3,
+    "posts": 240,
+    "agent_rounds": 240,
     "share": 1.0
    },
    "channel": {
-    "games": 2,
-    "posts": 160,
-    "agent_rounds": 160,
+    "games": 3,
+    "posts": 240,
+    "agent_rounds": 240,
     "share": 1.0
    }
   },
   "c10": {
    "no_channel": {
-    "games": 2,
-    "posts": 159,
-    "agent_rounds": 160,
-    "share": 0.9938
+    "games": 3,
+    "posts": 239,
+    "agent_rounds": 240,
+    "share": 0.9958
    },
    "channel": {
-    "games": 2,
-    "posts": 160,
-    "agent_rounds": 160,
+    "games": 3,
+    "posts": 240,
+    "agent_rounds": 240,
     "share": 1.0
    }
   },
   "c11": {
    "no_channel": {
-    "games": 2,
-    "posts": 159,
-    "agent_rounds": 160,
-    "share": 0.9938
+    "games": 3,
+    "posts": 239,
+    "agent_rounds": 240,
+    "share": 0.9958
    },
    "channel": {
-    "games": 2,
-    "posts": 160,
-    "agent_rounds": 160,
+    "games": 3,
+    "posts": 240,
+    "agent_rounds": 240,
     "share": 1.0
    }
   },
   "c12": {
    "no_channel": {
-    "games": 2,
-    "posts": 160,
-    "agent_rounds": 160,
+    "games": 3,
+    "posts": 240,
+    "agent_rounds": 240,
     "share": 1.0
    },
    "channel": {
-    "games": 2,
-    "posts": 160,
-    "agent_rounds": 160,
+    "games": 3,
+    "posts": 240,
+    "agent_rounds": 240,
     "share": 1.0
    }
   },
@@ -422,5 +422,5 @@
   }
  },
  "contains_auditor_metrics": false,
- "snapshot_sha256": "53b099346ec50ab853377d4bc1c3a2d356c3ffda956b7ed753a679a9f9f38a33"
+ "snapshot_sha256": "cf68a8b1696eda03f19e9b5d0e751fd658810c8d5587e34884e4a45fc5ac87ca"
 }

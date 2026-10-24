@@ -301,7 +301,7 @@ def _():
 
 
 @claim("C24", "E116 within channel: plan view AUROC strict-executed vs non-executed", "0.69 [0.44, 0.91]",
-       "(private plans 0.69 [0.44, 0.91]; low power)",
+       "(plans 0.69 [0.44, 0.91])",
        "13 strict vs 7 non-executed private markets (llm_p2strongF); exploratory, zero LLM calls, seed bootstrap")
 def _():
     src = "results/analysis/p2_within_agree_llm_p2strongF.json"
@@ -324,7 +324,7 @@ def _():
 
 
 @claim("C25", "E112 participant replacement (luna newcomer), private arm: market excess replaced - original; re-agreement replaced; originals",
-       "+0.20 [-0.08, +0.62]; 16/20; 15/20", "market level (+0.20 [-0.08, +0.62]) nor re-agreement (16/20 vs 15/20)",
+       "+0.20 [-0.08, +0.62]; 16/20; 15/20", "the level (+0.20 [-0.08, +0.62]) nor re-agreement (16/20 vs 15/20)",
        "20 paired private games replayed from llm_p2strongF, newcomer from round 21, rounds 21-40; registered E112, all 4 predictions held; none arm +0.16 [-0.27, +0.57] in P2.15")
 def _():
     src = "results/analysis/p2_replace.json"
@@ -335,7 +335,7 @@ def _():
 
 
 @claim("C28", "E115 participant replacement (gpt-6.1-sol newcomer), private arm: re-agreement replaced; markets >= Nash + 2 replaced",
-       "0/20; 18/20", "never re-agrees (0/20), yet 18/20 markets stay",
+       "0/20; 18/20", "re-agrees 0/20, yet 18/20 markets stay",
        "same 20 paired private games as E112, sol newcomer from round 21; registered E115, S1 failed, S2-S4 held; none arm 9/10 in P2.15")
 def _():
     src = "results/analysis/p2_replace_sol.json"

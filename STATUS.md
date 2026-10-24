@@ -1,17 +1,16 @@
 # STATUS
 
-## Current state (2026-10-24 19:25 UTC from date -u, Phase 2 iteration 36)
+## Current state (2026-10-24 19:40 UTC from date -u, Phase 2 iteration 37)
 - Headline unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc).
-- **19:30 checkpoint export DONE (iter36):** REPORT.pdf (26 pp) / REPORT.html rebuilt from current REPORT via `uv run --group handoff python build_handoff.py`; `python3 build_handoff.py --check` PASS. PRESENTATION.pdf is still the Phase-1 talk (rebuild Sun 16:30 as directed).
-- Figure P2.7 (strongF price paths by class: executed ≈ tacit-high) now embedded in P2.7 instead of a path mention (7/7 figures embedded). REPORT 703 lines.
-- Verification: claims **28/28**; `verify_phase2.py` re-run → 25/25 commands, 32/32 outputs exact, receipt current.
-- **E115 FINAL (evaluated once 19:20):** sol newcomer re-agrees 0/20 (luna E112: 16/20), executes 0/20; own price −3.38 [−4.17, −2.54] vs replaced firm; market −1.34 [−1.79, −0.91] private / −1.71 [−2.51, −0.92] none, yet ≥ Nash+2 18/20 & 9/10. S1 FAILED, S2–S4 held. E50 pair-gap CUSUM 22/30 (orig 5/30; undercutter, not collusion). In P2.15 + abstract + TL;DR + glance; claim C28 → 29/29.
-- **E113 82 games / 16 cells / 2 sweeps** (Q1.4 E70 has 6 sweeps planned); NO interim detector metrics read.
-- Abstract now ~300 words (over ~260 target): trim at Sun 12:30 review. Re-export again after E113 lands.
-- Next E113: `snapshot` + cached `audit` + `coverage`; Q1.4 announces 6 sweeps complete (or Sun 08:00) → `preflight`, then `eval` ONCE.
-- Next review Sun 12:30, numbers freeze Sun 14:00, presentation/EVIDENCE/manifest rebuild Sun 16:30. Never stash/checkout while generators run.
+- **Abstract trimmed 298 → 275 words (iter37)**, no number changed; within-agreement and E112/E115 sentences compressed; p2_claims.py snippet text updated for 3 reworded claims → **29/29 OK**. REPORT 710 lines.
+- **Checkpoint export re-done 19:40** (REPORT.pdf 26 pp / html, 7/7 figures); `build_handoff.py --check` PASS. PRESENTATION.pdf still Phase-1 talk (rebuild Sun 16:30).
+- **E113 snapshot6:** 90 games / 16 cells / **2 balanced sweeps** (Q1.4 E70 targets 6; qwen lane is the bottleneck, ETA ~22:00); coverage 100% all views, 0 unparsed; NO detector metrics read. Luna board posts: c02 channel 78/240, c07 no-channel 75/240, c04 no-channel 3/240.
+- E115 final (S1 failed, S2–S4 held) is in P2.15/abstract/TL;DR/glance (iter36).
+- Next E113: keep `snapshot` + `audit` + `coverage` as sweeps land; when Q1.4 STATUS says "6 sweeps complete" (or Sun 08:00) → `preflight`, then `eval` ONCE → ≤10 lines + glance row by Sun 10:00.
+- Next review Sun 12:30 (Opus + codex on final claims), numbers freeze Sun 14:00, presentation/EVIDENCE/manifest rebuild Sun 16:30. Never stash/checkout while generators run.
 
 ## Log
+- 19:40 P2 iter37: abstract 298→275 words (claims 29/29, 3 snippet texts updated), E113 snapshot6 (90 games, 2 sweeps, coverage 100%, no scores read), checkpoint re-export PASS.
 - 19:25 P2 iter36: E115 final (S1 failed, S2–S4 held) → P2.15/abstract/TL;DR/glance, C28 (29/29), unittests E115/E113/E99 OK, re-export + verify_phase2 25/25.
 - 19:12 P2 iter36: checkpoint export (REPORT.pdf/html, check PASS); Figure P2.7 embedded; claims 28/28; verify_phase2 receipt refreshed 25/25; E115 27/30.
 - 18:28 P2 iter32: git gc (.git 90→20 MB); last iter30-review P3 wording fixes (P2.11 E65 cross-ref, TL;DR P2.15 wording, E116 column header); claims 28/28; E115 still 15/30 raw, rescuer holding 0024/26/28.
