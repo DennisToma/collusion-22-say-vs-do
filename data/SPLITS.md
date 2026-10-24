@@ -177,3 +177,13 @@ scorers, thresholds, metric definitions and published numerical estimates are un
   seeds, models, prompts, thresholds or label rules. A seller fallback needs an explicit attrition disclosure; do not
   silently drop it. If the evaluation lock/output already exists, inspect logs and chronology before any recovery;
   never remove the lock merely to obtain another estimate. Published results remain the record.
+
+## E108 / Part E4 transcript exploration (iteration 18, 2026-10-24)
+- Dataset-balanced random sample frozen before reading: 20 completed games per repo, one per sampled dataset, seed 2026102418.
+  Eligible frame: 24 datasets / 611 games in Q2.2, 24 / 427 in Q1.4; 40 games / 841 rounds selected. Source commits,
+  exclusions, blob hashes and IDs are in `data/serendipity_e108/manifest.json`; portable transcripts in `sample.jsonl.gz`.
+- Uses already analysed data, including old pilots, not a new confirmatory test. In-flight strongF and Qwen strong arms excluded.
+  Five follow-up questions chosen AFTER transcript review and preliminary helper counts; exploratory, descriptive, no population CIs.
+  No auditor/label prompt, threshold, execution rule or frozen detector changed; no headline metric rerun. E108e is consistency
+  of fields emitted in one response, not temporal promise keeping. Q1.4 original +/-1 and Q2.2 lower-bound compliance remain distinct;
+  E66's adapter mirrors Q2.2, so its pending class equality check is unaffected. No new held-out design or tuning split is needed.

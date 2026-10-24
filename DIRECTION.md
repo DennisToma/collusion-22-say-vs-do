@@ -182,6 +182,9 @@ Part D1, before Part D2/D3. Report the three pairs in one table: abliterated −
 detector AUROCs) with CIs, and state the precision caveat (FP8/AWQ/bf16) per pair.
 
 
+
+**Serendipity Explorer (added 14:50 UTC):** a third agent runs wild cheap pilots in `~/collusion/collusion-serendipity` (other markets, hub-and-spoke advisor, leniency, counterfactual replay, steganography in prices, personas, ...). Read its `HITS.md` at the start of every iteration; if a hit bears on your headline claims, decide explicitly (in STATUS) whether to confirm it with a registered experiment. Don't duplicate its pilots.
+
 ## Part E — BROADEN THE DESIGN so we can make concrete, general claims (added by Dennis 14:30 UTC)
 **Why:** so far we varied one thing at a time (model, prompt, memory, channel) in mostly one market setup. Claims like
 "collusion shows up as level, not co-movement" are only as general as the conditions we tested. Goal: a small number of

@@ -1,22 +1,22 @@
-> **PHASE 2** (from 2026-10-24 06:30 UTC). v1 frozen as tag v1-overnight. Work queue = DIRECTION.md gaps.
-
 # STATUS
 
-## Current state (2026-10-24 14:33 UTC VM clock, Phase 2 iteration 17)
+## Current state (2026-10-24 14:52 UTC VM clock, Phase 2 iteration 18)
 - Main claim unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc).
-- iter17: hardened existing E99 completion path; exact 40-game/matched-seed/raw-plan coverage, valid terms, current same-model audits, run-once protection.
-- Shared classes now publish BEFORE remaining audits; no partial classes or metrics. Wrapper restarted safely (PID 3033342; old idle wrapper/sleep stopped).
-- Verified: 17 synthetic tests + 7 existing prompt-boundary tests PASS; disposable luna pilot preserves every old JSON key/value; independent Codex review resolved.
-- strongF 27/40 at 14:29 (gen PID 3302642 alive); live --check-only correctly refuses incomplete generation without calls/writes. No full-arm outcomes inspected.
-- E102 strong Qwen continues (stop Sun 10:00); E100/E105 final. No new experiment or scientific estimate this iteration; newest director Part E (14:30) queues broader designs after in-flight C.
-- REPORT remains 692 lines; README now labels static exports as overnight snapshots. Frozen handoff checker rejects Phase 2 cache inventory; refresh deferred to Sun 16:30.
+- iter18: Part E4 DONE, E108a–e. Frozen 40-game / 841-round sample (20 per repo); five post-hoc descriptive checks, no new games or seller/auditor calls.
+- Label nuance: q14 pair within ±1 opening target 37/40 rounds but exactly target 1/40; openly unequal 12/13 for 28 rounds. REPORT no longer equates Q1.4 band and Q2.2 lower-bound rules.
+- Other cases: independence disclaimers with price talk; unilateral rigid18 with lowest relative profit; Claude endgame withdrawal vs GLM precommitment. No intent/causal/profit-counterfactual inference.
+- Dud: 0/143 narrow price-declaration mismatches across10 runs checks SAME-RESPONSE fields, not temporal honesty. Full cases + provenance: data/serendipity_e108/README.md; results/analysis/p2_serendipity.json.
+- Verified: independent Codex review; all40 transcripts equal source git objects; deterministic regeneration, resampling refusal; 17 strongF tests + transition checker PASS; figure visually checked.
+- E99 strongF 32/40; generator 3302642 and post wrapper 3033342 alive. No full-arm class/detector outcome inspected; publish complete classes first, evaluate once.
+- E100/E105 final; E102 remains descriptive until Sun10:00 cutoff. REPORT now689 lines + new case figure; static exports/manifest still deferred to Sun16:30.
+- New director serendipity-explorer instruction read; ../collusion-serendipity/HITS.md has no hits, so no confirmation experiment warranted.
+
 ## Next steps
-1. Watch logs/partc_chain.log: "strongF classes ready" releases Q1.4 E66; "strongF post done" releases report/figure rendering. Full runner log: logs/strongF_post_runner.log.
-2. On post done: p2_strongF_report.py --ds llm_p2strongF; REPLACE P2.7 interim with class rates + E99-x table + registered contrasts, then p2_strongF_fig.py; update glance/abstract/header and merger X/Y. Cite Q1.4 E66 when available.
-3. Interpret E99-x cautiously: class rules do NOT force price AUROC=0.5; a text/plan AUROC alone is not incremental gain over actions. Keep exploratory label and circularity caveat.
-4. On failure: check runner/classes/eval logs and data/SPLITS.md recovery rules. Never append a generation-done marker until --check-only passes; never remove a completed evaluation lock to obtain another estimate.
-5. Checkpoint at Sat 19:30; E102 descriptive cutoff Sun 10:00; frozen handoff/presentation/manifest refresh Sun 16:30. No new waiter scripts.
-6. NEW DIRECTION Part E (14:30, read during iter17): after in-flight Part C, E1 Q1.4 factorial generation/Q2.2 audits; Q2.2 E2 replacement, E3 mixed families, E4 zero-game anomaly hunt, E5 German. Register before work; target Sun 13:00; these are queued, not started.
+1. E99 remains priority: watch logs/partc_chain.log for "strongF classes ready" (releases Q1.4 E66) and "strongF post done". No new waiter scripts.
+2. On post done: p2_strongF_report.py --ds llm_p2strongF; REPLACE P2.7 interim with class rates + exploratory E99-x + registered contrasts; p2_strongF_fig.py; update abstract/glance/merger X/Y, cite Q1.4 E66 when ready.
+3. Class rules do not force price AUROC=0.5; text/plan separation alone is not incremental gain. Keep circularity caveat and n<3 descriptive rule. E66 adapter mirrors our LOWER-BOUND rule; original q14 pilot uses ±1.
+4. After in-flight C: latest C3c (Qwen9 clean serving pair) precedes further generation; read QWEN_BUDGET, pilot 3 games and drop if >10% invalid. E1 Q1.4 generates/Q2.2 audits; E2 replacement/E3 mixed families/E5 German remain queued, register before work. E4 is complete.
+5. Checkpoint Sat19:30; E102 stop/report at Sun10:00; finalize-only Sun16:30. Read ../collusion-serendipity/HITS.md every iteration; decide explicitly whether any relevant hit warrants registered confirmation.
 
 ## Log
 - 14:16 P2 iter16: p2_strongF_fig.py (Part C class-path figure, pilot smoke test); no new experiments, waiting on E99 gen 24/40.
@@ -135,3 +135,8 @@
 - 14:33 iter17 interpretation adjustment to director 1(ii), justified by the code and independent review: strict requires pair excess >=+2 after agreement; tacit-high requires market excess >=+2 in rounds 11–40. Different selections do not guarantee equal price distributions or price AUROC=0.5. Preserved E99-x prediction, but formatter now lists action controls separately and warns that text/plan separation alone does not establish incremental gain. REPORT replacements only (692 lines); no results changed. Review: reviews/p2_iter17_codex_review.md; objective cache-recovery procedure: data/SPLITS.md.
 
 - 14:34 iter17 director steering: DIRECTION.md changed during verification (Dennis 14:30 Part E). Read the new diff and queued its E1–E5 instructions for after in-flight Part C, which is still generating; this supersedes the earlier blanket "no new registered experiments" for those directed designs. Did not start a second research chunk. Director edits will be included intact in the milestone commit.
+
+- 2026-10-24 14:52 UTC P2 iter18 (fallback Codex manager): completed Part E4 zero-new-games anomaly hunt, E108a–e. Registered sampling before reading, then disclosed all five specific follow-ups as post-hoc after transcript review/preliminary helper counts. Sampled committed snapshots (24 eligible datasets per repo, 1038 eligible games; 20 datasets per repo selected), archived portable gzip + source hashes, and reviewed all 40 public/private transcripts / 841 rounds with two read-only Codex helpers. No live strongF/Qwen-strong data in the sample, no seller/auditor calls or headline evaluation. Scheduling rationale: E99 is still generating, so this independent zero-call work uses the wait without taking backend capacity; no new generation arm started.
+- iter18 results: q14 strong_luna_C001 band compliance37/40 vs exact target1/40, equal prices8/40, persistent unequal12/13 for28 rounds (opening promises may be one-round only); q14 g56l/para disclaimers21/27 with equal pairs12/18 and13/15 thereafter, not proof of coordination/intent. q22 p2rep0048 A18 all12 rounds and strictly lowest relative profit each round (A1147.47, B2144.49, C2214.21, D2034.52), not a counterfactual harm result. Mixed q22 endings10/20 games any drop,21/80 firms (same state3/8,3/32); Claude withdraws21->19, GLM precommits/keeps20. Narrow numeric declarations143 (72 private,71 public),0 mismatches across10 games: same-response consistency only.
+- iter18 verification/review: all40 archived transcripts and selected source blob hashes equal recorded git objects, including private chats; horizon/contiguity/unique firm/ID checks pass. Byte-identical analysis regeneration and freeze refusal verified. Independent q14 reviewer reproduced8 tolerance +2 disclaimer rows; q22 counts match separate transcript review. All five framing corrections applied; reviews/p2_iter18_serendipity.md. Corrected REPORT's false equivalence of Q1.4 +/-1 and Q2.2 lower-bound execution compliance; registered rules/results untouched, E66 adapter checked and already mirrors ours. Existing17 strongF tests and read-only transition-source checker pass. Case plot generated and visually inspected; old transition detail moved unchanged to appendix, REPORT692->689 lines. No handoff export/manifest rebuild.
+- iter18 director steering: DIRECTION gained the separate Serendipity Explorer at runtime; read its HITS.md (none yet). Decision: no registered confirmation warranted without a hit; do not duplicate its pilots. E4 is now done; C3c and other Part E generation designs stay queued behind in-flight C.

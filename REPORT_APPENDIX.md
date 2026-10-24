@@ -711,3 +711,29 @@ public log under six views (defined in §Setup). Locked test split (n = 95, run 
 5. **Breadth.** Other seller model families, more firms/rounds, and a second market type.
 
 
+
+## v1 transition-source validation detail
+
+**Transition-source check (post-hoc, iteration 25).** `python3 -S check_price_transitions.py` →
+`results/analysis/price_transitions.json` and [all parsed clauses with source prices](PRICE_TRANSITIONS.md).
+A fixed, selective grammar recognizes leading transition clauses in 51/2,229 test items and 6/696 replication items
+across the same six views. All 57 parsed clauses have matching source endpoints under a cited-round reading:
+54 adjacent-round matches and 3 with an earlier, nonadjacent start; no numeric-direction conflicts.
+For example, `llm_v3_0030`, action view, item 0 describes firm A cutting from 18 to 14 over three rounds;
+the public prices are 18 → 16 → 14 (rounds 1–3). Requiring both endpoints to equal the single cited-round price
+rejects this description; even the historical ±1-round check at round 3 misses the starting 18 in round 1.
+This is an illustrative example, not a re-estimate of the historical dev/test regex rates.
+The new check uses only public logs and cached observations, with explicit subjects overriding the cited firm
+and omitted subjects binding to it. It checks endpoints only: intermediate paths, duration, market context,
+other clauses and collusion inferences remain unchecked. Unparsed items remain in the coverage denominator;
+these selective counts are **not an explanation-accuracy rate**, and no semantic judge was run. A source mismatch,
+if found, would call for review rather than automatically establish hallucination. Historical evidence outputs
+and all frozen detection results are unchanged. Items include repeated descriptions across views and are not
+independent trajectories.
+Selection is especially restrictive for coordination claims: adverbs such as *jointly/simultaneously* and verbs
+such as *decrease/fall/rise* are outside the grammar. A lexical diagnostic added after the first census finds
+52 further unparsed test items and 17 replication items containing numeric `from X to Y` spans anywhere in the
+observation; these can describe costs, later clauses or quoted wording, rather than price transitions. They are
+exposed without source-agreement labels, and the validation grammar was not widened. The 57 endpoint matches
+give limited assurance about collusion-alleging evidence, which may use the excluded wording.
+
