@@ -14,6 +14,20 @@ write-up; wide appendix tables use landscape PDF pages. Export with
 The [cached evidence source ledger](EVIDENCE.html) lets reviewers inspect every original-view
 test and replication evidence item beside the public log (offline, searchable; no semantic judging).
 
+**TL;DR (plain-language summary; every number is repeated with its source below).**
+1. *Question:* does a zero-shot LLM auditor detect collusion better if it reads sellers' public messages as well as
+   their prices? *On our generator: no resolved gain.* Locked test (n = 95): text alone run AUROC 0.47 (chance); text +
+   actions 0.74 vs actions alone 0.75; combined minus best single modality −0.01 [−0.09, +0.06].
+2. *Why:* LLM sellers given a private chat all use it (70/70 private pairs), but the explicit-public-coordination
+   screen flags 0/125 runs, so the public text gives the tested zero-shot auditor little to read.
+3. *What helps:* summarising the actions. A computed statistics table adds +0.11 [+0.04, +0.18]; an untrained
+   pair price premium reaches 0.95 (chosen after partial test exposure; 0.92 on a 30-run replication).
+4. *Caution:* the label equals the condition. Round-1 prices (set before any partner message) already give 0.90, and
+   a placebo channel that is offered but never delivered is flagged as often (premium 14/15 vs 14/15). The detectors
+   respond to the channel offer; they need not be detecting a delivered agreement.
+5. *Suggested architecture (not evaluated end-to-end):* always-on action statistics as the screen; LLM audit to
+   explain flagged runs.
+
 ## Abstract
 Does an auditor catch LLM collusion better if it reads what sellers *say* in public as well as what they *do*?
 **On our generator: no resolved run-level detection gain** (a small nominal localisation gain with statistics did not repeat on fresh data). We simulate a 4-firm repeated-pricing market with gpt-6-luna sellers; in the
