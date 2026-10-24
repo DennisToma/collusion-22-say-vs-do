@@ -1,16 +1,17 @@
 # STATUS
 
-## Current state (2026-10-24 22:20 UTC, Phase 2 iteration 51) — following DIRECTION 20:00
+## Current state (2026-10-24 22:10 UTC, Phase 2 iteration 52) — following DIRECTION 20:00
 - Headline unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc).
 - Directives 2, 3, 5 done (E124, stale waiter killed, E125); 4 pre-staged (merge block E126, E113 line PENDING); D2 cited (E130).
 - E113 pending: snapshot 182 games (sibling 9cee046); audits cached and current, coverage complete for all 16 cells, 0 unparsed (+6 calls this iter). Luna 6/6, qwen 5/6 sweeps; qwen sixth sweep done c00–c10, c11 started 22:02, c12–c15 left (≈20 min/cell → ETA ≈ 23:45). Preflight correctly refuses (5/6). No metrics computed/inspected; no result/lock file.
-- The c10 stall noted at iter50 resolved itself (c10 finished ~22:02).
+- Iter52 (22:05): re-ran snapshot/audit/coverage/preflight: still 182 games, 0 new audit calls, preflight refuses 5/6. Q1.4 STATUS (21:55) not yet "6 sweeps complete"; c11 running since 22:02.
 - Verification state unchanged from iter50: claims 32/32; offline reproduction 26/26; 14/14 E113 synthetic tests.
 - **Next (iter52+):** once Q1.4 STATUS says "6 sweeps complete" → snapshot → audit → coverage → preflight → eval ONCE → p2_e1_report.py → P2.16/glance/abstract/merge block + ONE final-snapshot ledger row → claims + verify_phase2. Joint pCMI sentence only if Q1.4 reports qwen replication.
 - Then ONE abstract pass ≤260 words by Sun 07:30; reviews Sun 12:30; freeze 14:00; exports 16:30. Never stash/checkout live generators.
 - Risk: E113 lands ~00:00–00:30, at the director's target; if qwen/aqueduct slows, Sun 08:00 fallback uses complete sweeps.
 
 ## Log
+- 22:10 P2 iter52: no new games since iter51 (182, 0 audit calls, preflight 5/6, no metrics read). Ended early per director stop rule. Note: iter51's 22:20 stamp was ahead of the clock (actual ≤ 22:05).
 - 22:20 P2 iter51: E113 snapshot 182 games + cached audits (+6 calls), coverage complete, preflight refuses 5/6 (no metrics read); REPORT header snapshot count updated. Ended early per director stop rule (no wording work while E113 gated).
 - 21:12 P2 iter47: E127 corrects staged E113 formatter (both-arm posts, silent-only no-text noise); 13/13 synthetic tests; snapshot165 +3 cached audits, all coverage/current-prompt checks pass; preflight refuses4/6, no metrics read. REPORT header + final luna board covariate refreshed; abstract/TL;DR unchanged. Offline reproduction 26/26 commands, 33/33 outputs exact, originals unchanged; receipt freshness PASS.
 - 21:10 P2 iter46: E113 snapshot 164 games + cached audit (+6 calls), coverage complete, preflight refuses 4/6 (no scores read); luna lane done 6/6, qwen idx 4 in progress and maybe slowing (c09 22 min). No ledger row, REPORT unchanged.
