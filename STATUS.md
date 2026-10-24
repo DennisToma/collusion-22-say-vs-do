@@ -11,7 +11,7 @@
   tacit_high tracks market height (luna 45-92, sol 4-5). Frozen: thr 50 both scores + 58 tacit_high.
 - p2_strongF_post.sh RUNNING: prefetches labels/views/plan every 40 min (cache only), then on "strongF gen done" runs everything once.
 - RUNNING: chain6b (ds views 56/120), C3 qwen (a 16, b 8) -> p2_c3post.sh auto, E102 qwen strong, mimo 5/14, g56sol 4/14, chain3 p2cue.
-- codex review (logs/review_iter9p2_codex.md, 25 items) APPLIED 12:35: v3rep −0.14 [−0.33,−0.02] now in abstract/TL;DR; ds/sol final premium
+- codex review (logs/review_iter9p2_codex.md, 25 items) APPLIED 12:27: v3rep −0.14 [−0.33,−0.02] now in abstract/TL;DR; ds/sol final premium
   (+1.49, −0.05; flags 9/15|6/15, 4/7|2/7); ≥F−1 rule; first-floor-compliance naming; E99-amend exposure; E103 target mismatch; asym 7/10 intersection.
   NOT applied: H3/market-price ds/sol interim columns (wait for P2.6 finals); heterogeneous-cost benchmark (noted as not tried).
 ## Next steps
@@ -24,7 +24,7 @@
 - Risk: codex overload (~35 codex procs across repos). Known: verify_artifacts.py FAILS (manifest) — deferred to Sun 16:30.
 
 ## Log
-- 12:36 P2 iter9: codex review applied to abstract/TL;DR/P2.4-P2.9; p2_strong_eval enforces n<3 descriptive rule.
+- 12:27 P2 iter9: codex review applied to abstract/TL;DR/P2.4-P2.9; p2_strong_eval enforces n<3 descriptive rule.
 - 12:20 P2 iter9: E87 asym result (P2.9; cost-adj P2 failed); E99-amend + E103 plan view registered, pilot calibration; strongF post chain w/ prefetch; p2coded killed; codex review launched.
 - 12:10 P2 iter8: p2rep computed once (E80/E89 held; P2.8), E84 on p2rep, pooled E101; chain6 0-call bug -> chain6b; C3 qwen E100 + E102 launched; strong pilot final.
 - 11:39 P2 iter7: luna pilot final 2/3 executed (strict 2/3); seed 2 executed floor 18 but matched no-channel market also 18.0 -> executed adds ~0 over tacit. g56sol started.
