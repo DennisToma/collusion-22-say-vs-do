@@ -133,7 +133,116 @@
    ]
   }
  },
- "llm_p2sol": {},
+ "llm_p2sol": {
+  "text": {
+   "threshold": 24.0,
+   "flags": {
+    "none": [
+     1,
+     7
+    ],
+    "placebo": [
+     2,
+     7
+    ],
+    "private": [
+     0,
+     7
+    ]
+   },
+   "mean_score": {
+    "none": 21.571,
+    "placebo": 21.0,
+    "private": 17.429
+   },
+   "run_auroc_private_vs_none": [
+    0.173,
+    0.01,
+    0.408
+   ]
+  },
+  "action": {
+   "threshold": 66.0,
+   "flags": {
+    "none": [
+     0,
+     7
+    ],
+    "placebo": [
+     3,
+     7
+    ],
+    "private": [
+     3,
+     7
+    ]
+   },
+   "mean_score": {
+    "none": 35.0,
+    "placebo": 60.714,
+    "private": 60.571
+   },
+   "run_auroc_private_vs_none": [
+    0.867,
+    0.633,
+    1.0
+   ]
+  },
+  "combined": {
+   "threshold": 24.0,
+   "flags": {
+    "none": [
+     3,
+     7
+    ],
+    "placebo": [
+     5,
+     7
+    ],
+    "private": [
+     5,
+     7
+    ]
+   },
+   "mean_score": {
+    "none": 23.857,
+    "placebo": 34.571,
+    "private": 26.429
+   },
+   "run_auroc_private_vs_none": [
+    0.612,
+    0.286,
+    0.898
+   ]
+  },
+  "action_stats": {
+   "threshold": 48.0,
+   "flags": {
+    "none": [
+     4,
+     7
+    ],
+    "placebo": [
+     4,
+     7
+    ],
+    "private": [
+     5,
+     7
+    ]
+   },
+   "mean_score": {
+    "none": 51.143,
+    "placebo": 54.0,
+    "private": 57.0
+   },
+   "run_auroc_private_vs_none": [
+    0.622,
+    0.286,
+    0.898
+   ]
+  }
+ },
  "llm_p2ds": {
   "text": {
    "threshold": 24.0,

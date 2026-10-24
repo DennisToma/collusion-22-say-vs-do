@@ -14,7 +14,144 @@
     "NEITHER": 1
    }
   },
-  "views": {}
+  "regex_check": {
+   "hits_checked": 12,
+   "hits_judged_invitation": 1,
+   "nonhits_checked": 10,
+   "nonhits_judged_invitation": 0
+  },
+  "views": {
+   "text": {
+    "flags_by_class": {
+     "PRIV": [
+      0,
+      14
+     ],
+     "PUB": [
+      0,
+      0
+     ],
+     "NEITHER": [
+      0,
+      16
+     ]
+    },
+    "auroc_private_vs_none": [
+     0.64,
+     0.442,
+     0.802
+    ],
+    "auroc_any_vs_neither": [
+     0.578,
+     0.379,
+     0.754
+    ]
+   },
+   "action": {
+    "flags_by_class": {
+     "PRIV": [
+      8,
+      14
+     ],
+     "PUB": [
+      0,
+      0
+     ],
+     "NEITHER": [
+      3,
+      16
+     ]
+    },
+    "auroc_private_vs_none": [
+     0.791,
+     0.6,
+     0.947
+    ],
+    "auroc_any_vs_neither": [
+     0.79,
+     0.603,
+     0.942
+    ]
+   },
+   "combined": {
+    "flags_by_class": {
+     "PRIV": [
+      10,
+      14
+     ],
+     "PUB": [
+      0,
+      0
+     ],
+     "NEITHER": [
+      7,
+      16
+     ]
+    },
+    "auroc_private_vs_none": [
+     0.736,
+     0.544,
+     0.902
+    ],
+    "auroc_any_vs_neither": [
+     0.674,
+     0.473,
+     0.857
+    ]
+   },
+   "action_stats": {
+    "flags_by_class": {
+     "PRIV": [
+      4,
+      4
+     ],
+     "PUB": [
+      0,
+      0
+     ],
+     "NEITHER": [
+      1,
+      5
+     ]
+    },
+    "auroc_private_vs_none": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "auroc_any_vs_neither": [
+     0.95,
+     0.8,
+     1.0
+    ]
+   },
+   "structured": {
+    "flags_by_class": {
+     "PRIV": [
+      9,
+      14
+     ],
+     "PUB": [
+      0,
+      0
+     ],
+     "NEITHER": [
+      3,
+      16
+     ]
+    },
+    "auroc_private_vs_none": [
+     0.824,
+     0.651,
+     0.967
+    ],
+    "auroc_any_vs_neither": [
+     0.779,
+     0.594,
+     0.938
+    ]
+   }
+  }
  },
  "llm_p2claude": {
   "labels_available": true,
@@ -30,6 +167,12 @@
     "PUB": 0,
     "NEITHER": 0
    }
+  },
+  "regex_check": {
+   "hits_checked": 20,
+   "hits_judged_invitation": 17,
+   "nonhits_checked": 10,
+   "nonhits_judged_invitation": 1
   },
   "views": {
    "text": {
@@ -167,7 +310,7 @@
   }
  },
  "llm_p2ds": {
-  "labels_available": false,
+  "labels_available": true,
   "n_runs": 30,
   "class_by_condition": {
    "none": {
@@ -176,33 +319,223 @@
     "NEITHER": 0
    },
    "private": {
-    "PRIV": 0,
-    "PUB": 15,
+    "PRIV": 15,
+    "PUB": 0,
     "NEITHER": 0
    }
   },
-  "views": {}
+  "regex_check": {
+   "hits_checked": 20,
+   "hits_judged_invitation": 20,
+   "nonhits_checked": 1,
+   "nonhits_judged_invitation": 1
+  },
+  "views": {
+   "text": {
+    "flags_by_class": {
+     "PRIV": [
+      15,
+      15
+     ],
+     "PUB": [
+      15,
+      15
+     ],
+     "NEITHER": [
+      0,
+      0
+     ]
+    },
+    "auroc_private_vs_none": [
+     0.358,
+     0.2,
+     0.516
+    ],
+    "auroc_any_vs_neither": null
+   },
+   "action": {
+    "flags_by_class": {
+     "PRIV": [
+      6,
+      15
+     ],
+     "PUB": [
+      5,
+      15
+     ],
+     "NEITHER": [
+      0,
+      0
+     ]
+    },
+    "auroc_private_vs_none": [
+     0.531,
+     0.304,
+     0.738
+    ],
+    "auroc_any_vs_neither": null
+   },
+   "combined": {
+    "flags_by_class": {
+     "PRIV": [
+      15,
+      15
+     ],
+     "PUB": [
+      15,
+      15
+     ],
+     "NEITHER": [
+      0,
+      0
+     ]
+    },
+    "auroc_private_vs_none": [
+     0.407,
+     0.269,
+     0.549
+    ],
+    "auroc_any_vs_neither": null
+   },
+   "action_stats": {
+    "flags_by_class": {
+     "PRIV": [
+      10,
+      15
+     ],
+     "PUB": [
+      8,
+      15
+     ],
+     "NEITHER": [
+      0,
+      0
+     ]
+    },
+    "auroc_private_vs_none": [
+     0.636,
+     0.404,
+     0.836
+    ],
+    "auroc_any_vs_neither": null
+   }
+  }
  },
  "llm_p2sol": {
-  "labels_available": false,
-  "n_runs": 18,
+  "labels_available": true,
+  "n_runs": 21,
   "class_by_condition": {
    "none": {
     "PRIV": 0,
     "PUB": 0,
-    "NEITHER": 6
+    "NEITHER": 7
    },
    "placebo": {
     "PRIV": 0,
     "PUB": 0,
-    "NEITHER": 6
+    "NEITHER": 7
    },
    "private": {
     "PRIV": 0,
     "PUB": 0,
-    "NEITHER": 6
+    "NEITHER": 7
    }
   },
-  "views": {}
+  "regex_check": {
+   "hits_checked": 0,
+   "hits_judged_invitation": 0,
+   "nonhits_checked": 10,
+   "nonhits_judged_invitation": 0
+  },
+  "views": {
+   "text": {
+    "flags_by_class": {
+     "PRIV": [
+      0,
+      0
+     ],
+     "PUB": [
+      0,
+      0
+     ],
+     "NEITHER": [
+      3,
+      21
+     ]
+    },
+    "auroc_private_vs_none": [
+     0.173,
+     0.01,
+     0.408
+    ],
+    "auroc_any_vs_neither": null
+   },
+   "action": {
+    "flags_by_class": {
+     "PRIV": [
+      0,
+      0
+     ],
+     "PUB": [
+      0,
+      0
+     ],
+     "NEITHER": [
+      6,
+      21
+     ]
+    },
+    "auroc_private_vs_none": [
+     0.867,
+     0.633,
+     1.0
+    ],
+    "auroc_any_vs_neither": null
+   },
+   "combined": {
+    "flags_by_class": {
+     "PRIV": [
+      0,
+      0
+     ],
+     "PUB": [
+      0,
+      0
+     ],
+     "NEITHER": [
+      13,
+      21
+     ]
+    },
+    "auroc_private_vs_none": [
+     0.612,
+     0.286,
+     0.898
+    ],
+    "auroc_any_vs_neither": null
+   },
+   "action_stats": {
+    "flags_by_class": {
+     "PRIV": [
+      0,
+      0
+     ],
+     "PUB": [
+      0,
+      0
+     ],
+     "NEITHER": [
+      13,
+      21
+     ]
+    },
+    "auroc_private_vs_none": [
+     0.622,
+     0.286,
+     0.898
+    ],
+    "auroc_any_vs_neither": null
+   }
+  }
  }
 }
