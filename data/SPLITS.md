@@ -187,3 +187,8 @@ scorers, thresholds, metric definitions and published numerical estimates are un
   No auditor/label prompt, threshold, execution rule or frozen detector changed; no headline metric rerun. E108e is consistency
   of fields emitted in one response, not temporal promise keeping. Q1.4 original +/-1 and Q2.2 lower-bound compliance remain distinct;
   E66's adapter mirrors Q2.2, so its pending class equality check is unaffected. No new held-out design or tuning split is needed.
+
+## E110 / Part E5 German market (llm_p2de, iteration 20, 2026-10-24 15:13 UTC)
+- 20 fresh runs: `llm_market.py --ds llm_p2de --framing lab --lang de --rounds 12 --matched private,none --matched-n 10 --seed 8100`.
+  Seeds 8100000-8100009 = same cost/demand paths as llm_p2cue private/none k 0-9 (paired English comparison).
+- Pure evaluation set for frozen labeler/auditors (no tuning on it). Descriptive; registered predictions in EXPERIMENTS.tsv E110-de-reg.
