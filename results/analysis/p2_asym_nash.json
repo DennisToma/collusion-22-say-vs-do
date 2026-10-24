@@ -1,0 +1,29 @@
+{
+ "frozen_premium_threshold": 0.667,
+ "by_cost": {
+  "5": {
+   "symmetric": 10.236,
+   "highcost_pair_premium": 1.437,
+   "highcost_own_passthrough": 0.855,
+   "quality_pair_premium": 0.581
+  },
+  "6": {
+   "symmetric": 11.211,
+   "highcost_pair_premium": 1.449,
+   "highcost_own_passthrough": 0.856,
+   "quality_pair_premium": 0.573
+  },
+  "7": {
+   "symmetric": 12.182,
+   "highcost_pair_premium": 1.464,
+   "highcost_own_passthrough": 0.856,
+   "quality_pair_premium": 0.563
+  },
+  "8": {
+   "symmetric": 13.146,
+   "highcost_pair_premium": 1.481,
+   "highcost_own_passthrough": 0.857,
+   "quality_pair_premium": 0.551
+  }
+ }
+}

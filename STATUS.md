@@ -4,6 +4,7 @@
 
 ## Current state (2026-10-24 12:20 UTC, Phase 2 iteration 9)
 - DONE gap 5 (E86, P2.9): aware pairs 0/20 agreements (vs 10/10), markets BELOW none (-1.19): deterrence, not evasion.
+  Opus review applied: compliance vs deterrence not separable (replicates E45); asym highcost flags = competition-predicted (p2_asym_nash.py).
   DEVIATION: p2aware frozen LLM views SKIPPED (no agreement to survive; saves 80 sol calls).
 - DONE p2rep (E80/E89 held, P2.8; pooled n=90 E101). DONE gap 7 (E87, P2.10): premium flags highcost 7/10, quality 9/10 vs none 2/10;
   own-cost adjustment FAILS (moves flag to the low-cost pair 8/10: ~half cost pass-through). Gap 8 p2coded killed (2 partial runs, unused).
@@ -25,6 +26,7 @@
 - Risk: codex overload (~35 codex procs across repos). Known: verify_artifacts.py FAILS (manifest) — deferred to Sun 16:30.
 
 ## Log
+- 12:36 P2 iter9: Opus review of P2.7/P2.9/P2.10 applied (p2_asym_nash.py competitive benchmark, E45 replication, prediction list).
 - 12:31 P2 iter9: E86 p2aware result (P2.9; labels 20 calls), abstract sentence; asym renumbered P2.10.
 - 12:27 P2 iter9: codex review applied to abstract/TL;DR/P2.4-P2.9; p2_strong_eval enforces n<3 descriptive rule.
 - 12:20 P2 iter9: E87 asym result (P2.9; cost-adj P2 failed); E99-amend + E103 plan view registered, pilot calibration; strongF post chain w/ prefetch; p2coded killed; codex review launched.
