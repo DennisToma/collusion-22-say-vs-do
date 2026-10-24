@@ -2,22 +2,24 @@
 
 # STATUS
 
-## Current state (2026-10-24 14:10 UTC, Phase 2 iteration 13)
-- DONE this iter: directive-4 adversarial review (Opus subagent) of abstract/TL;DR/glance/P2.11/P2.12: all numbers matched json; 14 framing
-  fixes applied (reviews/p2_iter13_opus_review.md): abstract 242 words, answer first; "no resolved gain" scoped to primary combined view
-  (structured +0.08 [+0.00,+0.17] test, from stats table not text); premium paired with post-hoc + asymmetry confounds; abliteration
-  ceiling/strict 5/15/bf16-vs-FP8; SALT 62% per-episode + no-verdict-words 0.75; TL;DR 3/5 rewritten.
-- RUNNING: strongF generation 23/40 at 14:08 (~3 games/8 min -> gen done ~15:00-15:30) -> p2_strongF_post.sh (pid 662788, waits on
-  "strongF gen done" in logs/partc_chain.log) writes p2_strong_classes_llm_p2strongF.json; E102 qwenaS/qwenbS (stop Sun 10:00).
+## Current state (2026-10-24 14:12 UTC VM clock, Phase 2 iteration 14)
+- DONE this iter: `p2_strongF_report.py` (formats P2.7 from p2_strong_eval/classes json: class counts + Jeffreys, AUROC table incl.
+  E99-x strict-vs-tacit-high, registered verdicts E99 P2-P4 / amend / E103 P1-P4 / E99-x, and the registered E99 P3 paired market-excess
+  seed-bootstrap CI -> results/analysis/p2_strongF_report_<ds>.json); smoke-tested on pilot llm_p2strong_luna (output deleted).
+  Cross-pollination text: E64 circularity caveat in P2.4 (followed label is price-defined); Q1.4 E44 spillover cited in P2.7;
+  joint Q1.4 merger sentence 1 (verbatim) under TL;DR. Directive 5 (null bound) + premium-confound pairing verified present.
+- RUNNING: strongF generation 23/40 (920 traj lines) -> p2_strongF.sh echoes "strongF gen done" -> p2_strongF_post.sh (pid 662788)
+  -> "strongF post done" in logs/partc_chain.log. E102 qwenaS/qwenbS (stop Sun 10:00).
 ## Next steps
-1. When "strongF post done" in logs/partc_chain.log: replace P2.7 strong-arm text with finals (directive 1: class counts w/ Jeffreys,
-   executed-private vs tacit-high-none AUROCs = key auroc_strict_vs_tacit_high (E99-x, exploratory), all views incl. plan; E64 caveat:
-   price AUROCs on executed classes ~1 by construction; cite Q1.4 E44 + E66 verdict). Update glance row P2.7 + abstract Part C sentence + header.
-2. Light self-check of new P2.7 only (review of the rest is done); export at 19:30.
-3. E102 at Sun 10:00: descriptive line in P2.11.
+1. On "strongF post done": `uv run python p2_strongF_report.py --ds llm_p2strongF` -> REPLACE P2.7 full-arm/plan interim text with its
+   markdown (+ E64 caveat: price AUROCs on strict class ~1 by construction vs competitive; E99-x is the decisive contrast). Update glance
+   row P2.7, abstract Part C sentence, header; add merger sentence 2 with X/Y = strict count. Quote Q1.4 E66 verdict when it exists.
+2. If gen exits nonzero the echo never fires: check logs/partc_strongF.log; then append the echo manually and let post run.
+3. Light self-check of P2.7; export at 19:30. E102 at Sun 10:00: descriptive line in P2.11.
 - Risk: never `pkill -f` a pattern in your own command line. verify_artifacts.py FAILS (manifest) — deferred to Sun 16:30.
 
 ## Log
+- 14:12 P2 iter14: p2_strongF_report.py formatter (pilot smoke test); P2.4 circularity caveat, E44 cite in P2.7, merger sentence 1.
 - 14:10 P2 iter13: Opus adversarial review (directive 4) applied to abstract/TL;DR/glance/P2.11/P2.12 (14 items, no number changes).
 - 14:03 P2 iter12: E99-x exploratory strict-executed vs tacit-high contrast registered + added to p2_strong_eval.py (pilot smoke test: old keys unchanged).
 - 14:01 P2 iter12: E100 C3 result (P2.11), E98 C2 final, abstract/TL;DR/glance consolidation, P2.1-3 -> appendix.

@@ -32,6 +32,9 @@ Abliterated vs base Qwen: no detectable increase in agreement or execution.
 6. *Practical:* premium precision 0.24 at 5% prevalence; legitimate cost/quality edges are flagged 7/10, 9/10 (controls 2/10). Screens
    need model- and prompt-matched references; we recommend no screening architecture.
 
+*Joint statement with Q1.4 (verbatim in both reports):* "Detectability of LLM collusion by any price statistic is a property of the (seller
+model × prompt) pair. Relative screens survive a shared model but fail under market-wide spillover; absolute screens need model- and prompt-matched references."
+
 ## Phase 2 results (in progress, from 2026-10-24 06:30 UTC; v1 below frozen as git tag `v1-overnight`)
 
 Phase 2 closes known validity gaps. Generators are registered in `EXPERIMENTS.tsv` before their data exist, analyses and audits before their outputs;
@@ -75,7 +78,8 @@ not-kept agreements set floor 17–18, and 34 of 36 are made in round 1. Kept fl
 14 are agreed in rounds 2–11. A second judge (Claude Sonnet 5.5, same prompt, first 30 test chats; E84d, `p2_terms_xfam.py`) matches
 sol on agreed yes/no 25/30, floor 23/30 and class 24/30. Asked about scope, it reads 18 of the 21 not-kept agreements
 as *meant for the opening round only* and none as ongoing. Example llm_v3_0040: "I suggest we both start at 18 this
-round … adjust next round", and from round 3 both firms say they price independently. Detectors, followed (14) vs rest (81):
+round … adjust next round", and from round 3 both firms say they price independently. *Circularity caveat (cf. Q1.4 E64):* *followed* is itself defined by
+pair prices (≥ floor − 1, floor ≥ 12), so price views are partly scored against their own input here; text views are not. Detectors, followed (14) vs rest (81):
 
 | detector (frozen dev threshold) | test run AUROC, followed vs rest | flags: followed / not followed / none / legit | test AUROC, followed vs not followed | replication, followed (5) vs rest (25) |
 |---|---|---|---|---|
@@ -173,7 +177,7 @@ style), unknown end, full price history, a persistent private plan for every fir
 kept 26/26 rounds, phrased as "I'm independently testing 19 too"); gpt-6.1-sol 0/2 (no agreement, market 12.9 vs 12.5). **But the high
 price is market-wide:** luna rounds 11–40 market mean 17.1 with vs **15.5 with no channel at all** (Nash 10–13); pair premiums ≈ 0
 (mean −0.01), and in seed 2 the matched no-channel market also sits at 18.0. A pair-relative screen cannot see this by construction (frozen
-premium flags 0/3 private vs 1/3 none; cf. Q1.4 E60 spillover). *Full arm (E99, `llm_p2strongF`, luna, 20 + 20 matched seeds):* generating;
+premium flags 0/3 private vs 1/3 none; cf. Q1.4 E60 spillover, and E44 at T = 60: rivals carry +2.24 of the pair's +2.47, market-level AUROC 0.94). *Full arm (E99, `llm_p2strongF`, luna, 20 + 20 matched seeds):* generating;
 evaluated once by behaviour class (strict-executed private / non-executed private / **tacit-high none** = market ≥ Nash + 2 over rounds 11–40 /
 competitive none; `p2_strong_eval.py` → `p2_strong_classes_llm_p2strongF.json`, shared with Q1.4). Registered: premium AUROC private vs none
 < 0.70; market excess private > none with none > +1; text flags executed ≤ none + 2; tacit-high rate in none ≥ 0.5.
