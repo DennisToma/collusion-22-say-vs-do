@@ -1,6 +1,6 @@
 # STATUS
 
-## Current state (2026-10-24 18:10 UTC from date -u, Phase 2 iteration 28)
+## Current state (2026-10-24 18:09 UTC from date -u, Phase 2 iteration 28)
 - Main claim unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc).
 - **Iter 28 consolidation (DIRECTION 17:56 dirs 2, 4):** E112 replacement sentence now in abstract + TL;DR 5 (luna arm; adjust after E115);
   abstract compressed 517 → 388 words (pair-stats parenthetical → TL;DR 1; SALT counts → TL;DR 3). Still above the ~260 target: kept
@@ -20,7 +20,7 @@
 3. E113: `snapshot` + `audit` cached as sweeps land; FINAL `eval` ONCE at 6 sweeps.
 
 ## Log
-- 18:10 P2 iter28: E112 sentence → abstract/TL;DR; abstract 517→388 words; REPORT 724→701 lines (evidence checks → appendix); C25; E115 raw-cache stash incident fixed + disclosed.
+- 18:09 P2 iter28: E112 sentence → abstract/TL;DR; abstract 517→388 words; REPORT 724→701 lines (evidence checks → appendix); C25; E115 raw-cache stash incident fixed + disclosed.
 - 18:00 P2 iter27: E116 within-channel contrast (p2_within_agree.py) → REPORT P2.7/abstract/TL;DR/glance; C24 claim; E3 dropped.
 - 17:58 P2 iter26: Opus checkpoint review (reviews/p2_iter26_checkpoint_opus.md) applied to abstract/TL;DR/glance/P2.15/header; p2_claims +C04c/C22/C23 → 25/25 OK; E1 snapshot 36 games/16 cells, coverage OK.
 - 17:51 P2 iter25: P2.11 three-pair abliteration line (Q1.4 E61, E69 + ours) + glance; p2_claims 22/22 OK; REPORT 711 lines.
