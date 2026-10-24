@@ -6,8 +6,8 @@
 - RUNNING (bg): p2_chain.sh -> p2rep (60; para2 DONE); llm_p2sol (~14/21); llm_p2ds (20/30); llm_p2logbook (E92, 2/15);
   chain3 (E89 views p2cue/p2rep), chain4 (family label+analysis on exit), chain5 (E92 once), NEW chain6 (E91-ext views on sol/ds).
 - NEW E78 result (p2_band.py -> p2_band.json): wording band FAILED for terse paraphrase 2: private-none premium +0.24
-  [-.32,.81] vs +1.75 orig / +1.79 para1 on the same 10 seeds (para2-orig -1.51 [-2.33,-.68]); chats still agree on 18
-  (judge explicit 10/10, but ~5/10 on ~12 near Nash). Pairs open lower and others price higher. -> REPORT P2.5 band, TL;DR 7, takeaways.
+  [-.32,.81] vs +1.75 orig / +1.79 para1 on the same 10 seeds (para2-orig -1.51 [-2.33,-.68]); judge labels unchanged
+  (explicit 10/10, but ~5/10 on ~12 near Nash; codex: not attributable to follow-through). Pair, outsider and baseline prices all move. -> REPORT P2.5 band, TL;DR 7, takeaways.
 - NEW E93 interim families (p2_interim.py, results/analysis/interim/): deepseek (10 seeds) invites coordination openly in
   BOTH arms (public 479/480 in none; none markets 17.0 vs luna 12.1), premium +2.05 but flags 4/10 controls (AUROC .75);
   gpt-6.1-sol (4 pairs) no joint-pricing talk, premium -0.14. Opus review applied (E93-review).
