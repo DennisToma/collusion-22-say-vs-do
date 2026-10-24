@@ -179,8 +179,14 @@ weak (run AUROC pCMI 0.54, MI 0.62, TE 0.45, Pearson 0.56; their `pair_level` = 
 cascade end to end (premium sends top 50% of runs, LLM view must also flag): action_stats recall 0.60 / FPR 0.02 /
 correct pair 0.44, structured 0.34 / 0.00 / 0.26 — again, gating by an LLM only loses recall vs the premium alone;
 evidence items name a colluding firm 54–62% of the time on y=1 runs (chance 50%); price claims are correct within
-±1 round in 81–93% of cases (action-bearing views). Cross-family (Claude Sonnet 5.5 vs gpt-6.1-sol, n = 18 mod-3
-runs so far, dev+test): similar pair AUROCs per view (e.g. structured 0.91 vs 0.84), Spearman 0.42–0.63.
+±1 round in 81–93% of cases (action-bearing views). Cross-family (Claude Sonnet 5.5 vs gpt-6.1-sol, all 42 mod-3
+runs, 24 y=1, dev+test pooled; `cross_family.py` → `results/analysis/llm_v3_crossfamily_claude-sonnet-5-5.json`): the
+**view ranking replicates across model families** — text lowest (run AUROC GPT 0.51 / Claude 0.58), action 0.76 / 0.80,
+combined 0.74 / 0.74, stats views highest (action_stats 0.85 / 0.91, structured 0.79 / 0.90, combined_stats 0.76 /
+0.92). Adding text to action does not help either auditor (Δ pair AUROC combined − best single: GPT +0.01
+[−0.05, +0.08], Claude −0.01 [−0.10, +0.07]); adding stats does (action_stats: GPT +0.09 [+0.02, +0.16], Claude +0.09
+[+0.00, +0.19]). Per-pair agreement between the two auditors is only moderate (Spearman 0.31 text … 0.59 structured;
+top-pair agreement 0.38–0.71), so individual verdicts are model-dependent even though the aggregate conclusion is not.
 Message-shuffle ablation on test and the llm_v3fp / llm_v3mon strata: pending.
 
 ![mechanism test](figures/mechanism_test.png)

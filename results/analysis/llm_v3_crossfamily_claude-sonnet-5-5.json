@@ -2,87 +2,111 @@
  "dataset": "llm_v3",
  "base": "gpt-6.1-sol",
  "other": "claude-sonnet-5-5",
- "n_runs": 18,
- "n_pos": 9,
+ "n_runs": 42,
+ "n_pos": 24,
  "views": {
   "text": {
-   "pair_auroc_gpt-6.1-sol": 0.6049,
-   "pair_auroc_claude-sonnet-5-5": 0.6111,
-   "spearman_pair_scores": 0.421,
-   "top_pair_agree": 0.338
+   "pair_auroc_gpt-6.1-sol": 0.6444,
+   "pair_auroc_claude-sonnet-5-5": 0.6742,
+   "run_auroc_gpt-6.1-sol": 0.5069,
+   "within_market_gpt-6.1-sol": 0.7,
+   "run_auroc_claude-sonnet-5-5": 0.5764,
+   "within_market_claude-sonnet-5-5": 0.6958,
+   "spearman_pair_scores": 0.307,
+   "top_pair_agree": 0.379
   },
   "action": {
-   "pair_auroc_gpt-6.1-sol": 0.7806,
-   "pair_auroc_claude-sonnet-5-5": 0.7873,
-   "spearman_pair_scores": 0.491,
-   "top_pair_agree": 0.546
+   "pair_auroc_gpt-6.1-sol": 0.7598,
+   "pair_auroc_claude-sonnet-5-5": 0.7791,
+   "run_auroc_gpt-6.1-sol": 0.7569,
+   "within_market_gpt-6.1-sol": 0.7792,
+   "run_auroc_claude-sonnet-5-5": 0.7951,
+   "within_market_claude-sonnet-5-5": 0.7792,
+   "spearman_pair_scores": 0.473,
+   "top_pair_agree": 0.603
   },
   "combined": {
-   "pair_auroc_gpt-6.1-sol": 0.7531,
-   "pair_auroc_claude-sonnet-5-5": 0.7834,
-   "spearman_pair_scores": 0.627,
-   "top_pair_agree": 0.694
+   "pair_auroc_gpt-6.1-sol": 0.7695,
+   "pair_auroc_claude-sonnet-5-5": 0.7685,
+   "run_auroc_gpt-6.1-sol": 0.7419,
+   "within_market_gpt-6.1-sol": 0.7917,
+   "run_auroc_claude-sonnet-5-5": 0.7384,
+   "within_market_claude-sonnet-5-5": 0.7958,
+   "spearman_pair_scores": 0.573,
+   "top_pair_agree": 0.622
   },
   "structured": {
-   "pair_auroc_gpt-6.1-sol": 0.8446,
-   "pair_auroc_claude-sonnet-5-5": 0.9147,
-   "spearman_pair_scores": 0.601,
-   "top_pair_agree": 0.565
+   "pair_auroc_gpt-6.1-sol": 0.8493,
+   "pair_auroc_claude-sonnet-5-5": 0.8642,
+   "run_auroc_gpt-6.1-sol": 0.7928,
+   "within_market_gpt-6.1-sol": 0.8875,
+   "run_auroc_claude-sonnet-5-5": 0.897,
+   "within_market_claude-sonnet-5-5": 0.8458,
+   "spearman_pair_scores": 0.585,
+   "top_pair_agree": 0.639
   },
   "action_stats": {
-   "pair_auroc_gpt-6.1-sol": 0.89,
-   "pair_auroc_claude-sonnet-5-5": 0.8664,
-   "spearman_pair_scores": 0.468,
-   "top_pair_agree": 0.685
+   "pair_auroc_gpt-6.1-sol": 0.8465,
+   "pair_auroc_claude-sonnet-5-5": 0.8681,
+   "run_auroc_gpt-6.1-sol": 0.8507,
+   "within_market_gpt-6.1-sol": 0.8375,
+   "run_auroc_claude-sonnet-5-5": 0.9132,
+   "within_market_claude-sonnet-5-5": 0.8333,
+   "spearman_pair_scores": 0.518,
+   "top_pair_agree": 0.714
   },
   "combined_stats": {
-   "pair_auroc_gpt-6.1-sol": 0.8586,
-   "pair_auroc_claude-sonnet-5-5": 0.9074,
-   "spearman_pair_scores": 0.549,
-   "top_pair_agree": 0.667
+   "pair_auroc_gpt-6.1-sol": 0.8535,
+   "pair_auroc_claude-sonnet-5-5": 0.886,
+   "run_auroc_gpt-6.1-sol": 0.7558,
+   "within_market_gpt-6.1-sol": 0.8958,
+   "run_auroc_claude-sonnet-5-5": 0.9236,
+   "within_market_claude-sonnet-5-5": 0.8542,
+   "spearman_pair_scores": 0.535,
+   "top_pair_agree": 0.583
   }
  },
  "delta_pair": {
   "gpt-6.1-sol:combined": {
-   "delta": -0.0275,
+   "delta": 0.0097,
    "ci": [
-    -0.1418,
-    0.0876
+    -0.0515,
+    0.0763
    ]
   },
   "gpt-6.1-sol:structured": {
-   "delta": 0.064,
+   "delta": 0.0895,
    "ci": [
-    -0.0287,
-    0.1585
+    0.0253,
+    0.1607
    ]
   },
   "gpt-6.1-sol:action_stats": {
-   "delta": 0.1094,
+   "delta": 0.0867,
    "ci": [
-    0.0141,
-    0.2164
+    0.018,
+    0.1606
    ]
   },
   "claude-sonnet-5-5:combined": {
-   "delta": -0.0039,
+   "delta": -0.0105,
    "ci": [
-    -0.1975,
-    0.1397
+    -0.1001,
+    0.0731
    ]
   },
   "claude-sonnet-5-5:structured": {
-   "delta": 0.1274,
+   "delta": 0.0852,
    "ci": [
-    0.0237,
-    0.2596
+    -0.001,
+    0.1733
    ]
   },
   "claude-sonnet-5-5:action_stats": {
-   "delta": 0.0791,
+   "delta": 0.089,
    "ci": [
-    -0.0297,
-    0.1981
+    0.0013,
+    0.1858
    ]
   }
  }

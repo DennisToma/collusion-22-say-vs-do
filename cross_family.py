@@ -9,7 +9,7 @@ import argparse, json
 from pathlib import Path
 import numpy as np
 from scipy.stats import spearmanr
-from analyze_llm import PAIRS, VIEWS, load_jsonl, auc
+from analyze_llm import PAIRS, VIEWS, load_jsonl, auc, metrics
 
 
 def main():
@@ -46,6 +46,10 @@ def main():
         # expected agreement when each auditor breaks its own ties uniformly at random
         top = np.mean([len(tops(a.base, r) & tops(a.other, r)) / (len(tops(a.base, r)) * len(tops(a.other, r))) for r in common])
         out["views"][v] = {"pair_auroc_" + m: round(pair_auc(m, v, common), 4) for m in (a.base, a.other)}
+        for m in (a.base, a.other):  # run-level detection + within-market localisation, same definitions as headline
+            mm = metrics(common, {v: R[(m, v)]}, labs)[v]
+            out["views"][v].update({f"run_auroc_{m}": round(float(mm["run_auroc"]), 4),
+                                    f"within_market_{m}": round(float(mm["within_market_auroc"]), 4)})
         out["views"][v].update(spearman_pair_scores=round(float(spearmanr(sb, so)[0]), 3), top_pair_agree=round(float(top), 3))
     for m in (a.base, a.other):
         for h in ("combined", "structured", "action_stats"):
