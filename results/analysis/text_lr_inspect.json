@@ -1,0 +1,385 @@
+{
+ "note": "descriptive fit on all 125 runs after the locked headline; not an evaluation",
+ "top_positive": [
+  [
+   "considered",
+   0.76
+  ],
+  [
+   "considered price",
+   0.76
+  ],
+  [
+   "adjusting our",
+   0.55
+  ],
+  [
+   "at considered",
+   0.54
+  ],
+  [
+   "service",
+   0.51
+  ],
+  [
+   "re adjusting",
+   0.49
+  ],
+  [
+   "supports reliable",
+   0.48
+  ],
+  [
+   "and cost",
+   0.47
+  ],
+  [
+   "with sustainable",
+   0.46
+  ],
+  [
+   "re focusing",
+   0.45
+  ],
+  [
+   "customer value",
+   0.45
+  ],
+  [
+   "balances customer",
+   0.45
+  ],
+  [
+   "price to",
+   0.44
+  ],
+  [
+   "service we",
+   0.43
+  ],
+  [
+   "that balances",
+   0.43
+  ],
+  [
+   "balances",
+   0.43
+  ],
+  [
+   "cost",
+   0.42
+  ],
+  [
+   "conditions with",
+   0.42
+  ],
+  [
+   "measured price",
+   0.41
+  ],
+  [
+   "demand this",
+   0.41
+  ],
+  [
+   "that",
+   0.41
+  ],
+  [
+   "fair sustainable",
+   0.4
+  ],
+  [
+   "measured",
+   0.4
+  ],
+  [
+   "price that",
+   0.4
+  ],
+  [
+   "product at",
+   0.39
+  ]
+ ],
+ "top_negative": [
+  [
+   "keeping",
+   -0.82
+  ],
+  [
+   "keeping our",
+   -0.79
+  ],
+  [
+   "re keeping",
+   -0.77
+  ],
+  [
+   "business",
+   -0.66
+  ],
+  [
+   "price competitive",
+   -0.59
+  ],
+  [
+   "competitive while",
+   -0.58
+  ],
+  [
+   "our offer",
+   -0.58
+  ],
+  [
+   "fair competitive",
+   -0.56
+  ],
+  [
+   "your business",
+   -0.54
+  ],
+  [
+   "earn",
+   -0.52
+  ],
+  [
+   "to earn",
+   -0.52
+  ],
+  [
+   "continue",
+   -0.52
+  ],
+  [
+   "offer competitive",
+   -0.5
+  ],
+  [
+   "competitive and",
+   -0.49
+  ],
+  [
+   "ll continue",
+   -0.48
+  ]
+ ],
+ "occurrence_rate_of_top_positive_ngrams": {
+  "considered": {
+   "colluding_pair": [
+    0.229,
+    70
+   ],
+   "other_pairs_private_runs": [
+    0.171,
+    350
+   ],
+   "pairs_none_runs": [
+    0.0,
+    210
+   ],
+   "pairs_legit_runs": [
+    0.0,
+    120
+   ]
+  },
+  "considered price": {
+   "colluding_pair": [
+    0.229,
+    70
+   ],
+   "other_pairs_private_runs": [
+    0.171,
+    350
+   ],
+   "pairs_none_runs": [
+    0.0,
+    210
+   ],
+   "pairs_legit_runs": [
+    0.0,
+    120
+   ]
+  },
+  "adjusting our": {
+   "colluding_pair": [
+    0.529,
+    70
+   ],
+   "other_pairs_private_runs": [
+    0.357,
+    350
+   ],
+   "pairs_none_runs": [
+    0.257,
+    210
+   ],
+   "pairs_legit_runs": [
+    0.133,
+    120
+   ]
+  },
+  "at considered": {
+   "colluding_pair": [
+    0.0,
+    70
+   ],
+   "other_pairs_private_runs": [
+    0.0,
+    350
+   ],
+   "pairs_none_runs": [
+    0.0,
+    210
+   ],
+   "pairs_legit_runs": [
+    0.0,
+    120
+   ]
+  },
+  "service": {
+   "colluding_pair": [
+    0.786,
+    70
+   ],
+   "other_pairs_private_runs": [
+    0.709,
+    350
+   ],
+   "pairs_none_runs": [
+    0.381,
+    210
+   ],
+   "pairs_legit_runs": [
+    0.717,
+    120
+   ]
+  },
+  "re adjusting": {
+   "colluding_pair": [
+    0.557,
+    70
+   ],
+   "other_pairs_private_runs": [
+    0.406,
+    350
+   ],
+   "pairs_none_runs": [
+    0.267,
+    210
+   ],
+   "pairs_legit_runs": [
+    0.208,
+    120
+   ]
+  },
+  "supports reliable": {
+   "colluding_pair": [
+    0.443,
+    70
+   ],
+   "other_pairs_private_runs": [
+    0.246,
+    350
+   ],
+   "pairs_none_runs": [
+    0.133,
+    210
+   ],
+   "pairs_legit_runs": [
+    0.083,
+    120
+   ]
+  },
+  "and cost": {
+   "colluding_pair": [
+    0.257,
+    70
+   ],
+   "other_pairs_private_runs": [
+    0.191,
+    350
+   ],
+   "pairs_none_runs": [
+    0.029,
+    210
+   ],
+   "pairs_legit_runs": [
+    0.0,
+    120
+   ]
+  },
+  "with sustainable": {
+   "colluding_pair": [
+    0.2,
+    70
+   ],
+   "other_pairs_private_runs": [
+    0.151,
+    350
+   ],
+   "pairs_none_runs": [
+    0.067,
+    210
+   ],
+   "pairs_legit_runs": [
+    0.117,
+    120
+   ]
+  },
+  "re focusing": {
+   "colluding_pair": [
+    0.229,
+    70
+   ],
+   "other_pairs_private_runs": [
+    0.123,
+    350
+   ],
+   "pairs_none_runs": [
+    0.0,
+    210
+   ],
+   "pairs_legit_runs": [
+    0.05,
+    120
+   ]
+  },
+  "customer value": {
+   "colluding_pair": [
+    0.3,
+    70
+   ],
+   "other_pairs_private_runs": [
+    0.26,
+    350
+   ],
+   "pairs_none_runs": [
+    0.124,
+    210
+   ],
+   "pairs_legit_runs": [
+    0.108,
+    120
+   ]
+  },
+  "balances customer": {
+   "colluding_pair": [
+    0.243,
+    70
+   ],
+   "other_pairs_private_runs": [
+    0.191,
+    350
+   ],
+   "pairs_none_runs": [
+    0.086,
+    210
+   ],
+   "pairs_legit_runs": [
+    0.05,
+    120
+   ]
+  }
+ }
+}

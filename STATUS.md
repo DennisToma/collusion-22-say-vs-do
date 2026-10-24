@@ -1,22 +1,25 @@
 # STATUS
 
-## Current state (2026-10-23 23:30 UTC, iteration 9)
-- **Generation** llm_v3 110/125 (ETA ~23:55); `pipeline.sh` audits in step; `after_gen.sh` then v3fp gen, Claude mod3,
-  shuffle seeds 0–2 on TEST; `mon_chain.sh` then llm_v3mon (cutoff 03:30).
-- NEW `auto_finalize.sh` (log `logs/final_auto.log`): waits for gen done + 125 labels + `auditors.py --verify` OK, then
-  runs `finalize_test.sh` ONCE. **Do not run finalize by hand unless final_auto.log shows a preflight failure.**
-- Dev (n=30): premium run 1.00 / within .98 > action_stats .89/.91 > structured .83/.91 ≈ combined ≈ fusion > action
-  .78 > text .58. Mechanism fig (dev): private pair opens ~17.4 vs 12.5, late premium +0.90, >0 in 12/20 runs.
-- REPORT now has a HEADLINE (test) slot above the dev section; dev section labelled as superseded.
+## Current state (2026-10-24 00:13 UTC, iteration 9)
+- **LOCKED TEST DONE** (finalize_test.sh once: STARTED 23:59, HEADLINE_DONE 00:03; no failed steps). REPORT headline +
+  abstract written from `results/analysis/report_tables_test.md`. DO NOT rerun final_analysis --split test.
+- Test (n=95, 50 y=1): text LLM run .47 / within .65; Δ_hybrid[combined] −.013 [−.09,+.06]; action_stats−action +.106
+  run; combined_stats−action_stats within +.036 [+.008,+.072]; premium run .95 vs structured .84 (+.112 [+.026,+.197]);
+  localisation premium ≈ stats views; legit flagged: premium 5/15, structured/action 0/15; text LR (CV in test) .98 —
+  inspection (text_lr_inspect.py): market-wide wording shift in private runs + pair-specific shift.
+- Running: after_gen (v3fp gen → pipeline; Claude mod3 pass; shuffle seeds 0–2 on TEST for combined,structured),
+  mon_chain (llm_v3mon after v3fp; cutoff 03:30).
 ## Next steps
-1. When `logs/final/RUN_ONCE.stamp` has HEADLINE_DONE: paste `results/analysis/report_tables_test.md` into the REPORT
-   headline slot; rewrite abstract from test numbers; move dev tables to an appendix; `fig_mechanism.py --split all`.
-2. After inputs: shuffle_analysis.py --views combined,structured; cross_family.py; fp_stratum.py --ds llm_v3fp;
-   monitor_stratum.py (mon_chain does it); report_tables --split test; make_figures --split test.
-3. Remaining P2s of logs/review_iter9.md. Final codex + Opus review of REPORT claims.
-- Risks: LLM concurrency ~7; finalize preflight needs hardset coverage of every run (it reruns hardset).
+1. When shuffle done (`logs/after_gen.log` "shuffle done"): `shuffle_analysis.py --views combined,structured`;
+   re-run `report_tables.py --split test` + copy new sections (shuffle) into REPORT.
+2. cross_family.py after Claude pass 2; fp_stratum.py --ds llm_v3fp; monitor_stratum (mon_chain) → REPORT strata.
+3. Move dev section to an appendix; tidy REPORT; final codex + Opus review of REPORT claims (REQUIRED).
+4. Limitations: add text-LR finding (in-split supervised, transfer untested), hardset model mix.
+- Risks: LLM concurrency; v3mon may not finish before 06:30 (no new experiments after).
 
 ## Log
+- 00:13 iter 9: LOCKED TEST RUN (E36) after preflight caught 1 hardset failure (E37 fix); REPORT headline/abstract;
+  text_lr_inspect (E38); mechanism figs dev/test/all.
 - 23:40 iter 9: codex review_iter9 applied (E35): auditors.py --verify gate in auto_finalize + finalize preflight;
   REPORT dev table now generated values, softened claims, full disclosure. Open P2s in logs/review_iter9.md (evidence
   scope, n-gram coefficient artifact, cascade 'explanation role' wording).

@@ -161,8 +161,16 @@ which lists all 25 pre-registered contrasts; no multiplicity correction):
 5-fold CV *within* the test split, reaches run AUROC 0.98 [0.95, 1.00] and pair-ID accuracy 1.00, while the zero-shot
 LLM text auditor is at chance. Shuffling messages within label+condition does not hurt it (0.97). So the public text
 *does* carry a strong condition-linked signal that no public message states explicitly (0/125 hard-set flags) and the
-zero-shot LLM does not use. We have not yet established what it is (a likely candidate: private-channel sellers'
-public wording shifts in a way tied to the condition/prompt rather than to collusion per se) — see Limitations.
+zero-shot LLM does not use. Post-headline inspection (`uv run python text_lr_inspect.py` → `results/analysis/text_lr_inspect.json`;
+descriptive fit on all runs, not an evaluation): the top positive n-grams are bland margin phrasing ("considered
+price", "supports reliable", "balances customer value"); "considered price" occurs in 23% of colluding pairs' message
+sets and 17% of the *other* pairs in private runs, but in 0% of pairs in `none`/`legit` runs. Only the colluding pair
+gets the private-channel prompt, so the whole market's public wording shifts when a pair colludes (plausibly echoing
+the higher, steadier prices), plus a smaller pair-specific shift ("supports reliable": 44% colluders vs 25% other
+private-run pairs). The top negative n-grams are competitive phrasing ("keeping our price competitive", "earn your
+business"). So public text is an *indirect* trace of collusion — style that follows conduct — that a supervised
+model trained in-distribution can learn but a zero-shot LLM auditor reading for explicit coordination does not see.
+Whether it transfers to other seller models or framings is untested.
 The untrained text-convergence score (`textsim.py`) localises at 0.74 [0.66, 0.81] vs the LLM text auditor 0.65
 (Δ +0.088 [−0.010, +0.176], not resolved).
 
