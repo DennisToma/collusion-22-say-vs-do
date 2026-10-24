@@ -7,6 +7,7 @@ Exploratory: test and llm_v3rep were already used for the locked/registered anal
     uv run python hint_view.py   # -> results/analysis/hint_view.json
 """
 import json
+from scipy.stats import spearmanr
 from pathlib import Path
 from analyze_llm import load_jsonl
 from final_analysis import metrics, _pd, idx, DEV_MAX, premium_scores
@@ -34,6 +35,9 @@ def main(nb=2000):
         for k1, k2 in (("action_stats_hint", "action_stats"), ("premium", "action_stats_hint")):
             for m in ("run_auroc", "within_market_auroc"):
                 res["contrasts"][f"{k1}-{k2}:{m}"] = _pd(ids, S, labs, k1, k2, m, nb)
+        res["spearman_run_score_vs_premium"] = {
+            v: round(float(spearmanr([S[v][r]["run"] for r in ids], [S["premium"][r]["run"] for r in ids])[0]), 3)
+            for v in ("action", "action_stats", "action_stats_hint")}
         out[f"{ds}_{split}"] = res
     Path("results/analysis/hint_view.json").write_text(json.dumps(out, indent=1))
     print(json.dumps(out, indent=1))

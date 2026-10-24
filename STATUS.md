@@ -1,21 +1,21 @@
 # STATUS
 
-## Current state (2026-10-24 02:20 UTC, iteration 14)
+## Current state (2026-10-24 02:45 UTC, iteration 15)
 - LOCKED TEST DONE (00:03; never rerun). REPLICATION DONE (02:07, run once; lock logs/final/REPLICATION_ONCE.lock;
-  never rerun). REPORT presentable; reviews applied thru E53.
+  never rerun). REPORT presentable; reviews applied thru E55 (+E56 review pending/applied below).
 - Replication llm_v3rep (n=30): 4/4 pre-registered predictions held (P3/P4 narrowly): premium .92 vs action_stats .80.
 - E50/E52: round-1 (pre-message) premium alone gives run AUROC .90 (test) / .84 (rep) -> treatment-response detector.
-- E54 (new): LLM auditors cite round 1 in only 4.5-10% of evidence items (uniform 8.3%); no-table views at/below
-  uniform -> consistent with auditors missing the opening jump the premium uses (self-report caveat).
-- E55: codex e2e + Opus judge reviews APPLIED (new abstract w/ direct answer; combined_stats localisation gain did NOT
-  replicate: -.007 [-.040,+.020]). Not applied: section cuts to appendix (optional), replication.py docstring (hashed).
-- pipeline.sh bug: its pgrep matches the parent shell cmdline -> never exits (no pipeline running now).
+- E54: auditors cite round 1 at ~uniform rate (4.5-10% of items).
+- E56 (new, post-hoc exploration): action_stats + 1-sentence premium hint: test run .86->.93, within .89->.96
+  (+.06 [+.02,+.11]), gap to premium +.02 n.s.; replication run .80->.80 (no gain). Inconclusive; in REPORT + abstract.
+- Figures checked (auroc_test, early_detection): fine.
 ## Next steps (no new generation after 03:30, no new experiments after 06:30; FINALIZE from 08:15)
-1. Done: flag-rate tables + 'other test results' moved to Appendix C. Remaining: final codex review of REPORT claims
-   (after any further edits), figures check.
-2. Finalize: figures check, reproduce block (add evidence_rounds.py), final codex review of REPORT claims.
+1. Apply codex review logs/review_iter15_hint.md if not yet applied.
+2. Final codex review of full REPORT claims near finalize; optional: cross-family check of hint view (Claude) - low value.
+3. Finalize: trim length if possible (REPORT ~640 lines), push.
 
 ## Log
+- 02:45 iter 15: action_stats_hint exploration (E56, 155 gpt-6.1-sol calls), hint_view.py, REPORT section + abstract sentence; codex review launched.
 - 02:21 iter 14: REPORT restructure (flag-rate tables, other test results -> Appendix C; numbers unchanged).
 - 02:20 iter 14: applied e2e reviews (E55).
 - 02:16 iter 14: evidence_rounds.py (E54) -> REPORT exploration; e2e reviews launched.

@@ -18,7 +18,8 @@ public log under six views (defined in §Setup). Locked test split (n = 95, run 
 - **A computed statistics table helps** (action_stats − action, run AUROC +0.11 [+0.04, +0.18]). On fresh data the
   run-level gain is not resolved (+0.04 [−0.10, +0.19]), but the localisation gain is.
 - **A one-line untrained statistic ranks highest among untrained scorers.** The pair's price premium over its rivals
-  reaches 0.95, against ≤ 0.86 for every LLM view (+0.09 [+0.01, +0.18]). It was chosen after seeing partial data, and
+  reaches 0.95, against ≤ 0.86 for every LLM view (+0.09 [+0.01, +0.18]). A one-sentence hint pointing the auditor at
+  the premium (post hoc) raises action_stats to 0.93 on test but not on the replication (0.80). It was chosen after seeing partial data, and
   **round-1 prices alone give 0.90**. Those prices are set before any partner message is read. So the premium largely
   detects the response to being *offered* a channel, not agreement-driven pricing.
 - **The public text carries a learnable trace.** A supervised TF-IDF classifier reaches 0.98 (grouped CV within the
@@ -344,6 +345,27 @@ score (`collusion_present`) correlates with both the round-1 and the rounds-2..1
 0.52 vs 0.58; combined 0.42 vs 0.40). These are citation frequencies and descriptive associations. They do not show
 which rounds drove a verdict, nor do they explain the stats-table benefit.
 
+**Telling the auditor where to look (`action_stats_hint`; post-lock exploration E56; `uv run python auditors.py --ds
+llm_v3 --views action_stats_hint` (+ `--ds llm_v3rep`), then `uv run python hint_view.py` →
+`results/analysis/hint_view.json`).** This view is `action_stats` plus one fixed sentence. The sentence says that
+colluding pairs typically price above the other two firms, often from round 1, and asks the auditor to check each
+pair's premium and round-1 prices. We wrote it once, after the locked test and the replication, using what those
+analyses had shown. It was not tuned on any split. Because the hint encodes knowledge taken from the test and replication data,
+neither split is held out for it. Paired, class-stratified bootstrap over runs:
+- **Test (n = 95).** Run AUROC rises from 0.86 to 0.93 (Δ +0.07 [−0.00, +0.15]). Within-market AUROC rises from 0.89 to 0.96
+  (Δ +0.06 [+0.02, +0.11]). Pair-ID rises from 0.66 to 0.83. The remaining gap to the premium is +0.02 [−0.02, +0.07]
+  (run) and +0.00 [−0.03, +0.03] (within-market).
+- **Replication (n = 30).** No run-level change: 0.80 vs 0.80, Δ −0.00 [−0.18, +0.16]. Within-market AUROC is
+  0.99 for both, at ceiling. The premium stays ahead at 0.92 (Δ +0.12 [−0.03, +0.28]).
+- **Dev (n = 30).** Run AUROC 0.93 vs 0.89; within-market 0.98 vs 0.91. Neither change is resolved.
+
+The hint makes the run score track the premium more closely: Spearman with the max-pair premium rises from 0.60 to 0.87
+on test and from 0.65 to 0.75 on the replication. Pointing the auditor at the premium can therefore recover much of
+the premium's ranking on test, but the gain does not show on the 30 replication runs (where the run score already
+localised at ceiling).
+Even at best, a hinted LLM auditor roughly matches a one-line statistic rather than beating it. A cheaper design is to
+compute the statistic and ask the LLM only for explanation.
+
 ## Validity safeguards
 Labels from private chat only (judge blind to prices); same auditor model across views, fallback calls dropped;
 combined is a strict superset of both single views; shuffle donors matched on label *and* condition;
@@ -404,8 +426,8 @@ computed on the mod-3 subset incl. test runs. The test evaluation is locked and 
    such a trace here). Train/transfer that text model across seller models and framings before trusting it.
 3. **Label ≠ condition.** Generate runs where the private channel is offered but often declined within the *same*
    framing, so detection of agreement can be separated from detection of channel access.
-4. **Auditor design.** The stats-table views already include the premium. Test an explicit
-   premium-threshold-and-explanation instruction against them, ablate the premium column, evaluate any
+4. **Auditor design.** The stats-table views already include the premium. A one-sentence premium hint was tested
+   post hoc (§Exploration, E56: mixed). Test it prospectively on a fresh split, ablate the premium column, evaluate any
    stats-first → LLM cascade on fresh data, and test tuned/few-shot auditors on a fresh split.
 5. **Breadth.** Other seller model families, more firms/rounds, and a second market type.
 
@@ -432,6 +454,8 @@ uv run python matched_recall.py                 # legit/none flags at matched re
 uv run python round1_effect.py --ds llm_v3      # round-1 (pre-message) prices by role (descriptive)
 uv run python early_detection.py --ds llm_v3 && uv run python fig_early.py   # premium AUROC vs rounds observed
 uv run python evidence_rounds.py --ds llm_v3 --split test   # do auditors cite round 1? (descriptive)
+uv run python auditors.py --ds llm_v3 --views action_stats_hint && uv run python auditors.py --ds llm_v3rep --views action_stats_hint
+uv run python hint_view.py                      # premium-hint auditor exploration (E56, post-lock)
 uv run python replication.py                    # pre-registered fresh-split replication (run ONCE; lock in logs/final)
 ./finalize_test.sh                              # the ONE locked test run (sole entry point for --split test headline)
 uv run python auditors.py --ds llm_v3 --auditor claude-sonnet-5-5 --subset mod3   # cross-family subset
