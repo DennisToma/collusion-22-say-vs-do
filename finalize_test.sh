@@ -1,12 +1,15 @@
 #!/bin/bash
 # The ONE locked-test analysis (data/SPLITS.md). Run after every llm_v3 run is labelled and audited by all 6 views.
 # Order: hard-set check + metrics-free preflight + all dev steps FIRST; then the run-once guard on the headline step
-# (final_analysis --split test), taken atomically. The other test steps are deterministic, read-only re-renderings
-# of frozen scorers and may be RETRIED (re-running this script after the stamp skips the headline step); a step
-# failure is printed, not fatal, so one crash cannot block the rest. Any rerun of the headline step must be
-# disclosed in data/SPLITS.md.
+# (final_analysis --split test), taken atomically. Historical retry logic remains below, but a completed
+# evaluation's committed receipt now refuses the whole script even without local logs/ locks. Invoke individual
+# deterministic renderers to refresh tables/figures. Any rerun of the headline step requires disclosure in
+# data/SPLITS.md and an explicit change to the committed completion protection.
 set -o pipefail
 cd "$(dirname "$0")"
+# The original logs/ locks do not survive git clone. Respect the committed completion
+# receipt before any preflight, calibration or writes; use individual renderers if needed.
+python3 evaluation_guard.py headline || exit $?
 mkdir -p logs/final
 step() { echo "== $*"; "$@" || echo "!! STEP FAILED: $*" | tee -a logs/final/FAILED_STEPS.txt; }
 if [ ! -e logs/final/RUN_ONCE.stamp ]; then

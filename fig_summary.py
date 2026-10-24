@@ -82,7 +82,7 @@ bx.set_xticklabels([s for s, _ in scorers], fontsize=9)
 bx.set_ylim(0, 1.05)
 bx.set_ylabel("flag rate at frozen dev threshold (Wilson 95% CI)")
 bx.legend(fontsize=8, loc="upper left")
-bx.set_title("(b) Placebo stratum (exploration, 15 matched seeds; 10 none):\nflags fire on the channel offer, not only delivery",
+bx.set_title("(b) Placebo stratum (exploration, 15 matched seeds; 10 none):\nfrequent flags without delivered private messages",
              fontsize=10)
 fig.tight_layout()
 fig.savefig("figures/summary.png", dpi=140)

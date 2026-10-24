@@ -1,15 +1,16 @@
 # STATUS
 
-## Current state (2026-10-24 04:05 UTC, iteration 18)
-- LOCKED TEST DONE (00:03; never rerun). REPLICATION DONE (02:07; lock; never rerun). REPORT presentable.
-- Replication llm_v3rep (n=30): 4/4 pre-registered predictions held: premium .92 vs action_stats .80.
-- E50/E52: round-1 (pre-message) premium alone gives run AUROC .90 (test) / .84 (rep).
-- E58 placebo (exploratory): premium/LLM views flag placebo >= private; nothing separates them.
-- E60 repro check OK; E61 final claims audit applied. E62: Figure 1 summary (figures/summary.png, fig_summary.py)
-  after abstract — test+rep run AUROC per scorer with CIs + placebo flag rates; JSON-only, no new numbers.
+## Current state (2026-10-24 03:58 UTC, iteration 19)
+- LOCKED TEST DONE (00:03) and REPLICATION DONE (02:07); never rerun. REPORT presentable; estimates unchanged.
+- Test: premium run AUROC .95; action_stats .86; combined-minus-best-unimodal -.013 [-.091,+.064].
+- Fresh replication (n=30): premium .92 vs action_stats .80; 4/4 registered decision rules held (not equivalence).
+- Placebo exploration: premium flags 14/15 with or without message delivery; channel/condition confound remains.
+- E63: offline verifier + README + post-hoc SHA-256 manifest/receipt; clean clones retain run-once protection.
+- Verified 393 artifact hashes, 206 runs/2472 rounds, 1236 audits, 15 matched paths; 9 isolation tests pass.
+- Independent Codex review applied (reviews/iteration19_handoff.md); no LLM spend or AUROC/bootstrap rerun.
 ## Next steps (no new experiments after 06:30; FINALIZE 08:15)
-1. Final read-through for consistency; optional light trim. No new LLM spend needed — all directives covered.
-2. Gotcha: pgrep -f / pkill -f patterns match the calling shell's own command line. Use pgrep -f "python X" | grep -v $$.
+1. Keep results frozen; use python3 verify_artifacts.py for read-only checks, individual scripts to render tables/figures.
+2. Final presentation corrections only as needed; protected entrypoints now refuse even without local logs/ locks.
 
 ## Log
 - 04:05 iter 18: Figure 1 summary figure (E62) inserted after abstract; reproduce line added.
@@ -64,3 +65,6 @@
   `public_info.jsonl`, strict parse + failure log + no silent model fallback, exact-id resume, LR for all
   baseline feature sets (GBM optional), price-context number extraction, same-condition shuffle donors.
 - 20:50 scripted_v2 generated (levels 12/14, strength .15–.5).
+
+- 03:58 iter 19: E63 offline handoff: discovered original run-once locks are gitignored; added portable completion receipt + guards (test/all and replication smoke variants, fail closed on corrupted/deleted receipt/result). Added standard-library read-only verifier, post-hoc manifest, README and 9 isolation tests. Independent Codex review fixes applied; summary caption now discloses test exposure, duplicate figure numbering fixed, panel-b causal wording softened; no scientific estimates changed. Protected dev/test hashes match original replication record. VM date -u used for this entry; inherited iter17/18 timestamps retained unchanged.
+- 03:59 iter 19 verification: Git-index-only export passes offline verifier and completion guard without logs/final/; all exported file hashes unchanged. Initial export assertion incorrectly expected no logs/ directory (six review files are tracked); corrected to check missing evaluation locks and unchanged inventory. No product failure or metric rerun.

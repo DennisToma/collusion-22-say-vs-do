@@ -1,0 +1,18 @@
+{
+  "recorded_utc": "2026-10-24T03:54:26.995990+00:00",
+  "note": "Post-hoc completion receipt added in iteration 19 because logs/ run-once locks are gitignored. Completion times transcribed from existing local stamps and data/SPLITS.md; this does not prove pre-registration.",
+  "evaluations": {
+    "headline": {
+      "state": "complete",
+      "completed_utc_minute": "2026-10-24T00:03:00Z",
+      "result": "results/analysis/final_llm_v3_gpt-6.1-sol_test.json",
+      "sha256": "2a4c19a68a511453493f6c615ad44f575ef2f5da74543f3ab6d82d14a2679355"
+    },
+    "replication": {
+      "state": "complete",
+      "completed_utc_minute": "2026-10-24T02:07:00Z",
+      "result": "results/analysis/replication_llm_v3rep.json",
+      "sha256": "bf7169d63d9b9b72afc8cc70cc68659e2204ae156b758e5f75cc3753ea067b0d"
+    }
+  }
+}

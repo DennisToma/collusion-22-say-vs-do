@@ -1,5 +1,6 @@
-"""PRE-REGISTERED replication on a fresh split (iter 12, data/SPLITS.md §llm_v3rep). Written 01:15 UTC before any
-llm_v3rep run existed. Same generator/framing as llm_v3 (lab, sim llm-0.3), seed 9000, private:15 none:10 legit:5.
+"""Registered replication on a fresh split (iter 12, data/SPLITS.md §llm_v3rep). Registration followed the start
+of generation; no replication metrics existed, but partial raw outputs did. See SPLITS.md for full chronology.
+Same generator/framing as llm_v3 (lab, sim llm-0.3), seed 9000, private:15 none:10 legit:5.
 Nothing is fitted: thresholds and the fusion weight are the FROZEN llm_v3 dev values; "best LLM view" is fixed from
 the llm_v3 TEST json (highest test run AUROC). Run ONCE on the complete set.
 
@@ -25,6 +26,12 @@ def main():
     ap.add_argument("--max-idx", type=int, default=None, help="smoke test only (e.g. --ds llm_v3 --max-idx 30 = dev)")
     a = ap.parse_args()
     smoke = a.allow_partial or a.max_idx is not None or a.ds != "llm_v3rep"
+    if a.ds == "llm_v3rep":
+        from evaluation_guard import refuse_completed
+        refuse_completed("replication")
+    if a.ds == "llm_v3" and (a.max_idx is None or a.max_idx > 30):
+        from evaluation_guard import refuse_completed
+        refuse_completed("headline")
     frozen = {f: hashlib.sha256(Path(f).read_bytes()).hexdigest()[:16] for f in
               ("results/analysis/final_llm_v3_gpt-6.1-sol_dev.json", "results/analysis/final_llm_v3_gpt-6.1-sol_test.json")}
     if not smoke:  # run-once lock (codex review_iter12 P2)

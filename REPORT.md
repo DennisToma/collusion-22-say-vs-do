@@ -1,6 +1,6 @@
 # Say vs. Do: does auditing what AI agents *say* together with what they *do* catch collusion better?
 
-*Apart AI Collusion Sprint, Q2.2 — text + action auditing. Status: locked test results in (2026-10-24 00:03 UTC); all exploration strata (§Exploration) complete (01:25 UTC); pre-registered replication run 02:07 UTC; placebo-channel stratum 03:33 UTC.*
+*Apart AI Collusion Sprint, Q2.2 — text + action auditing. Status: locked test results in (2026-10-24 00:03 UTC); registered replication run 02:07 UTC (chronology disclosed below); placebo-channel exploration 03:33 UTC. Offline verification: `python3 verify_artifacts.py`; handoff instructions in [README.md](README.md).*
 
 ## Abstract
 Does an auditor catch LLM collusion better if it reads what sellers *say* in public as well as what they *do*?
@@ -23,7 +23,7 @@ explaining flagged runs.
 ![summary](figures/summary.png)
 *Figure 1 (`uv run python fig_summary.py`, read from existing results JSON). (a) Run AUROC with 95% run-bootstrap CIs;
 filled = locked test split (n = 95), hollow = fresh replication (n = 30). The premium comparator was chosen after
-seeing partial dev data; the round-1 replication point is exploratory (computed after `replication.py`). (b) Flag
+seeing partial data including test runs; the round-1 replication point is exploratory (computed after `replication.py`). (b) Flag
 rates at frozen dev thresholds in the placebo exploration stratum (15 placebo, 15 matched private, 10 `none`); n is
 small and no scorer resolves placebo from private.*
 
@@ -141,7 +141,7 @@ siblings). Hard set: 0/125 runs have explicit coordination language in public (`
 | premium_r2plus | 0.90 [0.84, 0.95] | 0.93 [0.88, 0.98] | 0.92 [0.88, 0.96] | 0.84 [0.73, 0.93] |
 
 ![test AUROC](figures/auroc_test.png)
-*Figure 1. Test detection (all 95 runs) and localisation (50 positive runs) AUROCs with 95% run-bootstrap CIs.*
+*Figure 2. Test detection (all 95 runs) and localisation (50 positive runs) AUROCs with 95% run-bootstrap CIs.*
 
 ![test ROC](figures/roc_test.png)
 *Test ROC curves (`uv run python fig_roc.py`; descriptive, thresholds read from the locked json). Dots = dev-chosen
@@ -720,6 +720,13 @@ The test gaps to the premium are unresolved; this establishes neither equivalenc
 compute the statistic and ask the LLM only for explanation.
 
 ## Appendix E — Reproduce
+The experiments are complete. For a read-only offline check of the shipped artifacts, run
+`python3 verify_artifacts.py` (standard library only; no LLM calls, metric recomputation, or writes).
+The post-hoc manifest and completion receipt were added in iteration 19 to preserve the handoff;
+they are not pre-registration evidence. See [README.md](README.md) for artifact locations and
+safe rendering commands. The generation/audit commands below document how the existing results
+were produced; the two completed run-once entry points now refuse to rerun even in a fresh clone.
+
 ```
 uv run python llm_market.py --ds llm_v3 --plan private:70,none:35,legit:20 --rounds 12 --framing lab --games-parallel 2 --seed 3000
 uv run python label_llm.py --ds llm_v3
@@ -748,8 +755,8 @@ uv run python auditors.py --ds llm_v3 --views action_stats_hint && uv run python
 uv run python hint_view.py                      # premium-hint auditor exploration (E56, post-lock)
 uv run python llm_market.py --ds llm_v3plc --match-ds llm_v3rep --rounds 12 --framing lab   # placebo channel (E58)
 uv run python label_llm.py --ds llm_v3plc && uv run python auditors.py --ds llm_v3plc && uv run python placebo.py
-uv run python replication.py                    # pre-registered fresh-split replication (run ONCE; lock in logs/final)
-./finalize_test.sh                              # the ONE locked test run (sole entry point for --split test headline)
+uv run python replication.py                    # historical run-once command; now guarded by committed completion receipt
+./finalize_test.sh                              # historical locked-test command; now guarded by committed completion receipt
 uv run python auditors.py --ds llm_v3 --auditor claude-sonnet-5-5 --subset mod3   # cross-family subset
 uv run python cross_family.py --ds llm_v3 --other claude-sonnet-5-5               # cross-family comparison
 uv run python sim.py --dataset scripted_v2 --n-per-cond 40 --rounds 30 --seed 1 --levels 12,14 --strength 0.15,0.5

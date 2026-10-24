@@ -149,6 +149,9 @@ def main():
     ap.add_argument("--allow-partial", action="store_true", help="development only: analyse runs that have all views so far")
     ap.add_argument("--check-only", action="store_true", help="preflight: assert the frozen cohort is complete, compute nothing")
     a = ap.parse_args()
+    if a.ds == "llm_v3" and a.split in ("test", "all") and not a.check_only:
+        from evaluation_guard import refuse_completed
+        refuse_completed("headline")
     labs = {x["run_id"]: dict(x, y=int(x["agreement"] in ("explicit", "info_exchange")))
             for x in load_jsonl(Path("data") / a.ds / "labels.jsonl")}
     d = Path("results") / "llm_auditor" / a.ds / a.auditor

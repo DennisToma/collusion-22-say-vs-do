@@ -115,3 +115,14 @@
   finished placebo runs, and placebo.py had been smoke-run on them (output seen). Pre-generation registration is not
   independently established; treat E58 as exploratory. Post-review change: private-vs-placebo AUROC CIs resample the
   matched seed pairs jointly (bauc_paired).
+
+## Portable completion protection (iteration 19, post-hoc)
+`logs/` is gitignored, so the original run-once stamps/lock directories do not survive a clone.
+`data/evaluation_receipt.json` now records the two completed output hashes and their completion
+times (transcribed from local stamps / the records above). `finalize_test.sh`,
+`final_analysis.py --split test/all` (except metrics-free `--check-only`), and `replication.py`
+on `llm_v3rep` (including smoke flags) refuse to recompute these completed evaluations.
+`python3 verify_artifacts.py` checks the saved artifacts without rerunning any metric.
+The receipt and manifest are post-hoc handoff records, not new evidence about registration timing.
+Only safeguards and the inaccurate replication docstring were changed; the protected result bytes,
+scorers, thresholds, metric definitions and published numerical estimates are unchanged.
