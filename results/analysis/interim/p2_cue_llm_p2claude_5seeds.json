@@ -380,11 +380,11 @@
  },
  "public_invitation_rate": {
   "private": [
-   209,
+   210,
    240
   ],
   "none": [
-   239,
+   240,
    240
   ]
  },

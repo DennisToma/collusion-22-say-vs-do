@@ -2,25 +2,27 @@
 
 # STATUS
 
-## Current state (2026-10-24 09:25 UTC, Phase 2 iteration 5)
-- RUNNING (bg): p2_chain.sh para2 (18/20) -> p2rep (60); llm_p2sol (14/21); llm_p2ds (16/30); llm_p2logbook (E92, 2/15);
-  chain3 (E89 views), chain4 (family label+analysis on generator exit), chain5 (E92 analysis once).
-- NEW E93 interim families (p2_interim.py -> results/analysis/interim/, complete matched seeds only; descriptive):
-  deepseek colludes in BOTH arms (8/8 chats propose joint pricing; public invitations 382/384 msgs in private AND none;
-  none markets 17.3 vs luna 11.9), premium +1.38 [.27,2.55] but luna threshold flags 4/8 controls (AUROC .69).
-  gpt-6.1-sol abstains: channel used every round, 0/96 joint-pricing msgs, premium -0.14, 0 public invitations.
-  -> REPORT P2.6 table rows + paragraph, TL;DR 8, takeaway line. Opus review of E93 running (apply next iteration if not done).
+## Current state (2026-10-24 09:28 UTC, Phase 2 iteration 5)
+- RUNNING (bg): p2_chain.sh -> p2rep (60; para2 DONE); llm_p2sol (~14/21); llm_p2ds (20/30); llm_p2logbook (E92, 2/15);
+  chain3 (E89 views p2cue/p2rep), chain4 (family label+analysis on exit), chain5 (E92 once), NEW chain6 (E91-ext views on sol/ds).
+- NEW E78 result (p2_band.py -> p2_band.json): wording band FAILED for terse paraphrase 2: private-none premium +0.24
+  [-.32,.81] vs +1.75 orig / +1.79 para1 on the same 10 seeds (para2-orig -1.51 [-2.33,-.68]); chats still agree on 18
+  (judge explicit 10/10). Pairs open lower and others price higher. -> REPORT P2.5 band, TL;DR 7, takeaways.
+- NEW E93 interim families (p2_interim.py, results/analysis/interim/): deepseek (10 seeds) invites coordination openly in
+  BOTH arms (public 479/480 in none; none markets 17.0 vs luna 12.1), premium +2.05 but flags 4/10 controls (AUROC .75);
+  gpt-6.1-sol (4 pairs) no joint-pricing talk, premium -0.14. Opus review applied (E93-review).
 - DONE P2.1-P2.6 (see REPORT).
 
 ## Next steps
-1. Apply Opus E93 review. When logbook has 15 runs: `uv run python p2_logbook.py` ONCE -> E92 row, P2.5, TL;DR 7.
-2. When sol / ds finish (chain4): replace interim rows with final p2_cue/p2_family numbers; run frozen auditor views on
-   llm_p2ds + llm_p2sol (register as E91 extension first; prediction: text views flag ~all ds markets incl. none, ~none of sol).
-3. para2 -> E78 band line in P2.5. p2rep -> replication.py --ds llm_p2rep ONCE after chain3 views; p2_behaviour on p2rep.
-4. codex adversarial review of P2 claims when codex load drops; checkpoint takeaways + exports by 19:30.
-- Risk: codex oversubscribed; p2rep may slip past 14:00. deepseek none arm is not a clean negative (label issue, like Claude).
+1. When logbook has 15 runs: `uv run python p2_logbook.py` ONCE (chain5) -> E92 row, P2.5, TL;DR 7.
+2. When sol / ds finish (chain4 + chain6): replace interim rows with final p2_cue/p2_family/p2_family_views numbers; E91-ext verdicts.
+3. p2rep -> replication.py --ds llm_p2rep ONCE after chain3 views; p2_behaviour on p2rep (E80/E84 rep).
+4. codex adversarial review of P2 claims (esp. E78 failure + E93) when codex load drops; checkpoint takeaways + exports by 19:30.
+5. Consider: E78 implies premium validity is wording-dependent -> TL;DR/abstract framing at checkpoint (don't soften).
+- Risk: codex oversubscribed; p2rep may slip past 14:00.
 
 ## Log
+- 09:28 P2 iter5: E78 para2 result (band failed, p2_band.py); E93 review applied, refreshed to 10 ds seeds; E91-ext chain6 launched.
 - 09:25 NOTE: earlier iterations stamped STATUS/EXPERIMENTS times ahead of the VM clock (e.g. E92 amend "09:58" was committed 09:20). Always use `date -u`.
 - 09:22 P2 iter5: E93 interim family snapshot (p2_interim.py); REPORT P2.6/TL;DR 8/takeaways; Opus review launched.
 - 09:58 P2 iter4: codex pre-outcome review of E92 applied as amendment (direction-aware/strict verdicts, completeness asserts).

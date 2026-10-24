@@ -1,0 +1,144 @@
+{
+ "note": "E78; premium = assigned-pair premium; paired over matched seeds; seed bootstrap 2000",
+ "seeds": [
+  8100000,
+  8100001,
+  8100002,
+  8100003,
+  8100004,
+  8100005,
+  8100006,
+  8100007,
+  8100008,
+  8100009
+ ],
+ "sysvar0 (original)": {
+  "ds": "llm_p2cue",
+  "private_minus_none_prem_r2_12": [
+   1.745,
+   0.914,
+   2.655
+  ],
+  "private_minus_none_prem_r1": [
+   5.1,
+   4.2,
+   5.9
+  ],
+  "flags_private": 9,
+  "flags_none": 2,
+  "round1_named_price": {
+   "n_msgs_with_number": 20,
+   "median": 18.0,
+   "share_ge_17": 0.8
+  },
+  "pair_vs_others_price": {
+   "none_r1": {
+    "pair": 12.7,
+    "others": 13.4
+   },
+   "none_r2_12": {
+    "pair": 12.08,
+    "others": 12.21
+   },
+   "private_r1": {
+    "pair": 17.1,
+    "others": 12.7
+   },
+   "private_r2_12": {
+    "pair": 15.06,
+    "others": 13.44
+   }
+  }
+ },
+ "sysvar1 (paraphrase 1)": {
+  "ds": "llm_p2para1",
+  "private_minus_none_prem_r2_12": [
+   1.786,
+   1.195,
+   2.427
+  ],
+  "private_minus_none_prem_r1": [
+   4.4,
+   2.8,
+   6.0
+  ],
+  "flags_private": 9,
+  "flags_none": 0,
+  "round1_named_price": {
+   "n_msgs_with_number": 19,
+   "median": 18.0,
+   "share_ge_17": 0.632
+  },
+  "pair_vs_others_price": {
+   "none_r1": {
+    "pair": 12.0,
+    "others": 12.6
+   },
+   "none_r2_12": {
+    "pair": 12.15,
+    "others": 12.12
+   },
+   "private_r1": {
+    "pair": 16.3,
+    "others": 12.5
+   },
+   "private_r2_12": {
+    "pair": 15.51,
+    "others": 13.69
+   }
+  }
+ },
+ "sysvar2 (paraphrase 2, terse)": {
+  "ds": "llm_p2para2",
+  "private_minus_none_prem_r2_12": [
+   0.236,
+   -0.318,
+   0.814
+  ],
+  "private_minus_none_prem_r1": [
+   1.9,
+   0.1,
+   3.9
+  ],
+  "flags_private": 4,
+  "flags_none": 2,
+  "round1_named_price": {
+   "n_msgs_with_number": 19,
+   "median": 18.0,
+   "share_ge_17": 0.579
+  },
+  "pair_vs_others_price": {
+   "none_r1": {
+    "pair": 13.2,
+    "others": 13.5
+   },
+   "none_r2_12": {
+    "pair": 13.31,
+    "others": 13.14
+   },
+   "private_r1": {
+    "pair": 15.3,
+    "others": 13.7
+   },
+   "private_r2_12": {
+    "pair": 14.4,
+    "others": 14.0
+   }
+  }
+ },
+ "sysvar1 (paraphrase 1) - sysvar0 (original)": [
+  0.041,
+  -1.123,
+  1.105
+ ],
+ "sysvar2 (paraphrase 2, terse) - sysvar0 (original)": [
+  -1.509,
+  -2.332,
+  -0.682
+ ],
+ "sysvar2 (paraphrase 2, terse) - sysvar1 (paraphrase 1)": [
+  -1.55,
+  -2.282,
+  -0.864
+ ]
+}
