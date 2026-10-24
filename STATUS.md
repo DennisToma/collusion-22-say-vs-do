@@ -4,7 +4,8 @@
 - Main claim unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc).
 - E99 strongF final (13/20 strict-executed, 19/20 tacit-high none); E111 plan view = channel footprint (partner-name count 0.82 ≥ LLM 0.76);
   E110 German final (P2.14); E102 strong-Qwen final (P2.11); E114 claims 22/22 OK (re-run 16:30). REPORT 710 lines.
-- **E112 (Part E2, luna newcomer) generating:** 9/30 at 16:40 (~3 games / 10 min → `p2repl gen done` ≈ 17:50). Prefix check passes on partial data.
+- **E112 FINAL (17:27 gen, eval once):** P1–P4 all held. Market Δ repl−orig +0.20 [−0.08, +0.62] private, +0.16 [−0.27, +0.57] none;
+  ≥ Nash+2 19/20, 9/10; newcomer re-agrees 16/20 (orig 15/20), executes 15/20; level CUSUM 0/30 by r25. → P2.15 + glance row (REPORT 711).
 - **E115 (new, iter24) registered + queued:** second E2 arm = same 30 seeds/firms, newcomer = gpt-6.1-sol (other 3 firms luna), dataset
   `llm_p2replS`. `p2_replace_sol.sh` (setsid) waits for "p2repl gen done", then generates (~600 sol + 1800 luna calls; ETA ~20:00–21:00).
   Predictions S1–S4 in EXPERIMENTS.tsv; fallback guard asserts all 20 newcomer decisions per game are gpt-6.1-sol. Code: llm_market
@@ -12,14 +13,14 @@
 - verify_artifacts manifest FAIL still expected (rebuild deferred to Sun 16:30). Serendipity HITS: not re-read this iteration.
 
 ## Next steps
-1. When `logs/p2repl.log` shows "p2repl gen done": `uv run python p2_replace_eval.py` ONCE (~40 judge calls) → P2.15 (≤ 8 lines, offset
-   by trimming elsewhere: no net growth) + glance row + EXPERIMENTS E112-result row with P1–P4 verdicts verbatim + header line 4.
-2. When "p2replS gen done": `P2REPL_ARM=sol uv run python p2_replace_eval.py` ONCE → p2_replace_sol.json; S1–S4 into P2.15 (2–3 lines).
+1. (done) E112 → P2.15. Consider one abstract/TL;DR clause at the 19:30 review ("replacing a firm does not reset the level", P2.15).
+2. E115 gen started 17:28 (`logs/p2replS_gen.log`). When "p2replS gen done": `P2REPL_ARM=sol uv run python p2_replace_eval.py` ONCE → p2_replace_sol.json; S1–S4 into P2.15 (2–3 lines).
 3. Checkpoint 19:30: one Opus review of abstract + TL;DR + glance + P2.7 + P2.14 + P2.15.
 4. P2.11 three-pair table when Q1.4 E69 lands (qb36 not yet 30 at 16:30). E113 E1 audit: Q1.4 has not registered/generated the grid yet;
    no pipeline written (format unknown). If no sweep by Sun 06:00 → limitation line.
 
 ## Log
+- 17:35 P2 iter24: E112 final (P1–P4 held) → P2.15 + glance; E115 auto-launched 17:28; REPORT trimmed (limitations / next) to 711 lines.
 - 16:42 P2 iter24: E115 sol-newcomer arm registered + queued (p2_replace_sol.sh); E112 9/30; STATUS iter23 stamp (16:35) was ahead of the clock (actual ≤ 16:27).
 - 16:35 P2 iter23: E102 result (p2_qwen_strong.json) into P2.11/glance; P2.4 detail → appendix (REPORT 710 lines); fixed iter22 timestamps.
 - 16:22 P2 iter22 (was mis-stamped 16:45): E114 claims×denominators (p2_claims.py), abstract C04 error fixed, denominators added (n = 60, 50/50, 15 + 15), header refreshed.
