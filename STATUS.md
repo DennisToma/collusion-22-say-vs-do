@@ -11,7 +11,7 @@
   6+6 each (p2_qwen_strong.sh, auto). Strong pilot final: luna 2/3 executed, sol 0/2.
 - RUNNING too: E99 strongF (4/40, ~ETA 19:00), mimo 5/14, g56sol 4/14, p2asym (chain2), p2cue audit (chain3).
 ## Next steps
-1. E100 done (qwena ~13:00, qwenb ~14:30): `uv run python p2_strong.py --ds llm_p2qwenb llm_p2qwena --min-floor 12 --late 2 --out results/analysis/p2_qwen.json`
+1. E100: p2_c3post.sh runs labels+views+p2_strong_eval+p2_strong AUTOMATICALLY (logs/partc_qwen_post.log); then write P2.9 from results/analysis/p2_qwen.json + p2_strong_eval_llm_p2qwen{a,b}.json. Manual equivalent: `uv run python p2_strong.py --ds llm_p2qwenb llm_p2qwena --min-floor 12 --late 2 --out results/analysis/p2_qwen.json`
    + `uv run python auditors.py --ds <ds> --views text,action,combined,action_stats --workers 2` (labels first: `p2_label.py --ds <ds>`)
    + `p2_strong_eval.py`; premium private−none (p2_cue-style) -> REPORT P2.9 (C3) + E100 result row.
 2. chain6b done -> P2.6 finals (deepseek/sol rows replace interim) + E95 3-way table + E91-ext result rows.
