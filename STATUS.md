@@ -13,7 +13,7 @@
   ~25 framing fixes applied (replication text nominally hurts, E71 localisation mixed, 'resolved' defined, placebo wording).
 - NEW E74 (label-only): Claude Sonnet re-judge of all 115 private chats agrees with GPT judge on binary y 115/115;
   explicit-vs-info_exchange sub-label differs (κ .33/.38). REPORT Labels + Limitations updated; codex review applied.
-- 47 tests / 418 hashes / 2,368 audit inputs pass; exports rebuilt (27 pages); talk unchanged at 7 slides.
+- 47 tests / 424 hashes / 2,368 audit inputs pass; exports rebuilt (27 pages); talk unchanged at 7 slides.
 ## Next steps (no new experiments after 06:30; FINALIZE 08:15)
 1. Keep detection results frozen; present PRESENTATION.pdf or PRESENTATION.html. Send REPORT.pdf for detail.
 2. Read-only: python3 -S verify_artifacts.py; uv run python check_audit_inputs.py; python3 -S check_price_transitions.py --check.
