@@ -1,16 +1,17 @@
 # STATUS
 
-## Current state (2026-10-24 03:58 UTC, iteration 19)
-- LOCKED TEST DONE (00:03) and REPLICATION DONE (02:07); never rerun. REPORT presentable; estimates unchanged.
+## Current state (2026-10-24 04:07 UTC, iteration 20)
+- LOCKED TEST DONE (00:03) and REPLICATION DONE (02:07); never rerun. Scientific estimates unchanged.
 - Test: premium run AUROC .95; action_stats .86; combined-minus-best-unimodal -.013 [-.091,+.064].
 - Fresh replication (n=30): premium .92 vs action_stats .80; 4/4 registered decision rules held (not equivalence).
-- Placebo exploration: premium flags 14/15 with or without message delivery; channel/condition confound remains.
-- E63: offline verifier + README + post-hoc SHA-256 manifest/receipt; clean clones retain run-once protection.
-- Verified 393 artifact hashes, 206 runs/2472 rounds, 1236 audits, 15 matched paths; 9 isolation tests pass.
-- Independent Codex review applied (reviews/iteration19_handoff.md); no LLM spend or AUROC/bootstrap rerun.
-## Next steps (no new experiments after 06:30; FINALIZE 08:15)
-1. Keep results frozen; use python3 verify_artifacts.py for read-only checks, individual scripts to render tables/figures.
-2. Final presentation corrections only as needed; protected entrypoints now refuse even without local logs/ locks.
+- Placebo: premium flags 14/15 with or without delivery; channel/condition confound remains.
+- E64: offline 7-slide PRESENTATION.html + speaker notes, generated only from saved JSON; README/REPORT linked.
+- Independent Codex review applied; lab framing, premium table inclusion, replication timing visible on slides.
+- Verified 396 artifact hashes, 206 runs/2472 rounds, 1236 audits; all 11 handoff tests pass with uv.
+- Browser: navigation/offline/mobile pass; no overflow at five desktop sizes; Print/PDF gives 7 pages.
+## Next steps (no new generation after 03:30; no new experiments after 06:30; FINALIZE 08:15)
+1. Keep results frozen; run python3 verify_artifacts.py or python3 build_presentation.py --check for read-only checks.
+2. Final presentation corrections only if needed; use PRESENTATION.html for the five-minute talk.
 
 ## Log
 - 04:05 iter 18: Figure 1 summary figure (E62) inserted after abstract; reproduce line added.
@@ -68,3 +69,5 @@
 
 - 03:58 iter 19: E63 offline handoff: discovered original run-once locks are gitignored; added portable completion receipt + guards (test/all and replication smoke variants, fail closed on corrupted/deleted receipt/result). Added standard-library read-only verifier, post-hoc manifest, README and 9 isolation tests. Independent Codex review fixes applied; summary caption now discloses test exposure, duplicate figure numbering fixed, panel-b causal wording softened; no scientific estimates changed. Protected dev/test hashes match original replication record. VM date -u used for this entry; inherited iter17/18 timestamps retained unchanged.
 - 03:59 iter 19 verification: Git-index-only export passes offline verifier and completion guard without logs/final/; all exported file hashes unchanged. Initial export assertion incorrectly expected no logs/ directory (six review files are tracked); corrected to check missing evaluation locks and unchanged inventory. No product failure or metric rerun.
+
+- 04:07 iter 20: E64 presentation-only handoff: build_presentation.py renders seven offline HTML slides plus speaker notes and SHA-256 source hashes from existing JSON; --check is write-free. REPORT/README link it; verifier and post-hoc manifest cover freshness (396 hashes). Independent Codex reviewer found no blocking issues; all 3 minor caveats applied. Chromium checked navigation, JavaScript-disabled reading, zero external requests, local links, desktop/mobile layout and 7-page print. All 11 tests pass via uv (initial system-Python invocation lacked sklearn, so evaluator-import assertions failed before any metrics). All pre-existing scientific data/results/figures/receipts/analysis hashes unchanged. No generation, LLM audit calls, metrics, bootstrap or threshold refitting. Review: reviews/iteration20_presentation.md.

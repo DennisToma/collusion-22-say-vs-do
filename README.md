@@ -1,7 +1,10 @@
 # Say vs. Do — Q2.2
 
 Read [REPORT.md](REPORT.md) for the research question, results, uncertainty, figures,
-and limitations. [PLAN.md](PLAN.md) defines the project, [data/SPLITS.md](data/SPLITS.md)
+and limitations. For the five-minute talk, open [PRESENTATION.html](PRESENTATION.html)
+locally in a browser; it works offline, with presentation controls and Print / PDF.
+[PRESENTATION.md](PRESENTATION.md) contains speaker notes and source hashes.
+[PLAN.md](PLAN.md) defines the project, [data/SPLITS.md](data/SPLITS.md)
 records evaluation exposure and registration chronology, and [EXPERIMENTS.tsv](EXPERIMENTS.tsv)
 records the experiments. [SCHEMA.md](SCHEMA.md) describes trajectory files.
 
@@ -19,7 +22,8 @@ python3 verify_artifacts.py
 
 The verifier reads a committed SHA-256 manifest, validates cached dataset/auditor coverage,
 matched placebo market paths, frozen calibration inputs, saved CI/contrast arithmetic,
-and the primary report table and image links. It makes no LLM calls and does not recompute
+the primary report table and image links, and presentation freshness against saved JSON.
+It makes no LLM calls and does not recompute
 AUROC, bootstrap intervals, or thresholds. The manifest and completion receipt were recorded
 **after** the experiments in iteration 19; they preserve the handoff, not evidence of
 pre-registration. Some early audit rows have a recorded prompt length but no historical
@@ -30,6 +34,8 @@ For deterministic table/figure rendering, install the pinned environment with `u
 ```sh
 uv run python report_tables.py --split test
 uv run python fig_summary.py
+python3 build_presentation.py          # standard library only, HTML + speaker notes
+python3 build_presentation.py --check  # read-only, byte-for-byte freshness check
 ```
 
 These render from saved results; they do not refit detectors. More generator, audit, and

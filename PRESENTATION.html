@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Say vs. Do — Q2.2 presentation</title><style>
+:root { color-scheme: light; font-family: system-ui, sans-serif; color:#17243b; background:#e8edf5 }
+* { box-sizing:border-box } body { margin:0 } a { color:#225cb7 }
+header { position:sticky; top:0; z-index:3; display:flex; align-items:center; gap:12px;
+  background:#17243b; color:white; padding:10px 4vw; font-size:14px }
+header button { cursor:pointer; color:inherit; background:transparent; border:1px solid #a9bbd5;
+  border-radius:5px; padding:6px 12px; font:inherit } #position { margin-right:auto }
+main { max-width:1440px; margin:auto } .slide { background:white; margin:25px 20px;
+  padding:42px 52px 30px; border-top:6px solid #225cb7; border-radius:6px; min-height:700px }
+.eyebrow { text-transform:uppercase; letter-spacing:.12em; color:#456182; font-size:14px; margin:0 }
+h1 { font-size:44px; line-height:1.15; letter-spacing:-.025em; margin:16px 0 22px; max-width:1050px }
+h2 { font-size:25px; margin:0 0 12px } p,li { font-size:22px; line-height:1.42 }
+li { margin:10px 0 } .lead { font-size:28px; max-width:1050px }
+.callout { padding:18px 24px; background:#eaf1fb; border-left:5px solid #225cb7; margin:24px 0 }
+.caution { background:#fff4df; border-color:#a55b05 } .small, .small p { font-size:16px; line-height:1.45 }
+.grid { display:grid; grid-template-columns:1fr 1fr; gap:28px; margin:22px 0 }
+.metric { font-size:46px; font-weight:700; margin:8px 0; font-variant-numeric:tabular-nums }
+.card { padding:20px; background:#f2f5f9; border-radius:6px } table { border-collapse:collapse;
+  width:100%; margin:15px 0; font-size:18px; font-variant-numeric:tabular-nums }
+th,td { border-bottom:1px solid #d7dfeb; padding:11px 12px; text-align:left; vertical-align:top }
+th { color:#34516e; font-size:16px } td:not(:first-child) { white-space:nowrap }
+.compact td { padding:7px 12px } svg { display:block; width:100%; max-height:380px; font-size:17px }
+.source { font-size:13px; line-height:1.5; overflow-wrap:anywhere; color:#53647a; margin-top:26px }
+details { border-top:1px solid #d7dfeb; padding-top:12px; margin-top:20px }
+summary { cursor:pointer; font-size:14px; color:#34516e } details p { font-size:17px }
+.presenting .slide { display:none; margin:0; border-radius:0; min-height:calc(100vh - 56px) }
+.presenting .slide.active { display:block } .presenting details { display:none }
+.presenting main { max-width:1440px } .sr-only { position:absolute; width:1px; height:1px;
+  padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0 }
+@media screen and (min-width:801px) {
+  .presenting .slide { padding:24px 40px 18px }
+  .presenting h1 { font-size:clamp(28px,4.5vh,40px); margin:12px 0 16px }
+  .presenting h2 { font-size:23px }
+  .presenting p,.presenting li { font-size:clamp(17px,2.5vh,22px); line-height:1.35 }
+  .presenting .lead { font-size:clamp(22px,3.2vh,28px) }
+  .presenting .small,.presenting .small p { font-size:14px }
+  .presenting .source { font-size:11px; margin-top:16px }
+  .presenting .eyebrow { font-size:13px }
+  .presenting .grid { gap:24px; margin:16px 0 }
+  .presenting .card { padding:16px }
+  .presenting .metric { font-size:40px }
+  .presenting .callout { padding:12px 18px; margin:16px 0 }
+  .presenting svg { max-height:min(35vh,330px) }
+}
+@media(max-width:800px) { .slide { padding:25px 22px; min-height:0; margin:15px 8px }
+  h1 { font-size:31px } p,li { font-size:19px } .lead { font-size:23px }
+  .grid { grid-template-columns:1fr } .metric { font-size:34px } table { font-size:13px }
+  th,td { padding:7px 5px } td:not(:first-child) { white-space:normal } header { flex-wrap:wrap }
+  .presenting .slide { min-height:calc(100vh - 95px) } }
+@media print { @page { size:landscape; margin:10mm } body { background:white }
+  header,details { display:none!important } main { max-width:none }
+  .slide,.presenting .slide { display:block!important; break-after:page; margin:0; padding:18px 24px;
+    min-height:0; border-radius:0; border-top-width:3px } .slide:last-child { break-after:auto }
+  h1 { font-size:30px; margin:8px 0 14px } p,li { font-size:16px; line-height:1.3 }
+  .lead { font-size:21px } .metric { font-size:32px } table { font-size:13px; margin:8px 0 }
+  th,td,.compact td { padding:6px 8px } th { font-size:12px } .source { font-size:10px; margin-top:12px }
+  .callout { padding:10px 15px; margin:12px 0 } .grid { margin:12px 0; gap:18px }
+  .card { padding:13px } .small,.small p { font-size:12px } svg { max-height:250px }
+  a { color:inherit; text-decoration:none } }
+</style></head><body><header><span id="position" aria-live="polite">Say vs. Do</span><button id="previous" aria-label="Previous slide">←</button><button id="next" aria-label="Next slide">→</button><button id="mode" aria-pressed="false">Present</button><button id="print">Print / PDF</button></header><main><section class="slide" id="slide-1" aria-labelledby="title-1"><p class="eyebrow">Say vs. Do · Q2.2 · 1 / 7</p><h1 id="title-1">Does reading what sellers say improve action auditing?</h1><p class="lead"><strong>On this generator, no resolved detection gain.</strong><br>
+Computed action summaries help; a simple price statistic ranks strongly.</p>
+<div class="grid"><div class="card"><h2>Adding public text</h2>
+<p class="metric">-0.01</p>
+<p>Test run-AUROC change vs the best single modality</p>
+<p class="small">95% CI: -0.013 [-0.091, +0.064]</p></div>
+<div class="card"><h2>A major validity limit</h2><p>Opening prices discriminate before any partner message is read.
+Flags stay frequent when private messages are never delivered.</p></div></div>
+<p class="small">Q2.2 · Apart AI Collusion Sprint · gpt-6-luna sellers, gpt-6.1-sol auditors.
+This is a generator-specific comparison. The CI does not establish equivalence.</p><p class="source">Saved sources: <a href="results/analysis/final_llm_v3_gpt-6.1-sol_test.json">test JSON</a> · <a href="results/analysis/placebo_llm_v3plc.json">placebo JSON</a>. Full methods and caveats: <a href="REPORT.md">REPORT.md</a>.</p><details><summary>Speaker notes</summary><p>Open with the answer to Q2.2, then state the validity limit immediately. The negative finding is about these zero-shot auditors and these public messages. It does not establish that text cannot help in other settings or after training.</p></details></section>
+<section class="slide" id="slide-2" aria-labelledby="title-2"><p class="eyebrow">Say vs. Do · Q2.2 · 2 / 7</p><h1 id="title-2">What was observed, and what was labelled?</h1>
+<div class="grid"><div><h2>Market and split</h2><ul>
+<li>Four LLM sellers set prices and post public messages for twelve rounds in an economics-lab framing;
+earnings = profit.</li>
+<li>Conditions: private channel, no channel, or a public shipping partnership.</li>
+<li>Dev n = 30; test n = 95 (50 positive);
+fresh replication n = 30.</li></ul></div>
+<div><h2>Six original auditor views</h2><ol class="small">
+<li>Public text</li><li>Actions: prices, state, units, profit</li><li>Actions + pair statistics</li>
+<li>Text + actions</li><li>Text + actions + pair statistics</li>
+<li>All above + stated-vs-actual price table</li></ol></div></div>
+<div class="callout caution"><strong>Endpoint: private coordination communication.</strong>
+A judge reads private chat only, never prices. Private chat is hidden from auditors.
+In the main dataset every private-channel run is positive: label = condition.
+This is not a verified-overcharge label.</div>
+<p class="small">Same auditor model, same cases, public partnership notice in every view.
+Run AUROC measures detection; within-market AUROC measures pair localisation in positive runs.</p><p class="source">Saved sources: <a href="results/analysis/final_llm_v3_gpt-6.1-sol_test.json">test JSON</a> · <a href="results/analysis/replication_llm_v3rep.json">rep JSON</a>. Full methods and caveats: <a href="REPORT.md">REPORT.md</a>.</p><details><summary>Speaker notes</summary><p>Sellers were given profit objectives and an opportunity to communicate, not instructions to collude. The operational label includes explicit agreements and price-intention exchanges. A judge-positive chat is not evidence that the private exchange caused the prices. The full report documents the lab framing, pilots, and all six input views.</p></details></section>
+<section class="slide" id="slide-3" aria-labelledby="title-3"><p class="eyebrow">Say vs. Do · Q2.2 · 3 / 7</p><h1 id="title-3">Summarising actions helps more than adding public text</h1>
+<svg viewBox="0 0 1280 440" role="img" aria-labelledby="chart-title chart-desc"><title id="chart-title">Run AUROC on test and fresh replication</title><desc id="chart-desc">Filled blue dots: test. Hollow orange dots: replication. Lines show saved 95 percent bootstrap confidence intervals. The adjacent table gives all values.</desc><line x1="330.0" x2="330.0" y1="14" y2="382" stroke="#d5dce8"/><text x="330.0" y="407" text-anchor="middle">0.3</text><line x1="584.2857142857143" x2="584.2857142857143" y1="14" y2="382" stroke="#d5dce8"/><text x="584.2857142857143" y="407" text-anchor="middle">0.5</text><line x1="838.5714285714286" x2="838.5714285714286" y1="14" y2="382" stroke="#d5dce8"/><text x="838.5714285714286" y="407" text-anchor="middle">0.7</text><line x1="1092.8571428571431" x2="1092.8571428571431" y1="14" y2="382" stroke="#d5dce8"/><text x="1092.8571428571431" y="407" text-anchor="middle">0.9</text><line x1="1220.0" x2="1220.0" y1="14" y2="382" stroke="#d5dce8"/><text x="1220.0" y="407" text-anchor="middle">1.0</text><text x="312" y="43" text-anchor="end">Public text</text><line x1="412.26" x2="686.89" y1="31" y2="31" stroke="#225cb7" stroke-width="3"/><circle cx="548.69" cy="31" r="5" fill="#225cb7" stroke="#225cb7" stroke-width="2"/><line x1="547.54" x2="1036.41" y1="47" y2="47" stroke="#9c4b00" stroke-width="3"/><circle cx="799.03" cy="47" r="5" fill="white" stroke="#9c4b00" stroke-width="2"/><text x="312" y="95" text-anchor="end">Actions</text><line x1="778.69" x2="1029.03" y1="83" y2="83" stroke="#225cb7" stroke-width="3"/><circle cx="906.34" cy="83" r="5" fill="#225cb7" stroke="#225cb7" stroke-width="2"/><line x1="677.48" x2="1106.97" y1="99" y2="99" stroke="#9c4b00" stroke-width="3"/><circle cx="909.26" cy="99" r="5" fill="white" stroke="#9c4b00" stroke-width="2"/><text x="312" y="147" text-anchor="end">Text + actions</text><line x1="762.03" x2="1003.86" y1="135" y2="135" stroke="#225cb7" stroke-width="3"/><circle cx="890.32" cy="135" r="5" fill="#225cb7" stroke="#225cb7" stroke-width="2"/><line x1="457.02" x2="971.31" y1="151" y2="151" stroke="#9c4b00" stroke-width="3"/><circle cx="731.26" cy="151" r="5" fill="white" stroke="#9c4b00" stroke-width="2"/><text x="312" y="199" text-anchor="end">Actions + statistics</text><line x1="925.28" x2="1140.03" y1="187" y2="187" stroke="#225cb7" stroke-width="3"/><circle cx="1040.60" cy="187" r="5" fill="#225cb7" stroke="#225cb7" stroke-width="2"/><line x1="722.74" x2="1140.92" y1="203" y2="203" stroke="#9c4b00" stroke-width="3"/><circle cx="962.92" cy="203" r="5" fill="white" stroke="#9c4b00" stroke-width="2"/><text x="312" y="251" text-anchor="end">Text + actions + statistics</text><line x1="844.42" x2="1077.09" y1="239" y2="239" stroke="#225cb7" stroke-width="3"/><circle cx="962.92" cy="239" r="5" fill="#225cb7" stroke="#225cb7" stroke-width="2"/><line x1="541.95" x2="1025.09" y1="255" y2="255" stroke="#9c4b00" stroke-width="3"/><circle cx="784.92" cy="255" r="5" fill="white" stroke="#9c4b00" stroke-width="2"/><text x="312" y="303" text-anchor="end">Above + consistency table</text><line x1="900.74" x2="1107.86" y1="291" y2="291" stroke="#225cb7" stroke-width="3"/><circle cx="1011.49" cy="291" r="5" fill="#225cb7" stroke="#225cb7" stroke-width="2"/><line x1="522.11" x2="1022.17" y1="307" y2="307" stroke="#9c4b00" stroke-width="3"/><circle cx="787.71" cy="307" r="5" fill="white" stroke="#9c4b00" stroke-width="2"/><text x="312" y="355" text-anchor="end">Price premium (statistic)</text><line x1="1097.69" x2="1195.08" y1="343" y2="343" stroke="#225cb7" stroke-width="3"/><circle cx="1153.38" cy="343" r="5" fill="#225cb7" stroke="#225cb7" stroke-width="2"/><line x1="954.40" x2="1220.00" y1="359" y2="359" stroke="#9c4b00" stroke-width="3"/><circle cx="1118.29" cy="359" r="5" fill="white" stroke="#9c4b00" stroke-width="2"/><text x="600" y="437" text-anchor="middle">Run AUROC · saved 95% run-bootstrap CIs</text></svg>
+<details class="values"><summary>Accessible numerical table: run AUROC [95% CI]</summary><table><thead><tr><th>Scorer</th><th>Test (n = 95)</th><th>Replication (n = 30)</th></tr></thead><tbody><tr><td>Public text</td><td>0.47 [0.36, 0.58]</td><td>0.67 [0.47, 0.86]</td></tr><tr><td>Actions</td><td>0.75 [0.65, 0.85]</td><td>0.76 [0.57, 0.91]</td></tr><tr><td>Text + actions</td><td>0.74 [0.64, 0.83]</td><td>0.62 [0.40, 0.80]</td></tr><tr><td>Actions + statistics</td><td>0.86 [0.77, 0.94]</td><td>0.80 [0.61, 0.94]</td></tr><tr><td>Text + actions + statistics</td><td>0.80 [0.70, 0.89]</td><td>0.66 [0.47, 0.85]</td></tr><tr><td>Above + consistency table</td><td>0.84 [0.75, 0.91]</td><td>0.66 [0.45, 0.84]</td></tr><tr><td>Price premium (statistic)</td><td>0.95 [0.90, 0.98]</td><td>0.92 [0.79, 1.00]</td></tr></tbody></table></details>
+<p class="small">Filled blue = test (n = 95); hollow orange = fresh replication (n = 30).
+The chart compares the six original LLM views and the premium. Premium = pair mean price minus rival mean price;
+run score = maximum over pairs. The statistics table already includes the premium; its contribution was not isolated.</p>
+<div class="callout caution small">Premium selection used partial data including test runs.
+The test evaluation ran once, but was not fully blind. Replication analysis was registered after generation began,
+before metrics. Its intervals are wide; the premium's registered advantage over action_stats is unresolved.</div>
+<p class="small">A supervised TF-IDF baseline also learns a public-text trace (REPORT, within-split CV);
+that is a different training regime from these zero-shot auditors.</p><p class="source">Saved sources: <a href="results/analysis/final_llm_v3_gpt-6.1-sol_test.json">test JSON</a> · <a href="results/analysis/replication_llm_v3rep.json">rep JSON</a>. Full methods and caveats: <a href="REPORT.md">REPORT.md</a>.</p><details><summary>Speaker notes</summary><p>Premium has the highest point estimate among these untrained scorers. Do not call it the best detector in general: the report also has supervised baselines. The six original LLM views are all shown, so the graphic does not hide a stronger original view. The fresh sample checks direction but does not resolve the premium&#x27;s lead.</p></details></section>
+<section class="slide" id="slide-4" aria-labelledby="title-4"><p class="eyebrow">Say vs. Do · Q2.2 · 4 / 7</p><h1 id="title-4">Paired comparisons separate text from statistics</h1>
+<table><thead><tr><th>Change in AUROC [95% CI]</th><th>Test</th><th>Replication</th></tr></thead><tbody><tr><td>Raw text gain · run AUROC</td><td>-0.013 [-0.091, +0.064]</td><td>-0.140 [-0.304, +0.016]</td></tr><tr><td>Statistics gain · run AUROC</td><td>+0.106 [+0.038, +0.180]</td><td>+0.042 [-0.096, +0.193]</td></tr><tr><td>Statistics gain · localisation</td><td>+0.100 [+0.036, +0.164]</td><td>+0.173 [+0.053, +0.320]</td></tr><tr><td>Text with statistics · localisation</td><td>+0.036 [+0.008, +0.072]</td><td>-0.007 [-0.040, +0.020]</td></tr></tbody></table>
+<p class="small">Raw-text row: test = combined − max(text, action); replication = registered combined − action.
+Statistics gain = action_stats − action. Text with statistics = combined_stats − action_stats.</p>
+<ul><li>No resolved positive detection gain from raw text in either sample.</li>
+<li>The statistics table improves localisation in both samples.</li>
+<li>The small nominal text-with-statistics localisation gain on test did not repeat.</li></ul>
+<div class="callout small">Class-stratified paired run-bootstrap intervals. Test contrasts are nominal, unadjusted
+for multiple comparisons. Text-with-statistics on replication is exploratory. CI inclusion is not equivalence.</div><p class="source">Saved sources: <a href="results/analysis/final_llm_v3_gpt-6.1-sol_test.json">test JSON</a> · <a href="results/analysis/replication_llm_v3rep.json">rep JSON</a>. Full methods and caveats: <a href="REPORT.md">REPORT.md</a>.</p><details><summary>Speaker notes</summary><p>The two raw-text cells use the contrasts registered for each evaluation; do not describe them as identical definitions. The test evaluates the maximum of the two unimodal AUROCs inside each bootstrap draw. The replication&#x27;s raw-text contrast directly subtracts action. Report detection and pair localisation separately. The main report lists all contrast families, the shuffle ablation, and the registered replication rules.</p></details></section>
+<section class="slide" id="slide-5" aria-labelledby="title-5"><p class="eyebrow">Say vs. Do · Q2.2 · 5 / 7</p><h1 id="title-5">The channel offer already leaves a conduct cue</h1>
+<div class="grid"><div class="card"><h2>Before receiving any partner message</h2>
+<p class="metric">0.90</p><p>Test run AUROC using round-1 prices alone</p>
+<p class="small">95% CI: 0.90 [0.83, 0.96]. Price and first private message are produced in the same call.</p></div>
+<div class="card"><h2>Without private-message delivery</h2>
+<p class="metric">14/15 vs 14/15</p>
+<p>Premium flags: placebo vs matched delivered-channel runs</p>
+<p class="small">Frozen dev threshold; 15 matched seeds, identical channel prompt and market paths.</p></div></div>
+<p>Rounds 2–12 pair premium: placebo +1.09, delivered +1.06.
+Paired difference +0.03 [-0.54, +0.49].</p>
+<div class="callout caution small">Exploratory. Placebo is not a judge-labelled no-collusion control;
+public prices and messages remain visible. This does not establish equivalence or separate offer-induced focal pricing
+from tacit public-price coordination.</div><p class="source">Saved sources: <a href="results/analysis/early_detection_llm_v3.json">early JSON</a> · <a href="results/analysis/placebo_llm_v3plc.json">placebo JSON</a>. Full methods and caveats: <a href="REPORT.md">REPORT.md</a>.</p><details><summary>Speaker notes</summary><p>This is the strongest reason to limit the collusion claim. Messages offered but never delivered still produce elevated pair prices and frequent flags. The contrast asks about private-message delivery, not about all communication. Round-1 analysis is post-lock and placebo registration is not independently established before generation. The main report discloses those timings. No detector here has established a robust discriminator of agreement-caused conduct.</p></details></section>
+<section class="slide" id="slide-6" aria-labelledby="title-6"><p class="eyebrow">Say vs. Do · Q2.2 · 6 / 7</p><h1 id="title-6">Ranking well does not guarantee a reliable alarm</h1>
+<table><thead><tr><th>No-channel flag rate [Wilson 95% CI]</th><th>Test (n = 30)</th><th>Replication (n = 10)</th></tr></thead><tbody><tr><td>Actions</td><td>0.07 [0.02, 0.21]</td><td>0.10 [0.02, 0.40]</td></tr><tr><td>Actions + statistics</td><td>0.03 [0.01, 0.17]</td><td>0.50 [0.24, 0.76]</td></tr><tr><td>Text + actions</td><td>0.17 [0.07, 0.34]</td><td>0.50 [0.24, 0.76]</td></tr><tr><td>Price premium (statistic)</td><td>0.07 [0.02, 0.21]</td><td>0.40 [0.17, 0.69]</td></tr></tbody></table>
+<p class="small">Same dev-chosen thresholds in both samples; neither sample calibrates these thresholds.</p>
+<div class="grid"><div><h2>Threshold uncertainty</h2><p>False-alarm rates change even under the same generator.
+The fresh no-channel sample is small.</p></div><div><h2>Evasion remains untested</h2>
+<p>Under an announced price monitor, the judge finds coordination in
+0/14 private-channel runs.
+There were no judge-positive evasive colluders to evaluate.</p></div></div>
+<div class="callout small">Design hypothesis: compute cheap action statistics first, then use LLMs for explanation.
+This proposed workflow is not validated for deployment or for explanation accuracy.</div><p class="source">Saved sources: <a href="results/analysis/final_llm_v3_gpt-6.1-sol_test.json">test JSON</a> · <a href="results/analysis/replication_llm_v3rep.json">rep JSON</a> · <a href="results/analysis/monitor_stratum_llm_v3mon.json">monitor JSON</a>. Full methods and caveats: <a href="REPORT.md">REPORT.md</a>.</p><details><summary>Speaker notes</summary><p>AUROC is threshold-free and does not promise a calibrated alarm. The premium&#x27;s fresh none rate is four of ten; the uncertainty is large. The report has firm-framing and announced-monitor strata with additional false alarms. The monitor result could reflect safety-triggered refusal or deterrence. We cannot test evasion without coordinated runs. A premium-filtered AND-gate was analysed descriptively in the report; the broader explanatory workflow is only a proposal.</p></details></section>
+<section class="slide" id="slide-7" aria-labelledby="title-7"><p class="eyebrow">Say vs. Do · Q2.2 · 7 / 7</p><h1 id="title-7">A bounded finding, and a more decisive next test</h1>
+<ul><li><strong>Supported here:</strong> no resolved detection gain from adding raw public text to the tested zero-shot auditors;
+computed action summaries improve pair localisation.</li>
+<li><strong>Not established:</strong> equivalence of text and action auditing, agreement-caused overcharge detection,
+reliable evasion detection, or transfer across seller models.</li>
+<li><strong>Next study:</strong> independently vary channel offer, message delivery, and realised agreement;
+replicate across seller models and market designs, and test concealed opening-price cues.</li></ul>
+<div class="callout"><strong>Read and verify:</strong> <a href="REPORT.md">REPORT.md</a> ·
+<a href="README.md">README.md</a> · <a href="data/SPLITS.md">split/exposure chronology</a><br>
+<code>python3 verify_artifacts.py</code><br><code>python3 build_presentation.py --check</code></div>
+<p class="small">Saved results and data ship with the repo. No model calls or locked-evaluation reruns are needed.
+This talk is generated from saved JSON, with full SHA-256 source hashes in PRESENTATION.md.</p><p class="source">Saved sources: <a href="results/analysis/final_llm_v3_gpt-6.1-sol_test.json">test JSON</a> · <a href="results/analysis/replication_llm_v3rep.json">rep JSON</a> · <a href="results/analysis/placebo_llm_v3plc.json">placebo JSON</a>. Full methods and caveats: <a href="REPORT.md">REPORT.md</a>.</p><details><summary>Speaker notes</summary><p>Close on the narrow answer and the stronger experimental design it motivates. The comparator was selected after partial test exposure. Replication registration followed the start of generation but preceded metrics; some raw output and later progress lines were seen. Placebo is exploratory. Private chat is the judge&#x27;s evidence, never an auditor input. Direct questions about cost, failure examples, cross-family results, and supervised text to the full report.</p></details></section></main><script>
+(() => {
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const position = document.getElementById('position');
+  const toggle = document.getElementById('mode');
+  let index = 0;
+  function show(next) {
+    index = Math.max(0, Math.min(slides.length - 1, next));
+    slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
+    position.textContent = `Say vs. Do · ${index + 1} / ${slides.length}`;
+    if (document.body.classList.contains('presenting')) window.scrollTo(0, 0);
+  }
+  document.getElementById('previous').onclick = () => show(index - 1);
+  document.getElementById('next').onclick = () => show(index + 1);
+  toggle.onclick = () => {
+    const enabled = document.body.classList.toggle('presenting');
+    toggle.textContent = enabled ? 'Read all slides' : 'Present';
+    toggle.setAttribute('aria-pressed', String(enabled));
+    show(index);
+  };
+  document.getElementById('print').onclick = () => window.print();
+  document.addEventListener('keydown', event => {
+    if (event.target.closest('button, a, summary, input, textarea, select')) return;
+    if (!document.body.classList.contains('presenting')) return;
+    if (['ArrowRight', 'PageDown', ' '].includes(event.key)) { event.preventDefault(); show(index + 1); }
+    if (['ArrowLeft', 'PageUp'].includes(event.key)) { event.preventDefault(); show(index - 1); }
+    if (event.key === 'Home') { event.preventDefault(); show(0); }
+    if (event.key === 'End') { event.preventDefault(); show(slides.length - 1); }
+    if (event.key === 'Escape') toggle.click();
+  });
+  show(0);
+})();
+</script></body></html>

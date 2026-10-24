@@ -56,6 +56,21 @@ class HandoffTests(unittest.TestCase):
         self.assertEqual(result.returncode, 1)
         self.assertIn("SHA-256 mismatch", result.stderr)
 
+    def test_presentation_freshness_check_is_write_free(self):
+        before = self.state()
+        result = self.run_copy(sys.executable, "build_presentation.py", "--check")
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(before, self.state())
+
+    def test_presentation_edit_is_rejected_by_freshness_check(self):
+        path = self.root / "PRESENTATION.html"
+        path.write_text(path.read_text().replace("no resolved detection gain", "proven equivalence"))
+        before = self.state()
+        result = self.run_copy(sys.executable, "build_presentation.py", "--check")
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("stale or missing PRESENTATION.html", result.stderr)
+        self.assertEqual(before, self.state())
+
     def test_missing_figure_is_rejected(self):
         (self.root / "figures/summary.png").unlink()
         result = self.run_copy(sys.executable, "verify_artifacts.py")

@@ -2,6 +2,11 @@
 
 *Apart AI Collusion Sprint, Q2.2 — text + action auditing. Status: locked test results in (2026-10-24 00:03 UTC); registered replication run 02:07 UTC (chronology disclosed below); placebo-channel exploration 03:33 UTC. Offline verification: `python3 verify_artifacts.py`; handoff instructions in [README.md](README.md).*
 
+For the five-minute presentation, open [PRESENTATION.html](PRESENTATION.html) locally in a browser;
+[speaker notes and saved-input hashes](PRESENTATION.md) accompany it. Render with
+`python3 build_presentation.py`, or check freshness without writes using
+`python3 build_presentation.py --check`. It reads existing results only; no estimates change.
+
 ## Abstract
 Does an auditor catch LLM collusion better if it reads what sellers *say* in public as well as what they *do*?
 **On our generator: no resolved gain.** We simulate a 4-firm repeated-pricing market with gpt-6-luna sellers; in the

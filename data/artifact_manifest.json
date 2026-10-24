@@ -2,12 +2,15 @@
   "recorded_utc": "2026-10-24T03:57:53.696498+00:00",
   "note": "Post-hoc handoff snapshot; not proof of pre-registration or historical prompt hashes.",
   "sha256": {
+    "PRESENTATION.html": "826358433b6b5e018ee07f01cb79959eb38d4a06981853406d6b2ba29c458536",
+    "PRESENTATION.md": "bb7fdbef0c4a6cdee254c934d9e05aa8e495dee3e77e6c047b202214a2ec7d5d",
     "SCHEMA.md": "edc9416f4b2cdfa7754d7032f1592b34327ea7eb11afcad93f358cd9e19560c8",
     "after_gen.sh": "efa09eae4f4f05961d419beac382b162aa5739b09d26dadf7eff0bc67c8b556f",
     "analyze_llm.py": "2f98ff200219f8236b409fa0acbe396bd92c1d590af64b5073c5c3d3994ac76f",
     "auditors.py": "5e23db0b1ed6686d53fc754fe4d7b6148b3cf8bb477902973332f4c4b4de8045",
     "auto_finalize.sh": "3a87bbf9760154326f072ee79f4e1c354aba43e8e5c74f0d566f701597674037",
     "baselines.py": "a952d32e029ae0c76e5a81a0e9ba9701da0bc378ab332f4ec1518b22514b81aa",
+    "build_presentation.py": "a9ba03d43aedb1c7b100fb952bf0ea1a20b9a7a5a04adf3ff44011865d43e6ba",
     "cost.py": "610e123e5c92d477d3d43f92a9800a689692aa3797cba4addbdfde3d9b9c290e",
     "cross_family.py": "a33127ecbc9ed6b25ad983cacf418c5ed66888ff9d566bd05c2dfb511c63831d",
     "data/SPLITS.md": "aacf77d08d6fc6c3b0bd18024075d63b1e21a812915626a7cf108fc670fc9e39",
@@ -390,10 +393,26 @@
     "show_run.py": "451b5051c1f5a46df1b914e476957d10f061c3eb3f8c269fa27b6c5a20db4a25",
     "shuffle_analysis.py": "819e39b7083dbd451ea3ddb971f411eb8ac75b15ddfb12bf39f04a3fa48ac224",
     "sim.py": "0964ce2009a056667c40d9f8c5cedea7bc0ae1287307fe2b5d089871a27c5042",
-    "tests/test_handoff.py": "fe4b801501863d4316bd31d9fad8bb35780c953c553a002f24e5cb1486aece23",
+    "tests/test_handoff.py": "3e296863f39734b90a5ae877261624458eb3e180b78986afaf26b0701d299ed7",
     "text_lr_inspect.py": "2b0152c9f8e33d2b436b04962cd92749780f5efd37c0a4f4357c52b9b944664b",
     "textsim.py": "b99342ed5988fd5e8868f8504b58ead939ef7dbcf6c652b324a64947a528014e",
     "uv.lock": "b6d151aafed1081cb42f0bd0da71dd8faf8b81cf4b9dd8ed80a1118bcfeff700",
-    "verify_artifacts.py": "778830520a9880e1a617ff7c84d649fbda4c8bf1dcabbfe3086fd55b1ac12966"
-  }
+    "verify_artifacts.py": "ef5437621decb57e1936d935bdc6ce84e21c7a0bb597e6505062814b035342e1"
+  },
+  "updates": [
+    {
+      "recorded_utc": "2026-10-24T04:05:52.447532+00:00",
+      "iteration": 20,
+      "note": "Presentation-only extension from existing saved JSON; no experimental input/result/figure bytes changed. Initial snapshot and this extension are post-hoc.",
+      "added": [
+        "PRESENTATION.html",
+        "PRESENTATION.md",
+        "build_presentation.py"
+      ],
+      "changed": [
+        "tests/test_handoff.py",
+        "verify_artifacts.py"
+      ]
+    }
+  ]
 }

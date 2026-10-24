@@ -1,7 +1,8 @@
 """Read-only, offline handoff check; Python standard library only.
 
 Checks the committed SHA-256 manifest, cached dataset/audit coverage, portable
-completion receipts, saved CI/contrast consistency, and headline report tables.
+completion receipts, saved CI/contrast consistency, headline report tables, and
+the presentation's freshness against its saved JSON inputs.
 Never imports an experiment module, recomputes AUROC/CIs, or calls an LLM.
 The manifest is recorded after the experiments; it is not pre-registration evidence.
 
@@ -54,7 +55,8 @@ def snapshot_paths(root):
     # Explicit research artifacts; mutable manager reports/logs are deliberately excluded.
     paths = list(root.glob("*.py")) + list(root.glob("*.sh"))
     paths += list((root / "tests").glob("*.py"))
-    paths += [root / p for p in ("pyproject.toml", "uv.lock", "SCHEMA.md")]
+    paths += [root / p for p in ("pyproject.toml", "uv.lock", "SCHEMA.md",
+                               "PRESENTATION.html", "PRESENTATION.md")]
     for folder in ("data", "results", "figures"):
         paths += [p for p in (root / folder).rglob("*")
                   if p.is_file() and p.suffix in (".json", ".jsonl", ".md", ".png")]
@@ -184,8 +186,13 @@ def verify(root):
     require(set(hard) == set(datasets["llm_v3"][0]) and
             all(r["public_explicit"] is False and isinstance(r["llm"], bool) for r in hard.values()), "hard-set coverage")
     check_saved_results(root)
+    # The presentation renderer uses only saved values and standard-library code.
+    # This checks freshness without writing HTML or importing an experiment module.
+    from build_presentation import render
+    for name, content in render(root).items():
+        require((root / name).read_bytes() == content.encode("utf-8"), f"stale presentation: {name}")
     print(f"PASS: {n} artifact hashes; 206 runs / 2,472 rounds; 1,236 original-view audits; "
-          "15 matched placebo paths; frozen inputs/receipts; saved CI/contrast consistency; REPORT table/figures.")
+          "15 matched placebo paths; frozen inputs/receipts; saved CI/contrast consistency; REPORT table/figures; presentation freshness.")
     print("No LLM calls, writes, refitting, or AUROC/bootstrap recomputation. Manifest is post-hoc, not a registration.")
 
 
