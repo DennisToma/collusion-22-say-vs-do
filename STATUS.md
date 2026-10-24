@@ -2,21 +2,16 @@
 
 # STATUS
 
-## Current state (2026-10-24 12:20 UTC, Phase 2 iteration 9)
-- DONE gap 5 (E86, P2.9): aware pairs 0/20 agreements (vs 10/10), markets BELOW none (-1.19): deterrence, not evasion.
-  Opus review applied: compliance vs deterrence not separable (replicates E45); asym highcost flags = competition-predicted (p2_asym_nash.py).
-  DEVIATION: p2aware frozen LLM views SKIPPED (no agreement to survive; saves 80 sol calls).
-- DONE p2rep (E80/E89 held, P2.8; pooled n=90 E101). DONE gap 7 (E87, P2.10): premium flags highcost 7/10, quality 9/10 vs none 2/10;
-  own-cost adjustment FAILS (moves flag to the low-cost pair 8/10: ~half cost pass-through). Gap 8 p2coded killed (2 partial runs, unused).
-- E99 strongF 6/40 (gen ~10 min/run/slot, ETA ~18:00). REGISTERED E99-amend (4 behaviour classes; tacit-high none) + E103 plan view.
-  p2_strong_eval.py now writes classes -> results/analysis/p2_strong_classes_<ds>.json (for Q1.4) + exec_or_tacit/tacit contrasts.
-- E103 pilot calibration (n=10, p2_plan_calib.json): plan reader scores executed luna 18/36 (reads "hold while rivals hold" as tacit),
-  tacit_high tracks market height (luna 45-92, sol 4-5). Frozen: thr 50 both scores + 58 tacit_high.
-- p2_strongF_post.sh RUNNING: prefetches labels/views/plan every 40 min (cache only), then on "strongF gen done" runs everything once.
-- RUNNING: chain6b (ds views 56/120), C3 qwen (a 16, b 8) -> p2_c3post.sh auto, E102 qwen strong, mimo 5/14, g56sol 4/14, chain3 p2cue.
-- codex review (logs/review_iter9p2_codex.md, 25 items) APPLIED 12:27: v3rep −0.14 [−0.33,−0.02] now in abstract/TL;DR; ds/sol final premium
-  (+1.49, −0.05; flags 9/15|6/15, 4/7|2/7); ≥F−1 rule; first-floor-compliance naming; E99-amend exposure; E103 target mismatch; asym 7/10 intersection.
-  NOT applied: H3/market-price ds/sol interim columns (wait for P2.6 finals); heterogeneous-cost benchmark (noted as not tried).
+## Current state (2026-10-24 12:37 UTC, Phase 2 iteration 9)
+- DONE gap 5 (E86, P2.9): warned pairs 0/10 + 0/10 agreements (vs 10/10 matched), markets below none (−1.19); compliance, replicates E45;
+  deterrence vs norm/refusal response not separable. DEVIATION: p2aware LLM views SKIPPED (no agreement left; saves 80 sol calls).
+- DONE gap 7 (E87, P2.10): premium flags highcost 7/10, quality 9/10 vs none 2/10; own-cost adj. P2 failed. p2_asym_nash.py: competitive
+  highcost premium +1.45 (> thr) so those flags are competition-predicted; quality competitive +0.57 < thr (luna +1.08). Gap 8 killed.
+- DONE E94 closed (para1 P3 held). E91-ext deepseek views final (text/combined flag 15/15 none; P1/P2 held). sol views running (chain6b).
+- E99 strongF 7/40 (ETA ~18:00). REGISTERED E99-amend (behaviour classes) + E103 plan view; pilot calibration done (collusion_present J=0;
+  tacit_high thr 58). p2_strongF_post.sh RUNNING (prefetch every 40 min, then everything once on "strongF gen done").
+- Reviews this iter: codex (logs/review_iter9p2_codex.md) + Opus subagent, both APPLIED (v3rep −0.14 [−0.33,−0.02] in abstract; ds/sol finals).
+- RUNNING: chain6b (sol views → p2_family3way), C3 qwen (a 22, b 11) → p2_c3post.sh auto, E102, mimo 6/14, g56sol 6/14, chain3 p2cue.
 ## Next steps
 1. P2.6 market-price + regex columns for ds/sol still interim (10 / 4 seeds) -> refresh with p2_family.py after chain6b.
 2. C3: when logs show "c3 strong done": write REPORT P2.11 (C3 qwen) from results/analysis/p2_qwen.json + p2_strong_eval_llm_p2qwen{a,b}.json; E100 result row.
