@@ -1,7 +1,7 @@
 {
- "started_utc": "2026-10-24T21:46:41.608122+00:00",
+ "started_utc": "2026-10-24T21:57:05.967818+00:00",
  "kind": "post-hoc computational reproduction",
- "git_head": "c120388c9d676ca748b0945322440cac592b645c",
+ "git_head": "3aa8e9741c5c88a1ccab4ee841199745e2cf0b19",
  "python": "3.12.15 (main, Oct 21 2026, 17:47:06) [Clang 23.1.3 ]",
  "dependencies": {
   "numpy": "2.5.4",
@@ -31,6 +31,8 @@
   "data/artifact_manifest.json": "59690a26357c0376a4a2c8a04250918852848f3689c05177bfaeaeeb87d3d22b",
   "data/audit_input_receipt.json": "6d4a062e8982ae059e39de6c81cf21d6bb104edf43dd9466317b53832ca9daea",
   "data/evaluation_receipt.json": "50aa3159822c6d9d30725bea5273ac94353ce9d26d9c4bec6cc65a5b9210c9ec",
+  "data/ext_cda_d2/SOURCE.json": "2d0baab3abf65be43dabcfefeb64858430d8182bfd207182d8e4d054097253be",
+  "data/ext_cda_d2/e68_cda.json": "12045ea744443965e9c24414f6f8422cb2e4c90e21b9343efdf5e34353207374",
   "data/handoff_exports.json": "cbd2afd66514adfaa0c5dccc84b3cc672c5a56c3a80df84ce3b812b11fc5f6ff",
   "data/llm_p2asym/ground_truth.jsonl": "4a672dadae3e0b0360dc23aacc573464f99ae2813f56c793af453ee33222ceb8",
   "data/llm_p2asym/private.jsonl": "c755f334d6353ea42e8943635396e0d77947584174e3caa750492191fcc30293",
@@ -1260,7 +1262,7 @@
    ],
    "returncode": 0,
    "error": null,
-   "seconds": 8.86,
+   "seconds": 9.01,
    "outputs": {
     "results/analysis/p2_cue_llm_p2cue.json": {
      "state": "match",
@@ -1301,7 +1303,7 @@
    ],
    "returncode": 0,
    "error": null,
-   "seconds": 0.7,
+   "seconds": 0.67,
    "outputs": {
     "results/analysis/p2_cue_verdict_llm_p2cue.json": {
      "state": "match",
@@ -1317,7 +1319,7 @@
    ],
    "returncode": 0,
    "error": null,
-   "seconds": 1.18,
+   "seconds": 1.17,
    "outputs": {
     "results/analysis/p2_band.json": {
      "state": "match",
@@ -1333,7 +1335,7 @@
    ],
    "returncode": 0,
    "error": null,
-   "seconds": 6.08,
+   "seconds": 6.13,
    "outputs": {
     "results/analysis/p2_aware.json": {
      "state": "match",
@@ -1381,7 +1383,7 @@
    ],
    "returncode": 0,
    "error": null,
-   "seconds": 9.07,
+   "seconds": 9.26,
    "outputs": {
     "results/analysis/p2_logbook.json": {
      "state": "match",
@@ -1397,7 +1399,7 @@
    ],
    "returncode": 0,
    "error": null,
-   "seconds": 3.92,
+   "seconds": 3.75,
    "outputs": {
     "results/analysis/p2_de.json": {
      "state": "match",
@@ -1413,7 +1415,7 @@
    ],
    "returncode": 0,
    "error": null,
-   "seconds": 1.77,
+   "seconds": 1.85,
    "outputs": {
     "results/analysis/p2_prevalence.json": {
      "state": "match",
@@ -1435,7 +1437,7 @@
    ],
    "returncode": 0,
    "error": null,
-   "seconds": 10.74,
+   "seconds": 11.08,
    "outputs": {
     "results/analysis/p2_family_views.json": {
      "state": "match",
@@ -1451,7 +1453,7 @@
    ],
    "returncode": 0,
    "error": null,
-   "seconds": 14.13,
+   "seconds": 14.12,
    "outputs": {
     "results/analysis/p2_family3way.json": {
      "state": "match",
@@ -1475,7 +1477,7 @@
    ],
    "returncode": 0,
    "error": null,
-   "seconds": 1.07,
+   "seconds": 1.15,
    "outputs": {
     "results/analysis/p2_strongF.json": {
      "state": "match",
@@ -1500,7 +1502,7 @@
    ],
    "returncode": 0,
    "error": null,
-   "seconds": 0.95,
+   "seconds": 1.25,
    "outputs": {
     "results/analysis/p2_c2older.json": {
      "state": "match",
@@ -1525,7 +1527,7 @@
    ],
    "returncode": 0,
    "error": null,
-   "seconds": 0.96,
+   "seconds": 0.98,
    "outputs": {
     "results/analysis/p2_qwen.json": {
      "state": "match",
@@ -1550,7 +1552,7 @@
    ],
    "returncode": 0,
    "error": null,
-   "seconds": 1.05,
+   "seconds": 1.31,
    "outputs": {
     "results/analysis/p2_qwen_strong.json": {
      "state": "match",
@@ -1566,7 +1568,7 @@
    ],
    "returncode": 0,
    "error": null,
-   "seconds": 0.86,
+   "seconds": 0.84,
    "outputs": {
     "results/analysis/p2_qwen_cmp.json": {
      "state": "match",
@@ -1582,7 +1584,7 @@
    ],
    "returncode": 0,
    "error": null,
-   "seconds": 0.12,
+   "seconds": 0.11,
    "outputs": {
     "results/analysis/p2_qwen_public.json": {
      "state": "match",
@@ -1598,7 +1600,7 @@
    ],
    "returncode": 0,
    "error": null,
-   "seconds": 0.11,
+   "seconds": 0.09,
    "outputs": {
     "results/analysis/p2_strongF_public.json": {
      "state": "match",
@@ -1614,7 +1616,7 @@
    ],
    "returncode": 0,
    "error": null,
-   "seconds": 1.11,
+   "seconds": 1.16,
    "outputs": {
     "results/analysis/p2_strongF_report_llm_p2strongF.json": {
      "state": "match",
@@ -1630,7 +1632,7 @@
    ],
    "returncode": 0,
    "error": null,
-   "seconds": 1.79,
+   "seconds": 1.87,
    "outputs": {
     "results/analysis/p2_plan_keyword_llm_p2strongF.json": {
      "state": "match",
@@ -1649,7 +1651,7 @@
    ],
    "returncode": 0,
    "error": null,
-   "seconds": 2.88,
+   "seconds": 2.79,
    "outputs": {
     "results/analysis/p2_within_agree_llm_p2strongF.json": {
      "state": "match",
@@ -1675,7 +1677,7 @@
    ],
    "returncode": 0,
    "error": null,
-   "seconds": 9.18,
+   "seconds": 8.84,
    "outputs": {
     "results/analysis/p2_strict_sensitivity.json": {
      "state": "match",
@@ -1691,7 +1693,7 @@
    ],
    "returncode": 0,
    "error": null,
-   "seconds": 41.36,
+   "seconds": 41.89,
    "outputs": {
     "results/analysis/p2_behaviour.json": {
      "state": "match",
@@ -1711,7 +1713,7 @@
    ],
    "returncode": 0,
    "error": null,
-   "seconds": 19.02,
+   "seconds": 19.75,
    "outputs": {
     "results/analysis/p2_behaviour_p2rep.json": {
      "state": "match",
@@ -1727,7 +1729,7 @@
    ],
    "returncode": 0,
    "error": null,
-   "seconds": 87.48,
+   "seconds": 84.65,
    "outputs": {
     "results/analysis/p2_textlr.json": {
      "state": "match",
@@ -1743,7 +1745,7 @@
    ],
    "returncode": 0,
    "error": null,
-   "seconds": 47.81,
+   "seconds": 45.19,
    "outputs": {
     "results/analysis/p2_pool_rep.json": {
      "state": "match",
@@ -1761,5 +1763,5 @@
  "n_outputs": 33,
  "n_outputs_matched": 33,
  "passed": true,
- "finished_utc": "2026-10-24T21:51:14.595552+00:00"
+ "finished_utc": "2026-10-24T22:01:35.646706+00:00"
 }

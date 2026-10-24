@@ -1,6 +1,6 @@
 # STATUS
 
-## Current state (2026-10-24 21:53 UTC by `date -u`, Phase 2 iteration 50) — following DIRECTION 20:00
+## Current state (2026-10-24 21:59 UTC by `date -u`, Phase 2 iteration 50) — following DIRECTION 20:00
 - Headline unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc).
 - Iter50 milestone: Q1.4 final D2 cited in REPORT P2.12; inconclusive, 15+15 games. Chat ask effect +0.39 [+0.06,+0.69]; ask-level AUROC0.68 [0.46,0.88], pCMI0.60 [0.40,0.80]. Offers distinguished from paid prices; no agreement inference from the ask effect alone.
 - D2 source pinned at sibling9cee046 with result/producer SHA256 and regeneration via report_tables.py --external-d2; exact source bytes and REPORT citation checked; E130 ledger row. No new generation or local detector analysis.
@@ -9,7 +9,8 @@
 - Verification: claims32/32; offline reproduction26/26 commands,33/33 JSON outputs exact, originals unchanged; receipt freshness PASS. REPORT707 lines; abstract/merge block/TL;DR untouched.
 - Execution endpoints remain distinct (iter49): Q2.2 first-floor/strict, replacement O5 and Q1.4 E70. Preserve frozen labels; no common ±1-band claim or pooling.
 - **Next:** await Q1.4 “6 sweeps complete” → final snapshot/audits/coverage → preflight → eval ONCE → p2_e1_report.py → P2.16/glance/abstract/merge block + ONE final-snapshot ledger row. Secondary labels only from published E70; joint pCMI sentence only if Q1.4 reports replication.
-- Iter50 continues toward E113 within the ~60-minute timebox. Then ONE abstract pass <=260 words by Sun07:30; reviews Sun12:30; freeze14:00; exports16:30. No new generation/reviews/exports or snapshot-only commits; never stash/checkout live generators.
+- **Open delay:** c10 sixth-sweep generator remains alive but last seller-cache response21:45:48 UTC (unchanged at21:59); no cause established. Q1.4 STATUS21:55 forecasts22:30–22:45 completion; that ETA may slip. Sibling untouched.
+- Iter50 ends after the available D2 landing and verification; E113 remains gated, so no extra wording/tooling work. Then ONE abstract pass <=260 words after E113/by Sun07:30; reviews Sun12:30; freeze14:00; exports16:30. Never stash/checkout live generators.
 
 ## Log
 - 21:12 P2 iter47: E127 corrects staged E113 formatter (both-arm posts, silent-only no-text noise); 13/13 synthetic tests; snapshot165 +3 cached audits, all coverage/current-prompt checks pass; preflight refuses4/6, no metrics read. REPORT header + final luna board covariate refreshed; abstract/TL;DR unchanged. Offline reproduction 26/26 commands, 33/33 outputs exact, originals unchanged; receipt freshness PASS.
@@ -184,3 +185,5 @@
 - 2026-10-24 21:33 UTC P2 iter49: E129 method-definition correction (zero new estimates). Frozen code contradicts DIRECTION's common ±1-band shorthand: Q2.2 strict uses lower-bound compliance, >=10 later rounds and post-agreement excess; replacement O5 uses >=5; Q1.4 E70 uses a second-half margin and no separate floor cutoff. REPORT P2.7 definition table + P2.15 O5 labels, C21b metadata corrected, C30 checks 15/20 vs14/20 luna and0/20 vs14/20 sol. Three synthetic boundary cases distinguish the implemented rules; labels/scorers/prompts/formatter unchanged; abstract/merge/TL;DR byte-identical. Claims32/32; report705 lines; offline reproduction26/26 commands and33/33 outputs exact, originals unchanged; freshness PASS. E113 snapshot172 +12 cached calls, all current; preflight refuses4/6; final result/lock absent, no detector metric inspected. No new generation/review/export or snapshot-only ledger row.
 
 - 2026-10-24 21:53 UTC P2 iter50 milestone: E130 final Q1.4 D2 citation landed (inconclusive; ask effect+0.39 [+0.06,+0.69], level0.68/pCMI0.60 with CIs spanning chance), pinned source + formatter; claims32/32, offline26/26 commands/33 outputs exact. E113 cache180 games/5 balanced sweeps, no metrics read; direct fidelity/noninterference check176 games passes. Continues awaiting sixth sweep; abstract/TL;DR unchanged.
+
+- 2026-10-24 21:59 UTC P2 iter50 handoff: D2 milestone3aa8e97 pushed; source grid still5/6, real preflight refuses before metrics, no final result/lock. c10 last seller-cache response21:45:48 (process alive; source completion ETA may slip). Ended eligible work after D2 landing per DIRECTION stop-polishing rule rather than waiting on the sibling; next iteration resumes E113 only when six sweeps are announced. Final receipt refresh with pinned D2 files tracked is still running; do not claim it passed until completion.
