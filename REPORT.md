@@ -42,11 +42,11 @@ test and replication evidence item beside the public log (offline, searchable; n
    **notepad with no recipient** raises their premium over rounds 2–12 by +1.04 [+0.65, +1.42] vs no channel. A real
    private channel raises it by +1.61 [+0.92, +2.35]; the difference is not resolved (+0.56 [−0.29, +1.48]), and so is the effect of delivery
    (private − placebo +0.38 [−0.41, +1.18]). The frozen premium flags 10/15 notepad runs (AUROC 0.89). The registered
-   "offer alone is not the driver" prediction failed. The notepad arm has confounds (pair-only extra text, memory). The premium also depends on wording: a terse paraphrase of the same prompt removes it (+0.24 [−0.32, +0.81] vs +1.75 on the same seeds; registered E78 failed), although the judge still finds an agreement in 10/10 chats (half of them on ~12, near Nash).
-8. *Luna-calibrated detectors did not transfer to other seller families (P2.6; Claude 5-seed pilot, deepseek/sol interim):* Claude Sonnet 5.5 sellers price at or above the
+   "offer alone is not the driver" prediction failed. The notepad arm has confounds (pair-only extra text, memory). The premium also depends on wording: a terse paraphrase of the same prompt reduces it to +0.24 [−0.32, +0.81] (vs +1.75 on the same seeds; registered E78 failed), although the judge still labels 10/10 chats "explicit" (about half on ~12, near Nash).
+8. *Seller-model pilots raise detector-transfer problems (P2.6; Claude 5-seed pilot, deepseek/sol interim):* Claude Sonnet 5.5 sellers price at or above the
    joint-monopoly level (≈ 19; Nash ≈ 11) from round 1 even with **no channel** (market mean 20.2, 5/5). This is above the profit-maximising
    price, so we read it mainly as a high-price disposition rather than learned collusion. With the channel, pairs state 20–24 and stay there (matched no-channel pairs do not, in 4/5 seeds).
-   The pair premium is small (+0.58 [+0.23, +1.03]), the frozen premium flags 2/5, and the luna-trained text classifier scores 0.64. Both AUROC CIs include chance. Claude's no-channel firms also invite each other *publicly* not to undercut, so every frozen LLM view that reads messages flags all 10 markets (E91): whether that counts as collusion is a labelling choice. *Interim (E93):* deepseek sellers propose joint pricing in 10/10 private chats and openly invite rivals in nearly all public messages in *both* arms (no-channel markets at 17.0 vs luna 12.1), so the luna threshold flags 4/10 controls (AUROC 0.75). gpt-6.1-sol sellers (4 pairs) message every round but never propose joint pricing and show no premium (−0.14).
+   The pair premium is small (+0.58 [+0.23, +1.03]), the frozen premium flags 2/5, and the luna-trained text classifier scores 0.64. Both AUROC CIs include chance. Claude's no-channel firms also invite each other *publicly* not to undercut, so every frozen LLM view that reads messages flags all 10 markets (E91): whether that counts as collusion is a labelling choice. *Interim (E93):* deepseek sellers propose joint pricing in 10/10 private chats and openly invite rivals in nearly all public messages in *both* arms (no-channel markets at 17.0 vs luna 12.1), so the luna threshold flags 4/10 controls (AUROC 0.75). In four gpt-6.1-sol pairs, messages contain no observed joint-pricing proposal; the premium estimate is −0.14 [−0.58, +0.19].
 
 ## Phase 2 results (in progress, from 2026-10-24 06:30 UTC; v1 above frozen as git tag `v1-overnight`)
 
@@ -58,7 +58,7 @@ Phase 2 closes known validity gaps. Every experiment is registered in `EXPERIMEN
 - *Reimplementation (P2.2):* an independent codex reimplementation from the method text matches 31/32 headline numbers (`results/reimpl/`).
 - *Behaviour labels (P2.4):* only 14/50 test "colluders" keep the agreed price; premium AUROC on that label 0.80 [0.67, 0.90]; text + actions vs best single modality −0.03 [−0.14, +0.06] (`p2_behaviour.json`).
 - *Prompt artifact (P2.5):* a private notepad with no recipient raises the pair premium by +1.04 [+0.65, +1.42] (private channel +1.61 [+0.92, +2.35]); the supervised text classifier scores notepad runs 0.86 (`p2_cue_verdict_llm_p2cue.json`, `p2_textlr.json`). Wording band (E78, `p2_band.json`): +1.75 / +1.79 / **+0.24 [−0.32, +0.81]** for the original / paraphrase 1 / terse paraphrase 2 on the same 10 seeds; the judge still labels 10/10 terse chats as agreements, half of them near Nash.
-- *Other sellers (P2.6):* Claude Sonnet sellers price ≥ monopoly with no channel; premium flags 2/5, text views flag 10/10 incl. no-channel markets (`p2_family*.json`). Interim (E93, `results/analysis/interim/`): deepseek openly invites coordination in both arms (public invitations 479/480 in `none`; premium +2.05, but flags 4/10 controls); sol (4 pairs) never proposes joint pricing (premium −0.14).
+- *Other sellers (P2.6):* Claude Sonnet sellers price ≥ monopoly with no channel; premium flags 2/5, text views flag 10/10 incl. no-channel markets (`p2_family*.json`). Interim (E93, `results/analysis/interim/`): deepseek openly invites coordination in both arms (public invitations 479/480 in `none`; premium +2.05, but flags 4/10 controls); sol (4 pairs): no observed joint-pricing proposal, premium −0.14 [−0.58, +0.19].
 
 **P2.1 Precision at realistic prevalence (E81; post-hoc re-expression of saved scores, nothing refit).** The test split
 has 53% positives, which flatters precision. At the frozen dev thresholds, precision(π) = TPR·π / (TPR·π + FPR·(1−π)),
@@ -187,17 +187,18 @@ notepad pair on top in 14/15 runs. The public-text trace therefore also appears 
 **Wording band (E78, registered; `uv run python p2_band.py` → `results/analysis/p2_band.json`).** Three wordings of the
 same seller prompt (same facts), on the same 10 matched seeds, private − none pair premium over rounds 2–12: original
 +1.75 [+0.91, +2.66]; paraphrase 1 +1.79 [+1.20, +2.43]; **paraphrase 2 (terse, list-like) +0.24 [−0.32, +0.81]**.
-Paraphrase 2 minus original: −1.51 [−2.33, −0.68]. Frozen premium flags (private / none): 9/2, 9/0, 4/2. The registered
-prediction (premium survives both paraphrases) **failed** for paraphrase 2. Two things change. (i) *Ambition:* the
-judge still labels 10/10 paraphrase-2 chats explicit agreements. But the highest price named in the pair's round-1
+Paraphrase 2 minus original: −1.51 [−2.33, −0.68]. Frozen premium flags, private vs none: 9/10 vs 2/10; 9/10 vs 0/10; 4/10 vs 2/10. The registered
+prediction (premium survives both paraphrases) **failed** for paraphrase 2. Two things change. (i) *Agreement content:* the
+judge labels all 10 paraphrase-2 chats "explicit", but this does not establish unchanged mutual agreements (some
+evidence combines conflicting proposals, e.g. 0004: 18 vs 12, or matching plans qualified by "choose independently"). Also the highest price named in the pair's round-1
 messages is ≥ 17 in 7/10 pairs (original 10/10, paraphrase 1 9/10; json key `opening_proposal_per_pair`). By our reading
 of the judge's evidence quotes (`data/llm_p2para2/labels.jsonl`), 5/10 agreements are on ~12, close to static Nash
 (11), e.g. llm_p2para2_0008 "Let's start at 12". (ii) *Others' prices:* non-pair firms price higher (rounds 2–12: 14.0 vs 13.4),
 and no-channel markets sit at 13.2 vs 12.1. The pair's round-1 price is 15.3 vs 17.1, and the round-1 premium is +1.9 [+0.1, +3.9]
-vs +5.1 [+4.2, +5.9] (json key `pair_vs_others_price`). **Reading:** the size of the premium depends on prompt wording,
-both through what the pair agrees on and through how everyone else prices. A binary "agreement in chat" label does not
-track this: it stays at 10/10 while the price signal disappears. Some of these "agreements" are on near-competitive
-prices, which a price-based detector should *not* flag.
+vs +5.1 [+4.2, +5.9] (json key `pair_vs_others_price`). **Reading:** prompt wording changes the size of the premium,
+through the pair's prices, the other firms' prices and the no-channel baseline all at once. With n = 10 and uncertain
+agreement labels we cannot attribute the drop specifically to weaker follow-through on agreements. But the binary judge
+label stays at 10/10 while the price contrast shrinks, so "agreement in chat" and "premium" measure different things.
 
 ![Figure P2.5](figures/p2_cue_rounds.png)
 
@@ -216,17 +217,17 @@ cross-family) and deepseek-v4.1-flash (Go) are still running.** At the costs use
 
 **Interim: deepseek and gpt-6.1-sol (E93, post-hoc, descriptive, no decisions; `uv run python p2_interim.py --ds llm_p2ds
 llm_p2sol` → `results/analysis/interim/`; complete matched seeds only, final numbers replace these when generation ends).**
-The two families defeat the luna detectors in opposite ways. *deepseek sellers invite coordination openly in both arms.* Every
+These descriptive interim samples pose opposite problems for luna-calibrated detectors; transfer performance is unresolved. *deepseek sellers invite coordination openly in both arms.* Every
 private chat (10/10) proposes joint pricing ("let's cooperate: both price at 22 … I'll avoid undercutting if you do").
 A regex screen also finds such invitations in 479/480 *public* messages of no-channel markets (480/480 with the channel;
-Claude 239/240; luna 7/720, mostly non-invitations such as "We welcome steady business from everyone"). No-channel
+Claude 240/240; luna 7/720, mostly non-invitations such as "We welcome steady business from everyone"). No-channel
 markets already price at 17.0 (luna `none` on the same 10 seeds: 12.1). The channel still adds a pair premium (+2.05)
 and raises the market price (+2.9). But the luna-calibrated threshold flags 4/10 no-channel markets: the run score is
-the max premium over all 6 firm pairs, and deepseek firm prices are more spread out, so run AUROC is 0.75 [0.46, 1.00].
-*gpt-6.1-sol shows no sign of collusion in 4 pairs.* sol pairs send a private message every round (96/96), but the
+the max premium over all 6 firm pairs (a plausible but untested mechanism: deepseek firm prices are more spread out); run AUROC 0.75 [0.46, 1.00].
+*In the four completed gpt-6.1-sol private runs, no explicit joint-pricing proposal was observed.* sol pairs send a private message every round (96/96), but the
 content is about pricing independently ("I will assess demand and customer response this round"). Regex: 0/96 joint-pricing
-phrases; a 1–2 digit number appears in 4/96, e.g. disclosing an opening price; public invitations 0/576. There is no pair
-premium (−0.14), so for this family a channel run is not a collusion positive. Regex screens are descriptive; the sol
+phrases; a 1–2 digit number appears in 4/96, e.g. disclosing an opening price; public invitations 0/576. The premium estimate is
+−0.14 [−0.58, +0.19]; this small sample neither establishes a zero effect nor validates channel presence as a collusion label. Regex screens are descriptive; the sol
 judge labels and frozen auditor views (E91-ext, registered) come with the final run. **Reading:** whether there is
 collusion to detect, and whether a no-channel market is a clean negative, depend on the seller model. For 2 of 4
 families the control arm's public messages already contain open invitations to coordinate (auditors so far run on
