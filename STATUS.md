@@ -1,23 +1,23 @@
 # STATUS
 
-## Current state (2026-10-24 01:50 UTC, iteration 13)
-- LOCKED TEST DONE (00:03; do NOT rerun final_analysis --split test). REPORT presentable; reviews applied thru E49.
-- NEW (E50): round-1 prices are chosen BEFORE any private message is read, yet channel holders open at 17.5 vs 12.9
-  (premium +4.56 [+4.19,+4.90], 69/70) -> round-1-only premium test run AUROC .90 (full .95, r2..12 .90).
-  => premium is largely a treatment-response detector (reacts to channel *offer*). REPORT §Exploration "When does
-  the premium appear?" + fig early_detection_llm_v3.png + abstract caveat + limitation; Appendix A "agrees in round 1" corrected.
-  codex review_iter13 APPLIED (E51).
-- E47 replication llm_v3rep: generation DONE (30/30; labels 15/15 private y=1), audits running (pipeline.sh,
-  logs/pipeline_v3rep.log), ETA ~02:45. gen_v3rep.log gets REP_DONE when finished.
-## Next steps
-1. (done) review_iter13 applied.
-2. When logs/gen_v3rep.log ends with REP_DONE: `uv run python auditors.py --ds llm_v3rep --verify`, then
-   `uv run python replication.py` ONCE; fill REPORT §Replication (replace PENDING) + abstract bullet; E47 row; commit.
-   Only AFTER that (exploratory): `uv run python round1_effect.py --ds llm_v3rep` and early_detection --ds llm_v3rep.
-3. No new generation after 03:30, no new experiments after 06:30; FINALIZE from 08:15 (final REPORT review by codex).
-- Risks: codex limits shared with sibling (it runs 4 workers).
+## Current state (2026-10-24 02:15 UTC, iteration 13)
+- LOCKED TEST DONE (00:03; never rerun). REPLICATION DONE (02:07, run once; lock logs/final/REPLICATION_ONCE.lock;
+  never rerun). REPORT presentable; all reviews applied thru E53.
+- Replication llm_v3rep (n=30, 15 y=1): 4/4 pre-registered predictions held, P3/P4 narrowly: premium run .92
+  [.79,1.00] vs action_stats .80 (Δ +.12 [-.004,+.29]); text .67; combined-action -.14 [-.30,+.02]; frozen
+  thresholds flag 40-60% of fresh none runs (operating points unstable).
+- E50/E52: round-1 prices are set BEFORE any private message is read, yet channel holders open +4.6 (llm_v3) / +5.0
+  (rep) above rivals → round-1-only premium test run AUROC .90: the premium is largely a treatment-response detector.
+  In REPORT abstract caveats, §Exploration "When does the premium appear?", Limitations, Appendix A (corrected).
+- pipeline.sh bug: its pgrep matches the parent shell cmdline → never exits; kill it manually once audits verify.
+## Next steps (no new generation after 03:30, no new experiments after 06:30; FINALIZE from 08:15)
+1. Opus-subagent + codex end-to-end review of REPORT for coherence now that all results are in (abstract is long;
+   consider tightening to ~6 bullets with the round-1 finding prominent). Keep numbers traceable.
+2. Optional exploration (no LLM generation): auditor evidence — do LLM auditors cite round 1 as evidence? (evidence.json)
+3. Finalize: figures check, reproduce block, final codex review of REPORT claims.
 
 ## Log
+- 02:15 iter 13: replication run once (E47 result: 4/4 held), round-1 replicates (E52), codex review_iter13_rep applied (E53).
 - 02:05 iter 13: codex review_iter13 applied (E51).
 - 01:50 iter 13: round-1 treatment-response finding (E50), early_detection.py, round1_effect.py, fig_early.py.
 - 01:35 iter 12: codex review_iter12 applied (E49).

@@ -28,9 +28,10 @@ table. Results on the locked test split (n = 95, run once):
   One seller model, one framing, sellers never try to evade. On 16 runs from a different framing in which the judge found
   no agreement, the frozen thresholds flag 44% (premium) and 25–63% (stats-table views) of runs: the strong
   detectors do not transfer as-is.
-- **Pre-registered replication on 30 fresh runs (4/4 predictions held, two narrowly):** premium run AUROC 0.92
-  [0.79, 1.00] vs best LLM view 0.80 (Δ +0.12 [−0.004, +0.29]); text 0.67 [0.47, 0.86]; combined − action −0.14
-  [−0.30, +0.02] (no text gain). The frozen dev thresholds over-flag fresh `none` runs (premium 4/10).
+- **Replication on 30 fresh runs (4/4 registered criteria met; registration-timing caveat in §Replication):**
+  premium run AUROC 0.92 [0.79, 1.00] vs the fixed best LLM view, action_stats, 0.80 (Δ +0.12 [−0.004, +0.29]);
+  text 0.67 [0.47, 0.86]; combined − action −0.14 [−0.30, +0.02]. Neither premium superiority nor a text gain is
+  resolved. The frozen premium threshold flags 4/10 fresh `none` runs.
 - **No coordination under an announced price monitor.** When the prompt also says prices are monitored (private chat
   still unmonitored), the judge finds agreements in 0/14 private runs (vs 70/70 without the note) and mean markup is
   close to the no-channel runs, so the planned evasion test had no colluders to test on (unpaired exploration, n = 20).
@@ -228,7 +229,9 @@ positive in 44/50 runs; none −0.02; legit +0.08.)*
 
 ### Replication on a fresh split (`llm_v3rep`, pre-registered, run once 02:07 UTC)
 Because the premium was chosen after a look at partial data including test runs, we generated 30 new runs with the
-unchanged generator (seed 9000; 15 `private`, 10 `none`, 5 `legit`) AFTER freezing everything. Analysis
+unchanged generator (seed 9000; 15 `private`, 10 `none`, 5 `legit`), using the existing llm_v3 scorers, thresholds
+and fusion weight. The registration commit followed the start of generation, and analysis safeguards were added
+afterwards but before any replication metric was computed. Analysis
 (`uv run python replication.py` → `results/analysis/replication_llm_v3rep.json`; frozen llm_v3 dev thresholds and
 fusion weight; best LLM view = action_stats, fixed from the llm_v3 test json; run-once lock
 `logs/final/REPLICATION_ONCE.lock`) and four predictions were pre-registered in `data/SPLITS.md` (commit 71eae06;
@@ -254,18 +257,19 @@ labeller log lines with per-run pair premiums (runs 0027–0029); no metric was 
 - P2 text run AUROC CI includes 0.5: 0.67 [0.47, 0.86] — held, but the point estimate is higher than on test (0.47).
 - P3 premium − best view (action_stats) ≥ 0, point: **+0.12** [−0.004, +0.29] — held; CI just includes 0
   (within-market: +0.00 [−0.04, +0.04]).
-- P4 combined − action run AUROC CI includes 0: **−0.14** [−0.30, +0.02] — held narrowly. Adding the public text to
-  the action view nominally *lowered* detection; an exploratory second bootstrap of the same contrast
-  (Δ_hybrid[combined], different resampling stream) gives [−0.33, −0.02], so the "includes 0" call is
-  resampling-sensitive. Either way there is no sign of a text gain.
+- P4 combined − action run AUROC CI includes 0: **−0.14** [−0.30, +0.02] — held narrowly. The exploratory
+  Δ_hybrid[combined] CI is [−0.33, −0.02], but it subtracts max(text, action) within each bootstrap resample, so it
+  is a different contrast. Neither contrast resolves a text gain.
 - Registered action_stats − action: run +0.04 [−0.10, +0.19] (not resolved, vs +0.11 on test), within-market +0.17
   [+0.05, +0.32] (resolved, as on test).
 
-**Reading.** The qualitative headline replicates on fresh data: the untrained premium has the best detection point
-estimate, and text adds nothing to the LLM auditor. The stats-table views localise almost perfectly within markets
-(0.98–0.99), but their *run-level* detection is weaker than on test. At the frozen dev thresholds several scorers
-flag 40–60% of the 10 fresh `none` runs (test `none`: 3–17%; premium 0.40 vs 0.07), so the dev operating points do
-not carry over even within the same generator (n = 10, Wilson CIs ~[0.17, 0.69]). Exploratory contrasts (not
+**Reading.** The fresh sample preserves the premium's highest run-AUROC point estimate, but its advantage over the
+fixed best LLM view is unresolved. No run-AUROC gain from adding text is resolved; P2 and P4 establish CI inclusion,
+not equivalence. action_stats and combined_stats reach within-market AUROCs of 0.99 and 0.98 on the 15 positive runs;
+their run-AUROC point estimates are lower than on test. At the frozen dev thresholds several scorers flag 40–60% of
+the 10 fresh `none` runs (test `none`: 3–17%; premium 0.40 vs 0.07), suggesting that the frozen operating points may
+be unstable even under the same generator. With only 10 fresh `none` runs, uncertainty is substantial: Wilson 95% CIs
+are [0.17, 0.69] for 4/10, [0.24, 0.76] for 5/10, and [0.31, 0.83] for 6/10. Exploratory contrasts (not
 pre-registered) are all in the json.
 
 ### Exploration strata (never pooled into the headline; frozen dev thresholds, nothing fitted)
@@ -332,9 +336,9 @@ with anticipation of coordination. As a result the premium from **round 1 alone*
 12-round premium (0.95 / 0.96) and above every LLM view's run-AUROC point estimate, though below combined_stats on
 localisation (0.926 vs 0.930; no paired CIs for these comparisons). Dropping round 1, the premium over rounds 2..k has
 test run AUROC 0.877 at k = 2, falls to 0.855 at k = 4, and reaches 0.904 at k = 12, so later prices also distinguish
-the conditions. On the fresh replication split (run after `replication.py`; `--ds llm_v3rep`), the round-1 private
-pair premium is +5.03 [+4.30, +5.80] (> 0 in 15/15; `none` −0.40, `legit` −1.40) and round 1 alone gives run AUROC
-0.84 [0.69, 0.96], within-market 0.95 [0.91, 0.99] (n = 30). Strong discrimination is thus already present before sellers receive any partner message: the
+the conditions. In exploratory analyses of `llm_v3rep` performed after `replication.py`, the round-1 private-pair premium is
++5.03 [+4.30, +5.80] (> 0 in 15/15; `none` −0.40, `legit` −1.40). Round 1 alone gives run AUROC 0.84 [0.69, 0.96]
+across 30 runs and within-market AUROC 0.95 [0.91, 0.99] across the 15 positive runs. Strong discrimination is thus already present before sellers receive any partner message: the
 round-1 score is a **treatment-response detector** (it reacts to the channel *offer*). These analyses do not quantify
 how much of the full-period AUROC comes from that response, nor performance when no agreement develops. This tightens
 the label = condition caveat. Round-1 prices support early ranking here; first-round alarm rates at a calibrated

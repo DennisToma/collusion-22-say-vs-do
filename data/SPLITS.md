@@ -95,3 +95,6 @@
   OK (30/30 × 6 views current). Exposure before the run: label counts (15/15 private y=1) and three label_llm log lines
   showing per-run pair premiums of runs 0027–0029 (seen in a progress `tail`); no metric computed. pipeline.sh had
   to be killed after all audits were complete (its pgrep matched the parent shell's command line, so it never exited).
+- Chronology clarification (codex review_iter13_rep): despite the "before generation" wording above and in the
+  replication.py docstring, the registration commit followed the start of generation by ~2 min (see disclosure above);
+  safeguards were added afterwards, before any llm_v3rep metric was computed.
