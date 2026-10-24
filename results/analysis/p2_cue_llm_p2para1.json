@@ -1,0 +1,493 @@
+{
+ "ds": "llm_p2para1",
+ "frozen_dev_threshold": 0.667,
+ "model": [
+  "gpt-6-luna"
+ ],
+ "n": {
+  "private": 10,
+  "none": 10
+ },
+ "by_condition": {
+  "private": {
+   "prem_r1": [
+    3.8,
+    2.6,
+    4.9
+   ],
+   "prem_r2_12": [
+    1.823,
+    1.264,
+    2.455
+   ],
+   "prem_all": [
+    1.988,
+    1.416,
+    2.629
+   ],
+   "markup_r1": [
+    8.4,
+    7.75,
+    8.95
+   ],
+   "markup_r2_12": [
+    8.234,
+    7.32,
+    9.089
+   ],
+   "markup_all": [
+    8.248,
+    7.373,
+    9.065
+   ],
+   "did_r2_12_minus_r1": [
+    -1.977,
+    -2.95,
+    -0.8
+   ],
+   "flag_rate": [
+    9,
+    10
+   ],
+   "agreement_counts": {
+    "explicit": 8,
+    "info_exchange": 2
+   }
+  },
+  "none": {
+   "prem_r1": [
+    -0.6,
+    -1.3,
+    0.0
+   ],
+   "prem_r2_12": [
+    0.036,
+    -0.073,
+    0.15
+   ],
+   "prem_all": [
+    -0.017,
+    -0.154,
+    0.108
+   ],
+   "markup_r1": [
+    6.3,
+    6.0,
+    6.65
+   ],
+   "markup_r2_12": [
+    5.773,
+    5.398,
+    6.175
+   ],
+   "markup_all": [
+    5.817,
+    5.473,
+    6.187
+   ],
+   "did_r2_12_minus_r1": [
+    0.636,
+    0.077,
+    1.291
+   ],
+   "flag_rate": [
+    0,
+    10
+   ],
+   "agreement_counts": {
+    "no_channel": 10
+   }
+  }
+ },
+ "paired": {
+  "private-none": {
+   "n": 10,
+   "prem_r1": [
+    4.4,
+    2.8,
+    6.0
+   ],
+   "prem_r2_12": [
+    1.786,
+    1.195,
+    2.427
+   ],
+   "prem_all": [
+    2.004,
+    1.375,
+    2.633
+   ],
+   "markup_r1": [
+    2.1,
+    1.5,
+    2.6
+   ],
+   "markup_r2_12": [
+    2.461,
+    1.625,
+    3.175
+   ],
+   "markup_all": [
+    2.431,
+    1.633,
+    3.115
+   ],
+   "did_r2_12_minus_r1": [
+    -2.614,
+    -4.114,
+    -1.099
+   ]
+  },
+  "none-private": {
+   "n": 10,
+   "prem_r1": [
+    -4.4,
+    -6.0,
+    -2.8
+   ],
+   "prem_r2_12": [
+    -1.786,
+    -2.427,
+    -1.195
+   ],
+   "prem_all": [
+    -2.004,
+    -2.633,
+    -1.375
+   ],
+   "markup_r1": [
+    -2.1,
+    -2.6,
+    -1.5
+   ],
+   "markup_r2_12": [
+    -2.461,
+    -3.175,
+    -1.625
+   ],
+   "markup_all": [
+    -2.431,
+    -3.115,
+    -1.633
+   ],
+   "did_r2_12_minus_r1": [
+    2.614,
+    1.099,
+    4.114
+   ]
+  }
+ },
+ "run_auroc_vs_none": {
+  "private": [
+   1.0,
+   1.0,
+   1.0
+  ]
+ },
+ "per_run": {
+  "private": [
+   {
+    "seed": 8100000,
+    "run_id": "llm_p2para1_0000",
+    "run_score": 1.8749999999999982,
+    "flag": true,
+    "prem_r1": 4.0,
+    "markup_r1": 8.0,
+    "prem_r2_12": 1.6818181818181834,
+    "markup_r2_12": 9.93181818181818,
+    "prem_all": 1.8749999999999982,
+    "markup_all": 9.770833333333332,
+    "did_r2_12_minus_r1": -2.3181818181818166,
+    "agreement": "info_exchange",
+    "y": 1
+   },
+   {
+    "seed": 8100001,
+    "run_id": "llm_p2para1_0002",
+    "run_score": 0.5416666666666661,
+    "flag": false,
+    "prem_r1": 3.0,
+    "markup_r1": 7.5,
+    "prem_r2_12": 0.31818181818181834,
+    "markup_r2_12": 5.522727272727272,
+    "prem_all": 0.5416666666666661,
+    "markup_all": 5.687500000000001,
+    "did_r2_12_minus_r1": -2.6818181818181817,
+    "agreement": "explicit",
+    "y": 1
+   },
+   {
+    "seed": 8100002,
+    "run_id": "llm_p2para1_0004",
+    "run_score": 3.958333333333334,
+    "flag": true,
+    "prem_r1": 5.0,
+    "markup_r1": 8.5,
+    "prem_r2_12": 3.8636363636363633,
+    "markup_r2_12": 8.295454545454545,
+    "prem_all": 3.958333333333334,
+    "markup_all": 8.3125,
+    "did_r2_12_minus_r1": -1.1363636363636367,
+    "agreement": "explicit",
+    "y": 1
+   },
+   {
+    "seed": 8100003,
+    "run_id": "llm_p2para1_0006",
+    "run_score": 3.041666666666666,
+    "flag": true,
+    "prem_r1": 6.0,
+    "markup_r1": 9.0,
+    "prem_r2_12": 2.7727272727272716,
+    "markup_r2_12": 7.840909090909091,
+    "prem_all": 3.041666666666666,
+    "markup_all": 7.9375,
+    "did_r2_12_minus_r1": -3.2272727272727284,
+    "agreement": "explicit",
+    "y": 1
+   },
+   {
+    "seed": 8100004,
+    "run_id": "llm_p2para1_0008",
+    "run_score": 0.8333333333333339,
+    "flag": true,
+    "prem_r1": 0.0,
+    "markup_r1": 6.0,
+    "prem_r2_12": 0.9090909090909101,
+    "markup_r2_12": 6.0,
+    "prem_all": 0.8333333333333339,
+    "markup_all": 6.000000000000001,
+    "did_r2_12_minus_r1": 0.9090909090909101,
+    "agreement": "explicit",
+    "y": 1
+   },
+   {
+    "seed": 8100005,
+    "run_id": "llm_p2para1_0010",
+    "run_score": 2.25,
+    "flag": true,
+    "prem_r1": 6.0,
+    "markup_r1": 9.0,
+    "prem_r2_12": 1.90909090909091,
+    "markup_r2_12": 9.863636363636363,
+    "prem_all": 2.25,
+    "markup_all": 9.791666666666668,
+    "did_r2_12_minus_r1": -4.09090909090909,
+    "agreement": "explicit",
+    "y": 1
+   },
+   {
+    "seed": 8100006,
+    "run_id": "llm_p2para1_0012",
+    "run_score": 2.3750000000000018,
+    "flag": true,
+    "prem_r1": 5.0,
+    "markup_r1": 9.5,
+    "prem_r2_12": 2.1363636363636367,
+    "markup_r2_12": 8.522727272727273,
+    "prem_all": 2.3750000000000018,
+    "markup_all": 8.604166666666666,
+    "did_r2_12_minus_r1": -2.8636363636363633,
+    "agreement": "explicit",
+    "y": 1
+   },
+   {
+    "seed": 8100007,
+    "run_id": "llm_p2para1_0014",
+    "run_score": 1.708333333333334,
+    "flag": true,
+    "prem_r1": 5.0,
+    "markup_r1": 8.5,
+    "prem_r2_12": 1.4090909090909083,
+    "markup_r2_12": 8.113636363636363,
+    "prem_all": 1.708333333333334,
+    "markup_all": 8.145833333333332,
+    "did_r2_12_minus_r1": -3.5909090909090917,
+    "agreement": "explicit",
+    "y": 1
+   },
+   {
+    "seed": 8100008,
+    "run_id": "llm_p2para1_0016",
+    "run_score": 2.416666666666666,
+    "flag": true,
+    "prem_r1": 1.0,
+    "markup_r1": 8.5,
+    "prem_r2_12": 2.1818181818181817,
+    "markup_r2_12": 8.545454545454545,
+    "prem_all": 2.083333333333332,
+    "markup_all": 8.541666666666668,
+    "did_r2_12_minus_r1": 1.1818181818181817,
+    "agreement": "info_exchange",
+    "y": 1
+   },
+   {
+    "seed": 8100009,
+    "run_id": "llm_p2para1_0018",
+    "run_score": 1.208333333333334,
+    "flag": true,
+    "prem_r1": 3.0,
+    "markup_r1": 9.5,
+    "prem_r2_12": 1.045454545454545,
+    "markup_r2_12": 9.704545454545455,
+    "prem_all": 1.208333333333334,
+    "markup_all": 9.6875,
+    "did_r2_12_minus_r1": -1.954545454545455,
+    "agreement": "explicit",
+    "y": 1
+   }
+  ],
+  "none": [
+   {
+    "seed": 8100000,
+    "run_id": "llm_p2para1_0001",
+    "run_score": 0.16666666666666607,
+    "flag": false,
+    "prem_r1": 0.0,
+    "markup_r1": 6.0,
+    "prem_r2_12": 0.0,
+    "markup_r2_12": 6.636363636363636,
+    "prem_all": 0.0,
+    "markup_all": 6.583333333333334,
+    "did_r2_12_minus_r1": 0.0,
+    "agreement": "no_channel",
+    "y": 0
+   },
+   {
+    "seed": 8100001,
+    "run_id": "llm_p2para1_0003",
+    "run_score": 0.20833333333333215,
+    "flag": false,
+    "prem_r1": 0.0,
+    "markup_r1": 6.0,
+    "prem_r2_12": 0.2272727272727284,
+    "markup_r2_12": 5.022727272727272,
+    "prem_all": 0.20833333333333215,
+    "markup_all": 5.104166666666667,
+    "did_r2_12_minus_r1": 0.2272727272727284,
+    "agreement": "no_channel",
+    "y": 0
+   },
+   {
+    "seed": 8100002,
+    "run_id": "llm_p2para1_0005",
+    "run_score": 0.08333333333333393,
+    "flag": false,
+    "prem_r1": 0.0,
+    "markup_r1": 6.0,
+    "prem_r2_12": 0.09090909090909172,
+    "markup_r2_12": 4.818181818181818,
+    "prem_all": 0.08333333333333393,
+    "markup_all": 4.916666666666667,
+    "did_r2_12_minus_r1": 0.09090909090909172,
+    "agreement": "no_channel",
+    "y": 0
+   },
+   {
+    "seed": 8100003,
+    "run_id": "llm_p2para1_0007",
+    "run_score": 0.16666666666666607,
+    "flag": false,
+    "prem_r1": 0.0,
+    "markup_r1": 6.0,
+    "prem_r2_12": 0.09090909090908994,
+    "markup_r2_12": 5.090909090909091,
+    "prem_all": 0.08333333333333393,
+    "markup_all": 5.166666666666666,
+    "did_r2_12_minus_r1": 0.09090909090908994,
+    "agreement": "no_channel",
+    "y": 0
+   },
+   {
+    "seed": 8100004,
+    "run_id": "llm_p2para1_0009",
+    "run_score": 0.25,
+    "flag": false,
+    "prem_r1": 0.0,
+    "markup_r1": 6.0,
+    "prem_r2_12": -0.2727272727272716,
+    "markup_r2_12": 6.09090909090909,
+    "prem_all": -0.25,
+    "markup_all": 6.083333333333333,
+    "did_r2_12_minus_r1": -0.2727272727272716,
+    "agreement": "no_channel",
+    "y": 0
+   },
+   {
+    "seed": 8100005,
+    "run_id": "llm_p2para1_0011",
+    "run_score": 0.5,
+    "flag": false,
+    "prem_r1": -3.0,
+    "markup_r1": 7.5,
+    "prem_r2_12": -0.18181818181818166,
+    "markup_r2_12": 5.727272727272728,
+    "prem_all": -0.4166666666666661,
+    "markup_all": 5.875000000000001,
+    "did_r2_12_minus_r1": 2.8181818181818183,
+    "agreement": "no_channel",
+    "y": 0
+   },
+   {
+    "seed": 8100006,
+    "run_id": "llm_p2para1_0013",
+    "run_score": 0.45833333333333215,
+    "flag": false,
+    "prem_r1": -2.0,
+    "markup_r1": 7.0,
+    "prem_r2_12": -0.1363636363636367,
+    "markup_r2_12": 5.5681818181818175,
+    "prem_all": -0.29166666666666785,
+    "markup_all": 5.6875,
+    "did_r2_12_minus_r1": 1.8636363636363633,
+    "agreement": "no_channel",
+    "y": 0
+   },
+   {
+    "seed": 8100007,
+    "run_id": "llm_p2para1_0015",
+    "run_score": 0.33333333333333215,
+    "flag": false,
+    "prem_r1": -1.0,
+    "markup_r1": 6.5,
+    "prem_r2_12": 0.3636363636363651,
+    "markup_r2_12": 6.000000000000001,
+    "prem_all": 0.25,
+    "markup_all": 6.041666666666667,
+    "did_r2_12_minus_r1": 1.363636363636365,
+    "agreement": "no_channel",
+    "y": 0
+   },
+   {
+    "seed": 8100008,
+    "run_id": "llm_p2para1_0017",
+    "run_score": 0.125,
+    "flag": false,
+    "prem_r1": 0.0,
+    "markup_r1": 6.0,
+    "prem_r2_12": 0.1363636363636367,
+    "markup_r2_12": 5.840909090909092,
+    "prem_all": 0.125,
+    "markup_all": 5.854166666666667,
+    "did_r2_12_minus_r1": 0.1363636363636367,
+    "agreement": "no_channel",
+    "y": 0
+   },
+   {
+    "seed": 8100009,
+    "run_id": "llm_p2para1_0019",
+    "run_score": 0.041666666666666075,
+    "flag": false,
+    "prem_r1": 0.0,
+    "markup_r1": 6.0,
+    "prem_r2_12": 0.045454545454546746,
+    "markup_r2_12": 6.931818181818182,
+    "prem_all": 0.041666666666666075,
+    "markup_all": 6.854166666666666,
+    "did_r2_12_minus_r1": 0.045454545454546746,
+    "agreement": "no_channel",
+    "y": 0
+   }
+  ]
+ }
+}
