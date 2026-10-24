@@ -72,3 +72,5 @@
 {"run_id": "llm_grid_p2_c14_C_001", "cell": "c14", "channel": 1, "condition": "qwen_ch", "agreement": "channel_arm", "sweep": 1}
 {"run_id": "llm_grid_p2_c15_D_000", "cell": "c15", "channel": 1, "condition": "qwen_ch", "agreement": "channel_arm", "sweep": 0}
 {"run_id": "llm_grid_p2_c15_B_000", "cell": "c15", "channel": 0, "condition": "qwen_noch", "agreement": "none", "sweep": 0}
+{"run_id": "llm_grid_p2_c15_D_001", "cell": "c15", "channel": 1, "condition": "qwen_ch", "agreement": "channel_arm", "sweep": 1}
+{"run_id": "llm_grid_p2_c15_B_001", "cell": "c15", "channel": 0, "condition": "qwen_noch", "agreement": "none", "sweep": 1}

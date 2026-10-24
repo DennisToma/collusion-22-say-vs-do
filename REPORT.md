@@ -1,7 +1,7 @@
 # Say vs. Do: does auditing what AI agents *say* together with what they *do* catch collusion better?
 
 *Apart AI Collusion Sprint, Q2.2 — text + action auditing. v1 (overnight) results are frozen as git tag `v1-overnight`;
-Phase 2 (from 2026-10-24 06:30 UTC) re-tests them. Checkpoint text, 2026-10-24 18:39 UTC: P2.1–P2.15 final except the second P2.15 arm (E115, gpt-6.1-sol newcomer; generating) and the E1 grid audit (E113; 74 snapshot games, cached audits verified; final eval once Q1.4's 6 balanced sweeps are complete). E102 (strong-framing Qwen, 6 seeds) is descriptive. Exports: [README.md](README.md).*
+Phase 2 (from 2026-10-24 06:30 UTC) re-tests them. Checkpoint text, 2026-10-24 18:48 UTC: P2.1–P2.15 final except the second P2.15 arm (E115, gpt-6.1-sol newcomer; generating) and the E1 grid audit (E113; 76 snapshot games, cached audits verified; final eval once Q1.4's 6 balanced sweeps are complete). E102 (strong-framing Qwen, 6 seeds) is descriptive. Exports: [README.md](README.md).*
 
 ## Abstract
 Adding LLM sellers' public messages to their prices gives **no resolved gain** for detecting collusion: combined minus the better
@@ -351,9 +351,9 @@ firm (private: a pair firm) is run by a fresh luna with no plan and no earlier c
 Paired with the original rounds 21–40: market excess over Nash replaced − original +0.20 [−0.08, +0.62] (private), +0.16 [−0.27, +0.57] (none);
 markets ≥ Nash + 2 stay 19/20 and 9/10; a new agreement with its partner is judged (floor ≥ 13) in 16/20 (originals 15/20; it writes
 in all 20, first in 10/20) and executes in 15/20 (14/20); level CUSUM alarms by round 25 in 0/30 (threshold = maximum over the original continuations, so originals cannot alarm; any-round alarms 3/30). All four registered predictions held.
-**Reading:** in this luna arm (20 + 10 games) the high price and even the agreement survive replacing one firm's memory: a fresh seller seeing
-only public prices, the board and its own records re-joins the level, and its partner (who keeps its memory) often re-proposes. Replacing one
-participant is therefore no test for collusion here. Second arm (E115, gpt-6.1-sol newcomer) running.
+**Reading:** in this luna arm (20 + 10 games), the level and agreement survive one firm's memory reset; its partner keeps its memory and often re-proposes.
+E115 (gpt-6.1-sol newcomer) is running; full-cohort provenance checks and a run-once lock precede its frozen S1–S4 evaluation.
+E115 caveat: four run-0014 round-40 raw decisions were reconstructed from saved trajectories/chat; their model and parse status are inferred (`p2_replace_integrity.json`).
 
 ## v1 overnight summary (frozen 2026-10-24 06:30 UTC; superseded by the Abstract above)
 v1 answer, unchanged by Phase 2: on the locked test (n = 95) text alone is ≈ chance (0.47) and combined − best single modality is −0.01

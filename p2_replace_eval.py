@@ -4,20 +4,27 @@ Written and committed before any replaced-round outcome was read. Run ONCE after
     uv run python p2_replace_eval.py                 # -> results/analysis/p2_replace.json
     uv run python p2_replace_eval.py --selftest      # original vs itself, no judge calls (code check only)
 """
-import argparse, json
+import argparse, fcntl, hashlib, json, threading
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 import numpy as np
-from p2_replace import SRC, DS, T0, R, ARM, design, check
+from p2_replace import SRC, DS, T0, R, ARM, NEW_MODEL, design
 from p2_strong import jeffreys
+from p2_replace_guard import check_generation, validate_term, indexed, read, sha, refuse_final, acquire_final, need
 
 PAIRS = [(0, 1), (0, 2), (0, 3), (1, 2), (1, 3), (2, 3)]
 AG = "ABCD"
+TERMS_LOCK = threading.Lock()
+
+
+def final_paths():
+    suffix = '' if ARM == 'luna' else '_sol'
+    return Path(f'results/analysis/p2_replace{suffix}.json'), Path(f'logs/final/REPLACE_{ARM.upper()}_ONCE.lock')
 
 
 def load(ds):
     P, N = {}, {}
-    for r in map(json.loads, open(Path("data") / ds / "trajectories.jsonl")):
+    for r in read(Path("data") / ds / "trajectories.jsonl"):
         P.setdefault(r["run_id"], {})[r["round"] + 1] = {x["id"]: x["price"] for x in r["agents"]}
         N.setdefault(r["run_id"], {})[r["round"] + 1] = r["market"]["cost"] + 5  # Nash, as p2_strong.analyse
     return P, N
@@ -59,14 +66,27 @@ def boot(d, B=2000):
 
 def post_terms(ds, rid, pair, cache_f, judge):
     """Judge (p2_behaviour.extract, unchanged) on the private chat from round T0+1 on only; cached."""
-    have = {(x["ds"], x["run_id"]): x for x in map(json.loads, open(cache_f))} if cache_f.exists() else {}
-    if (ds, rid) in have:
-        return have[(ds, rid)]
-    p = next(x for x in map(json.loads, open(Path("data") / ds / "private.jsonl")) if x["run_id"] == rid)
+    p = next(x for x in read(Path("data") / ds / "private.jsonl") if x["run_id"] == rid)
     p = dict(p, chat=[m for m in p["chat"] if m["round"] >= T0])
-    d = dict(judge(p), ds=ds, n_msgs=len(p["chat"]))
-    with open(cache_f, "a") as f:
+    need(p['pair'] == pair, f'{rid}: terms pair differs')
+    chat_sha = hashlib.sha256(json.dumps(p['chat'], sort_keys=True).encode()).hexdigest()
+    from p2_behaviour import TERMS
+    prompt_sha = hashlib.sha256(TERMS.encode()).hexdigest()
+    with TERMS_LOCK:
+        have = indexed(read(cache_f), lambda x: (x['ds'], x['run_id']), 'post21 terms') if cache_f.exists() else {}
+    if (ds, rid) in have:
+        d = have[ds, rid]
+        validate_term(d, ds, rid)
+        need(d['n_msgs'] == len(p['chat']), f'{rid}: cached message count differs')
+        if 'chat_sha256' in d or ds != SRC:
+            need(d.get('chat_sha256') == chat_sha and d.get('terms_prompt_sha256') == prompt_sha,
+                 f'{rid}: stale terms source/prompt')
+        return d
+    d = dict(judge(p), ds=ds, n_msgs=len(p["chat"]), chat_sha256=chat_sha, terms_prompt_sha256=prompt_sha)
+    # Preserve invalid responses for disclosure; never silently turn them into negative labels.
+    with TERMS_LOCK, open(cache_f, "a") as f:
         f.write(json.dumps(d) + "\n")
+    validate_term(d, ds, rid)
     return d
 
 
@@ -86,10 +106,41 @@ def executed_after(P, N, pair, t):
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--selftest", action="store_true"); a = ap.parse_args()
+    ap = argparse.ArgumentParser(); ap.add_argument("--selftest", action="store_true")
+    ap.add_argument('--check-only', action='store_true', help='read-only generation gate; no metrics or judge calls')
+    a = ap.parse_args()
+    need(not (a.selftest and a.check_only), 'choose selftest or check-only')
+    result, lock = final_paths()
     new_ds = SRC if a.selftest else DS
     if not a.selftest:
-        check()
+        refuse_final(result, lock)
+        receipt = check_generation(DS, NEW_MODEL)
+        print(f"replacement generation complete: {receipt['n_complete']}/30 games; raw, model, prefix and state checks pass")
+        if a.check_only:
+            return
+        # Finish/validate cached price-blind labels BEFORE any outcome computation.
+        from p2_behaviour import extract
+        cache_f = Path('data/llm_p2repl/terms_post21.jsonl')
+        jobs = [(ds, rid, d['pair']) for d in design() if d['cond'] == 'private'
+                for ds, rid in ((SRC, d['src']), (DS, d['rid']))]
+        # One preparer across processes, including the shared E112 original-chat cache.
+        # flock is released on failure; the final evaluation lock is permanent.
+        preparation_path = Path('logs/final/REPLACE_TERMS_PREPARE.flock')
+        preparation_path.parent.mkdir(parents=True, exist_ok=True)
+        with preparation_path.open('a') as preparation:
+            fcntl.flock(preparation, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            refuse_final(result, lock)
+            with ThreadPoolExecutor(2) as ex:
+                terms = list(ex.map(lambda j: post_terms(*j, cache_f, extract), jobs))
+            T = {(t['ds'], t['run_id']): t for t in terms}
+            receipt['terms_cache_sha256'] = sha(cache_f)
+            receipt['legacy_original_terms_without_chat_hash'] = sum('chat_sha256' not in t for t in terms)
+            need(check_generation(DS, NEW_MODEL)['sources_sha256'] == receipt['sources_sha256'], 'inputs changed during terms collection')
+            receipt['code_sha256'] = {str(p): sha(p) for p in
+                                     map(Path, ('p2_replace_eval.py', 'p2_replace_guard.py', 'p2_replace.py',
+                                                'llm_market.py', 'p2_behaviour.py')) if p.exists()}
+            acquire_final(result, lock)
+            (lock / 'input_receipt.json').write_text(json.dumps(receipt, indent=1) + '\n')
     PO, NO = load(SRC); PR, NR = load(new_ds)
     late = range(T0 + 1, R + 1)
     rows = []
@@ -124,13 +175,7 @@ def main():
             A[f"O7b_e50_first_alarm_rounds_{t}"] = sorted(x for x in fb if x is not None)
         out["arms"][c] = A
     if not a.selftest:
-        from p2_behaviour import extract
-        cache_f = Path("data") / "llm_p2repl" / "terms_post21.jsonl"  # keyed by (ds, run_id): E115 reuses E112's original-run judgements
         E = [(d, e) for d, e in zip(design(), rows) if d["cond"] == "private"]
-        jobs = [(ds, rid, d["pair"]) for d, _ in E for ds, rid in ((SRC, d["src"]), (DS, d["rid"]))]
-        with ThreadPoolExecutor(2) as ex:
-            T = list(ex.map(lambda j: post_terms(*j, cache_f, extract), jobs))
-        T = {(t["ds"], t["run_id"]): t for t in T}
         judges = sorted({t.get("judge_model") for t in T.values()})
         per = {}
         for d, _ in E:
@@ -156,9 +201,12 @@ def main():
             "P3_reagree_ge10of20": agreed["repl"] >= 10,
             "P4_level_cusum_le4of30": A["O7a_level_cusum_alarm_by_r25_repl"][0] + Z["O7a_level_cusum_alarm_by_r25_repl"][0] <= 4}
     out["runs"] = [{k: v for k, v in e.items() if "cusum" not in k and "e50" not in k} for e in rows]
-    p = Path("results/analysis/p2_replace_selftest.json" if a.selftest else
-             "results/analysis/p2_replace.json" if ARM == "luna" else "results/analysis/p2_replace_sol.json")
-    p.write_text(json.dumps(out, indent=1))
+    p = Path("results/analysis/p2_replace_selftest.json") if a.selftest else result
+    if not a.selftest:
+        out['input_receipt'] = receipt
+    tmp = p.with_suffix('.tmp')
+    tmp.write_text(json.dumps(out, indent=1))
+    tmp.replace(p)
     print(json.dumps({k: v for k, v in out.items() if k not in ("runs", "post21_terms")}, indent=1)); print("->", p)
 
 

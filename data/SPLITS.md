@@ -198,3 +198,26 @@ scorers, thresholds, metric definitions and published numerical estimates are un
 - Final evaluation ONCE on complete contiguous sweeps (each = 16 cells × two arms). Wait for Q1.4's six-sweep completion announcement, or use complete sweeps at Sun 08:00 UTC. Ignore partial later sweeps. Both arms of every included cell must have current, unique same-model audit records. No exclusion based on score or outcome.
 - `p2_e1_audit.py preflight` checks local snapshot digests, exact rounds/firms, seller model/arm, audit provenance and valid scores without metrics. Final lock: `logs/final/E113_ONCE.lock`; portable refusal: existing `results/analysis/p2_e1_audit.json`. Never remove either to recompute a result.
 - Per-cell/arm board usage is a covariate, not an interim detector result. The 16-cell comparison uses action as luna's single comparator; qwen's three-view comparison is also reported separately as k/8. Secondary execution labels are copied from Q1.4's published final E70 result, with a source digest, or marked unavailable at the primary evaluation cutoff.
+
+## E115 completion safeguards (iteration 34, before final evaluation; no tuning)
+- `P2REPL_ARM=sol uv run python p2_replace_eval.py --check-only` is read-only: exact 30 registered
+  runs / 40 rounds / four firms; seeds, conditions, pairs and replaced firm; same exogenous paths;
+  byte-identical raw prefix and identical prefix trajectories; raw/saved public prices, private chat
+  and plans; model/backend at each decision. It refuses partial generation and computes no outcome.
+- Cache extraction uses the unchanged E112 judge/prompt, post-round-20 private messages only.
+  Invalid/duplicate/fallback terms are errors, never negative labels. New cache rows record chat and
+  prompt hashes; the 20 shared original E112 terms have no historical chat hashes (legacy disclosed).
+  A shared process lock prevents concurrent preparers; labels finish before outcome computation.
+- Final computation takes exclusive `logs/final/REPLACE_SOL_ONCE.lock`, records input/code hashes,
+  and atomically publishes `results/analysis/p2_replace_sol.json`. Either file/lock prevents reruns,
+  including in a clone without local logs. A computation failure retains the lock: inspect and disclose,
+  never delete it merely to obtain another estimate. E112's already-published output is also protected;
+  its bytes and original results are unchanged. No O1–O7 formula, bootstrap or S1–S4 rule changes.
+- Provenance exception: raw rows `39:A`–`39:D` in E115 run 0014 were lost by a manager stash and rebuilt
+  from saved trajectories/private fields (ledger E115-raw-incident); model and parse metadata were inferred.
+  They are retained and enumerated in the receipt; consistency checks cannot independently authenticate
+  these four calls. Incident 2's three raw files were recovered complete from open inodes. No exclusions.
+- If a price-blind judge returns an objectively malformed/fallback row before evaluation begins,
+  archive the original row, log its run ID and exact failure, and retry only the unchanged judge/prompt.
+  Valid negative labels cannot be retried. Seller fallbacks or new raw-data damage require disclosure,
+  not silent repair or attrition. Existing E112/E115 outcomes must never be recomputed to inspect them.
