@@ -1,6 +1,6 @@
 # STATUS
 
-## Current state (2026-10-24 16:12 UTC VM clock, Phase 2 iteration 21)
+## Current state (2026-10-24 16:20 UTC VM clock, Phase 2 iteration 21)
 - Main claim unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc).
 - E99 strongF final: strict-executed 13/20, tacit-high none 19/20; paired private−none −0.44 [−1.84, +1.00].
 - **E111 (new, no LLM, exploratory):** private plans contain NO agreement words (0/39 private-arm runs); a partner-name count separates
@@ -10,7 +10,7 @@
 - E110 German final (P2.14). REPORT 738 lines (was 734; P2.13 + P2.7 pilot compressed).
 
 - **E112 (Part E2 participant replacement) registered + LAUNCHED 16:15** (`p2_replace.sh`, setsid; 30 games = 20 private + 10 none,
-  rounds 1–20 replayed byte-identical from E99 cache, fresh luna takes one firm at r21; ETA ~18:00 at ~10 min per 3-game batch). Eval script
+  rounds 1–20 replayed byte-identical from E99 cache, fresh luna takes one firm at r21; ETA ~22:00–23:00: ~30 min per 3-game batch, codex shared). Eval script
   `p2_replace_eval.py` committed before outcomes (selftest passes; predictions P1–P4 in EXPERIMENTS.tsv).
 
 ## Next steps
