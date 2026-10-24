@@ -136,3 +136,5 @@ scorers, thresholds, metric definitions and published numerical estimates are un
 - `llm_p2rep` (gap 4, seed 9500, plan private:30,none:20,legit:10, llm_v3 settings): fully HELD-OUT second
   replication of the frozen premium statistic. Labels by p2_label.py (same JUDGE as label_llm.py for private
   runs). Premium run AUROC is computed ONCE after all 60 runs are labelled.
+- `llm_p2aware` (aware/aware_all), `llm_p2asym` (highcost/quality), `llm_p2coded` (coded): seed 8100, k = 0..9,
+  matched to llm_p2cue seeds (E86–E88); no tuning; whole set analysed once.
