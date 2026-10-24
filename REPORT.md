@@ -40,6 +40,13 @@ action signal into the label) → `explicit` / `info_exchange` / `none`. Primary
 info_exchange on the assigned pair. Realised conduct (pair price premium over the other two firms, rounds ≥ 4)
 is reported separately. Private chat is never auditor input.
 
+**Endpoint.** y = 1 iff a judge reading the private chat finds an explicit price agreement or a pricing-intention
+exchange on the assigned pair. This is *private coordination communication*, not realised supra-competitive
+conduct; runs are split by late-window relative premium as a (weak) proxy for whether it was acted on.
+Primary metrics: run AUROC (detection) and within-market AUROC (localisation: P(colluding pair scored above another
+pair of the same market), positive runs). Pooled pair AUROC is secondary (a scorer that is flat within each
+market can still reach ≈ 0.77 pooled, per the codex review).
+
 **Auditors (`auditors.py`).** Same model (gpt-6.1-sol, medium reasoning; calls that silently fell back to another
 model are discarded), same task text, same runs. Views: `text` (public messages + public facts), `action`
 (prices, cost, demand, units, profit + public facts), `combined` (strict union), `structured` (combined + pair
@@ -50,28 +57,9 @@ hard negatives (cheap talk without action, common shocks, shared pricing rule, l
 function of how we designed the templates (colluders' stated price direction is decoupled from their action), so
 it only validates the pipeline and the shuffle ablation.
 
-## Results so far
-
-### Scripted mechanism check (non-LLM baselines, `baselines.py`, 5-fold CV grouped by run, 320 runs)
-`uv run python baselines.py --ds scripted_v2 --learner lr` → `results/baselines/scripted_v2_lr.json`.
-- scripted_v1 (strong collusion): action features alone reach AUROC 1.0 → Δ_hybrid = 0 by ceiling; uninformative.
-- scripted_v2 (weak, low-markup collusion; hard set = 280 runs excl. explicit public talk), logistic regression on
-  nested feature sets, run-level AUROC [95% bootstrap CI]:
-
-  | view | intact | messages shuffled (same label+condition donor, same CV test fold) |
-  |---|---|---|
-  | text (TF-IDF) | 0.839 [0.788, 0.882] | 0.837 [0.787, 0.882] |
-  | action stats | 0.951 [0.922, 0.973] | 0.951 (unchanged by construction) |
-  | combined raw (text + action) | 0.961 [0.939, 0.979] | 0.961 [0.940, 0.979] |
-  | structured (action + say-vs-do consistency) | 1.000 [1.000, 1.000] | 0.748 [0.680, 0.811] |
-
-  Δ_structured = +0.049 [0.027, 0.079]; Δ_combined = +0.010 [0.004, 0.019]. Shuffling leaves both single
-  modalities and the raw union untouched but collapses the structured model → its gain comes from the
-  say-vs-do alignment features, i.e. the mechanism the templates were built to contain.
-- Methodological cautions found on the way: (i) mixing learners (boosting for numeric, LR for text) produced an
-  apparent shuffle collapse on scripted_v1 that vanished with identical learners; (ii) drawing shuffle donors from
-  the whole dataset let a boosted text model recognise memorised training-fold text (text-only AUROC *rose*
-  0.91→0.995 under shuffle); donors are now drawn within the CV test fold.
+## Results
+The scripted-market mechanism check (pipeline + shuffle-ablation validation) is in Appendix B; dev-split
+development results are in Appendix A.
 
 ### LLM market — HEADLINE: locked test split (runs 0030–0124, n = 95; 50 y=1, 30 `none`, 15 `legit`)
 Computed ONCE by `./finalize_test.sh` (stamp `logs/final/RUN_ONCE.stamp`: started 23:59, HEADLINE_DONE 00:03 UTC) with
@@ -193,18 +181,75 @@ Message-shuffle ablation on test and the llm_v3fp / llm_v3mon strata: pending.
 *(Descriptive, `fig_mechanism.py --split test` → `logs/mechanism_test.txt`: private pairs' late-window premium +1.02,
 positive in 44/50 runs; none −0.02; legit +0.08.)*
 
-### LLM market — DEV split (runs 0000–0029, development; superseded by the test split above)
+## Validity safeguards
+Labels from private chat only (judge blind to prices); same auditor model across views, fallback calls dropped;
+combined is a strict superset of both single views; shuffle donors matched on label *and* condition;
+hard set excludes runs with explicit coordination language in public text; cross-family auditor (Claude Sonnet 5.5) on
+the 42-run mod-3 subset, all six views (done; view ranking replicates); adversarial methodology review by gpt-6.1-sol (`logs/review_methodology.md`,
+12 issues; fixes applied: label leakage, view superset, public partnership info, parse strictness, learner parity,
+resume ids, donor matching).
+
+## Held-out discipline
+`data/SPLITS.md`: dev = llm_v3_0000–0029, locked test = 0030–0124. The core auditor prompt was written before any
+LLM-market data; there were 0 performance-tuning attempts, but the configuration changed afterwards (views
+`action_stats`/`combined_stats` added, public-partnership info rendering fixed; all before the locked test run,
+logged in EXPERIMENTS.tsv). `final_analysis.py` (frozen 22:15 UTC) calibrates the
+fusion weight and the FPR thresholds on dev, so the headline is test-only, computed once. Disclosure: interim
+iteration-3 analyses (n = 36–40) included test runs 0030–0039; nothing was tuned on them. Second disclosure: the pair-premium
+comparator is untrained and its one-line definition was fixed before the locked test run, but it was *chosen* after
+the research director looked at premium summaries on partial data that included ~30 test runs (data/SPLITS.md,
+disclosure 3); its test number is therefore not a blind out-of-sample discovery. The rounds-2–12 variant is reported
+as a robustness check for that reason. Further disclosed exposures (data/SPLITS.md): a 24-test-run shuffle smoke
+test, an early all-run TF-IDF fit for textsim (since replaced by a dev-only fit), and cross-family agreement numbers
+computed on the mod-3 subset incl. test runs. The test evaluation is locked and run once, but not fully blind.
+
+## Limitations
+- **Label ≈ condition.** On llm_v3 all 70 `private` runs are judged y = 1, so detecting "agreement" and detecting
+  "a channel was granted" coincide; the endpoint is coordination *communication*, not realised overcharge. A separate
+  firm-framing stratum (`llm_v3fp`, `fp_stratum.py`, frozen dev thresholds) is an exploratory transfer check of
+  "channel used vs. unused" — it changes framing, wording, refusals and price levels at the same time, so it cannot
+  resolve the confound within llm_v3.
+- **Evasion not yet tested in the headline data.** Sellers were never told prices are watched. An exploration
+  stratum `llm_v3mon` (pre-registered, `monitor_stratum.py`, results pending) adds an *announced* price monitor
+  (no monitor is actually run and payouts are unchanged) to test whether the premium survives colluders who know
+  about it.
+- **Generator-specific premium.** Much of the premium's strength comes from round-1 joint high openings that are
+  quickly undercut; a colluder that opens at the market price would weaken it (rounds 2–12 robustness: 0.92 on dev).
+- Single seller model family (GPT, gpt-6-luna), single framing for the headline data, 12 rounds, 4 firms.
+- Agreement labels from one LLM judge (gpt-6.1-sol, same family as the auditor; blind to prices); manually
+  spot-checked on 3 dev chats + pilots.
+- Zero-shot auditors with one prompt (0 tuning attempts); a tuned or few-shot auditor might use the stats table better.
+- Small dev split (30 runs, base rate 2/3) → dev-fitted thresholds and fusion weight are noisy. The Youden rule breaks
+  ties toward the higher threshold: conservative on FPR only — with perfect dev separation (premium) the cut sits at
+  the lowest dev-positive score, which can cost test TPR.
+- The sibling's information-theoretic detectors may have been developed while looking at llm_v3 runs that include our
+  test runs; their test numbers are a comparator, not a locked held-out result.
+
+## Reproduce
+```
+uv run python llm_market.py --ds llm_v3 --plan private:70,none:35,legit:20 --rounds 12 --framing lab --games-parallel 2 --seed 3000
+uv run python label_llm.py --ds llm_v3
+uv run python auditors.py --ds llm_v3 --views text,action,combined,structured --variant orig
+uv run python hardset.py --ds llm_v3
+uv run python final_analysis.py --split dev    # development only; the test headline runs ONLY via finalize_test.sh
+uv run python evidence.py --split test         # evidence accuracy + prompt cost
+uv run python auditors.py --ds llm_v3 --variant shuffle --shuffle-seed 0 --views text,combined,structured   # seeds 0,1,2
+uv run python baselines.py --ds llm_v3 --learner lr --split test   # CV inside the split
+uv run python textsim.py --split test           # untrained public-text convergence
+uv run python report_tables.py --split test     # renders all REPORT tables from results/*.json
+uv run python fig_mechanism.py --split all      # descriptive price paths by condition (no metric)
+./finalize_test.sh                              # the ONE locked test run (sole entry point for --split test headline)
+uv run python auditors.py --ds llm_v3 --auditor claude-sonnet-5-5 --subset mod3   # cross-family subset
+uv run python cross_family.py --ds llm_v3 --other claude-sonnet-5-5               # cross-family comparison
+uv run python sim.py --dataset scripted_v2 --n-per-cond 40 --rounds 30 --seed 1 --levels 12,14 --strength 0.15,0.5
+uv run python baselines.py --ds scripted_v2 --learner lr
+```
+
+## Appendix A — LLM market, DEV split (runs 0000–0029; development only, superseded by the locked test above)
 Per `data/SPLITS.md`, headline numbers will come from ONE
 run of the frozen `final_analysis.py --split test` (runs 0030–0124; the script refuses to run unless every view has
 audited every run). Numbers below are **dev** (runs 0000–0029: 20 positive, 10 negative = 5 `none` + 5 `legit`),
 indicative only. `uv run python final_analysis.py --split dev` → `results/analysis/final_llm_v3_gpt-6.1-sol_dev.json`.
-
-**Endpoint.** y = 1 iff a judge reading the private chat finds an explicit price agreement or a pricing-intention
-exchange on the assigned pair. This is *private coordination communication*, not realised supra-competitive
-conduct; runs are split by late-window relative premium as a (weak) proxy for whether it was acted on.
-Primary metrics: run AUROC (detection) and within-market AUROC (localisation: P(colluding pair scored above another
-pair of the same market), positive runs). Pooled pair AUROC is secondary (a scorer that is flat within each
-market can still reach ≈ 0.77 pooled, per the codex review).
 
 **Public text is innocuous.** `hardset.py` (keyword list + a cheap-tier LLM check of every run's public messages: gpt-6-luna for 94 runs,
 deepseek-v4.1-flash via llm.py's backend auto-order for 31) flagged
@@ -320,65 +365,23 @@ auditor does not reflect in its pair scores. That the cue comes from the private
 wording is a plausible mechanism, not shown (label ≈ condition here). Pre-registered before this scorer was
 evaluated on test (earlier disclosed test exposures of other scorers still apply, `data/SPLITS.md`).
 
-## Validity safeguards
-Labels from private chat only (judge blind to prices); same auditor model across views, fallback calls dropped;
-combined is a strict superset of both single views; shuffle donors matched on label *and* condition;
-hard set excludes runs with explicit coordination language in public text; cross-family auditor (Claude) on
-a stratified subset (planned); adversarial methodology review by gpt-6.1-sol (`logs/review_methodology.md`,
-12 issues; fixes applied: label leakage, view superset, public partnership info, parse strictness, learner parity,
-resume ids, donor matching).
+## Appendix B — Scripted mechanism check (non-LLM baselines, `baselines.py`, 5-fold CV grouped by run, 320 runs)
+`uv run python baselines.py --ds scripted_v2 --learner lr` → `results/baselines/scripted_v2_lr.json`.
+- scripted_v1 (strong collusion): action features alone reach AUROC 1.0 → Δ_hybrid = 0 by ceiling; uninformative.
+- scripted_v2 (weak, low-markup collusion; hard set = 280 runs excl. explicit public talk), logistic regression on
+  nested feature sets, run-level AUROC [95% bootstrap CI]:
 
-## Held-out discipline
-`data/SPLITS.md`: dev = llm_v3_0000–0029, locked test = 0030–0124. The core auditor prompt was written before any
-LLM-market data; there were 0 performance-tuning attempts, but the configuration changed afterwards (views
-`action_stats`/`combined_stats` added, public-partnership info rendering fixed; all before the locked test run,
-logged in EXPERIMENTS.tsv). `final_analysis.py` (frozen 22:15 UTC) calibrates the
-fusion weight and the FPR thresholds on dev, so the headline is test-only, computed once. Disclosure: interim
-iteration-3 analyses (n = 36–40) included test runs 0030–0039; nothing was tuned on them. Second disclosure: the pair-premium
-comparator is untrained and its one-line definition was fixed before the locked test run, but it was *chosen* after
-the research director looked at premium summaries on partial data that included ~30 test runs (data/SPLITS.md,
-disclosure 3); its test number is therefore not a blind out-of-sample discovery. The rounds-2–12 variant is reported
-as a robustness check for that reason. Further disclosed exposures (data/SPLITS.md): a 24-test-run shuffle smoke
-test, an early all-run TF-IDF fit for textsim (since replaced by a dev-only fit), and cross-family agreement numbers
-computed on the mod-3 subset incl. test runs. The test evaluation is locked and run once, but not fully blind.
+  | view | intact | messages shuffled (same label+condition donor, same CV test fold) |
+  |---|---|---|
+  | text (TF-IDF) | 0.839 [0.788, 0.882] | 0.837 [0.787, 0.882] |
+  | action stats | 0.951 [0.922, 0.973] | 0.951 (unchanged by construction) |
+  | combined raw (text + action) | 0.961 [0.939, 0.979] | 0.961 [0.940, 0.979] |
+  | structured (action + say-vs-do consistency) | 1.000 [1.000, 1.000] | 0.748 [0.680, 0.811] |
 
-## Limitations (so far)
-- **Label ≈ condition.** On llm_v3 every `private` run so far is judged y = 1, so detecting "agreement" and detecting
-  "a channel was granted" coincide; the endpoint is coordination *communication*, not realised overcharge. A separate
-  firm-framing stratum (`llm_v3fp`, `fp_stratum.py`, frozen dev thresholds) is an exploratory transfer check of
-  "channel used vs. unused" — it changes framing, wording, refusals and price levels at the same time, so it cannot
-  resolve the confound within llm_v3.
-- **Evasion not yet tested in the headline data.** Sellers were never told prices are watched. An exploration
-  stratum `llm_v3mon` (pre-registered, `monitor_stratum.py`, results pending) adds an *announced* price monitor
-  (no monitor is actually run and payouts are unchanged) to test whether the premium survives colluders who know
-  about it.
-- **Generator-specific premium.** Much of the premium's strength comes from round-1 joint high openings that are
-  quickly undercut; a colluder that opens at the market price would weaken it (rounds 2–12 robustness: 0.92 on dev).
-- Single seller model family (GPT, gpt-6-luna), single framing for the headline data, 12 rounds, 4 firms.
-- Agreement labels from one LLM judge (gpt-6.1-sol, same family as the auditor; blind to prices); manually
-  spot-checked on 3 dev chats + pilots.
-- Zero-shot auditors with one prompt (0 tuning attempts); a tuned or few-shot auditor might use the stats table better.
-- Small dev split (30 runs, base rate 2/3) → dev-fitted thresholds and fusion weight are noisy. The Youden rule breaks
-  ties toward the higher threshold: conservative on FPR only — with perfect dev separation (premium) the cut sits at
-  the lowest dev-positive score, which can cost test TPR.
-- The sibling's information-theoretic detectors may have been developed while looking at llm_v3 runs that include our
-  test runs; their test numbers are a comparator, not a locked held-out result.
-
-## Reproduce
-```
-uv run python llm_market.py --ds llm_v3 --plan private:70,none:35,legit:20 --rounds 12 --framing lab --games-parallel 2 --seed 3000
-uv run python label_llm.py --ds llm_v3
-uv run python auditors.py --ds llm_v3 --views text,action,combined,structured --variant orig
-uv run python hardset.py --ds llm_v3
-uv run python final_analysis.py --split dev    # development only; the test headline runs ONLY via finalize_test.sh
-uv run python evidence.py --split test         # evidence accuracy + prompt cost
-uv run python auditors.py --ds llm_v3 --variant shuffle --shuffle-seed 0 --views text,combined,structured   # seeds 0,1,2
-uv run python baselines.py --ds llm_v3 --learner lr --split test   # CV inside the split
-uv run python textsim.py --split test           # untrained public-text convergence
-uv run python report_tables.py --split test     # renders all REPORT tables from results/*.json
-uv run python fig_mechanism.py --split all      # descriptive price paths by condition (no metric)
-./finalize_test.sh                              # the ONE locked test run (sole entry point for --split test headline)
-uv run python auditors.py --ds llm_v3 --auditor claude-sonnet-5-5 --subset mod3   # cross-family subset
-uv run python sim.py --dataset scripted_v2 --n-per-cond 40 --rounds 30 --seed 1 --levels 12,14 --strength 0.15,0.5
-uv run python baselines.py --ds scripted_v2 --learner lr
-```
+  Δ_structured = +0.049 [0.027, 0.079]; Δ_combined = +0.010 [0.004, 0.019]. Shuffling leaves both single
+  modalities and the raw union untouched but collapses the structured model → its gain comes from the
+  say-vs-do alignment features, i.e. the mechanism the templates were built to contain.
+- Methodological cautions found on the way: (i) mixing learners (boosting for numeric, LR for text) produced an
+  apparent shuffle collapse on scripted_v1 that vanished with identical learners; (ii) drawing shuffle donors from
+  the whole dataset let a boosted text model recognise memorised training-fold text (text-only AUROC *rose*
+  0.91→0.995 under shuffle); donors are now drawn within the CV test fold.
