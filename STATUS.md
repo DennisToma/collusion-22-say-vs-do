@@ -21,7 +21,7 @@
 5. Adversarial codex + Opus review of Phase 2 section before Sat 20:00.
 
 ## Log
-- 06:58 P2 iter1: Opus design review (E85) applied: registration amendment, script fixes, REPORT wording.
+- 06:53 P2 iter1: Opus design review (E85) applied: registration amendment, script fixes, REPORT wording.
 - 06:43 P2 iter1: generator conds + matched seeds; E77-E83 registered; E81/E82/E83 done; generation launched (codex + Go).
 - 06:20 iter 30: TL;DR block in REPORT (E75); handoff exports + manifest rebuilt; all verifiers/tests PASS. No new experiments from here.
 - 06:10 iter 29: E74 cross-family label re-judge (label_xfam.py, 115 Sonnet calls), REPORT, exports, manifest; codex review logs/review_iter29_xfam_label.md.
