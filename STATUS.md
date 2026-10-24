@@ -1,16 +1,19 @@
 # STATUS
 
-## Current state (2026-10-24 22:10 UTC, Phase 2 iteration 52) — following DIRECTION 20:00
+## Current state (2026-10-24 22:07 UTC, Phase 2 iteration 53) — following DIRECTION 22:05
 - Headline unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc).
-- Directives 2, 3, 5 done (E124, stale waiter killed, E125); 4 pre-staged (merge block E126, E113 line PENDING); D2 cited (E130).
-- E113 pending: snapshot 182 games (sibling 9cee046); audits cached and current, coverage complete for all 16 cells, 0 unparsed (+6 calls this iter). Luna 6/6, qwen 5/6 sweeps; qwen sixth sweep done c00–c10, c11 started 22:02, c12–c15 left (≈20 min/cell → ETA ≈ 23:45). Preflight correctly refuses (5/6). No metrics computed/inspected; no result/lock file.
-- Iter52 (22:05): re-ran snapshot/audit/coverage/preflight: still 182 games, 0 new audit calls, preflight refuses 5/6. Q1.4 STATUS (21:55) not yet "6 sweeps complete"; c11 running since 22:02.
-- Verification state unchanged from iter50: claims 32/32; offline reproduction 26/26; 14/14 E113 synthetic tests.
-- **Next (iter52+):** once Q1.4 STATUS says "6 sweeps complete" → snapshot → audit → coverage → preflight → eval ONCE → p2_e1_report.py → P2.16/glance/abstract/merge block + ONE final-snapshot ledger row → claims + verify_phase2. Joint pCMI sentence only if Q1.4 reports qwen replication.
-- Then ONE abstract pass ≤260 words by Sun 07:30; reviews Sun 12:30; freeze 14:00; exports 16:30. Never stash/checkout live generators.
-- Risk: E113 lands ~00:00–00:30, at the director's target; if qwen/aqueduct slows, Sun 08:00 fallback uses complete sweeps.
+- E113 pending: Q1.4 STATUS has not announced six completed sweeps. Existing snapshot 182 games; no new snapshot/audit/coverage/preflight or metric inspection this iteration; final result/lock remain absent.
+- **Pre-eval interpretation commitment (iter53, before E113 metrics):** headline = Qwen 8-cell stratified pooled Δ combined−action and combined−text with CIs, then Qwen positive/tie/negative counts, then registered 16-cell P1; call P1 weak confirmation only if held (max-selection bias and ties disclosed).
+- If Qwen combined−action CI is wholly above zero, scope the abstract opening to the base market + two replications and report the positive grid gain in the same pass. If Qwen text AUROC CI is wholly below 0.5, connect its inversion to public invitations in both arms and P2.0; do not label a new grid as independent replication.
+- Silent Luna cells estimate re-prompt noise only; list posting cells separately. Joint pCMI sentence only if Q1.4 explicitly reports Qwen-cell replication as replicated; TE confirmation alone does not change our claim.
+- On Q1.4 completion announcement: final snapshot → audit → coverage → preflight → eval ONCE → p2_e1_report.py → P2.16 (≤10 lines), glance, abstract, merge block + ONE final-snapshot ledger row; land by Sun00:30 (Sun08:00 fallback per registration).
+- Same landing pass: replace universal “text helps only where” thesis with bounded market findings + text inversion (0.15–0.36 in P2.0 public-inviting rows); SALT is one external text-predicts-execution setting, with different labels and no action view. Abstract ≤260 words; REPORT ≤~707 lines; claims + verify_phase2 once after edits.
+- Verification carried forward (not rerun): claims32/32, offline reproduction26/26, E113 synthetic14/14. E129 definitions table authoritative; strict/floor/O5/Q1.4 execution counts remain distinct. D2 citation E130 final.
+- Reviews now Sun02:00–05:00 (Opus + codex), fix P0/P1 by07:30; top freeze07:30, dated merge changes after08:00, numbers freeze14:00, exports16:30. Never stash/checkout live generators.
+- Serendipity HITS read: no promoted hit; no confirmation warranted. Between landings end cheaply, STATUS only; no new tooling, snapshots, audit re-caching, tests, or generator monitoring.
 
 ## Log
+- 22:07 P2 iter53: adopted DIRECTION22:05; Q1.4 completion trigger absent; pre-committed E113 interpretation branches above before metrics; HITS has no promoted result. Ended early under directive5: STATUS only, no new calls/metrics/checks or REPORT edits; review window updated to Sun02:00–05:00.
 - 22:10 P2 iter52: no new games since iter51 (182, 0 audit calls, preflight 5/6, no metrics read). Ended early per director stop rule. Note: iter51's 22:20 stamp was ahead of the clock (actual ≤ 22:05).
 - 22:20 P2 iter51: E113 snapshot 182 games + cached audits (+6 calls), coverage complete, preflight refuses 5/6 (no metrics read); REPORT header snapshot count updated. Ended early per director stop rule (no wording work while E113 gated).
 - 21:12 P2 iter47: E127 corrects staged E113 formatter (both-arm posts, silent-only no-text noise); 13/13 synthetic tests; snapshot165 +3 cached audits, all coverage/current-prompt checks pass; preflight refuses4/6, no metrics read. REPORT header + final luna board covariate refreshed; abstract/TL;DR unchanged. Offline reproduction 26/26 commands, 33/33 outputs exact, originals unchanged; receipt freshness PASS.
