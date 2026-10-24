@@ -1,22 +1,24 @@
 # STATUS
 
-## Current state (2026-10-24 15:14 UTC VM clock, Phase 2 iteration 19)
+## Current state (2026-10-24 15:40 UTC VM clock, Phase 2 iteration 20)
 - Main claim unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc).
-- iter19: C3c (E109, Qwen3.5-9B base vs abliterated, identical Modal L4 FP8) registered + piloted: 0/192 parse failures each, but base median price 9.0 < Nash 11 → registered pilot rule FAILS → stage 2 dropped (Modal ~$1.5). REPORT P2.11 + glance row note it.
-- Fix: llm_market.py caps max_tokens 2500 for qwen9 models (endpoint max_model_len 8192 → HTTP 400 at 6000); only qwen9 affected.
-- E99 strongF 36/40 at 15:12; generator + p2_strongF_post.sh (pid 3033342) alive. No full-arm class/detector outcome inspected yet.
-- E100/E105 final; E102 qwen strong (aS 6/12, bS 11/12) descriptive until Sun 10:00 cutoff. E108 serendipity final (iter18).
-- Abstract 242 words; REPORT ~690 lines. Exports/manifest deferred to Sun 16:30.
-- Sibling Q1.4 has not started the E1 grid (nothing for us to audit yet).
+- **E99 strongF FINAL (15:34):** strict-executed 13/20 [.43,.83], tacit-high none 19/20 [.79,.99]; paired excess private−none −0.44 [−1.84,+1.00].
+  Executed vs tacit-high (E99-x, exploratory): premium .47, market excess .50, action .57, text .25, combined .18 (inverted), plan .76 [.55,.93].
+  Public board = channel without a private one (hold-price msgs .43 none vs .28 private; p2_strongF_public.py). E99 P3 + E103 P1 FAILED; rest held / n.e.
+  REPORT P2.7 replaced, abstract (~255 words), TL;DR 5, glance row, figure fixed. Class file published 15:31 (Q1.4 E66 unblocked).
+- Proposed 2nd joint sentence differs from DIRECTION draft: our executed agreements are NOT rare under strong framing (13/20) → Q1.4 to align.
+- E110 (Part E5 German market, registered 15:13): `p2_de.sh` running (gen ~10/20 at 15:37, then labels + text/action/combined audits);
+  analyse with `uv run python p2_de.py` → results/analysis/p2_de.json, then ≤ 8-line REPORT subsection (P2.14) + glance row.
+- Codex review of new P2.7/abstract running → reviews/p2_iter20_strongF_codex.md (apply next iteration if not done).
+- E102 qwen strong descriptive until Sun 10:00. Abstract ≤ 250 target slightly exceeded.
 
 ## Next steps
-1. E99 remains priority: watch logs/partc_chain.log for "strongF classes ready" (releases Q1.4 E66) and "strongF post done". No new waiter scripts.
-2. On post done: p2_strongF_report.py --ds llm_p2strongF; REPLACE P2.7 interim with class rates + exploratory E99-x + registered contrasts; p2_strongF_fig.py; update abstract/glance/merger X/Y, cite Q1.4 E66 when ready.
-3. Class rules do not force price AUROC=0.5; text/plan separation alone is not incremental gain. Keep circularity caveat and n<3 descriptive rule. E66 adapter mirrors our LOWER-BOUND rule; original q14 pilot uses ±1.
-4. C3c DONE (dropped, E109). After E99 post finishes (codex free): Part E queue for Q2.2 = E5 German (10+10 luna, cheapest) > E2 replacement mid-game > E3 mixed-family pair; register each before running; results by Sun 13:00. E1 grid: audit only once Q1.4 generates it.
-5. Checkpoint Sat19:30; E102 stop/report at Sun10:00; finalize-only Sun16:30. Read ../collusion-serendipity/HITS.md every iteration; decide explicitly whether any relevant hit warrants registered confirmation.
+1. Apply codex review (reviews/p2_iter20_strongF_codex.md). 2. E110: when logs/p2de.log shows "p2de audited", run p2_de.py, write P2.14 once.
+3. Part E queue after E110: E2 replacement mid-game (owner Q2.2) > E3 mixed-family pair; register before running; results by Sun 13:00.
+4. Checkpoint Sat 19:30: one Opus review of abstract+glance; E102 stop Sun 10:00; finalize-only Sun 16:30. Read serendipity HITS.md each iteration (15:11: no promoted hits).
 
 ## Log
+- 15:40 P2 iter20: E99 strongF final → P2.7/abstract/TL;DR/glance; p2_strongF_public.py; E110 German market registered + launched (llm_market --lang de, p2_de.py).
 - 15:14 P2 iter19: C3c E109 registered, pilot run, dropped by registered price rule (base 9B prices below Nash); qwen9 max_tokens fix; REPORT P2.11 line.
 - 14:16 P2 iter16: p2_strongF_fig.py (Part C class-path figure, pilot smoke test); no new experiments, waiting on E99 gen 24/40.
 - 14:35 P2 iter15: REPORT consolidation (v1 summary + v1 limitations -> appendix; Phase-2 Limitations/What-next), 770 -> 692 lines.
