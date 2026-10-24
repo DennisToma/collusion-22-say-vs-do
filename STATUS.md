@@ -2,23 +2,26 @@
 
 # STATUS
 
-## Current state (2026-10-24 09:45 UTC, Phase 2 iteration 4)
-- RUNNING (bg): p2_chain.sh para2 (15/20) -> p2rep (60, ETA ~13:00); llm_p2sol (~14/21); llm_p2ds (~15/30);
-  NEW llm_p2logbook (E92, 2/15 at 10:00, ETA ~13:00; p2_chain5.sh auto-runs p2_logbook.py once -> logs/p2/logbook_analysis.log); chain3 (E89 views after sol / p2rep); chain4.
-- NEW E92 (registered 09:25, before data): logbook arm = notes structure with invented-weather content (price-irrelevant),
-  matched seeds to llm_p2cue. Decision rule in EXPERIMENTS.tsv; analysis `uv run python p2_logbook.py` written before data.
-  Separates "extra private writing field for the pair" (structural artifact) from "private space to think about pricing".
-- REPORT: interim 5-line "Phase 2 takeaways" block added at top of Phase 2 section (update at 19:30 checkpoint).
-- DONE P2.1-P2.6 (see REPORT). P2.6 ~30 lines: trim when sol/ds rows land.
+## Current state (2026-10-24 09:45 UTC, Phase 2 iteration 5)
+- RUNNING (bg): p2_chain.sh para2 (18/20) -> p2rep (60); llm_p2sol (14/21); llm_p2ds (16/30); llm_p2logbook (E92, 2/15);
+  chain3 (E89 views), chain4 (family label+analysis on generator exit), chain5 (E92 analysis once).
+- NEW E93 interim families (p2_interim.py -> results/analysis/interim/, complete matched seeds only; descriptive):
+  deepseek colludes in BOTH arms (8/8 chats propose joint pricing; public invitations 382/384 msgs in private AND none;
+  none markets 17.3 vs luna 11.9), premium +1.38 [.27,2.55] but luna threshold flags 4/8 controls (AUROC .69).
+  gpt-6.1-sol abstains: channel used every round, 0/96 joint-pricing msgs, premium -0.14, 0 public invitations.
+  -> REPORT P2.6 table rows + paragraph, TL;DR 8, takeaway line. Opus review of E93 running (apply next iteration if not done).
+- DONE P2.1-P2.6 (see REPORT).
 
 ## Next steps
-1. When logbook has 15 runs: `uv run python p2_logbook.py` ONCE -> E92 result row, P2.5 paragraph (replace "missing control" sentence), TL;DR 7.
-2. When sol / ds finish: p2_family.py --ds llm_p2sol llm_p2ds; auditors + p2_family_views (E91 ext.) -> P2.6 table; trim to <= 20 lines.
+1. Apply Opus E93 review. When logbook has 15 runs: `uv run python p2_logbook.py` ONCE -> E92 row, P2.5, TL;DR 7.
+2. When sol / ds finish (chain4): replace interim rows with final p2_cue/p2_family numbers; run frozen auditor views on
+   llm_p2ds + llm_p2sol (register as E91 extension first; prediction: text views flag ~all ds markets incl. none, ~none of sol).
 3. para2 -> E78 band line in P2.5. p2rep -> replication.py --ds llm_p2rep ONCE after chain3 views; p2_behaviour on p2rep.
-4. codex adversarial review of P2 claims when codex load drops; checkpoint takeaways refresh by 19:30.
-- Risk: codex oversubscribed (para2 + sol + logbook + sibling's 5 workers); p2rep may slip past 14:00.
+4. codex adversarial review of P2 claims when codex load drops; checkpoint takeaways + exports by 19:30.
+- Risk: codex oversubscribed; p2rep may slip past 14:00. deepseek none arm is not a clean negative (label issue, like Claude).
 
 ## Log
+- 09:45 P2 iter5: E93 interim family snapshot (p2_interim.py); REPORT P2.6/TL;DR 8/takeaways; Opus review launched.
 - 09:58 P2 iter4: codex pre-outcome review of E92 applied as amendment (direction-aware/strict verdicts, completeness asserts).
 - 09:40 P2 iter4: E92 logbook control registered + launched; p2_logbook.py; Phase 2 takeaways block in REPORT.
 - 09:15 P2 iter3: E78 paraphrase 1 interim (+1.79 vs +1.75 orig, same seeds) in P2.5.

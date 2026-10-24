@@ -43,10 +43,10 @@ test and replication evidence item beside the public log (offline, searchable; n
    private channel raises it by +1.61 [+0.92, +2.35]; the difference is not resolved (+0.56 [−0.29, +1.48]), and so is the effect of delivery
    (private − placebo +0.38 [−0.41, +1.18]). The frozen premium flags 10/15 notepad runs (AUROC 0.89). The registered
    "offer alone is not the driver" prediction failed. The notepad arm has confounds (pair-only extra text, memory).
-8. *Detectors did not transfer to Claude sellers in a 5-seed pilot (P2.6):* Claude Sonnet 5.5 sellers price at or above the
+8. *Luna-calibrated detectors did not transfer to other seller families (P2.6; Claude 5-seed pilot, deepseek/sol interim):* Claude Sonnet 5.5 sellers price at or above the
    joint-monopoly level (≈ 19; Nash ≈ 11) from round 1 even with **no channel** (market mean 20.2, 5/5). This is above the profit-maximising
    price, so we read it mainly as a high-price disposition rather than learned collusion. With the channel, pairs state 20–24 and stay there (matched no-channel pairs do not, in 4/5 seeds).
-   The pair premium is small (+0.58 [+0.23, +1.03]), the frozen premium flags 2/5, and the luna-trained text classifier scores 0.64. Both AUROC CIs include chance. Claude's no-channel firms also invite each other *publicly* not to undercut, so every frozen LLM view that reads messages flags all 10 markets (E91): whether that counts as collusion is a labelling choice. gpt-6.1-sol and deepseek runs are pending.
+   The pair premium is small (+0.58 [+0.23, +1.03]), the frozen premium flags 2/5, and the luna-trained text classifier scores 0.64. Both AUROC CIs include chance. Claude's no-channel firms also invite each other *publicly* not to undercut, so every frozen LLM view that reads messages flags all 10 markets (E91): whether that counts as collusion is a labelling choice. *Interim (E93):* deepseek sellers propose joint pricing in 8/8 private chats and invite rivals publicly in ~99% of messages in *both* arms (no-channel markets at 17.3), so the luna threshold false-flags 4/8 controls (AUROC 0.69). gpt-6.1-sol sellers talk every round but never propose joint pricing, and show no premium (−0.14).
 
 ## Phase 2 results (in progress, from 2026-10-24 06:30 UTC; v1 above frozen as git tag `v1-overnight`)
 
@@ -58,7 +58,7 @@ Phase 2 closes known validity gaps. Every experiment is registered in `EXPERIMEN
 - *Reimplementation (P2.2):* an independent codex reimplementation from the method text matches 31/32 headline numbers (`results/reimpl/`).
 - *Behaviour labels (P2.4):* only 14/50 test "colluders" keep the agreed price; premium AUROC on that label 0.80 [0.67, 0.90]; text + actions vs best single modality −0.03 [−0.14, +0.06] (`p2_behaviour.json`).
 - *Prompt artifact (P2.5):* a private notepad with no recipient raises the pair premium by +1.04 [+0.65, +1.42] (private channel +1.61 [+0.92, +2.35]); the supervised text classifier scores notepad runs 0.86 (`p2_cue_verdict_llm_p2cue.json`, `p2_textlr.json`). Paraphrase 1 of the prompt: +1.79 [+1.20, +2.43].
-- *Other sellers (P2.6):* Claude Sonnet sellers price ≥ monopoly with no channel; premium flags 2/5, text views flag 10/10 incl. no-channel markets (`p2_family*.json`). sol / deepseek pending.
+- *Other sellers (P2.6):* Claude Sonnet sellers price ≥ monopoly with no channel; premium flags 2/5, text views flag 10/10 incl. no-channel markets (`p2_family*.json`). Interim (E93, `results/analysis/interim/`): deepseek colludes in both arms (public invitations 382/384, premium +1.38, but flags 4/8 controls); sol never proposes joint pricing (premium −0.14).
 
 **P2.1 Precision at realistic prevalence (E81; post-hoc re-expression of saved scores, nothing refit).** The test split
 has 53% positives, which flatters precision. At the frozen dev thresholds, precision(π) = TPR·π / (TPR·π + FPR·(1−π)),
@@ -200,6 +200,22 @@ cross-family) and deepseek-v4.1-flash (Go) are still running.** At the costs use
 | gpt-6-luna (llm_p2cue, 15) | 11.94 [11.56, 12.31] | 13.96 [13.39, 14.54] | +1.61 [+0.92, +2.35] | 14/15 / 2/15 | 0.91 [0.79, 1.00] |
 | gpt-6-luna, same 5 seeds as Claude | — | — | — | 4/5 / 2/5 | — |
 | Claude Sonnet 5.5 (llm_p2claude, 5) | 20.19 [19.66, 20.63] | 21.64 [20.72, 22.57] | +0.58 [+0.23, +1.03] | 2/5 / 0/5 | 0.70 [0.32, 1.00] |
+| deepseek-v4.1-flash (llm_p2ds, **interim** 8 of 15) | 17.30 [16.41, 18.09] | 20.11 [19.37, 20.78] | +1.38 [+0.27, +2.55] | 5/8 / 4/8 | 0.69 [0.38, 0.94] |
+| gpt-6.1-sol (llm_p2sol, **interim** 4 of 7) | 15.25 [14.52, 15.98] | 15.50 [14.69, 16.31] | −0.14 [−0.58, +0.19] | 2/4 / 1/4 (placebo 2/4) | 0.63 [0.19, 1.00] |
+
+**Interim: deepseek and gpt-6.1-sol (E93, post-hoc, descriptive, no decisions; `uv run python p2_interim.py --ds llm_p2ds
+llm_p2sol` → `results/analysis/interim/`; complete matched seeds only, final numbers replace these when generation ends).**
+The two families fail the luna detectors for opposite reasons. *deepseek colludes everywhere.* Every private chat (8/8)
+proposes joint pricing ("let's cooperate: both price at 22 … I'll avoid undercutting if you do"). And 382/384 *public*
+messages in **both** arms invite all rivals to avoid a price war (luna: 7/720 in `none`; Claude: 239/240). No-channel
+markets already price at 17.3, near the joint-monopoly 19. The channel still adds a pair premium (+1.38) and the
+market price rises (+2.8). But the luna-calibrated premium threshold flags 4/8 no-channel markets, because deepseek
+prices are more dispersed, so run AUROC is only 0.69. *gpt-6.1-sol does not collude.* sol pairs use the channel every round (96/96
+messages) but never propose joint pricing (0/96 by regex; any 1–2 digit number in 4/96; typical: "I will assess demand and customer
+response this round"). Public invitations: 0/576. There is no pair premium (−0.14), so a channel run is not a
+positive for this family. Regex screens are descriptive; the sol judge labels come with the final run. **Reading:**
+whether there is collusion to detect, and whether a no-channel market is a clean negative, depend on the seller model.
+For 2 of 4 families, every message-reading auditor sees open public coordination in the control arm.
 
 **Reading (n = 5 pairs, descriptive).** Claude sellers price at or above the joint-monopoly level from round 1, even
 with no channel: round-1 no-channel prices are 18–22, set before any rival price has been seen, and the market mean over rounds 2–12 is 20.2
