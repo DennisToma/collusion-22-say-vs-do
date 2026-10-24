@@ -23,6 +23,8 @@ table. Results on the locked test split (n = 95, run once):
   text detection.
 - **Caveats.** The label coincides with the experimental condition (all private runs are colluding; no-channel runs
   are negative by construction), so we detect *channel granted and used*, not realised overcharge or tacit collusion.
+  Round-1 prices, set before any private message is read, already give the premium test run AUROC 0.90: much of its
+  signal is sellers reacting to being *offered* a channel, not to an agreement (post-lock, descriptive).
   One seller model, one framing, sellers never try to evade. On 16 runs from a different framing in which the judge found
   no agreement, the frozen thresholds flag 44% (premium) and 25–63% (stats-table views) of runs: the strong
   detectors do not transfer as-is.
@@ -279,6 +281,26 @@ auditors show no evidence of cross-modal reasoning on LLM data, matching the nul
 share label + condition and the pair mapping, the shuffled text still carries condition- and role-level style
 (e.g. colluders' missing competitive wording), so the ablation only removes run-specific message–price consistency.
 
+**When does the premium appear? Round 1 is set before any partner message is seen (post-lock, descriptive; `uv run
+python round1_effect.py --ds llm_v3` → `results/analysis/round1_effect_llm_v3.json`; `uv run python early_detection.py
+--ds llm_v3 && uv run python fig_early.py` → `results/analysis/early_detection_llm_v3.json`).** In `llm_market.py` a
+seller writes its round-1 price and its first private message in the same call, while its private history is still
+empty, so round-1 prices cannot reflect any agreement. Yet in round 1 the channel holders already price at 17.5
+[17.2, 17.7] vs 12.9 [12.6, 13.2] for their rivals (pair premium +4.56 [+4.19, +4.90], > 0 in 69/70 private runs;
+`none` +0.17 [−0.54, +0.81], `legit` −0.45 [−1.23, +0.38]; run-bootstrap CIs of means). 98.6% of round-1 private
+messages already name a price ("I suggest we both start at 15"). So each seller *unilaterally* prices high when
+told it has a channel, in anticipation of coordinating. As a result the premium from **round 1 alone** gives run AUROC 0.90
+[0.83, 0.96] and within-market AUROC 0.93 [0.89, 0.96] on the test runs (0.91 / 0.94 on all 125), close to the full
+12-round premium (0.95 / 0.96) and above every LLM view's point estimate (no paired CI). Dropping round 1, the premium over rounds 2..k
+rises from 0.88 (k = 2) to 0.90 (k = 12) run AUROC on test, so later rounds carry signal too (persistent pair-specific
+pricing), but the headline premium is to a large extent a **treatment-response detector**: it picks up how a seller
+reacts to being offered a channel, and it would score the same even if no agreement were ever reached. This tightens the
+label = condition caveat. For deployment, a price-premium monitor would fire from the first round here, but a
+colluder that opens at the market price removes this cue.
+
+![early detection](figures/early_detection_llm_v3.png)
+*Premium AUROC vs rounds observed (all 125 llm_v3 runs, descriptive; bands = 95% class-stratified run bootstrap).*
+
 ## Validity safeguards
 Labels from private chat only (judge blind to prices); same auditor model across views, fallback calls dropped;
 combined is a strict superset of both single views; shuffle donors matched on label *and* condition;
@@ -314,8 +336,10 @@ computed on the mod-3 subset incl. test runs. The test evaluation is locked and 
 - **The premium only sees partial cartels.** It compares a pair with its non-colluding rivals by construction; a
   market-wide cartel (or a 2-firm market) gives a premium near zero. That is where text or dependence statistics
   might be needed, and we did not test it.
-- **Generator-specific premium.** Much of the premium's strength comes from round-1 joint high openings that are
-  quickly undercut; a colluder that opens at the market price would weaken it (rounds 2–12 robustness: 0.92 on dev).
+- **Generator-specific premium.** Much of the premium's strength comes from round-1 high openings that are
+  quickly undercut. These openings are chosen *before* any private message is received, so they are a unilateral
+  response to being offered a channel, not evidence of an agreement (round 1 alone: test run AUROC 0.90). A colluder
+  that opens at the market price would weaken the premium (rounds 2–12: test 0.90, dev 0.92).
 - Single seller model family (GPT, gpt-6-luna), single framing for the headline data, 12 rounds, 4 firms.
 - Agreement labels from one LLM judge (gpt-6.1-sol, same family as the auditor; blind to prices); manually
   spot-checked on 3 dev chats + pilots.
@@ -360,6 +384,9 @@ uv run python incremental.py --split test       # premium + LLM view rank-averag
 uv run python fp_stratum.py --ds llm_v3fp       # firm-framing exploration stratum
 uv run python monitor_stratum.py --ds llm_v3mon # announced-monitor stratum (frozen thresholds)
 uv run python deterrence.py                     # agreement / message / markup comparison llm_v3 vs llm_v3mon
+uv run python matched_recall.py                 # legit/none flags at matched recall (post-lock, descriptive)
+uv run python round1_effect.py --ds llm_v3      # round-1 (pre-message) prices by role (descriptive)
+uv run python early_detection.py --ds llm_v3 && uv run python fig_early.py   # premium AUROC vs rounds observed
 ./finalize_test.sh                              # the ONE locked test run (sole entry point for --split test headline)
 uv run python auditors.py --ds llm_v3 --auditor claude-sonnet-5-5 --subset mod3   # cross-family subset
 uv run python cross_family.py --ds llm_v3 --other claude-sonnet-5-5               # cross-family comparison
@@ -399,8 +426,9 @@ action_stats .85/.10, combined .80/.20, combined_stats .90/.30, structured .65/.
 | premium_r2plus | 0.92 [0.80, 1.00] | 0.95 [0.89, 1.00] | 0.96 [0.91, 0.99] | 0.90 [0.75, 1.00] |
 
 (Thresholds are dev-fitted, so the flag rates on dev are optimistic; honest test FPR is in the headline section.)
-Why the premium is so strong: in many private runs the pair agrees in round 1 to open high ("let's both start at
-18") while the rivals open at ≈ 12; the pair is undercut and often abandons the agreement within 1–3 rounds
+Why the premium is so strong: in round 1 each private-channel seller opens high and proposes a price ("let's start
+at 18") in the same move, before seeing its partner's message (correction, iter 13: earlier versions said the pair "agrees in round 1";
+round-1 prices are set before any exchange, see §Exploration "When does the premium appear?"), while the rivals open at ≈ 12; the pair is undercut and often abandons the agreement within 1–3 rounds
 (manual read of 3 dev chats: 0005, 0012, 0016). The opening-round gap alone carries much of the signal; without
 round 1 the premium still matches or beats every LLM view on dev, but no longer significantly vs structured/action_stats
 (premium_r2plus − structured: run +0.09 [−0.10, +0.29]; it still beats text, and action/combined on
