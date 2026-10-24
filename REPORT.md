@@ -16,7 +16,7 @@ other firm reads yields +1.04 [+0.65, +1.42] (real channel +1.61); the same note
 shrinks the premium to +0.24 [−0.32, +0.81], while the judge still labels every chat an agreement. Most "colluders" agree on an ambitious
 opening price, often for round 1 only (14/50 maintain it). Whether text helps depends on *where* sellers coordinate. Luna coordinates
 privately, so public text adds no resolved gain; Claude Sonnet (and, by regex, deepseek) sellers invite rivals publicly even without
-a channel, so message-reading auditors flag all Claude control markets. gpt-6.1-sol pairs proposed no joint pricing (interim). At a hypothetical 5% prevalence,
+a channel, so message-reading auditors flag all Claude control markets. gpt-6.1-sol pairs proposed no joint pricing (interim). Told that a regulator screens pair premiums, luna pairs stop agreeing (0/20 vs 10/10 on matched seeds) rather than evade; a pair with a legitimate public cost or quality edge is flagged in 7/10 and 9/10 no-private-channel markets. At a hypothetical 5% prevalence,
 premium precision is 0.24. Condition, talk and price labels disagree; detectability depends on the
 (seller model × prompt) pair.
 
@@ -42,7 +42,7 @@ premium precision is 0.24. Condition, talk and price labels disagree; detectabil
    (premium flags 2/5 private runs); the luna threshold flags 6/15 deepseek no-channel markets; gpt-6.1-sol pairs
    show no joint-pricing talk (7 seeds, premium −0.05 [−0.42, +0.32]).
 6. *Practical reading.* At a hypothetical 5% prevalence (condition labels, measured TPR/FPR assumed to transport), premium precision is 0.24 [0.15, 0.43] (test) and 0.16 (replication). Any price or
-   text screen needs references matched to the seller model and prompt. Legitimate asymmetry is a hard negative: a pair with a public cost or quality edge is flagged in 7/10 and 9/10 no-channel markets, and own-cost adjustment does not fix it (P2.9). We do not recommend a screening architecture: the
+   text screen needs references matched to the seller model and prompt. Legitimate asymmetry is a hard negative: a pair with a public cost or quality edge is flagged in 7/10 and 9/10 no-channel markets, and own-cost adjustment does not fix it (P2.10). We do not recommend a screening architecture: the
    v1 suggestion (action statistics as the screen, LLM audit to explain) is undermined by (3) and was never evaluated end to end. Most hybrid CIs still allow gains up to ~+0.06.
 
 ## Phase 2 results (in progress, from 2026-10-24 06:30 UTC; v1 below frozen as git tag `v1-overnight`)
@@ -57,7 +57,8 @@ descriptive post-hoc work is marked as such (e.g. E93) (E77–E95). New datasets
 - *Behaviour labels (P2.4):* only 14/50 test "colluders" maintain the agreed floor (both price ≥ floor − 1 in ≥ half of later rounds); premium AUROC on that label 0.80 [0.67, 0.90]; text + actions vs best single modality −0.03 [−0.14, +0.06] (`p2_behaviour.json`).
 - *Prompt artifact (P2.5):* a private notepad with no recipient raises the pair premium by +1.04 [+0.65, +1.42] (private channel +1.61 [+0.92, +2.35]); the same notepad with weather entries only +0.22 [+0.05, +0.40] (E92, `p2_logbook.json`: supports a pricing-content contribution under this control); the supervised text classifier scores notepad runs 0.86 (`p2_cue_verdict_llm_p2cue.json`, `p2_textlr.json`). Wording band (E78, `p2_band.json`): +1.75 / +1.79 / **+0.24 [−0.32, +0.81]** for the original / paraphrase 1 / terse paraphrase 2 on the same 10 seeds; the judge still labels 10/10 terse chats as agreements, half of them near Nash.
 - *Other sellers (P2.6):* Claude Sonnet sellers price ≥ monopoly with no channel; premium flags 2/5, text views flag 10/10 incl. no-channel markets (`p2_family*.json`). Final generation (`p2_cue_llm_p2{ds,sol}.json`): deepseek (15 seeds) premium +1.49 [+0.52, +2.48], but flags 6/15 controls (private 9/15); it openly invites coordination in both arms (regex: 479/480 public messages in 10 interim `none` markets); sol (7 seeds): no observed joint-pricing proposal, premium −0.05 [−0.42, +0.32], flags 4/7 / 2/7.
-- *Legitimate asymmetry (P2.9):* with no private channel, a pair with a public +2 cost or quality edge is flagged by the frozen premium in 7/10 and 9/10 markets (no-channel controls 2/10); adjusting for own cost still flags 8/10 markets, now ranking the low-cost pair on top (7 of those 8) (`p2_asym.json`).
+- *Monitor-aware sellers (P2.9):* told that a regulator screens pair premiums, luna pairs stop agreeing (0/20 vs 10/10 matched) and whole markets price below the no-channel arm (−1.19 [−1.69, −0.72] markup): deterrence, not evasion (`p2_aware.json`).
+- *Legitimate asymmetry (P2.10):* with no private channel, a pair with a public +2 cost or quality edge is flagged by the frozen premium in 7/10 and 9/10 markets (no-channel controls 2/10); adjusting for own cost still flags 8/10 markets, now ranking the low-cost pair on top (7 of those 8) (`p2_asym.json`).
 - *Shared with Q1.4 (sibling repo):* detectability of LLM collusion by any price statistic is a property of the (seller model × prompt) pair. Relative screens survive a shared model but miss market-wide high prices (our random-partner arm: market markup +2.85 while the assigned-pair premium is ~0 by construction; Claude markets); absolute screens need model- and prompt-matched references.
 
 **P2.1 Precision at realistic prevalence (E81; post-hoc re-expression of saved scores, nothing refit).** The test split
@@ -254,7 +255,18 @@ no detector resolvably separates kept from abandoned agreements (premium 0.50, t
 falls from 0.94 to 0.78 [0.64, 0.90] on the kept label. Caveat: the replication reuses the generator, prompt and seller
 model, so it addresses selection-after-seeing-test bias, not the prompt and family dependence in P2.5–P2.7.
 
-**P2.9 Legitimate asymmetry hard negatives (E87 registered before generation; computed once; `uv run python p2_asym.py` →
+**P2.9 Monitor-aware sellers (E86 registered before generation; computed once; `uv run python p2_label.py --ds llm_p2aware && uv run
+python p2_aware.py` → `results/analysis/p2_aware.json`).** Same seeds as the `llm_p2cue` private / none arms; the channel pair (`aware`) or all
+four firms (`aware_all`) are told that a regulator screens for pairs priced above the others, reads the public board, cannot see
+private channels, and halves flagged firms' earnings. **Luna does not evade; it stops coordinating.** The judge finds 0/10 + 0/10 agreements
+(matched private: 10/10); chats read "I'm not proposing or agreeing to coordinate prices". Pair premium r2–12: aware −0.33 [−0.51, −0.17],
+aware_all +0.20 [+0.01, +0.37] vs private +1.62 and none −0.13; market markup falls *below* the no-channel arm (aware 4.59, aware_all 4.20 vs
+none 5.78, private 7.89; aware − none −1.19 [−1.69, −0.72]). Frozen premium flags 2/10 and 0/10 (none 2/10). Registered P1 (premium falls)
+held; P2 (pairs still agree) and P3 (collusion moves to the market level) **failed**. With no agreement left, "which auditor survives" is
+moot, so the frozen LLM views were not run on these markets. Caveat: one seller model; the warning may act as a refusal cue for a
+safety-trained model (cf. C3).
+
+**P2.10 Legitimate asymmetry hard negatives (E87 registered before generation; computed once; `uv run python p2_asym.py` →
 `results/analysis/p2_asym.json`; no LLM calls).** No private channel (legitimate-asymmetry, no-private-channel controls; public talk still allowed); one pair has a publicly known +2 unit cost (`highcost`) or +2
 quality (`quality`); luna, lab prompt, T = 12, the 10 seeds of the `llm_p2cue` none arm. Frozen premium at the frozen threshold:
 

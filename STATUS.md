@@ -3,7 +3,9 @@
 # STATUS
 
 ## Current state (2026-10-24 12:20 UTC, Phase 2 iteration 9)
-- DONE p2rep (E80/E89 held, P2.8; pooled n=90 E101). DONE gap 7 (E87, P2.9): premium flags highcost 7/10, quality 9/10 vs none 2/10;
+- DONE gap 5 (E86, P2.9): aware pairs 0/20 agreements (vs 10/10), markets BELOW none (-1.19): deterrence, not evasion.
+  DEVIATION: p2aware frozen LLM views SKIPPED (no agreement to survive; saves 80 sol calls).
+- DONE p2rep (E80/E89 held, P2.8; pooled n=90 E101). DONE gap 7 (E87, P2.10): premium flags highcost 7/10, quality 9/10 vs none 2/10;
   own-cost adjustment FAILS (moves flag to the low-cost pair 8/10: ~half cost pass-through). Gap 8 p2coded killed (2 partial runs, unused).
 - E99 strongF 6/40 (gen ~10 min/run/slot, ETA ~18:00). REGISTERED E99-amend (4 behaviour classes; tacit-high none) + E103 plan view.
   p2_strong_eval.py now writes classes -> results/analysis/p2_strong_classes_<ds>.json (for Q1.4) + exec_or_tacit/tacit contrasts.
@@ -16,14 +18,14 @@
   NOT applied: H3/market-price ds/sol interim columns (wait for P2.6 finals); heterogeneous-cost benchmark (noted as not tried).
 ## Next steps
 1. P2.6 market-price + regex columns for ds/sol still interim (10 / 4 seeds) -> refresh with p2_family.py after chain6b.
-2. C3: when logs show "c3 strong done": write REPORT P2.10 (C3 qwen) from results/analysis/p2_qwen.json + p2_strong_eval_llm_p2qwen{a,b}.json; E100 result row.
+2. C3: when logs show "c3 strong done": write REPORT P2.11 (C3 qwen) from results/analysis/p2_qwen.json + p2_strong_eval_llm_p2qwen{a,b}.json; E100 result row.
 3. chain6b done -> P2.6 finals + E95 3-way (p2_family3way.py) + E91-ext rows; E94 para1 close (one row + one line).
 4. E99: when "strongF post done" in logs/partc_chain.log: P2.7 final from p2_strong_eval_llm_p2strongF.json (by class + plan view, E103 P1-P4 verdicts),
    E99/E103 result rows, abstract C-part sentence + merger sentence. Checkpoint Sat 19:30 regardless (interim labelled).
-5. p2aware frozen views (gap 5, after chain6b): `auditors.py --ds llm_p2aware --views text,action,combined,action_stats --workers 2`.
 - Risk: codex overload (~35 codex procs across repos). Known: verify_artifacts.py FAILS (manifest) — deferred to Sun 16:30.
 
 ## Log
+- 12:33 P2 iter9: E86 p2aware result (P2.9; labels 20 calls), abstract sentence; asym renumbered P2.10.
 - 12:27 P2 iter9: codex review applied to abstract/TL;DR/P2.4-P2.9; p2_strong_eval enforces n<3 descriptive rule.
 - 12:20 P2 iter9: E87 asym result (P2.9; cost-adj P2 failed); E99-amend + E103 plan view registered, pilot calibration; strongF post chain w/ prefetch; p2coded killed; codex review launched.
 - 12:10 P2 iter8: p2rep computed once (E80/E89 held; P2.8), E84 on p2rep, pooled E101; chain6 0-call bug -> chain6b; C3 qwen E100 + E102 launched; strong pilot final.
