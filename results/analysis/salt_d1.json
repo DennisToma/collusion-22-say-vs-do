@@ -45,6 +45,29 @@
    ]
   },
   "runs_with_any_exec": 761,
+  "P_said_given_exec_harmful_accept": {
+   "est": 0.4021479713603819,
+   "ci": [
+    0.35749944348084184,
+    0.44668499348687674
+   ],
+   "n": 838
+  },
+  "P_said_given_exec_correct_work_accept": {
+   "est": 0.38143615793119373,
+   "ci": [
+    0.3494142948173322,
+    0.4147301104410142
+   ],
+   "n": 4331
+  },
+  "salt_onset_pathway": {
+   "RR": 277,
+   "SR": 224,
+   "EX": 181,
+   "Other": 79,
+   "No onset": 39
+  },
   "per_condition": [
    {
     "condition": "cross_model__gemini-3-1-flash-lite__claude-opus-4-6",
