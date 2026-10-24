@@ -2,7 +2,7 @@
 
 # STATUS
 
-## Current state (2026-10-24 09:55 UTC, Phase 2 iteration 3 end)
+## Current state (2026-10-24 09:11 UTC, Phase 2 iteration 3 end)
 - RUNNING (bg): p2_chain.sh para1 -> para2 -> p2rep (ETA ~11:00+); llm_p2sol (~11/21); llm_p2ds (~10/30);
   p2_chain4.sh labels + p2_cue.py each family when done; p2_chain3.sh (E89) auditor views after sol / after p2rep.
 - DONE P2.6 Claude pilot (E79-p2claude, E90, E91; Opus review applied): Claude sellers price 20.2 with NO channel (above
@@ -20,8 +20,8 @@
 5. codex adversarial review of P2 claims when codex slots free; checkpoint block (5-line Phase 2 takeaways) by 19:30.
 
 ## Log
-- 09:55 P2 iter3: Opus review of P2.6 applied; E91 frozen auditor views on Claude markets (text views flag 10/10 incl. none: public invitations).
-- 09:10 P2 iter3: P2.6 Claude family result (E79-p2claude, E90 p2_family.py), REPORT P2.6 + TL;DR 8.
+- 09:11 P2 iter3: Opus review of P2.6 applied; E91 frozen auditor views on Claude markets (text views flag 10/10 incl. none: public invitations).
+- 08:58 P2 iter3: P2.6 Claude family result (E79-p2claude, E90 p2_family.py), REPORT P2.6 + TL;DR 8.
 - 08:44 P2 iter2: P2.5 cue result (E77, H3 failed: notepad gives ~65% of premium), text LR on cue arms (E82b), Opus reviews E84e + P2.5 applied; chain4 for families.
 - 07:58 P2 iter2: seller families sol/Claude/deepseek launched (E79 amendments); E84b/c/d; E89 registered + chain3; REPORT appendix split.
 - 07:10 P2 iter1: E84 behaviour labels (P2.4); gaps 5/7/8 generator + E86-E88 registered, chain2 queued; TL;DR item 6.
