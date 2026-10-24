@@ -2,24 +2,23 @@
 
 # STATUS
 
-## Current state (2026-10-24 09:57 UTC, Phase 2 iteration 5)
-- RUNNING (bg): p2_chain.sh -> p2rep (60; para2 DONE); llm_p2sol (~14/21); llm_p2ds (20/30); llm_p2logbook (E92, 2/15);
-  chain3 (E89 views p2cue/p2rep), chain4 (family label+analysis on exit), chain5 (E92 once), NEW chain6 (E91-ext views on sol/ds).
-- NEW E78 result (p2_band.py -> p2_band.json): wording band FAILED for terse paraphrase 2: private-none premium +0.24
-  [-.32,.81] vs +1.75 orig / +1.79 para1 on the same 10 seeds (para2-orig -1.51 [-2.33,-.68]); judge labels unchanged
-  (explicit 10/10, but ~5/10 on ~12 near Nash; codex: not attributable to follow-through). Pair, outsider and baseline prices all move. -> REPORT P2.5 band, TL;DR 7, takeaways.
-- NEW E93 interim families (p2_interim.py, results/analysis/interim/): deepseek (10 seeds) invites coordination openly in
-  BOTH arms (public 479/480 in none; none markets 17.0 vs luna 12.1), premium +2.05 but flags 4/10 controls (AUROC .75);
-  gpt-6.1-sol (4 pairs) no joint-pricing talk, premium -0.14. Opus review applied (E93-review).
-- DONE P2.1-P2.6 (see REPORT).
-
+## Current state (2026-10-24 10:25 UTC, Phase 2 iteration 6)
+- HEADLINE REWRITTEN (directive 1): REPORT Abstract (250 words) + TL;DR (6 items) now state the Phase 2 Q2.2 answer:
+  (i) text+actions no gain (-0.01 test / -0.14 rep / -0.03 kept label), (ii) premium = offer+wording artifact (notepad 65%, para2 +0.24),
+  (iii) text usefulness depends on WHERE a family coordinates, (iv) labels disagree (14/50 kept). "Suggested architecture" removed.
+  P2.5/P2.6 cut to <=20 lines + 1 table each (full text -> REPORT_APPENDIX.md §P2-detail). Export paragraph -> README only.
+- RUNNING (bg): p2rep 22/60 (ETA ~11:35); sol 18/21; logbook 14/15; ds 30/30 DONE (labels via chain4 after sol).
+  chain3 REORDERED: p2rep label+6 views FIRST, then p2cue audit. NEW one-shot p2_para_views.sh (E94, para2 then para1, workers 1).
+  chain2 (aware/asym/coded after p2rep), chain4 (labels), chain5 (E92 once), chain6 (E91-ext views sol->ds).
+- NEW registered: E94 (frozen views on para2/para1, directive 3), E95 (3-way family label PRIV/PUB/NEITHER, directive 4;
+  p2_family3way.py written + dry-run OK: Claude 5 PRIV + 5 PUB, sol all NEITHER, ds pending judge labels). Ledger timestamp correction row added.
 ## Next steps
-1. When logbook has 15 runs: `uv run python p2_logbook.py` ONCE (chain5) -> E92 row, P2.5, TL;DR 7.
-2. When sol / ds finish (chain4 + chain6): replace interim rows with final p2_cue/p2_family/p2_family_views numbers; E91-ext verdicts.
-3. p2rep -> replication.py --ds llm_p2rep ONCE after chain3 views; p2_behaviour on p2rep (E80/E84 rep).
-4. codex review of E78+E93 DONE (09:57); remaining: codex review of P2.1-P2.4 claims; checkpoint takeaways + exports by 19:30.
-5. Consider: E78 implies premium validity is wording-dependent -> TL;DR/abstract framing at checkpoint (don't soften).
-- Risk: codex oversubscribed; p2rep may slip past 14:00.
+1. When para2/para1 views land: `uv run python p2_family_views.py --ds llm_p2para2 llm_p2para1` (auto in script) -> E94 verdict -> abstract if P1 holds.
+2. When chain4 labels ds and chain6 views ds/sol: `uv run python p2_family3way.py` (with regex check, ~60 sol calls) -> E95, P2.6 table.
+3. p2rep views (chain3) -> `replication.py --ds llm_p2rep` ONCE + p2_behaviour on p2rep -> pooled n=90 Δ_hybrid row (TL;DR 1).
+4. E92 logbook once (chain5); finals for sol/ds replace interim rows; then p2aware views (directive 5).
+5. Apply codex headline review (reviews/review_iter6_codex_headline.md) if not yet applied.
+- Risk: codex load ~7 parallel incl. Q1.4; p2rep views may land ~13:00.
 
 ## Log
 - 09:57 P2 iter5: codex review of E78+E93 applied (agreement labels qualified, say-vs-do attribution withdrawn, sol wording softened).
@@ -110,3 +109,7 @@
 
 
 - 2026-10-24 06:18 UTC iter 31: E76 summary/handoff finalization. Independent Codex and Opus reviews applied to TL;DR, abstract, README and talk: remove unsupported causal explanations, distinguish run detection from within-market localisation and test from replication, clarify raw-action/statistics views and non-equivalence. Added six source-linked presenter Q&As, E74 label robustness on slide 2 and uniform-stratum caveat in notes; repaired stale monitor judge caveat. Browser QA exposed a pre-existing focus/keyboard bug (Present retained focus; ArrowRight was ignored); fixed while preserving native Space activation, reproduced before/after, and asserted all seven slide transitions. Actual all-slide QA found and fixed slide 3 overflow at 1024x768. Five desktop layouts, mobile, no-JS reading and offline checks pass. Exports preserve 28 report / 7 talk pages, 341 cells, 477 report + 102 slide fragments and 8 figures. All 47 tests, 424 hashes, 2,368 audit-input checks and source/export freshness pass. Every scientific input/cache/result/figure/analysis/receipt unchanged; 417/424 previous manifested files identical. Review: reviews/iteration31_summary_handoff.md. No experiments, model audits, label judging, AUROC/bootstrap or threshold recomputation. Inherited log timestamps are retained unchanged; this entry uses date -u.
+
+### 2026-10-24 10:25 UTC (P2 iter6)
+- Directive 1 done: new Abstract/TL;DR (Phase 2 answer), P2.5/P2.6 condensed, appendix §P2-detail. Fixed sol public-invitation cell to the none arm (0/192; was all arms 0/576); luna none 7/720 verified.
+- Directive 2: chain3 restarted with p2rep before p2cue. Directive 3: E94 registered 09:58 + launched. Directive 4: E95 registered 10:02 + p2_family3way.py. Ledger correction row (6 rows stamped after their commit).

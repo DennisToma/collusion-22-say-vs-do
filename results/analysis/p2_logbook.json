@@ -1,0 +1,258 @@
+{
+ "note": "E92; llm_p2cue arms generated 06:45-08:30 UTC, logbook arm from 09:25 UTC; same model gpt-6-luna",
+ "model_logbook": [
+  "gpt-6-luna"
+ ],
+ "n_logbook": 15,
+ "frozen_dev_threshold": 0.667,
+ "by_condition": {
+  "logbook": {
+   "prem_r1": [
+    1.2,
+    0.133,
+    2.333
+   ],
+   "prem_r2_12": [
+    0.136,
+    -0.003,
+    0.306
+   ],
+   "prem_all": [
+    0.225,
+    0.05,
+    0.444
+   ],
+   "markup_r2_12": [
+    6.174,
+    5.636,
+    6.843
+   ],
+   "flag_rate": [
+    2,
+    15
+   ]
+  },
+  "notes": {
+   "prem_r1": [
+    2.367,
+    1.467,
+    3.334
+   ],
+   "prem_r2_12": [
+    0.961,
+    0.645,
+    1.264
+   ],
+   "prem_all": [
+    1.078,
+    0.739,
+    1.411
+   ],
+   "markup_r2_12": [
+    7.147,
+    6.483,
+    7.958
+   ],
+   "flag_rate": [
+    10,
+    15
+   ]
+  },
+  "none": {
+   "prem_r1": [
+    -0.867,
+    -2.067,
+    0.2
+   ],
+   "prem_r2_12": [
+    -0.082,
+    -0.215,
+    0.021
+   ],
+   "prem_all": [
+    -0.147,
+    -0.322,
+    0.008
+   ],
+   "markup_r2_12": [
+    5.668,
+    5.371,
+    5.944
+   ],
+   "flag_rate": [
+    2,
+    15
+   ]
+  },
+  "private": {
+   "prem_r1": [
+    4.667,
+    3.767,
+    5.467
+   ],
+   "prem_r2_12": [
+    1.524,
+    0.824,
+    2.282
+   ],
+   "prem_all": [
+    1.786,
+    1.103,
+    2.506
+   ],
+   "markup_r2_12": [
+    7.689,
+    7.117,
+    8.274
+   ],
+   "flag_rate": [
+    14,
+    15
+   ]
+  },
+  "placebo": {
+   "prem_r1": [
+    4.7,
+    3.967,
+    5.4
+   ],
+   "prem_r2_12": [
+    1.145,
+    0.639,
+    1.812
+   ],
+   "prem_all": [
+    1.442,
+    0.956,
+    2.072
+   ],
+   "markup_r2_12": [
+    7.076,
+    6.558,
+    7.605
+   ],
+   "flag_rate": [
+    13,
+    15
+   ]
+  }
+ },
+ "paired": {
+  "logbook-none": {
+   "n": 15,
+   "prem_r1": [
+    2.067,
+    0.6,
+    3.6
+   ],
+   "prem_r2_12": [
+    0.218,
+    0.052,
+    0.4
+   ],
+   "prem_all": [
+    0.372,
+    0.169,
+    0.594
+   ],
+   "markup_r2_12": [
+    0.506,
+    -0.103,
+    1.205
+   ]
+  },
+  "logbook-notes": {
+   "n": 15,
+   "prem_r1": [
+    -1.167,
+    -2.467,
+    0.2
+   ],
+   "prem_r2_12": [
+    -0.824,
+    -1.17,
+    -0.452
+   ],
+   "prem_all": [
+    -0.853,
+    -1.231,
+    -0.45
+   ],
+   "markup_r2_12": [
+    -0.973,
+    -1.693,
+    -0.342
+   ]
+  },
+  "logbook-private": {
+   "n": 15,
+   "prem_r1": [
+    -3.467,
+    -4.867,
+    -2.067
+   ],
+   "prem_r2_12": [
+    -1.388,
+    -2.043,
+    -0.727
+   ],
+   "prem_all": [
+    -1.561,
+    -2.183,
+    -0.911
+   ],
+   "markup_r2_12": [
+    -1.515,
+    -2.226,
+    -0.733
+   ]
+  },
+  "logbook-placebo": {
+   "n": 15,
+   "prem_r1": [
+    -3.5,
+    -4.767,
+    -2.267
+   ],
+   "prem_r2_12": [
+    -1.009,
+    -1.639,
+    -0.494
+   ],
+   "prem_all": [
+    -1.217,
+    -1.842,
+    -0.725
+   ],
+   "markup_r2_12": [
+    -0.902,
+    -1.365,
+    -0.409
+   ]
+  }
+ },
+ "premium_run_auroc_vs_cue_none": [
+  0.58,
+  0.376,
+  0.791
+ ],
+ "verdict_as_registered": "C_content",
+ "predicates": {
+  "S_registered": false,
+  "C_registered": true,
+  "logbook_gt_none": true,
+  "logbook_equiv_none": true,
+  "logbook_notes_ci_has_0": false,
+  "logbook_equiv_notes": false,
+  "logbook_lt_notes": true
+ },
+ "verdict_amended": "C_strict",
+ "textlr_run_auroc_vs_v3rep_none": [
+  0.72,
+  0.493,
+  0.9,
+  5,
+  15,
+  10
+ ]
+}
