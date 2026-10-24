@@ -1,21 +1,23 @@
 # STATUS
 
-## Current state (2026-10-24 01:25 UTC, iteration 11)
-- LOCKED TEST DONE (00:03; do NOT rerun final_analysis --split test). REPORT is presentable (abstract, headline test,
-  Exploration strata, limitations, reproduce, appendices). All reviews applied through E44.
-- NEW (E45): llm_v3mon announced price monitor → DETERRENCE: agreements 0/14 vs 70/70 lab (Fisher p=3e-16), 0/336
-  private msgs with numbers, markup back to none level. Evasion test impossible (no positives). In REPORT
-  Exploration + abstract bullet + Limitations/Next steps; deterrence.py → results/analysis/deterrence.json.
-- DONE: monitor_stratum FP (E46): premium .36/.50, stats views .33-.43, text 0 on monitored y=0 runs → in REPORT.
-  codex review of deterrence text applied (narrowed: "no judge-labelled agreements", unpaired cohorts, regex counts).
+## Current state (2026-10-24 01:10 UTC, iteration 12)  [note: iter-11 log times were ~25 min ahead of the real clock]
+- LOCKED TEST DONE (00:03; do NOT rerun final_analysis --split test). REPORT presentable; all reviews applied thru E46.
+- NEW (E47): fresh REPLICATION split `llm_v3rep` (seed 9000, private:15 none:10 legit:5, same lab generator)
+  PRE-REGISTERED in data/SPLITS.md + `replication.py` (P1-P4) committed BEFORE generation (commit 71eae06).
+  Running in background: generation (2 games parallel, ~70 min) → pipeline.sh label+audit; `logs/gen_v3rep.log`
+  ends with REP_DONE when finished (~02:45-03:15). Then run ONCE: `uv run python replication.py` and add a
+  REPORT section "Replication on a fresh split" (+abstract line). Not pooled with llm_v3.
+- NEW (E48): matched-recall legit check → LLM views have NO advantage over premium on legit at equal recall
+  (REPORT finding 4 rewritten).
+- codex review of replication.py/matched_recall running → logs/review_iter12.md (apply fixes BEFORE running replication).
 ## Next steps
-1. (done) v3mon in REPORT. All generation finished; nothing running.
-
-2. Optional (descriptive): matched-recall legit FPR comparison; figure polish. No new generation after 03:30,
-   no new experiments after 06:30; FINALIZE from 08:15.
-- Risks: none major. Consider a final REPORT read-through for length/clarity before 08:15.
+1. Apply logs/review_iter12.md; wait for REP_DONE; run replication.py once; write REPORT section; commit.
+2. No new generation after 03:30, no new experiments after 06:30; FINALIZE from 08:15 (final REPORT review by codex).
+- Risks: codex usage limits shared with sibling (it runs 4 workers) → generation could slow; if not done by ~05:30,
+  run with --allow-partial NOT allowed for headline; report as incomplete instead.
 
 ## Log
+- 01:10 iter 12: llm_v3rep replication pre-registered + launched (E47); matched-recall legit (E48); codex review started.
 - 01:25 iter 11: monitor_stratum FP (E46) + codex review fixes in REPORT.
 - 01:00 iter 11: v3mon deterrence result (E45) → REPORT; codex review started.
 - 00:50 iter 10: codex re-check (E44) applied.

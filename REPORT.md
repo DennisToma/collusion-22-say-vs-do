@@ -219,6 +219,13 @@ Message-shuffle ablation and exploration strata: see Exploration below.
 *(Descriptive, `fig_mechanism.py --split test` → `logs/mechanism_test.txt`: private pairs' late-window premium +1.02,
 positive in 44/50 runs; none −0.02; legit +0.08.)*
 
+### Replication on a fresh split (`llm_v3rep`, pre-registered; PENDING)
+Because the premium was chosen after a look at partial data including test runs, we generate 30 new runs with the
+unchanged generator (seed 9000; 15 `private`, 10 `none`, 5 `legit`) AFTER freezing everything. Analysis
+(`uv run python replication.py`, frozen dev thresholds, best LLM view fixed from the test json, run once) and four
+predictions are pre-registered in `data/SPLITS.md` (commit 71eae06, before generation). *Results pending — generation
+and audits running at 01:10 UTC.*
+
 ### Exploration strata (never pooled into the headline; frozen dev thresholds, nothing fitted)
 **Firm framing, channel offered, no agreement found (`llm_v3fp`, 16 `private` runs, `uv run python fp_stratum.py --ds
 llm_v3fp` → `results/analysis/fp_stratum_llm_v3fp.json`).** Under the "pricing manager + competition authority"
