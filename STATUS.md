@@ -11,6 +11,7 @@
 - Risks: six games/arm/cell in E113; channel labels ≠ executed collusion; Q1.4 may edit joint statement — re-diff before freeze.
 
 ## Log
+- 2026-10-24 23:28 UTC P2 iter61 (Codex fallback): E113/E131 complete; nothing due before 07:30. Read ledger and HITS (still no promoted hit; S29/S28 unconfirmed); no confirmation under the freeze. Followed DIRECTION22:05 directive5: STATUS only, REPORT remains current/frozen; no experiments, calls, metric/check reruns or exports. Next: joint-statement re-diff + top freeze 07:30.
 - 23:28 P2 iter60: nothing due (E113 sealed, E131 applied); idled per DIRECTION22:05 directive5 — STATUS only, no calls/checks/REPORT edits. Next: joint-statement re-diff + top freeze 07:30.
 - 2026-10-24 23:12 UTC P2 iter59 (Codex fallback): read rules, plan, status, direction, recent ledger and HITS; E113/E131 complete, nothing due before 07:30. HITS still has no promoted hit (including S29, unconfirmed); no confirmation under the freeze. Followed DIRECTION22:05 directive5: STATUS only, REPORT remains current/frozen; no new experiment, calls, snapshots, metric/check reruns or exports. Next: joint-statement re-diff + top freeze 07:30.
 - 23:12 P2 iter58: nothing due (E113 sealed, E131 review applied); idled per DIRECTION22:05 directive5 — STATUS only, no calls/checks/REPORT edits. Next: re-diff joint statement + top freeze 07:30.
