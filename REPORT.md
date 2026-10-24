@@ -38,10 +38,11 @@ test and replication evidence item beside the public log (offline, searchable; n
    agree on 18 for round 1 only (a second judge reads 18 of 21 checked cases as opening-only). The premium flags them
    anyway; against the kept-agreement label it falls to 0.80, and text + actions shows no resolved gain over the best
    single modality (combined −0.03 [−0.14, +0.06]).
-7. *The premium is mostly an offer artifact (P2.5, registered E77):* on 15 matched seeds, giving the pair a private
+7. *A substantial part of the premium is an offer artifact (P2.5, registered E77):* on 15 matched seeds, giving the pair a private
    **notepad with no recipient** raises their premium over rounds 2–12 by +1.04 [+0.65, +1.42] vs no channel. A real
-   private channel raises it by +1.61 [+0.92, +2.35]; the difference is not resolved (+0.56 [−0.29, +1.48]). The frozen
-   premium flags 10/15 notepad runs (AUROC 0.89). The registered "offer alone is not the driver" prediction failed.
+   private channel raises it by +1.61 [+0.92, +2.35]; the difference is not resolved (+0.56 [−0.29, +1.48]), and so is the effect of delivery
+   (private − placebo +0.38 [−0.41, +1.18]). The frozen premium flags 10/15 notepad runs (AUROC 0.89). The registered
+   "offer alone is not the driver" prediction failed. The notepad arm has confounds (pair-only extra text, memory).
 
 ## Phase 2 results (in progress, from 2026-10-24 06:30 UTC; v1 above frozen as git tag `v1-overnight`)
 
@@ -140,7 +141,7 @@ neutrally worded "message box"; **notes-to-self** (the pair is told "You also ha
 firm sees its own past entries, and no other firm is mentioned); channel to a
 random partner re-drawn each round; placebo (offered, never delivered); no channel. Statistic: assigned-pair premium
 (pair mean − other-two mean), primary window rounds 2–12, paired over seeds, seed bootstrap; ±0.5 equivalence margin.
-**Most of the premium appears without any possible communication.**
+**A large share of the premium appears without any private channel or recipient.**
 
 | arm | premium round 1 | premium rounds 2–12 | paired vs none (r2–12) | frozen premium flags | run AUROC vs none |
 |---|---|---|---|---|---|
@@ -153,21 +154,23 @@ random partner re-drawn each round; placebo (offered, never delivered); no chann
 Registered contrasts (rounds 2–12): private − notes +0.56 [−0.29, +1.48], placebo − notes +0.19 [−0.56, +1.07],
 private − placebo +0.38 [−0.41, +1.18], neutral − private −0.13 [−1.29, +1.13]: all *inconclusive* (none positive, none
 inside ±0.5). H1 (private > none) and H2 (neutral > none) **held**. H3 (notes − none upper CI < half of private − none,
-i.e. < 0.80) **failed**: notes − none is +1.04 [+0.65, +1.42], a notes/private ratio of 0.65 [0.34, 1.32]. Difference in
-differences (r2–12 minus r1): private − notes −1.74 [−2.78, −0.73]. The private arm's *extra* premium is front-loaded in
-round 1 and fades over rounds 2–5 (Figure P2.5). Random partner: the assigned-pair premium is ~0 by construction, but the
-whole market prices highest of all arms (markup vs none +2.85 [+2.09, +3.59]). Firms matched at round t have slightly
-*smaller* price gaps at t + 1 than unmatched firms: −0.12 [−0.23, −0.02]. **Reading:** telling two firms they have a
-private writing space, even one nobody reads, makes them price about 1 unit above the other two for the whole game. The
-frozen premium then flags 10/15 of these runs (AUROC 0.89 vs none). In this generator, the premium, and with it the
-v1 "collusion" label, mostly measures *the offer and its framing*, not delivered coordination. Delivered messages add
-at most a front-loaded round-1–2 bump that we cannot separate from zero over rounds 2–12. Caveats: 15 seeds; one seller model
-(paraphrase band and other families pending). Label judge (gpt-6.1-sol, price-blind): explicit agreement in 14/15 private, 14/15 neutral and 15/15 random-partner
-chats; all 15 placebo runs contain unilateral proposals from both firms. Notepad entries contain no coordination
-language (e.g. llm_p2cue_0002: "Test a high-margin price while leaving room to adjust"). One mechanism we have not
-tested is that the notepad gives the pair a persistent memory of its own reasoning that the other firms lack.
-**Supervised text classifier** (P2.3 model, fit on llm_v3, scored vs fresh `none`; `p2_textlr.py`): private 1.00,
-neutral 1.00, random partner 1.00, placebo 0.96 [0.87, 1.00], **notes 0.86 [0.70, 0.98]**, none 0.40. It puts the
+i.e. < 0.80) **failed**: notes − none is +1.04 [+0.65, +1.42], a notes/private ratio of 0.65 [0.34, 1.32]. Round 1 is
+identical in private and placebo (same prompt, nothing delivered yet: 4.67 vs 4.70), so the round-1 excess over notes
+reflects how the offer is worded. It fades over rounds 2–5 (Figure P2.5; DiD private − notes −1.74 [−2.78, −0.73]).
+Delivery itself (private − placebo) is unresolved: +0.38 [−0.41, +1.18] over rounds 2–12, DiD +0.41 [−0.71, +1.65]. Random partner: the assigned-pair premium is ~0 by construction, but the
+whole market prices highest of all arms (markup vs none, rounds 2–12, +2.85 [+2.09, +3.59]). The matched-minus-unmatched price
+gap at t + 1, relative to the same gap in round t, is −0.12 [−0.23, −0.02] (a slight convergence of partners). **Reading:** telling two firms they have a private writing space, even one nobody else reads, makes them price
+about 1 unit above the other two for the whole game. The frozen premium flags 10/15 of these runs (AUROC 0.89 vs
+none). A substantial share of the premium (point 65%, CI 34–132%) therefore needs no private channel. Whether delivered
+coordination adds to it is unresolved at n = 15. The notepad arm changes several things at once. Only the pair gets
+extra system text; it adds an output field; the prompt is longer; it uses the word "private"; and it gives persistent
+memory (last 8 own notes vs 6 rounds of price history). The missing control is an irrelevant sentence of the same
+length given to the pair, with no notepad. Caveats: 15 seeds, with percentile bootstrap CIs that may be narrow at this n;
+the equivalence check uses 95% CIs (conservative vs TOST); one seller model (paraphrase band and other families pending).
+Label judge (gpt-6.1-sol, price-blind): explicit agreement in 14/15 private, 14/15 neutral and 15/15 random-partner
+chats; all 15 placebo runs contain unilateral proposals from both firms. The notepad entries we inspected (2 runs) contain no
+coordination language (e.g. llm_p2cue_0002: "Test a high-margin price while leaving room to adjust"). **Supervised text classifier** (P2.3 model, fit on llm_v3; each arm scored against the same 10 fresh llm_v3rep `none` runs; `p2_textlr.py`): private 1.00,
+neutral 1.00, random partner 1.00, placebo 0.96 [0.87, 1.00], **notes 0.86 [0.70, 0.98]**, and this dataset's own `none` arm 0.40. It puts the
 notepad pair on top in 14/15 runs. The public-text trace therefore also appears when the firms have no one to talk to.
 
 ![Figure P2.5](figures/p2_cue_rounds.png)
