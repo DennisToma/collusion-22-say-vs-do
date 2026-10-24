@@ -2,26 +2,26 @@
 
 # STATUS
 
-## Current state (2026-10-24 07:10 UTC, Phase 2 iteration 1)
-- RUNNING (bg): `p2_chain.sh` llm_p2cue (6 conds x 15 seeds; ~30/90 runs at 07:10, ETA ~08:30) -> llm_p2para1/2 (40)
-  -> llm_p2rep (60, gap 4); then `p2_chain2.sh` -> llm_p2aware (20), llm_p2asym (20), llm_p2coded (10).
-  `p2_post.sh` auto-labels (p2_label.py) + analyses (p2_cue.py) cue/para1/para2. llm_p2glm (glm-5.3-flash, Go, slow ~1 run/2h).
-- DONE E81 precision@5%: premium .24 test/.16 rep; action_stats .46/.08. E83 codex reimplementation: 31/32 match, no bug.
-- DONE E82: text LR flags placebo (no delivery) 15/15 above all none -> text signal needs no delivered message.
-- DONE E84 behaviour labels: test only 14/50 positives FOLLOW the agreement; premium flags 34/36 abandoned ones;
-  vs followed label premium .80 [.67,.90], LLM views .50-.65. P1/P3 failed, P2 held.
-- E85 Opus design review applied (prereg amendment E77-p2cue-amend BEFORE any cue outcome).
-- verify_artifacts.py FAILS by design (v1 manifest); verify v1 at tag v1-overnight; rebuild manifest at finalize.
+## Current state (2026-10-24 07:58 UTC, Phase 2 iteration 2)
+- RUNNING (bg): p2_chain.sh llm_p2cue 67/90 (ETA ~08:30) -> para1/2 -> p2rep; p2_post.sh labels+analyses cue/para.
+  NEW: llm_p2sol (gpt-6.1-sol sellers, 21 runs, codex SIM_PAR 2), llm_p2claude (Sonnet sellers, 10 runs; 2 done),
+  llm_p2ds (deepseek thinking-off via Go, 30 runs; replaces glm, stopped at 3 runs = E79-p2glm-stop).
+  p2_chain3.sh (E89): after cue analysed + sol done -> 6 auditor views on p2cue private/placebo/notes/none; after
+  p2rep -> p2_label + 6 views on p2rep. Then `uv run python replication.py --ds llm_p2rep` ONCE (lock P2REP_ONCE).
+- DONE this iter: E84b Δ_hybrid on followed label (test combined −0.03 [−0.14,+0.06]; no hybrid gain); E84c label
+  sensitivity (premium .79–.83); E84d Claude term check (18/21 not_followed = opening-round-only agreements).
+- REPORT: v1 exploration strata + Appendices A–D moved verbatim to REPORT_APPENDIX.md (591 lines now).
 
 ## Next steps
-1. Cue done -> check logs/p2/post.log; read results/analysis/p2_cue_llm_p2cue.json; write P2.5 against the
-   registered pattern (E77 + amendment); rerun p2_textlr.py (adds cue conds); run p2_behaviour on llm_p2cue.
-2. Para1/2 -> E78 band. p2rep -> `p2_label.py --ds llm_p2rep` then compute frozen premium AUROC ONCE (E80; write script first).
-3. Gaps 5/7/8 analyses when chain2 data lands (E86-E88): need small analysis scripts (premium, own-cost premium, judge).
-4. codex adversarial review of Phase 2 REPORT claims before Sat 20:00; Figure for P2.5 (per-round premium by condition).
-5. Optional: LLM auditor views on p2cue placebo/notes/neutral (tests which detectors respond to the offer).
+1. Cue done -> `uv run python p2_cue_verdict.py --ds llm_p2cue` (verdict script + figure written BEFORE outcomes);
+   write P2.5 against E77+amendment; rerun p2_textlr.py (notes arm); p2_behaviour on llm_p2cue; tacit-high search in none arms.
+2. Families: when sol/claude/ds finish -> p2_label.py + p2_cue.py --ds llm_p2sol llm_p2claude llm_p2ds (exclude luna-fallback runs).
+3. p2rep -> replication.py --ds llm_p2rep ONCE (E80 premium + E89 views); p2_behaviour on p2rep.
+4. codex adversarial review of P2 claims before Sat 20:00; checkpoint "Phase 2 takeaways" block by 19:30.
+5. Sun: gaps 5/7/8 (chain2) with premium + action_stats + text views.
 
 ## Log
+- 07:58 P2 iter2: seller families sol/Claude/deepseek launched (E79 amendments); E84b/c/d; E89 registered + chain3; REPORT appendix split.
 - 07:10 P2 iter1: E84 behaviour labels (P2.4); gaps 5/7/8 generator + E86-E88 registered, chain2 queued; TL;DR item 6.
 - 06:53 P2 iter1: Opus design review (E85) applied: registration amendment, script fixes, REPORT wording.
 - 06:43 P2 iter1: generator conds + matched seeds; E77-E83 registered; E81/E82/E83 done; generation launched (codex + Go).
