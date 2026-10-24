@@ -340,7 +340,7 @@ identical seeds (same pair, costs, demand). Frozen English-prompted judge and au
 In German the pairs mostly refuse to fix prices ("Preise unabhängig und ohne Absprachen festlegen"; spot check of the 7 non-explicit chats
 agrees with the judge), yet the channel premium survives at about half the English size (paired German − English −0.58 [−1.79, +0.51]).
 Registered verdicts: P1 (German premium > 0) held; P3 (German agreement rate within the English CI) **failed**; P4 not evaluable (English
-text AUROC 0.66 < 0.7 on these seeds). In this small sample, language changed what sellers *say* (agreements) more clearly than what they
+text AUROC 0.66 < 0.7 on these seeds). In this small sample (n = 10 seeds per language), language changed what sellers *say* (agreements) more clearly than what they
 *do* (premium difference unresolved), the same say/do gap as P2.4/P2.5.
 
 **P2.15 Participant replacement (Part E2, E112 registered before generation; `./p2_replace.sh`, then `uv run python p2_replace_eval.py` → `p2_replace.json`).**

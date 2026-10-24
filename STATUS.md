@@ -14,7 +14,7 @@
 ## Next steps
 1. E115: when "p2replS gen done": `P2REPL_ARM=sol uv run python p2_replace_eval.py` ONCE → S1–S4 into P2.15 (2–3 lines) + abstract clause; claim C26.
 2. E113: rerun `snapshot` + `audit` (cached) as sweeps land; FINAL `eval` ONCE at 6 sweeps → ≤ 10 lines + glance row by Sun 10:00.
-3. Remaining open review P3: P2.14 "(n = 10 seeds)" + who did the German judge spot check; abliterated joint-statement cross-reference. No further reviews until Sun 12:30.
+3. Remaining open review P3: who did the German judge spot check (provenance not recorded in ledger/STATUS: leave unattributed rather than guess); abliterated joint-statement cross-reference. No further reviews until Sun 12:30.
 - Risk: .git is 89 MB (cap 100 MB). Don't commit raw caches; check `du -sh .git` before adding large data.
 
 ## Log
