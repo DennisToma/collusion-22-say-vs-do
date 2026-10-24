@@ -301,6 +301,16 @@ def _():
     return ci(pick(QWEN, ("P3_paired_premium", "diff_boot95"))), QWEN, "P3_paired_premium.diff_boot95"
 
 
+@claim("C24", "E116 within channel: plan view AUROC strict-executed vs non-executed", "0.69 [0.44, 0.91]",
+       "plans do not resolvably predict execution (0.69 [0.44, 0.91])",
+       "13 strict vs 7 non-executed private markets (llm_p2strongF); exploratory, zero LLM calls, seed bootstrap")
+def _():
+    src = "results/analysis/p2_within_agree_llm_p2strongF.json"
+    d = json.load(open(src))
+    assert (d["n_strict"], d["n_nonexec"]) == (13, 7)
+    return ci(d["views"]["plan"]["auroc_strict_vs_nonexec"], False), src, "views.plan.auroc_strict_vs_nonexec"
+
+
 def run():
     text = abstract_text()
     rows = []

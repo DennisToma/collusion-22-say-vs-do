@@ -298,5 +298,17 @@
   "key_path": "P3_paired_premium.diff_boot95",
   "status": "OK",
   "in_report_abstract": true
+ },
+ {
+  "id": "C24",
+  "claim": "E116 within channel: plan view AUROC strict-executed vs non-executed",
+  "expected": "0.69 [0.44, 0.91]",
+  "denominator": "13 strict vs 7 non-executed private markets (llm_p2strongF); exploratory, zero LLM calls, seed bootstrap",
+  "note": "",
+  "value": "0.69 [0.44, 0.91]",
+  "source": "results/analysis/p2_within_agree_llm_p2strongF.json",
+  "key_path": "views.plan.auroc_strict_vs_nonexec",
+  "status": "OK",
+  "in_report_abstract": true
  }
 ]

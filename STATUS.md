@@ -1,22 +1,25 @@
 # STATUS
 
-## Current state (2026-10-24 17:58 UTC from date -u, Phase 2 iteration 26)
+## Current state (2026-10-24 18:00 UTC from date -u, Phase 2 iteration 27)
 - Main claim unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc).
-- E99, E110, E102, E111, E112 final in REPORT. **Checkpoint Opus review done (iter26, early)**: 19/19 spot-checked numbers match;
-  4 P1 + 8 P2 framing fixes applied (abstract now says action_stats test gain did NOT replicate, +0.00 pooled; SALT text auditor 0.87
-  stated next to 62%; plan view "comparably, no paired test"; P2.15 reading limited to one firm's memory; joint-statement Qwen numbers
-  labelled as Q1.4 E65). p2_claims 25/25 OK (new C04c, C22, C23). REPORT 717 lines; abstract ~365 words after a tightening pass (over the ~255 target because of review-required qualifiers).
-- **E115** (sol-newcomer arm of E112) generating (`logs/p2replS_gen.log`, 7/30 raw at 17:55); ETA ~20:00–21:00.
-- **E113 E1 audit**: snapshot refreshed 36 games / 16 cells (first sweep complete); audit cached; coverage 100%, 0 unparsed; no scores read.
-- verify_artifacts manifest FAIL still expected (rebuild deferred to Sun 16:30).
+- **E116 (new, DIRECTION 17:56 dir 1, zero calls, exploratory):** within-channel strict-executed (13) vs non-executed (7) on llm_p2strongF:
+  plan 0.69 [0.44, 0.91], partner-name share 0.73 [0.50, 0.92], public text 0.61, combined 0.52; action auditors INVERTED (action_stats
+  0.18 [0.00, 0.42]); judged agreement 13/13 vs 5/7. → No text/plan view resolves execution once both classes have a channel. In REPORT
+  P2.7 (new table column replacing flags column + 4 lines), abstract, TL;DR 5, glance. p2_claims +C24 → 26/26 OK.
+  Second stratum (E102/E112) not run: no frozen-view scores exist for those runs, no new calls allowed.
+- E3 cross-family DROPPED (Limitations line + ledger row). REPORT 723 lines (directive says ≤ 711: trim at 19:30 review pass).
+- **E115** (sol newcomer) generating, 9/30 raw at 18:00; ETA ~20:00–21:00.
+- E113: Q1.4 E70 is now **6 sweeps** (ETA ~22:00), not 3.
 
 ## Next steps
-1. E115: when "p2replS gen done": `P2REPL_ARM=sol uv run python p2_replace_eval.py` ONCE → S1–S4 into P2.15 (2–3 lines) + glance.
-2. Checkpoint review is DONE (do not run another before Sun 12:30 per DIRECTION). Remaining P3-3 (registration exceptions) partly applied.
-3. E1: re-run `snapshot` + `audit` (+ `coverage`) as Q1.4 sweeps 2–3 land; FINAL `eval` once when all 3 sweeps exist (or Sun 12:00).
-4. Abstract tightened once (iter26); further cuts only by moving the Qwen/plan sentences to TL;DR at the final pass.
+1. E115: when "p2replS gen done": `P2REPL_ARM=sol uv run python p2_replace_eval.py` ONCE → S1–S4 into P2.15; then E112/E115 sentence
+   into abstract + TL;DR (DIRECTION dir 2 wording), replacing/compressing the SALT clause.
+2. 19:30: one Opus review of abstract + TL;DR + glance + P2.7 + P2.14 + P2.15; trim REPORT to ≤ 711 lines; abstract ≤ ~260 words.
+3. E113: `snapshot` + `audit` cached as sweeps land; FINAL `eval` ONCE when Q1.4 STATUS says 6 sweeps complete (or Sun 08:00).
+4. Joint cross-repo line on luna board usage (DIRECTION dir 4) still to add.
 
 ## Log
+- 18:00 P2 iter27: E116 within-channel contrast (p2_within_agree.py) → REPORT P2.7/abstract/TL;DR/glance; C24 claim; E3 dropped.
 - 17:58 P2 iter26: Opus checkpoint review (reviews/p2_iter26_checkpoint_opus.md) applied to abstract/TL;DR/glance/P2.15/header; p2_claims +C04c/C22/C23 → 25/25 OK; E1 snapshot 36 games/16 cells, coverage OK.
 - 17:51 P2 iter25: P2.11 three-pair abliteration line (Q1.4 E61, E69 + ours) + glance; p2_claims 22/22 OK; REPORT 711 lines.
 - 17:48 P2 iter25: E113 E1-audit pipeline p2_e1_audit.py + snapshot (24 games/12 cells); E113-amend (luna posts no public messages in grid) registered pre-audit; shakedown 60 calls, coverage OK (no scores read).

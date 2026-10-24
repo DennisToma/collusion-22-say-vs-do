@@ -1,0 +1,174 @@
+{
+ "ds": "llm_p2strongF",
+ "n_strict": 13,
+ "n_nonexec": 7,
+ "n_nonexec_agreed": 5,
+ "judged_agreement": {
+  "strict": 13.0,
+  "nonexec": 5
+ },
+ "views": {
+  "premium": {
+   "auroc_strict_vs_nonexec": [
+    0.346,
+    0.048,
+    0.679
+   ],
+   "auroc_strict_vs_nonexec_agreed": [
+    0.454,
+    0.062,
+    0.911
+   ],
+   "mean_strict": 0.486,
+   "mean_nonexec": 1.234,
+   "flags_strict_nonexec": [
+    2,
+    13,
+    3,
+    7
+   ]
+  },
+  "market_excess_nash": {
+   "auroc_strict_vs_nonexec": [
+    0.78,
+    0.536,
+    0.958
+   ],
+   "auroc_strict_vs_nonexec_agreed": [
+    0.815,
+    0.554,
+    1.0
+   ],
+   "mean_strict": 5.586,
+   "mean_nonexec": 3.693
+  },
+  "action": {
+   "auroc_strict_vs_nonexec": [
+    0.33,
+    0.101,
+    0.59
+   ],
+   "auroc_strict_vs_nonexec_agreed": [
+    0.308,
+    0.071,
+    0.598
+   ],
+   "mean_strict": 67.538,
+   "mean_nonexec": 78.429,
+   "flags_strict_nonexec": [
+    8,
+    13,
+    7,
+    7
+   ]
+  },
+  "action_stats": {
+   "auroc_strict_vs_nonexec": [
+    0.181,
+    0.0,
+    0.418
+   ],
+   "auroc_strict_vs_nonexec_agreed": [
+    0.208,
+    0.0,
+    0.516
+   ],
+   "mean_strict": 50.308,
+   "mean_nonexec": 73.143,
+   "flags_strict_nonexec": [
+    5,
+    13,
+    6,
+    7
+   ]
+  },
+  "text": {
+   "auroc_strict_vs_nonexec": [
+    0.615,
+    0.369,
+    0.854
+   ],
+   "auroc_strict_vs_nonexec_agreed": [
+    0.623,
+    0.323,
+    0.875
+   ],
+   "mean_strict": 27.0,
+   "mean_nonexec": 19.0,
+   "flags_strict_nonexec": [
+    5,
+    13,
+    1,
+    7
+   ]
+  },
+  "combined": {
+   "auroc_strict_vs_nonexec": [
+    0.516,
+    0.209,
+    0.824
+   ],
+   "auroc_strict_vs_nonexec_agreed": [
+    0.408,
+    0.0,
+    0.793
+   ],
+   "mean_strict": 23.923,
+   "mean_nonexec": 31.0,
+   "flags_strict_nonexec": [
+    6,
+    13,
+    3,
+    7
+   ]
+  },
+  "plan": {
+   "auroc_strict_vs_nonexec": [
+    0.692,
+    0.443,
+    0.906
+   ],
+   "auroc_strict_vs_nonexec_agreed": [
+    0.669,
+    0.375,
+    0.915
+   ],
+   "mean_strict": 49.385,
+   "mean_nonexec": 28.571,
+   "flags_strict_nonexec": [
+    5,
+    13,
+    1,
+    7
+   ]
+  },
+  "partner_share_E111": {
+   "auroc_strict_vs_nonexec": [
+    0.731,
+    0.5,
+    0.923
+   ],
+   "auroc_strict_vs_nonexec_agreed": [
+    0.777,
+    0.5,
+    0.969
+   ],
+   "mean_strict": 0.088,
+   "mean_nonexec": 0.038
+  },
+  "judged_agreement": {
+   "auroc_strict_vs_nonexec": [
+    0.643,
+    0.5,
+    0.85
+   ],
+   "auroc_strict_vs_nonexec_agreed": [
+    0.5,
+    null,
+    null
+   ],
+   "mean_strict": 1.0,
+   "mean_nonexec": 0.714
+  }
+ }
+}

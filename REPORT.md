@@ -18,7 +18,7 @@ data (8000 episodes, 10 models) 62% of executed episodes show no explicit agreem
 their agreement. With memory, profit framing and other levers (combined, not ablated), 13/20 channel pairs strictly execute, yet 19/20
 no-channel markets also price ≥ Nash + 2. Exploratory (13 vs 19 markets): a monitor reading private plans ranks executed above tacit
 (AUROC 0.76 [0.55, 0.93]), but a no-LLM count of plans naming the chat partner does comparably (0.82 [0.66, 0.96]; no paired test) and
-no plan uses agreement words, consistent with a channel footprint rather than stated collusion. Public text ranks the classes in reverse (0.25 [0.08, 0.46]).
+no plan uses agreement words, consistent with a channel footprint; among channel pairs (13 executed vs 7 not) plans do not resolvably predict execution (0.69 [0.44, 0.91]). Public text ranks the classes in reverse (0.25 [0.08, 0.46]).
 Abliterated vs base Qwen3.8-27B (15 + 15 markets; bf16 vs FP8; agreement at ceiling): no detectable increase in agreement or execution, and a
 smaller channel premium (−1.24 [−2.41, −0.03]).
 Every abstract number with its denominator and source key: `results/analysis/claims_denominators.md` (`p2_claims.py`, 25/25 match).
@@ -36,7 +36,8 @@ Every abstract number with its denominator and source key: `results/analysis/cla
    strict-executed; paired difference −0.44 [−1.84, +1.00] (P2.7). gpt-5.6-sol, mimo and Qwen price high even at base framing.
    In this one arm (n = 13 vs 19, exploratory), a monitor reading private plans separated executed from tacit (0.76 [0.55, 0.93]) where
    prices (≈ 0.5) and public text (0.25 [0.08, 0.46], inverted; no-channel markets use more hold-price phrases on the public board, 43% vs 28% of messages,
-   post hoc, not shown to be agreement) did not; a no-LLM partner-name count does comparably (0.82 [0.66, 0.96]).
+   post hoc, not shown to be agreement) did not; a no-LLM partner-name count does comparably (0.82 [0.66, 0.96]). Within channel pairs
+   (13 vs 7, E116) no view resolves execution (plan 0.69 [0.44, 0.91]); action auditors invert (0.18 [0.00, 0.42]).
 6. *Practical:* premium precision 0.24 at 5% prevalence; legitimate cost/quality edges are flagged 7/10, 9/10 (controls 2/10). Screens
    need model- and prompt-matched references; our evidence does not support recommending any particular screening architecture.
 
@@ -61,7 +62,7 @@ Phase 2 experiments and checks are E77–E115 (exceptions to pre-registration ar
 | P2.4 | labels by behaviour | 14/50 agreements kept; premium 0.80 [0.67, 0.90] on kept label; hybrid −0.03 [−0.14, +0.06] (test), −0.03 [−0.13, +0.06] (pooled fresh) | `p2_behaviour.json`, `p2_pool_rep.json` |
 | P2.5 | prompt artifact? | notepad +1.04 [+0.65, +1.42] vs channel +1.61; weather notepad +0.22; terse wording +0.24 [−0.32, +0.81] vs +1.75 original wording (same 10 seeds) | `p2_logbook.json`, `p2_band.json` |
 | P2.6 | other seller families | luna private only; Claude (5 seeds) / deepseek public too (deepseek: 719/720 no-channel public messages match the invitation regex, precision 20/20); sol 0/7 agreements, Nash + 4 | `p2_family3way.json` |
-| P2.7 | executed (strong) collusion; older sellers | strict-executed 13/20 [0.43, 0.83] vs tacit-high 19/20 no-channel; executed vs tacit (exploratory): price-view CIs include 0.5, public text 0.25 (reverse), private-plan view 0.76 [0.55, 0.93] but no-LLM partner-name count 0.82 [0.66, 0.96] (E111; plans contain no agreement words); older sellers: gpt-5.6-sol executed 1/7, mimo 4/4 | `p2_strongF_report_llm_p2strongF.json`, `p2_plan_keyword_llm_p2strongF.json`, `p2_c2older.json` |
+| P2.7 | executed (strong) collusion; older sellers | strict-executed 13/20 [0.43, 0.83] vs tacit-high 19/20 no-channel; executed vs tacit (exploratory): price-view CIs include 0.5, public text 0.25 (reverse), private-plan view 0.76 [0.55, 0.93] but no-LLM partner-name count 0.82 [0.66, 0.96] (E111; plans contain no agreement words); within channel pairs (E116, 13 vs 7) plan 0.69 [0.44, 0.91], action_stats 0.18 (inverted); older sellers: gpt-5.6-sol executed 1/7, mimo 4/4 | `p2_strongF_report_llm_p2strongF.json`, `p2_plan_keyword_llm_p2strongF.json`, `p2_within_agree_llm_p2strongF.json`, `p2_c2older.json` |
 | P2.8 | second fresh replication (n = 60, registered) | premium 0.94 [0.87, 0.99] (confounded, P2.5/P2.10); hybrid −0.04 [−0.16, +0.08]; pooled n = 90 −0.07 [−0.17, +0.02] | `replication_llm_p2rep.json`, `p2_pool_rep.json` |
 | P2.9 | monitor-aware sellers | 0/10 + 0/10 agreements vs 10/10 matched: compliance, not evasion | `p2_aware.json` |
 | P2.10 | legitimate asymmetry hard negative | flagged 7/10 (cost), 9/10 (quality) vs 2/10; competition predicts the cost flag | `p2_asym.json`, `p2_asym_nash.json` |
@@ -169,16 +170,21 @@ testing 19 too"); gpt-6.1-sol 0/2. The high price was already market-wide (round
 (first-floor executed 14/20; judged agreement 18/20); **tacit-high 19/20 no-channel markets [0.79, 0.99]**; competitive 1/20. Market mean rounds 11–40: 16.4 private vs
 16.9 none (Nash + 4.9 / + 5.4); paired private − none −0.44 [−1.84, +1.00] (Figure: `figures/p2_strong_llm_p2strongF.png`).
 
-| view (frozen) | private vs none | **strict-executed vs tacit-high** (E99-x, exploratory) | flags: strict / tacit-high / non-exec |
+| view (frozen) | private vs none | **strict-executed vs tacit-high** (E99-x, exploratory) | **strict vs non-executed, both with channel** (E116, exploratory, 13 vs 7) |
 |---|---|---|---|
-| pair premium | 0.51 [0.33, 0.70] | 0.47 [0.27, 0.69] | 2/13 / 7/19 / 3/7 |
-| market excess over Nash | 0.43 [0.22, 0.67] | 0.50 [0.28, 0.72] | – |
-| action (LLM) | 0.64 [0.45, 0.82] | 0.57 [0.32, 0.80] | 8/13 / 10/19 / 7/7 |
-| action_stats | 0.54 [0.36, 0.72] | 0.43 [0.21, 0.66] | 5/13 / 11/19 / 6/7 |
-| text (public) | 0.20 [0.07, 0.36] | 0.25 [0.08, 0.46] | 5/13 / 15/19 / 1/7 |
-| combined | 0.20 [0.07, 0.34] | 0.18 [0.04, 0.35] | 6/13 / 16/19 / 3/7 |
-| plan (own private plans + prices, E103) | 0.70 [0.51, 0.87] | **0.76 [0.55, 0.93]** | 5/13 / 0/19 / 1/7 |
-| no-LLM: share of plans naming the partner (E111) | – | 0.82 [0.66, 0.96] | – |
+| pair premium | 0.51 [0.33, 0.70] | 0.47 [0.27, 0.69] | 0.35 [0.05, 0.68] |
+| market excess over Nash | 0.43 [0.22, 0.67] | 0.50 [0.28, 0.72] | 0.78 [0.54, 0.96] (partly by construction) |
+| action (LLM) | 0.64 [0.45, 0.82] | 0.57 [0.32, 0.80] | 0.33 [0.10, 0.59] |
+| action_stats | 0.54 [0.36, 0.72] | 0.43 [0.21, 0.66] | 0.18 [0.00, 0.42] |
+| text (public) | 0.20 [0.07, 0.36] | 0.25 [0.08, 0.46] | 0.61 [0.37, 0.85] |
+| combined | 0.20 [0.07, 0.34] | 0.18 [0.04, 0.35] | 0.52 [0.21, 0.82] |
+| plan (own private plans + prices, E103) | 0.70 [0.51, 0.87] | **0.76 [0.55, 0.93]** | 0.69 [0.44, 0.91] |
+| no-LLM: share of plans naming the partner (E111) | – | 0.82 [0.66, 0.96] | 0.73 [0.50, 0.92] |
+
+*E116 within-channel contrast (zero LLM calls, registered before computing; `uv run python p2_within_agree.py`):* both classes had the channel, so the
+footprint confound is gone. No text or plan view resolves execution (plan 0.69, partner count 0.73, public text 0.61; CIs reach 0.5); judged
+agreement cannot separate much (13/13 vs 5/7). The action auditors rank the wrong way (action_stats 0.18 [0.00, 0.42]: non-executed pairs look
+*more* collusive to them). Agreed-only non-executed (n = 5) gives the same picture. Say-vs-do here: what pairs plan does not resolvably predict what they do.
 
 Reading. (i) The premium and market-excess AUROC CIs include 0.5. This does not establish equivalence; the classes use different
 price-based selection rules, so chance discrimination is not guaranteed by design. (ii) Public-text scores rank tacit-high markets above
@@ -429,8 +435,8 @@ siblings); replication and exploratory results cite their own JSON sources. Hard
 |---|---|---|---|---|
 | text | 0.47 [0.36, 0.58] | 0.65 [0.59, 0.71] | 0.60 [0.53, 0.67] | 0.35 [0.26, 0.46] |
 | action | 0.75 [0.65, 0.85] | 0.79 [0.72, 0.87] | 0.78 [0.72, 0.84] | 0.42 [0.28, 0.56] |
-| action_stats | 0.86 [0.77, 0.94] | 0.89 [0.84, 0.94] | 0.89 [0.84, 0.94] | 0.66 [0.52, 0.80] |
-| combined | 0.74 [0.64, 0.83] | 0.80 [0.71, 0.87] | 0.78 [0.72, 0.84] | 0.43 [0.31, 0.57] |
+| action_stats | 0.86 [0.77, 0.94] | 0.89 [0.84, 0.94] | 0.89 [0.84, 0.94] | 0.18 [0.00, 0.42] |
+| combined | 0.74 [0.64, 0.83] | 0.80 [0.71, 0.87] | 0.78 [0.72, 0.84] | 0.52 [0.21, 0.82] |
 | combined_stats | 0.80 [0.70, 0.89] | 0.93 [0.89, 0.96] | 0.89 [0.85, 0.93] | 0.73 [0.60, 0.84] |
 | structured | 0.84 [0.75, 0.91] | 0.92 [0.89, 0.96] | 0.89 [0.85, 0.94] | 0.70 [0.57, 0.82] |
 | fusion | 0.72 [0.62, 0.83] | 0.82 [0.74, 0.88] | 0.80 [0.74, 0.85] | 0.43 [0.30, 0.57] |
@@ -545,8 +551,8 @@ labeller log lines with per-run pair premiums (runs 0027–0029); no metric was 
 |---|---|---|---|
 | text | 0.67 [0.47, 0.86] | 0.69 [0.55, 0.82] | 0.07 / 0.20 / 0.00 |
 | action | 0.76 [0.57, 0.91] | 0.81 [0.67, 0.93] | 0.33 / 0.10 / 0.00 |
-| combined | 0.62 [0.40, 0.80] | 0.80 [0.66, 0.91] | 0.53 / 0.50 / 0.20 |
-| action_stats | 0.80 [0.61, 0.94] | 0.99 [0.96, 1.00] | 0.53 / 0.50 / 0.00 |
+| combined | 0.62 [0.40, 0.80] | 0.80 [0.66, 0.91] | 0.52 [0.21, 0.82] |
+| action_stats | 0.80 [0.61, 0.94] | 0.99 [0.96, 1.00] | 0.18 [0.00, 0.42] |
 | combined_stats | 0.66 [0.47, 0.85] | 0.98 [0.95, 1.00] | 0.73 / 0.60 / 0.20 |
 | structured | 0.66 [0.45, 0.84] | 0.91 [0.82, 0.98] | 0.40 / 0.40 / 0.00 |
 | fusion | 0.78 [0.60, 0.93] | 0.84 [0.71, 0.93] | 0.47 / 0.10 / 0.00 |
@@ -644,7 +650,8 @@ computed on the mod-3 subset incl. test runs. The test evaluation is locked and 
   absolute screens need model- and prompt-matched references; replacing a firm does not reset the level either (P2.15).
 - **Headline Δ_hybrid is one seller family.** The registered say-vs-do contrast (test + two fresh replications) uses gpt-6-luna sellers,
   T = 12, 4 firms, one market. Other families (P2.6, P2.11) are smaller, compared across families (associated, not isolated), and audited
-  with luna-calibrated thresholds that do not transfer. Strong-arm levers were combined, not ablated.
+  with luna-calibrated thresholds that do not transfer. Strong-arm levers were combined, not ablated. The cross-family auditor
+  re-run on the strong arm (E3) was **dropped** (time and gateway capacity); E70's model factor varies family at the market level.
 - **External data is a different construct** (P2.12): SALT measures an act inside the conversation; it supports "it depends where the
   behaviour happens", not a transfer of our numbers. D3 trust-breaking was **dropped** (promise-breaking, not collusion).
 - **Statistics.** Zero-shot auditors, one prompt per view (0 tuning on the six original views; the hint view E56 is one data-informed
