@@ -81,3 +81,26 @@ for name, ds in DS.items():
     out[name]["pair_vs_others_price"] = pair_vs_others(ds)
 Path("results/analysis/p2_band.json").write_text(json.dumps(out, indent=1))
 print({n: out[n]["pair_vs_others_price"] for n in DS})
+
+
+def opening_proposal_per_pair(ds):
+    """Descriptive: per private run, max of the first 1-2 digit numbers named in the pair's round-1 messages
+    (the opening price on the table). Counts pairs whose opening proposal is >= 17 vs <= 13."""
+    import re
+    gt = {g["run_id"]: g for g in map(json.loads, open(f"data/{ds}/ground_truth.jsonl"))}
+    res = {}
+    for l in open(f"data/{ds}/private.jsonl"):
+        r = json.loads(l); g = gt[r["run_id"]]
+        if g["condition"] != "private" or g["seed"] not in seeds:
+            continue
+        v = [int(x.group(1)) for m in r["chat"] if m["round"] == 0 for x in [re.search(r"\b(\d{1,2})\b", m["text"])] if x]
+        res[r["run_id"]] = max(v) if v else None
+    vals = [v for v in res.values() if v is not None]
+    return {"per_run": res, "n_ge_17": sum(v >= 17 for v in vals), "n_le_13": sum(v <= 13 for v in vals), "n": len(res)}
+
+
+for name, ds in DS.items():
+    out[name]["opening_proposal_per_pair"] = opening_proposal_per_pair(ds)
+Path("results/analysis/p2_band.json").write_text(json.dumps(out, indent=1))
+print({n: {k: v for k, v in out[n]["opening_proposal_per_pair"].items() if k != "per_run"} for n in DS})
+print(out["sysvar2 (paraphrase 2, terse)"]["opening_proposal_per_pair"]["per_run"])

@@ -48,6 +48,23 @@
     "pair": 15.06,
     "others": 13.44
    }
+  },
+  "opening_proposal_per_pair": {
+   "per_run": {
+    "llm_p2cue_0000": 18,
+    "llm_p2cue_0006": 18,
+    "llm_p2cue_0012": 18,
+    "llm_p2cue_0018": 18,
+    "llm_p2cue_0024": 18,
+    "llm_p2cue_0030": 18,
+    "llm_p2cue_0036": 18,
+    "llm_p2cue_0042": 18,
+    "llm_p2cue_0048": 18,
+    "llm_p2cue_0054": 18
+   },
+   "n_ge_17": 10,
+   "n_le_13": 0,
+   "n": 10
   }
  },
  "sysvar1 (paraphrase 1)": {
@@ -86,6 +103,23 @@
     "pair": 15.51,
     "others": 13.69
    }
+  },
+  "opening_proposal_per_pair": {
+   "per_run": {
+    "llm_p2para1_0000": 18,
+    "llm_p2para1_0002": 18,
+    "llm_p2para1_0004": 18,
+    "llm_p2para1_0006": 18,
+    "llm_p2para1_0008": 12,
+    "llm_p2para1_0010": 18,
+    "llm_p2para1_0012": 18,
+    "llm_p2para1_0014": 18,
+    "llm_p2para1_0016": 18,
+    "llm_p2para1_0018": 18
+   },
+   "n_ge_17": 9,
+   "n_le_13": 1,
+   "n": 10
   }
  },
  "sysvar2 (paraphrase 2, terse)": {
@@ -124,6 +158,23 @@
     "pair": 14.4,
     "others": 14.0
    }
+  },
+  "opening_proposal_per_pair": {
+   "per_run": {
+    "llm_p2para2_0000": 18,
+    "llm_p2para2_0002": 12,
+    "llm_p2para2_0004": 18,
+    "llm_p2para2_0006": 18,
+    "llm_p2para2_0008": 12,
+    "llm_p2para2_0010": 18,
+    "llm_p2para2_0012": 18,
+    "llm_p2para2_0014": 18,
+    "llm_p2para2_0016": 18,
+    "llm_p2para2_0018": 12
+   },
+   "n_ge_17": 7,
+   "n_le_13": 3,
+   "n": 10
   }
  },
  "sysvar1 (paraphrase 1) - sysvar0 (original)": [

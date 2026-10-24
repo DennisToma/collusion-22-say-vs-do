@@ -42,7 +42,7 @@ test and replication evidence item beside the public log (offline, searchable; n
    **notepad with no recipient** raises their premium over rounds 2–12 by +1.04 [+0.65, +1.42] vs no channel. A real
    private channel raises it by +1.61 [+0.92, +2.35]; the difference is not resolved (+0.56 [−0.29, +1.48]), and so is the effect of delivery
    (private − placebo +0.38 [−0.41, +1.18]). The frozen premium flags 10/15 notepad runs (AUROC 0.89). The registered
-   "offer alone is not the driver" prediction failed. The notepad arm has confounds (pair-only extra text, memory). The premium also depends on wording: a terse paraphrase of the same prompt removes it (+0.24 [−0.32, +0.81] vs +1.75 on the same seeds; registered E78 failed), although the chats still agree on 18.
+   "offer alone is not the driver" prediction failed. The notepad arm has confounds (pair-only extra text, memory). The premium also depends on wording: a terse paraphrase of the same prompt removes it (+0.24 [−0.32, +0.81] vs +1.75 on the same seeds; registered E78 failed), although the judge still finds an agreement in 10/10 chats (half of them on ~12, near Nash).
 8. *Luna-calibrated detectors did not transfer to other seller families (P2.6; Claude 5-seed pilot, deepseek/sol interim):* Claude Sonnet 5.5 sellers price at or above the
    joint-monopoly level (≈ 19; Nash ≈ 11) from round 1 even with **no channel** (market mean 20.2, 5/5). This is above the profit-maximising
    price, so we read it mainly as a high-price disposition rather than learned collusion. With the channel, pairs state 20–24 and stay there (matched no-channel pairs do not, in 4/5 seeds).
@@ -57,7 +57,7 @@ Phase 2 closes known validity gaps. Every experiment is registered in `EXPERIMEN
 - *Prevalence (P2.1):* at 5% collusion prevalence the frozen premium's precision is 0.24 [0.15, 0.43] on test, 0.16 on replication (`p2_prevalence.json`).
 - *Reimplementation (P2.2):* an independent codex reimplementation from the method text matches 31/32 headline numbers (`results/reimpl/`).
 - *Behaviour labels (P2.4):* only 14/50 test "colluders" keep the agreed price; premium AUROC on that label 0.80 [0.67, 0.90]; text + actions vs best single modality −0.03 [−0.14, +0.06] (`p2_behaviour.json`).
-- *Prompt artifact (P2.5):* a private notepad with no recipient raises the pair premium by +1.04 [+0.65, +1.42] (private channel +1.61 [+0.92, +2.35]); the supervised text classifier scores notepad runs 0.86 (`p2_cue_verdict_llm_p2cue.json`, `p2_textlr.json`). Wording band (E78, `p2_band.json`): +1.75 / +1.79 / **+0.24 [−0.32, +0.81]** for the original / paraphrase 1 / terse paraphrase 2 on the same 10 seeds; agreements in chat are unchanged.
+- *Prompt artifact (P2.5):* a private notepad with no recipient raises the pair premium by +1.04 [+0.65, +1.42] (private channel +1.61 [+0.92, +2.35]); the supervised text classifier scores notepad runs 0.86 (`p2_cue_verdict_llm_p2cue.json`, `p2_textlr.json`). Wording band (E78, `p2_band.json`): +1.75 / +1.79 / **+0.24 [−0.32, +0.81]** for the original / paraphrase 1 / terse paraphrase 2 on the same 10 seeds; the judge still labels 10/10 terse chats as agreements, half of them near Nash.
 - *Other sellers (P2.6):* Claude Sonnet sellers price ≥ monopoly with no channel; premium flags 2/5, text views flag 10/10 incl. no-channel markets (`p2_family*.json`). Interim (E93, `results/analysis/interim/`): deepseek openly invites coordination in both arms (public invitations 479/480 in `none`; premium +2.05, but flags 4/10 controls); sol (4 pairs) never proposes joint pricing (premium −0.14).
 
 **P2.1 Precision at realistic prevalence (E81; post-hoc re-expression of saved scores, nothing refit).** The test split
@@ -188,14 +188,16 @@ notepad pair on top in 14/15 runs. The public-text trace therefore also appears 
 same seller prompt (same facts), on the same 10 matched seeds, private − none pair premium over rounds 2–12: original
 +1.75 [+0.91, +2.66]; paraphrase 1 +1.79 [+1.20, +2.43]; **paraphrase 2 (terse, list-like) +0.24 [−0.32, +0.81]**.
 Paraphrase 2 minus original: −1.51 [−2.33, −0.68]. Frozen premium flags (private / none): 9/2, 9/0, 4/2. The registered
-prediction (premium survives both paraphrases) **failed** for paraphrase 2. The pairs still *talk* the same. The judge
-labels 10/10 paraphrase-2 chats explicit agreements, and the first price named in round-1 messages has median 18 under all
-three wordings (≥ 17 in 80% / 63% / 58% of messages). But the prices separate less: the round-1 premium is +1.9 [+0.1, +3.9] vs +5.1
-[+4.2, +5.9] under the original. Pairs open lower (mean pair price round 1: 15.3 vs 17.1), and the other firms price higher
-(rounds 2–12: 14.0 vs 13.4; no-channel markets 13.2 vs 12.1). In llm_p2para2_0000 the pair agrees on 18 and opens at 18,
-but so does non-pair firm C (json key `pair_vs_others_price`).
-**Reading:** how much of the agreement reaches prices depends on prompt wording. Talk-based labels stay
-constant while the price signal disappears, a say-vs-do gap that a premium detector cannot see.
+prediction (premium survives both paraphrases) **failed** for paraphrase 2. Two things change. (i) *Ambition:* the
+judge still labels 10/10 paraphrase-2 chats explicit agreements. But the highest price named in the pair's round-1
+messages is ≥ 17 in 7/10 pairs (original 10/10, paraphrase 1 9/10; json key `opening_proposal_per_pair`). By our reading
+of the judge's evidence quotes (`data/llm_p2para2/labels.jsonl`), 5/10 agreements are on ~12, close to static Nash
+(11), e.g. llm_p2para2_0008 "Let's start at 12". (ii) *Others' prices:* non-pair firms price higher (rounds 2–12: 14.0 vs 13.4),
+and no-channel markets sit at 13.2 vs 12.1. The pair's round-1 price is 15.3 vs 17.1, and the round-1 premium is +1.9 [+0.1, +3.9]
+vs +5.1 [+4.2, +5.9] (json key `pair_vs_others_price`). **Reading:** the size of the premium depends on prompt wording,
+both through what the pair agrees on and through how everyone else prices. A binary "agreement in chat" label does not
+track this: it stays at 10/10 while the price signal disappears. Some of these "agreements" are on near-competitive
+prices, which a price-based detector should *not* flag.
 
 ![Figure P2.5](figures/p2_cue_rounds.png)
 
