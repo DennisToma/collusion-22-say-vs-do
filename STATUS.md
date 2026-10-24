@@ -1,6 +1,6 @@
 # STATUS
 
-## Current state (2026-10-24 00:13 UTC, iteration 9)
+## Current state (2026-10-24 00:09 UTC, iteration 9)
 - **LOCKED TEST DONE** (finalize_test.sh once: STARTED 23:59, HEADLINE_DONE 00:03; no failed steps). REPORT headline +
   abstract written from `results/analysis/report_tables_test.md`. DO NOT rerun final_analysis --split test.
 - Test (n=95, 50 y=1): text LLM run .47 / within .65; Δ_hybrid[combined] −.013 [−.09,+.06]; action_stats−action +.106
@@ -18,7 +18,7 @@
 - Risks: LLM concurrency; v3mon may not finish before 06:30 (no new experiments after).
 
 ## Log
-- 00:13 iter 9: LOCKED TEST RUN (E36) after preflight caught 1 hardset failure (E37 fix); REPORT headline/abstract;
+- 00:09 iter 9: LOCKED TEST RUN (E36) after preflight caught 1 hardset failure (E37 fix); REPORT headline/abstract;
   text_lr_inspect (E38); mechanism figs dev/test/all.
 - 23:40 iter 9: codex review_iter9 applied (E35): auditors.py --verify gate in auto_finalize + finalize preflight;
   REPORT dev table now generated values, softened claims, full disclosure. Open P2s in logs/review_iter9.md (evidence
