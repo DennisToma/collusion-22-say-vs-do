@@ -1,0 +1,30 @@
+{
+ "llm_p2qwenb": {
+  "private": {
+   "public_msgs": 720,
+   "regex_hits": 290,
+   "markets_with_hit": 15,
+   "markets": 15
+  },
+  "none": {
+   "public_msgs": 720,
+   "regex_hits": 636,
+   "markets_with_hit": 15,
+   "markets": 15
+  }
+ },
+ "llm_p2qwena": {
+  "private": {
+   "public_msgs": 720,
+   "regex_hits": 354,
+   "markets_with_hit": 15,
+   "markets": 15
+  },
+  "none": {
+   "public_msgs": 720,
+   "regex_hits": 617,
+   "markets_with_hit": 15,
+   "markets": 15
+  }
+ }
+}

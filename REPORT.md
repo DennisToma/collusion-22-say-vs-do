@@ -223,8 +223,12 @@ competitive none; `p2_strong_eval.py` → `p2_strong_classes_llm_p2strongF.json`
 agent-log/CoT monitoring. Pilot-only calibration (n = 10, in-sample): `collusion_present` 18/36 on the executed luna markets, 12/12 on
 tacit-high, 70 on a non-agreement private market; the executing pair's plans never mention the deal. Frozen thresholds 50 (and 58 on
 `tacit_high`); predictions P1 AUROC private vs none ≥ 0.75, P2 executed > tacit-high, P3 plan > text, P4 `tacit_high` ≥ 0.70 (P1/P2 look unlikely).
-*C2/C3 (generating):* previous-generation sellers gpt-5.6-sol and mimo-v2.5 (base prompt, 7 + 7 seeds each); base vs abliterated
-Qwen3.8-27B (15 + 15 each, E100; then the strong lever set 6 + 6, E102; confound: base FP8 via Aqueduct vs abliterated bf16 via Modal).
+*C2 older sellers (E98, final, base lab prompt, T = 12, generation stopped; `uv run python p2_label.py --ds llm_p2g56sol` (and `llm_p2mimo`), then
+`p2_strong.py --ds llm_p2g56sol llm_p2mimo --min-floor 12 --late 2 --out results/analysis/p2_c2older.json` and `p2_strong_eval.py`; 0 fallback runs; descriptive):*
+gpt-5.6-sol (7 + 7 matched seeds): judged agreement 4/7, executed 1/7 [0.02, 0.50]; market ≈ Nash + 7.2 with *and* without a channel; frozen premium
+flags 5/7 private vs 1/7 none (AUROC 0.75 [0.49, 0.97]). mimo-v2.5 (4 private + 3 none): agreement 4/4, executed 4/4 [0.56, 1.00] (strict 3/4), market ≈ Nash + 4.4
+in both arms, premium flags 4/4 vs 1/3. Unlike gpt-6.1-sol (0/7 agreements, P2.6), the previous-generation sol agrees but rarely keeps it. With Q1.4's
+gpt-5.6-luna (tacit-high 9/10 in their market), older and other models price far above Nash without any channel in both markets. C3 (abliterated Qwen): P2.11.
 
 **P2.8 Second fresh replication, n = 60 (E80 + E89 registered before generation; computed once 12:05 UTC; `uv run python
 replication.py --ds llm_p2rep` → `results/analysis/replication_llm_p2rep.json`; behaviour labels `p2_behaviour.py --ds llm_p2rep
@@ -278,6 +282,27 @@ heterogeneous-cost competitive price, which a deployable screen would need to kn
 but luna prices the edge at +1.08, so 9/10 flags exceed what competition predicts (a seller disposition, not a clean hard negative).
 Q1.4 P2.4 reports the cost case in a scripted market: all 30/30 cost-asymmetric no-collusion markets flagged (false positives). Gap 8 (coded public signals) was dropped for budget (two completed,
 unanalysed runs in `data/llm_p2coded`; remainder not generated).
+
+**P2.11 Abliterated vs base Qwen3.8-27B sellers (C3; E100 registered before generation; computed once 14:05 UTC; `bash p2_c3post.sh`
+then `uv run python p2_qwen_cmp.py` → `results/analysis/p2_qwen_cmp.json`; per-model `p2_strong_eval_llm_p2qwen{a,b}.json`;
+public-text regex (post hoc) `uv run python p2_qwen_public.py` → `p2_qwen_public.json`).** Lab prompt, T = 12, 15 matched seeds × {private, none} per model;
+base = FP8 via Aqueduct, abliterated = bf16 via Modal (precision confound); 0 fallback runs. Registered: abliterated ≥ base on P1–P3, "supported" only if the CI excludes 0.
+
+| | base | abliterated | abliterated − base [95% CI] | verdict |
+|---|---|---|---|---|
+| P1 judged agreement, private | 15/15 | 15/15 | 0.00 [−0.20, +0.20] (Newcombe) | not supported |
+| P2 executed (floor ≥ 12 kept, rounds 2–12) | 13/15 [0.64, 0.97] | 13/15 [0.64, 0.97] | 0.00 [−0.26, +0.26] | not supported |
+| P3 pair premium, private − none | +2.10 | +0.86 | **−1.24 [−2.41, −0.03]** (seed bootstrap) | not supported (opposite sign) |
+| market excess over Nash, private / none | +9.7 / +6.4 | +4.6 / +4.3 | – | descriptive |
+| frozen premium AUROC private vs none | 0.88 [0.72, 0.97] | 0.64 [0.45, 0.83] | – | descriptive |
+| frozen text view AUROC private vs none (flags none) | 0.21 (15/15) | 0.15 (15/15) | – | descriptive |
+
+Removing refusal training did not detectably increase agreement or execution: both models agree in every private market. The abliterated
+seller has the *smaller* channel premium and the lower price level. Both models price well above Nash without a channel (all 30 no-channel
+markets are tacit-high), and they invite rivals publicly: 636/720 (base) and 617/720 (abliterated) no-channel public messages match the
+frozen invitation regex, vs 290 and 354 with a private channel. So the text views flag every no-channel market and score *below* chance (as for Claude/deepseek, P2.6).
+Q1.4 E61 (their market, T = 20): abliterated − base −0.37 [−2.09, +1.36]. In neither market did removing refusal training detectably increase channel
+collusion. "No detectable" is not "no effect": n = 15 pairs excludes only large differences. E102 (strong framing, 6 + 6 seeds per model) is still generating and will be reported descriptively.
 
 **P2.12 External validity: SALT-NLP agent-collusion (Part D1; E105 registered before any call; E104 P1/P2 registered after the pooled
 crosstab was seen, so mostly descriptive; `uv run python salt_d1.py sayvsdo|sample|audit|tfidf|report` → `results/analysis/salt_d1.json`;

@@ -166,6 +166,21 @@ Claude quota runs the managers. gpt-6.1-sol as a seller for a third family check
    → **DROPPED** (11:45; codex to Part C). One Limitations line, citing Q1.4 P2.6 bid rotation and SALT's silent executors.
 Items 1–4 must be done by Sat 20:00 if at all possible; 5–8 by Sun 15:00.
 
+
+**C3b/C3c — replicate the abliteration null on more Qwen pairs (added 16:00 UTC).** C3 (Qwen3.8-27B) gave no
+abliteration effect; one pair is a case, three pairs are a pattern. Same design as C3 (matched seeds, A vs C,
+15 + 15 per model, base prompt; plus the memory lever if C3's memory arm shows execution), all via `llm.chat(backend="qwen", model=...)`
+unless noted:
+- **C3b Qwen3.6-35B-A3B (MoE, 3B active):** abliterated `model="qwen36-abliterated"` (Modal L40S, FP8) vs base
+  `llm.chat(backend="aqueduct", model="qwen-3.6-35b")` (gateway, AWQ 4-bit, free). Owner: Q1.4.
+- **C3c Qwen3.5-9B (small, cheap):** `model="qwen9-abliterated"` vs `model="qwen9-base"` (both Modal L4, FP8 —
+  identical serving, the cleanest pair). Owner: Q2.2. First check the 9B follows the game protocol (parse rate,
+  sane prices in 3 pilot games); if > 10% unparsable or nonsense prices, report that and drop it.
+Each Modal endpoint cold-starts in up to ~10 min after 10 min idle → run each model's games as one batch.
+Cost ≈ L40S $2.2/h, L4 $1/h each; the $70 guard covers all apps. Priority: after the running Part C arms and
+Part D1, before Part D2/D3. Report the three pairs in one table: abliterated − base (agreement, executed, markup,
+detector AUROCs) with CIs, and state the precision caveat (FP8/AWQ/bf16) per pair.
+
 ## Part D — EXTERNAL VALIDITY with the three proposed datasets (added by Dennis 14:05 UTC)
 **Priority:** after the important in-flight work (E44/P2.8, Part C strong arm + C3 qwen pair, the Sat 20:00
 checkpoint) — and BEFORE any remaining exploration-portfolio (part B) items. Target: results by Sun 12:00 UTC.

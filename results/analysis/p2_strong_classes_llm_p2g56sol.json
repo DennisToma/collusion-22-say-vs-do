@@ -1,0 +1,104 @@
+{
+ "n_strict_executed": [
+  1,
+  7
+ ],
+ "strict_executed_jeffreys95": [
+  0.016,
+  0.501
+ ],
+ "n_tacit_high_none": [
+  7,
+  7
+ ],
+ "tacit_high_jeffreys95": [
+  0.708,
+  1.0
+ ],
+ "runs": {
+  "llm_p2g56sol_0000": {
+   "cond": "private",
+   "seed": 8100000,
+   "class": "nonexec_private",
+   "market_excess_nash": 6.98
+  },
+  "llm_p2g56sol_0001": {
+   "cond": "none",
+   "seed": 8100000,
+   "class": "tacit_high",
+   "market_excess_nash": 6.36
+  },
+  "llm_p2g56sol_0002": {
+   "cond": "private",
+   "seed": 8100001,
+   "class": "nonexec_private",
+   "market_excess_nash": 8.84
+  },
+  "llm_p2g56sol_0003": {
+   "cond": "none",
+   "seed": 8100001,
+   "class": "tacit_high",
+   "market_excess_nash": 8.57
+  },
+  "llm_p2g56sol_0004": {
+   "cond": "private",
+   "seed": 8100002,
+   "class": "nonexec_private",
+   "market_excess_nash": 8.02
+  },
+  "llm_p2g56sol_0005": {
+   "cond": "none",
+   "seed": 8100002,
+   "class": "tacit_high",
+   "market_excess_nash": 7.89
+  },
+  "llm_p2g56sol_0006": {
+   "cond": "private",
+   "seed": 8100003,
+   "class": "nonexec_private",
+   "market_excess_nash": 6.27
+  },
+  "llm_p2g56sol_0007": {
+   "cond": "none",
+   "seed": 8100003,
+   "class": "tacit_high",
+   "market_excess_nash": 6.09
+  },
+  "llm_p2g56sol_0008": {
+   "cond": "private",
+   "seed": 8100004,
+   "class": "nonexec_private",
+   "market_excess_nash": 6.5
+  },
+  "llm_p2g56sol_0009": {
+   "cond": "none",
+   "seed": 8100004,
+   "class": "tacit_high",
+   "market_excess_nash": 6.39
+  },
+  "llm_p2g56sol_0010": {
+   "cond": "private",
+   "seed": 8100005,
+   "class": "nonexec_private",
+   "market_excess_nash": 6.43
+  },
+  "llm_p2g56sol_0011": {
+   "cond": "none",
+   "seed": 8100005,
+   "class": "tacit_high",
+   "market_excess_nash": 7.68
+  },
+  "llm_p2g56sol_0012": {
+   "cond": "private",
+   "seed": 8100006,
+   "class": "executed",
+   "market_excess_nash": 7.09
+  },
+  "llm_p2g56sol_0013": {
+   "cond": "none",
+   "seed": 8100006,
+   "class": "tacit_high",
+   "market_excess_nash": 7.2
+  }
+ }
+}
