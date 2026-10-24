@@ -2,26 +2,27 @@
 
 # STATUS
 
-## Current state (2026-10-24 12:10 UTC, Phase 2 iteration 8)
-- DONE p2rep (fresh n=60, registered E80/E89, computed ONCE 12:05): premium 0.94 [0.87,0.99] (P1 held); Δ_hybrid[combined]
-  −0.04 [−0.16,+0.08]; text 0.45; all 4 predictions held. Behaviour: 12/30 kept; premium .78 on kept label; no detector separates
-  kept vs abandoned (~0.5). Pooled n=90 (E101): Δ_hybrid −0.07 [−0.17,+0.02] (cond), −0.03 [−0.13,+0.06] (kept). REPORT P2.8, abstract, TL;DR 1.
-- BUG FOUND: chain6 (E91-ext views ds/sol) ran 10:13 with 0 calls (labels not yet written) -> relaunched as p2_chain6b.sh (then p2_family3way).
-- C3 qwen (E100) RUNNING: base (Aqueduct) + abliterated (Modal, $4.6 spent) 15+15 each, lab T=12 (p2_qwen.sh); then E102 strong-lever qwen
-  6+6 each (p2_qwen_strong.sh, auto). Strong pilot final: luna 2/3 executed, sol 0/2.
-- RUNNING too: E99 strongF (4/40, ~ETA 19:00), mimo 5/14, g56sol 4/14, p2asym (chain2), p2cue audit (chain3).
+## Current state (2026-10-24 12:25 UTC, Phase 2 iteration 9)
+- DONE p2rep (E80/E89 held, P2.8; pooled n=90 E101). DONE gap 7 (E87, P2.9): premium flags highcost 7/10, quality 9/10 vs none 2/10;
+  own-cost adjustment FAILS (moves flag to the low-cost pair 8/10: ~half cost pass-through). Gap 8 p2coded killed (2 partial runs, unused).
+- E99 strongF 6/40 (gen ~10 min/run/slot, ETA ~18:00). REGISTERED E99-amend (4 behaviour classes; tacit-high none) + E103 plan view.
+  p2_strong_eval.py now writes classes -> results/analysis/p2_strong_classes_<ds>.json (for Q1.4) + exec_or_tacit/tacit contrasts.
+- E103 pilot calibration (n=10, p2_plan_calib.json): plan reader scores executed luna 18/36 (reads "hold while rivals hold" as tacit),
+  tacit_high tracks market height (luna 45-92, sol 4-5). Frozen: thr 50 both scores + 58 tacit_high.
+- p2_strongF_post.sh RUNNING: prefetches labels/views/plan every 40 min (cache only), then on "strongF gen done" runs everything once.
+- RUNNING: chain6b (ds views 56/120), C3 qwen (a 16, b 8) -> p2_c3post.sh auto, E102 qwen strong, mimo 5/14, g56sol 4/14, chain3 p2cue.
+- codex review of Abstract/TL;DR/P2.4-P2.9 launched 12:20 -> logs/review_iter9p2_codex.md (apply next iteration).
 ## Next steps
-1. E100: p2_c3post.sh runs labels+views+p2_strong_eval+p2_strong AUTOMATICALLY (logs/partc_qwen_post.log); then write P2.9 from results/analysis/p2_qwen.json + p2_strong_eval_llm_p2qwen{a,b}.json. Manual equivalent: `uv run python p2_strong.py --ds llm_p2qwenb llm_p2qwena --min-floor 12 --late 2 --out results/analysis/p2_qwen.json`
-   + `uv run python auditors.py --ds <ds> --views text,action,combined,action_stats --workers 2` (labels first: `p2_label.py --ds <ds>`)
-   + `p2_strong_eval.py`; premium private−none (p2_cue-style) -> REPORT P2.9 (C3) + E100 result row.
-2. chain6b done -> P2.6 finals (deepseek/sol rows replace interim) + E95 3-way table + E91-ext result rows.
-3. C2 (mimo, g56sol) done -> p2_strong.py --min-floor 12 --late 2 per ds. E99 at Sun 12:00 latest (see STATUS iter7 commands in log).
-4. Abstract still needs a C-part sentence once E99/E100 land. Next codex review Sun ~13:00 after finals.
-- Risk: codex load high (strongF 3 games, chain3, chain6b, asym, g56sol + Q1.4). Aqueduct shared with Q1.4 (qwen-base).
-- Known: verify_artifacts.py FAILS (manifest stale) — rebuild deferred to Sun 16:30 per DIRECTION.
-- For Q1.4: our strong luna arm = market-wide spillover (no-channel 15.5–16.3); our p2rep confirms premium 0.94 on fresh seeds.
+1. Apply logs/review_iter9p2_codex.md fixes to REPORT.
+2. C3: when logs show "c3 strong done": write REPORT P2.10 (C3 qwen) from results/analysis/p2_qwen.json + p2_strong_eval_llm_p2qwen{a,b}.json; E100 result row.
+3. chain6b done -> P2.6 finals + E95 3-way (p2_family3way.py) + E91-ext rows; E94 para1 close (one row + one line).
+4. E99: when "strongF post done" in logs/partc_chain.log: P2.7 final from p2_strong_eval_llm_p2strongF.json (by class + plan view, E103 P1-P4 verdicts),
+   E99/E103 result rows, abstract C-part sentence + merger sentence. Checkpoint Sat 19:30 regardless (interim labelled).
+5. p2aware frozen views (gap 5, after chain6b): `auditors.py --ds llm_p2aware --views text,action,combined,action_stats --workers 2`.
+- Risk: codex overload (~35 codex procs across repos). Known: verify_artifacts.py FAILS (manifest) — deferred to Sun 16:30.
 
 ## Log
+- 12:25 P2 iter9: E87 asym result (P2.9; cost-adj P2 failed); E99-amend + E103 plan view registered, pilot calibration; strongF post chain w/ prefetch; p2coded killed; codex review launched.
 - 12:10 P2 iter8: p2rep computed once (E80/E89 held; P2.8), E84 on p2rep, pooled E101; chain6 0-call bug -> chain6b; C3 qwen E100 + E102 launched; strong pilot final.
 - 11:39 P2 iter7: luna pilot final 2/3 executed (strict 2/3); seed 2 executed floor 18 but matched no-channel market also 18.0 -> executed adds ~0 over tacit. g56sol started.
 - 11:17 P2 iter7: E97 interim pilot (luna 1/2 executed, market-wide high prices, sol 0/1); E99 full arm registered+launched; REPORT P2.7.

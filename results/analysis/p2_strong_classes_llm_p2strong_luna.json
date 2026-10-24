@@ -1,0 +1,56 @@
+{
+ "n_strict_executed": [
+  2,
+  3
+ ],
+ "strict_executed_jeffreys95": [
+  0.177,
+  0.961
+ ],
+ "n_tacit_high_none": [
+  2,
+  3
+ ],
+ "tacit_high_jeffreys95": [
+  0.177,
+  0.961
+ ],
+ "runs": {
+  "llm_p2strong_luna_0000": {
+   "cond": "private",
+   "seed": 9700000,
+   "class": "nonexec_private",
+   "market_excess_nash": 4.29
+  },
+  "llm_p2strong_luna_0001": {
+   "cond": "none",
+   "seed": 9700000,
+   "class": "competitive",
+   "market_excess_nash": 1.28
+  },
+  "llm_p2strong_luna_0002": {
+   "cond": "private",
+   "seed": 9700001,
+   "class": "executed",
+   "market_excess_nash": 5.48
+  },
+  "llm_p2strong_luna_0003": {
+   "cond": "none",
+   "seed": 9700001,
+   "class": "tacit_high",
+   "market_excess_nash": 3.65
+  },
+  "llm_p2strong_luna_0004": {
+   "cond": "private",
+   "seed": 9700002,
+   "class": "executed",
+   "market_excess_nash": 6.54
+  },
+  "llm_p2strong_luna_0005": {
+   "cond": "none",
+   "seed": 9700002,
+   "class": "tacit_high",
+   "market_excess_nash": 6.53
+  }
+ }
+}
