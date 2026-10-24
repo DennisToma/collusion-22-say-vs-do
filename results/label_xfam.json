@@ -1,0 +1,78 @@
+{
+ "model": "claude-sonnet-5-5",
+ "prompt": "label_llm.JUDGE (verbatim)",
+ "datasets": {
+  "llm_v3": {
+   "n": 70,
+   "n_private_total": 70,
+   "gpt_y1": 70,
+   "claude_y1": 70,
+   "binary_agree": 70,
+   "binary_agree_frac": 1.0,
+   "kappa_3class": 0.328,
+   "class3_agree": 60,
+   "claude_counts": {
+    "explicit": 57,
+    "info_exchange": 13
+   },
+   "gpt_counts": {
+    "explicit": 67,
+    "info_exchange": 3
+   },
+   "disagreements": []
+  },
+  "llm_v3rep": {
+   "n": 15,
+   "n_private_total": 15,
+   "gpt_y1": 15,
+   "claude_y1": 15,
+   "binary_agree": 15,
+   "binary_agree_frac": 1.0,
+   "kappa_3class": 0.375,
+   "class3_agree": 11,
+   "claude_counts": {
+    "explicit": 9,
+    "info_exchange": 6
+   },
+   "gpt_counts": {
+    "explicit": 13,
+    "info_exchange": 2
+   },
+   "disagreements": []
+  },
+  "llm_v3fp": {
+   "n": 16,
+   "n_private_total": 16,
+   "gpt_y1": 0,
+   "claude_y1": 0,
+   "binary_agree": 16,
+   "binary_agree_frac": 1.0,
+   "kappa_3class": null,
+   "class3_agree": 16,
+   "claude_counts": {
+    "none": 16
+   },
+   "gpt_counts": {
+    "none": 16
+   },
+   "disagreements": []
+  },
+  "llm_v3mon": {
+   "n": 14,
+   "n_private_total": 14,
+   "gpt_y1": 0,
+   "claude_y1": 0,
+   "binary_agree": 14,
+   "binary_agree_frac": 1.0,
+   "kappa_3class": null,
+   "class3_agree": 14,
+   "claude_counts": {
+    "none": 14
+   },
+   "gpt_counts": {
+    "none": 14
+   },
+   "disagreements": []
+  }
+ }
+}

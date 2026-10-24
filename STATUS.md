@@ -1,6 +1,6 @@
 # STATUS
 
-## Current state (2026-10-24 05:50 UTC, iteration 28)
+## Current state (2026-10-24 06:10 UTC, iteration 29)
 - LOCKED TEST DONE (00:03), REPLICATION DONE (02:07); never rerun; detection estimates unchanged.
 - Test: premium run AUROC .95; action_stats .86; combined-minus-best-unimodal -.013 [-.091,+.064].
 - Replication (n=30): premium .92 vs action_stats .80; 4/4 registered rules held (not equivalence).
@@ -11,14 +11,17 @@
   localisation +.07 [+.02,+.13]. Codex review applied (logs/review_iter27_nolevel.md).
 - iter28: fresh full-REPORT claims audit (codex + Opus, logs/review_iter28_final_*.md): numbers all matched JSON;
   ~25 framing fixes applied (replication text nominally hurts, E71 localisation mixed, 'resolved' defined, placebo wording).
+- NEW E74 (label-only): Claude Sonnet re-judge of all 115 private chats agrees with GPT judge on binary y 115/115;
+  explicit-vs-info_exchange sub-label differs (κ .33/.38). REPORT Labels + Limitations updated; codex review applied.
 - 47 tests / 418 hashes / 2,368 audit inputs pass; exports rebuilt (27 pages); talk unchanged at 7 slides.
 ## Next steps (no new experiments after 06:30; FINALIZE 08:15)
 1. Keep detection results frozen; present PRESENTATION.pdf or PRESENTATION.html. Send REPORT.pdf for detail.
 2. Read-only: python3 -S verify_artifacts.py; uv run python check_audit_inputs.py; python3 -S check_price_transitions.py --check.
 3. If REPORT.md changes, rerun build_handoff.py, then re-record the manifest (rm data/artifact_manifest.json; verify_artifacts.py --write-manifest).
-4. Optional remaining (before 06:30): nothing essential; prefer polish/review over new audits.
+4. After 06:30: no new experiments. Polish only; FINALIZE 08:15.
 
 ## Log
+- 06:10 iter 29: E74 cross-family label re-judge (label_xfam.py, 115 Sonnet calls), REPORT, exports, manifest; codex review logs/review_iter29_xfam_label.md.
 - 05:50 iter 28: final claims audit (E73), codex + Opus; framing fixes in REPORT; exports/manifest rebuilt; test phrase updated.
 - 05:35 iter 27: E71 level-column ablation (action_stats_nolevel, 155 audits, nolevel_view.py); checker/verifier counts 44->46 caches, 2,213->2,368 audits; codex review applied; REPORT/exports/manifest refreshed.
 - 05:40 iter 26: E70 markup_baseline.py (comparison-free markup vs premium; own-cost variant after Codex review logs/review_iter26_markup.md); REPORT, exports, manifest updated.

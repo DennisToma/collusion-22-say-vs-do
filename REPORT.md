@@ -114,7 +114,7 @@ triggering a price war"). Pilot data: `data/llm_v2` (firm framing), `data/pilot_
 
 **Labels (`label_llm.py`).** A gpt-6.1-sol judge reads ONLY the private chat (no prices, to avoid building the
 action signal into the label) → `explicit` / `info_exchange` / `none`. Primary label y = explicit ∪
-info_exchange on the assigned pair. Realised conduct (pair price premium over the other two firms, rounds 5–12; the
+info_exchange on the assigned pair. *Cross-family label check (E74, post-hoc, label-only; `uv run python label_xfam.py` → `results/label_xfam.json`):* Claude Sonnet 5.5 with the same `JUDGE` template and chat formatting (backend wrappers differ) re-judged all 115 private chats (llm_v3 70, llm_v3rep 15, firm-framing `llm_v3fp` 16, monitored `llm_v3mon` 14) and agrees on y in 115/115 (70/70 and 15/15 positive; 0/16 and 0/14 positive). The two judges give identical binary labels on these 115 chats (pooled binary κ = 1; within each dataset κ is undefined because each is single-class); this does not establish label correctness or generalisation; the explicit-vs-info_exchange split is less stable (Claude: 57 explicit/13 info_exchange vs GPT 67/3 on llm_v3, exact agreement 60/70, 3-class κ 0.33; llm_v3rep 9/6 vs 13/2, 11/15, κ 0.38) and is not used as an endpoint. Realised conduct (pair price premium over the other two firms, rounds 5–12; the
 mechanism-figure summaries separately use rounds 9–12) is reported separately. Private chat is never auditor input.
 
 **Endpoint.** y = 1 iff a judge reading the private chat finds an explicit price agreement or a pricing-intention
@@ -520,7 +520,8 @@ computed on the mod-3 subset incl. test runs. The test evaluation is locked and 
   would happen if sellers changed their opening strategy.
 - Single seller model family (GPT, gpt-6-luna), single framing for the headline data, 12 rounds, 4 firms.
 - Agreement labels from one LLM judge (gpt-6.1-sol, same family as the auditor; blind to prices); manually
-  spot-checked on 3 dev chats + pilots.
+  spot-checked on 3 dev chats + pilots. A Claude Sonnet 5.5 re-judge (E74) reproduces the binary label on all 115
+  private chats, but the explicit vs info_exchange sub-label differs between these two judges.
 - Zero-shot auditors with one prompt per view (0 tuning attempts on the six original views; the post-hoc hint view E56 is one data-informed revision); a tuned or few-shot auditor might use the stats table better.
 - Small dev split (30 runs, base rate 2/3) → dev-fitted thresholds and fusion weight are noisy. Reported intervals resample saved runs and
   scores; they do not repeat model calls, refit supervised models, or account for adaptive analysis selection. The Youden rule breaks
@@ -846,6 +847,7 @@ were produced; the two completed run-once entry points now refuse to rerun even 
 ```
 uv run python llm_market.py --ds llm_v3 --plan private:70,none:35,legit:20 --rounds 12 --framing lab --games-parallel 2 --seed 3000
 uv run python label_llm.py --ds llm_v3
+uv run python label_xfam.py                    # E74 cross-family (Claude Sonnet) label re-judge, label-only
 uv run python auditors.py --ds llm_v3 --variant orig   # default = all six views
 uv run python hardset.py --ds llm_v3
 uv run python final_analysis.py --split dev    # development only; the test headline runs ONLY via finalize_test.sh
