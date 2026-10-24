@@ -1,0 +1,11 @@
+{
+ "kind": "read-only final-result citation; no local detector recomputation",
+ "snapshot_utc": "2026-10-24T21:46:08.728565+00:00",
+ "sibling_head": "9cee04681b5fb9342d286563c1f1e439764188c7",
+ "source": "results/eval/e68_cda.json",
+ "source_sha256": "12045ea744443965e9c24414f6f8422cb2e4c90e21b9343efdf5e34353207374",
+ "producer": "uv run python scripts/e68_cda.py (Q1.4; already evaluated once)",
+ "producer_sha256": "0bb6b5b05a9101d9ec97e82d2371a1cdc8f868530e00d37402c14f432f9e1508",
+ "scope": "Q1.4 E68 final 15 matched seeds x comms/nocomms; action-detector comparison, not a text/hybrid evaluation",
+ "caveat": "nocomms seed14 regenerated once after parse crash before full-set outcome inspection; 18 parse failures in 14/30 final runs (Q1.4 REPORT P2.12/R32)"
+}

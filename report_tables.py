@@ -3,6 +3,7 @@
     uv run python report_tables.py --split dev    # -> results/analysis/report_tables_dev.md
     uv run python report_tables.py --split test   # after finalize_test.sh
     uv run python report_tables.py --say-vs-do    # -> results/analysis/p2_say_vs_do.md (Phase 2 summary)
+    uv run python report_tables.py --external-d2  # -> results/analysis/p2_external_d2.md (Q1.4 final citation)
 
 Sections whose input json does not exist yet are skipped (listed at the end as "pending").
 """
@@ -237,6 +238,35 @@ def say_vs_do():
     print(out.read_text())
 
 
+def external_d2():
+    """Render the final sibling D2 citation from its pinned result, without rerunning any analysis."""
+    import hashlib
+    root = Path("data/ext_cda_d2")
+    raw = (root / "e68_cda.json").read_bytes()
+    provenance = load(root / "SOURCE.json")
+    assert hashlib.sha256(raw).hexdigest() == provenance["source_sha256"], "D2 snapshot digest mismatch"
+    d = json.loads(raw)
+    assert d["complete"] and d["sample_status"] == "full declared set", "D2 final set required"
+    assert d["n_comms"] == d["n_nocomms"] == 15 and len(d["runs"]) == 30
+    m = d["manipulation_check"]
+    effect = f"{m['diff']:+.2f} [{m['ci'][0]:+.2f}, {m['ci'][1]:+.2f}]"
+    metric = lambda key: pci([d["auroc"][key]["auroc"], *d["auroc"][key]["ci"]])
+    line = (f"**Part D2 (Q1.4 E68, external double auction; {d['n_comms']} + {d['n_nocomms']} games): "
+            f"{d['verdict']}.** Chat raises all-round mean asks by {effect}; second-half ask-level AUROC "
+            f"{metric('level')}, pCMI {metric('pcmi')}. This is an action-detector comparison; asks are offers, "
+            "not paid prices, and the ask effect alone does not verify an agreement. "
+            "Pinned source: `data/ext_cda_d2/e68_cda.json`; regenerate this citation with "
+            "`uv run python report_tables.py --external-d2`.")
+    out = A / "p2_external_d2.md"
+    out.write_text(line + "\n")
+    print(line)
+
+
 if __name__ == "__main__":
     import sys
-    say_vs_do() if "--say-vs-do" in sys.argv else main()
+    if "--say-vs-do" in sys.argv:
+        say_vs_do()
+    elif "--external-d2" in sys.argv:
+        external_d2()
+    else:
+        main()

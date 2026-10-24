@@ -1,7 +1,7 @@
 # Say vs. Do: does auditing what AI agents *say* together with what they *do* catch collusion better?
 
 *Apart AI Collusion Sprint, Q2.2 — text + action auditing. v1 (overnight) results are frozen as git tag `v1-overnight`;
-Phase 2 (from 2026-10-24 06:30 UTC) re-tests them. Checkpoint text, 2026-10-24 21:29 UTC: P2.1–P2.15 final (E115 evaluated 19:20); P2.7 distinguishes the frozen execution rules across endpoints. E1 grid audit E113 remains pending: 172 snapshot games (luna 6/6, qwen 4/6 balanced sweeps), cached audits current; final eval once Q1.4 announces 6 complete sweeps. E102 (strong-framing Qwen, 6 seeds) is descriptive. Exports: [README.md](README.md).*
+Phase 2 (from 2026-10-24 06:30 UTC) re-tests them. Checkpoint text, 2026-10-24 21:53 UTC: P2.1–P2.15 final (E115 evaluated 19:20); P2.7 distinguishes frozen execution rules; Q1.4 D2 is final and inconclusive (P2.12). E1 grid audit E113 remains pending: 180 snapshot games (luna 6/6, qwen 5/6 balanced sweeps), cached audits current; final eval once Q1.4 announces 6 complete sweeps. E102 (strong-framing Qwen, 6 seeds) is descriptive. Exports: [README.md](README.md).*
 
 ## Abstract
 Adding LLM sellers' public messages to their prices gives **no resolved gain** for detecting collusion: combined minus the better
@@ -341,6 +341,8 @@ replicates externally (in 62% of executed episodes that episode's chat has no ex
 cases (0.75 without verdict words), plausibly because the chat is where agents negotiate verification (asking for raw logs vs settling for summaries). That differs from our
 pricing market, where text alone is near chance (TL;DR 1). How much text helps therefore depends on whether the decisive behaviour itself
 happens in the conversation. 0 tuning attempts; one prompt; one run.
+
+**Part D2 (Q1.4 E68, external double auction; 15 + 15 games): inconclusive.** Chat raises all-round mean asks by +0.39 [+0.06, +0.69]; second-half ask-level AUROC 0.68 [0.46, 0.88], pCMI 0.60 [0.40, 0.80]. This is an action-detector comparison; asks are offers, not paid prices, and the ask effect alone does not verify an agreement. Pinned source: `data/ext_cda_d2/e68_cda.json`; regenerate this citation with `uv run python report_tables.py --external-d2`.
 
 **P2.13 Transcript anomaly hunt (Part E4, E108a–e; exploratory, post hoc).** Forty balanced games from both repos (841 rounds, no new calls), five descriptive checks, no prevalence or causal claim: e.g. a Q1.4 pair stays within ±1 of 12 in 37/40 rounds (exactly 12 in 1/40); a regex finds 0/143 own-price contradictions. `uv run python p2_serendipity.py analyse` → `p2_serendipity.json`; [details](data/serendipity_e108/README.md).
 
