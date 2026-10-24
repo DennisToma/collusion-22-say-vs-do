@@ -2,7 +2,7 @@
 
 # STATUS
 
-## Current state (2026-10-24 12:25 UTC, Phase 2 iteration 9)
+## Current state (2026-10-24 12:20 UTC, Phase 2 iteration 9)
 - DONE p2rep (E80/E89 held, P2.8; pooled n=90 E101). DONE gap 7 (E87, P2.9): premium flags highcost 7/10, quality 9/10 vs none 2/10;
   own-cost adjustment FAILS (moves flag to the low-cost pair 8/10: ~half cost pass-through). Gap 8 p2coded killed (2 partial runs, unused).
 - E99 strongF 6/40 (gen ~10 min/run/slot, ETA ~18:00). REGISTERED E99-amend (4 behaviour classes; tacit-high none) + E103 plan view.
@@ -22,7 +22,7 @@
 - Risk: codex overload (~35 codex procs across repos). Known: verify_artifacts.py FAILS (manifest) — deferred to Sun 16:30.
 
 ## Log
-- 12:25 P2 iter9: E87 asym result (P2.9; cost-adj P2 failed); E99-amend + E103 plan view registered, pilot calibration; strongF post chain w/ prefetch; p2coded killed; codex review launched.
+- 12:20 P2 iter9: E87 asym result (P2.9; cost-adj P2 failed); E99-amend + E103 plan view registered, pilot calibration; strongF post chain w/ prefetch; p2coded killed; codex review launched.
 - 12:10 P2 iter8: p2rep computed once (E80/E89 held; P2.8), E84 on p2rep, pooled E101; chain6 0-call bug -> chain6b; C3 qwen E100 + E102 launched; strong pilot final.
 - 11:39 P2 iter7: luna pilot final 2/3 executed (strict 2/3); seed 2 executed floor 18 but matched no-channel market also 18.0 -> executed adds ~0 over tacit. g56sol started.
 - 11:17 P2 iter7: E97 interim pilot (luna 1/2 executed, market-wide high prices, sol 0/1); E99 full arm registered+launched; REPORT P2.7.
