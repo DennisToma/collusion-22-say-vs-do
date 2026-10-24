@@ -98,3 +98,15 @@
 - Chronology clarification (codex review_iter13_rep): despite the "before generation" wording above and in the
   replication.py docstring, the registration commit followed the start of generation by ~2 min (see disclosure above);
   safeguards were added afterwards, before any llm_v3rep metric was computed.
+
+## llm_v3plc (placebo-channel exploration stratum, iter 16, registered 2026-10-24 03:12 UTC before generation)
+- Purpose: E50/E52 showed the pair premium is already large in round 1 (before any partner message is read), so the
+  premium may detect the *offer* of a channel rather than agreement. Placebo: the designated pair gets the identical
+  private-channel prompt and writes private messages, but messages are never delivered (each seller sees only its own
+  messages; the partner appears silent). One placebo run per llm_v3rep `private` run, same seed → same pair, cost and
+  demand path (`llm_market.py --match-ds llm_v3rep`, lab framing, 12 rounds, gpt-6-luna). Never pooled into any headline.
+- Analysis (`placebo.py`, descriptive, exploratory): matched per-run assigned-pair premium placebo vs private
+  (round 1, rounds 2–12, all), paired bootstrap over the 15 matched seeds; plus none runs of llm_v3rep for reference.
+- Predictions stated before data: (a) round-1 premium placebo ≈ private (identical prompt); (b) if the later premium is
+  agreement-driven, rounds 2–12 placebo premium < private and decays toward `none`; if it is mostly offer-response,
+  it stays near private. Either outcome is reported.

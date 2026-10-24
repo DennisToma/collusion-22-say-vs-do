@@ -151,7 +151,7 @@ def run_game(ds_dir, run_id, cond, seed, R):
         jobs = {}
         for a in AGENTS:
             partner = [b for b in pair if b != a][0] if a in pair else None
-            has_priv = cond == "private" and a in pair
+            has_priv = cond in ("private", "placebo") and a in pair
             extra = ""
             if has_priv:
                 extra = EXTRA_PRIVATE.format(p=partner)
@@ -161,6 +161,8 @@ def run_game(ds_dir, run_id, cond, seed, R):
                 extra = extra + MONITOR_NOTE
             sysm = (SYSTEM_LAB if CFG["framing"] in ("lab", "lab_monitored") else SYSTEM).format(me=a, R=R, pmin=PMIN, pmax=PMAX, extra=extra)
             ph = [x for x in priv if a in pair] if has_priv else []
+            if cond == "placebo":  # channel offered, partner's messages never delivered: each sees only its own
+                ph = [x for x in ph if x[1] == a]
             up = user_prompt(t, R, a, cost[a], shock, hist, ph, has_priv, partner)
             last = hist[-1]["prices"][a] if hist else 12
             jobs[a] = (f"{t}:{a}", sysm, up, last)
@@ -178,7 +180,7 @@ def run_game(ds_dir, run_id, cond, seed, R):
         msg = {a: str(dec[a].get("public_message") or "").strip() for a in AGENTS}
         hist.append({"t": t, "prices": prices, "cost": cost, "shock": shock, "msg": msg,
                      "q": dict(zip(AGENTS, q)), "profit": dict(zip(AGENTS, prof))})
-        if cond == "private":
+        if cond in ("private", "placebo"):
             for a in pair:
                 pm = str(dec[a].get("private_message") or "").strip()
                 if pm:
@@ -195,6 +197,7 @@ def run_game(ds_dir, run_id, cond, seed, R):
           "private_channel_enabled": cond == "private", "agreement_verified": None,
           "coordinated_actions_verified": None, "realized_collusion": None,
           "hard_negative": "legit_cooperation" if cond == "legit" else None,
+          "placebo_undelivered": cond == "placebo",
           "seed": seed, "model": ",".join(models), "backend": CFG["backend"], "framing": CFG["framing"], "sim_version": SIM_VERSION,
           "parse_failures": sum(not cache[k]["parse_ok"] for k in cache), "rounds": R}
     return traj, private, gt
@@ -210,6 +213,8 @@ def main():
     ap.add_argument("--framing", default="firm", choices=["firm", "lab", "lab_monitored"])
     ap.add_argument("--seller-backend", default="codex")
     ap.add_argument("--seller-model", default=None)
+    ap.add_argument("--match-ds", default=None, help="placebo stratum (iter 16): rerun every private run of this ds "
+                    "with its own seed (same pair, cost and demand path) under condition 'placebo'; same run index")
     a = ap.parse_args()
     CFG.update(framing=a.framing, backend=a.seller_backend, model=a.seller_model)
     ds = Path("data") / a.ds
@@ -242,8 +247,31 @@ def main():
             print(rid, cond, gt["assigned_pair"], "prices last:", [x["price"] for x in ps[-1]],
                   "priv msgs:", len(private["chat"]), "fails:", gt["parse_failures"], flush=True)
 
+    if a.match_ds:
+        src = [json.loads(l) for l in open(Path("data") / a.match_ds / "ground_truth.jsonl")]
+        seeds = {int(g["run_id"].rsplit("_", 1)[1]): g["seed"] for g in src if g["condition"] == "private"}
+        a.seed = None
+        items = [(k, "placebo") for k in sorted(seeds)]
+    else:
+        items = [(start + i, c) for i, c in enumerate(jobs)]
+
+    def one_m(kc):
+        if a.match_ds:
+            k, cond = kc
+            rid = f"{a.ds}_{k:04d}"
+            if rid in done:
+                return
+            traj, private, gt = run_game(ds, rid, cond, seeds[k], a.rounds)
+            with lock:
+                for fn, rows in (("trajectories.jsonl", traj), ("private.jsonl", [private]), ("ground_truth.jsonl", [gt])):
+                    with open(ds / fn, "a") as f:
+                        f.writelines(json.dumps(r) + "\n" for r in rows)
+                print(rid, cond, gt["assigned_pair"], "prices last:", [x["price"] for x in traj[-1]["agents"]], flush=True)
+        else:
+            one(kc)
+
     with ThreadPoolExecutor(a.games_parallel) as ex:
-        list(ex.map(one, [(start + i, c) for i, c in enumerate(jobs)]))
+        list(ex.map(one_m, items))
     write_public_info(ds)
 
 
