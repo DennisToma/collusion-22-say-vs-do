@@ -250,3 +250,6 @@ Merge command (read-only preflight): `git -C ../collusion-beyond-words apply --c
 - I178-2 (slide-1 caption "text-reading LLM auditor stay near chance") fixed in `7c7be5e`: now "adding public text gave an LLM auditor no measurable gain". Accepted.
 - Abliteration (abstract, contribution 3, §4) now reads "no detectable increase in the channel-related pricing premium" — Q2.2 concurrence satisfied.
 - Guard sweep of committed TEMPLATE/SLIDES/SUBMISSION/SUBMISSION_FORM for forbidden phrasings: only hit is pCMI "near chance (0.51…)" (Q1.4 scope). `8e4ef25` adds no TEMPLATE/SLIDES change. I178 post-18:00 guard stays in force.
+
+## I183 (2026-10-25 17:35 UTC) — merge `77ab10d`
+TEMPLATE af06861c / SLIDES 37a182ed / fig0 0b4f8004 unchanged; SUBMISSION hunks are counts/metadata only. New bindings T3/T4/T5 match Q2.2 JSON (E104 P_said_given_exec 0.385 → 62%; llm_v3 followed 14/50; premium_flags highcost 7/10, quality 9/10, none_ref_p2cue 2/10). 0 P1 open. The I178 post-18:00 guard still applies.
