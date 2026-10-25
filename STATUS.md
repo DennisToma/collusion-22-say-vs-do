@@ -1,8 +1,8 @@
 # STATUS
 
-## Current state (2026-10-25 17:33 UTC, iteration 184) — FINAL; research frozen
+## Current state (2026-10-25 17:50 UTC, iteration 185) — FINAL; research frozen
 - **P1 open: 0.** I184 confirms the accepted template, slides and headline figure are unchanged in committed merge `77ab10d` and its clean working tree.
-- Last merge bytes read: `77ab10d`, TEMPLATE af06861c, SLIDES 37a182ed, fig0 0b4f8004; P1 open: 0.
+- Last merge bytes read: `2fe0265` (I185; same hashes as `77ab10d`), TEMPLATE af06861c, SLIDES 37a182ed, fig0 0b4f8004; P1 open: 0.
 - Headline unchanged: locked-test Δ −0.01 [−0.09, +0.06]; fresh pooled n=90 −0.07 [−0.17, +0.02] (post hoc); Qwen combined−action −0.24 [−0.37, −0.09].
 - Pin `91ffb2d` remains 76/77 (REPORT I133 review line only); Q2.2 post-18:00 guard in merge_flags I178 remains for the merge's last hour.
 - Limitations: no resolved gain does not prove zero; Qwen inversion is family-scoped; E84 keeps 14/50 agreements under its rule; one market.
@@ -10,6 +10,7 @@
 - Next: none required; source hard stop 18:00 UTC. Merge self-check guard is in merge_flags I178.
 
 ## Log
+- I185 2026-10-25 17:50 UTC: merge HEAD now `2fe0265` (handoff/freshness commit); TEMPLATE af06861c, SLIDES 37a182ed, fig0 0b4f8004 unchanged → no new Q2.2 claim bytes, 0 P1. Research frozen at source hard stop 18:00; no REPORT edits, calls or experiments.
 - I184 2026-10-25 17:33 UTC (Codex fallback): merge HEAD still `77ab10d`; committed TEMPLATE/SLIDES/fig0 match I181/I183 hashes and working-tree bytes exactly; both trees clean, 0 P1 open. HITS remains unpromoted (including S72/S70); no confirmation under finalize freeze. DIRECTION no-op rule applies: REPORT/APPENDIX and exports stay frozen; no calls, experiments, metric/source-check reruns or new scope review. Ended early because no new claim bytes require work.
 - I183 2026-10-25 17:35 UTC: merge `77ab10d` (number bindings): TEMPLATE/SLIDES/fig0 bytes unchanged; SUBMISSION hunks are counts/metadata only (no-op). New Q2.2 bindings T3 (62% = 1−0.385 E104), T4 (14/50 followed), T5 (premium flags 7/10, 9/10, 2/10) checked against our JSON → correct. 0 P1. No REPORT edits, calls or experiments.
 - I181 2026-10-25 17:18 UTC: DIRECTION #3. Merge `7c7be5e`/`8e4ef25`: I178-1/2 P1s and abliteration wording fixed in committed TEMPLATE/SLIDES → 0 P1 open; guard-phrase sweep clean (only pCMI "near chance", Q1.4 scope). merge_flags I181. No REPORT edits, calls or experiments.
