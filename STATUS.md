@@ -1,17 +1,14 @@
 # STATUS
 
-## Current state (2026-10-25 08:42 UTC, iteration 118) — research top frozen since 07:30; following DIRECTION 08:23
+## Current state (2026-10-25 08:53 UTC, iteration 120) — research top frozen since 07:30; following DIRECTION 08:23
 - Base headline unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc). E113 Qwen stratified combined−action −0.24 [−0.37, −0.09]. E133e +0.06 [+0.02, +0.10] post hoc.
-- **DIRECTION 08:23 #1 done:** single ranked fix list `results/analysis/merge_flags.md` (linked from REPORT Changes-after-08:00), checked vs merge HEAD `02ebfd2`:
-  - P1 open: (a) E133 third-analysis / label-rule / shared-judge caveat (§5.3 l.236–240); (b) Fig. 5 "two channel arms are indistinguishable" (l.267) → placebo-minus-delivered +0.03 [−0.54, +0.49] unresolved.
-  - P2 partial: "gains nothing" in Abstract l.22 + §5.3 heading (body fixed); Limitations l.314 "cannot separate" (§5.4 fixed).
-  - Applied: inversion range (now Qwen 0.15–0.21), "only where deal is conversation" (now descriptive), executed −0.30 rule named.
-  - Director's P1 (iv) inversion range is already applied in 02ebfd2; so 2 P1 remain, not 4.
-- All Q2.2 numbers in 02ebfd2 re-checked: correct (new paraphrase-1 CI from `p2_band.json`). check_merge_sources PASS 69/21; p2_claims 36/36.
-- Next: re-check on each new merge commit (`git -C ~/collusion/collusion-beyond-words log -1`), update statuses in merge_flags.md; no new items unless P1 in new text. No idle commits. Export pass 16:30; hard stop 18:00.
-- Risks: fixes are recommendations only (read-only sibling); E133e post hoc third analysis.
+- **Merge support: all 7 wording fixes applied, 0 open** (merge HEAD `e606cb7` + uncommitted working tree; P1-a and P2-b exist only in the working tree so far). `results/analysis/merge_flags.md` updated; check_merge_sources PASS 69/21.
+- New Q2.2 text in merge §5.3 (rule-score gloss) matches REPORT P2.17. Table 1 executed pair-level 0.87 is a Q1.4 number, not checked here.
+- Next: on each new merge commit, confirm P1-a/P2-b land in a commit; flag only P1 in new text. No idle commits. Export pass 16:30 (directive 4); hard stop 18:00.
+- Risks: working-tree fixes could be lost if the merge manager resets; fixes are recommendations only (sibling is read-only).
 
 ## Log
+- 2026-10-25 08:53 UTC P2 iter120: merge advanced to `e606cb7` (+ working-tree edits). Re-checked: P1-b, P2-a applied in HEAD; P1-a (E133 caveat) and P2-b (placebo Limitations) applied in working tree → 0 open. check_merge_sources PASS. merge_flags.md + one REPORT Changes-after-08:00 line. No calls.
 - 2026-10-25 08:42 UTC P2 iter118: DIRECTION 08:23 #1 — consolidated 7 posted fixes into ranked merge_flags.md vs merge 02ebfd2: 2 P1 open, 2 P2 partial, 3 applied; Q2.2 numbers in draft all correct. REPORT: one Changes-after-08:00 line. No calls.
 - 2026-10-25 08:15 UTC P2 iter115: merge iter1 committed (`fbed25a`); working-tree SUBMISSION still has the 4 iter114 issues (not yet processed). Found 1 more caveat drop (abstract text-inversion range lacks "point estimates; CI < 0.5 only Qwen-3.8"); posted as fix 5. No calls, no REPORT changes (frozen).
 - 2026-10-25 08:10 UTC P2 iter114: merge manager started (iter1, SUBMISSION v0, uncommitted). Checked every Q2.2 number in it against REPORT: all correct; 4 wording fixes posted above (executed-rule label, "add nothing", placebo limitation, E133 caveat). No calls, no REPORT changes.

@@ -5,19 +5,18 @@ P1 = merge text claims more than REPORT, or drops a caveat that changes meaning.
 All Q2.2 numbers in this draft were re-checked against REPORT/JSON: correct (incl. new paraphrase-1 CI +1.79 [+1.20, +2.43] = `p2_band.json:"sysvar1 (paraphrase 1)".private_minus_none_prem_r2_12`, which REPORT gives only as a point value).
 No new items will be added unless they are P1 in newly written text.
 
-## Open
+## Update 2026-10-25 08:52 UTC — merge HEAD `e606cb7` + working tree (SUBMISSION.md sha256 `bba51050…`, uncommitted)
+**All 7 fixes applied; 0 open.** P1-a (E133 caveat) and P2-b (Limitations placebo) are in the uncommitted working tree; P1-b (Fig. 5) and P2-a (abstract + §5.3 heading) are in HEAD `e606cb7`.
+`check_merge_sources.py` PASS (16/16 groups, 69 checks, 21 hashes). New Q2.2 text in §5.3 ("a compliance rule that uses early prices *and* the privately judged agreed price") matches REPORT P2.17 E133e → no flag. The new Table 1 executed-only pair-level 0.87 is a Q1.4 number (not checked here).
 
-| rank | id | SUBMISSION line | current text | exact replacement | REPORT § | JSON key | status |
-|---|---|---|---|---|---|---|---|
-| P1-a | 114-4 | §5.3 l.236–240 (E133 paragraph) | "…beats the best raw early-price rule (0.94 vs 0.885, Δ +0.06 [+0.02, +0.10], post hoc), with no evidence that its edge comes from public messages." | append: "This is the third analysis of the same 78 games; the rule score was fixed after E133c/d were seen, the LLM prompt states the label rule, and the same model (sol) is Q1.4's label judge and extracted the agreed price." | P2.17 (E133e paragraph, "Post-hoc caveat") | `e133e_attr.json:b_llm_E133d_minus_raw.rule_score` | open |
-| P1-b | 116-2 | Fig. 5 caption l.267 | "and the two channel arms are indistinguishable." | "and the placebo-minus-delivered premium difference is unresolved (+0.03 [−0.54, +0.49], rounds 2–12)." | P2.5 / Fig. 5 | `placebo_llm_v3plc.json:windows.r2_12.placebo_minus_private_paired` (sign: placebo − private) | open |
+## Formerly open (now applied)
 
-## Partially applied (P2)
-
-| rank | id | SUBMISSION line | current text | replacement | status |
-|---|---|---|---|---|---|
-| P2-a | 114-2 | Abstract l.22, §5.3 heading l.195 | "gains nothing from public messages / words" | "shows no resolved gain from public messages / words" (body l.215–217 already says this with bounds) | body applied; abstract + heading open |
-| P2-b | 114-3 | §7 Limitations l.314 | "Q2.2's placebo cannot separate delivery from offer." | "Q2.2's placebo leaves delivery unresolved (private − placebo +0.38 [−0.41, +1.18])." (§5.4 l.247 already says this) | §5.4 applied; Limitations open |
+| rank | id | where | status |
+|---|---|---|---|
+| P1-a | 114-4 | §5.3 l.247–249 E133 caveat appended verbatim (gpt-6.1-sol named) | applied (working tree, uncommitted) |
+| P1-b | 116-2 | Fig. 5 caption l.275–276: "placebo − private over rounds 2–12 is +0.03 [−0.54, +0.49] (no resolved difference, not equivalence)" | applied (`e606cb7`) |
+| P2-a | 114-2 | Abstract l.22 + §5.3 heading l.198: "no resolved gain" | applied (`e606cb7`) |
+| P2-b | 114-3 | §7 Limitations l.325: "leaves delivery unresolved (private − placebo +0.38 [−0.41, +1.18])" | applied (working tree, uncommitted) |
 
 ## Applied (closed)
 
