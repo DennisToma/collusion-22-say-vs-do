@@ -1,12 +1,12 @@
 # STATUS
 
-## Current state (2026-10-25 11:40 UTC, iteration 141) — research frozen; DIRECTION 10:30 (pin discipline)
+## Current state (2026-10-25 11:31 UTC, iteration 142) — research frozen; DIRECTION 10:30
 - Headline unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc); Qwen combined−action −0.24 [−0.37, −0.09].
-- Merge HEAD `b1a92f6` (iter17) scope-checked: Q2.2 hunks are 0.01 double-rounding corrections (E113 exec upper −0.16, Spearman −0.40, Fig. 6 action 0.57). All three match our stored 3-dp ties, 0 P1 (merge_flags 141-round).
-- Our REPORT still prints −0.17/−0.41/0.58. We leave it per pin discipline; the merge discloses the difference.
-- Directives 1–2 done (iter135); directive 3 ongoing. No experiments, calls, REPORT edits or check reruns this iteration.
-- Next: diff-check new merge HEADs; 14:00–15:00 final scope read (+ check_merge_sources once); 16:30 export pass (render-only); stop by 17:30.
-- Risks: REPORT.html/pdf stale until 16:30; REPORT shows the double-rounded values (merge is authoritative); REPORT l.12/l.89 "deal struck in chat" less precise than merge.
+- Merge HEAD remains `b1a92f6`; committed and working-tree SUBMISSION/SLIDES diffs since I141 are empty. 0 open P1; no new scope review needed.
+- Directives 1–2 complete; directive 3 checked. REPORT still differs from pin `91ffb2d` only by the I133 review line; no pinned source edits.
+- No experiments, model calls, metric/check reruns or exports. HITS through S69 has no promoted hit; no confirmation warranted or authorized.
+- Next: review new merge diffs; final scope read + check_merge_sources once at 14:00–15:00; render-only export at 16:30; stop by 17:30.
+- Risks: exports stale until 16:30; source REPORT retains the disclosed double-rounding values and less precise SALT wording; merge carries corrections.
 
 ## Log
 - 2026-10-25 11:40 UTC P2 iter141: merge advanced f5e91e5 → b1a92f6 (iter17 double-rounding audit). Q2.2 hunks M6/M33/M34 verified: the merge's unrounded recomputes round to our stored 3-dp ties (−0.165, −0.405, 0.575) and print correctly at single rounding → 0 P1, merge_flags 141-round. No REPORT edits, no calls.
@@ -251,3 +251,5 @@
 - 2026-10-25 10:56 UTC P2 iter138 (Codex fallback): read CLAUDE/PLAN/STATUS/DIRECTION and experiment ledger; merge HEAD remains 5ccd0b7, clean, with an empty SUBMISSION/SLIDES diff against the last checked commit. No new scope review, checker rerun, experiment, model call or export. HITS through S67/S66 has no promoted hit; no confirmation under DIRECTION. REPORT remains current/frozen: its diff from pin 91ffb2d is still only the I133 review line. Ending early under the freeze; status-only commit/push follows the explicit iteration request. Next authorized work: a new merge diff, the 14:00–15:00 final scope read, then the 16:30 export. The earlier iter137 log label of 11:05 is retained as history; its commit time is 10:55:44 UTC, preceding this iteration.
 
 - 2026-10-25 11:14 UTC P2 iter140 (Codex fallback): read CLAUDE/PLAN/STATUS/DIRECTION and experiment ledger; merge HEAD remains `f5e91e5`, so the committed SUBMISSION/SLIDES diff since I139 is empty. Pending working-tree edits change Q1.4 E65's premium and merge process/reproducibility counts only; no new Q2.2 scientific hunk or P1 to review. No source checker, metric rerun, experiment, model call or export. REPORT and all pinned evidence left unchanged under DIRECTION 10:30 #1; full scope read remains scheduled for 14:00–15:00, not pulled forward. Ending this bounded merge-support iteration early under the freeze; status-only commit/push follows the explicit iteration request, as in I138. I139's future-dated log remains untouched; this timestamp comes from the VM UTC clock.
+
+- 2026-10-25 11:31 UTC P2 iter142 (Codex fallback): read CLAUDE/PLAN/STATUS/DIRECTION and ledger; merge HEAD remains `b1a92f6`, clean, with empty committed and working-tree SUBMISSION/SLIDES diffs since I141. No new Q2.2 scope hunk or P1; one unchanged-state handoff line in merge_flags. REPORT diff from pin `91ffb2d` remains only the I133 review line. HITS through S69: expected-incentive calibration/DUD, no promoted hit or confirmation request. Ending early under DIRECTION 10:30 freeze; no experiments, model calls, metric/check reruns or exports. REPORT unchanged per explicit pin discipline; one metadata-only commit/push follows the user's iteration instruction. Final scope read stays at 14:00–15:00, export at 16:30. VM UTC timestamp used; inherited future-dated log entries retained unchanged.
