@@ -53,6 +53,12 @@ CASES = [
          ['results/analysis/p2_behaviour_p2rep.json']),
     case('p2_textlr.py'),
     case('p2_pool.py', outputs=['results/analysis/p2_pool_rep.json']),
+    # E133 a-e: c/d read the frozen sol cache only (Q22_CACHE_ONLY + llm.chat denied below).
+    case('p2_e133_privileged.py', outputs=['results/analysis/e133_privileged.json']),
+    case('p2_e133c_llm.py', outputs=['results/analysis/e133c_llm.json']),
+    case('p2_e133c_llm.py', ['--noprivate'], ['results/analysis/e133d_noprivate_llm.json']),
+    case('p2_e133_cluster.py', outputs=['results/analysis/e133_cluster.json']),
+    case('p2_e133e_attr.py', outputs=['results/analysis/e133e_attr.json']),
 ]
 
 # This harness is executed in a fresh child for every explicitly listed command.
@@ -130,7 +136,8 @@ def include(path):
     return (path.suffix in ('.py', '.json', '.jsonl', '.toml', '.lock')
             and not s.startswith(('data/llm_p2replS/', 'data/ext_llm_grid_p2/',
                                   'results/llm_auditor/ext_llm_grid_p2/'))
-            and path not in (RECEIPT, Path('results/analysis/p2_e1_coverage.json')))
+            and path not in (RECEIPT, Path('results/analysis/p2_e1_coverage.json'))
+            or s == 'data/ext_llm_grid_p2/SHA256SUMS')  # hash pins only, needed by E133
 
 
 def run_case(scratch, entry, timeout):
@@ -139,7 +146,8 @@ def run_case(scratch, entry, timeout):
         (scratch / p).unlink()  # A no-op or an incomplete writer cannot pass.
     env = dict(os.environ, PYTHONDONTWRITEBYTECODE='1', PYTHONHASHSEED='0',
                MPLCONFIGDIR=str(scratch / '.mpl'), TMPDIR=str(scratch / '.tmp'),
-               OPENBLAS_NUM_THREADS='1', OMP_NUM_THREADS='1')
+               OPENBLAS_NUM_THREADS='1', OMP_NUM_THREADS='1', Q22_CACHE_ONLY='1',
+               Q22_SIB=str((ROOT / '..' / 'collusion-14-infotheory').resolve()))  # sibling is read-only input
     (scratch / '.tmp').mkdir(exist_ok=True)
     start = time.monotonic()
     try:

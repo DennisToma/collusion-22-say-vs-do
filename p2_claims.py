@@ -415,7 +415,7 @@ def _():
 
 
 @claim("C34", "E133e no-chat LLM minus best raw early-price rule score; oriented say-do gap and pair SD AUROC",
-       "+0.06 [+0.02, +0.10]; 0.77; 0.855", "an LLM beats the best price rule (+0.06 [+0.02, +0.10])",
+       "+0.06 [+0.02, +0.10]; 0.77; 0.855", "an LLM beats the best price rule (post hoc, +0.06 [+0.02, +0.10])",
        "78 Q1.4 E70 grid agreed games (48 held / 30 not); post hoc robustness declared before computing (E133e-reg); paired game bootstrap; 0 LLM calls")
 def _():
     src = A + "e133e_attr.json"

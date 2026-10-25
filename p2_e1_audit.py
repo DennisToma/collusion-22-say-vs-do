@@ -17,14 +17,14 @@ E113-amend3 (2026-10-24 20:35, before any score was read; reporting only, P1 unc
 pos/tie/neg counts + cell-stratified pooled deltas (within-cell AUROC differences averaged, game-cluster bootstrap);
 luna combined-minus-action reported as auditor re-prompt noise, posting cells separately; raw pooled AUROC = unstratified.
 """
-import ast, hashlib, json, subprocess, sys
+import ast, hashlib, json, os, subprocess, sys
 from datetime import datetime, timezone
 from pathlib import Path
 import numpy as np
 from p2_cue import boot_auc, auc
 import auditors
 
-SIB = Path("../collusion-14-infotheory").resolve()
+SIB = Path(os.environ.get("Q22_SIB", "../collusion-14-infotheory")).resolve()  # verify_phase2 runs from a scratch copy
 OUT = Path("data/ext_llm_grid_p2")
 AUD = Path("results/llm_auditor/ext_llm_grid_p2/gpt-6.1-sol")
 VIEWS = ("text", "action", "combined")

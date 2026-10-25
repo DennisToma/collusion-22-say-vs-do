@@ -9,7 +9,7 @@ If the model that answers is not gpt-6.1-sol the row is dropped (no model switch
 
   uv run python p2_e133c_llm.py            # calls (cached) + analysis -> results/analysis/e133c_llm.json
 """
-import json, re, sys, threading
+import json, os, re, sys, threading
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 import numpy as np
@@ -108,6 +108,8 @@ def run_calls(G):
         print(rid, p, r["model"], flush=True)
 
     todo = [rid for rid in sorted(G) if rid not in done]
+    if todo and os.environ.get("Q22_CACHE_ONLY"):  # verify_phase2 sets this: a cache miss must fail, never call
+        raise RuntimeError(f"cache-only: {len(todo)} uncached games")
     with ThreadPoolExecutor(4) as ex:
         list(ex.map(one, todo))
 
