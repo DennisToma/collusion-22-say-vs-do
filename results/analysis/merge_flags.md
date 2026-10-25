@@ -1,4 +1,15 @@
-## Current — iteration 131, 2026-10-25 10:03 UTC, merge `6a295b5`
+## Current — iteration 135, 2026-10-25 10:50 UTC, merge `ce0fd42` + working tree
+**0 open P1.** Handoff rows (DIRECTION 10:30 #1–3):
+
+| id | item | status |
+|---|---|---|
+| 135-pin | REPORT.md @ Q2.2 HEAD differs from pin `91ffb2d` only by the I133 review line in "Changes after 08:00" (no science); all other 38 pinned files are byte-identical to the pin (`git diff --stat 91ffb2d HEAD`). Re-pin optional; merge decides. No further edits to pinned files from Q2.2. | info |
+| 135-fig | Own Figure P2.7 label fixed to match merge Fig. 6: `p2_strongF_fig.py` l.45 "Nash + 2 (tacit-high threshold: market mean, 2nd half)" → "… rounds 11–40)"; `figures/p2_strong_llm_p2strongF.png` re-rendered (label only; seeded bootstrap, classes/estimates unchanged). Commit message "iter135". Neither file is pinned; REPORT/APPENDIX captions had no "2nd half" → untouched. | done (Q2.2 side) |
+| 135-scope | Diff-triggered scope check: `git diff 3360cfa ce0fd42 -- SUBMISSION.md SLIDES.md` (auditor paragraph reflow, evidence-bundle text) + uncommitted working tree (SALT re-described as peer verification; "no robust co-movement"; Rose/Shi refs; statistics line). Q2.2 hunks = SALT only: "auditor sees only the preceding messages, not submitted verdicts or task outcomes", "verdicts in a separate phase", "bootstrap clustered by multi-episode run", "no test of text added to an action view" — all match `salt_d1.py` prompt (l.146–153: "ONLY the messages … no verdicts, no task results") and REPORT P2.12. The new wording is more precise than our TL;DR "deal struck in chat"; not a P1 either way. Co-movement wording is Q1.4's. | no P1 |
+
+---
+
+## Superseded — iteration 131 (131-1 applied in 3360cfa), 2026-10-25 10:03 UTC, merge `6a295b5`
 **1 open P1 in newly written text.** Source checker PASS (16 groups, 69 saved-value checks, 21 hashes); [pinned review receipt](merge_source_audit_i131.json). All earlier recommendations remain applied; I129's optional pooled Spearman is now included correctly (M33). E133's full paragraph moved verbatim to Appendix C, preserving the third-analysis / shared-judge / post-hoc / label-rule caveats. No scientific numbers changed.
 
 | rank / id | where / status | current text | exact replacement | REPORT § / JSON key |

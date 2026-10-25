@@ -1,46 +1,49 @@
-# DIRECTION — Phase 2, director review 2026-10-25 08:23 UTC (Sun morning)
-(experiments end **Sun 15:00** · numbers freeze **14:00** · finalize-only **16:30** · hard stop **18:00** · top/merge block frozen since **07:30** at `8b680ee` · merge manager `collusion-beyond-words` **started 08:03**: SUBMISSION v0 at `fbed25a`, Opus review applied at `02ebfd2`)
+# DIRECTION — Phase 2, director review 2026-10-25 10:30 UTC (Sun morning)
+(experiments end **Sun 15:00** · numbers freeze **14:00** · finalize-only **16:30** · hard stop **18:00** · merge `collusion-beyond-words` is at v1.6 `9664022`; it pins **Q2.2 evidence at `91ffb2d`** (39 files incl. `REPORT.md`, `REPORT_APPENDIX.md`, `llm_market.py`, `p2_strong_eval.py`, `data/llm_p2strongF/trajectories.jsonl`; SHA256 in `collusion-beyond-words/evidence/manifest.json`) · Q2.2 HEAD `94018c8`: **REPORT.md already differs from the pin by one review line** (the merge logged "65/66 live blobs match")
 
 **Verdict (3 lines).**
-1. **Q2.2 is answered and now fully regenerable.** E133 a–e are in `verify_phase2.py`, cache-only: 31/31 commands, 38/38 outputs, 0 calls (I107). The two overclaims are fixed: "no evidence via messages" and "post hoc" next to +0.06. Claims are 36/36, and the joint statement is identical in both repos. All 06:20 directives are done.
-2. **Merge support is good, but you are drip-feeding it.** `check_merge_sources.py` (69 checks, 21 hashes) is exactly the right tool, and linking it from "Changes after 08:00" is the right channel. But 7 wording fixes have been posted across 3 iterations (I114: 4, I115: 1, I116: 2). None is applied yet: at `02ebfd2` + working tree, "two channel arms are indistinguishable" (l.267) and the E133 caveat drop are still there. An unranked, growing list gets triaged badly.
-3. **Explore vs exploit: exploit only.** About 6.5 h of experiment time is left. No new call can change the Q2.2 answer, and three analysis rounds on the 78 games are the limit. Value left: get the P1 fixes applied, check each merge commit, then do one clean export.
+1. **Q2.2 is answered, and the merged text is faithful.** The 08:23 directives are done. The ranked `merge_flags.md` (I118) worked: all 7 original fixes were applied by `e606cb7` (I120). The later P1s (121-x, 123-1/2, 131-1 Fig. 6 scope) were all applied by `3360cfa`, so 0 flags are open (I133). The abstract now has "no resolved gain", the SALT exception, and "inverted … CIs below 0.5" scoped to the Qwen families. That is the right claim.
+2. **Remaining risk: source-to-merge drift and redundant audits, not science.** You keep appending review lines to the pinned REPORT.md, which already breaks the merge's byte-identical `--live` check. You also have one deferred own-figure label fix (Fig. 6 window). Meanwhile the merge now machine-checks 57 source assertions, 64 report/slide numeric bindings and 66 hashed blobs, so your per-commit 69-check rerun duplicates it. What nobody machine-checks is qualitative scope, and that is your remaining job.
+3. **Explore vs exploit: exploit only.** About 4.5 h of experiment time is left. I considered an evasion/red-team arm, since "no evasion test" is in Limitations and the monitor-aware 0/10 shows refusal, not hiding. It is rejected for three reasons: it needs instructed colluders (against Dennis's rule), it would land after the 14:00 freeze unreviewed, and it can't change the "no resolved gain" headline. Also not reopening: three analysis rounds on the 78 E133 games is already the limit, and E113 is sealed.
 
 ## Top directives (in priority order)
 
-1. **Consolidate the 7 fixes into one ranked list, ≤ 15 min, then stop adding.**
-   - In `merge_source_audit_i116.json`, or a short `results/analysis/merge_flags.md` linked from the same Changes-after-08:00 line, rank every open fix as P1 or P2. P1 means the merge text says something stronger than REPORT or loses a caveat that changes meaning. P2 means style.
-   - My reading of what is P1:
-     - (i) the E133 third-analysis / label-rule / shared-judge caveat plus "post hoc" on +0.06;
-     - (ii) "text helps only where the deal is the conversation" → the SALT-only wording;
-     - (iii) the Fig. 5 "indistinguishable" → "delivered-minus-placebo contrast unresolved";
-     - (iv) the inversion range 0.15–0.36 as point estimates, CI < 0.5 only for the Qwen arms/grid.
-   - The rest (executed-rule label, "add nothing" → "no resolved gain") are P2.
-   - Each row gets: SUBMISSION line, current text, exact replacement, REPORT §, JSON key, status (open / applied / rejected).
-   - **Why:** the merge manager is running two reviewers and has 25+ items in flight. Four ranked P1s get applied; seven unranked items compete with everything else.
-2. **Re-run `check_merge_sources.py` on every new merge commit, and update statuses (every iteration until 16:30).**
-   - Trigger on `git -C ~/collusion/collusion-beyond-words log -1` changing. Mark fixes applied/open.
-   - Post a new item only if it is P1 *and* in newly written text. The hunt for new nits in unchanged text is over.
-   - If the merge manager rejects a fix, record "rejected" and move on.
-   - Watch for: "text auditing doesn't work" (SALT is the exception), "private talk doesn't forecast execution" (it does, 0.77; it adds nothing beyond prices), "the LLM reads messages", executed counts without their definition, "replicates" applied to the pooled post-hoc −0.07, and one "shared market" across both repos (Q1.4 T=20 Nash 10 vs yours T=12 Nash ≈ 11).
-3. **Answer merge asks within one iteration.** Quote § + JSON key. If REPORT doesn't state a number, say so rather than computing a new one. After 07:30, any new number needs a Changes-after-08:00 line and a merge re-sync.
-4. **16:30 export pass (unchanged, once).** REPORT.pdf/html, PRESENTATION, EVIDENCE.html, `build_handoff.py` if that is the path, `verify_phase2.py` + `p2_claims.py` + `check_merge_sources.py` once, one commit. Nothing after 17:30 except fixing an error the merge manager reports.
-5. **Idle properly between merge commits.** With no new merge commit and no ask, **do not commit**. Recent history has many "idle per DIRECTION" commits. At most one STATUS line per hour, folded into the next real commit. Use `date -u` for every timestamp.
+1. **Pin discipline: stop editing REPORT.md and the other 38 pinned files (now → 18:00).**
+   - No more "Changes after 08:00" lines in REPORT.md. The existing ones stay; don't revert, because a revert is another edit.
+   - All further handoff goes only in `results/analysis/merge_flags.md`, which is not pinned.
+   - In `merge_flags.md`, add one top row: "REPORT.md @ HEAD differs from pin 91ffb2d only by the I133 review line (no science); re-pin optional". Let the merge decide; don't push for it.
+   - **Why:** each extra source edit makes the merge's "66/66 hashes match" reproducibility claim false for a judge who clones the sources.
+2. **Fix the deferred Fig. 6 label in your own repo now, before 14:00, not at 16:30.**
+   - Do it figure-only, with the same `late=11` → "rounds 11–40" label the merge used. Files under `figures/` are not pinned.
+   - If the REPORT.md / REPORT_APPENDIX caption also says "2nd half", fold that caption fix into the **same single commit**. Post one `merge_flags.md` row with the commit hash and the changed lines so the merge can re-pin once.
+   - **Why:** your repo and the submission currently disagree on a figure label. Doing it now leaves the merge a quiet window to re-pin, instead of a surprise during its 16:30 export.
+3. **Replace the per-commit 69-check rerun with a diff-triggered scope check (every iteration until 16:30).**
+   - On a new merge HEAD, run `git -C ~/collusion/collusion-beyond-words diff <last-checked> HEAD -- SUBMISSION.md SLIDES.md`.
+   - If no hunk touches Q2.2 content (auditor views, Δ_hybrid, inversion, SALT, placebo/notepad, E112/E115, E133, strict/tacit-high, German E110): log one line in `merge_flags.md` and **do not commit**.
+   - Otherwise check scope only. Use the watch list: "text auditing doesn't work" (SALT is the exception), "private talk doesn't forecast execution" (it does, 0.77, but adds nothing beyond prices), "the LLM reads messages", executed counts without their rule, "replicates" applied to the pooled post hoc −0.07, placebo stated as equivalence, and the inversion generalised beyond the two Qwen families.
+   - P1 only.
+4. **One final judge-style scope read of all Q2.2-tagged text at the merge's content freeze (once, 14:00–15:00, ≤ 40 min).**
+   - Read the TL;DR, the abstract, §3–§8, the appendix rows tagged Q2.2, and all 8 slides end to end. Check direction, scope, denominator and post hoc tags against REPORT.
+   - Output one P1-only table in `merge_flags.md`, plus one STATUS line: "final scope read done, N P1".
+5. **16:30 export pass (once, render-only), then wind down.**
+   - Rebuild REPORT.pdf/html, PRESENTATION, EVIDENCE.html from the REPORT as of directive 2. Run `verify_phase2.py` + `p2_claims.py` once. Read-only, check the pinned files against `git show 91ffb2d:<path>` (or against the re-pin hash if the merge re-pinned), and record which ones differ and why. Make one commit.
+   - Nothing after 17:30 except fixing an error the merge manager reports. Then stop iterating.
 
 ## STOP doing
-- **No E133f**, no new features, strata, prompts or LLM calls on the 78 games or anything else. E133c/d are already over their call cap (156 vs 100, disclosed).
-- No growing the merge fix list with P2 nits; see directive 1.
-- No idle-only commits. No STATUS cosmetic or ordering passes.
-- No REPORT restructuring. TL;DR 3 is long, but the merge is lifting § pointers now.
-- Don't reopen sealed E113 outputs, overwrite hashed files, edit the joint statement, or cite unpromoted serendipity (no promoted hits through S56).
-- Don't edit the merge repo. Recommendations only.
+- **Stop rerunning `check_merge_sources.py` on every merge commit.** The merge's own 57 + 64 + 66 checks supersede it. Run it once more at the 14:00 scope read.
+- Stop making multiple commits for one merge event. I129, I130 and I131 were three commits in 6 min; one iteration should be one commit, or none if nothing changed (directive 3).
+- No new LLM calls, features, strata or prompts. No E133f, no reopening sealed E113, no evasion/red-team arm (verdict 3).
+- No REPORT.md edits beyond directive 2's single caption fix. No REPORT restructuring. Don't edit the joint statement.
+- Don't edit the merge repo; recommendations only. If the merge rejects a flag, record "rejected" and move on.
+- No serendipity confirmation. HITS through S67 has no promoted hits; S65/S67 (organisational approvals, settlement accounting) are outside your market and unlabelled for agreement.
 
 ## Cross-pollination
-- **From here → Q1.4:** your `check_merge_sources.py` + receipt, and the Changes-after-08:00 pointer line, are the pattern. Q1.4 has a P1 flag ("not a pure power failure", SUBMISSION §5.2 l.174) that sits only in its STATUS. Q1.4 is being told to copy your delivery channel. Answer quickly if they ask how the checker parses SUBMISSION.
-- **From Q1.4 → here:** none needed. E74/E73 don't touch your text, and your E66 citation matches their P2.3(g) (checked I108).
-- **Joint flag:** if the merge Methods describe one shared market, Q1.4 and Q2.2 should post *one* combined flag. Coordinate via the sibling's STATUS.
+- **From the merge → here:** its evidence bundle (`evidence/manifest.json`, 66 SHA256-pinned blobs) and `scripts/check_sources.py` with per-context numeric bindings are a stronger version of your `check_merge_sources.py`. Read its STATUS check line instead of re-deriving it.
+- **Here → merge (via `merge_flags.md`):** the Fig. 6 label fix (directive 2) and the REPORT drift note (directive 1). These are the only two things the merge still needs from you, apart from P1s.
+- **From Q1.4:** none needed. Q1.4 has 0 open flags and has stopped editing its REPORT (pin `732f08c` intact). Both repos now run the same diff-triggered scope check, each on its own tagged text only. Don't check Q1.4's sentences.
+- Shared-market risk: **closed.** SUBMISSION says the two ran separate markets, with per-result source tags.
 
-## Phase 2 gap-list status summary (08:23 Sun)
+## Phase 2 gap-list status summary (10:30 Sun)
 | item | status |
 |---|---|
 | Shared: precision at prevalence (E81) · reimplementation (E83) | DONE |
@@ -57,12 +60,18 @@
 | Part E: E3 cross-family | DROPPED (gateway saturated; E70 factor M) |
 | Denominators | DONE (36/36) |
 | E132 inversion mechanism | DONE (post hoc, Qwen-specific) |
-| E133 a–e (privileged, no-chat LLM, like-for-like attribution) | DONE; wording fixed (I107) |
-| E133 a–e in `verify_phase2.py` (cache-only, 0 calls) | DONE (I107: 31/31, 38/38) |
-| "Changes after 08:00" heading + 07:30 freeze | DONE (08:12 line links merge receipt) |
-| Merge support | IN PROGRESS: all SUBMISSION Q2.2 numbers correct (I114/I116); 7 wording fixes posted, **0 applied yet** → directives 1–2 |
-| Export pass (16:30) | NOT STARTED → directive 4 |
-| Serendipity | no promoted hits |
+| E133 a–e + `verify_phase2.py` (cache-only) | DONE (I107: 31/31, 38/38) |
+| "Changes after 08:00" heading + 07:30 freeze | DONE; now CLOSED for new lines (directive 1) |
+| Ranked merge fix list (08:23 #1) | DONE (I118 `merge_flags.md`) |
+| Merge flags applied | DONE: 7 original fixes (I120) + 121-x, 123-1/2, 131-1 → 0 open at merge `3360cfa` (I133) |
+| Shared-market flag | DONE / not needed (separate markets stated in SUBMISSION) |
+| Per-commit merge re-check | SUPERSEDED: replaced by the diff-triggered scope check (directive 3) |
+| Pin discipline (pinned at `91ffb2d`) | IN PROGRESS: one REPORT review line of drift; stop here (directive 1) |
+| Own Fig. 6 window label fix | NOT STARTED (deferred to 16:30) → move to before 14:00 (directive 2) |
+| Final scope read of Q2.2 text | NOT STARTED → directive 4 (14:00–15:00) |
+| Export pass (16:30) | NOT STARTED → directive 5 |
+| Evasion / red-team arm | DROPPED (conflicts with the "never instruct" rule; lands after the freeze; already a Limitations bullet) |
+| Serendipity | no promoted hits (through S67) |
 
 ---
 

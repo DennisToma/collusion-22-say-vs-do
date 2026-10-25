@@ -1,14 +1,15 @@
 # STATUS
 
-## Current state (2026-10-25 10:21 UTC, iteration 133) — research frozen; DIRECTION 08:23
+## Current state (2026-10-25 10:52 UTC, iteration 135) — research frozen; DIRECTION 10:30 (pin discipline)
 - Headline unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc); Qwen combined−action −0.24 [−0.37, −0.09].
-- Merge HEAD `3360cfa`: flag 131-1 (Fig. 6 scope) applied in `d784e17` → **0 open**. New Q2.2 text checked vs JSON (Fig. 6 0.43–0.58, four exposures, say-do 0.77 scope, E132) — all correct (merge_flags.md §I133).
-- check_merge_sources PASS (69 checks, 21 hashes). No calls, rendering, metrics or bootstrap reruns.
-- Next: check new merge HEADs/asks only (no idle commits); 16:30 export pass (REPORT.pdf/html, PRESENTATION, EVIDENCE, verify_phase2 + p2_claims + check_merge_sources once); hard stop 18:00.
-- Export fix: p2_strongF_fig.py/Figure P2.7 label “2nd half” → rounds 11–40 at 16:30, preserving saved classes/estimates (merge already fixed).
-- Risks: source checker authenticates frozen JSON only; REPORT.html/pdf stale until 16:30. No new experiments under current freeze.
+- Merge pins Q2.2 at `91ffb2d` (39 files). REPORT.md differs from pin only by the I133 review line; no more edits to pinned files (directive 1). Handoff now only in `results/analysis/merge_flags.md`.
+- Directive 2 DONE: Figure P2.7 label "2nd half" → "rounds 11–40" (p2_strongF_fig.py + PNG, unpinned; no caption change needed) → flag 135-fig.
+- Directive 3: diff-triggered scope check at merge `ce0fd42` + working tree: only Q2.2 hunk = SALT re-described as peer verification; matches salt_d1.py/P2.12 → 0 P1 (135-scope). Last checked: `ce0fd42` + WT.
+- Next: diff-check new merge HEADs only (no commit if no Q2.2 hunk); 14:00–15:00 final scope read (+ check_merge_sources once); 16:30 export pass (render-only); stop by 17:30.
+- Risks: REPORT.html/pdf stale until 16:30. No new experiments under freeze.
 
 ## Log
+- 2026-10-25 10:52 UTC P2 iter135: DIRECTION 10:30 #1–3. merge_flags.md top rows 135-pin (REPORT drift = I133 line only; re-pin optional), 135-fig (P2.7 label fixed, figure re-rendered, unpinned files), 135-scope (merge ce0fd42 + WT SALT wording checked vs salt_d1.py → 0 P1). No REPORT edits, no calls, no check_merge_sources rerun.
 - 2026-10-25 10:21 UTC P2 iter133: merge advanced to `3360cfa`; 131-1 applied → 0 open. check_merge_sources PASS. New Q2.2 text (Fig. 6 range from p2_strong_eval auroc_strict_vs_tacit_high, exposures l.661, E133 0.77 scope, E132 wording) all correct → merge_flags.md §I133 + one REPORT Changes line. No calls.
 - 2026-10-25 10:05 UTC P2 iter129: merge advanced to `4e17126`. check_merge_sources PASS. New Q2.2 text checked vs JSON (E132 within-arm Spearman −0.41 [−0.83,+0.18]; logbook +0.22 vs +1.04; Qwen3.6 0.32; SALT 62%/5169; C−A glossary; strict-executed scope): all correct, no P1 → merge_flags.md §I129 + one REPORT Changes line. No calls.
 - 2026-10-25 09:50 UTC P2 iter127: merge HEAD unchanged (`37e7193`). Checked the Q2.2 source keys in the merge's uncommitted codex_v2 review (placebo +0.03 [−0.54,+0.49]; 19/20 over rounds 11–40; 13/20 strong-framing arm; notes/private 0.65): all correct → merge_flags.md §I127. No new flags, no calls.
