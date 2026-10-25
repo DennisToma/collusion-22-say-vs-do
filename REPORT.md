@@ -1,7 +1,7 @@
 # Say vs. Do: does auditing what AI agents *say* together with what they *do* catch collusion better?
 
 *Apart AI Collusion Sprint, Q2.2 — text + action auditing. v1 (overnight) results are frozen as git tag `v1-overnight`;
-Phase 2 (from 2026-10-24 06:30 UTC) re-tests them. Results current 2026-10-24 22:31 UTC: P2.1–P2.16 final; E113 audited all 192 Q1.4 grid games and evaluated once. P2.7 distinguishes frozen execution rules; Q1.4 D2 is final and inconclusive (P2.12). E102 (strong-framing Qwen, 6 seeds) is descriptive. Exports: [README.md](README.md).*
+Phase 2 (from 2026-10-24 06:30 UTC) re-tests them. Results current 2026-10-25 03:05 UTC: P2.1–P2.17 final (P2.17 = E133, private say-vs-do forecast); E113 audited all 192 Q1.4 grid games and evaluated once. P2.7 distinguishes frozen execution rules; Q1.4 D2 is final and inconclusive (P2.12). E102 (strong-framing Qwen, 6 seeds) is descriptive. Exports: [README.md](README.md).*
 
 **Key findings in one minute** (plain language; every number is from the text below; "channel" = private channel, the public board exists in all arms)
 - Adding public messages to prices does not help a zero-shot LLM auditor: −0.01 AUROC (locked test), −0.07 (fresh replications).
@@ -10,6 +10,7 @@ Phase 2 (from 2026-10-24 06:30 UTC) re-tests them. Results current 2026-10-24 22
 - The price premium replicates (0.94 AUROC) but is partly a prompt effect: an unread notepad gives 65% of the channel's premium.
 - High prices need no channel: with memory and profit framing, 19/20 no-channel markets price ≥ Nash + 2.
 - Text does work where the deal is struck in the chat itself (SALT negotiations, AUROC 0.87).
+- All auditors read public messages and prices only; private chat is used for labels and in E133, where even private talk does not forecast execution beyond early prices (Δ −0.05 [−0.09, −0.02], n = 78).
 
 ## Abstract
 Adding LLM sellers' public messages to prices gives **no resolved gain in our base market and two fresh replications**: combined minus the better single view is −0.01 [−0.09, +0.06] (locked
@@ -23,7 +24,7 @@ smaller channel premium (−1.24 [−2.41, −0.03]; serving precision differs).
 Every abstract number with its denominator and source key: `results/analysis/claims_denominators.md` (`p2_claims.py`).
 
 **For the merged report (numbers freeze Sun 14:00).**
-- *Answer:* adding public text to prices gives no resolved gain in our base market and two fresh replications, and lowers AUROC in the Qwen factorial grid (P2.16). In our markets public text never resolvably beats prices and is *inverted* (run AUROC 0.15–0.36 on point estimates; CI below 0.5 only for the two Qwen-3.8 arms) for families that invite rivals publicly in control markets too. The one setting where text predicts execution (SALT, 0.87 [0.83, 0.91]; 0.81 [0.75, 0.87] on executed episodes with no judged agreement) is a bilateral negotiation where the conversation is the main action channel.
+- *Answer:* adding public text to prices gives no resolved gain in our base market and two fresh replications, and lowers AUROC in the Qwen factorial grid (P2.16). In our markets public text never resolvably beats prices and is *inverted* (run AUROC 0.15–0.36 on point estimates; CI below 0.5 only for the two Qwen-3.8 arms) for families that invite rivals publicly in control markets too. The one setting where text predicts execution (SALT, 0.87 [0.83, 0.91]; 0.81 [0.75, 0.87] on executed episodes with no judged agreement) is a bilateral negotiation where the conversation is the main action channel. Scope: all auditors read public messages and prices only; private chat is used for labels (and in E133). With privileged access (E133, P2.17), even private talk does not forecast execution beyond early prices (Δ AUROC −0.05 [−0.09, −0.02], n = 78 Q1.4 grid games).
 - *Numbers:* combined − best single −0.01 [−0.09, +0.06] (locked test, 95 runs); −0.07 [−0.17, +0.02] (pooled fresh, 90 runs, post hoc); SALT text auditor 0.87 [0.83, 0.91] (240 episodes).
 - *E113 grid (16 Q1.4 cells, 192 games):* registered P1 held weakly (4/16 positive, 1 tie, 11 negative; max-selection bias). Qwen-3.6 cell-stratified Δ combined − action −0.24 [−0.37, −0.09], combined − text −0.05 [−0.13, +0.03] (estimand added in amend3, 20:35, after about half the games were audited but before any score was read); prices alone are at chance there (pooled 0.52 [0.41, 0.64]), so combined inherits the inverted text (pooled 0.32 [0.24, 0.42]; flags 48/48 in both arms); 0/8 Qwen cells positive. In the 5 luna cells with public posts (almost only in the channel arm) combined − action is +0.11 [−0.02, +0.24] (text view not audited there). On executed games only (Q1.4's E70 rule, registered secondary), Qwen text stays inverted (0.36 [0.26, 0.46]) and Δ combined − action is −0.30 [−0.44, −0.17]. This reuses Q1.4 E70 data, not an independent joint replication.
 - *Lift:* the say-vs-do table (P2.0 below; `results/analysis/p2_say_vs_do.md`) and Figure P2.7 (`figures/p2_strong_llm_p2strongF.png`).
@@ -59,7 +60,7 @@ this report's own Qwen comparison is P2.11. "Predicts" means "is consistent with
 ## Phase 2 results (from 2026-10-24 06:30 UTC; v1 below frozen as git tag `v1-overnight`)
 
 Phase 2 closes known validity gaps. Generators are registered in `EXPERIMENTS.tsv` before their data exist, analyses and audits before their outputs;
-Phase 2 experiments and checks are E77–E120 (exceptions to pre-registration are marked where they occur, e.g. E104, E99-x); descriptive post-hoc analyses are marked (e.g. E93). New datasets are named `llm_p2*`. v1 numbers below are unchanged.
+Phase 2 experiments and checks are E77–E133 (exceptions to pre-registration are marked where they occur, e.g. E104, E99-x); descriptive post-hoc analyses are marked (e.g. E93). New datasets are named `llm_p2*`. v1 numbers below are unchanged.
 
 **P2.0 Say vs do in one table (E125)** (gpt-6.1-sol auditor, zero-shot; run/market AUROC [95% bootstrap CI]; < 0.5 = the view ranks controls higher):
 
@@ -93,6 +94,7 @@ Phase 2 experiments and checks are E77–E120 (exceptions to pre-registration ar
 | P2.14 | German-language market (10 + 10, paired seeds) | explicit agreement 3/10 vs 9/10 English (incl. information exchange 7/10 vs 10/10); premium still +0.91 [+0.20, +1.58] (English +1.75; paired German − English −0.58 [−1.79, +0.51]) | `p2_de.json` |
 | P2.15 | participant replacement (30 paired games) | market Δ +0.20 [−0.08, +0.62] private, +0.16 [−0.27, +0.57] none; re-agreement 16/20 (originals 15/20); level CUSUM 0/30 alarms by round 25 (3/30 any round). sol newcomer (E115): re-agreement 0/20, market Δ −1.34 [−1.79, −0.91] private, −1.71 [−2.51, −0.92] none, ≥ Nash + 2 18/20 & 9/10 | `p2_replace.json`, `p2_replace_sol.json` |
 | P2.16 | E1 factorial grid audit (Q1.4 E70, 192 games) | registered P1 held weakly: combined > best single 4/16 (1 tie); Qwen-3.6 cells 0/8; stratified Δ combined − action -0.24 [-0.37, -0.09] (amend3); Qwen text pooled 0.32 [0.24, 0.42] (inverted); silent luna re-prompt noise +0.02 [-0.12, +0.16] (3 cells) | `p2_e1_audit.json` |
+| P2.17 | private say-vs-do forecast (E133, Q1.4 E70 grid, 78 agreed games, 0 calls) | early prices alone 0.82; + private say-do features 0.77; Δ −0.05 [−0.09, −0.02]; strongF 13 vs 7: Δ −0.08 [−0.22, +0.03] | `e133_privileged.json` |
 | – | coded public signals; trust-breaking (D3) | dropped (budget; D3 measures promise-breaking, not collusion) | – |
 
 **P2.1 Precision at realistic prevalence (E81).** At 5% prevalence the frozen premium's precision is 0.24 [0.15, 0.43] (test), 0.16 (replication);
@@ -387,6 +389,11 @@ Combined-flag factor main effects with CI excluding 0: model +0.18 [+0.10, +0.26
 Registered secondary, executed labels (E113-secondary; run 2026-10-25 00:20 after the primary was read; Q1.4's E70 rule, not our strict rule; 44/96 channel games executed, 20/48 Qwen): on Qwen cells, executed channel vs no-channel text 0.36 [0.26, 0.46] (still inverted), action 0.65 [0.51, 0.77], combined 0.25 [0.15, 0.36]; stratified Δ combined − action −0.30 [−0.44, −0.17] (7 cells), so the executed label shows no text gain either. Luna two-view Δ on executed games is +0.16 [+0.05, +0.28] (8 cells), but +0.12 [−0.08, +0.32] in the 3 silent cells with no text input (post hoc split), so it cannot be credited to text. Source: `results/analysis/e113_secondary.json` (`uv run python p2_e113_secondary.py`).
 Source: `results/analysis/p2_e1_audit.json` (`uv run python p2_e1_audit.py eval`, run once; lines by `p2_e1_report.py`).
 Qwen text inversion (CI below 0.5) echoes P2.0: public invitations in both arms can rank controls higher; the Q1.4 grid is not an independent joint replication. The primary label is channel assignment; the executed-label secondary (above) does not change the conclusion.
+
+**P2.17 Privileged say-vs-do forecast (E133; registered before computing, exploratory, 0 LLM calls).** Population: Q1.4 E70 channel games with a judged agreed price (n = 78). Outcome: 48 held the agreement in rounds 10–19, 30 did not, under a late-window variant of Q1.4's E70 rule. Predictors use private messages and prices from rounds −1…5 only, with rounds 6–9 left as a gap. The model is leave-one-cell-out logistic with a game bootstrap.
+Early prices alone (pair markup, pair price SD) give AUROC 0.82. Adding three no-LLM say-do features lowers it to 0.77: Δ −0.05 [−0.09, −0.02]. The features are: share of messages stating a price, |price − last privately stated price|, and a frozen defection/renegotiation regex. Private talk alone *is* informative (say-do model 0.70; say-do gap single AUROC 0.23, i.e. a larger gap means not held), but it is redundant with early price dispersion (0.15, i.e. 0.85 reversed). So **even private talk does not forecast execution beyond early prices**.
+Secondary, strongF private arm (13 vs 7, full-game strict label, leave-one-out): Δ −0.08 [−0.22, +0.03]. Descriptive: the coarse regex also matches "avoid undercutting"; it fires in 29/34 agreed-not-executed vs 27/44 executed games under Q1.4's E70 rule. Four agreed games without a stated price are excluded. The optional LLM view (part c) was not run.
+Source: `results/analysis/e133_privileged.json` (`uv run python p2_e133_privileged.py`).
 
 ## v1 overnight summary (frozen 2026-10-24 06:30 UTC; superseded by the Abstract above)
 v1 answer, unchanged by Phase 2: on the locked test (n = 95) text alone is ≈ chance (0.47) and combined − best single modality is −0.01

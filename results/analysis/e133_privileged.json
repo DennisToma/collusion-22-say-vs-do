@@ -1,0 +1,183 @@
+{
+ "registration": "EXPERIMENTS.tsv E133-reg (2026-10-25 02:32, before computing)",
+ "llm_calls": 0,
+ "part_c_llm_view": "skipped (kept zero-call)",
+ "judge_label_sha256": {
+  "llm_grid_p2_c00": "68204e2701b3fb646f9e4644d5d7305179125e14e41a5d9671ed2ad44565805c",
+  "llm_grid_p2_c01": "6070f755d4880b7403cf2c32f6c9d83d4328f91b69d5062eb5a2ca8e80da7f43",
+  "llm_grid_p2_c02": "34dc4e032bed10d6b87dd46403b5143b8924d8ec3e183024c475167c9381086d",
+  "llm_grid_p2_c03": "60ebba2a16406974867c779b677344fcaa2822e75d0cbc52b4cf9c57b1c0cbaf",
+  "llm_grid_p2_c04": "b56396fd9a219aa2351518188653d7ecf4123627c5af12d0415c5f04c49b97ed",
+  "llm_grid_p2_c05": "0158a5e97787301b1cf4090a2ed0943e2fbf84bb60c10866a7331238202bf46f",
+  "llm_grid_p2_c06": "76e3468e3bd2a2ac521bd1786ea21a536c7cfa4b8875a9a4ddb37d845aafe423",
+  "llm_grid_p2_c07": "71482e77fb51e9db3577e0c663a245364df46df8af8a276b65b9e6515dd098ca",
+  "llm_grid_p2_c08": "52dc509922a6d807e98357f37cd2f0f833062b9c2c3e19c7aa6920fa6975eb4e",
+  "llm_grid_p2_c09": "6c4f4dd5b012d504b03153edae93ec0a70a1673a5e33dd45b466934a49b89973",
+  "llm_grid_p2_c10": "3b3659fcb19aeea7442c333c3f57ce80545b9406d526f156f5c35d86063adc58",
+  "llm_grid_p2_c11": "52380a83e6c7d309b2aabde195fe4df23637ce7bc3c99d572944eaed50929afb",
+  "llm_grid_p2_c12": "b90d9bfba594dd854c175379bd330dea29584e472f82c0f4169dc6124378268b",
+  "llm_grid_p2_c13": "e21d82eacf996747c585c13063e1b72be3d01739fe8a25368ff5e1eb5ab7dec3",
+  "llm_grid_p2_c14": "35529ebe137181af53e8b7aaa09eda2ce53f29812e3c4ae9258a9c8a396ea866",
+  "llm_grid_p2_c15": "ffffcf6843f6c732567424987db3733f1b74c36e2edba5596fc3faf4c892d52f"
+ },
+ "price_rx": "(?<!round )(?<!rounds )\\$?\\b(\\d{1,2}(?:\\.\\d+)?)\\b",
+ "defect_rx": "\\b(undercut\\w*|defect\\w*|cheat\\w*|deviat\\w*|renegotiat\\w*|betray\\w*|punish\\w*|retaliat\\w*|broke|break\\w*|lower\\w*|cut\\w*|drop\\w*)\\b",
+ "primary_e70_grid_late_exec": {
+  "n": 78,
+  "n_pos": 48,
+  "n_neg": 30,
+  "auroc_b": 0.816,
+  "auroc_a": 0.702,
+  "auroc_ab": 0.765,
+  "delta_ab_minus_b": [
+   -0.051,
+   -0.09,
+   -0.017
+  ],
+  "single_feature_auroc": {
+   "say_price_share": [
+    0.491,
+    0.432,
+    0.55
+   ],
+   "say_do_gap": [
+    0.23,
+    0.128,
+    0.343
+   ],
+   "defect_share": [
+    0.328,
+    0.206,
+    0.458
+   ],
+   "markup_0_5": [
+    0.393,
+    0.262,
+    0.519
+   ],
+   "pair_sd_0_5": [
+    0.145,
+    0.062,
+    0.244
+   ]
+  },
+  "say_do_gap_missing": 0,
+  "defect_talk_any_round": {
+   "held": [
+    31,
+    48
+   ],
+   "not_held": [
+    25,
+    30
+   ]
+  },
+  "means": {
+   "say_price_share": {
+    "held": 0.983,
+    "not_held": 0.989
+   },
+   "say_do_gap": {
+    "held": 0.696,
+    "not_held": 1.721
+   },
+   "defect_share": {
+    "held": 0.338,
+    "not_held": 0.546
+   },
+   "markup_0_5": {
+    "held": 4.533,
+    "not_held": 5.278
+   },
+   "pair_sd_0_5": {
+    "held": 0.668,
+    "not_held": 1.825
+   }
+  },
+  "defect_talk_any_round_q14_e70_rule": {
+   "executed": [
+    27,
+    44
+   ],
+   "agreed_not_executed": [
+    29,
+    34
+   ],
+   "note": "4 further Q1.4 agreed-not-held games have agreement=yes but no agreed_price (no late outcome definable): excluded"
+  }
+ },
+ "secondary_strongF_strict_class": {
+  "n": 20,
+  "n_pos": 13,
+  "n_neg": 7,
+  "auroc_b": 0.813,
+  "auroc_a": 0.451,
+  "auroc_ab": 0.736,
+  "delta_ab_minus_b": [
+   -0.077,
+   -0.222,
+   0.033
+  ],
+  "single_feature_auroc": {
+   "say_price_share": [
+    0.61,
+    0.385,
+    0.819
+   ],
+   "say_do_gap": [
+    0.28,
+    0.077,
+    0.533
+   ],
+   "defect_share": [
+    0.467,
+    0.209,
+    0.742
+   ],
+   "markup_0_5": [
+    0.868,
+    0.687,
+    1.0
+   ],
+   "pair_sd_0_5": [
+    0.214,
+    0.033,
+    0.462
+   ]
+  },
+  "say_do_gap_missing": 0,
+  "defect_talk_any_round": {
+   "held": [
+    12,
+    13
+   ],
+   "not_held": [
+    6,
+    7
+   ]
+  },
+  "means": {
+   "say_price_share": {
+    "held": 0.973,
+    "not_held": 0.959
+   },
+   "say_do_gap": {
+    "held": 1.995,
+    "not_held": 3.224
+   },
+   "defect_share": {
+    "held": 0.06,
+    "not_held": 0.082
+   },
+   "markup_0_5": {
+    "held": 5.423,
+    "not_held": 3.226
+   },
+   "pair_sd_0_5": {
+    "held": 1.001,
+    "not_held": 1.751
+   }
+  },
+  "note": "full-game strict label (overlaps rounds 0-5: partial leakage into (b)); LOO CV"
+ }
+}
