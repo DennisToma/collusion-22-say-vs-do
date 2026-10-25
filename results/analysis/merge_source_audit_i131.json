@@ -1,0 +1,119 @@
+{
+  "kind": "read-only review of new committed merge presentation text; no experiment or metric recomputation",
+  "iteration": 131,
+  "time_utc": "2026-10-25T10:03:42.710700+00:00",
+  "merge_commit": "6a295b5e29f6bb31fb5a108a48d1a2ec94d220f5",
+  "previous_reviewed_commit": "94c45c0",
+  "reviewed_merge_sha256": {
+    "SUBMISSION.md": "3cc5e59422ffcb54f15966fc40ddf52cdc2be6d72cb6b7bb8007778da20100dd",
+    "SLIDES.md": "8c7681a1156da82c0179b32dab46f7484471f1cd0b7b9c716fb612dd36dc8926",
+    "SOURCES.md": "5b648fefc146a4b42159e49bcf6ef05ba573c0b17d943112f879dfbe70f99955"
+  },
+  "source_sha256": {
+    "results/analysis/e132_inversion.json": "f911c20853d0943e5c2a25b3e3e14108025bc341feb10e81e01fdad479834c19",
+    "results/analysis/p2_strong_eval_llm_p2strongF.json": "a5bb377e2a9e00f0c4f4f1632f0769091f5ccd0b27cb14c2fc7eb989d668945c"
+  },
+  "saved_value_checks": [
+    {
+      "file": "results/analysis/p2_strong_eval_llm_p2strongF.json",
+      "path": [
+        "detectors",
+        "premium",
+        "auroc_strict_vs_tacit_high"
+      ],
+      "value": [
+        0.474,
+        0.266,
+        0.693
+      ],
+      "ci_includes_chance": true
+    },
+    {
+      "file": "results/analysis/p2_strong_eval_llm_p2strongF.json",
+      "path": [
+        "detectors",
+        "market_excess_nash",
+        "auroc_strict_vs_tacit_high"
+      ],
+      "value": [
+        0.5,
+        0.275,
+        0.722
+      ],
+      "ci_includes_chance": true
+    },
+    {
+      "file": "results/analysis/p2_strong_eval_llm_p2strongF.json",
+      "path": [
+        "detectors",
+        "action",
+        "auroc_strict_vs_tacit_high"
+      ],
+      "value": [
+        0.575,
+        0.323,
+        0.8
+      ],
+      "ci_includes_chance": true
+    },
+    {
+      "file": "results/analysis/p2_strong_eval_llm_p2strongF.json",
+      "path": [
+        "detectors",
+        "action_stats",
+        "auroc_strict_vs_tacit_high"
+      ],
+      "value": [
+        0.429,
+        0.212,
+        0.661
+      ],
+      "ci_includes_chance": true
+    },
+    {
+      "file": "results/analysis/e132_inversion.json",
+      "path": [
+        "sets",
+        "Qwen3.8 base",
+        "spearman_text_vs_invite_rate_pooled"
+      ],
+      "value": [
+        0.49,
+        0.165,
+        0.714,
+        30
+      ]
+    },
+    {
+      "file": "results/analysis/e132_inversion.json",
+      "path": [
+        "sets",
+        "Qwen3.8 base",
+        "spearman_text_vs_invite_rate_within_no_channel"
+      ],
+      "value": [
+        -0.405,
+        -0.833,
+        0.178,
+        15
+      ]
+    }
+  ],
+  "e133_appendix_verbatim_move": true,
+  "new_P1_findings": [
+    {
+      "id": "131-1",
+      "where": "SUBMISSION.md Figure 6 caption, lines 326\u2013327",
+      "current_text": "overlaps the strict-executed channel class (blue), so price paths cannot separate them.",
+      "exact_replacement": "overlaps the strict-executed channel class (blue); the tested price views show no resolved separation (E99-x, exploratory), which does not establish that price paths are indistinguishable.",
+      "reason": "Overlapping class means and unresolved tested-view AUROCs do not establish that arbitrary price paths cannot discriminate the classes.",
+      "report_section": "P2.7, E99-x price-view table and reading guard",
+      "status": "open"
+    }
+  ],
+  "prior_recommendations": "All original flags remain applied; optional I129 pooled Spearman added with correct M33 source key.",
+  "source_checker": "PASS: 16/16 groups, 69 saved-value checks, 21 hashes; frozen I116 receipt only, latest text reviewed separately",
+  "model_calls": 0,
+  "new_metrics": false,
+  "experiment_ledger_rows_read": 249
+}

@@ -1,12 +1,13 @@
 # STATUS
 
-## Current state (2026-10-25 10:01 UTC, iteration 130) — research frozen; DIRECTION 08:23
+## Current state (2026-10-25 10:03 UTC, iteration 131) — research frozen; DIRECTION 08:23
 - Headline unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc); Qwen combined−action −0.24 [−0.37, −0.09].
-- Merge HEAD `94c45c0` (iter6): Figure 6 threshold label correctly says rounds 11–40; executable AST matches our source after declared paths/import/label changes; saved counts 13/20 strict, 19/20 tacit-high agree; 0 open Q2.2 flags.
-- check_merge_sources PASS (69 checks, 21 hashes); pinned review `results/analysis/merge_source_audit_i130.json`. No calls, rendering, metrics or bootstrap reruns.
-- Next: check only new merge HEADs/asks; 16:30 export pass (REPORT.pdf/html, PRESENTATION, EVIDENCE, verify_phase2 + p2_claims + check_merge_sources once); hard stop 18:00.
-- Export fix: our original `p2_strongF_fig.py`/Figure P2.7 still says “2nd half”; change its presentation label to rounds 11–40 at 16:30, preserving saved classes/estimates (merge already fixed).
-- Risks: source checker authenticates frozen JSON only; REPORT.html/pdf remain stale until 16:30. Serendipity through S64 has no promoted hit; no confirmation experiment.
+- Merge `6a295b5` presentation pass reviewed: E133 moved verbatim to Appendix C; M33 pooled Spearman matches JSON; all prior flags applied.
+- One new P1 open: Figure 6 says overlapping class means imply “price paths cannot separate them”; exact scoped replacement in results/analysis/merge_flags.md (131-1).
+- check_merge_sources PASS (69 checks, 21 hashes); pinned review results/analysis/merge_source_audit_i131.json. No calls, rendering, metrics or bootstrap reruns.
+- Next: check new merge HEADs/asks; 16:30 export pass (REPORT.pdf/html, PRESENTATION, EVIDENCE, verify_phase2 + p2_claims + check_merge_sources once); hard stop 18:00.
+- Export fix: p2_strongF_fig.py/Figure P2.7 label “2nd half” → rounds 11–40 at 16:30, preserving saved classes/estimates (merge already fixed).
+- Risks: source checker authenticates frozen JSON only; REPORT.html/pdf stale until 16:30. No new experiments under current freeze.
 
 ## Log
 - 2026-10-25 10:05 UTC P2 iter129: merge advanced to `4e17126`. check_merge_sources PASS. New Q2.2 text checked vs JSON (E132 within-arm Spearman −0.41 [−0.83,+0.18]; logbook +0.22 vs +1.04; Qwen3.6 0.32; SALT 62%/5169; C−A glossary; strict-executed scope): all correct, no P1 → merge_flags.md §I129 + one REPORT Changes line. No calls.
@@ -240,3 +241,5 @@
 - 2026-10-25 08:49 UTC P2 iter121 (Codex fallback): DIRECTION #2 triggered by merge `f88618d`. All 7 original fixes verified in committed SUBMISSION; 69 saved-value checks / 21 source hashes PASS. Reviewed newly added SLIDES only for substantive Q2.2 overclaims: 2 P1s posted with exact replacements in the single ranked list, hashes/quotes pinned in merge_source_audit_i121.json. REPORT Changes-after-08:00 handoff updated; scientific text and joint statement unchanged. No experiment, model call, metric rerun or early export. Ending this bounded merge-support chunk per DIRECTION #5; full 45–60 min research work is superseded by the freeze.
 
 - 2026-10-25 10:01 UTC P2 iter130 (Codex fallback): DIRECTION #2 triggered by merge `94c45c0`. Figure 6 correction verified against the one-indexed `late=11` frozen analysis and saved classes (13/20 strict, 19/20 tacit-high); AST comparison proves copied renderer changes only paths/import/threshold text, no plot computation change. Committed PNG visually checked; check_merge_sources PASS (69 saved-value checks, 21 source hashes). Pinned receipt + merge_flags current state + REPORT Changes line; 0 open flags. Own original figure label correction deferred to scheduled 16:30 export. HITS through S64 has no promoted hit, so no confirmation. No calls, new experiment, rendering, metrics or bootstrap reruns; bounded merge-support work supersedes the 45–60 min research chunk under the freeze.
+
+- 2026-10-25 10:03 UTC P2 iter131 (Codex fallback): new merge commits 444fea2/6a295b5 reviewed vs 94c45c0, per DIRECTION #2. Frozen source checker PASS; four E99-x price-view CIs include chance, M33 pooled/within-arm correlations match saved JSON, E133 appendix is a verbatim move. Posted exactly one new P1 (131-1): overlapping class-average prices do not show arbitrary price paths cannot discriminate. REPORT Changes-after-08:00 + pinned receipt updated; all scientific data/estimates unchanged, 0 model calls. Export remains scheduled 16:30.

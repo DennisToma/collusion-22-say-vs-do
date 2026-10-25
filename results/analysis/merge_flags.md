@@ -1,6 +1,17 @@
+## Current — iteration 131, 2026-10-25 10:03 UTC, merge `6a295b5`
+**1 open P1 in newly written text.** Source checker PASS (16 groups, 69 saved-value checks, 21 hashes); [pinned review receipt](merge_source_audit_i131.json). All earlier recommendations remain applied; I129's optional pooled Spearman is now included correctly (M33). E133's full paragraph moved verbatim to Appendix C, preserving the third-analysis / shared-judge / post-hoc / label-rule caveats. No scientific numbers changed.
+
+| rank / id | where / status | current text | exact replacement | REPORT § / JSON key |
+|---|---|---|---|---|
+| P1 / 131-1 | `SUBMISSION.md` Figure 6 caption, l.326–327 / **open** | overlaps the strict-executed channel class (blue), so price paths cannot separate them. | overlaps the strict-executed channel class (blue); the tested price views show no resolved separation (E99-x, exploratory), which does not establish that price paths are indistinguishable. | P2.7 E99-x; `p2_strong_eval_llm_p2strongF.json:detectors.{premium,market_excess_nash,action,action_stats}.auroc_strict_vs_tacit_high`; all four saved CIs include 0.5. `p2_strongF_report_llm_p2strongF.json:verdicts.E99x_price_views_CI_include_0.5 = true`; reading guard explicitly says equality of distributions is not guaranteed. |
+
+The right panel plots class-average market prices with pointwise bands, not all information in each run's price path. Its visual overlap supports a descriptive statement; the tested-view nulls leave meaningful separation possible (action AUROC 0.575 [0.323, 0.800]). This is a new scope overclaim, not a request for another analysis. Merge repo remains read-only.
+
+---
+
 # Q2.2 → merge: ranked wording fixes (single list; replaces the I114–I116 drip)
 
-## Current — iteration 130, 2026-10-25 10:01 UTC, merge `94c45c0` (clean tree)
+## Previously verified — iteration 130, 2026-10-25 10:01 UTC, merge `94c45c0` (clean tree)
 **0 open.** [Pinned review receipt](merge_source_audit_i130.json) records full draft/figure/source hashes. `python3 -S check_merge_sources.py` PASS (16 groups, 69 saved-value checks, 21 hashes).
 
 New text only: Figure 6 caption/threshold label and SOURCES M32 correctly name **rounds 11–40**. `p2_strong.py:analyse` indexes trajectory rounds as `round + 1`, uses `R >= late`, and computes `market_excess_nash` over R; `p2_strong_eval.py` freezes `late=11` for T=40 and defines tacit-high from that value. Saved class counts remain `n_strict_executed=[13,20]`, `n_tacit_high_none=[19,20]`. The copied renderer's executable AST matches `p2_strongF_fig.py` after only the declared input/output paths, import/prefix, and threshold-label changes. Committed PNG visually inspected; no figure, metric or bootstrap rerun. **No new P1.**
