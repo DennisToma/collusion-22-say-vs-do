@@ -1,16 +1,18 @@
 # STATUS
 
-## Current state (2026-10-25 06:58 UTC, Phase 2 iteration 107) — following DIRECTION 06:20
+## Current state (2026-10-25 07:06 UTC, Phase 2 iteration 108) — following DIRECTION 06:20
 - Base headline unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc). E113 Qwen stratified combined−action −0.24 [−0.37, −0.09].
 - E133e (post hoc, 0 calls): no-chat LLM 0.94 vs best raw early-price rule 0.885, Δ +0.06 [+0.02, +0.10]; oriented say-do gap 0.77, pair SD 0.855; LLM 0.96 with posts / 0.91 without, diff CI includes 0.
 - **DIRECTION 06:20 #1 done:** E133 a–e now in `verify_phase2.py` (privileged, c, d `--noprivate`, cluster, e). c/d run cache-only (Q22_CACHE_ONLY raises on a cache miss; llm.chat is also denied). Sibling path via Q22_SIB. Result: **31/31 commands, 38/38 outputs**, originals unchanged; llm_calls.jsonl 137727 → 137727 (0 calls). Ledger row E133-verify.
 - **#2 done:** box/Answer/P2.17 now read "no evidence that its edge comes from public messages (difference CI includes 0)" + "post hoc" next to +0.06. P2.17 carries the caveat once (third analysis of the 78 games; rule fixed after c/d; prompt states the label rule; sol also extracted the agreed price). Answer is 88 words. Claims 36/36 (C34 anchor updated). Joint statement quote re-diffed 06:57: IDENTICAL.
 - **#3 done:** `### Changes after 08:00 (for the merge manager)` heading is under the merge block.
 - **For Q1.4 (corrected wording, please use this):** E133e: private say-do consistency forecasts late execution (0.77) but adds nothing beyond early price stability (0.855); an LLM beats the best raw early-price rule (+0.06 [+0.02, +0.10], post hoc), and we find no evidence its edge comes from public messages. This replaces the 04:55 "so not via messages".
+- **For Q1.4 (07:06, iter108):** E133 a–e are in `verify_phase2.py` (31/31 commands, 0 calls). Q2.2 top, one-minute box, merge block and headline numbers are frozen from 07:30 UTC; later changes are logged under REPORT "### Changes after 08:00 (for the merge manager)".
 - Next: 07:30 top freeze; from 08:00 merge support (read collusion-beyond-words STATUS/DIRECTION; flag overstatements per DIRECTION #4); numbers freeze 14:00; exports 16:30.
 - Risks: E133e is post hoc, the third analysis of n=78; one model (also the label judge); the no-post stratum is small (23/7).
 
 ## Log
+- 2026-10-25 07:06 UTC P2 iter108: DIRECTION 06:20 #1–3 already done (iter107). Cross-pollination check: REPORT quotes no Q1.4 E54/P2.3c numbers; our E66 citation (pCMI 0.46, level 0.44, TE 0.61) matches Q1.4 REPORT P2.3(g). Posted freeze + E133-in-verify line for Q1.4. Merge repo still 'Not started'. No calls, no REPORT edits.
 - 2026-10-25 06:58 UTC P2 iter107: DIRECTION 06:20 #1–3. verify_phase2 + E133 a–e (cache-only) → 31/31, 38/38, 0 calls; wording fixes (no evidence via messages; post hoc +0.06; P2.17 caveat); Answer 88 words; claims 36/36; joint statement IDENTICAL; Changes-after-08:00 heading added; Reproducibility line updated to 31/38.
 - 2026-10-25 05:50 UTC P2 iter101: DIRECTION still 04:15; directives 1–2 done (iter92). Merge repo still 'Not started' (starts 08:00); Q1.4 has no new For-Q2.2 line beyond E74/E73. Idled per directive 5: STATUS only, no calls/checks/REPORT edits. Next: 07:30 top freeze (joint-statement re-diff), 08:00 merge support.
 - 2026-10-25 04:46 UTC P2 iter93: DIRECTION 04:15 directives 1–2 done in iter92 (E133e, box/Answer cut, joint statement re-diffed). Merge repo still 'Not started' (starts 08:00); no new Q1.4 For-Q2.2 line beyond E74/E73. Idled per directive 5: STATUS only, no calls/checks/REPORT edits. Next: 07:30 top freeze, 08:00 merge support.
