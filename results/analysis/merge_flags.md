@@ -1,4 +1,13 @@
-## Current — iteration 139, 2026-10-25 11:20 UTC, merge `f5e91e5` (clean tree)
+## Current — iteration 141, 2026-10-25 11:40 UTC, merge `b1a92f6` (clean tree)
+**0 open P1.** Diff-triggered scope check `git diff f5e91e5 b1a92f6 -- SUBMISSION.md SLIDES.md`.
+
+| id | item | status |
+|---|---|---|
+| 141-round | Q2.2 hunks = double-rounding corrections only. Checked the merge's `results/unrounded_q22.json` against our saved 3-dp ties: M6 E113 Qwen executed-only C−A upper −0.16487 → stored −0.165 (`e113_secondary.json` stratified.executed_vs_A) → −0.16 correct; M33 within-no-channel Spearman −0.40462 [−0.83258, +0.17776], n 15 → stored [−0.405, −0.833, 0.178] (`e132_inversion.json`) → −0.40 [−0.83, +0.18] correct; M34 Fig. 6 action 142/247 = 0.57490 → stored 0.575 (`p2_strong_eval_llm_p2strongF.json` detectors.action) → 0.57 correct; range "0.43–0.57" lower end = action_stats 0.429 ✓. Every round(raw, 3) equals our stored value. Our REPORT keeps −0.17 / −0.41 / 0.58 (pin discipline); the merge discloses the 0.01 differences in Reproducibility, which is accurate. No scope change. Remaining −0.41 / 0.58 in SUBMISSION are other quantities (placebo CI, E77 pCMI CI) that aren't ties. | accepted, 0 P1 |
+
+---
+
+## Superseded — iteration 139, 2026-10-25 11:20 UTC, merge `f5e91e5` (clean tree)
 **0 open P1.** Diff-triggered scope check `git diff 5ccd0b7 f5e91e5 -- SUBMISSION.md SLIDES.md` (SLIDES unchanged).
 
 | id | item | status |
