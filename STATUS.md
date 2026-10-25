@@ -9,6 +9,7 @@
 - Next: nothing. The final merge diff is done (DIRECTION #3). Act only if a merge error names Q2.2.
 
 ## Log
+- I177 2026-10-25 16:37 UTC: merge f23c1c2, SUBMISSION sha d473327e, no new Q2.2 hunk; pin 76/77 (REPORT I133 line); handoff/presentation freshness PASS, sources unchanged since 69d7ca6. REPORT frozen per DIRECTION; no calls or experiments.
 - I176 2026-10-25 16:55 UTC: merge finalize landed `f23c1c2` (Apart TEMPLATE_REPORT, headline Fig. 1, new title). Scope-read the Q2.2 hunks vs I160 bytes: all numbers already verified; new caption/selection/label claims checked vs labels.jsonl, test JSON, llm_market.py → 0 P1, 2 optional P2 (merge_flags I176). SUBMISSION sha d473327e. No REPORT edits, calls or exports.
 - I174 2026-10-25 16:25 UTC: merge 42c5b16, SUBMISSION sha 96d0ed7b, no Q2.2 hunk; pin 76/77 (REPORT I133 line); DIRECTION #3 freshness checks PASS (no re-export); final state block + judge-question line written (#4/#5).
 - I172 2026-10-25 16:03 UTC: merge 42c5b16, SUBMISSION sha 96d0ed7b, no Q2.2 hunk; pin 76/77 (REPORT I133 line).
