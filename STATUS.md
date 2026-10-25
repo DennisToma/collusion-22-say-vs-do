@@ -1,9 +1,9 @@
 # STATUS
 
-## Current state (2026-10-25 16:57 UTC, iteration 179) — FINAL; research frozen
-- **P1 open: 2 in merge `52f3fd8`; applicable fix: `results/analysis/template_scope_fixes_i179.patch` (I178-1/2 + Q1.4's three abliteration locations). Earlier Q1.4 patch no longer applies cleanly.**
+## Current state (2026-10-25 16:59 UTC, iteration 180) — FINAL; research frozen
+- **P1 open: 2 in merge `1a295a0`; applicable fix: `results/analysis/template_scope_fixes_i179.patch` (I178-1/2 + Q1.4's three abliteration locations). Earlier Q1.4 patch no longer applies cleanly.**
 - Headline unchanged: locked-test Δ −0.01 [−0.09, +0.06]; fresh pooled n=90 −0.07 [−0.17, +0.02] (post hoc); Qwen combined−action −0.24 [−0.37, −0.09].
-- Last merge bytes read: `52f3fd8`, TEMPLATE 211e4436, SLIDES e7f46fb3, fig0 0b4f8004; P1 open: 2 (same bytes as I178).
+- Last merge bytes read: `1a295a0`, TEMPLATE 211e4436, SLIDES e7f46fb3, fig0 0b4f8004; P1 open: 2 (same bytes as I178; empty content diff from I179).
 - Handoff patch verified in scratch: apply/check, expected bytes, reverse/check and exact restoration PASS; result/qualifier anchors preserved. Merge files/PDFs untouched.
 - Pin `91ffb2d` remains 76/77 (REPORT I133 review line only); locked-test replay 6/6 views + 8/8 contrasts unchanged; Q2.2 post-18:00 guard remains in merge_flags I178.
 - Limitations: no resolved gain does not prove zero; Qwen inversion is family-scoped; E84 keeps 14/50 agreements under its rule; one market.
@@ -292,3 +292,5 @@
 - I175 2026-10-25 16:19:37 UTC: merge 42c5b16, SUBMISSION sha 96d0ed7b, no new Q2.2 hunk; pin 76/77 (REPORT I133 line); read-only handoff/presentation checks PASS, sources unchanged since 69d7ca6; post-16:30 final-byte check pending.
 
 - I179 2026-10-25 16:57 UTC (Codex fallback): DIRECTION 16:40 remains binding. Merge `52f3fd8` changes since I178 are packaging/checker/STATUS only; TEMPLATE/SLIDES/fig0 bytes unchanged, so no repeat scope review. Found the accepted Q1.4 patch fails apply-check on current committed files; produced `results/analysis/template_scope_fixes_i179.patch` for the five already-agreed sentence replacements (two Q2.2 P1s, three Q1.4 abliteration locations). Scratch apply/check, expected bytes, reverse/check, exact restoration and frozen-result anchors PASS; receipt `template_scope_check_i179.json`. Open claims not marked closed; merge untouched. REPORT/APPENDIX unchanged under the explicit freeze; no calls, experiments, metric/source-check reruns or exports. Bounded handoff completed early under the directive's finalization limits; next substantive action requires a new merge content commit. No experiment-ledger row because no experiment or estimate was produced.
+
+- I180 2026-10-25 16:59 UTC (Codex fallback): merge `1a295a0`, empty committed TEMPLATE/SLIDES/fig0-script/fig0-image diff from I179 `52f3fd8`; 2 P1 remain open with the applicable I179 patch. DIRECTION 16:40 count-only no-op/freeze supersedes the 45–60 min research chunk: STATUS-only commit; REPORT/APPENDIX unchanged (REPORT drift from pin is still the I133 line), no calls, experiments, reviews, check reruns or exports. Serendipity through S72 remains unpromoted; no confirmation trigger. Next action is a substantive merge content commit (at most two P1-only checks, last by 17:55).
