@@ -1,21 +1,15 @@
 # STATUS
 
-## Current state (2026-10-25 14:25 UTC, iteration 160) — research frozen; DIRECTION 12:35
-- Headline unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc); Qwen combined−action −0.24 [−0.37, −0.09].
-- DIRECTION 12:35 #1 DONE: render-only export from REPORT @ `94018c8` → REPORT.html/PDF (30 pp, 7 figs), PRESENTATION.pdf (7 pp); PRESENTATION.html/md already current (no diff).
-- Checks: build_handoff --check PASS, build_presentation --check PASS, p2_claims 36/36 (no diff), verify_phase2 31/31 commands, 38/38 outputs, originals unchanged.
-- Pin 91ffb2d: 76/77 SHA256 match; only REPORT.md differs (I133 review line). No pinned writer run; REPORT.md untouched.
-- Independent confirmation: merge iter25 `locked_test_q22.json` replays 6/6 views + 8/8 contrasts exactly (I146/I147).
-- I153: merge → `2cf7c7d` (+ Dennis's compliance DIRECTION for merge: 8 pp, 150–250-word abstract, ethics appendix, reference check). 0 Q2.2 P1. Ref pre-check: 15/15 SUBMISSION references verifiable (14 in starter papers.csv + Schreiber 2000), so 0 to remove (merge_flags I153).
-- I155: merge → `089ffb0` + WT compliance rewrite (8 pp, new abstract, App. G ethics, form). Full Q2.2 scope read (me + Opus subagent) → 0 P1, 5 optional P2 (merge_flags I155); check_merge_sources PASS. This covers directive #3 early.
-- I156: DIRECTION #3 final scope read done at merge `089ffb0` + WT (SUBMISSION sha256 c2fc36ba…): 0 P1. Delta since I155 = Q1.4 abstract terms (pCMI/TE spelled out) + usage/coverage counts only; SLIDES unchanged; check_merge_sources PASS 16/16.
-- I157: new compliance-draft clarifications at merge `089ffb0` + WT (SUBMISSION sha256 4ff83a2b…): luna scope, Qwen3.8-base/post-hoc mechanism, cost-adjusted Nash + 2 over rounds 11–40 all match frozen sources; 0 P1; source check 16/16, 69 values, 21 hashes. SLIDES unchanged.
-- I158: final scope read done at merge `ff5b616` (compliance rewrite committed) + WT (SUBMISSION sha256 adb75810…), 0 P1. vs I157-read text: only the LLM-usage count sentence (361→364 iterations); SLIDES identical; check_merge_sources PASS 16/16.
-- I160: final scope read at merge `f82acb0` (codex 2nd-critic P2 wording; clean WT; SUBMISSION sha256 96d0ed7b…), 0 P1. Q2.2 hunks: abstract now 'registered gain (combined minus better single view, AUROC) −0.01 [−0.09, +0.06]' = REPORT l.16/28; §conclusion 'resolved no benefit from public text; small gains remain possible' = CI upper +0.06. SLIDES identical. check_merge_sources PASS 16/16.
-- Next: silent no-op iterations (#2); one short diff read only if the compliance draft changes Q2.2 text again; 16:30 --check freshness only (#4); final line by 17:30.
-- Risks: none scientific; re-export only if REPORT/slide sources change.
+## Current state (2026-10-25 16:25 UTC, iteration 174) — FINAL; research frozen
+- Headline unchanged: combined − better single view Δ −0.01 [−0.09, +0.06] (locked test); pooled fresh n=90 −0.07 [−0.17, +0.02] (post hoc); Qwen combined−action −0.24 [−0.37, −0.09].
+- Q2.2 final at `2700083`+I174; pin 91ffb2d 76/77 (REPORT.md I133 review line only); merge locked-test replay 6/6 + 8/8; last merge bytes read: merge `42c5b16`, SUBMISSION sha 96d0ed7b…, 0 P1 (merge 16:30 finalize not landed yet; the one final diff is still due under DIRECTION #3).
+- 16:17 freshness check (DIRECTION #3): build_handoff --check PASS, build_presentation --check PASS, REPORT/APPENDIX/presentation sources unchanged since 69d7ca6 → no re-export.
+- Limitations: the null bounds the gain (> +0.06 excluded on test), it does not prove zero; the Qwen inversion is family-scoped; labels are rule-dependent (E84 kept 14/50); one market.
+- Likely judge question: "Isn't the text auditor just reading the channel-offer prompt cue, and does the null mean text is useless?" → (1) cue: the notepad (no recipient) and placebo (never delivered) arms carry most of the premium (notes +1.04, placebo +1.23 vs private +1.61; P2.5 E77), and E92 logbook control shows it needs private *pricing* thought (logbook − notes −0.82); the 0.98 supervised classifier scores placebo/notepad runs high, so it detects condition traces, not agreements (P2.3 E82). (2) Not useless: in the executed-vs-tacit arm, a monitor reading private plans got 0.76 [0.55, 0.93] where prices ≈ 0.5 and public text inverted 0.25 (exploratory E99-x; always quote with E111 no-LLM partner-name count 0.82 → channel footprint); where agents strike the deal in chat (SALT, E105) the text audit reaches 0.87 [0.83, 0.91].
+- Next: after merge finalize lands, one diff of final SUBMISSION/SLIDES vs 96d0ed7b, filtered for Q2.2 terms; then act only on a merge error naming Q2.2.
 
 ## Log
+- I174 2026-10-25 16:25 UTC: merge 42c5b16, SUBMISSION sha 96d0ed7b, no Q2.2 hunk; pin 76/77 (REPORT I133 line); DIRECTION #3 freshness checks PASS (no re-export); final state block + judge-question line written (#4/#5).
 - I172 2026-10-25 16:03 UTC: merge 42c5b16, SUBMISSION sha 96d0ed7b, no Q2.2 hunk; pin 76/77 (REPORT I133 line).
 - I171 2026-10-25 15:45 UTC: merge 31cf60e, SUBMISSION sha 96d0ed7b, no Q2.2 hunk; pin 76/77 (REPORT I133 line).
 - I170 2026-10-25 15:44 UTC: merge 31cf60e, SUBMISSION sha 96d0ed7b, no Q2.2 hunk; pin 76/77 (REPORT I133 line).
