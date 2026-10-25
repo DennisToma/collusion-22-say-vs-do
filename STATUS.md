@@ -1,6 +1,6 @@
 # STATUS
 
-## Current state (2026-10-25 08:10 UTC, iteration 114; top frozen since 07:30) — following DIRECTION 06:20
+## Current state (2026-10-25 08:15 UTC, iteration 115; top frozen since 07:30) — following DIRECTION 06:20
 - Base headline unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc). E113 Qwen stratified combined−action −0.24 [−0.37, −0.09].
 - E133e (post hoc, 0 calls): no-chat LLM 0.94 vs best raw early-price rule 0.885, Δ +0.06 [+0.02, +0.10]; oriented say-do gap 0.77, pair SD 0.855; LLM 0.96 with posts / 0.91 without, diff CI includes 0.
 - **DIRECTION 06:20 #1 done:** E133 a–e now in `verify_phase2.py` (privileged, c, d `--noprivate`, cluster, e). c/d run cache-only (Q22_CACHE_ONLY raises on a cache miss; llm.chat is also denied). Sibling path via Q22_SIB. Result: **31/31 commands, 38/38 outputs**, originals unchanged; llm_calls.jsonl 137727 → 137727 (0 calls). Ledger row E133-verify.
@@ -14,10 +14,14 @@
   3. §7 "Q2.2's placebo cannot separate delivery from offer" is wrong: the placebo *is* the delivery contrast, it is just unresolved. Use "Q2.2's placebo leaves delivery unresolved (private − placebo +0.38 [−0.41, +1.18], 15 seeds)" (REPORT P2.5, `p2_logbook.json`).
   4. §5.3 E133 sentence: add the caveat our P2.17 carries. "Post hoc" means the third analysis of the same 78 games; the LLM prompt states the label rule; gpt-6.1-sol also extracted the agreed price. §3 "judge … never prices" holds for labels but not for E133.
   Correct as written: the say-vs-do table, 0.40 vs 0.88, 0.385/62%, 14/50, 115/115, 0/10+0/10, 0.24 at 5%, 7/10, 9/10 (2/10), notepad/placebo/terse numbers, market spec (12 rounds, 6–30, Nash ≈ 11, monopoly ≈ 19), and verify 31/31. (−0.19/+2.56 are Q1.4 numbers, P2.7.)
+- **For merge manager (08:15 UTC, iter115, re SUBMISSION working tree after merge iter1 `fbed25a`):** the 4 fixes above are not applied yet (abstract l.21 and §5.3 heading l.165 still say "add nothing"; §7 l.258 placebo sentence; §5.3 l.187 executed rule; l.191 E133 caveat). One more (P2, no new numbers):
+  5. Abstract l.24 "text ranks control markets *above* channel markets (AUROC 0.15–0.36)" drops our caveat: these are point estimates; the CI is below 0.5 only for the two Qwen-3.8 arms (and the Qwen-3.6 grid). Also "families that talk publicly in every market" → "families that invite rivals publicly in control markets too" (REPORT TL;DR item 3, l.42). Source: REPORT P2.0 table, `p2_family3way.json`, `p2_strong_eval_llm_p2qwen{a,b}.json : detectors.text.auroc_private_vs_none`.
+  Rechecked correct: 30/30 cost false flags (Q1.4 P2.4), 0.40 vs 0.88, −0.24/−0.30 (executed under E70 in our text), E133 0.77/0.855/0.94/0.885.
 - Next: merge support each iteration (read collusion-beyond-words STATUS/DIRECTION/SUBMISSION, answer asks); numbers freeze 14:00; exports 16:30.
 - Risks: E133e is post hoc, the third analysis of n=78; one model (also the label judge); the no-post stratum is small (23/7).
 
 ## Log
+- 2026-10-25 08:15 UTC P2 iter115: merge iter1 committed (`fbed25a`); working-tree SUBMISSION still has the 4 iter114 issues (not yet processed). Found 1 more caveat drop (abstract text-inversion range lacks "point estimates; CI < 0.5 only Qwen-3.8"); posted as fix 5. No calls, no REPORT changes (frozen).
 - 2026-10-25 08:10 UTC P2 iter114: merge manager started (iter1, SUBMISSION v0, uncommitted). Checked every Q2.2 number in it against REPORT: all correct; 4 wording fixes posted above (executed-rule label, "add nothing", placebo limitation, E133 caveat). No calls, no REPORT changes.
 - 2026-10-25 07:37 UTC P2 iter112: DIRECTION 06:20 #1–3 done (iter107/108); top frozen since 07:30. Merge repo still 'Not started' (starts 08:00); Q1.4 posted its 07:30 freeze line, no Q2.2 asks. Idle per #5: no calls, checks or REPORT edits. Next: merge support from 08:00.
 - 2026-10-25 07:21 UTC P2 iter110: DIRECTION 06:20 #1–3 done (iter107/108). Merge repo still 'Not started' (starts 08:00); Q1.4 has no new For-Q2.2 line (latest terms note on TE/qwen-pCMI already mirrored; our REPORT only cites E66 numbers). Idle per #5: no calls, checks or REPORT edits. Next: top frozen 07:30; merge support from 08:00.
