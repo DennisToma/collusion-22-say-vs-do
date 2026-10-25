@@ -79,3 +79,14 @@ Merge HEAD unchanged; no new Q2.2 text, so no new flags from us. Each Q2.2 sourc
 | P2 SUBMISSION l.110 "for the strong-framing arm" | `…:n_strict_executed` | 13/20; floor 13 applies to strong framing only (REPORT label table) | correct |
 | P2 SLIDES l.64 "≈ two thirds" vs no channel | `p2_cue_llm_p2cue.json:H3_notes_over_private_r2_12` | 0.65 [0.34, 1.32] = notes−none 1.04 / private−none 1.61 | correct |
 The Q1.4 items (SLIDES l.68, SUBMISSION l.18) are not ours to check.
+
+## I129 (10:05 UTC): merge HEAD `4e17126` (from `37e7193`; iter4 Opus final-claims fixes + iter5 check_sources.py)
+check_merge_sources PASS (16/16 groups, 69 checks, 21 hashes). Merge working tree clean. Every new/changed Q2.2 number checked against our JSON — **all correct, no new P1, 0 open**:
+| merge text | value | our source | verdict |
+|---|---|---|---|
+| SUBMISSION §5.3 inversion: "within the Qwen3.8-base no-channel arm, text score vs invite rate: Spearman −0.41 [−0.83, +0.18]" | −0.405 [−0.833, +0.178], n=15 | `e132_inversion.json:sets."Qwen3.8 base".spearman_text_vs_invite_rate_within_no_channel` (not stated in REPORT; REPORT cites the pooled 0.41–0.74, CI > 0) | number correct. P2 note only (not posted as an ask): the within-arm sign is opposite to the mechanism, and the pooled evidence REPORT cites (Qwen3.8 base 0.49 [0.17, 0.71]) is left out. Optional replacement: "(text score vs invite rate, both arms pooled: Spearman 0.49 [0.17, 0.71]; within the no-channel arm −0.41 [−0.83, +0.18], so the association comes from the arm difference)". The text is more cautious than REPORT, so not P1 |
+| SUBMISSION Discussion: logbook pair premium +0.22 [+0.05, +0.40] vs +1.04 pricing notepad; caveats: longer instruction, later batch | +0.22 [+0.05, +0.40]; +1.04 [+0.65, +1.42] | REPORT P2.5 / `p2_logbook.json` | correct, caveats kept |
+| Abstract: Qwen3.6 grid text 0.32 [0.24, 0.42], "CIs below 0.5" for both Qwen families | 0.32 [0.24, 0.42]; Qwen3.8 arms 0.15–0.21 CI < 0.5 | E113 / Table 2 | correct (closes the 115-5 scope: every listed range has CI < 0.5) |
+| §5.3 SALT "in the full dataset (5169 executed episodes), 62% carry no explicit agreement" | 1 − 1989/5169 = 0.615 | `salt_d1.json`, REPORT P2.12 | correct |
+| Glossary C − A: "Q2.2 contrasts use the designated-pair premium" | — | REPORT P2.5 / Table P2.5 | correct |
+| Label table: strict-executed "for the strong-framing arm"; SLIDES placebo "no resolved difference … not equivalence"; "≈ ⅔ … vs no channel" | 13/20; +0.03 [−0.54, +0.49]; 0.65 [0.34, 1.32] | as in I127 | correct (codex_v2 items applied as checked in I127) |
