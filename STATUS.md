@@ -1,14 +1,15 @@
 # STATUS
 
-## Current state (2026-10-25 10:52 UTC, iteration 135) — research frozen; DIRECTION 10:30 (pin discipline)
+## Current state (2026-10-25 11:05 UTC, iteration 137) — research frozen; DIRECTION 10:30 (pin discipline)
 - Headline unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc); Qwen combined−action −0.24 [−0.37, −0.09].
-- Merge pins Q2.2 at `91ffb2d` (39 files). REPORT.md differs from pin only by the I133 review line; no more edits to pinned files (directive 1). Handoff now only in `results/analysis/merge_flags.md`.
-- Directive 2 DONE: Figure P2.7 label "2nd half" → "rounds 11–40" (p2_strongF_fig.py + PNG, unpinned; no caption change needed) → flag 135-fig.
-- Directive 3: diff-triggered scope check at merge `ce0fd42` + working tree: only Q2.2 hunk = SALT re-described as peer verification; matches salt_d1.py/P2.12 → 0 P1 (135-scope). Last checked: `ce0fd42` + WT.
+- Merge pins Q2.2 at `91ffb2d` (now 43 files, plus 4 llm_v3plc/v3rep files, all byte-identical at HEAD). REPORT.md differs from the pin only by the I133 line. No edits to pinned files.
+- Directives 1–2 done (iter135). Directive 3: merge `5ccd0b7` scope-checked. The only Q2.2 hunk is the SALT re-description; the new 0.75 [0.66, 0.84] n=117 matches salt_d1.json → 0 P1 (merge_flags 137-scope). Last checked: `5ccd0b7`.
+- Dennis's TOP PRIORITY (Part C) is all DONE per DIRECTION annotations; no new experiments (freeze).
 - Next: diff-check new merge HEADs only (no commit if no Q2.2 hunk); 14:00–15:00 final scope read (+ check_merge_sources once); 16:30 export pass (render-only); stop by 17:30.
-- Risks: REPORT.html/pdf stale until 16:30. No new experiments under freeze.
+- Risks: REPORT.html/pdf stale until 16:30; our REPORT l.12/l.89 "deal struck in chat" is less precise than the merge (left as is per pin discipline).
 
 ## Log
+- 2026-10-25 11:05 UTC P2 iter137: merge advanced ce0fd42 → 5ccd0b7. Diff-triggered scope check: Q2.2 hunks are SALT only. New subset AUROC 0.75 [0.66, 0.84] n=117 verified vs salt_d1.json E105_audit.auroc_no_verdict_words; peer-verification description matches salt_d1.py. 0 P1 → merge_flags 137-scope/137-src. No REPORT edits, no calls.
 - 2026-10-25 10:52 UTC P2 iter135: DIRECTION 10:30 #1–3. merge_flags.md top rows 135-pin (REPORT drift = I133 line only; re-pin optional), 135-fig (P2.7 label fixed, figure re-rendered, unpinned files), 135-scope (merge ce0fd42 + WT SALT wording checked vs salt_d1.py → 0 P1). No REPORT edits, no calls, no check_merge_sources rerun.
 - 2026-10-25 10:21 UTC P2 iter133: merge advanced to `3360cfa`; 131-1 applied → 0 open. check_merge_sources PASS. New Q2.2 text (Fig. 6 range from p2_strong_eval auroc_strict_vs_tacit_high, exposures l.661, E133 0.77 scope, E132 wording) all correct → merge_flags.md §I133 + one REPORT Changes line. No calls.
 - 2026-10-25 10:05 UTC P2 iter129: merge advanced to `4e17126`. check_merge_sources PASS. New Q2.2 text checked vs JSON (E132 within-arm Spearman −0.41 [−0.83,+0.18]; logbook +0.22 vs +1.04; Qwen3.6 0.32; SALT 62%/5169; C−A glossary; strict-executed scope): all correct, no P1 → merge_flags.md §I129 + one REPORT Changes line. No calls.

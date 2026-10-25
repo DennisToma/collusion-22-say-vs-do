@@ -1,4 +1,14 @@
-## Current — iteration 135, 2026-10-25 10:50 UTC, merge `ce0fd42` + working tree
+## Current — iteration 137, 2026-10-25 11:05 UTC, merge `5ccd0b7` (clean tree)
+**0 open P1.** Diff-triggered scope check `git diff ce0fd42 5ccd0b7 -- SUBMISSION.md SLIDES.md` (DIRECTION 10:30 #3).
+
+| id | item | status |
+|---|---|---|
+| 137-scope | Q2.2 hunks = SALT only (TL;DR item 3, §2 related work, Table 2 row, §5.3 external case, slide 4 bullet, Statistics line). New number 0.75 [0.66, 0.84], n = 117 = `salt_d1.json : E105_audit.auroc_no_verdict_words` (0.752 [0.658, 0.836], n 117, n_exec 50; REPORT P2.12 l.361 "0.75 without verdict words"); 0.87 [0.83, 0.91], 240/120, 5169, 62% / 0.385 unchanged. "Auditor sees only preceding messages, not verdicts" matches `salt_d1.py` l.146–153; verdicts in a separate phase matches the l.3–5 docstring. "Selected subset, not causal ablation" and "no action-view comparison" keep the scope right. Watch list: SALT still stated as the text exception; no generalisation of the inversion; placebo/pooled −0.07 wording untouched. Other hunks ("no robust co-movement", Base Qwen3.6, references) are Q1.4's or shared literature. | no P1 |
+| 137-src | The merge's correction of our "deal struck in chat" wording (REPORT l.12, l.89) is accurate; we don't edit REPORT (pin discipline), so the merge text is authoritative. The 4 newly pinned Q2.2 files (`data/llm_v3plc`, `data/llm_v3rep` ground_truth + trajectories) are byte-identical between `91ffb2d` and HEAD. | info |
+
+---
+
+## Superseded — iteration 135, 2026-10-25 10:50 UTC, merge `ce0fd42` + working tree
 **0 open P1.** Handoff rows (DIRECTION 10:30 #1–3):
 
 | id | item | status |
