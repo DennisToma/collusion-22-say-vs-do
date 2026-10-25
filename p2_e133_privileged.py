@@ -1,4 +1,4 @@
-"""E133 (registered 2026-10-25 02:32, ledger row E133-reg, before computing): does early PRIVATE talk forecast late execution?
+"""E133 (registered 2026-10-25 02:18, ledger row E133-reg, before computing): does early PRIVATE talk forecast late execution?
 
 Zero LLM calls. Primary set: Q1.4's E70 grid channel games with a judged agreement (Q1.4 judge file, read-only; sibling
 trajectories pinned by data/ext_llm_grid_p2/SHA256SUMS). Outcome late_exec = Q1.4 E70 executed rule restricted to the late
@@ -155,7 +155,7 @@ def analyse(rows, B=2000, seed=0):
 
 def main():
     rows, hashes = grid_rows()
-    res = {"registration": "EXPERIMENTS.tsv E133-reg (2026-10-25 02:32, before computing)", "llm_calls": 0,
+    res = {"registration": "EXPERIMENTS.tsv E133-reg (2026-10-25 02:18, before computing; commit e2e5da6)", "llm_calls": 0,
            "part_c_llm_view": "skipped (kept zero-call)", "judge_label_sha256": hashes,
            "price_rx": PRICE_RX.pattern, "defect_rx": DEFECT_RX.pattern,
            "primary_e70_grid_late_exec": analyse(rows)}

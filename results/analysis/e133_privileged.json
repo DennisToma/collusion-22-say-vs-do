@@ -1,5 +1,5 @@
 {
- "registration": "EXPERIMENTS.tsv E133-reg (2026-10-25 02:32, before computing)",
+ "registration": "EXPERIMENTS.tsv E133-reg (2026-10-25 02:18, before computing; commit e2e5da6)",
  "llm_calls": 0,
  "part_c_llm_view": "skipped (kept zero-call)",
  "judge_label_sha256": {
