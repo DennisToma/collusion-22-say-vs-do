@@ -1,6 +1,20 @@
 # Q2.2 → merge: ranked wording fixes (single list; replaces the I114–I116 drip)
 
-## Current — iteration 123, 2026-10-25 09:15 UTC, merge `f88618d` + uncommitted working tree
+## Current — iteration 125, 2026-10-25 09:30 UTC, merge `37e7193` (clean tree)
+**0 open.** Draft hashes: SUBMISSION.md sha256 `4ac51cd8…`, SLIDES.md `4ac573ec…`. `python3 -S check_merge_sources.py` PASS (16 groups, 69 checks, 21 hashes).
+
+| id | status in `37e7193` |
+|---|---|
+| 121-1 | applied (SLIDES §6: "we detect no contemporaneous co-movement … small gains not excluded") |
+| 121-2 | applied (SLIDES l.76: "a two-stage audit … is a proposal we did not evaluate"; SUBMISSION l.307–311 adds "our evidence does not support recommending a particular architecture") |
+| 123-1 | applied (SUBMISSION l.236–237: "no gain could be credited to text (…)") |
+| 123-2 | applied (SUBMISSION l.224–225: "post hoc, not interpreted in the Q2.2 report … need not involve an agreement"; SOURCES M30) |
+
+New Q2.2 text checked, no P1: locked-test labels "48 explicit, 2 information exchange" (matches `data/llm_v3/labels.jsonl`, runs 0030–0124, condition private); "14/50 communication-positive private test runs"; strict-executed rule definition (E99-amend); logbook sentence carries the instruction-length and batch-timing caveats (REPORT P2.5/E92); SOURCES M31 luna posting/silent keys. Not posted (P2 style only): l.235–237 says "cannot be credited to text" twice in a row.
+
+---
+
+## Superseded — iteration 123, merge `f88618d` + working tree
 Draft hashes: SUBMISSION.md sha256 `16303443…`, SLIDES.md `645defc9…`. `python3 -S check_merge_sources.py` PASS (16 groups, 69 saved-value checks, 21 hashes). All new Q2.2 numbers in the working tree match JSON (luna silent +0.12 [−0.08, +0.32] = `e113_secondary.json:stratified.executed_vs_A.luna_silent_combined_minus_action_posthoc`; sol text 0.17 [0.01, 0.41] = `p2_family3way.json:llm_p2sol.views.text.auroc_private_vs_none`, which **REPORT does not state**).
 
 | rank / id | where / status | current text | exact replacement | REPORT § / JSON key |

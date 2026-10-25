@@ -1,14 +1,14 @@
 # STATUS
 
-## Current state (2026-10-25 09:15 UTC, iteration 123) — research frozen; DIRECTION 08:23
+## Current state (2026-10-25 09:31 UTC, iteration 125) — research frozen; DIRECTION 08:23
 - Headline unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc); Qwen combined−action −0.24 [−0.37, −0.09].
-- Merge HEAD still `f88618d`, with an uncommitted working tree (merge iter3). Slide flag 121-1 applied; 121-2 (audit-architecture recommendation) still open.
-- 2 new P1s in new §5.3 text: 123-1 "nowhere resolvedly helped" → "no gain could be credited to text"; 123-2 sol inversion 0.17 [0.01, 0.41] (correct per p2_family3way.json, but REPORT doesn't state it) → mark post hoc, "need not". See `results/analysis/merge_flags.md`.
+- Merge HEAD `37e7193` (clean): all Q2.2 recommendations applied (121-1, 121-2, 123-1, 123-2) → **0 open**. New Q2.2 text (48 explicit + 2 info_exchange on locked test, strict-executed definition, logbook caveats) matches sources.
 - check_merge_sources PASS (69 checks, 21 hashes). No calls, no metric reruns.
-- Next: re-check when the merge commits; 16:30 export pass; hard stop 18:00.
-- Risks: 3 P1 recommendations open; source checker authenticates frozen JSON only; draft wording needs manual review.
+- Next: re-check only when merge HEAD changes (no idle commits); 16:30 export pass (REPORT.pdf/html, PRESENTATION, EVIDENCE, verify_phase2 + p2_claims + check_merge_sources once); hard stop 18:00.
+- Risks: source checker authenticates frozen JSON only, not the latest draft wording; REPORT.html/pdf are stale vs the Changes-after-08:00 lines until the 16:30 export.
 
 ## Log
+- 2026-10-25 09:31 UTC P2 iter125: merge advanced to `37e7193`: 121-2, 123-1, 123-2 applied (121-1 already) → 0 open. Spot-checked new Q2.2 text (48/2 label split vs data/llm_v3/labels.jsonl; 14/50; strict rule; logbook caveats) — no P1. check_merge_sources PASS. merge_flags.md + one REPORT Changes line. No calls.
 - 2026-10-25 09:15 UTC P2 iter123: merge working tree (uncommitted, after f88618d) reviewed: 121-1 applied, 121-2 open; new P1s 123-1 (E113 "nowhere resolvedly helped"), 123-2 (sol inversion unreported/post hoc). All new numbers match JSON. check_merge_sources PASS. merge_flags.md + one REPORT Changes line. No calls.
 - 2026-10-25 08:53 UTC P2 iter120: merge advanced to `e606cb7` (+ working-tree edits). Re-checked: P1-b, P2-a applied in HEAD; P1-a (E133 caveat) and P2-b (placebo Limitations) applied in working tree → 0 open. check_merge_sources PASS. merge_flags.md + one REPORT Changes-after-08:00 line. No calls.
 - 2026-10-25 08:42 UTC P2 iter118: DIRECTION 08:23 #1 — consolidated 7 posted fixes into ranked merge_flags.md vs merge 02ebfd2: 2 P1 open, 2 P2 partial, 3 applied; Q2.2 numbers in draft all correct. REPORT: one Changes-after-08:00 line. No calls.
