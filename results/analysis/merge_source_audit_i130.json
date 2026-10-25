@@ -1,0 +1,64 @@
+{
+  "kind": "read-only committed-merge figure review; no experiment, rendering, metric or bootstrap recomputation",
+  "iteration": 130,
+  "time_utc": "2026-10-25T10:00:28.826028+00:00",
+  "merge_commit": "94c45c09b56dc655c6beb574a3427833111d1c1a",
+  "merge_working_tree_status": "?? reviews/judge_v0.md\n",
+  "reviewed_merge_sha256": {
+    "SUBMISSION.md": "9fec1c704c9b8211b45879f10c4566be30656e1ffb25375d37f16e54727243b3",
+    "SLIDES.md": "a7d3e8b83cb442da496f003d91623300ad02ff2203519465401f05e541ad6841",
+    "SOURCES.md": "65bc79a2fa6ce64709c4a91df94d4e648d30022c3ec9711f373baf12ae409e57",
+    "scripts/fig6_strong_framing.py": "e939d54920c4a685bd152699b7e1011cf0b7f1d3813d7701b26ed5440e3eb127",
+    "figures/fig6_strong_framing_tacit.png": "edcafd92cdeb7936ea7e1d537a257d4f78196f348ac85a554a816d4476c4835a"
+  },
+  "source_sha256": {
+    "p2_strongF_fig.py": "869785ee7f23227be7d85806936dff5f2b2fd4c58a54f9fea95821c981c052ab",
+    "p2_strong.py": "9d7026e53f3e69e184996767734828c1355aab17dc1e9c04bb695254ec193172",
+    "p2_strong_eval.py": "dea0bb99c6f7e12b741c61a110699aa92169adefb481c9cef495445e5dfa8a08",
+    "data/llm_p2strongF/trajectories.jsonl": "0c42ef7b5941e0625b6de9764a9c38d84b6a67e85f5e8f6654f14746d205eb4e",
+    "results/analysis/p2_strong_classes_llm_p2strongF.json": "894b8d0494a5b1e9c52329cc3ac015c7a05e6acd9c5d2cde10a82befd0ecabee"
+  },
+  "source_check": {
+    "command": "python3 -S check_merge_sources.py",
+    "stdout": "PASS: 16/16 source groups, 69 saved-value checks, 21 source hashes; no metrics recomputed\nReviewed draft SHA256: c2fc36bad970c882d37810effb0ab2a94f0338257bbd7ccc1436f7fc628f8786\nHuman wording findings remain recommendations; this does not certify the latest draft.\n",
+    "scope": "Frozen I116 source receipt; latest text and figure checked separately here."
+  },
+  "figure_checks": {
+    "executable_ast_matches_source_after_only_declared_changes": true,
+    "declared_changes": [
+      "Import os and set Q22 read-only source prefix",
+      "Prefix the two input paths with Q22",
+      "Replace threshold-label wording 2nd half with rounds 11\u201340",
+      "Set merge figure output filename",
+      "Update module docstring"
+    ],
+    "window_trace": [
+      "p2_strong.py: analyse maps zero-indexed trajectory round to round + 1",
+      "p2_strong.py: R keeps round >= late; market_excess_nash uses all four firms over R",
+      "p2_strong_eval.py: E99 freezes late=11; T=40; tacit_high uses market_excess_nash >= 2"
+    ],
+    "saved_class_counts": {
+      "n_strict_executed": [
+        13,
+        20
+      ],
+      "n_tacit_high_none": [
+        19,
+        20
+      ]
+    },
+    "caption_matches_implemented_window": true,
+    "committed_png_visually_inspected": true,
+    "figure_renderer_executed": false
+  },
+  "new_P1_findings": [],
+  "open_Q22_flags": 0,
+  "deferred_export_note": "Original Q2.2 figure and p2_strongF_fig.py still say 2nd half. At the scheduled 16:30 export, correct that presentation label to rounds 11\u201340; preserve saved classes and scientific estimates. The merge already carries the corrected label.",
+  "serendipity": "HITS.md through S64 has no promoted hit; no confirmation experiment.",
+  "ledger_review": {
+    "rows_read": 249,
+    "last_id": "I116-merge-source-audit",
+    "new_experiment": false
+  },
+  "model_calls": 0
+}

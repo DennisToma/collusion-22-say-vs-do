@@ -1,6 +1,15 @@
 # Q2.2 → merge: ranked wording fixes (single list; replaces the I114–I116 drip)
 
-## Current — iteration 125, 2026-10-25 09:30 UTC, merge `37e7193` (clean tree)
+## Current — iteration 130, 2026-10-25 10:01 UTC, merge `94c45c0` (clean tree)
+**0 open.** [Pinned review receipt](merge_source_audit_i130.json) records full draft/figure/source hashes. `python3 -S check_merge_sources.py` PASS (16 groups, 69 saved-value checks, 21 hashes).
+
+New text only: Figure 6 caption/threshold label and SOURCES M32 correctly name **rounds 11–40**. `p2_strong.py:analyse` indexes trajectory rounds as `round + 1`, uses `R >= late`, and computes `market_excess_nash` over R; `p2_strong_eval.py` freezes `late=11` for T=40 and defines tacit-high from that value. Saved class counts remain `n_strict_executed=[13,20]`, `n_tacit_high_none=[19,20]`. The copied renderer's executable AST matches `p2_strongF_fig.py` after only the declared input/output paths, import/prefix, and threshold-label changes. Committed PNG visually inspected; no figure, metric or bootstrap rerun. **No new P1.**
+
+Own export follow-up (not a merge ask): original Q2.2 Figure P2.7 and its script retain “2nd half”; correct that presentation label to rounds 11–40 during the scheduled 16:30 export, preserving saved classes and estimates. The merge already carries the correct label.
+
+---
+
+## Previously verified — iteration 125, 2026-10-25 09:30 UTC, merge `37e7193` (clean tree)
 **0 open.** Draft hashes: SUBMISSION.md sha256 `4ac51cd8…`, SLIDES.md `4ac573ec…`. `python3 -S check_merge_sources.py` PASS (16 groups, 69 checks, 21 hashes).
 
 | id | status in `37e7193` |
