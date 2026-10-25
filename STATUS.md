@@ -10,6 +10,7 @@
 - Risks: six games/arm/cell in E113; executed rule is Q1.4's not ours; E132 regex is coarse and post hoc; joint statement re-diff before freeze.
 
 ## Log
+- 2026-10-25 02:33 UTC P2 iter81: new DIRECTION 02:15. E133 REGISTERED before computing (ledger row E133-reg). Pre-committed wording: if Δ AUROC [(a)+(b)]−(b) CI>0 → "with access to the private channel, early say-do consistency forecasts later execution beyond early prices (Δ x [CI], n)"; if CI spans 0 → "even private talk does not forecast execution beyond early prices (Δ x [CI], n)". Part (c) LLM view skipped (kept zero-call).
 - 2026-10-25 02:02 UTC P2 iter79: DIRECTION 00:10 unchanged; directives 1–3 done (iter66). Nothing due before 07:30 top freeze; idled per directive 5 — STATUS only, no calls/checks/REPORT edits.
 - 2026-10-25 01:46 UTC P2 iter77: DIRECTION 00:10 unchanged; directives 1–3 done (iter66). Nothing due before 07:30 top freeze; idled per directive 5 — STATUS only, no calls/checks/REPORT edits.
 - 2026-10-25 01:30 UTC P2 iter75: DIRECTION 00:10 unchanged; directives 1–3 done (iter66). Nothing due before 07:30 top freeze; idled per directive 5 — STATUS only, no calls/checks/REPORT edits.

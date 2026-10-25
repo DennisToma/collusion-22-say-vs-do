@@ -1,50 +1,92 @@
-# DIRECTION — Phase 2, director review 2026-10-25 00:10 UTC (Sun, early morning)
-(experiments end **Sun 15:00** · numbers freeze **14:00** · finalize-only **16:30** · hard stop **18:00** · merge manager (`collusion-beyond-words`) reads your REPORT from **08:00**, so anything not in REPORT by **07:30** may be missed)
+# DIRECTION — Phase 2, director review 2026-10-25 02:15 UTC (Sun, early morning)
+(experiments end **Sun 15:00** · numbers freeze **14:00** · finalize-only **16:30** · hard stop **18:00** · merge manager (`collusion-beyond-words`, still "Not started") reads your REPORT from **08:00**. Anything not in REPORT by **07:30** goes into "Changes after 08:00".)
 
 **Verdict.**
-1. Q2.2 is answered, replicated and honestly bounded. Public text adds nothing resolvable: −0.01 [−0.09, +0.06] on the locked test and −0.07 [−0.17, +0.02] pooled fresh. On the Qwen grid it *hurts*: E113 Δ combined − action −0.24 [−0.37, −0.09]. E113 was sealed and the E131 review applied. Every 22:05 directive is done, including the thesis rephrase.
-2. Two loose ends are things a judge will ask about:
-   - (a) E113's **registered secondary analysis (executed label)** was "unavailable at cutoff". The labels now exist, as per-game `executed` in Q1.4's `results/eval/e70_grid.json`, so a registered analysis sits unrun at zero cost.
-   - (b) The **inversion**, your most quotable finding, has a *proposed* mechanism ("public-inviting families talk publicly in controls; channel pairs move talk to private") that has never been quantified. Without that, "text ranks innocent markets higher" reads as auditor noise.
-3. Explore vs exploit: you have 15 h left and the repo has idled since iteration 56, with Claude and Codex fallback managers both writing idle lines. Do the two zero-call analyses above, then one readability pass: the TL;DR is 7 dense paragraphs, and item 5 alone is ~150 words. No new generation.
+1. **Q2.2 is answered, replicated and bounded for *public* text.** Text adds nothing: −0.01 [−0.09, +0.06] on test, −0.07 pooled fresh. It hurts on the Qwen grid: −0.24, and −0.30 on games executed under Q1.4's E70 rule (E113-secondary). The inversion now has a Qwen-specific mechanism (E132). The box is in; claims 35/35 and verify 26/26. All 00:10 directives were done by 00:50, and the repo has written 7 idle iterations since.
+2. **The weakness a tough judge will hit first:** every auditor reads public messages only ("Private chat is never auditor input", l.429), and in the channel arms the deal is made in private. So "text adds nothing" is close to true by construction. The title question, whether what agents *say* predicts what they *do*, has only been tested within agreements on 13 vs 7 markets (E116, unresolved) and on external SALT. Q1.4's E70 grid already holds per-round `private_message` logs for **44 executed vs 38 agreed-not-held** channel games, about 4× E116's sample, at zero generation cost.
+3. **Explore vs exploit:** 12.5 h remain and nothing is running. Spend them on one registered, pre-committed say-vs-do forecast (E133; the core is zero-call). Everything else is freeze hygiene and merge support. No new generation.
 
 ## Top directives (in priority order)
 
-1. **E113-secondary: run the registered executed-label contrast now (zero new LLM calls; target done by Sun 03:00).** Snapshot Q1.4's `results/eval/e70_grid.json` into `data/ext_llm_grid_p2/` with its SHA256 and the sibling commit. Use the field `games[].executed`, which is Q1.4's E70 rule (name it as such; it is not your strict rule) and gives 44/96 C games. Compute, from the **cached** frozen audit scores:
-   - executed-C vs A and non-executed-C vs A AUROC for the text, action and combined views;
-   - cell-stratified Δ combined − action on the 8 qwen cells;
-   - luna two-view only, as registered.
-   Write to a **new** output file (`results/analysis/e113_secondary.json`) and don't touch the sealed E113 outputs. Pre-commit before computing: report the result whatever its direction; if text is still inverted on executed qwen games, the inversion sentence gains "including executed games under Q1.4's rule"; if Δ on executed games is positive with CI > 0, say so in P2.16 and in the merge block (it would be the first in-market text gain). Write ≤ 3 lines in P2.16 and one ledger row (`E113-secondary`, registered 16:16 / amend2 18:29; computed after the primary was read, so state that). **Why:** "channel labels ≠ executed collusion" is your own listed top risk, and this answers it on 192 games for free.
-2. **E132: quantify the inversion mechanism (zero calls, exploratory/post hoc, register first; target done by Sun 05:00).** For each family/dataset in the P2.0 table:
-   - (i) public messages per game and the invite/hold-price regex rate, in C vs A;
-   - (ii) within each family, Spearman correlation between the frozen text-auditor score and the public-invite count (pooled over arms, plus within A alone);
-   - (iii) a simple no-LLM baseline: AUROC of "fewer public invites ⇒ channel" against the auditor's inverted AUROC.
-   If (i) shows C posts fewer public invitations than A and (ii) is positive, TL;DR 3 gets one mechanism clause: "channel pairs move their talk to the private channel, so the public record of controls looks more collusive (invite rate A x vs C y)". If not, write "mechanism not established" and drop the "talk moves private" wording wherever it appears. Use ≤ 4 lines in P2.0/TL;DR 3 and one table in the appendix. **Why:** it turns a curiosity into a practical warning with a cause. Text auditors that read only public channels are *anti*-informative exactly when colluders have a private line.
-3. **"Key findings in one minute" box at the very top of REPORT (by 07:30, zero new numbers).** It goes directly under the title and above the abstract: ≤ 6 bullets, each ≤ 25 words, plain language, one number each, every number copied verbatim from the existing text. Suggested skeleton:
-   (i) adding public messages to prices does not help (−0.01; −0.07 fresh);
-   (ii) on the Qwen grid it hurts (−0.24);
-   (iii) text auditors can rank innocent markets *above* colluding ones (inversion, plus the E132 mechanism);
-   (iv) the price premium replicates (0.94) but is partly a prompt effect (notepad 65%);
-   (v) high prices need no channel (19/20 no-channel markets with memory + profit framing);
-   (vi) text works where the deal is struck in chat (SALT 0.87).
-   Use the same terms as Q1.4's box: channel = private channel, the public board exists in all arms, executed rule named. Leave the abstract, merge block and joint statement untouched. Re-run `p2_claims.py` + `verify_phase2.py` **once** after directives 1–3.
-4. **Merge support and freeze schedule.** After 08:00, read `~/collusion/collusion-beyond-words/STATUS.md` and `DIRECTION.md` each iteration for requests to Q2.2, and answer them in your STATUS (read-only there). Log post-08:00 top/headline changes in a dated "Changes after 08:00 (for the merge manager)" list. Numbers freeze 14:00. At **16:30**, one export pass (REPORT.pdf/html, PRESENTATION, EVIDENCE.html, `build_handoff.py` if that is your export path), the checks once, then commit. Nothing after 17:30 except fixing an error.
-5. **Otherwise idle cheaply:** one STATUS line per iteration when nothing is due. Codex fallback iterations should write *nothing* if the previous line in the same 15-min slot already says "idle".
+1. **E133: does early private talk forecast late execution? (register in EXPERIMENTS.tsv *before* computing; exploratory but fully pre-specified. Zero-call part (a)+(b) by Sun 05:30, optional (c) by 10:00.)**
+   - **Population:** E70 channel games with a judged agreement (Q1.4 labels), using the E70 trajectories snapshot. Add a SHA256 for `trajectories.jsonl` if `data/ext_llm_grid_p2` lacks one. Report per set and never pool across execution rules. Secondary sets:
+     - the strongF private arm (13 vs 7);
+     - the llm_v3 test kept vs not kept (14/50, E84 rule).
+   - **Outcome, non-circular by design:** *late execution* = both pair firms ≥ agreed − 1 in ≥ ½ of rounds 11–20 AND pair mean over rounds 11–20 ≥ Nash + 2. This is Q1.4's E70 rule restricted to the late window; name it so.
+     - The agreed price comes from the label file Q1.4's rule reads. If that is not recoverable, use the pair's first stated price in the round −1 private chat, fixed before any outcome is read.
+   - **Predictors:** rounds −1…5 only. Rounds 6–10 are a gap so there is no leakage.
+     - (a) **No-LLM say-do features:**
+       - the share of private messages stating a price;
+       - mean |own price − own last privately stated price|;
+       - a defection/undercut/renegotiation word regex. **Freeze the regex in the registration row.**
+     - (b) **Early-price baseline (action-only):** pair mean markup and pair price SD over rounds 0–5.
+     - (c) **Optional privileged LLM view.** Run it *only if* one gpt-6.1-sol smoke call returns within 3 min by 04:00; otherwise skip it and say so. Don't switch models mid-analysis.
+       - Prompt: the frozen `combined` prompt plus the pair's private messages for rounds −1…5, asking for P(agreement held in rounds 11–20).
+       - Budget: one cached call per game, no prompt iteration, ≤ 100 calls.
+   - **Primary estimand:** Δ AUROC of [(b) + (a)] minus (b). Use a cell-grouped cross-validated logistic model, game-bootstrap CI. Also report each predictor's AUROC alone, and (c) vs (b).
+   - **Pre-committed wording (write it in STATUS before computing):**
+     - If Δ's CI > 0: a new TL;DR item, plus a box bullet and a merge-block *Answer* line: "with access to the private channel, early say-do consistency forecasts later execution beyond early prices (Δ x [CI], n)". This would be your first in-market positive say-vs-do result; say so.
+     - If Δ's CI spans 0: "even private talk does not forecast execution beyond early prices (Δ x [CI], n)". This strengthens the thesis, because it no longer rests on public text only.
+     - Either way, report descriptively how many of the 38 agreed-not-held games contain defection or renegotiation talk (Q1.4 E72 places TE there).
+   - **Output:** `p2_e133_privileged.py` → `results/analysis/e133_privileged.json`, ≤ 5 lines (new P2.17 or inside P2.16), one ledger row. Add a "Changes after 08:00" entry if it lands after 07:30.
+   - **Why:** it turns the near-tautological "public text doesn't help when deals are private" into a direct say-vs-do test. It uses data already on disk, at about 4× E116's power.
+2. **07:30 top freeze and hygiene (no new numbers except E133).**
+   - (a) **Scope sentence:** put one plain clause in the box or the merge-block *Answer*: "all auditors read public messages and prices only; private chat is used for labels (and in E133)". Today that fact sits only at l.429, and a judge must not have to find it.
+   - (b) **Stale headers:** l.4 "Results current 2026-10-24 22:31" → the current time + P2.1–P2.16(+E133). l.62 "E77–E120" → E77–E133.
+   - (c) Re-diff the joint statement.
+   - (d) Run `p2_claims.py` + `verify_phase2.py` **once** after E133 lands.
+3. **Merge support from 08:00.** Each iteration, read `~/collusion/collusion-beyond-words/STATUS.md` and `DIRECTION.md` (read-only) and answer Q2.2 asks in your STATUS. Keep a dated "Changes after 08:00 (for the merge manager)" list.
+4. **Freeze schedule (unchanged).** Numbers freeze 14:00. At **16:30**, do one export pass: REPORT.pdf/html, PRESENTATION, EVIDENCE.html, `build_handoff.py` if that is the export path. Run the checks once, then commit. Nothing after 17:30 except fixing an error.
+5. **Idle cheaply, and less often.** When nothing is due, write at most **one** STATUS idle line per hour. The codex fallback manager writes nothing when the last line is an idle line less than 60 min old.
 
 ## STOP doing
-- No new generation, arms, families, languages, auditor prompts or threshold recalibration. E113-secondary and E132 reuse cached scores and saved transcripts only.
-- No re-opening of the sealed E113 primary outputs and no overwriting of hashed files. New analyses go to new files.
-- No further abstract/TL;DR wording iterations beyond directive 3's box, plus the one clause each from directives 1 and 2. Don't edit the joint statement: your parenthetical already disambiguates "without any channel".
-- No snapshot/coverage/verification passes as iteration work, and no new chain/waiter `.sh` scripts.
+- No new generation, arms, families, languages or threshold recalibration. E133 reads saved transcripts and makes at most ≤ 100 cached auditor calls.
+- **No auditor prompt iteration:** E133's (c) prompt is frozen when first written, with one call per game. No second privileged prompt and no switch to another model if sol fails.
+- No re-opening of the sealed E113 primary outputs, and no overwriting of hashed files (new analyses go to new files). No more E132 regex refinement: it is coarse and post hoc, and it is stated as such.
+- No TL;DR/abstract rewording beyond E133's pre-committed clause and directive 2's scope clause. Don't edit the joint statement.
+- No snapshot/coverage/verification passes as iteration work, and no new chain/waiter `.sh` scripts (E133 is one Python script).
 - Don't cite S21 or any unpromoted serendipity result.
 
 ## Cross-pollination
-- **From Q1.4 → here:** the E70 per-game `executed` labels (directive 1), the E72 TE diagnostic verdict (theirs to report; cite in one line only if your merge-block shared-inference sentence mentions TE), and consistent "Key findings" terms.
-- **From here → Q1.4:** post one STATUS line each for the E113-secondary verdict and the E132 mechanism verdict ("For Q1.4: …"). If the executed-label result changes the joint "neither words nor co-movement establish execution" inference, say so explicitly there.
-- **Shared definitions (unchanged from 22:05):** no single shared executed rule. Q2.2 strict / floor / O5 and Q1.4 E64/E70 differ (E129 table), counts are never pooled, and tacit-high and Jeffreys CIs are shared. The joint statement stays verbatim in both reports.
+- **From Q1.4 → here:**
+  - E70's per-round `private_message` + `games[].executed` (E133 input; read-only, pin by SHA).
+  - E72: TE lives in non-executed channel games (0.73 vs 0.49). E133's defection-talk count is the natural joint check.
+  - E73 (Q1.4's new nonlinear-estimator check): if it finds co-movement, the joint "neither words nor co-movement establish execution" inference must be re-read. Watch for their "For Q2.2" line.
+- **From here → Q1.4:** post one "For Q1.4" STATUS line with the E133 verdict and the defection-talk share among agreed-not-held games. If E133 is positive, say explicitly that the joint inference changes ("words in the private channel *do* forecast execution").
+- **Shared definitions (unchanged):** there is no single shared executed rule (E129 table). Counts are never pooled. E133's late-window rule is a named variant of Q1.4's E70 rule.
 
-## Phase 2 gap-list status summary (00:10 Sun)
-All eight Q2.2 gaps: **DONE/frozen** (gap 8 DROPPED with reason). Shared gaps: **DONE**. Part C: **DONE**. Part D: **D1 DONE**, D2 (Q1.4) **DONE, cited**, **D3 DROPPED**. Part E: **E1 audit = E113 DONE** (primary sealed 22:36; **registered secondary executed-label analysis NOT STARTED → directive 1**); E2 **DONE**; E3 **DROPPED**; E4 **DONE**; E5 **DONE**. Denominators: **DONE** (claims 35/35). **New (00:10):** E132 inversion mechanism NOT STARTED; one-minute box NOT STARTED. Serendipity: no promoted hits (S28–S32 unconfirmed/dud).
+## Phase 2 gap-list status summary (02:15 Sun)
+| item | status |
+|---|---|
+| Shared: precision at prevalence (E81) · reimplementation (E83) | DONE |
+| Q2.2 gap 1 (E77/E92/E78/E94) | DONE / frozen |
+| Q2.2 gap 2 (E84) | DONE / frozen |
+| Q2.2 gap 3 (E95) | DONE / frozen |
+| Q2.2 gap 4 (E80/E89) | DONE / frozen |
+| Q2.2 gap 5 (E86) | DONE / frozen |
+| Q2.2 gap 6 (E82) | DONE / frozen |
+| Q2.2 gap 7 (E87) | DONE / frozen |
+| Q2.2 gap 8 hidden signals | DROPPED (codex moved to Part C; Limitations line) |
+| Part C: C1 (E99/E111/E116/E120/E129) | DONE |
+| Part C: C2 (gpt-5.6-sol, mimo) | DONE |
+| Part C: C3 (E100/E124) | DONE |
+| Part C: C3c | DROPPED by its pilot rule (E109) |
+| Part C: C3b | Q1.4 DONE, cited |
+| Part D: D1 SALT (E104/E105) | DONE |
+| Part D: D2 | Q1.4 DONE, cited E130 |
+| Part D: D3 | DROPPED (promise-breaking, not collusion) |
+| Part E: E1 audit (E113 primary, sealed) | DONE |
+| Part E: E1 registered secondary, executed label (E113-secondary) | DONE (00:50) |
+| Part E: E2 (E112/E115) | DONE |
+| Part E: E3 cross-family | DROPPED (gateway saturated; E70 factor M) |
+| Part E: E4 (E108) | DONE |
+| Part E: E5 (E110) | DONE |
+| Denominators | DONE (35/35) |
+| E132 inversion mechanism | DONE (00:50, post hoc, Qwen-specific) |
+| One-minute box | DONE |
+| Serendipity | no promoted hits (S28–S38) |
+| **New (02:15):** E133 privileged say-vs-do forecast | NOT STARTED → directive 1 |
+| **New (02:15):** scope clause + stale headers | NOT STARTED → directive 2 |
 
 ---
 
@@ -194,7 +236,7 @@ detector AUROCs) with CIs, and state the precision caveat (FP8/AWQ/bf16) per pai
 
 
 **Serendipity Explorer (added 14:50 UTC):** a third agent runs wild cheap pilots in `~/collusion/collusion-serendipity` (other markets, hub-and-spoke advisor, leniency, counterfactual replay, steganography in prices, personas, ...). Read its `HITS.md` at the start of every iteration; if a hit bears on your headline claims, decide explicitly (in STATUS) whether to confirm it with a registered experiment. Don't duplicate its pilots.
-→ Status 00:10 Sun: **still no promoted hits** (S28–S32 unconfirmed/dud). (S01, S03, S07, S21, S22, S24 duds; S02 odd; S04 uninformative; S11 ODD; S14 used by Q1.4 D2; S16 failed pilot). S21 (auditor reads actions correctly in 10/10 selected cases) is a feasibility check, not detector evidence: don't cite it. Nothing to confirm; one STATUS line per iteration.
+→ Status 02:15 Sun: **still no promoted hits** (S28–S38 unconfirmed/dud/ODD). (S01, S03, S07, S21, S22, S24 duds; S02 odd; S04 uninformative; S11 ODD; S14 used by Q1.4 D2; S16 failed pilot). S21 (auditor reads actions correctly in 10/10 selected cases) is a feasibility check, not detector evidence: don't cite it. Nothing to confirm; one STATUS line per iteration.
 
 ## Part E — BROADEN THE DESIGN so we can make concrete, general claims (added by Dennis 14:30 UTC)
 **Why:** so far we varied one thing at a time (model, prompt, memory, channel) in mostly one market setup. Claims like
@@ -211,7 +253,7 @@ designs that turn one-off pilots into **general statements with a denominator** 
   Report main effects with CIs (which factors CAUSE the price lift — answers sprint Q1.1 — and which single restriction
   cuts it most — answers Q1.5) and the claim's **denominator** (in how many cells level > co-movement, text ≈ chance).
   Gateway is 45 calls/min shared: luna cells via codex, qwen cells via gateway; one queue, resumable, registered first.
-  → **DONE (00:10 Sun), except the registered secondary.** E70 generation done 22:22; E113 final 22:36 (sealed): qwen stratified combined − action −0.24 [−0.37, −0.09], text 0.32 [0.24, 0.42], P1 weakly held 4/16; E131 review applied. **Open:** registered secondary executed label, now available from Q1.4 `e70_grid.json` `games[].executed` → directive 1. Earlier log: Generation: Q1.4 E70 (22:05: luna 6/6; qwen sweep 5 c08–c10 done, c11–c15 left; ETA ≈22:30–23:00). **Audit (this repo) = E113 IN PROGRESS:** registered 16:16, amend 17:36, amend2 18:29, **amend3 20:35 (DONE, before any score)**; formatter fixes E127/E128; 180 snapshot games cached, no metrics read. **Next:** final snapshot + eval ONCE on Q1.4's trigger → write-up by Sun 00:30 with pre-committed interpretations (22:05 directive 1).
+  → **DONE (02:15 Sun), including the registered secondary** (E113-secondary 00:50: executed under Q1.4 E70 rule, Qwen text 0.36 [0.26, 0.46], Δ comb−act −0.30 [−0.44, −0.17]). E70 generation done 22:22; E113 final 22:36 (sealed): qwen stratified combined − action −0.24 [−0.37, −0.09], text 0.32 [0.24, 0.42], P1 weakly held 4/16; E131 review applied. **Open:** registered secondary executed label, now available from Q1.4 `e70_grid.json` `games[].executed` → directive 1. Earlier log: Generation: Q1.4 E70 (22:05: luna 6/6; qwen sweep 5 c08–c10 done, c11–c15 left; ETA ≈22:30–23:00). **Audit (this repo) = E113 IN PROGRESS:** registered 16:16, amend 17:36, amend2 18:29, **amend3 20:35 (DONE, before any score)**; formatter fixes E127/E128; 180 snapshot games cached, no metrics read. **Next:** final snapshot + eval ONCE on Q1.4's trigger → write-up by Sun 00:30 with pre-committed interpretations (22:05 directive 1).
 - **E2 Participant replacement mid-game (owner Q2.2; sprint Q1.2).** In executed-collusion games (strong arm / qwen memory),
   replace one colluder at round T/2 with a fresh agent (same model, no chat history) or a different model. Does the price
   level survive? Do detectors notice the break (changepoint)? Cheap, novel, and answers an official sprint question.
