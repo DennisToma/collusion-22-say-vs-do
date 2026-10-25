@@ -1,14 +1,17 @@
 # STATUS
 
-## Current state (2026-10-25 12:30 UTC, iteration 146) — research frozen; DIRECTION 10:30
+## Current state (2026-10-25 12:23 UTC, iteration 147) — research frozen; DIRECTION 10:30
 - Headline unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc); Qwen combined−action −0.24 [−0.37, −0.09].
-- Merge HEAD `d523c5b` (+ WT locked-test replay). Q2.2 hunks: kept-row wording fixed ("lower floors do not count as followed", resolves I145 nit); replay metadata. Merge's `locked_test_q22.json` equals our final test JSON to 4 dp → **0 P1** (merge_flags I146).
+- Merge HEAD remains `d523c5b`; new working-tree Reproducibility text accurately limits the locked-test replay to six cached views/eight run-AUROC contrasts, excluding fusion, thresholds and pair endpoints → **0 P1** (merge_flags I147).
+- Read-only saved-output comparison: 6/6 view AUROCs/CIs and 8/8 contrasts exactly match our frozen test JSON; 95 runs / 50 positives. No recomputation or model calls.
 - Directives 1–3 ongoing/complete; 4 done early (I145); at 14:00–15:00 only diff from d523c5b + check_merge_sources once.
-- No experiments, model calls, metric reruns or exports. REPORT untouched (pin drift = I133 line only).
-- Next: diff-triggered checks; 14:00 diff + check_merge_sources; render-only export 16:30; stop by 17:30.
-- Risks: exports stale until 16:30.
+- REPORT remains frozen per directive 1; only drift from pin is the existing I133 review line. No experiments or exports.
+- HITS S72 is unpromoted context only; no confirmation under the freeze. Ending early rather than inventing work before the scheduled checks.
+- Next: 14:00 scope diff/source check; render-only export 16:30; stop by 17:30.
+- Risks: exports stale until 16:30; prior I146 12:30 timestamp was ahead of the VM clock (its work was already present when read at 12:22).
 
 ## Log
+- 2026-10-25 12:23 UTC P2 iter147 (Codex fallback): read rules/plan/state/direction, ledger and HITS; merge HEAD still d523c5b. Reviewed new working-tree Reproducibility paragraph (six original cached views, eight run-AUROC contrasts, original paired class-stratified bootstrap, historical replay not another held-out evaluation; pair/fusion/threshold endpoints excluded). Read-only JSON equality check: 6/6 AUROC triples and 8/8 contrast objects match our frozen result exactly, n=95/50 positive; 0 P1. HITS S72 unpromoted/context only, no confirmation. REPORT stays frozen under DIRECTION10:30 #1; no calls, metric reruns, source-check reruns or exports. Ended early under freeze; next 14:00 diff/check, 16:30 render. Timestamp note: I146 was already committed/read at 12:22 despite its 12:30 log stamp; old log preserved.
 - 2026-10-25 12:30 UTC P2 iter146: merge f6f10df → d523c5b. Q2.2 hunks = kept-row wording (now matches trivial_floor class) + replay metadata; merge WT locked_test_q22.json replays our locked-test views/contrasts exactly (primary −0.0127 [−0.0913, +0.0642]). 0 P1, merge_flags I146. No REPORT edits, no calls.
 - 2026-10-25 12:20 UTC P2 iter145: merge 1329a9a → f6f10df (iter19–23: E84 floor wording, LLM-usage counts, coverage/test notes). Only Q2.2 hunk already verified I144. Early directive-4 scope read (merge in freeze hold): SUBMISSION Q2.2 text by Opus subagent vs REPORT/JSON, SLIDES by me → 0 P1; one wording nit (trivial-floor 'count as trivially kept') not flagged as P1. merge_flags I145. No REPORT edits, no calls.
 - 2026-10-25 11:55 UTC P2 iter143: merge b1a92f6 → 38e9a96 (committed: Reproducibility/App. A only) + working-tree Q2.2 wording (kept rule, combined_stats/structured definitions, Sonnet 115/115 caveat, Fig. 5 caption, App. B notes) verified vs p2_behaviour.py / auditors.py / labels → 0 P1, merge_flags 143-scope. No REPORT edits, no calls.
