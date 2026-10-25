@@ -69,3 +69,13 @@ No new items will be added unless they are P1 in newly written text.
 | 115-5 | inversion range limited to resolved arms | Abstract l.24: Qwen "0.15–0.21, CI below 0.5" — matches Table 2 bold rows |
 | 116-1 | "text helps only where the deal is the conversation" | Abstract l.25 now descriptive: "Text did work in an external negotiation dataset … (0.87 [0.83, 0.91])" |
 | 114-1 | executed-only −0.30 names Q1.4 rule | §5.3 l.228 "executed under Q1.4's rule", rule defined in label table l.109 |
+
+## I127 (09:50 UTC): Q2.2 source check of merge `reviews/codex_v2.md` (uncommitted, vs HEAD `37e7193`)
+Merge HEAD unchanged; no new Q2.2 text, so no new flags from us. Each Q2.2 source key cited by the merge's codex_v2 review was checked against our JSON. **All are correct**, so its Q2.2 replacements can be applied as written:
+| codex_v2 item | key | value in our JSON | verdict |
+|---|---|---|---|
+| P1 SLIDES l.65 "same premium" → no resolved difference, not equivalence | `placebo_llm_v3plc.json:windows.r2_12.placebo_minus_private_paired` | +0.03 [−0.54, +0.49] | supports the fix (same wording as our closed 116-2) |
+| P2 SUBMISSION l.28 add window "rounds 11–40" | `p2_strong_classes_llm_p2strongF.json:n_tacit_high_none` | 19/20; `p2_strong_eval.py --late 11`, T = 40 → rounds 11–40 | correct |
+| P2 SUBMISSION l.110 "for the strong-framing arm" | `…:n_strict_executed` | 13/20; floor 13 applies to strong framing only (REPORT label table) | correct |
+| P2 SLIDES l.64 "≈ two thirds" vs no channel | `p2_cue_llm_p2cue.json:H3_notes_over_private_r2_12` | 0.65 [0.34, 1.32] = notes−none 1.04 / private−none 1.61 | correct |
+The Q1.4 items (SLIDES l.68, SUBMISSION l.18) are not ours to check.
