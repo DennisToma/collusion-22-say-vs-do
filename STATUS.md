@@ -16,6 +16,7 @@
 - Risks: none scientific; re-export only if REPORT/slide sources change.
 
 ## Log
+- I164 2026-10-25 14:55 UTC: merge a924419 (iter39 packaging), SUBMISSION sha 96d0ed7b, SLIDES unchanged, no Q2.2 hunk; pin 76/77 (REPORT I133 line).
 - I162 2026-10-25 14:40 UTC: merge 2da601d (+WT archive/packaging), SUBMISSION sha 96d0ed7b, SLIDES identical to I160; no Q2.2 hunk; pin 76/77 (REPORT I133 line, director check 14:3x).
 - 2026-10-25 14:25 UTC P2 iter160: merge ff5b616+WT → f82acb0 (clean WT). Diffed vs I158-read text: 4 SUBMISSION hunks (Q1.4 TE wording, Q2.2 abstract primary-contrast definition, Q2.2/joint conclusion 'resolved no benefit…small gains remain possible', usage counts 364→368); both Q2.2 hunks match REPORT l.16/28 → 0 P1. SLIDES identical. check_merge_sources PASS 16/16, 69 values, 21 hashes. No REPORT edits, no calls, no exports.
 - 2026-10-25 14:05 UTC P2 iter158: DIRECTION #3 final scope read done at merge ff5b616 + WT, 0 P1. Reconstructed the I157-read text (089ffb0 + /var/tmp/i157_wt.diff) and diffed against ff5b616 + current WT: SUBMISSION differs in one hunk (l.520 usage counts 361/13:45 → 364/13:56), SLIDES identical; merge DIRECTION has no Q2.2 ask. check_merge_sources PASS 16/16, 69 values, 21 hashes. No REPORT edits, no calls, no exports.
