@@ -1,11 +1,11 @@
 # STATUS
 
-## Current state (2026-10-25 11:20 UTC, iteration 139) — research frozen; DIRECTION 10:30 (pin discipline)
+## Current state (2026-10-25 11:14 UTC, iteration 140) — research frozen; DIRECTION 10:30 (pin discipline)
 - Headline unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc); Qwen combined−action −0.24 [−0.37, −0.09].
-- Merge HEAD `f5e91e5` (new §9 Conclusion + LLM-usage statement): scope-checked → 0 P1 (merge_flags 139-scope). Manifest q22: 46 files pinned at `91ffb2d`; 45/46 byte-identical at HEAD, only REPORT.md differs (I133 line). No edits to pinned files.
-- Directives 1–2 done (iter135); directive 3 running per merge HEAD. No new experiments (freeze).
-- Next: diff-check new merge HEADs (no commit if no Q2.2 hunk); 14:00–15:00 final scope read (+ check_merge_sources once); 16:30 export pass (render-only); stop by 17:30.
-- Risks: REPORT.html/pdf stale until 16:30; our REPORT l.12/l.89 "deal struck in chat" less precise than merge (left per pin discipline).
+- Merge HEAD remains `f5e91e5`, last scope-checked in I139 with 0 P1. No new committed SUBMISSION/SLIDES diff; pending edits concern Q1.4 E65 and process/reproducibility counts, with no new Q2.2 scientific claim.
+- Directives 1–2 done (iter135); directive 3 waiting on a new merge HEAD. REPORT and pinned evidence unchanged; no experiments, calls, metric/check reruns or exports this iteration.
+- Next: diff-check new merge HEADs; 14:00–15:00 final scope read (+ check_merge_sources once); 16:30 export pass (render-only); stop by 17:30.
+- Risks: REPORT.html/pdf stale until 16:30; REPORT l.12/l.89 "deal struck in chat" less precise than merge (left per pin discipline). Existing I139 timestamp 11:20 is ahead of this VM-clock entry; retained as history.
 
 ## Log
 - 2026-10-25 11:20 UTC P2 iter139: merge advanced 5ccd0b7 → f5e91e5 (iter14–16). Diff-triggered scope check: only SUBMISSION changed; Q2.2 hunk = §9 Conclusion ("no resolved gain"; high prices via prompt cues/notepad/memory+profit; flag ≠ agreement) — consistent with REPORT box, l.10–11, P2.5, Limitations → 0 P1. Manifest q22 46 files: 45/46 identical at HEAD (REPORT.md = I133 line only). merge_flags 139-scope/139-pin. No REPORT edits, no calls.
@@ -247,3 +247,5 @@
 - 2026-10-25 10:03 UTC P2 iter131 (Codex fallback): new merge commits 444fea2/6a295b5 reviewed vs 94c45c0, per DIRECTION #2. Frozen source checker PASS; four E99-x price-view CIs include chance, M33 pooled/within-arm correlations match saved JSON, E133 appendix is a verbatim move. Posted exactly one new P1 (131-1): overlapping class-average prices do not show arbitrary price paths cannot discriminate. REPORT Changes-after-08:00 + pinned receipt updated; all scientific data/estimates unchanged, 0 model calls. Export remains scheduled 16:30.
 
 - 2026-10-25 10:56 UTC P2 iter138 (Codex fallback): read CLAUDE/PLAN/STATUS/DIRECTION and experiment ledger; merge HEAD remains 5ccd0b7, clean, with an empty SUBMISSION/SLIDES diff against the last checked commit. No new scope review, checker rerun, experiment, model call or export. HITS through S67/S66 has no promoted hit; no confirmation under DIRECTION. REPORT remains current/frozen: its diff from pin 91ffb2d is still only the I133 review line. Ending early under the freeze; status-only commit/push follows the explicit iteration request. Next authorized work: a new merge diff, the 14:00–15:00 final scope read, then the 16:30 export. The earlier iter137 log label of 11:05 is retained as history; its commit time is 10:55:44 UTC, preceding this iteration.
+
+- 2026-10-25 11:14 UTC P2 iter140 (Codex fallback): read CLAUDE/PLAN/STATUS/DIRECTION and experiment ledger; merge HEAD remains `f5e91e5`, so the committed SUBMISSION/SLIDES diff since I139 is empty. Pending working-tree edits change Q1.4 E65's premium and merge process/reproducibility counts only; no new Q2.2 scientific hunk or P1 to review. No source checker, metric rerun, experiment, model call or export. REPORT and all pinned evidence left unchanged under DIRECTION 10:30 #1; full scope read remains scheduled for 14:00–15:00, not pulled forward. Ending this bounded merge-support iteration early under the freeze; status-only commit/push follows the explicit iteration request, as in I138. I139's future-dated log remains untouched; this timestamp comes from the VM UTC clock.
