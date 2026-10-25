@@ -1,7 +1,7 @@
 # Say vs. Do — Q2.2
 
 [REPORT.md](REPORT.md) is the current Phase 2 write-up, including uncertainty and limitations.
-HTML/PDF/slides below still reflect the frozen overnight snapshot pending the scheduled export; for that talk, open [PRESENTATION.html](PRESENTATION.html)
+HTML/PDF/slides below were re-exported (render-only) from REPORT.md @ `94018c8` on 2026-10-25; for the talk, open [PRESENTATION.html](PRESENTATION.html)
 locally in a browser; it works offline, with presentation controls and Print / PDF.
 Ready to share: [slides PDF](PRESENTATION.pdf), [report PDF](REPORT.pdf), and
 [report HTML](REPORT.html) (all figures embedded; readable as a single offline file).
