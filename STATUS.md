@@ -1,6 +1,6 @@
 # STATUS
 
-## Current state (2026-10-25 13:50 UTC, iteration 155) — research frozen; DIRECTION 12:35
+## Current state (2026-10-25 13:48 UTC, iteration 156) — research frozen; DIRECTION 12:35
 - Headline unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc); Qwen combined−action −0.24 [−0.37, −0.09].
 - DIRECTION 12:35 #1 DONE: render-only export from REPORT @ `94018c8` → REPORT.html/PDF (30 pp, 7 figs), PRESENTATION.pdf (7 pp); PRESENTATION.html/md already current (no diff).
 - Checks: build_handoff --check PASS, build_presentation --check PASS, p2_claims 36/36 (no diff), verify_phase2 31/31 commands, 38/38 outputs, originals unchanged.
@@ -8,10 +8,12 @@
 - Independent confirmation: merge iter25 `locked_test_q22.json` replays 6/6 views + 8/8 contrasts exactly (I146/I147).
 - I153: merge → `2cf7c7d` (+ Dennis's compliance DIRECTION for merge: 8 pp, 150–250-word abstract, ethics appendix, reference check). 0 Q2.2 P1. Ref pre-check: 15/15 SUBMISSION references verifiable (14 in starter papers.csv + Schreiber 2000), so 0 to remove (merge_flags I153).
 - I155: merge → `089ffb0` + WT compliance rewrite (8 pp, new abstract, App. G ethics, form). Full Q2.2 scope read (me + Opus subagent) → 0 P1, 5 optional P2 (merge_flags I155); check_merge_sources PASS. This covers directive #3 early.
+- I156: DIRECTION #3 final scope read done at merge `089ffb0` + WT (SUBMISSION sha256 c2fc36ba…): 0 P1. Delta since I155 = Q1.4 abstract terms (pCMI/TE spelled out) + usage/coverage counts only; SLIDES unchanged; check_merge_sources PASS 16/16.
 - Next: silent no-op iterations (#2); one short diff read only if the compliance draft changes Q2.2 text again; 16:30 --check freshness only (#4); final line by 17:30.
 - Risks: none scientific; re-export only if REPORT/slide sources change.
 
 ## Log
+- 2026-10-25 13:48 UTC P2 iter156: final scope read done at merge 089ffb0 + WT (SUBMISSION c2fc36ba…), 0 P1. Diffed the current WT against the I155-read WT (HEAD + /var/tmp/i155_wt.diff): 3 hunks (abstract Q1.4 terms pCMI/TE, LLM-usage counts 353→359, binding/coverage counts 143→144, 245/277→248/281); no Q2.2 content; SLIDES identical; SUBMISSION_FORM unchanged since 13:35 (read in I155). check_merge_sources PASS 16/16, 69 values, 21 hashes. No REPORT edits, no calls, no exports.
 - 2026-10-25 13:50 UTC P2 iter155: merge 2cf7c7d → 089ffb0 (iter33 access/archive receipts, no manuscript change) + WT compliance rewrite per Dennis's 13:35 merge DIRECTION. Scope-read every Q2.2 claim in the new abstract, Appendix G (ethics), SUBMISSION_FORM and the cut body (Opus subagent), checked vs REPORT/JSON/code → 0 P1; 5 optional P2 wording nits recorded in merge_flags I155. check_merge_sources PASS 16/16. No REPORT edits, no calls, no exports.
 - 2026-10-25 13:30 UTC P2 iter153: merge d8ebfab → 2cf7c7d (iter30–32: Q1.4 gate pCMI replay, usage counts 353, 158 blobs, 26 tests) + WT iter33 (REPORT/SOURCES access notes only). 0 Q2.2 hunks, so 0 P1. New merge DIRECTION (Dennis, compliance) has #7 'verify every reference' → read-only pre-check: all 15 references match the starter literature/papers.csv or are standard (Schreiber 2000). Shi et al. 2026 (SALT) id/rev match salt_d1.py. Recorded in merge_flags I153 as input for the merge's 8-pp cut, plus the Q2.2 watch list. No REPORT edits, no calls, no exports.
 - 2026-10-25 13:10 UTC P2 iter151: merge advanced 118344c → d8ebfab (iter28 Q1.4 gate replay, iter29 fresh-clone distribution check) + WT (gate pCMI replay). SUBMISSION/SLIDES hunks = Q1.4 gate-replay paragraphs + metadata counts (346 iterations, 158 blobs) only; 0 Q2.2-content hunks → 0 P1. No Q2.2 asks in merge DIRECTION/STATUS. No REPORT edits, no calls, no exports.
