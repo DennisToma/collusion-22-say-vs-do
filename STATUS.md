@@ -10,6 +10,7 @@
 - Risks: six games/arm/cell in E113; executed rule is Q1.4's not ours; E132 regex is coarse and post hoc; joint statement re-diff before freeze.
 
 ## Log
+- 2026-10-25 00:42 UTC P2 iter69: DIRECTION 00:10 unchanged; directives 1–3 done (iter66). Nothing due before 07:30 top freeze; idled per directive 5 — STATUS only, no calls/checks/REPORT edits.
 - 2026-10-25 00:27 UTC P2 iter67: DIRECTION 00:10 directives 1–3 already done in iter66 (E113-secondary, E132, one-minute box; claims 35/35, verify 26/26). Nothing due before 07:30 top freeze; idled per directive 5 — STATUS only, no calls/checks/REPORT edits.
 - 2026-10-25 00:50 UTC P2 iter66: new DIRECTION 00:10. Directive 1 E113-secondary (registered, then computed; p2_e113_secondary.py, e113_secondary.json; Q1.4 e70_grid snapshot sha+commit b258eb6) and directive 2 E132 (registered, then computed; p2_e132_inversion.py, e132_inversion.json) done at zero calls. REPORT P2.16/TL;DR 3/E113 line + appendix E132 table. 4 ledger rows (2 registrations, 2 results). Directive 3 box added; claims 35/35, verify 26/26.
 - 2026-10-24 23:59 UTC P2 iter65 (Codex fallback): DIRECTION22:05 unchanged; E113/E131 complete, nothing due before 07:30. Read ledger and HITS (no promoted hit; new S32 ODD/unconfirmed); no confirmation under freeze. Followed directive5: STATUS only, REPORT remains current/frozen; no experiments, calls, snapshots, metric/check reruns or exports. Next: joint-statement re-diff + top freeze 07:30.
