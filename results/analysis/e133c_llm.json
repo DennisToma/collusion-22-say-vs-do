@@ -45,5 +45,45 @@
   "llm_grid_p2_c13": "e21d82eacf996747c585c13063e1b72be3d01739fe8a25368ff5e1eb5ab7dec3",
   "llm_grid_p2_c14": "35529ebe137181af53e8b7aaa09eda2ce53f29812e3c4ae9258a9c8a396ea866",
   "llm_grid_p2_c15": "ffffcf6843f6c732567424987db3733f1b74c36e2edba5596fc3faf4c892d52f"
+ },
+ "paired_privileged_minus_noprivate": {
+  "n": 78,
+  "auroc_privileged": 0.926,
+  "auroc_noprivate": 0.942,
+  "delta": [
+   -0.016,
+   -0.056,
+   0.014
+  ]
+ },
+ "posthoc_agreed_price_baseline": {
+  "note": "post hoc, after E133c results: (b) plus early compliance with the JUDGED agreed price (from private chat)",
+  "single_auroc": {
+   "early_comply": [
+    0.855,
+    0.764,
+    0.934
+   ],
+   "early_minus_agreed": [
+    0.884,
+    0.795,
+    0.959
+   ]
+  },
+  "auroc_b_plus_agreed_oof": 0.826,
+  "delta_bagreed_minus_b": [
+   0.01,
+   -0.061,
+   0.065
+  ],
+  "delta_c_minus_bagreed": [
+   0.099,
+   0.018,
+   0.196
+  ],
+  "llm_agreed_price_equals_judge": [
+   71,
+   78
+  ]
  }
 }

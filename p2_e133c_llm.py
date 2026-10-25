@@ -144,6 +144,43 @@ def main():
            "delta_c_minus_b": ci(A(sc, al) - A(sb, al), d1), "delta_bc_minus_b": ci(A(sbc, al) - A(sb, al), d2),
            "mean_p_kept": {"held": round(float(sc[y == 1].mean()), 1), "not_held": round(float(sc[y == 0].mean()), 1)},
            "judge_label_sha256": hashes}
+    other = Path("results/llm_auditor/e133c/gpt-6.1-sol_" + ("privileged" if ABL else "noprivate") + ".jsonl")
+    if other.exists():  # paired (c) privileged minus (d) no-private, same games
+        O = {j["run_id"]: j for j in map(json.loads, open(other)) if j.get("p_kept") is not None and j["model"] == MODEL}
+        both = [i for i, r in enumerate(ok) if r["run_id"] in O]
+        so = np.array([O[ok[i]["run_id"]]["p_kept"] for i in both]); yy = y[both]; sm = sc[both]
+        sp, sn = (so, sm) if ABL else (sm, so)
+        Ap = lambda s, idx: E.auc(list(s[idx][yy[idx] == 0]), list(s[idx][yy[idx] == 1]))
+        rng = np.random.default_rng(1); bd = []
+        for _ in range(2000):
+            i = rng.integers(0, len(both), len(both))
+            if 0 < yy[i].sum() < len(both):
+                bd.append(Ap(sp, i) - Ap(sn, i))
+        res["paired_privileged_minus_noprivate"] = {"n": len(both), "auroc_privileged": round(Ap(sp, np.arange(len(both))), 3),
+            "auroc_noprivate": round(Ap(sn, np.arange(len(both))), 3), "delta": ci(Ap(sp, np.arange(len(both))) - Ap(sn, np.arange(len(both))), bd)}
+    if not ABL:  # post hoc (labelled): does knowing the judged agreed price explain the LLM gain?
+        lab = {}
+        for i in range(16):
+            lab.update({j["run_id"]: j for j in map(json.loads, open(E.SIB / "results/llm_judge" / f"llm_grid_p2_c{i:02d}.jsonl"))})
+        G2 = games({r["run_id"] for r in ok})
+        for r in ok:
+            g = G2[r["run_id"]]; ap = lab[r["run_id"]]["agreed_price"]
+            P = {x["round"]: {a["id"]: a["price"] for a in x["agents"]} for x in g["rows"]}
+            r["early_comply"] = float(np.mean([all(P[t][a] >= ap - 1 for a in g["pair"]) for t in range(6)]))
+            r["early_minus_agreed"] = float(np.mean([P[t][a] for t in range(6) for a in g["pair"]]) - ap)
+        AG = ["early_comply", "early_minus_agreed"]
+        sbe = E.oof(ok, E.B_FEATS + AG); rng = np.random.default_rng(0); b1, b2 = [], []
+        for _ in range(2000):
+            i = rng.integers(0, n, n)
+            if 0 < y[i].sum() < n:
+                b1.append(A(sbe, i) - A(sb, i)); b2.append(A(sc, i) - A(sbe, i))
+        res["posthoc_agreed_price_baseline"] = {
+            "note": "post hoc, after E133c results: (b) plus early compliance with the JUDGED agreed price (from private chat)",
+            "single_auroc": {f: E.boot_auc([r[f] for r in ok if not r["y"]], [r[f] for r in ok if r["y"]]) for f in AG},
+            "auroc_b_plus_agreed_oof": round(A(sbe, al), 3), "delta_bagreed_minus_b": ci(A(sbe, al) - A(sb, al), b1),
+            "delta_c_minus_bagreed": ci(A(sc, al) - A(sbe, al), b2),
+            "llm_agreed_price_equals_judge": [sum(C[r["run_id"]].get("agreed_price") is not None and
+                                                  float(C[r["run_id"]]["agreed_price"]) == float(lab[r["run_id"]]["agreed_price"]) for r in ok), n]}
     OUTF.write_text(json.dumps(res, indent=1) + "\n")
     print(json.dumps({k: v for k, v in res.items() if k != "judge_label_sha256"}, indent=1))
 
