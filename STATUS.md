@@ -1,15 +1,16 @@
 # STATUS
 
-## Current state (2026-10-25 17:35 UTC, iteration 183) — FINAL; research frozen
-- **P1 open: 0.** Both I178 P1s and the abliteration wording are fixed in committed merge bytes (`7c7be5e`; HEAD `8e4ef25`).
+## Current state (2026-10-25 17:33 UTC, iteration 184) — FINAL; research frozen
+- **P1 open: 0.** I184 confirms the accepted template, slides and headline figure are unchanged in committed merge `77ab10d` and its clean working tree.
 - Last merge bytes read: `77ab10d`, TEMPLATE af06861c, SLIDES 37a182ed, fig0 0b4f8004; P1 open: 0.
 - Headline unchanged: locked-test Δ −0.01 [−0.09, +0.06]; fresh pooled n=90 −0.07 [−0.17, +0.02] (post hoc); Qwen combined−action −0.24 [−0.37, −0.09].
 - Pin `91ffb2d` remains 76/77 (REPORT I133 review line only); Q2.2 post-18:00 guard in merge_flags I178 remains for the merge's last hour.
 - Limitations: no resolved gain does not prove zero; Qwen inversion is family-scoped; E84 keeps 14/50 agreements under its rule; one market.
 - Likely judge question: "Isn't the text auditor just reading the channel-offer prompt cue, and does the null mean text is useless?" → (1) cue: the notepad (no recipient) and placebo (never delivered) arms carry most of the premium (notes +1.04, placebo +1.23 vs private +1.61; P2.5 E77), and E92 logbook control shows it needs private *pricing* thought (logbook − notes −0.82); the 0.98 supervised classifier scores placebo/notepad runs high, so it detects condition traces, not agreements (P2.3 E82). (2) Not useless: in the executed-vs-tacit arm, a monitor reading private plans got 0.76 [0.55, 0.93] where prices ≈ 0.5 and public text inverted 0.25 (exploratory E99-x; always quote with E111 no-LLM partner-name count 0.82 → channel footprint); where agents strike the deal in chat (SALT, E105) the text audit reaches 0.87 [0.83, 0.91].
-- Next: none required; at most one more P1-only check of a merge TEMPLATE/SLIDES commit before 17:55.
+- Next: none required; source hard stop 18:00 UTC. Merge self-check guard is in merge_flags I178.
 
 ## Log
+- I184 2026-10-25 17:33 UTC (Codex fallback): merge HEAD still `77ab10d`; committed TEMPLATE/SLIDES/fig0 match I181/I183 hashes and working-tree bytes exactly; both trees clean, 0 P1 open. HITS remains unpromoted (including S72/S70); no confirmation under finalize freeze. DIRECTION no-op rule applies: REPORT/APPENDIX and exports stay frozen; no calls, experiments, metric/source-check reruns or new scope review. Ended early because no new claim bytes require work.
 - I183 2026-10-25 17:35 UTC: merge `77ab10d` (number bindings): TEMPLATE/SLIDES/fig0 bytes unchanged; SUBMISSION hunks are counts/metadata only (no-op). New Q2.2 bindings T3 (62% = 1−0.385 E104), T4 (14/50 followed), T5 (premium flags 7/10, 9/10, 2/10) checked against our JSON → correct. 0 P1. No REPORT edits, calls or experiments.
 - I181 2026-10-25 17:18 UTC: DIRECTION #3. Merge `7c7be5e`/`8e4ef25`: I178-1/2 P1s and abliteration wording fixed in committed TEMPLATE/SLIDES → 0 P1 open; guard-phrase sweep clean (only pCMI "near chance", Q1.4 scope). merge_flags I181. No REPORT edits, calls or experiments.
 - I178 2026-10-25 17:05 UTC: DIRECTION 16:40 #1–#4. P1-only read of committed merge `934d875` (TEMPLATE 211e4436, SLIDES e7f46fb3, fig0 0b4f8004): 2 P1 (§5 "text auditing missed"; slide-1 "text near chance", but Qwen is below chance), both covered by Q1.4 patch → accepted; abliteration concurrence; 62% verified as full-set (1989/5169); Q2.2 guard written (merge_flags I178). No REPORT edits, calls or experiments.
