@@ -1,0 +1,1046 @@
+{
+ "kind": "post-hoc source-pointer and wording review; no experiment or metric recomputation",
+ "iteration": 116,
+ "time_utc": "2026-10-25T08:10:44.300987+00:00",
+ "source_repo_head": "f1bea0b3483538ca59a6332b3d0b7d5d4231e2fc",
+ "frozen_scientific_source_commit": "8b680ee",
+ "merge_repo_head": "fbed25a9bb32a001130f3352e8b7c12ecf5a9c18",
+ "reviewed_drafts": {
+  "SUBMISSION.md": {
+   "sha256": "c2fc36bad970c882d37810effb0ab2a94f0338257bbd7ccc1436f7fc628f8786"
+  },
+  "SOURCES.md": {
+   "sha256": "6c9cbc5ce8ded4b5caca4725d3997b32b97b7271cb18220b7f81d1f72519c0dc"
+  }
+ },
+ "source_sha256": {
+  "results/analysis/e113_secondary.json": "01abcd7b14e51d624e30a5e8c26fc2c146f0299848fe8fc22fe9ce9eda546dc5",
+  "results/analysis/e132_inversion.json": "f911c20853d0943e5c2a25b3e3e14108025bc341feb10e81e01fdad479834c19",
+  "results/analysis/e133e_attr.json": "4a68b7028b89db9a98f77f41d0031cf4b87308bff9ae0e8802f51d58963b03e3",
+  "results/analysis/final_llm_v3_gpt-6.1-sol_test.json": "2a4c19a68a511453493f6c615ad44f575ef2f5da74543f3ab6d82d14a2679355",
+  "results/analysis/p2_asym.json": "a5d9aa4e6e93175baf6ca8ad0bd1f27e16687b7066fe127a79aaf7536dfd8f2d",
+  "results/analysis/p2_aware.json": "0354206f4da37a1436d62f737633a9fe6173b4f3e4a5c8301de1b9516c24ac72",
+  "results/analysis/p2_band.json": "e87b9ae969954d614c31c03ab1535fe25fd3278fe3c699cbade825bb1d855c2b",
+  "results/analysis/p2_behaviour.json": "d4d6c3d24880ac685f9ed258bb9e51ed6df934835c3d173112f0897ffe0b842b",
+  "results/analysis/p2_cue_llm_p2cue.json": "a62e94cbe2af22a6329355ea4e980c45354ecef3821af1c144ca6b4692a76892",
+  "results/analysis/p2_e1_audit.json": "e63a428592481e78ef7bce5894937993d4169930b3c3f8a02af43581365dc127",
+  "results/analysis/p2_family3way.json": "24bed0b2c8ade94e06b870b06c047c369937109ead6a06b81ab0a634e2ee9ae5",
+  "results/analysis/p2_pool_rep.json": "903d33f8a728f9eefb74972d3ef4dd076b2ec991b271df2b0e3a84e1cc311b5e",
+  "results/analysis/p2_prevalence.json": "79f45938e3481bc4232b8c5bb4141922a5cf1cc34bc6ab20d524d5e47abc1ffb",
+  "results/analysis/p2_replace_sol.json": "8d500696091f0a07bf208d73394383b20b7cc91728d28ec22ccb5c38dfec5191",
+  "results/analysis/p2_strong_classes_llm_p2strongF.json": "894b8d0494a5b1e9c52329cc3ac015c7a05e6acd9c5d2cde10a82befd0ecabee",
+  "results/analysis/p2_strong_eval_llm_p2qwena.json": "89793cda04b49a9701b8a6c7a1461f205b340f1850016b0fa6d63745b476f63e",
+  "results/analysis/p2_strong_eval_llm_p2qwenb.json": "c9fd21ddb2bb0edce8c0701f210546f0c5f3ae5fd097fdf25376a401a859e997",
+  "results/analysis/placebo_llm_v3plc.json": "db9a7b1cc674577db00fdacfb9d301d447b4f72aa4132fbc4f59e043125cf008",
+  "results/analysis/replication_llm_p2rep.json": "fa12a801bc78f3be54fe0025084cc06aa078f3397a91068195dadda711ebaa8a",
+  "results/analysis/salt_d1.json": "d4d22188133574ffbd808e022780d4f927f174572bb11e2fdd80fba5c264e0cc",
+  "results/label_xfam.json": "e532a431d4e0ab9574242e04907e169c66fe13ae889b21ab5a8504ae0a95bdf7"
+ },
+ "groups": [
+  {
+   "id": "M1",
+   "report_section": "Abstract; locked test",
+   "note": "Registered combined minus better single view; n=95.",
+   "checks": [
+    {
+     "file": "results/analysis/final_llm_v3_gpt-6.1-sol_test.json",
+     "path": [
+      "n_runs"
+     ],
+     "expected": 95,
+     "digits": null
+    },
+    {
+     "file": "results/analysis/final_llm_v3_gpt-6.1-sol_test.json",
+     "path": [
+      "contrasts",
+      "delta_hybrid[combined]:run_auroc",
+      "delta"
+     ],
+     "expected": -0.01,
+     "digits": 2
+    },
+    {
+     "file": "results/analysis/final_llm_v3_gpt-6.1-sol_test.json",
+     "path": [
+      "contrasts",
+      "delta_hybrid[combined]:run_auroc",
+      "ci"
+     ],
+     "expected": [
+      -0.09,
+      0.06
+     ],
+     "digits": 2
+    }
+   ]
+  },
+  {
+   "id": "M2",
+   "report_section": "P2.8",
+   "note": "Two fresh replications; pooling post hoc.",
+   "checks": [
+    {
+     "file": "results/analysis/p2_pool_rep.json",
+     "path": [
+      "n"
+     ],
+     "expected": 90,
+     "digits": null
+    },
+    {
+     "file": "results/analysis/p2_pool_rep.json",
+     "path": [
+      "condition_label",
+      "contrasts",
+      "delta_hybrid[combined]",
+      "delta"
+     ],
+     "expected": -0.07,
+     "digits": 2
+    },
+    {
+     "file": "results/analysis/p2_pool_rep.json",
+     "path": [
+      "condition_label",
+      "contrasts",
+      "delta_hybrid[combined]",
+      "ci"
+     ],
+     "expected": [
+      -0.17,
+      0.02
+     ],
+     "digits": 2
+    }
+   ]
+  },
+  {
+   "id": "M3",
+   "report_section": "P2.0",
+   "note": "",
+   "checks": [
+    {
+     "file": "results/analysis/final_llm_v3_gpt-6.1-sol_test.json",
+     "path": [
+      "point_ci",
+      "text",
+      "run_auroc"
+     ],
+     "expected": [
+      0.47,
+      0.36,
+      0.58
+     ],
+     "digits": 2
+    },
+    {
+     "file": "results/analysis/final_llm_v3_gpt-6.1-sol_test.json",
+     "path": [
+      "point_ci",
+      "action",
+      "run_auroc"
+     ],
+     "expected": [
+      0.75,
+      0.65,
+      0.85
+     ],
+     "digits": 2
+    }
+   ]
+  },
+  {
+   "id": "M4",
+   "report_section": "P2.0",
+   "note": "Inversion range is point estimates; Claude/deepseek CIs include 0.5. Only the two Qwen3.8 arms resolve inversion here.",
+   "checks": [
+    {
+     "file": "results/analysis/p2_family3way.json",
+     "path": [
+      "llm_p2claude",
+      "views",
+      "text",
+      "auroc_private_vs_none"
+     ],
+     "expected": [
+      0.22,
+      0.0,
+      0.52
+     ],
+     "digits": 2
+    },
+    {
+     "file": "results/analysis/p2_family3way.json",
+     "path": [
+      "llm_p2claude",
+      "views",
+      "action",
+      "auroc_private_vs_none"
+     ],
+     "expected": [
+      0.52,
+      0.2,
+      0.88
+     ],
+     "digits": 2
+    },
+    {
+     "file": "results/analysis/p2_family3way.json",
+     "path": [
+      "llm_p2ds",
+      "views",
+      "text",
+      "auroc_private_vs_none"
+     ],
+     "expected": [
+      0.36,
+      0.2,
+      0.52
+     ],
+     "digits": 2
+    },
+    {
+     "file": "results/analysis/p2_family3way.json",
+     "path": [
+      "llm_p2ds",
+      "views",
+      "action",
+      "auroc_private_vs_none"
+     ],
+     "expected": [
+      0.53,
+      0.3,
+      0.74
+     ],
+     "digits": 2
+    },
+    {
+     "file": "results/analysis/p2_strong_eval_llm_p2qwenb.json",
+     "path": [
+      "detectors",
+      "text",
+      "auroc_private_vs_none"
+     ],
+     "expected": [
+      0.21,
+      0.12,
+      0.33
+     ],
+     "digits": 2
+    },
+    {
+     "file": "results/analysis/p2_strong_eval_llm_p2qwenb.json",
+     "path": [
+      "detectors",
+      "action",
+      "auroc_private_vs_none"
+     ],
+     "expected": [
+      0.86,
+      0.69,
+      0.98
+     ],
+     "digits": 2
+    },
+    {
+     "file": "results/analysis/p2_strong_eval_llm_p2qwena.json",
+     "path": [
+      "detectors",
+      "text",
+      "auroc_private_vs_none"
+     ],
+     "expected": [
+      0.15,
+      0.05,
+      0.25
+     ],
+     "digits": 2
+    },
+    {
+     "file": "results/analysis/p2_strong_eval_llm_p2qwena.json",
+     "path": [
+      "detectors",
+      "action",
+      "auroc_private_vs_none"
+     ],
+     "expected": [
+      0.57,
+      0.36,
+      0.78
+     ],
+     "digits": 2
+    }
+   ]
+  },
+  {
+   "id": "M5",
+   "report_section": "TL;DR 3; appendix E132",
+   "note": "Correct JSON source is e132_inversion.json; mechanism exploratory and Qwen-specific.",
+   "checks": [
+    {
+     "file": "results/analysis/e132_inversion.json",
+     "path": [
+      "sets",
+      "Qwen3.8 base",
+      "arms",
+      "channel",
+      "invite_rate_pooled"
+     ],
+     "expected": 0.4,
+     "digits": 2
+    },
+    {
+     "file": "results/analysis/e132_inversion.json",
+     "path": [
+      "sets",
+      "Qwen3.8 base",
+      "arms",
+      "no_channel",
+      "invite_rate_pooled"
+     ],
+     "expected": 0.88,
+     "digits": 2
+    }
+   ]
+  },
+  {
+   "id": "M6",
+   "report_section": "P2.16",
+   "note": "Executed-only secondary comes from e113_secondary.json, not p2_e1_audit.json. Q1.4 E70 executed rule; seven included Qwen cells.",
+   "checks": [
+    {
+     "file": "results/analysis/p2_e1_audit.json",
+     "path": [
+      "n_games"
+     ],
+     "expected": 192,
+     "digits": null
+    },
+    {
+     "file": "results/analysis/p2_e1_audit.json",
+     "path": [
+      "amend3",
+      "qwen_stratified_combined_minus_action",
+      "delta"
+     ],
+     "expected": -0.24,
+     "digits": 2
+    },
+    {
+     "file": "results/analysis/p2_e1_audit.json",
+     "path": [
+      "amend3",
+      "qwen_stratified_combined_minus_action",
+      "ci"
+     ],
+     "expected": [
+      -0.37,
+      -0.09
+     ],
+     "digits": 2
+    },
+    {
+     "file": "results/analysis/p2_e1_audit.json",
+     "path": [
+      "pooled_auroc_channel_vs_none_descriptive",
+      "action_qwen"
+     ],
+     "expected": [
+      0.52,
+      0.41,
+      0.64
+     ],
+     "digits": 2
+    },
+    {
+     "file": "results/analysis/p2_e1_audit.json",
+     "path": [
+      "pooled_auroc_channel_vs_none_descriptive",
+      "text_qwen"
+     ],
+     "expected": [
+      0.32,
+      0.24,
+      0.42
+     ],
+     "digits": 2
+    },
+    {
+     "file": "results/analysis/e113_secondary.json",
+     "path": [
+      "stratified",
+      "executed_vs_A",
+      "qwen_combined_minus_action",
+      "delta"
+     ],
+     "expected": -0.3,
+     "digits": 2
+    },
+    {
+     "file": "results/analysis/e113_secondary.json",
+     "path": [
+      "stratified",
+      "executed_vs_A",
+      "qwen_combined_minus_action",
+      "ci"
+     ],
+     "expected": [
+      -0.44,
+      -0.17
+     ],
+     "digits": 2
+    },
+    {
+     "file": "results/analysis/e113_secondary.json",
+     "path": [
+      "definition"
+     ],
+     "expected": "Q1.4 E70 executed rule (games[].executed; not Q2.2 strict)",
+     "digits": null
+    }
+   ]
+  },
+  {
+   "id": "M7",
+   "report_section": "P2.12",
+   "note": "SALT is a positive result in one external setting; does not establish text helps only in conversations. The 62% refers to absence of a judged agreement.",
+   "checks": [
+    {
+     "file": "results/analysis/salt_d1.json",
+     "path": [
+      "E105_audit",
+      "auroc",
+      "est"
+     ],
+     "expected": 0.87,
+     "digits": 2
+    },
+    {
+     "file": "results/analysis/salt_d1.json",
+     "path": [
+      "E105_audit",
+      "auroc",
+      "ci"
+     ],
+     "expected": [
+      0.83,
+      0.91
+     ],
+     "digits": 2
+    },
+    {
+     "file": "results/analysis/salt_d1.json",
+     "path": [
+      "E105_audit",
+      "n"
+     ],
+     "expected": 240,
+     "digits": null
+    },
+    {
+     "file": "results/analysis/salt_d1.json",
+     "path": [
+      "E105_audit",
+      "n_exec"
+     ],
+     "expected": 120,
+     "digits": null
+    },
+    {
+     "file": "results/analysis/salt_d1.json",
+     "path": [
+      "E104_sayvsdo",
+      "P_said_given_exec",
+      "est"
+     ],
+     "expected": 0.385,
+     "digits": 3
+    }
+   ]
+  },
+  {
+   "id": "M8",
+   "report_section": "P2.8",
+   "note": "Registered fresh replication, confounded premium.",
+   "checks": [
+    {
+     "file": "results/analysis/replication_llm_p2rep.json",
+     "path": [
+      "n_runs"
+     ],
+     "expected": 60,
+     "digits": null
+    },
+    {
+     "file": "results/analysis/replication_llm_p2rep.json",
+     "path": [
+      "point_ci",
+      "premium",
+      "run_auroc"
+     ],
+     "expected": [
+      0.94,
+      0.87,
+      0.99
+     ],
+     "digits": 2
+    }
+   ]
+  },
+  {
+   "id": "M9",
+   "report_section": "P2.5",
+   "note": "Terse-wording result is p2_band.json. Delivery is an unresolved contrast; placebo-private below has the reverse sign of private-placebo in the prose.",
+   "checks": [
+    {
+     "file": "results/analysis/p2_cue_llm_p2cue.json",
+     "path": [
+      "paired",
+      "notes-none",
+      "prem_r2_12"
+     ],
+     "expected": [
+      1.04,
+      0.65,
+      1.42
+     ],
+     "digits": 2
+    },
+    {
+     "file": "results/analysis/p2_cue_llm_p2cue.json",
+     "path": [
+      "paired",
+      "private-none",
+      "prem_r2_12"
+     ],
+     "expected": [
+      1.61,
+      0.92,
+      2.35
+     ],
+     "digits": 2
+    },
+    {
+     "file": "results/analysis/p2_cue_llm_p2cue.json",
+     "path": [
+      "paired",
+      "placebo-none",
+      "prem_r2_12"
+     ],
+     "expected": [
+      1.23,
+      0.76,
+      1.85
+     ],
+     "digits": 2
+    },
+    {
+     "file": "results/analysis/p2_cue_llm_p2cue.json",
+     "path": [
+      "paired",
+      "placebo-private",
+      "prem_r2_12"
+     ],
+     "expected": [
+      -0.38,
+      -1.18,
+      0.41
+     ],
+     "digits": 2
+    },
+    {
+     "file": "results/analysis/placebo_llm_v3plc.json",
+     "path": [
+      "windows",
+      "r2_12",
+      "placebo_minus_private_paired"
+     ],
+     "expected": [
+      0.03,
+      -0.542,
+      0.488
+     ],
+     "digits": 3
+    },
+    {
+     "file": "results/analysis/p2_cue_llm_p2cue.json",
+     "path": [
+      "H3_notes_over_private_r2_12"
+     ],
+     "expected": [
+      0.65,
+      0.34,
+      1.32
+     ],
+     "digits": 2
+    },
+    {
+     "file": "results/analysis/p2_band.json",
+     "path": [
+      "sysvar2 (paraphrase 2, terse)",
+      "private_minus_none_prem_r2_12"
+     ],
+     "expected": [
+      0.24,
+      -0.32,
+      0.81
+     ],
+     "digits": 2
+    }
+   ]
+  },
+  {
+   "id": "M10",
+   "report_section": "P2.7",
+   "note": "13/20 uses Q2.2 strict execution; 19/20 uses no-channel tacit-high rule; definitions differ from Q1.4.",
+   "checks": [
+    {
+     "file": "results/analysis/p2_strong_classes_llm_p2strongF.json",
+     "path": [
+      "n_tacit_high_none"
+     ],
+     "expected": [
+      19,
+      20
+     ],
+     "digits": null
+    },
+    {
+     "file": "results/analysis/p2_strong_classes_llm_p2strongF.json",
+     "path": [
+      "n_strict_executed"
+     ],
+     "expected": [
+      13,
+      20
+     ],
+     "digits": null
+    }
+   ]
+  },
+  {
+   "id": "M11",
+   "report_section": "P2.4",
+   "note": "Followed=14 of 50 agreements, 95 total test games; denominator 50 is followed plus not_followed.",
+   "checks": [
+    {
+     "file": "results/analysis/p2_behaviour.json",
+     "path": [
+      "datasets",
+      "llm_v3",
+      "class_counts",
+      "followed"
+     ],
+     "expected": 14,
+     "digits": null
+    },
+    {
+     "file": "results/analysis/p2_behaviour.json",
+     "path": [
+      "datasets",
+      "llm_v3",
+      "class_counts",
+      "not_followed"
+     ],
+     "expected": 36,
+     "digits": null
+    },
+    {
+     "file": "results/analysis/p2_behaviour.json",
+     "path": [
+      "datasets",
+      "llm_v3",
+      "n"
+     ],
+     "expected": 95,
+     "digits": null
+    }
+   ]
+  },
+  {
+   "id": "M12",
+   "report_section": "P2.17",
+   "note": "Third analysis of the same 78 games; raw rule fixed after E133c/d; prompt states label rule; sol also extracted agreed price. Public-post difference CI includes zero.",
+   "checks": [
+    {
+     "file": "results/analysis/e133e_attr.json",
+     "path": [
+      "n"
+     ],
+     "expected": 78,
+     "digits": null
+    },
+    {
+     "file": "results/analysis/e133e_attr.json",
+     "path": [
+      "b_raw_auroc",
+      "llm_E133d"
+     ],
+     "expected": [
+      0.942,
+      0.89,
+      0.982
+     ],
+     "digits": 3
+    },
+    {
+     "file": "results/analysis/e133e_attr.json",
+     "path": [
+      "b_raw_auroc",
+      "rule_score"
+     ],
+     "expected": [
+      0.885,
+      0.804,
+      0.951
+     ],
+     "digits": 3
+    },
+    {
+     "file": "results/analysis/e133e_attr.json",
+     "path": [
+      "b_raw_auroc",
+      "neg_pair_sd_0_5"
+     ],
+     "expected": [
+      0.855,
+      0.756,
+      0.938
+     ],
+     "digits": 3
+    },
+    {
+     "file": "results/analysis/e133e_attr.json",
+     "path": [
+      "a_oriented_auroc_smaller_is_held",
+      "say_do_gap"
+     ],
+     "expected": [
+      0.77,
+      0.657,
+      0.872
+     ],
+     "digits": 3
+    },
+    {
+     "file": "results/analysis/e133e_attr.json",
+     "path": [
+      "b_llm_E133d_minus_raw",
+      "rule_score"
+     ],
+     "expected": [
+      0.057,
+      0.019,
+      0.103
+     ],
+     "digits": 3
+    },
+    {
+     "file": "results/analysis/e133e_attr.json",
+     "path": [
+      "c_llm_E133d_public_minus_nopublic"
+     ],
+     "expected": [
+      0.047,
+      -0.052,
+      0.167
+     ],
+     "digits": 3
+    }
+   ]
+  },
+  {
+   "id": "M13",
+   "report_section": "P2.10; P2.1",
+   "note": "Frozen premium threshold; precision at 5% hypothetical prevalence, not empirical class proportion.",
+   "checks": [
+    {
+     "file": "results/analysis/p2_asym.json",
+     "path": [
+      "conditions",
+      "highcost",
+      "premium_flags"
+     ],
+     "expected": [
+      7,
+      10
+     ],
+     "digits": null
+    },
+    {
+     "file": "results/analysis/p2_asym.json",
+     "path": [
+      "conditions",
+      "quality",
+      "premium_flags"
+     ],
+     "expected": [
+      9,
+      10
+     ],
+     "digits": null
+    },
+    {
+     "file": "results/analysis/p2_asym.json",
+     "path": [
+      "conditions",
+      "none_ref_p2cue",
+      "premium_flags"
+     ],
+     "expected": [
+      2,
+      10
+     ],
+     "digits": null
+    },
+    {
+     "file": "results/analysis/p2_prevalence.json",
+     "path": [
+      "llm_v3_test",
+      "detectors",
+      "premium",
+      "precision@0.05"
+     ],
+     "expected": [
+      0.24,
+      0.15,
+      0.43
+     ],
+     "digits": 2
+    }
+   ]
+  },
+  {
+   "id": "M14",
+   "report_section": "P2.9",
+   "note": "No agreement; compliance, not evasion.",
+   "checks": [
+    {
+     "file": "results/analysis/p2_aware.json",
+     "path": [
+      "by_condition",
+      "aware",
+      "agreement_y"
+     ],
+     "expected": [
+      0,
+      10
+     ],
+     "digits": null
+    },
+    {
+     "file": "results/analysis/p2_aware.json",
+     "path": [
+      "by_condition",
+      "aware_all",
+      "agreement_y"
+     ],
+     "expected": [
+      0,
+      10
+     ],
+     "digits": null
+    },
+    {
+     "file": "results/analysis/p2_aware.json",
+     "path": [
+      "by_condition",
+      "private_p2cue",
+      "agreement_y"
+     ],
+     "expected": [
+      10,
+      10
+     ],
+     "digits": null
+    }
+   ]
+  },
+  {
+   "id": "M15",
+   "report_section": "Setup; E74",
+   "note": "Correct source: results/label_xfam.json (outside results/analysis). Counts sum to 115/115; binary agreement is not three-class agreement.",
+   "checks": [
+    {
+     "file": "results/label_xfam.json",
+     "path": [
+      "datasets",
+      "llm_v3",
+      "n"
+     ],
+     "expected": 70,
+     "digits": null
+    },
+    {
+     "file": "results/label_xfam.json",
+     "path": [
+      "datasets",
+      "llm_v3",
+      "binary_agree"
+     ],
+     "expected": 70,
+     "digits": null
+    },
+    {
+     "file": "results/label_xfam.json",
+     "path": [
+      "datasets",
+      "llm_v3rep",
+      "n"
+     ],
+     "expected": 15,
+     "digits": null
+    },
+    {
+     "file": "results/label_xfam.json",
+     "path": [
+      "datasets",
+      "llm_v3rep",
+      "binary_agree"
+     ],
+     "expected": 15,
+     "digits": null
+    },
+    {
+     "file": "results/label_xfam.json",
+     "path": [
+      "datasets",
+      "llm_v3fp",
+      "n"
+     ],
+     "expected": 16,
+     "digits": null
+    },
+    {
+     "file": "results/label_xfam.json",
+     "path": [
+      "datasets",
+      "llm_v3fp",
+      "binary_agree"
+     ],
+     "expected": 16,
+     "digits": null
+    },
+    {
+     "file": "results/label_xfam.json",
+     "path": [
+      "datasets",
+      "llm_v3mon",
+      "n"
+     ],
+     "expected": 14,
+     "digits": null
+    },
+    {
+     "file": "results/label_xfam.json",
+     "path": [
+      "datasets",
+      "llm_v3mon",
+      "binary_agree"
+     ],
+     "expected": 14,
+     "digits": null
+    }
+   ]
+  },
+  {
+   "id": "M16",
+   "report_section": "P2.15",
+   "note": "gpt-6.1-sol replacement; post-round-21 agreement with floor>=13.",
+   "checks": [
+    {
+     "file": "results/analysis/p2_replace_sol.json",
+     "path": [
+      "arms",
+      "private",
+      "O4_reagreement_floor_ge13",
+      "repl"
+     ],
+     "expected": [
+      0,
+      20
+     ],
+     "digits": null
+    },
+    {
+     "file": "results/analysis/p2_replace_sol.json",
+     "path": [
+      "arms",
+      "private",
+      "O6_market_excess_ge2",
+      "repl"
+     ],
+     "expected": [
+      18,
+      20
+     ],
+     "digits": null
+    }
+   ]
+  }
+ ],
+ "new_findings": [
+  {
+   "id": "116-1",
+   "location": "SUBMISSION Abstract and Contributions",
+   "old": "Text helps only where the deal is the conversation / helps only when the act happens in the conversation",
+   "replacement": "Text predicts execution in the external SALT negotiation setting (AUROC 0.87 [0.83, 0.91]).",
+   "why": "One external positive setting does not establish a necessary condition for text usefulness. SALT uses a different construct; REPORT P2.12 and Limitations."
+  },
+  {
+   "id": "116-2",
+   "location": "SUBMISSION Figure 5 caption",
+   "old": "the two channel arms are indistinguishable",
+   "replacement": "the delivered-minus-placebo price contrast is unresolved",
+   "why": "CI inclusion is not equivalence. Source: results/analysis/placebo_llm_v3plc.json : windows.r2_12.placebo_minus_private_paired = +0.030 [-0.542, +0.488]. This earlier llm_v3rep placebo stratum differs from the six-arm 15-seed P2.5 study; do not reuse the six-arm CI in this caption."
+  }
+ ],
+ "prior_findings_still_pending": [
+  "iter114/115 fix 1: executed-only -0.30 must name Q1.4 E70 rule",
+  "iter114/115 fix 2: add nothing -> no resolved gain, with CI bounds",
+  "iter114/115 fix 3: placebo is delivery contrast, unresolved rather than incapable",
+  "iter114/115 fix 4: E133 third-analysis/label-rule/shared-judge caveat",
+  "iter114/115 fix 5: inversion range is point estimates, CIs exclude 0.5 only Qwen arms/grid"
+ ],
+ "prior_findings": [
+  {
+   "id": "114-1",
+   "location": "SUBMISSION \u00a75.3 executed-only contrast",
+   "replacement": "\u22120.30 [\u22120.44, \u22120.17] on games executed under Q1.4 E70 rule",
+   "source_group": "M6"
+  },
+  {
+   "id": "114-2",
+   "location": "SUBMISSION Abstract and \u00a75.3 heading",
+   "old": "public messages add nothing / Public words add nothing",
+   "replacement": "public messages add no resolved detection value in the base market and two fresh replications; gains above +0.06 excluded on the locked test",
+   "source_groups": [
+    "M1",
+    "M2"
+   ]
+  },
+  {
+   "id": "114-3",
+   "location": "SUBMISSION \u00a77 Placebo",
+   "old": "Q2.2 placebo cannot separate delivery from offer",
+   "replacement": "Q2.2 placebo leaves delivery unresolved (private \u2212 placebo +0.38 [\u22120.41, +1.18], 15 seeds)",
+   "source_group": "M9"
+  },
+  {
+   "id": "114-4",
+   "location": "SUBMISSION \u00a75.3 E133",
+   "replacement": "E133e is the third analysis of the same 78 games; the rule score was fixed after E133c/d; the LLM prompt states the label rule; sol also extracted the agreed price.",
+   "source_group": "M12"
+  },
+  {
+   "id": "115-5",
+   "location": "SUBMISSION Abstract inversion-range claim",
+   "replacement": "For families that invite rivals publicly in control markets too, text ranks controls above channel markets on point estimates (AUROC 0.15\u20130.36); the CI is below 0.5 only for the two Qwen3.8 arms (and the Qwen3.6 grid).",
+   "source_groups": [
+    "M4",
+    "M6"
+   ]
+  }
+ ]
+}

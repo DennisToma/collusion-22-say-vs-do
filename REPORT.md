@@ -31,7 +31,7 @@ Every abstract number with its denominator and source key: `results/analysis/cla
 - *Do not quote:* E99-x plan 0.76 without E111 (no-LLM partner-name count 0.82); E116b Qwen strata (5 vs 10); the round-1 or pair premium as a detector (prompt-confounded, P2.5/P2.10); any executed count without its definition (strict / floor rule).
 
 ### Changes after 08:00 (for the merge manager)
-- (none yet; top, box and merge block frozen 07:30. Pre-freeze 06:50 edits: E133e wording "not via public messages" → "no evidence its edge comes from public messages"; "post hoc" added next to +0.06.)
+- 2026-10-25 08:12 UTC: merge-support source pointers → [verified M1–M16 handoff](results/analysis/merge_source_audit_i116.json) (`python3 -S check_merge_sources.py`: 69 saved-value checks, 21 hashes, all identical to frozen `8b680ee`). Exact wording recommendations and corrected JSON paths are in the receipt; scientific text, headline numbers and joint statement unchanged.
 
 
 **TL;DR (sources: the glance table below and the § cited per item).**
