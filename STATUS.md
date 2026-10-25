@@ -1,14 +1,15 @@
 # STATUS
 
-## Current state (2026-10-25 11:49 UTC, iteration 144) — research frozen; DIRECTION 10:30
+## Current state (2026-10-25 12:20 UTC, iteration 145) — research frozen; DIRECTION 10:30
 - Headline unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc); Qwen combined−action −0.24 [−0.37, −0.09].
-- Merge HEAD `1329a9a` commits the Q2.2 wording reviewed in I143; new working-tree E84 floor ≥ 12 clarification matches the code. Diff-triggered scope check → 0 open P1; SLIDES unchanged.
-- Directives 1–2 complete; 3 checked. REPORT diff from pin `91ffb2d` verified: only the I133 review line; no pinned source edits.
-- No experiments, model calls, metric reruns or exports.
-- Next: diff-triggered checks on new merge HEADs; final scope read + check_merge_sources once at 14:00–15:00; render-only export 16:30; stop by 17:30.
-- Risks: exports stale until 16:30; merge carries double-rounding corrections that our REPORT keeps (disclosed).
+- Merge HEAD `f6f10df` (freeze hold). Diff from `1329a9a`: only Q2.2 hunk = E84 floor ≥ 12 (verified I144). Early judge-style scope read of all Q2.2 text in SUBMISSION (Opus subagent) + 8 slides (own read) → **0 P1** (merge_flags I145).
+- Directives 1–2 complete; 3 done for f6f10df; 4 done early (merge in content freeze); at 14:00–15:00 only diff from f6f10df + check_merge_sources once.
+- No experiments, model calls (besides the reader subagent), metric reruns or exports. REPORT untouched (pin drift = I133 line only).
+- Next: diff-triggered checks on new merge HEADs; 14:00 diff + check_merge_sources; render-only export 16:30; stop by 17:30.
+- Risks: exports stale until 16:30.
 
 ## Log
+- 2026-10-25 12:20 UTC P2 iter145: merge 1329a9a → f6f10df (iter19–23: E84 floor wording, LLM-usage counts, coverage/test notes). Only Q2.2 hunk already verified I144. Early directive-4 scope read (merge in freeze hold): SUBMISSION Q2.2 text by Opus subagent vs REPORT/JSON, SLIDES by me → 0 P1; one wording nit (trivial-floor 'count as trivially kept') not flagged as P1. merge_flags I145. No REPORT edits, no calls.
 - 2026-10-25 11:55 UTC P2 iter143: merge b1a92f6 → 38e9a96 (committed: Reproducibility/App. A only) + working-tree Q2.2 wording (kept rule, combined_stats/structured definitions, Sonnet 115/115 caveat, Fig. 5 caption, App. B notes) verified vs p2_behaviour.py / auditors.py / labels → 0 P1, merge_flags 143-scope. No REPORT edits, no calls.
 - 2026-10-25 11:40 UTC P2 iter141: merge advanced f5e91e5 → b1a92f6 (iter17 double-rounding audit). Q2.2 hunks M6/M33/M34 verified: the merge's unrounded recomputes round to our stored 3-dp ties (−0.165, −0.405, 0.575) and print correctly at single rounding → 0 P1, merge_flags 141-round. No REPORT edits, no calls.
 - 2026-10-25 11:20 UTC P2 iter139: merge advanced 5ccd0b7 → f5e91e5 (iter14–16). Diff-triggered scope check: only SUBMISSION changed; Q2.2 hunk = §9 Conclusion ("no resolved gain"; high prices via prompt cues/notepad/memory+profit; flag ≠ agreement) — consistent with REPORT box, l.10–11, P2.5, Limitations → 0 P1. Manifest q22 46 files: 45/46 identical at HEAD (REPORT.md = I133 line only). merge_flags 139-scope/139-pin. No REPORT edits, no calls.
