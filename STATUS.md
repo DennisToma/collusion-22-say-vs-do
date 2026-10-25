@@ -1,8 +1,8 @@
 # STATUS
 
-## Current state (2026-10-25 17:16 UTC, iteration 182) — FINAL; research frozen
+## Current state (2026-10-25 17:35 UTC, iteration 183) — FINAL; research frozen
 - **P1 open: 0.** Both I178 P1s and the abliteration wording are fixed in committed merge bytes (`7c7be5e`; HEAD `8e4ef25`).
-- Last merge bytes read: `8e4ef25`, TEMPLATE af06861c, SLIDES 37a182ed, fig0 0b4f8004; P1 open: 0.
+- Last merge bytes read: `77ab10d`, TEMPLATE af06861c, SLIDES 37a182ed, fig0 0b4f8004; P1 open: 0.
 - Headline unchanged: locked-test Δ −0.01 [−0.09, +0.06]; fresh pooled n=90 −0.07 [−0.17, +0.02] (post hoc); Qwen combined−action −0.24 [−0.37, −0.09].
 - Pin `91ffb2d` remains 76/77 (REPORT I133 review line only); Q2.2 post-18:00 guard in merge_flags I178 remains for the merge's last hour.
 - Limitations: no resolved gain does not prove zero; Qwen inversion is family-scoped; E84 keeps 14/50 agreements under its rule; one market.
@@ -10,6 +10,7 @@
 - Next: none required; at most one more P1-only check of a merge TEMPLATE/SLIDES commit before 17:55.
 
 ## Log
+- I183 2026-10-25 17:35 UTC: merge `77ab10d` (number bindings): TEMPLATE/SLIDES/fig0 bytes unchanged; SUBMISSION hunks are counts/metadata only (no-op). New Q2.2 bindings T3 (62% = 1−0.385 E104), T4 (14/50 followed), T5 (premium flags 7/10, 9/10, 2/10) checked against our JSON → correct. 0 P1. No REPORT edits, calls or experiments.
 - I181 2026-10-25 17:18 UTC: DIRECTION #3. Merge `7c7be5e`/`8e4ef25`: I178-1/2 P1s and abliteration wording fixed in committed TEMPLATE/SLIDES → 0 P1 open; guard-phrase sweep clean (only pCMI "near chance", Q1.4 scope). merge_flags I181. No REPORT edits, calls or experiments.
 - I178 2026-10-25 17:05 UTC: DIRECTION 16:40 #1–#4. P1-only read of committed merge `934d875` (TEMPLATE 211e4436, SLIDES e7f46fb3, fig0 0b4f8004): 2 P1 (§5 "text auditing missed"; slide-1 "text near chance", but Qwen is below chance), both covered by Q1.4 patch → accepted; abliteration concurrence; 62% verified as full-set (1989/5169); Q2.2 guard written (merge_flags I178). No REPORT edits, calls or experiments.
 - I177 2026-10-25 16:37 UTC: merge f23c1c2, SUBMISSION sha d473327e, no new Q2.2 hunk; pin 76/77 (REPORT I133 line); handoff/presentation freshness PASS, sources unchanged since 69d7ca6. REPORT frozen per DIRECTION; no calls or experiments.
