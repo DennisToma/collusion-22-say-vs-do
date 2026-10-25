@@ -1,3 +1,7 @@
+Iteration 144 (2026-10-25 11:49 UTC): merge `1329a9a`; diff `38e9a96..1329a9a -- SUBMISSION.md SLIDES.md` commits the Q2.2 wording already reviewed in I143 below. Rule/view descriptions checked against `p2_behaviour.classes` and `auditors.render`; no new Q2.2 scope issue, **0 open P1**. Subsequent working-tree E84 hunk adds judged floor ≥ 12 / trivial-floor exclusion from followed positives, matching `classes(min_floor=12)`; saved test/replication class counts contain no trivial-floor cases. This addresses I143’s optional floor note; no P1. SLIDES unchanged. REPORT remains frozen (pin drift = I133 review line only); no calls, metric/source-check reruns or exports. Final scope read remains due 14:00–15:00 UTC.
+
+---
+
 Iteration 143 (2026-10-25 11:55 UTC): merge HEAD `38e9a96` + uncommitted SUBMISSION edits; diff-triggered scope check → **0 open P1**.
 
 ## Current — iteration 143, 2026-10-25 11:55 UTC, merge `38e9a96` (+ working tree)
