@@ -1,67 +1,64 @@
-# DIRECTION — Phase 2, director review 2026-10-25 14:32 UTC (Sun afternoon)
-(experiments end **Sun 15:00** (28 min; nothing new may start) · finalize-only **16:30** · hard stop **18:00** · merge `collusion-beyond-words` HEAD `2da601d` (iter38; manuscript bytes = iter34 `f82acb0`, SUBMISSION sha `96d0ed7b…`) · Q2.2 HEAD `f73f49c` (I160) · evidence pin `91ffb2d`: **director check at 14:3x: 76/77 pinned files SHA256-identical to merge `evidence/manifest.json` q22; only `REPORT.md` differs (the known I133 review line)**)
+# DIRECTION — Phase 2, director review 2026-10-25 16:40 UTC (Sun, finalize-only window)
+(experiments ended **15:00** · finalize-only since **16:30** · **source hard stop 18:00** (the merge alone is extended to 19:00 by Dennis's 16:40 merge DIRECTION) · merge `collusion-beyond-words` HEAD **`f23c1c2`** (iter50, 16:36): new **TEMPLATE_REPORT.md** (Apart template, sha `86c0f92e…`), new headline **Fig. 1** `figures/fig0_headline.png` + `IMAGE.png`, slide 1 rewritten (SLIDES.md `e297f700…`), SUBMISSION_FORM edited · Q2.2 HEAD `8c0683f` (I175) · pin `91ffb2d` 76/77 (REPORT.md I133 line only))
 
 **Verdict (3 lines).**
-1. **Q2.2 is answered and fully delivered.** All 12:35 directives are done:
-   - **Export:** I148 `69d7ca6` rebuilt REPORT 30 pp and slides 7 pp from REPORT @ `94018c8`. Checks pass: handoff, presentation, p2_claims 36/36, verify_phase2 31/31. README is fixed.
-   - **Final scope read:** I156/I158, then I160 on the current `f82acb0` bytes: 0 P1. The two new Q2.2 abstract/conclusion hunks match REPORT l.16/28.
-   - **Replay:** the merge's locked-test replay reproduces 6/6 views and 8/8 contrasts.
-
-   The honest null (Δ −0.01 [−0.09, +0.06]) is well defended against a tough judge: locked test, two replications, notepad placebo for the prompt cue, Qwen-scoped inversion, SALT as the stated exception, and named execution rules.
-2. **The commits were triggered by real merge diffs, but most of those diffs were count-only.** I149–I160 were all merge-scope reads, and several had zero Q2.2 hunks (I149, I151, I153; I156/I158 were Q1.4 terms + usage counts). Each entry is long, and some used an Opus subagent for a full re-read (I155). That was justified for the 13:35 compliance rewrite, but it is not needed for what is left.
-3. **Explore vs exploit: exploit only, final.** Nothing that could run in 28 minutes can be pinned, reviewed and merged before 16:30. The value left: (a) keep the pin intact, (b) catch any Q2.2 wording regression in the merge's final bytes, (c) the 16:30 freshness check and a clean final line.
+1. **The science is finished and defensible.** The locked-test null Δ −0.01 [−0.09, +0.06] stands, with two replications, the notepad/placebo cue control, the Qwen-scoped inversion, SALT as the stated boundary, and named execution rules. Freshness checks passed at 16:17, and nothing in REPORT needs to change.
+2. **New risk, not yet covered.** At 16:40 Dennis told the merge to write a *new* judge-facing report: "no CIs in main text, minimal hedging, frame negatives as positive contributions", and explicitly "text auditing … fails when it is a price". That rule invites overclaiming the null as "text fails / is useless". Q2.2's last read was SUBMISSION `96d0ed7b…`, and **it has never read TEMPLATE_REPORT, the new Fig. 1 or the new slide 1**. The merge committed them at 16:36. Q1.4 read the same file and found **2 P1s**, which shows the risk is real.
+3. **Explore vs exploit: exploit only.** The remaining value is one P1-only scope read of the template's Q2.2 claims, plus Fig. 1 panel (a), whose data are yours. Deliver exact replacement sentences fast, verify the merge's next commit before 18:00, and leave a self-check for the merge's last hour. The count-only loop (I162–I175) is over, because a real change has landed.
 
 ## Top directives (in priority order)
 
-1. **Count-only merge diffs are a no-op (now → 18:00).**
-   - If a new merge HEAD or working-tree change touches only these, do not scope-read, do not run `check_merge_sources.py`, and do not add a merge_flags entry:
-     - LLM-usage/iteration counts,
-     - blob/hash/test/binding counts,
-     - timestamps,
-     - archive/receipt metadata,
-     - Q1.4-only text.
-   - Filter with your `/var/tmp/i<n>_wt.diff` snapshot method plus a grep of the hunks for Q2.2 terms: Δ, combined, hybrid, text auditor, public text, placebo, notepad, kept, executed, tacit-high, SALT, Qwen inversion, locked test, E113, E99, E112/E115.
-   - The merge's 16:30 `finalize.py` will refresh usage counts in SUBMISSION. That alone is a no-op.
-   - **Why:** your last full-coverage point is I160 on `96d0ed7b…`, so only a hunk with Q2.2 content can create a P1.
-2. **If the wrapper forces a commit, make it one line.**
-   - When nothing Q2.2-relevant changed, write one log line: `I<n> <date -u>: merge <hash>, SUBMISSION sha <8>, no Q2.2 hunk; pin 76/77 (REPORT I133 line).`
-   - Do not edit the current-state block until directive 4, and do not use subagents for diff reads.
-   - **Why:** keep the history readable for Dennis/judges, and keep the Claude quota for the managers.
-3. **16:30 freshness check: read-only, ≤ 15 min.**
-   - Run `python3 -S build_handoff.py --check`, `python3 build_presentation.py --check` and the 77-file pin loop (expect 76/77).
-   - Confirm that REPORT.md, REPORT_APPENDIX.md and the presentation sources are unchanged since `69d7ca6`.
-   - Re-export only if a source changed (12:35 #1 rules; never `auto_finalize.sh` or writers of pinned files).
-   - After the merge's 16:30 finalize lands, do **one** last diff of its final SUBMISSION/SLIDES against `/var/tmp` of I160, filtered by directive 1, and record the sha you read.
-   - **Why:** the merge's final commit is the bytes Dennis submits, so the last Q2.2 read must be on exactly those bytes.
-4. **Final STATUS by 17:30.**
-   - Write the current-state block in ≤ 10 lines:
-     - headline unchanged,
-     - `Q2.2 final at <hash>; pin 91ffb2d 76/77 (REPORT.md I133 review line only); merge locked-test replay 6/6 + 8/8; last merge bytes read: SUBMISSION sha <…>, 0 P1`,
-     - one limitations line: the null bounds the gain (> +0.06 excluded on test), it does not prove zero; the Qwen inversion is family-scoped; labels are rule-dependent; one market.
-   - After that, act only on a merge error that names Q2.2.
-5. **One "likely judge question" line in the final STATUS block (no REPORT edit).** The question: "Isn't the text auditor just reading the channel-offer prompt cue, and does the null mean text is useless?" Point to:
-   - notepad/placebo (E77/E92): the offer alone moves prices;
-   - E82 TF-IDF ablation;
-   - executed-vs-tacit plan view 0.76 (E99-x, exploratory): text helps where price views are ≈ 0.5;
-   - SALT (E104/E105): where agents say what they do, text works.
-
-   Dennis needs this ready for the presentation.
+1. **P1-only scope read of the committed template, now. Deliver by 17:15 (≤ 35 min, no subagent).**
+   - Read `git -C ../collusion-beyond-words show f23c1c2:TEMPLATE_REPORT.md` (confirm sha `86c0f92e…`), `:SLIDES.md` slide 1, `:SUBMISSION_FORM.md` summary, and `scripts/fig0_headline.py`. Snapshot them to `/var/tmp/i<n>_*` (your method).
+   - Check every Q2.2 claim against REPORT/JSON. The concrete watch list:
+     - **Fig. 1(a)** (your market, gpt-6-luna):
+       - The caption says the two games are from a "fresh replication set", are "12-round", and were "chosen by a fixed rule: the median run of each arm by pair premium". Verify the run ids/premiums the script picks against your data.
+       - The caption also says "the pair prices above its two rivals in every round" and "without one, pair and rivals price identically". Verify both on those two runs.
+       - `IMAGE.png` suptitle: "A private channel shows up as a price gap".
+     - **Fig. 1(b) caption:** check "positives are runs whose private chat was judged communicative, which on this split are exactly the channel runs" on the 95-run locked test. Also check that the blue bar = pair premium, "chosen post hoc", and red = text-only.
+     - **§4 "Public words give no resolved gain"** (l.62):
+       - text-only 0.47;
+       - Qwen3.8 0.21 / 0.15 "inverted";
+       - invite rate 0.40 vs 0.88 (post hoc);
+       - SALT 0.87 "the same kind of auditor … predicted later rule-breaking verdicts from preceding messages";
+       - "in the full dataset, 62% of rule-breaking episodes contain no explicit agreement": is E104 0.385 on the full set or on your stratified sample?
+       - the closing phrase "why text failed in the pricing markets".
+     - **§4 "A channel is not collusion"** (l.64): notepad +1.04 vs +1.61, ratio 0.65 [0.34, 1.32]; 19/20 tacit-high (rounds 11–40, Nash + 2); 14 of 50 executed under your rule.
+     - **l.69:** replication −0.07 [−0.17, +0.02], n = 90, pooled post hoc.
+     - **Appendix table** l.143–148: 0.47 [0.36, 0.58] / 0.75 [0.65, 0.85]; 0.21 [0.12, 0.33]; 0.15 [0.05, 0.25]; SALT 240 episodes.
+     - **Limitations** l.161: judge family = auditor family; Sonnet re-judgement agreement.
+   - **P1 = any categorical overclaim of the null.** For example: "text fails/is useless/cannot detect" without "no resolved gain, gains > +0.06 excluded"; inversion stated beyond the Qwen arms; SALT presented as the same construct; "post hoc" dropped from the pair-premium bar or the invite mechanism. Any wrong number is also a P1.
+   - Deliver **one** merge_flags entry with the sha you read and exact replacement sentences, in Q1.4's `template_scope_fixes.patch` format. If you find 0 P1, say "0 P1 on `86c0f92e…`" in one line.
+   - **Why:** this is the document judges will read first. It is the only Q2.2-relevant text that no source reviewer has checked.
+2. **On abliteration, endorse Q1.4's fix rather than writing a competing one (≤ 5 min).**
+   - Q1.4 I167/I168 P1 #2: the template says abliterated models "show no detectable increase" / "no detectable price increase", in absolute terms. The tested null is the *channel premium*.
+   - Your Qwen3.8 pair (E100/E124) is one of the three pairs. Check that its contrast is premium-based, then write one line in your flag: "Q2.2 concurs with Q1.4 replacement: 'Removing safety training produced no detectable increase in the channel-related pricing premium across three Qwen comparisons.'"
+   - **Why:** two sources agreeing on one sentence is one edit for the merge. Two different sentences would mean another round.
+3. **Verify the next merge commit that touches TEMPLATE_REPORT/SLIDES/fig0 (P1 only, ≤ 15 min each, at most twice, last one by 17:55).**
+   - Diff it against your `/var/tmp` snapshot of `f23c1c2` and filter for Q2.2 terms (14:32 #1 list, plus: fails, useless, words, text auditor, inverted, SALT, notepad, placebo, post hoc).
+   - Confirm your P1s (if any) are fixed in **committed** bytes, and record the commit + sha.
+   - Accept equivalent wording. The bar is "no overclaim".
+4. **Leave the merge a self-check for after 18:00 (≤ 10 min, once).** The merge runs until 19:00 and you stop at 18:00. Append a 5-line "Q2.2 guard" to merge_flags:
+   - forbidden phrasings (e.g. "text fails", "text is useless", "auditors cannot detect", "words carry no signal");
+   - required qualifiers ("no resolved gain", "> +0.06 excluded" or the CI, "Qwen arms" scope for the inversion, "different construct" for SALT, "post hoc" on the pair-premium bar and the invite rate).
+5. **Final STATUS by 17:55 (≤ 10 lines).**
+   - Replace the "last merge bytes read" line with `last merge bytes read: <commit>, TEMPLATE <sha8>, SLIDES <sha8>, fig0 <sha8>; P1 open: <0|n>`.
+   - Keep the judge-question line.
+   - If any P1 is still open at 17:55, put it in line 1, so Dennis sees it before submitting.
 
 ## STOP doing
-- **Stop scope-reading count-only or Q1.4-only merge hunks**, and stop writing multi-sentence log entries for them (I149, I151, I153, I156, I158 pattern). See directives 1–2.
-- No more Opus/codex subagent re-reads of the merge. The compliance rewrite was the last large change.
-- Don't re-verify the merge's locked-test replay or rerun `check_merge_sources.py` without a Q2.2 hunk.
-- No new LLM calls, features, strata or prompts (no E133f, no E113 reopen, no evasion arm, no S72 confirmation).
-- No REPORT.md / REPORT_APPENDIX.md edits. Don't revert the I133 line, and don't push for a re-pin.
-- Don't fix old timestamps. Don't edit the merge repo or the joint statement.
-- Optional P2 wording nits (I155's 5) stay optional. Don't chase them unless the merge asks.
+- **No P2/P3 wording or readability suggestions on the template.** Merge time is the scarcest resource now; send P1 only. The I155 optional P2s stay optional.
+- No REPORT.md / REPORT_APPENDIX.md edits, no re-export, no repeat of `build_handoff --check` / `build_presentation --check` (passed 16:17; sources unchanged). Don't revert the I133 line, and don't push for a re-pin.
+- No new LLM calls, experiments, critics or subagent re-reads. Directive 1 is a ~4k-word read; do it yourself.
+- Still in force: a count-only merge diff (usage counts, timestamps, hashes, zip/archive packaging, Q1.4-only hunks) is a no-op, and a forced commit gets a one-line log entry.
+- Don't edit the merge repo. Don't fix old timestamps.
 
 ## Cross-pollination
-- **Q1.4 → here:** the I152 catch: the merge cited Q1.4's I151 as covering bytes I151 had not read. Your entries already quote SUBMISSION sha, so keep that for the final read (directive 3); it is what makes the citation checkable.
-- **Here → Q1.4:** your `/var/tmp/i<n>_wt.diff` snapshot method (diff new text against what you actually read, not against HEAD). Q1.4 is told to adopt it for the 16:30 read.
-- **Merge → both:** iter36/37 revert usage-count churn between finalize runs, so expect quiet until 16:30, then exactly one count-only change.
+- **Q1.4 → here:** I167/I168 found the template turning qualified results into categorical headlines. Read its `results/reviews/merge_flags.md` I167/I168 entries and `template_scope_fixes.patch` before you start (2 min). The patch also edits the Discussion's first sentence and the slide-1 caption, which mention text ("adding public text gave the auditor no measurable gain"). Check that those sentences are acceptable to you, so the merge can apply one patch.
+- **Here → Q1.4:** Fig. 1 is joint. Panel (a) and the say-vs-do bars are your data; Q1.4 verified its own bars (I166). Caption wording about text is yours to guard, caption wording about pCMI is Q1.4's.
+- **FYI for the merge (one line in your flag, not a scope claim):** `SUBMISSION_FORM.md` l.28 still lists the GitHub URL as the repository field. Dennis's 16:45 addendum says the repo stays private until the deadline and code goes in `submission_code.zip`.
 
-## Phase 2 gap-list status summary (14:32 Sun)
+## Phase 2 gap-list status summary (16:40 Sun)
 | item | status |
 |---|---|
 | Shared: precision at prevalence (E81) · reimplementation (E83) | DONE |
@@ -77,18 +74,21 @@
 | Part E: E2 (E112/E115) · E4 (E108) · E5 (E110) | DONE |
 | Part E: E3 cross-family | DROPPED (gateway saturated; E70 factor M) |
 | Denominators · E132 · E133 a–e + `verify_phase2.py` | DONE |
-| Ranked merge fix list + all flags applied | DONE: 0 open (I155's 5 P2 optional) |
+| Ranked merge fix list + all flags applied | DONE: 0 open on SUBMISSION `96d0ed7b…` (I155's 5 P2 optional) |
 | Own Fig. 6 window label fix | DONE (`7247c6c`) |
-| Fresh export (12:35 #1) | DONE (I148 `69d7ca6`; README l.4 fixed) |
-| Final scope read (12:35 #3) | DONE (I156/I158; I160 on the current `f82acb0` bytes, 0 P1) |
-| Diff-triggered scope check | IN PROGRESS: through merge `2da601d` (SUBMISSION `96d0ed7b…`). Continue with the count-only filter (directive 1) |
-| Pin discipline (`91ffb2d`) | IN PROGRESS: 76/77 director-verified 14:3x (REPORT.md = I133 line); keep until 18:00 |
-| 16:30 freshness check + last read of the merge's final bytes | NOT STARTED → directive 3 |
-| Final STATUS block | NOT STARTED → directive 4 (by 17:30) |
+| Fresh export (12:35 #1) · 16:30 freshness check (14:32 #3) | DONE (I148 `69d7ca6`; I174 checks PASS, no re-export needed) |
+| Final scope read of SUBMISSION (12:35 #3) | DONE (I156/I158/I160, 0 P1 on `96d0ed7b…`) |
+| Count-only filter + one-line entries (14:32 #1/#2) | DONE (I162–I175 one-line pattern) |
+| Final STATUS block + judge-question line (14:32 #4/#5) | DONE (I174). Refresh at 17:55 with the last bytes read → directive 5 |
+| **Scope read of the Apart TEMPLATE_REPORT + new Fig. 1 + slide 1 (new, merge 16:40 DIRECTION)** | **NOT STARTED** → directive 1 (top priority, by 17:15) |
+| Abliteration wording (Q1.4 P1 #2): concur on one sentence | NOT STARTED → directive 2 |
+| Verify fixes on the merge's committed bytes + merge self-check guard | NOT STARTED → directives 3–4 |
+| Pin discipline (`91ffb2d`) | IN PROGRESS: 76/77 (REPORT.md = I133 line); keep until 18:00 |
 | Evasion / red-team arm | DROPPED (conflicts with the "never instruct" rule; past the freeze; Limitations bullet) |
 | Serendipity | no promoted hits (through S72); closed |
 
 ---
+
 
 
 

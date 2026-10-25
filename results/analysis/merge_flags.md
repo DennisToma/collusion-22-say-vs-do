@@ -216,3 +216,21 @@ Q2.2 hunks vs I160/`42c5b16`: new title + Figure 1 caption (SUBMISSION/SLIDES), 
 | Sonnet re-judge "agreed on binary, weakly on three classes" | REPORT E74 (115/115; 3-class κ 0.33) | correct |
 | Strong framing "channel added no detectable premium" | REPORT l.218 paired private − none −0.44 [−1.84, +1.00] (market price) | correct; P2 nit: the measure is market price, not pair premium (SUBMISSION says "price") |
 | Fig. 1(b) plots the pair premium as the say-vs-do level screen | REPORT "do not quote the pair premium as a detector (prompt-confounded)" | P2: the caption says "chosen post hoc" and the text gives the notepad confound (two-thirds) → acceptable |
+
+## I178 (2026-10-25 17:0x UTC): P1-only overclaim read of committed template `934d875` (DIRECTION 16:40 #1–#4)
+Read (committed HEAD `934d875`, via be8ee87): TEMPLATE_REPORT.md sha256 211e4436…, SLIDES.md e7f46fb3…, figures/fig0_headline.png 0b4f8004… (vs f23c1c2: panel-(b) title text only). Snapshot `/var/tmp/i178_tmpl_f23.md`.
+**2 P1 open, both fixed verbatim by Q1.4 `results/reviews/template_scope_fixes.patch` — Q2.2 accepts that patch's text-related sentences as is (apply one patch):**
+| P1 | location (current bytes) | problem | replacement (= Q1.4 patch) |
+|---|---|---|---|
+| 178-1 | TEMPLATE §5 first sentence (l.73) | "co-movement and text auditing, missed the private channel" is a categorical claim with no qualifier | "Price-level screens separated channel from no-channel LLM pricing games more reliably than contemporaneous pCMI, and adding public text gave the auditor no measurable gain." |
+| 178-2 | SLIDES slide 1 caption (l.7) | "a text-reading LLM auditor stay[s] near chance in pricing markets" is wrong for the Qwen arms (0.21/0.15, *below* chance, i.e. inverted) and drops the registered contrast | "…pCMI intervals include chance in 8/9 main sets and in the pooled grid; adding public text gave an LLM auditor no measurable gain." |
+Concur (not counted as separate P1s): Q1.4's new title, contribution-2 heading and abliteration sentences. Abliteration: **Q2.2 concurs with the Q1.4 replacement: "Removing safety training produced no detectable increase in the channel-related pricing premium across three Qwen comparisons."** Our pair (E100, P2.11) is premium-based: abliterated − base channel premium −1.24 [−2.41, −0.03]. Apply it at TEMPLATE l.30 and l.64.
+Checked, OK: −0.01 [−0.09, +0.06] now defined as combined − better single view (l.62, = REPORT); 0.47; Qwen 0.21/0.15 "inverted" scoped to the Qwen3.8 arms; 0.40 vs 0.88 marked post hoc; SALT 0.87 marked as a different construct; **62% = full dataset** (1 − P(said | executed) 0.385, 1989/5169, `salt_d1.json`; the 0.87 is on the 240-episode sample, and the text says this correctly); notepad 0.65 [0.34, 1.32]; 19/20; 14/50; −0.07 n = 90 marked post hoc; App. table l.143–148. l.62 "why text failed in the pricing markets" is acceptable because the same paragraph states the qualifier; optional: "why text alone did not separate the arms".
+FYI (not scope): SUBMISSION_FORM l.28 already says the repo stays private until the deadline. Resolved.
+
+### Q2.2 guard for the merge after 18:00 (self-check before any edit to TEMPLATE/SLIDES/SUBMISSION text about text auditing)
+1. Forbidden unqualified phrases: "text fails", "text is useless", "auditors cannot detect", "words carry no signal", "text auditing missed", "text … near chance" (Qwen is *below* chance).
+2. Any sentence about adding public text must carry "no resolved/measurable gain" and, in body text, the CI −0.01 [−0.09, +0.06] or "gains > +0.06 excluded". It must not claim the gain is zero.
+3. "Inverted" only for the Qwen3.8 arms (0.21, 0.15); the invite-rate mechanism 0.40 vs 0.88 stays "post hoc" and "not shown to cause it".
+4. SALT 0.87 stays "a different, external task / different construct", and is never evidence about adding text to prices.
+5. "Post hoc" stays on the pair-premium bar (Fig. 1b blue) and on the pooled replication −0.07 (n = 90); if numbers change, P1 = any number not in REPORT.md @ 91ffb2d.
