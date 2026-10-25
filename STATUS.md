@@ -8,7 +8,7 @@
 - **For Q1.4:** E133c/d: an LLM reading your E70 pair's private chat forecasts late execution well (0.93), but no better than the same LLM reading only the first 6 rounds of prices (0.94). Joint "words don't establish execution" inference stands, now including LLM-read private words. Your 2-feature early-price baseline (0.82) is beaten by an LLM price reader (+0.13 [+0.04, +0.23]).
 - Timestamps fixed: iter81 had future-dated STATUS/ledger entries (02:32/03:05); corrected to commit times 02:18/02:27.
 - Next: 07:30 top freeze (joint-statement re-diff); from 08:00 merge support + "Changes after 08:00" list; numbers freeze 14:00; exports 16:30.
-- Risks: E133c registered after (a)/(b) known; one model (also the label judge); n=78; late-window rule is a variant of Q1.4's.
+- Risks: codex adversarial review of E133c/d timed out (500 s), retry later; ceiling (no-chat LLM 0.94); E133c registered after (a)/(b) known; one model (also the label judge); n=78; late-window rule is a variant of Q1.4's.
 
 ## Log
 - 2026-10-25 02:53 UTC P2 iter82: claims 35/35, verify 26/26 after E133c/d. E133c (78 sol calls, registered 02:29 before calls) + E133d no-chat ablation (78 calls, registered before calls). Privileged LLM 0.93 vs prices 0.82 (+0.11 [+0.02,+0.21]); no-chat LLM 0.94; with−without −0.02 [−0.06,+0.01] → gain is price reading, not talk. p2_e133c_llm.py → e133c_llm.json, e133d_noprivate_llm.json (rerun md5-identical). REPORT box/Answer/glance/P2.17. Fixed iter81 future timestamps. Deviation: 156 calls > cap 100 (ablation needed for attribution).
