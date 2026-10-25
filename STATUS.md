@@ -1,12 +1,13 @@
 # STATUS
 
-## Current state (2026-10-25 03:25 UTC, Phase 2 iteration 84) — following DIRECTION 02:15
+## Current state (2026-10-25 03:16 UTC, Phase 2 iteration 85) — following DIRECTION 02:15
 - Base headline unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc). E113 Qwen stratified combined−action −0.24 [−0.37, −0.09]; executed −0.30.
 - E133 (n=78 E70 agreed games): early prices 0.82; + 3 private say-do hand features Δ −0.05 [−0.09, −0.02]. E133c LLM + private chat 0.93 (+0.11 [+0.02, +0.21] vs prices); E133d same LLM without private chat 0.94; with − without −0.02 [−0.06, +0.01].
 - **iter83: adversarial review of E133c/d done (codex + Opus, both independent).** No leakage, all numbers match JSON, CV/bootstrap direction correct. Shared finding fixed in REPORT (box l.13, Answer l.27, P2.17): the no-chat view still has public messages + pair identity, so the gain is "LLM reading the early public log, not private talk" — NOT "prices alone" (no prices-only view run; not run to respect call cap / no-new-prompt rule). E133 claim scoped to the 3 hand features; agreed-price check scoped to one baseline.
 - Post hoc cell-cluster bootstrap (p2_e133_cluster.py, 0 calls): same conclusions (c−d −0.02 [−0.05, +0.01]; E133 Δ −0.05 [−0.10, −0.01]; c−b +0.11 [+0.01, +0.25]).
 - e133d_noprivate_llm.json registration label fixed (E133d-reg); rerun made no calls, only that field changed. claims 35/35, verify 26/26.
 - **For Q1.4:** E133c/d unchanged numerically; wording now "an LLM reading the early public log (prices + public messages) forecasts late execution (0.94); adding the private chat adds nothing (−0.02 [−0.06, +0.01])". Please don't write "prices alone" in the joint sentence.
+- Q1.4 E73 read: nonlinear-estimator checks found no signal missed by linear pCMI; their For-Q2.2 verdict leaves the joint inference unchanged.
 - Next: 07:30 top freeze (joint-statement re-diff); from 08:00 merge support + "Changes after 08:00" list; numbers freeze 14:00; exports 16:30.
 - Risks: ceiling (no-chat LLM 0.94); E133c registered after (a)/(b) known; one model (also label judge); n=78; LLM prompts state the label rule (hand features don't).
 
@@ -215,3 +216,5 @@
 - 2026-10-24 21:53 UTC P2 iter50 milestone: E130 final Q1.4 D2 citation landed (inconclusive; ask effect+0.39 [+0.06,+0.69], level0.68/pCMI0.60 with CIs spanning chance), pinned source + formatter; claims32/32, offline26/26 commands/33 outputs exact. E113 cache180 games/5 balanced sweeps, no metrics read; direct fidelity/noninterference check176 games passes. Continues awaiting sixth sweep; abstract/TL;DR unchanged.
 
 - 2026-10-24 21:59 UTC P2 iter50 handoff: D2 milestone3aa8e97 pushed; source grid still5/6, real preflight refuses before metrics, no final result/lock. c10 last seller-cache response21:45:48 (process alive; source completion ETA may slip). Ended eligible work after D2 landing per DIRECTION stop-polishing rule rather than waiting on the sibling; next iteration resumes E113 only when six sweeps are announced. Final receipt refresh with pinned D2 files tracked PASS:26/26 commands,33/33 outputs exact, originals unchanged; freshness checked before push. A bookkeeping field-name check failed after completion (originals_unchanged vs original_sources_unchanged); corrected without changing any scientific result.
+
+- 2026-10-25 03:16 UTC P2 iter85 (Codex fallback): read CLAUDE/PLAN/STATUS/DIRECTION and ledger; E133 a–d/review and directive 2 hygiene already complete. Read Q1.4 E73 For-Q2.2 line: joint inference unchanged; serendipity HITS still has no promoted result (latest S42 unpromoted DUD), so no confirmation experiment. Merge STATUS remains Not started. Ended early per DIRECTION 02:15 directive 5; REPORT remains current/frozen, no new calls, analyses, checks or exports. Next: joint-statement re-diff/top freeze 07:30, merge support 08:00.
