@@ -1,14 +1,15 @@
 # STATUS
 
-## Current state (2026-10-25 12:20 UTC, iteration 145) — research frozen; DIRECTION 10:30
+## Current state (2026-10-25 12:30 UTC, iteration 146) — research frozen; DIRECTION 10:30
 - Headline unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc); Qwen combined−action −0.24 [−0.37, −0.09].
-- Merge HEAD `f6f10df` (freeze hold). Diff from `1329a9a`: only Q2.2 hunk = E84 floor ≥ 12 (verified I144). Early judge-style scope read of all Q2.2 text in SUBMISSION (Opus subagent) + 8 slides (own read) → **0 P1** (merge_flags I145).
-- Directives 1–2 complete; 3 done for f6f10df; 4 done early (merge in content freeze); at 14:00–15:00 only diff from f6f10df + check_merge_sources once.
-- No experiments, model calls (besides the reader subagent), metric reruns or exports. REPORT untouched (pin drift = I133 line only).
-- Next: diff-triggered checks on new merge HEADs; 14:00 diff + check_merge_sources; render-only export 16:30; stop by 17:30.
+- Merge HEAD `d523c5b` (+ WT locked-test replay). Q2.2 hunks: kept-row wording fixed ("lower floors do not count as followed", resolves I145 nit); replay metadata. Merge's `locked_test_q22.json` equals our final test JSON to 4 dp → **0 P1** (merge_flags I146).
+- Directives 1–3 ongoing/complete; 4 done early (I145); at 14:00–15:00 only diff from d523c5b + check_merge_sources once.
+- No experiments, model calls, metric reruns or exports. REPORT untouched (pin drift = I133 line only).
+- Next: diff-triggered checks; 14:00 diff + check_merge_sources; render-only export 16:30; stop by 17:30.
 - Risks: exports stale until 16:30.
 
 ## Log
+- 2026-10-25 12:30 UTC P2 iter146: merge f6f10df → d523c5b. Q2.2 hunks = kept-row wording (now matches trivial_floor class) + replay metadata; merge WT locked_test_q22.json replays our locked-test views/contrasts exactly (primary −0.0127 [−0.0913, +0.0642]). 0 P1, merge_flags I146. No REPORT edits, no calls.
 - 2026-10-25 12:20 UTC P2 iter145: merge 1329a9a → f6f10df (iter19–23: E84 floor wording, LLM-usage counts, coverage/test notes). Only Q2.2 hunk already verified I144. Early directive-4 scope read (merge in freeze hold): SUBMISSION Q2.2 text by Opus subagent vs REPORT/JSON, SLIDES by me → 0 P1; one wording nit (trivial-floor 'count as trivially kept') not flagged as P1. merge_flags I145. No REPORT edits, no calls.
 - 2026-10-25 11:55 UTC P2 iter143: merge b1a92f6 → 38e9a96 (committed: Reproducibility/App. A only) + working-tree Q2.2 wording (kept rule, combined_stats/structured definitions, Sonnet 115/115 caveat, Fig. 5 caption, App. B notes) verified vs p2_behaviour.py / auditors.py / labels → 0 P1, merge_flags 143-scope. No REPORT edits, no calls.
 - 2026-10-25 11:40 UTC P2 iter141: merge advanced f5e91e5 → b1a92f6 (iter17 double-rounding audit). Q2.2 hunks M6/M33/M34 verified: the merge's unrounded recomputes round to our stored 3-dp ties (−0.165, −0.405, 0.575) and print correctly at single rounding → 0 P1, merge_flags 141-round. No REPORT edits, no calls.
