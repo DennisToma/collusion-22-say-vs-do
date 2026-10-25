@@ -1,6 +1,6 @@
 # STATUS
 
-## Current state (2026-10-25 07:06 UTC, Phase 2 iteration 108) — following DIRECTION 06:20
+## Current state (2026-10-25 08:10 UTC, iteration 114; top frozen since 07:30) — following DIRECTION 06:20
 - Base headline unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc). E113 Qwen stratified combined−action −0.24 [−0.37, −0.09].
 - E133e (post hoc, 0 calls): no-chat LLM 0.94 vs best raw early-price rule 0.885, Δ +0.06 [+0.02, +0.10]; oriented say-do gap 0.77, pair SD 0.855; LLM 0.96 with posts / 0.91 without, diff CI includes 0.
 - **DIRECTION 06:20 #1 done:** E133 a–e now in `verify_phase2.py` (privileged, c, d `--noprivate`, cluster, e). c/d run cache-only (Q22_CACHE_ONLY raises on a cache miss; llm.chat is also denied). Sibling path via Q22_SIB. Result: **31/31 commands, 38/38 outputs**, originals unchanged; llm_calls.jsonl 137727 → 137727 (0 calls). Ledger row E133-verify.
@@ -8,10 +8,17 @@
 - **#3 done:** `### Changes after 08:00 (for the merge manager)` heading is under the merge block.
 - **For Q1.4 (corrected wording, please use this):** E133e: private say-do consistency forecasts late execution (0.77) but adds nothing beyond early price stability (0.855); an LLM beats the best raw early-price rule (+0.06 [+0.02, +0.10], post hoc), and we find no evidence its edge comes from public messages. This replaces the 04:55 "so not via messages".
 - **For Q1.4 (07:06, iter108):** E133 a–e are in `verify_phase2.py` (31/31 commands, 0 calls). Q2.2 top, one-minute box, merge block and headline numbers are frozen from 07:30 UTC; later changes are logged under REPORT "### Changes after 08:00 (for the merge manager)".
-- Next: 07:30 top freeze; from 08:00 merge support (read collusion-beyond-words STATUS/DIRECTION; flag overstatements per DIRECTION #4); numbers freeze 14:00; exports 16:30.
+- **For merge manager (08:10 UTC, iter114, re SUBMISSION.md v0):** all ~30 Q2.2 numbers checked against our REPORT/JSON: **no wrong numbers.** Four wording fixes (P2, no new numbers):
+  1. §5.3 "−0.30 [−0.44, −0.17] on executed games" → add "(executed under Q1.4's E70 rule)". A Do-not-quote item says no executed count goes without its definition.
+  2. Abstract "public messages add nothing" → "public messages add no detectable value (gains > +0.06 excluded, locked test)". "Nothing" is stronger than our CI. Keep the SALT exception, which is already in the draft.
+  3. §7 "Q2.2's placebo cannot separate delivery from offer" is wrong: the placebo *is* the delivery contrast, it is just unresolved. Use "Q2.2's placebo leaves delivery unresolved (private − placebo +0.38 [−0.41, +1.18], 15 seeds)" (REPORT P2.5, `p2_logbook.json`).
+  4. §5.3 E133 sentence: add the caveat our P2.17 carries. "Post hoc" means the third analysis of the same 78 games; the LLM prompt states the label rule; gpt-6.1-sol also extracted the agreed price. §3 "judge … never prices" holds for labels but not for E133.
+  Correct as written: the say-vs-do table, 0.40 vs 0.88, 0.385/62%, 14/50, 115/115, 0/10+0/10, 0.24 at 5%, 7/10, 9/10 (2/10), notepad/placebo/terse numbers, market spec (12 rounds, 6–30, Nash ≈ 11, monopoly ≈ 19), and verify 31/31. (−0.19/+2.56 are Q1.4 numbers, P2.7.)
+- Next: merge support each iteration (read collusion-beyond-words STATUS/DIRECTION/SUBMISSION, answer asks); numbers freeze 14:00; exports 16:30.
 - Risks: E133e is post hoc, the third analysis of n=78; one model (also the label judge); the no-post stratum is small (23/7).
 
 ## Log
+- 2026-10-25 08:10 UTC P2 iter114: merge manager started (iter1, SUBMISSION v0, uncommitted). Checked every Q2.2 number in it against REPORT: all correct; 4 wording fixes posted above (executed-rule label, "add nothing", placebo limitation, E133 caveat). No calls, no REPORT changes.
 - 2026-10-25 07:37 UTC P2 iter112: DIRECTION 06:20 #1–3 done (iter107/108); top frozen since 07:30. Merge repo still 'Not started' (starts 08:00); Q1.4 posted its 07:30 freeze line, no Q2.2 asks. Idle per #5: no calls, checks or REPORT edits. Next: merge support from 08:00.
 - 2026-10-25 07:21 UTC P2 iter110: DIRECTION 06:20 #1–3 done (iter107/108). Merge repo still 'Not started' (starts 08:00); Q1.4 has no new For-Q2.2 line (latest terms note on TE/qwen-pCMI already mirrored; our REPORT only cites E66 numbers). Idle per #5: no calls, checks or REPORT edits. Next: top frozen 07:30; merge support from 08:00.
 - 2026-10-25 07:04 UTC P2 iter109 (Codex fallback): DIRECTION 06:20 #1–3 already committed in iter107/108; inspected saved reproduction receipt (31/31 commands, 38/38 outputs, originals unchanged), cache-only guards and REPORT reproducibility statement without rerunning checks. Merge repo still Not started; Q1.4 freeze notice unchanged; serendipity S54 DUD/S56 unpromoted context give no confirmation trigger. Per directive 5, REPORT remains current/frozen; no new calls, experiments, metric reruns or exports. Next: 07:30 top freeze, 08:00 merge support.
