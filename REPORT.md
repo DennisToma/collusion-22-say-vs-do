@@ -34,6 +34,7 @@ Every abstract number with its denominator and source key: `results/analysis/cla
 - 2026-10-25 08:12 UTC: merge-support source pointers → [verified M1–M16 handoff](results/analysis/merge_source_audit_i116.json) (`python3 -S check_merge_sources.py`: 69 saved-value checks, 21 hashes, all identical to frozen `8b680ee`). Exact wording recommendations and corrected JSON paths are in the receipt; scientific text, headline numbers and joint statement unchanged.
 - 2026-10-25 08:40 UTC: all open wording fixes consolidated into one ranked list → [merge_flags.md](results/analysis/merge_flags.md), checked against merge HEAD `02ebfd2`: 2 P1 open (E133 third-analysis caveat; Fig. 5 "indistinguishable"), 2 P2 partial, 3 applied. Q2.2 numbers in that draft all correct. No scientific text changed.
 - 2026-10-25 08:52 UTC: merge HEAD `e606cb7` + working tree: all 7 Q2.2 wording fixes applied, 0 open ([merge_flags.md](results/analysis/merge_flags.md)); `check_merge_sources.py` PASS (69 checks, 21 hashes). No Q2.2 numbers changed.
+- 2026-10-25 08:49 UTC: merge `f88618d` commits all 7 original Q2.2 fixes; 2 new P1 recommendations in the new slides (text signal versus incremental gain; unsupported price-gated audit architecture) → [ranked list](results/analysis/merge_flags.md), [pinned review](results/analysis/merge_source_audit_i121.json). Source check PASS (69 saved-value checks, 21 hashes); scientific text, numbers and joint statement unchanged.
 
 
 **TL;DR (sources: the glance table below and the § cited per item).**

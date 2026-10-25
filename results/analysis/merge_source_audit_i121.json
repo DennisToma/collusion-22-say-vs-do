@@ -1,0 +1,87 @@
+{
+  "kind": "read-only committed-merge handoff review; no experiment or metric recomputation",
+  "iteration": 121,
+  "time_utc": "2026-10-25T08:49:47.276364+00:00",
+  "merge_commit": "f88618dfafe97dbd59eb580063369e4dcc0b575d",
+  "reviewed_files": {
+    "SUBMISSION.md": {
+      "sha256": "ac215df4cb227d9fa2837d7f12b0293d2ad6f5e0c776c158a884fcd910912402",
+      "matches_working_tree": true
+    },
+    "SLIDES.md": {
+      "sha256": "416e1541ad3ad064689ae7d6edd678c3a733a874812cb2d5c0db0cbe9fa7a807",
+      "matches_working_tree": true
+    }
+  },
+  "original_fixes": {
+    "114-1": {
+      "status": "applied in committed SUBMISSION",
+      "verified_quote": "executed under Q1.4's rule"
+    },
+    "114-2": {
+      "status": "applied in committed SUBMISSION",
+      "verified_quote": "A zero-shot LLM auditor shows no resolved gain from public messages."
+    },
+    "114-3": {
+      "status": "applied in committed SUBMISSION",
+      "verified_quote": "leaves delivery unresolved (private − placebo +0.38 [−0.41, +1.18])"
+    },
+    "114-4": {
+      "status": "applied in committed SUBMISSION",
+      "verified_quote": "This is the third analysis of the same 78 games; the rule score was fixed after E133c/d"
+    },
+    "115-5": {
+      "status": "applied in committed SUBMISSION",
+      "verified_quote": "CI below 0.5). Text did work on an external negotiation dataset"
+    },
+    "116-1": {
+      "status": "applied in committed SUBMISSION",
+      "verified_quote": "Text did work on an external negotiation dataset (SALT-NLP)"
+    },
+    "116-2": {
+      "status": "applied in committed SUBMISSION",
+      "verified_quote": "difference, not equivalence)."
+    }
+  },
+  "source_check": {
+    "command": "python3 -S check_merge_sources.py",
+    "result": "PASS",
+    "source_groups": 16,
+    "saved_value_checks": 69,
+    "source_hashes": 21,
+    "scope": "Frozen I116 source receipt; does not automatically certify the latest merge text."
+  },
+  "new_text_findings": [
+    {
+      "id": "121-1",
+      "rank": "P1",
+      "status": "open",
+      "file": "SLIDES.md",
+      "line": 71,
+      "current": "- Channel assignment (including its prompt cue) is visible as **how high** prices are — not **how they move together**, and not in **what is said publicly**.",
+      "replacement": "Channel assignment (including its prompt cue) often changes price levels. Adding public text gives no resolved gain in the base market and replications; Qwen public text is informative but inverted for zero-shot auditors.",
+      "reason": "No incremental gain is not absence of a text signal: the resolved Qwen inversion itself identifies channel assignment with the opposite sign. This new slide also contradicts slide 4 and SUBMISSION §5.3.",
+      "report_section": "P2.0 / TL;DR 3 / P2.16",
+      "json_keys": [
+        "results/analysis/p2_strong_eval_llm_p2qwenb.json:detectors.text.auroc_private_vs_none",
+        "results/analysis/p2_strong_eval_llm_p2qwena.json:detectors.text.auroc_private_vs_none"
+      ]
+    },
+    {
+      "id": "121-2",
+      "rank": "P1",
+      "status": "open",
+      "file": "SLIDES.md",
+      "line": 73,
+      "current": "- Practical reading: a cheap level screen against a **model- and prompt-matched** reference as a first-stage *audit trigger*; expensive audits (private logs, dependence statistics, provenance) only on flagged pairs. Not evaluated end to end.",
+      "replacement": "Price screens need model- and prompt-matched references. Our evidence does not support recommending a particular screening architecture; a two-stage audit remains a proposal for evaluation.",
+      "reason": "The new slide recommends private-log/dependence/provenance audits only on price-flagged pairs. REPORT explicitly declines to recommend an architecture; pair-relative screens miss market-wide high prices. Saying the cascade is not evaluated does not support that gate.",
+      "report_section": "TL;DR 7 / P2.7 / Limitations (pair-relative screens)",
+      "json_keys": [
+        "results/analysis/p2_strongF_report_llm_p2strongF.json:markdown (premium flags strict-executed 2/13; descriptive frozen threshold)",
+        "results/analysis/p2_strongF_report_llm_p2strongF.json:E99_P3.paired_excess_private_minus_none"
+      ]
+    }
+  ],
+  "model_calls": 0
+}

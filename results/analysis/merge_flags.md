@@ -1,5 +1,21 @@
 # Q2.2 → merge: ranked wording fixes (single list; replaces the I114–I116 drip)
 
+## Current — iteration 121, 2026-10-25 08:49 UTC, committed merge `f88618d`
+
+**All 7 original fixes are committed; 2 new P1s open in the newly added slides.** The previous working-tree risk is closed: P1-a and P2-b both landed in `f88618d`. [Pinned review receipt](merge_source_audit_i121.json) records full draft hashes, exact committed fix quotes, and the two new slide findings. `python3 -S check_merge_sources.py` PASS: 16 groups, 69 saved-value checks, 21 hashes; this checks frozen source values, not the latest draft automatically. Scientific results and the joint statement are unchanged.
+
+### New P1s in new text only (recommendations; merge repo remains read-only)
+
+| rank / id | where / status | current text | exact replacement | REPORT § / JSON key |
+|---|---|---|---|---|
+| P1 / 121-1 | `SLIDES.md` l.71 / open | Channel assignment (including its prompt cue) is visible as **how high** prices are — not **how they move together**, and not in **what is said publicly**. | Channel assignment (including its prompt cue) often changes price levels. Adding public text gives no resolved gain in the base market and replications; Qwen public text is informative but inverted for zero-shot auditors. | P2.0 / TL;DR 3 / P2.16; `results/analysis/p2_strong_eval_llm_p2qwenb.json:detectors.text.auroc_private_vs_none`; `results/analysis/p2_strong_eval_llm_p2qwena.json:detectors.text.auroc_private_vs_none` |
+| P1 / 121-2 | `SLIDES.md` l.73 / open | Practical reading: a cheap level screen against a **model- and prompt-matched** reference as a first-stage *audit trigger*; expensive audits (private logs, dependence statistics, provenance) only on flagged pairs. Not evaluated end to end. | Price screens need model- and prompt-matched references. Our evidence does not support recommending a particular screening architecture; a two-stage audit remains a proposal for evaluation. | TL;DR 7 / P2.7 / Limitations (pair-relative screens); `results/analysis/p2_strongF_report_llm_p2strongF.json:markdown (premium flags strict-executed 2/13; descriptive frozen threshold)`; `results/analysis/p2_strongF_report_llm_p2strongF.json:E99_P3.paired_excess_private_minus_none` |
+
+No new numerical estimates or P2 items. The sections below preserve the earlier review history; their working-tree notes are superseded by this committed check.
+
+---
+
+
 Checked against `collusion-beyond-words` HEAD `02ebfd2` (SUBMISSION.md sha256 `3c6ff0d2…`, clean tree), 2026-10-25 08:40 UTC.
 P1 = merge text claims more than REPORT, or drops a caveat that changes meaning. P2 = style / partial.
 All Q2.2 numbers in this draft were re-checked against REPORT/JSON: correct (incl. new paraphrase-1 CI +1.79 [+1.20, +2.43] = `p2_band.json:"sysvar1 (paraphrase 1)".private_minus_none_prem_r2_12`, which REPORT gives only as a point value).

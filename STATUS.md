@@ -1,11 +1,12 @@
 # STATUS
 
-## Current state (2026-10-25 08:53 UTC, iteration 120) — research top frozen since 07:30; following DIRECTION 08:23
-- Base headline unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc). E113 Qwen stratified combined−action −0.24 [−0.37, −0.09]. E133e +0.06 [+0.02, +0.10] post hoc.
-- **Merge support: all 7 wording fixes applied, 0 open** (merge HEAD `e606cb7` + uncommitted working tree; P1-a and P2-b exist only in the working tree so far). `results/analysis/merge_flags.md` updated; check_merge_sources PASS 69/21.
-- New Q2.2 text in merge §5.3 (rule-score gloss) matches REPORT P2.17. Table 1 executed pair-level 0.87 is a Q1.4 number, not checked here.
-- Next: on each new merge commit, confirm P1-a/P2-b land in a commit; flag only P1 in new text. No idle commits. Export pass 16:30 (directive 4); hard stop 18:00.
-- Risks: working-tree fixes could be lost if the merge manager resets; fixes are recommendations only (sibling is read-only).
+## Current state (2026-10-25 08:49 UTC, iteration 121) — research frozen; DIRECTION 08:23
+- Headline unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc); Qwen combined−action −0.24 [−0.37, −0.09].
+- Merge `f88618d` commits all 7 original wording fixes; the two previously uncommitted fixes are now durable.
+- New slides: 2 P1 recommendations open (text signal ≠ incremental gain; unsupported price-gated audit architecture), exact replacements + REPORT/JSON pointers in `results/analysis/merge_flags.md`.
+- Verification: check_merge_sources PASS (16 groups / 69 saved-value checks / 21 hashes); committed SUBMISSION + SLIDES hashes and original-fix quotes pinned in `merge_source_audit_i121.json`. No calls or metric reruns.
+- Next: check the next merge commit for these 2 flags, answer asks; no idle commits. One export pass at 16:30; hard stop 18:00.
+- Risks: slide recommendations remain open; source checker authenticates frozen JSON, while draft wording requires manual review.
 
 ## Log
 - 2026-10-25 08:53 UTC P2 iter120: merge advanced to `e606cb7` (+ working-tree edits). Re-checked: P1-b, P2-a applied in HEAD; P1-a (E133 caveat) and P2-b (placebo Limitations) applied in working tree → 0 open. check_merge_sources PASS. merge_flags.md + one REPORT Changes-after-08:00 line. No calls.
@@ -231,3 +232,5 @@
 - 2026-10-25 08:12 UTC P2 iter116 (Codex fallback): merge support source handoff. Checked M1–M16 against saved JSON: 69 value checks, 21 hashes; all source bytes match frozen 8b680ee. New recommendations: SALT positive does not justify "only"; Fig.5 unresolved is not equivalence. Corrected source pointers supplied for M5/M6/M9/M15; prior five recommendations preserved in receipt. `check_merge_sources.py` PASS; saved phase2 reproduction receipt current (31/31 commands, 38/38 outputs), no metrics recomputed. REPORT adds only a dated handoff link; research text and scientific outputs unchanged. No calls/experiments/exports; sibling repos read only.
 
 - 2026-10-25 08:13 UTC P2 iter117 (Codex fallback): read current rules/ledger and merge STATUS/DIRECTION; no new asks. SUBMISSION.md and SOURCES.md SHA256 match the iter116 reviewed drafts exactly; seven wording recommendations remain pending. Ending early under DIRECTION #5 (one idle line/hour); REPORT remains current/frozen, no calls, experiments, metric reruns or exports. Next: merge support, 14:00 numbers freeze, 16:30 export.
+
+- 2026-10-25 08:49 UTC P2 iter121 (Codex fallback): DIRECTION #2 triggered by merge `f88618d`. All 7 original fixes verified in committed SUBMISSION; 69 saved-value checks / 21 source hashes PASS. Reviewed newly added SLIDES only for substantive Q2.2 overclaims: 2 P1s posted with exact replacements in the single ranked list, hashes/quotes pinned in merge_source_audit_i121.json. REPORT Changes-after-08:00 handoff updated; scientific text and joint statement unchanged. No experiment, model call, metric rerun or early export. Ending this bounded merge-support chunk per DIRECTION #5; full 45–60 min research work is superseded by the freeze.
