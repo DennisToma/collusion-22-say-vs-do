@@ -1,9 +1,9 @@
 # STATUS
 
-## Current state (2026-10-25 11:05 UTC, iteration 137) — research frozen; DIRECTION 10:30 (pin discipline)
+## Current state (2026-10-25 10:56 UTC, iteration 138) — research frozen; DIRECTION 10:30 (pin discipline)
 - Headline unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc); Qwen combined−action −0.24 [−0.37, −0.09].
 - Merge pins Q2.2 at `91ffb2d` (now 43 files, plus 4 llm_v3plc/v3rep files, all byte-identical at HEAD). REPORT.md differs from the pin only by the I133 line. No edits to pinned files.
-- Directives 1–2 done (iter135). Directive 3: merge `5ccd0b7` scope-checked. The only Q2.2 hunk is the SALT re-description; the new 0.75 [0.66, 0.84] n=117 matches salt_d1.json → 0 P1 (merge_flags 137-scope). Last checked: `5ccd0b7`.
+- Directives 1–2 done (iter135). Directive 3: merge HEAD still `5ccd0b7`, clean, no new SUBMISSION/SLIDES diff since iter137; 0 open P1 (merge_flags 137-scope). No repeat audit needed.
 - Dennis's TOP PRIORITY (Part C) is all DONE per DIRECTION annotations; no new experiments (freeze).
 - Next: diff-check new merge HEADs only (no commit if no Q2.2 hunk); 14:00–15:00 final scope read (+ check_merge_sources once); 16:30 export pass (render-only); stop by 17:30.
 - Risks: REPORT.html/pdf stale until 16:30; our REPORT l.12/l.89 "deal struck in chat" is less precise than the merge (left as is per pin discipline).
@@ -245,3 +245,5 @@
 - 2026-10-25 10:01 UTC P2 iter130 (Codex fallback): DIRECTION #2 triggered by merge `94c45c0`. Figure 6 correction verified against the one-indexed `late=11` frozen analysis and saved classes (13/20 strict, 19/20 tacit-high); AST comparison proves copied renderer changes only paths/import/threshold text, no plot computation change. Committed PNG visually checked; check_merge_sources PASS (69 saved-value checks, 21 source hashes). Pinned receipt + merge_flags current state + REPORT Changes line; 0 open flags. Own original figure label correction deferred to scheduled 16:30 export. HITS through S64 has no promoted hit, so no confirmation. No calls, new experiment, rendering, metrics or bootstrap reruns; bounded merge-support work supersedes the 45–60 min research chunk under the freeze.
 
 - 2026-10-25 10:03 UTC P2 iter131 (Codex fallback): new merge commits 444fea2/6a295b5 reviewed vs 94c45c0, per DIRECTION #2. Frozen source checker PASS; four E99-x price-view CIs include chance, M33 pooled/within-arm correlations match saved JSON, E133 appendix is a verbatim move. Posted exactly one new P1 (131-1): overlapping class-average prices do not show arbitrary price paths cannot discriminate. REPORT Changes-after-08:00 + pinned receipt updated; all scientific data/estimates unchanged, 0 model calls. Export remains scheduled 16:30.
+
+- 2026-10-25 10:56 UTC P2 iter138 (Codex fallback): read CLAUDE/PLAN/STATUS/DIRECTION and experiment ledger; merge HEAD remains 5ccd0b7, clean, with an empty SUBMISSION/SLIDES diff against the last checked commit. No new scope review, checker rerun, experiment, model call or export. HITS through S67/S66 has no promoted hit; no confirmation under DIRECTION. REPORT remains current/frozen: its diff from pin 91ffb2d is still only the I133 review line. Ending early under the freeze; status-only commit/push follows the explicit iteration request. Next authorized work: a new merge diff, the 14:00–15:00 final scope read, then the 16:30 export. The earlier iter137 log label of 11:05 is retained as history; its commit time is 10:55:44 UTC, preceding this iteration.
