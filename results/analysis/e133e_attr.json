@@ -1,0 +1,145 @@
+{
+ "registration": "EXPERIMENTS.tsv E133e-reg (post hoc robustness, declared before computing)",
+ "llm_calls": 0,
+ "n": 78,
+ "n_pos": 48,
+ "n_neg": 30,
+ "judge_label_sha256": {
+  "llm_grid_p2_c00": "68204e2701b3fb646f9e4644d5d7305179125e14e41a5d9671ed2ad44565805c",
+  "llm_grid_p2_c01": "6070f755d4880b7403cf2c32f6c9d83d4328f91b69d5062eb5a2ca8e80da7f43",
+  "llm_grid_p2_c02": "34dc4e032bed10d6b87dd46403b5143b8924d8ec3e183024c475167c9381086d",
+  "llm_grid_p2_c03": "60ebba2a16406974867c779b677344fcaa2822e75d0cbc52b4cf9c57b1c0cbaf",
+  "llm_grid_p2_c04": "b56396fd9a219aa2351518188653d7ecf4123627c5af12d0415c5f04c49b97ed",
+  "llm_grid_p2_c05": "0158a5e97787301b1cf4090a2ed0943e2fbf84bb60c10866a7331238202bf46f",
+  "llm_grid_p2_c06": "76e3468e3bd2a2ac521bd1786ea21a536c7cfa4b8875a9a4ddb37d845aafe423",
+  "llm_grid_p2_c07": "71482e77fb51e9db3577e0c663a245364df46df8af8a276b65b9e6515dd098ca",
+  "llm_grid_p2_c08": "52dc509922a6d807e98357f37cd2f0f833062b9c2c3e19c7aa6920fa6975eb4e",
+  "llm_grid_p2_c09": "6c4f4dd5b012d504b03153edae93ec0a70a1673a5e33dd45b466934a49b89973",
+  "llm_grid_p2_c10": "3b3659fcb19aeea7442c333c3f57ce80545b9406d526f156f5c35d86063adc58",
+  "llm_grid_p2_c11": "52380a83e6c7d309b2aabde195fe4df23637ce7bc3c99d572944eaed50929afb",
+  "llm_grid_p2_c12": "b90d9bfba594dd854c175379bd330dea29584e472f82c0f4169dc6124378268b",
+  "llm_grid_p2_c13": "e21d82eacf996747c585c13063e1b72be3d01739fe8a25368ff5e1eb5ab7dec3",
+  "llm_grid_p2_c14": "35529ebe137181af53e8b7aaa09eda2ce53f29812e3c4ae9258a9c8a396ea866",
+  "llm_grid_p2_c15": "ffffcf6843f6c732567424987db3733f1b74c36e2edba5596fc3faf4c892d52f"
+ },
+ "a_oriented_auroc_smaller_is_held": {
+  "say_do_gap": [
+   0.77,
+   0.657,
+   0.872
+  ],
+  "defect_share": [
+   0.672,
+   0.542,
+   0.794
+  ],
+  "pair_sd_0_5": [
+   0.855,
+   0.756,
+   0.938
+  ]
+ },
+ "b_raw_auroc": {
+  "neg_pair_sd_0_5": [
+   0.855,
+   0.756,
+   0.938
+  ],
+  "neg_say_do_gap": [
+   0.77,
+   0.657,
+   0.872
+  ],
+  "early_minus_agreed": [
+   0.884,
+   0.795,
+   0.959
+  ],
+  "rule_score": [
+   0.885,
+   0.804,
+   0.951
+  ],
+  "llm_E133d": [
+   0.942,
+   0.89,
+   0.982
+  ],
+  "llm_E133c": [
+   0.926,
+   0.866,
+   0.973
+  ]
+ },
+ "b_llm_E133d_minus_raw": {
+  "neg_pair_sd_0_5": [
+   0.086,
+   0.015,
+   0.169
+  ],
+  "neg_say_do_gap": [
+   0.172,
+   0.079,
+   0.274
+  ],
+  "early_minus_agreed": [
+   0.057,
+   0.01,
+   0.118
+  ],
+  "rule_score": [
+   0.057,
+   0.019,
+   0.103
+  ]
+ },
+ "b_best_raw": "rule_score",
+ "c_public_strata": {
+  "public_posts_r0_5": {
+   "n": 48,
+   "n_pos": 25,
+   "llm_E133d": [
+    0.96,
+    0.904,
+    0.995
+   ],
+   "llm_E133c": [
+    0.937,
+    0.86,
+    0.987
+   ],
+   "rule_score": [
+    0.879,
+    0.779,
+    0.962
+   ]
+  },
+  "no_public_posts_r0_5": {
+   "n": 30,
+   "n_pos": 23,
+   "llm_E133d": [
+    0.913,
+    0.792,
+    0.994
+   ],
+   "llm_E133c": [
+    0.879,
+    0.72,
+    0.988
+   ],
+   "rule_score": [
+    0.885,
+    0.752,
+    0.988
+   ]
+  }
+ },
+ "c_llm_E133d_public_minus_nopublic": [
+  0.047,
+  -0.052,
+  0.167
+ ],
+ "d_rule_score_leave_cell_out_logistic_auroc": 0.786,
+ "d_rule_score_raw_auroc": 0.885,
+ "d_registered_b_oof_for_reference": 0.816
+}

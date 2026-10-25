@@ -414,6 +414,18 @@ def _():
     return "; ".join([v, *[f"{x[0]}/{x[1]}" for x in vals]]), src, "pooled_auroc_channel_vs_none_descriptive.text_qwen; a_text_flag_rate_by_arm_qwen.{1,0}"
 
 
+@claim("C34", "E133e no-chat LLM minus best raw early-price rule score; oriented say-do gap and pair SD AUROC",
+       "+0.06 [+0.02, +0.10]; 0.77; 0.855", "an LLM beats the best price rule (+0.06 [+0.02, +0.10])",
+       "78 Q1.4 E70 grid agreed games (48 held / 30 not); post hoc robustness declared before computing (E133e-reg); paired game bootstrap; 0 LLM calls")
+def _():
+    src = A + "e133e_attr.json"
+    d = pick(src, ())
+    assert d["n"] == 78 and d["b_best_raw"] == "rule_score"
+    o = d["a_oriented_auroc_smaller_is_held"]
+    return "; ".join([ci(d["b_llm_E133d_minus_raw"]["rule_score"]), r(o["say_do_gap"][0]), r(o["pair_sd_0_5"][0], 3)]), src, \
+        "b_llm_E133d_minus_raw.rule_score; a_oriented_auroc_smaller_is_held.{say_do_gap,pair_sd_0_5}[0]"
+
+
 def run():
     text = abstract_text()
     rows = []

@@ -418,5 +418,17 @@
   "key_path": "pooled_auroc_channel_vs_none_descriptive.text_qwen; a_text_flag_rate_by_arm_qwen.{1,0}",
   "status": "OK",
   "in_report_abstract": true
+ },
+ {
+  "id": "C34",
+  "claim": "E133e no-chat LLM minus best raw early-price rule score; oriented say-do gap and pair SD AUROC",
+  "expected": "+0.06 [+0.02, +0.10]; 0.77; 0.855",
+  "denominator": "78 Q1.4 E70 grid agreed games (48 held / 30 not); post hoc robustness declared before computing (E133e-reg); paired game bootstrap; 0 LLM calls",
+  "note": "",
+  "value": "+0.06 [+0.02, +0.10]; 0.77; 0.855",
+  "source": "results/analysis/e133e_attr.json",
+  "key_path": "b_llm_E133d_minus_raw.rule_score; a_oriented_auroc_smaller_is_held.{say_do_gap,pair_sd_0_5}[0]",
+  "status": "OK",
+  "in_report_abstract": true
  }
 ]
