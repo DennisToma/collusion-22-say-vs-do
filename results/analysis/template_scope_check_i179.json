@@ -1,0 +1,30 @@
+{
+  "iteration": 179,
+  "kind": "read-only handoff patch verification; not a new experiment",
+  "merge_commit": "52f3fd8834eba6c3f94758506ead168b3c3950f5",
+  "base_sha256": {
+    "TEMPLATE_REPORT.md": "211e4436b0ca26ea702ed20a85bba149df8b7a3e341693a3bc57b65c170c8c1a",
+    "SLIDES.md": "e7f46fb3e2cd146ce181e16fc9385034d459589f9c8dbc2706644601a60ee91d"
+  },
+  "patched_sha256": {
+    "TEMPLATE_REPORT.md": "af06861c136736c41925912e9a0be2da2b5d17292b3c8cf58f3d4193c171ce3e",
+    "SLIDES.md": "37a182ed234ec0bede90e5b4a10cb7b20b00516267feddf52e8315978dd4fab5"
+  },
+  "patch_sha256": "69b96d41a364506a74ef84e60f23e4a98372100c5c9efbf0055ac08714ce29d5",
+  "changes": {
+    "Q22_open_P1": 2,
+    "Q14_abliteration_locations": 3
+  },
+  "checks": {
+    "apply_check": true,
+    "applied_bytes_exact": true,
+    "reverse_check": true,
+    "reverse_bytes_exact": true,
+    "frozen_result_anchors_preserved": true,
+    "prior_Q14_patch_does_not_apply": true
+  },
+  "scope": "Five sentence replacements already endorsed in I178; merge repository untouched. Does not verify exported PDFs or claim the fixes are committed.",
+  "reviewed_figure_sha256": "0b4f8004de50d8eb726e2dcf4f1bd1a42216371409768fcbb40cac19bacd937a",
+  "reviewed_figure_script_sha256": "39d5ce103ad321b6bea19126fcb2eac990aaa5ce175295c8af44258f8150b074",
+  "verified_at_utc": "2026-10-25 16:57 UTC"
+}

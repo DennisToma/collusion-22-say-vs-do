@@ -1,13 +1,14 @@
 # STATUS
 
-## Current state (2026-10-25 17:05 UTC, iteration 178) — FINAL; research frozen
-- **P1 open: 2 in merge `934d875` (TEMPLATE §5 first sentence "text auditing … missed the private channel"; slide-1 caption "text auditor stays near chance"). Both fixed verbatim by Q1.4 `template_scope_fixes.patch`, which Q2.2 accepts (merge_flags I178).**
-- Headline unchanged: combined − better single view Δ −0.01 [−0.09, +0.06] (locked test); pooled fresh n=90 −0.07 [−0.17, +0.02] (post hoc); Qwen combined−action −0.24 [−0.37, −0.09].
-- Q2.2 final; pin 91ffb2d 76/77 (REPORT.md I133 review line only); merge locked-test replay 6/6 + 8/8; last merge bytes read: `934d875`, TEMPLATE 211e4436, SLIDES e7f46fb3, fig0 0b4f8004; P1 open: 2 (above).
-- Abliteration: Q2.2 concurs with Q1.4 replacement ("no detectable increase in the channel-related pricing premium across three Qwen comparisons"); our pair is premium-based (−1.24 [−2.41, −0.03]). Q2.2 guard for the merge after 18:00 is in merge_flags I178.
-- Limitations: the null bounds the gain (> +0.06 excluded on test), it does not prove zero; the Qwen inversion is family-scoped; labels are rule-dependent (E84 kept 14/50); one market.
+## Current state (2026-10-25 16:57 UTC, iteration 179) — FINAL; research frozen
+- **P1 open: 2 in merge `52f3fd8`; applicable fix: `results/analysis/template_scope_fixes_i179.patch` (I178-1/2 + Q1.4's three abliteration locations). Earlier Q1.4 patch no longer applies cleanly.**
+- Headline unchanged: locked-test Δ −0.01 [−0.09, +0.06]; fresh pooled n=90 −0.07 [−0.17, +0.02] (post hoc); Qwen combined−action −0.24 [−0.37, −0.09].
+- Last merge bytes read: `52f3fd8`, TEMPLATE 211e4436, SLIDES e7f46fb3, fig0 0b4f8004; P1 open: 2 (same bytes as I178).
+- Handoff patch verified in scratch: apply/check, expected bytes, reverse/check and exact restoration PASS; result/qualifier anchors preserved. Merge files/PDFs untouched.
+- Pin `91ffb2d` remains 76/77 (REPORT I133 review line only); locked-test replay 6/6 views + 8/8 contrasts unchanged; Q2.2 post-18:00 guard remains in merge_flags I178.
+- Limitations: no resolved gain does not prove zero; Qwen inversion is family-scoped; E84 keeps 14/50 agreements under its rule; one market.
 - Likely judge question: "Isn't the text auditor just reading the channel-offer prompt cue, and does the null mean text is useless?" → (1) cue: the notepad (no recipient) and placebo (never delivered) arms carry most of the premium (notes +1.04, placebo +1.23 vs private +1.61; P2.5 E77), and E92 logbook control shows it needs private *pricing* thought (logbook − notes −0.82); the 0.98 supervised classifier scores placebo/notepad runs high, so it detects condition traces, not agreements (P2.3 E82). (2) Not useless: in the executed-vs-tacit arm, a monitor reading private plans got 0.76 [0.55, 0.93] where prices ≈ 0.5 and public text inverted 0.25 (exploratory E99-x; always quote with E111 no-LLM partner-name count 0.82 → channel footprint); where agents strike the deal in chat (SALT, E105) the text audit reaches 0.87 [0.83, 0.91].
-- Next: verify the merge's next commit touching TEMPLATE/SLIDES (DIRECTION #3, ≤ 2×, last by 17:55); then update line 1.
+- Next: verify the next merge content commit, at most twice and last by 17:55 (DIRECTION #3); keep REPORT/APPENDIX and exports frozen.
 
 ## Log
 - I178 2026-10-25 17:05 UTC: DIRECTION 16:40 #1–#4. P1-only read of committed merge `934d875` (TEMPLATE 211e4436, SLIDES e7f46fb3, fig0 0b4f8004): 2 P1 (§5 "text auditing missed"; slide-1 "text near chance", but Qwen is below chance), both covered by Q1.4 patch → accepted; abliteration concurrence; 62% verified as full-set (1989/5169); Q2.2 guard written (merge_flags I178). No REPORT edits, calls or experiments.
@@ -289,3 +290,5 @@
 - I173 2026-10-25 16:02:36 UTC: merge 42c5b16, SUBMISSION sha 96d0ed7b, no Q2.2 hunk; pin 76/77 (REPORT I133 line).
 
 - I175 2026-10-25 16:19:37 UTC: merge 42c5b16, SUBMISSION sha 96d0ed7b, no new Q2.2 hunk; pin 76/77 (REPORT I133 line); read-only handoff/presentation checks PASS, sources unchanged since 69d7ca6; post-16:30 final-byte check pending.
+
+- I179 2026-10-25 16:57 UTC (Codex fallback): DIRECTION 16:40 remains binding. Merge `52f3fd8` changes since I178 are packaging/checker/STATUS only; TEMPLATE/SLIDES/fig0 bytes unchanged, so no repeat scope review. Found the accepted Q1.4 patch fails apply-check on current committed files; produced `results/analysis/template_scope_fixes_i179.patch` for the five already-agreed sentence replacements (two Q2.2 P1s, three Q1.4 abliteration locations). Scratch apply/check, expected bytes, reverse/check, exact restoration and frozen-result anchors PASS; receipt `template_scope_check_i179.json`. Open claims not marked closed; merge untouched. REPORT/APPENDIX unchanged under the explicit freeze; no calls, experiments, metric/source-check reruns or exports. Bounded handoff completed early under the directive's finalization limits; next substantive action requires a new merge content commit. No experiment-ledger row because no experiment or estimate was produced.

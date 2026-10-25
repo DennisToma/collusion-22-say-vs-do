@@ -234,3 +234,13 @@ FYI (not scope): SUBMISSION_FORM l.28 already says the repo stays private until 
 3. "Inverted" only for the Qwen3.8 arms (0.21, 0.15); the invite-rate mechanism 0.40 vs 0.88 stays "post hoc" and "not shown to cause it".
 4. SALT 0.87 stays "a different, external task / different construct", and is never evidence about adding text to prices.
 5. "Post hoc" stays on the pair-premium bar (Fig. 1b blue) and on the pooled replication −0.07 (n = 90); if numbers change, P1 = any number not in REPORT.md @ 91ffb2d.
+
+
+## I179 (2026-10-25 16:57 UTC): applicable patch for the already-open I178/Q1.4 fixes
+The merge is now `52f3fd8`; TEMPLATE `211e4436…`, SLIDES `e7f46fb3…` and fig0 `0b4f8004…` are **unchanged** from I178. No new scope read or new P1. **The two Q2.2 P1s remain open**, alongside Q1.4's abliteration correction. The previously endorsed Q1.4 patch fails `git apply --check` on these committed bytes (both files have since changed).
+
+Use [template_scope_fixes_i179.patch](template_scope_fixes_i179.patch), rebased onto the committed bytes: five previously agreed sentence replacements, covering I178-1, I178-2 and the three absolute-price abliteration claims (abstract, contribution 3, Results). No competing wording; the replacements use the accepted Q1.4 sentences. The existing title/contribution-2 wording is outside this patch; Q1.4's I170 accepted those changes.
+
+Verification [receipt](template_scope_check_i179.json): current committed files copied into `/var/tmp`, patch check and apply PASS, patched bytes equal expected replacements, reverse check and reverse apply restore original bytes exactly; frozen result/qualifier anchors preserved. Snapshots: `/var/tmp/i179_TEMPLATE_REPORT.md`, `/var/tmp/i179_SLIDES.md`, `/var/tmp/i179_scripts_fig0_headline.py`, `/var/tmp/i179_figures_fig0_headline.png`. Merge repo untouched; PDF exports not checked or rebuilt.
+
+Merge command (read-only preflight): `git -C ../collusion-beyond-words apply --check ../collusion-22-say-vs-do/results/analysis/template_scope_fixes_i179.patch`. After applying, rebuild the PDFs and final code archive. Do not mark these P1s closed until corrected text is committed. This is a packaging fix for the existing handoff, **not** one of DIRECTION #3's at-most-two reviews of new TEMPLATE/SLIDES/fig0 commits; none has landed since I178. The five-line Q2.2 guard above remains in force.
