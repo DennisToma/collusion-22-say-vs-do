@@ -1,6 +1,20 @@
 # Q2.2 → merge: ranked wording fixes (single list; replaces the I114–I116 drip)
 
-## Current — iteration 121, 2026-10-25 08:49 UTC, committed merge `f88618d`
+## Current — iteration 123, 2026-10-25 09:15 UTC, merge `f88618d` + uncommitted working tree
+Draft hashes: SUBMISSION.md sha256 `16303443…`, SLIDES.md `645defc9…`. `python3 -S check_merge_sources.py` PASS (16 groups, 69 saved-value checks, 21 hashes). All new Q2.2 numbers in the working tree match JSON (luna silent +0.12 [−0.08, +0.32] = `e113_secondary.json:stratified.executed_vs_A.luna_silent_combined_minus_action_posthoc`; sol text 0.17 [0.01, 0.41] = `p2_family3way.json:llm_p2sol.views.text.auroc_private_vs_none`, which **REPORT does not state**).
+
+| rank / id | where / status | current text | exact replacement | REPORT § / JSON key |
+|---|---|---|---|---|
+| P1 / 121-1 | `SLIDES.md` §6 / **applied** (working tree) | "…we detect no contemporaneous co-movement, and a zero-shot auditor gains nothing resolved from public messages (small gains not excluded)" | – | P2.0 / TL;DR 1 |
+| P1 / 121-2 | `SLIDES.md` §6 "Practical reading" / **open** (SUBMISSION's hedged "could … serve … (not evaluated end to end)" is fine) | "Practical reading: a cheap level screen … as a first-stage *audit trigger*; expensive audits … only on flagged pairs. Not evaluated end to end." | "Price screens need model- and prompt-matched references; a two-stage audit (level screen, then private logs / dependence / provenance) is a proposal we did not evaluate." | TL;DR 7 / P2.7 / Limitations |
+| P1 / 123-1 | `SUBMISSION.md` §5.3 E113 paragraph, new last sentence / open | "In these markets public text resolvedly hurt the auditor (Qwen) and nowhere resolvedly helped." | "In these markets public text resolvedly hurt the auditor (Qwen); no gain could be credited to text (the luna executed-game gain also appears in cells without public posts)." — REPORT says "cannot be credited to text", not that text never helped: the posting luna cells give +0.19 [+0.06, +0.33] (post hoc). | P2.16 E113-secondary; `e113_secondary.json:stratified.executed_vs_A.luna_posting_combined_minus_action_posthoc` |
+| P1 / 123-2 | `SUBMISSION.md` §5.3 *Inversion* parenthesis / open | "(a gpt-6.1-sol seller arm with 0/7 private agreements is also inverted, 0.17 [0.01, 0.41], so inversion does not require an agreement)" | "(post hoc, not in the Q2.2 REPORT text: a gpt-6.1-sol seller arm with 0/7 private agreements also scores 0.17 [0.01, 0.41], 7 + 7 markets, so inversion need not involve an agreement)" — or drop it. The number is correct, but REPORT never interprets it; at n = 7 + 7 it supports "need not", not "does not require". Add the JSON key to SOURCES.md. | P2.6 table (sol row: text flags 3/21, location 0/0/21); `p2_family3way.json:llm_p2sol.views.text.auroc_private_vs_none` |
+
+Other new Q2.2 text checked, no flag: abstract executed definition (48/149), glossary "Executed", slide invite rate 0.40 vs 0.88 (post hoc), placebo − private +0.03 [−0.54, +0.49], slide sample-size line, 1% prevalence "max 0.20" (Q1.4 number, not checked here).
+
+---
+
+## Superseded — iteration 121, 2026-10-25 08:49 UTC, committed merge `f88618d`
 
 **All 7 original fixes are committed; 2 new P1s open in the newly added slides.** The previous working-tree risk is closed: P1-a and P2-b both landed in `f88618d`. [Pinned review receipt](merge_source_audit_i121.json) records full draft hashes, exact committed fix quotes, and the two new slide findings. `python3 -S check_merge_sources.py` PASS: 16 groups, 69 saved-value checks, 21 hashes; this checks frozen source values, not the latest draft automatically. Scientific results and the joint statement are unchanged.
 
