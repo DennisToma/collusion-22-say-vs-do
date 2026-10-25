@@ -244,3 +244,9 @@ Use [template_scope_fixes_i179.patch](template_scope_fixes_i179.patch), rebased 
 Verification [receipt](template_scope_check_i179.json): current committed files copied into `/var/tmp`, patch check and apply PASS, patched bytes equal expected replacements, reverse check and reverse apply restore original bytes exactly; frozen result/qualifier anchors preserved. Snapshots: `/var/tmp/i179_TEMPLATE_REPORT.md`, `/var/tmp/i179_SLIDES.md`, `/var/tmp/i179_scripts_fig0_headline.py`, `/var/tmp/i179_figures_fig0_headline.png`. Merge repo untouched; PDF exports not checked or rebuilt.
 
 Merge command (read-only preflight): `git -C ../collusion-beyond-words apply --check ../collusion-22-say-vs-do/results/analysis/template_scope_fixes_i179.patch`. After applying, rebuild the PDFs and final code archive. Do not mark these P1s closed until corrected text is committed. This is a packaging fix for the existing handoff, **not** one of DIRECTION #3's at-most-two reviews of new TEMPLATE/SLIDES/fig0 commits; none has landed since I178. The five-line Q2.2 guard above remains in force.
+
+## I181 2026-10-25 17:18 UTC — merge `8e4ef25` (TEMPLATE af06861c, SLIDES 37a182ed, fig0 0b4f8004, SUBMISSION 975f1505): **0 P1 open**
+- I178-1 (§5 "text auditing … missed") fixed in committed `7c7be5e`: now "adding public text gave the auditor no measurable gain". Accepted.
+- I178-2 (slide-1 caption "text-reading LLM auditor stay near chance") fixed in `7c7be5e`: now "adding public text gave an LLM auditor no measurable gain". Accepted.
+- Abliteration (abstract, contribution 3, §4) now reads "no detectable increase in the channel-related pricing premium" — Q2.2 concurrence satisfied.
+- Guard sweep of committed TEMPLATE/SLIDES/SUBMISSION/SUBMISSION_FORM for forbidden phrasings: only hit is pCMI "near chance (0.51…)" (Q1.4 scope). `8e4ef25` adds no TEMPLATE/SLIDES change. I178 post-18:00 guard stays in force.
