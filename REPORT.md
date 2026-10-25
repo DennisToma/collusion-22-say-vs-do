@@ -3,6 +3,14 @@
 *Apart AI Collusion Sprint, Q2.2 — text + action auditing. v1 (overnight) results are frozen as git tag `v1-overnight`;
 Phase 2 (from 2026-10-24 06:30 UTC) re-tests them. Results current 2026-10-24 22:31 UTC: P2.1–P2.16 final; E113 audited all 192 Q1.4 grid games and evaluated once. P2.7 distinguishes frozen execution rules; Q1.4 D2 is final and inconclusive (P2.12). E102 (strong-framing Qwen, 6 seeds) is descriptive. Exports: [README.md](README.md).*
 
+**Key findings in one minute** (plain language; every number is from the text below; "channel" = private channel, the public board exists in all arms)
+- Adding public messages to prices does not help a zero-shot LLM auditor: −0.01 AUROC (locked test), −0.07 (fresh replications).
+- On Q1.4's Qwen grid adding text hurts: combined minus prices −0.24, and still −0.30 on games executed under Q1.4's rule.
+- Text auditors can rank control markets *above* channel markets (AUROC 0.15–0.36): Qwen channel sellers invite rivals publicly less (0.40 vs 0.88 of messages).
+- The price premium replicates (0.94 AUROC) but is partly a prompt effect: an unread notepad gives 65% of the channel's premium.
+- High prices need no channel: with memory and profit framing, 19/20 no-channel markets price ≥ Nash + 2.
+- Text does work where the deal is struck in the chat itself (SALT negotiations, AUROC 0.87).
+
 ## Abstract
 Adding LLM sellers' public messages to prices gives **no resolved gain in our base market and two fresh replications**: combined minus the better single view is −0.01 [−0.09, +0.06] (locked
 test, n = 95) and −0.07 [−0.17, +0.02] (fresh pooled post hoc, n = 90). In the base market, four gpt-6-luna sellers (one pair offered private chat) face zero-shot gpt-6.1-sol auditors reading text, prices, or both. In Q1.4's 8-cell Qwen-3.6 grid, where prices alone are at chance (pooled 0.52 [0.41, 0.64]), adding inverted text lowers AUROC (stratified Δ combined − action −0.24 [−0.37, −0.09]).
@@ -27,7 +35,7 @@ Every abstract number with its denominator and source key: `results/analysis/cla
 2. *The premium replicates (0.94 [0.87, 0.99], 60 fresh runs: 30 private / 20 none / 10 legit) but is confounded* by the pricing notepad,
    wording and legitimate cost/quality edges (P2.10); a round-1-only premium already reaches 0.90 [0.83, 0.96] test AUROC. Quote it only with these.
 3. *Text can be inverted:* for families that invite rivals publicly in control markets too (Claude, deepseek, Qwen), text views rank controls *above* channel markets on point estimates (run AUROC 0.15–0.36; CI below 0.5 only for the two Qwen-3.8 arms, and for the Qwen-3.6 grid, P2.16, including executed games under Q1.4's E70 rule, 0.36 [0.26, 0.46]). Where a family talks decides what text can see: in our base market luna talks only in private (in Q1.4's grid it posts publicly in 5/8 cells, P2.16; under strong framing 43% of its no-channel public messages match a hold-price regex, P2.7, post hoc); Claude, deepseek and Qwen also in public (text views flag
-   100% of their control markets); gpt-6.1-sol proposed coordination in 0/7 private markets. SALT: P(said | executed) 0.385, yet a text auditor reaches 0.87 on 240 sampled episodes (120 executed; 0.81 without a judged agreement; P2.12), one external bilateral negotiation where chat is the main action channel.
+   100% of their control markets). Mechanism (E132, post hoc): Qwen channel sellers still post every round but invite rivals publicly less often (invite-regex rate 0.40 vs 0.88 controls, Qwen3.8 base; 0.18 vs 0.29 Qwen-3.6 grid), and text scores track that rate (Spearman 0.41–0.74, CI > 0, three Qwen sets); for deepseek (regex saturated, 1.00 both arms) and Claude (n = 10) the mechanism is not established (appendix E132); gpt-6.1-sol proposed coordination in 0/7 private markets. SALT: P(said | executed) 0.385, yet a text auditor reaches 0.87 on 240 sampled episodes (120 executed; 0.81 without a judged agreement; P2.12), one external bilateral negotiation where chat is the main action channel.
 4. *Labels disagree:* 14/50 test agreements are kept (E84 follow rule); on the kept label the premium falls to 0.80 [0.67, 0.90] (test) / 0.76 [0.64, 0.86]
    (pooled fresh) and text + actions shows no resolved gain (−0.03 [−0.14, +0.06] test; −0.03 [−0.13, +0.06] pooled).
 5. *High prices need no channel:* with memory + profit framing 19/20 no-channel markets price ≥ Nash + 2 and 13/20 channel pairs are

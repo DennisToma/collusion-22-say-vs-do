@@ -851,3 +851,15 @@ but 6/20 none. Behaviour labels replicate P2.4: 12/30 pairs keep their floor, 16
 no detector resolvably separates kept from abandoned agreements (premium 0.50, text 0.51, combined 0.57 AUROC). The premium AUROC
 falls from 0.94 to 0.78 [0.64, 0.90] on the kept label. Caveat: the replication reuses the generator, prompt and seller
 model, so it addresses selection-after-seeing-test bias, not the prompt and family dependence in P2.5–P2.7.
+
+## E132 Inversion mechanism: public invitations by arm (exploratory, post hoc; zero calls)
+
+Frozen public-invitation regex (`p2_family3way.RX`) on saved public messages; frozen gpt-6.1-sol text scores. Pre-committed rule: mechanism clause iff channel-arm invite rate < control AND pooled Spearman(text score, invites) > 0. It holds for the three Qwen sets and fails for deepseek; Claude (n = 10) is inconclusive. The 'fewer invites ⇒ channel' AUROC is a post hoc illustration whose direction was chosen after seeing the inversion, not a validated detector. The association is mainly between arms: within controls alone Spearman is mixed (−0.41 to +0.48 for Qwen3.8; +0.33 [0.03, 0.57] on the grid), so the regex rate does not fully explain within-arm score variation. Source: `results/analysis/e132_inversion.json` (`uv run python p2_e132_inversion.py`).
+
+| family / set | runs (A/C) | public msgs/run A, C | invite rate A vs C | Spearman text~invites, pooled | within controls | AUROC fewer invites | text auditor AUROC |
+|---|---|---|---|---|---|---|---|
+| Claude Sonnet | 5/5 | 48, 48 | 1.00 vs 0.88 | 0.14 [-0.58, 0.75] | constant | 0.80 [0.60, 1.00] | 0.22 [0.00, 0.54] |
+| deepseek | 15/15 | 48, 48 | 1.00 vs 1.00 | -0.08 [-0.21, -0.02] | -0.07 [-0.20, -0.07] | 0.47 [0.40, 0.50] | 0.36 [0.20, 0.52] |
+| Qwen3.8 base | 15/15 | 48, 48 | 0.88 vs 0.40 | 0.49 [0.17, 0.71] | -0.41 [-0.83, 0.18] | 0.99 [0.95, 1.00] | 0.21 [0.11, 0.34] |
+| Qwen3.8 abliterated | 15/15 | 48, 48 | 0.86 vs 0.49 | 0.74 [0.49, 0.89] | 0.48 [-0.08, 0.84] | 0.90 [0.76, 1.00] | 0.15 [0.04, 0.27] |
+| Qwen3.6 E70 grid (8 cells) | 48/48 | 80, 80 | 0.29 vs 0.18 | 0.41 [0.21, 0.56] | 0.33 [0.03, 0.57] | 0.72 [0.62, 0.82] | 0.32 [0.24, 0.42] |
