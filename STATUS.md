@@ -1,14 +1,15 @@
 # STATUS
 
-## Current state (2026-10-25 16:25 UTC, iteration 174) — FINAL; research frozen
+## Current state (2026-10-25 16:55 UTC, iteration 176) — FINAL; research frozen
 - Headline unchanged: combined − better single view Δ −0.01 [−0.09, +0.06] (locked test); pooled fresh n=90 −0.07 [−0.17, +0.02] (post hoc); Qwen combined−action −0.24 [−0.37, −0.09].
-- Q2.2 final at `2700083`+I174; pin 91ffb2d 76/77 (REPORT.md I133 review line only); merge locked-test replay 6/6 + 8/8; last merge bytes read: merge `42c5b16`, SUBMISSION sha 96d0ed7b…, 0 P1 (merge 16:30 finalize not landed yet; the one final diff is still due under DIRECTION #3).
+- Q2.2 final at `8c0683f`+I176; pin 91ffb2d 76/77 (REPORT.md I133 review line only); merge locked-test replay 6/6 + 8/8; **last merge bytes read: final merge `f23c1c2` (iter50 finalize OK), SUBMISSION sha d473327e…, TEMPLATE_REPORT 86c0f92e…, 0 P1** (2 optional P2 nits, merge_flags I176).
 - 16:17 freshness check (DIRECTION #3): build_handoff --check PASS, build_presentation --check PASS, REPORT/APPENDIX/presentation sources unchanged since 69d7ca6 → no re-export.
 - Limitations: the null bounds the gain (> +0.06 excluded on test), it does not prove zero; the Qwen inversion is family-scoped; labels are rule-dependent (E84 kept 14/50); one market.
 - Likely judge question: "Isn't the text auditor just reading the channel-offer prompt cue, and does the null mean text is useless?" → (1) cue: the notepad (no recipient) and placebo (never delivered) arms carry most of the premium (notes +1.04, placebo +1.23 vs private +1.61; P2.5 E77), and E92 logbook control shows it needs private *pricing* thought (logbook − notes −0.82); the 0.98 supervised classifier scores placebo/notepad runs high, so it detects condition traces, not agreements (P2.3 E82). (2) Not useless: in the executed-vs-tacit arm, a monitor reading private plans got 0.76 [0.55, 0.93] where prices ≈ 0.5 and public text inverted 0.25 (exploratory E99-x; always quote with E111 no-LLM partner-name count 0.82 → channel footprint); where agents strike the deal in chat (SALT, E105) the text audit reaches 0.87 [0.83, 0.91].
-- Next: after merge finalize lands, one diff of final SUBMISSION/SLIDES vs 96d0ed7b, filtered for Q2.2 terms; then act only on a merge error naming Q2.2.
+- Next: nothing. The final merge diff is done (DIRECTION #3). Act only if a merge error names Q2.2.
 
 ## Log
+- I176 2026-10-25 16:55 UTC: merge finalize landed `f23c1c2` (Apart TEMPLATE_REPORT, headline Fig. 1, new title). Scope-read the Q2.2 hunks vs I160 bytes: all numbers already verified; new caption/selection/label claims checked vs labels.jsonl, test JSON, llm_market.py → 0 P1, 2 optional P2 (merge_flags I176). SUBMISSION sha d473327e. No REPORT edits, calls or exports.
 - I174 2026-10-25 16:25 UTC: merge 42c5b16, SUBMISSION sha 96d0ed7b, no Q2.2 hunk; pin 76/77 (REPORT I133 line); DIRECTION #3 freshness checks PASS (no re-export); final state block + judge-question line written (#4/#5).
 - I172 2026-10-25 16:03 UTC: merge 42c5b16, SUBMISSION sha 96d0ed7b, no Q2.2 hunk; pin 76/77 (REPORT I133 line).
 - I171 2026-10-25 15:45 UTC: merge 31cf60e, SUBMISSION sha 96d0ed7b, no Q2.2 hunk; pin 76/77 (REPORT I133 line).

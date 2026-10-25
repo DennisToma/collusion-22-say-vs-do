@@ -202,3 +202,17 @@ check_merge_sources PASS (16/16 groups, 69 checks, 21 hashes). Merge working tre
 | §5.3: say–do consistency forecasts kept agreements (AUROC 0.77), three hand-built features in one logistic model add nothing beyond early price stability | REPORT P2.17 / `e133e_attr.json` (oriented gap 0.77), `e133_privileged.json` (3 features, Δ −0.05) | correct; the scope matches REPORT |
 | E132: "association comes mainly from the arm difference" | `e132_inversion.json` | correct (softer than before) |
 Working tree (uncommitted): only the evidence bundle and release-check text, no Q2.2 numbers → nothing to check.
+
+## I176 (2026-10-25 16:5x UTC): final merge bytes `f23c1c2` (iter50 finalize OK; WT clean)
+Read: SUBMISSION.md sha256 d473327e…, TEMPLATE_REPORT.md 86c0f92e…, SLIDES.md e297f700…, figures/fig0_headline.png 490527aa…
+Q2.2 hunks vs I160/`42c5b16`: new title + Figure 1 caption (SUBMISSION/SLIDES), new TEMPLATE_REPORT.md (Apart template, 185 lines). **0 P1.**
+| claim | source | verdict |
+|---|---|---|
+| All Q2.2 numbers in TEMPLATE_REPORT (Table A2, 0.40 vs 0.88, 62%, 0.65 [0.34, 1.32], 7/10, 9/10, 2/10, 14/50, −0.01, −0.07, 0.87) | already in verified `42c5b16` SUBMISSION | correct |
+| Fig. 1(b) say-vs-do premium 0.95 / text 0.47 [0.36, 0.58] | `final_llm_v3_gpt-6.1-sol_test.json` point_ci (0.948 [0.904, 0.980]; 0.472 [0.365, 0.581]) | correct |
+| "positives … on this split are exactly the channel runs" | labels.jsonl test: 50 private positive (48 explicit + 2 info), 30 none + 15 legit negative | correct |
+| Fig. 1(a) median run per arm, llm_v3rep | `scripts/fig0_headline.py` (fixed rule, pinned data) | correct |
+| Nash ≈ 11, joint ≈ 19; prompt verbatim | REPORT l.178; `llm_market.py` l.95 | correct |
+| Sonnet re-judge "agreed on binary, weakly on three classes" | REPORT E74 (115/115; 3-class κ 0.33) | correct |
+| Strong framing "channel added no detectable premium" | REPORT l.218 paired private − none −0.44 [−1.84, +1.00] (market price) | correct; P2 nit: the measure is market price, not pair premium (SUBMISSION says "price") |
+| Fig. 1(b) plots the pair premium as the say-vs-do level screen | REPORT "do not quote the pair premium as a detector (prompt-confounded)" | P2: the caption says "chosen post hoc" and the text gives the notepad confound (two-thirds) → acceptable |
