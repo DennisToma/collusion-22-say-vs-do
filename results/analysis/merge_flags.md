@@ -110,3 +110,14 @@ check_merge_sources PASS (16/16 groups, 69 checks, 21 hashes). Merge working tre
 | §5.3 SALT "in the full dataset (5169 executed episodes), 62% carry no explicit agreement" | 1 − 1989/5169 = 0.615 | `salt_d1.json`, REPORT P2.12 | correct |
 | Glossary C − A: "Q2.2 contrasts use the designated-pair premium" | — | REPORT P2.5 / Table P2.5 | correct |
 | Label table: strict-executed "for the strong-framing arm"; SLIDES placebo "no resolved difference … not equivalence"; "≈ ⅔ … vs no channel" | 13/20; +0.03 [−0.54, +0.49]; 0.65 [0.34, 1.32] | as in I127 | correct (codex_v2 items applied as checked in I127) |
+
+## I133 (2026-10-25 10:21 UTC): merge HEAD `3360cfa` (from `6a295b5`; iter7 v1.5 scope fixes + iter8 reproducibility/README)
+**131-1 applied** (`d784e17`): Fig. 6 caption now "the tested price views show no resolved separation (AUROC 0.43–0.58, all CIs include 0.5; exploratory), which does not establish that price paths are indistinguishable" → **0 open**. check_merge_sources PASS (16/16 groups, 69 checks, 21 hashes). New/changed Q2.2 text checked, all correct, no new flag:
+| merge text | our source | verdict |
+|---|---|---|
+| Fig. 6: price views strict-executed vs tacit-high 0.43–0.58, CIs include 0.5 | `p2_strong_eval_llm_p2strongF.json:detectors.{premium 0.474, market_excess_nash 0.500, action 0.575, action_stats 0.429}.auroc_strict_vs_tacit_high`, all CIs ∋ 0.5 | correct (REPORT table rounds action to 0.57; 0.575 → 0.58 also fine) |
+| Glossary: Q2.2 locked test "had four disclosed exposures … locked but not fully blind" | REPORT Held-out discipline l.661 | correct |
+| Abstract: "a post hoc pair premium in Q2.2" | REPORT l.661 lists "premium choice" as a disclosed exposure; registered replication P2.8 | acceptable |
+| §5.3: say–do consistency forecasts kept agreements (AUROC 0.77), three hand-built features in one logistic model add nothing beyond early price stability | REPORT P2.17 / `e133e_attr.json` (oriented gap 0.77), `e133_privileged.json` (3 features, Δ −0.05) | correct; the scope matches REPORT |
+| E132: "association comes mainly from the arm difference" | `e132_inversion.json` | correct (softer than before) |
+Working tree (uncommitted): only the evidence bundle and release-check text, no Q2.2 numbers → nothing to check.
