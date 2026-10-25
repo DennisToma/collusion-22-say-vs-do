@@ -1,14 +1,14 @@
 # STATUS
 
-## Current state (2026-10-25 10:56 UTC, iteration 138) — research frozen; DIRECTION 10:30 (pin discipline)
+## Current state (2026-10-25 11:20 UTC, iteration 139) — research frozen; DIRECTION 10:30 (pin discipline)
 - Headline unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc); Qwen combined−action −0.24 [−0.37, −0.09].
-- Merge pins Q2.2 at `91ffb2d` (now 43 files, plus 4 llm_v3plc/v3rep files, all byte-identical at HEAD). REPORT.md differs from the pin only by the I133 line. No edits to pinned files.
-- Directives 1–2 done (iter135). Directive 3: merge HEAD still `5ccd0b7`, clean, no new SUBMISSION/SLIDES diff since iter137; 0 open P1 (merge_flags 137-scope). No repeat audit needed.
-- Dennis's TOP PRIORITY (Part C) is all DONE per DIRECTION annotations; no new experiments (freeze).
-- Next: diff-check new merge HEADs only (no commit if no Q2.2 hunk); 14:00–15:00 final scope read (+ check_merge_sources once); 16:30 export pass (render-only); stop by 17:30.
-- Risks: REPORT.html/pdf stale until 16:30; our REPORT l.12/l.89 "deal struck in chat" is less precise than the merge (left as is per pin discipline).
+- Merge HEAD `f5e91e5` (new §9 Conclusion + LLM-usage statement): scope-checked → 0 P1 (merge_flags 139-scope). Manifest q22: 46 files pinned at `91ffb2d`; 45/46 byte-identical at HEAD, only REPORT.md differs (I133 line). No edits to pinned files.
+- Directives 1–2 done (iter135); directive 3 running per merge HEAD. No new experiments (freeze).
+- Next: diff-check new merge HEADs (no commit if no Q2.2 hunk); 14:00–15:00 final scope read (+ check_merge_sources once); 16:30 export pass (render-only); stop by 17:30.
+- Risks: REPORT.html/pdf stale until 16:30; our REPORT l.12/l.89 "deal struck in chat" less precise than merge (left per pin discipline).
 
 ## Log
+- 2026-10-25 11:20 UTC P2 iter139: merge advanced 5ccd0b7 → f5e91e5 (iter14–16). Diff-triggered scope check: only SUBMISSION changed; Q2.2 hunk = §9 Conclusion ("no resolved gain"; high prices via prompt cues/notepad/memory+profit; flag ≠ agreement) — consistent with REPORT box, l.10–11, P2.5, Limitations → 0 P1. Manifest q22 46 files: 45/46 identical at HEAD (REPORT.md = I133 line only). merge_flags 139-scope/139-pin. No REPORT edits, no calls.
 - 2026-10-25 11:05 UTC P2 iter137: merge advanced ce0fd42 → 5ccd0b7. Diff-triggered scope check: Q2.2 hunks are SALT only. New subset AUROC 0.75 [0.66, 0.84] n=117 verified vs salt_d1.json E105_audit.auroc_no_verdict_words; peer-verification description matches salt_d1.py. 0 P1 → merge_flags 137-scope/137-src. No REPORT edits, no calls.
 - 2026-10-25 10:52 UTC P2 iter135: DIRECTION 10:30 #1–3. merge_flags.md top rows 135-pin (REPORT drift = I133 line only; re-pin optional), 135-fig (P2.7 label fixed, figure re-rendered, unpinned files), 135-scope (merge ce0fd42 + WT SALT wording checked vs salt_d1.py → 0 P1). No REPORT edits, no calls, no check_merge_sources rerun.
 - 2026-10-25 10:21 UTC P2 iter133: merge advanced to `3360cfa`; 131-1 applied → 0 open. check_merge_sources PASS. New Q2.2 text (Fig. 6 range from p2_strong_eval auroc_strict_vs_tacit_high, exposures l.661, E133 0.77 scope, E132 wording) all correct → merge_flags.md §I133 + one REPORT Changes line. No calls.

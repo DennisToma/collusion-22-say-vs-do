@@ -1,4 +1,14 @@
-## Current — iteration 137, 2026-10-25 11:05 UTC, merge `5ccd0b7` (clean tree)
+## Current — iteration 139, 2026-10-25 11:20 UTC, merge `f5e91e5` (clean tree)
+**0 open P1.** Diff-triggered scope check `git diff 5ccd0b7 f5e91e5 -- SUBMISSION.md SLIDES.md` (SLIDES unchanged).
+
+| id | item | status |
+|---|---|---|
+| 139-scope | Q2.2 hunk = new §9 Conclusion. "Public messages gave a zero-shot auditor no resolved gain" matches the headline (Δ −0.01 [−0.09, +0.06] locked test; REPORT box). "High prices arise without a private channel under prompt cues, a private notepad, or memory with profit framing" matches REPORT l.10–11 / P2.5 (notepad +1.04 [+0.65, +1.42] vs channel +1.61; markup vs none +2.85; 19/20 no-channel ≥ Nash + 2) and keeps it as "high prices", not equivalence. "A flag alone does not show an agreement" and "open test = instructed/red-teamed colluders" match our Limitations (no evasion test). Watch list clean: no "text auditing doesn't work" (SALT untouched), no inversion generalisation, no "replicates" on pooled −0.07. "No robust co-movement" is Q1.4's. LLM-usage statement and Reproducibility counts (101/137/74, 219/260) are process text, not Q2.2 science. | no P1 |
+| 139-pin | Manifest `projects.q22` (pin `91ffb2d`, 46 files incl. newly pinned `p2_logbook.json`, `p2_cue_llm_p2para{1,2}.json`): 46/46 pin blobs match manifest SHA256; at Q2.2 HEAD 45/46 match, only `REPORT.md` differs (the I133 review line, as 135-pin). | info |
+
+---
+
+## Superseded — iteration 137, 2026-10-25 11:05 UTC, merge `5ccd0b7` (clean tree)
 **0 open P1.** Diff-triggered scope check `git diff ce0fd42 5ccd0b7 -- SUBMISSION.md SLIDES.md` (DIRECTION 10:30 #3).
 
 | id | item | status |
