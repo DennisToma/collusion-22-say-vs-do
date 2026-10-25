@@ -136,7 +136,7 @@ def main():
             d1.append(A(sc, i) - A(sb, i)); d2.append(A(sbc, i) - A(sb, i))
     al = np.arange(n)
     ci = lambda pt, bs: [round(pt, 3), round(float(np.percentile(bs, 2.5)), 3), round(float(np.percentile(bs, 97.5)), 3)]
-    res = {"registration": "EXPERIMENTS.tsv E133c-reg (before any call)", "model": MODEL, "temperature": 0,
+    res = {"registration": "EXPERIMENTS.tsv " + ("E133d-reg (post hoc ablation, before its calls)" if ABL else "E133c-reg (before any call)"), "model": MODEL, "temperature": 0,
            "n_called": len(C), "n_used": n, "n_pos": int(y.sum()), "n_neg": int(n - y.sum()),
            "dropped": sorted(set(C) - {r["run_id"] for r in ok}),
            "auroc_c_llm": E.boot_auc(list(sc[y == 0]), list(sc[y == 1])),

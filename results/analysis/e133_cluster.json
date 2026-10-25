@@ -1,0 +1,28 @@
+{
+ "note": "post hoc sensitivity: cell-cluster bootstrap (16 cells resampled with replacement), same scores as E133/E133c/E133d",
+ "n": 78,
+ "n_cells": 16,
+ "B": 2000,
+ "cluster_ci": {
+  "E133_ab_minus_b": [
+   -0.051,
+   -0.096,
+   -0.012
+  ],
+  "E133c_c_minus_b": [
+   0.11,
+   0.01,
+   0.252
+  ],
+  "E133d_d_minus_b": [
+   0.126,
+   0.024,
+   0.27
+  ],
+  "E133cd_c_minus_d": [
+   -0.016,
+   -0.049,
+   0.011
+  ]
+ }
+}

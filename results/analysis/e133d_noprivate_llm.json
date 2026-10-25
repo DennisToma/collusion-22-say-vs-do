@@ -1,5 +1,5 @@
 {
- "registration": "EXPERIMENTS.tsv E133c-reg (before any call)",
+ "registration": "EXPERIMENTS.tsv E133d-reg (post hoc ablation, before its calls)",
  "model": "gpt-6.1-sol",
  "temperature": 0,
  "n_called": 78,
