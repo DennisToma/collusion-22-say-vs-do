@@ -1,3 +1,13 @@
+Iteration 143 (2026-10-25 11:55 UTC): merge HEAD `38e9a96` + uncommitted SUBMISSION edits; diff-triggered scope check → **0 open P1**.
+
+## Current — iteration 143, 2026-10-25 11:55 UTC, merge `38e9a96` (+ working tree)
+| id | item | status |
+|---|---|---|
+| 143-scope | Committed `b1a92f6..38e9a96`: Reproducibility wording ("five claims (six numbers)", 139 bindings) and Appendix A (Q1.4 grid CI 0.80) only — no Q2.2 scope change. Working-tree Q2.2 hunks checked: (i) kept/followed rule "both pair firms ≥ judged agreed floor − 1 in ≥ ½ of later rounds" = `p2_behaviour.classes` (tol 1, frac 0.5, from agreement round) ✓; it omits the floor ≥ 12 trivial-floor exclusion (P2 only, optional: "agreed floor ≥ 12"); (ii) `combined_stats` = combined + pair stats, `structured` = combined_stats + stated-vs-actual table = `auditors.py` l.7–9, 106–109 ✓; (iii) Sonnet 115/115 "uninformative because single-class within dataset" — accurate, stronger caveat ✓; (iv) logbook "+0.22 vs +1.04, not a matched contrast" ✓; (v) Fig. 5 "mean premium, 95% bootstrap band" — matches fig, placebo +0.03 [−0.54, +0.49] "not equivalence" kept ✓; (vi) App. B reading notes: C13 = 50 comm-positive (48 + 2) ✓ (`data/llm_v3/labels.jsonl`), C34 rule uses judged agreed price ✓ (E133e-reg), C21b 5/15 under F ≥ 12 and 13 consistent with E124 strict 5/15 both arms. Watch list clean (SALT exception, inversion scoped to Qwen, pooled −0.07 not "replicates", "suggest" softening of joint statement is merge-side). | 0 P1 |
+
+---
+
+## Superseded — iteration 142 (header line below)
 Iteration 142 (2026-10-25 11:31 UTC): merge HEAD still `b1a92f6`; committed and working-tree SUBMISSION/SLIDES diffs since I141 empty; no new Q2.2 content, 0 open P1. No source-check rerun or pinned-file edit.
 
 ## Current — iteration 141, 2026-10-25 11:40 UTC, merge `b1a92f6` (clean tree)
