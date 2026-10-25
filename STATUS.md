@@ -16,6 +16,7 @@
 - Risks: none scientific; re-export only if REPORT/slide sources change.
 
 ## Log
+- I171 2026-10-25 15:45 UTC: merge 31cf60e, SUBMISSION sha 96d0ed7b, no Q2.2 hunk; pin 76/77 (REPORT I133 line).
 - I170 2026-10-25 15:44 UTC: merge 31cf60e, SUBMISSION sha 96d0ed7b, no Q2.2 hunk; pin 76/77 (REPORT I133 line).
 - I169 2026-10-25 15:28 UTC: merge 7b44715, SUBMISSION sha 96d0ed7b, no Q2.2 hunk; pin 76/77 (REPORT I133 line).
 - I168 2026-10-25 15:28 UTC: merge df154b1, SUBMISSION sha 96d0ed7b, no Q2.2 hunk; pin 76/77 (REPORT I133 line).
