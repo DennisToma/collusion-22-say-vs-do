@@ -1,19 +1,18 @@
 # STATUS
 
-## Current state (2026-10-25 08:12 UTC, iteration 116) — research top frozen since 07:30; following DIRECTION 06:20
-- Base headline unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc). E113 Qwen stratified combined−action −0.24 [−0.37, −0.09].
-- E133e unchanged: oriented say-do gap 0.77 vs pair SD 0.855; no-chat LLM 0.94 vs raw rule 0.885, Δ +0.06 [+0.02, +0.10], post hoc; no evidence its edge comes from public messages.
-- Required DIRECTION #1–3 complete: E133 a–e cache-only reproduction 31/31 commands, 38/38 outputs, 0 calls (iter107); wording fixes, 88-word Answer, 36/36 claims and Changes-after-08:00 heading done. Saved reproduction receipt checked current this iteration; no metric rerun.
-- **For merge manager (iter116):** `python3 -S check_merge_sources.py` checks all M1–M16: **69 saved-value checks, 21 source hashes**, all source files identical to scientific freeze commit `8b680ee`. Exact JSON paths, expected values, draft hashes, and all seven wording recommendations: `results/analysis/merge_source_audit_i116.json`.
-- **Source-pointer fixes:** M5 → `e132_inversion.json`; M6 executed −0.30 → `e113_secondary.json:stratified.executed_vs_A.qwen_combined_minus_action`; M9 terse +0.24 → `p2_band.json`; M15 → `results/label_xfam.json` (not under analysis). Other M rows now have explicit file/key paths in the receipt.
-- **New wording fix 6:** Abstract/Contributions "text helps only where the deal is the conversation" → "text predicts execution in the external SALT negotiation setting (0.87 [0.83, 0.91])". One external positive does not establish an only-if condition (REPORT P2.12/Limitations; receipt M7).
-- **New wording fix 7:** Fig.5 "two channel arms are indistinguishable" → "delivered-minus-placebo contrast is unresolved". Original v1 figure source: `placebo_llm_v3plc.json:windows.r2_12.placebo_minus_private_paired` = +0.030 [−0.542, +0.488]; do not paste the different six-arm P2.5 CI into this caption (receipt M9).
-- **Prior 5 wording fixes still pending in reviewed draft:** name Q1.4 E70 executed rule; "add nothing" → "no resolved gain"; placebo leaves delivery unresolved; E133 third-analysis/label-rule/shared-judge caveat; 0.15–0.36 is point estimates, inversion CI excludes 0.5 only in Qwen arms/grid. Exact replacements retained in receipt `prior_findings`.
-- Scientific REPORT top/box/merge block, headline numbers and joint statement unchanged. REPORT Changes-after-08:00 now links this handoff. Merge repo and Q1.4 were read only; no new calls, experiments or exports.
-- Next: merge support each iteration; between asks idle ≤1 STATUS line/hour. Numbers freeze 14:00; one export pass 16:30; hard stop 18:00 UTC.
-- Risks: merge wording fixes are recommendations, not applied in our read-only sibling; E133e is post hoc, third analysis of 78 games, shared model/label-rule disclosure; no-post stratum 23/7.
+## Current state (2026-10-25 08:42 UTC, iteration 118) — research top frozen since 07:30; following DIRECTION 08:23
+- Base headline unchanged: combined Δ −0.01 [−0.09, +0.06] locked test; −0.07 [−0.17, +0.02] pooled fresh n=90 (post hoc). E113 Qwen stratified combined−action −0.24 [−0.37, −0.09]. E133e +0.06 [+0.02, +0.10] post hoc.
+- **DIRECTION 08:23 #1 done:** single ranked fix list `results/analysis/merge_flags.md` (linked from REPORT Changes-after-08:00), checked vs merge HEAD `02ebfd2`:
+  - P1 open: (a) E133 third-analysis / label-rule / shared-judge caveat (§5.3 l.236–240); (b) Fig. 5 "two channel arms are indistinguishable" (l.267) → placebo-minus-delivered +0.03 [−0.54, +0.49] unresolved.
+  - P2 partial: "gains nothing" in Abstract l.22 + §5.3 heading (body fixed); Limitations l.314 "cannot separate" (§5.4 fixed).
+  - Applied: inversion range (now Qwen 0.15–0.21), "only where deal is conversation" (now descriptive), executed −0.30 rule named.
+  - Director's P1 (iv) inversion range is already applied in 02ebfd2; so 2 P1 remain, not 4.
+- All Q2.2 numbers in 02ebfd2 re-checked: correct (new paraphrase-1 CI from `p2_band.json`). check_merge_sources PASS 69/21; p2_claims 36/36.
+- Next: re-check on each new merge commit (`git -C ~/collusion/collusion-beyond-words log -1`), update statuses in merge_flags.md; no new items unless P1 in new text. No idle commits. Export pass 16:30; hard stop 18:00.
+- Risks: fixes are recommendations only (read-only sibling); E133e post hoc third analysis.
 
 ## Log
+- 2026-10-25 08:42 UTC P2 iter118: DIRECTION 08:23 #1 — consolidated 7 posted fixes into ranked merge_flags.md vs merge 02ebfd2: 2 P1 open, 2 P2 partial, 3 applied; Q2.2 numbers in draft all correct. REPORT: one Changes-after-08:00 line. No calls.
 - 2026-10-25 08:15 UTC P2 iter115: merge iter1 committed (`fbed25a`); working-tree SUBMISSION still has the 4 iter114 issues (not yet processed). Found 1 more caveat drop (abstract text-inversion range lacks "point estimates; CI < 0.5 only Qwen-3.8"); posted as fix 5. No calls, no REPORT changes (frozen).
 - 2026-10-25 08:10 UTC P2 iter114: merge manager started (iter1, SUBMISSION v0, uncommitted). Checked every Q2.2 number in it against REPORT: all correct; 4 wording fixes posted above (executed-rule label, "add nothing", placebo limitation, E133 caveat). No calls, no REPORT changes.
 - 2026-10-25 07:37 UTC P2 iter112: DIRECTION 06:20 #1–3 done (iter107/108); top frozen since 07:30. Merge repo still 'Not started' (starts 08:00); Q1.4 posted its 07:30 freeze line, no Q2.2 asks. Idle per #5: no calls, checks or REPORT edits. Next: merge support from 08:00.
