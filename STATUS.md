@@ -1,8 +1,8 @@
 # STATUS
 
-## Current state (2026-10-25 17:50 UTC, iteration 185) — FINAL; research frozen
-- **P1 open: 0.** I184 confirms the accepted template, slides and headline figure are unchanged in committed merge `77ab10d` and its clean working tree.
-- Last merge bytes read: `2fe0265` (I185; same hashes as `77ab10d`), TEMPLATE af06861c, SLIDES 37a182ed, fig0 0b4f8004; P1 open: 0.
+## Current state (2026-10-25 17:49:50 UTC, iteration 186) — FINAL; research frozen
+- **P1 open: 0.** I186 verifies all seven accepted merge artifacts against `77ab10d`; committed merge `2fe0265` and its working tree match exactly.
+- Last merge bytes read: `2fe0265` (I186; same hashes as `77ab10d`), TEMPLATE af06861c, SLIDES 37a182ed, fig0 0b4f8004; P1 open: 0.
 - Headline unchanged: locked-test Δ −0.01 [−0.09, +0.06]; fresh pooled n=90 −0.07 [−0.17, +0.02] (post hoc); Qwen combined−action −0.24 [−0.37, −0.09].
 - Pin `91ffb2d` remains 76/77 (REPORT I133 review line only); Q2.2 post-18:00 guard in merge_flags I178 remains for the merge's last hour.
 - Limitations: no resolved gain does not prove zero; Qwen inversion is family-scoped; E84 keeps 14/50 agreements under its rule; one market.
@@ -299,3 +299,5 @@
 - I180 2026-10-25 16:59 UTC (Codex fallback): merge `1a295a0`, empty committed TEMPLATE/SLIDES/fig0-script/fig0-image diff from I179 `52f3fd8`; 2 P1 remain open with the applicable I179 patch. DIRECTION 16:40 count-only no-op/freeze supersedes the 45–60 min research chunk: STATUS-only commit; REPORT/APPENDIX unchanged (REPORT drift from pin is still the I133 line), no calls, experiments, reviews, check reruns or exports. Serendipity through S72 remains unpromoted; no confirmation trigger. Next action is a substantive merge content commit (at most two P1-only checks, last by 17:55).
 
 - I182 2026-10-25 17:16:15 UTC (Codex fallback): merge still `8e4ef25`; committed and working-tree TEMPLATE af06861c, SLIDES 37a182ed, fig0 0b4f8004 and SUBMISSION 975f1505 match I181; fig0 script/form/IMAGE diff empty, so 0 P1 remains applicable without another scope review. DIRECTION 16:40 no-op/freeze requires STATUS-only commit; REPORT/APPENDIX remain current and unchanged, no calls, experiments, metric/source-check reruns or exports. HITS still has no promoted hit; no confirmation trigger. Next action only on a new relevant merge content commit, final check by 17:55.
+
+- I186 2026-10-25 17:49:50 UTC (Codex fallback): merge still `2fe0265`, clean; 7/7 committed artifacts (TEMPLATE, SLIDES, fig0 script/PNG, IMAGE, SUBMISSION, SUBMISSION_FORM) are byte-identical to accepted `77ab10d` and current working files. TEMPLATE af06861c, SLIDES 37a182ed, fig0 0b4f8004; 0 P1 open. HITS through S72/S70 remains unpromoted; no confirmation trigger. DIRECTION 16:40 no-op/freeze supersedes the 45–60 min research chunk and REPORT update: REPORT verified unchanged against HEAD, APPENDIX/exports left frozen; no new calls, experiments, scope review or metric/source-check reruns. STATUS-only commit/push; ending early because there are no new claim bytes. I178 post-18:00 merge guard remains in force.
